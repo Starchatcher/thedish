@@ -1,0 +1,5 @@
+# macOS에서 자동 생성되는 시스템 파일
+.DS_Store
+
+# VSCode 사용자 설정 폴더
+.vscode/
