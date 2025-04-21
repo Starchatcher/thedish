@@ -1,5 +1,19 @@
-# macOS에서 자동 생성되는 시스템 파일
-.DS_Store
+# 빌드 결과물
+target/
+*.class
+*.jar
+*.war
 
-# VSCode 사용자 설정 폴더
-.vscode/
+# IDE 설정
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# 시스템 생성 파일
+.DS_Store
+Thumbs.db
+
+# 로그 / 임시 파일
+*.log
+*.tmp
