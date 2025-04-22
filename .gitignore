@@ -43,5 +43,5 @@ Thumbs.db
 *.logs
 *.tmp
 
-pom.xml      
-*.xml        
+pom.xml
+*.xml
