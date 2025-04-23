@@ -1,7 +1,5 @@
 package com.thedish.user.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.thedish.user.model.vo.User;
 import com.thedish.common.PasswordPolicy;
 import com.thedish.user.model.vo.PasswordChange;
+import com.thedish.user.model.vo.User;
 import com.thedish.user.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -122,7 +122,7 @@ public class UserController {
         return "{\"isDuplicate\": " + isDuplicate + "}";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup1")
     public String signup(User user, String confirmPassword, Model model, HttpSession session) {
     // 비밀번호 정책 검사
     if (!PasswordPolicy.isValid(user.getPassword())) {
