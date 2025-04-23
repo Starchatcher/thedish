@@ -1,7 +1,5 @@
 package com.thedish.user.service.impl;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -10,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.thedish.user.model.vo.User;
-import com.thedish.user.model.vo.PasswordChange;
-import com.thedish.user.dao.UserDAO;
-import com.thedish.user.service.UserService;
 import com.thedish.common.EmailUtil;
 import com.thedish.common.PasswordUtil;
+import com.thedish.user.dao.UserDAO;
+import com.thedish.user.model.vo.PasswordChange;
+import com.thedish.user.model.vo.User;
+import com.thedish.user.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Service
@@ -71,93 +71,71 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-@Controller
-@RequestMapping("/user")
-public class UserController {
-
-    @Autowired
-    private UserService userService;
-    
-    // 로그인 페이지
-    @GetMapping("/login")
-    public String loginForm() {
-        return "user/login";
-    }
-    
-    // 로그인 처리
-    @PostMapping("/login")
-    public String login(String userId, String password, boolean remember, Model model, HttpSession session) {
-        User user = userService.loginUser(userId, password);
-        
-        if (user != null) {
-            // 로그인 성공
-            session.setAttribute("user", user);
-            
-            // 로그인 상태 유지 설정
-            if (remember) {
-                session.setMaxInactiveInterval(60 * 60 * 24 * 7); // 7일
-            }
-            
-            return "redirect:/"; // 메인 페이지로 리다이렉트
-        } else {
-            // 로그인 실패
-            model.addAttribute("errorMsg", "로그인 실패! 아이디/비밀번호 확인");
-            return "user/login";
-        }
-    }
-    
-    // 로그아웃
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/user/login";
-    }
-    
-    // 회원가입 페이지
-    @GetMapping("/signup")
-    public String signupForm() {
-        return "user/signup";
-    }
-    
-    // 회원가입 처리
-    @PostMapping("/signup")
-    public String signup(User user, HttpSession session) {
-        userService.registerUser(user);
-        
-        // 세션에 사용자 정보 저장 (환영 페이지에서 사용)
-        session.setAttribute("user", user);
-        
-        return "redirect:/user/terms";
-    }
-    
-    // 이용약관 페이지
-    @GetMapping("/terms")
-    public String termsForm() {
-        return "user/terms";
-    }
-    
-    // 이용약관 동의 처리
-    @PostMapping("/terms")
-    public String termsAgree(HttpSession session) {
-        // 약관 동의 처리 로직
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            userService.saveTermsAgreement(user.getUserId());
-        }
-        
-        return "redirect:/user/welcome";
-    }
-    
-    // 환영 페이지
-    @GetMapping("/welcome")
-    public String welcome(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user);
-        return "user/welcome";
-    }
-    
-
-}
+	/*
+	 * @Controller
+	 * 
+	 * @RequestMapping("/user") public class UserController {
+	 * 
+	 * @Autowired private UserService userService;
+	 * 
+	 * // 로그인 페이지
+	 * 
+	 * @GetMapping("/login") public String loginForm() { return "user/login"; }
+	 * 
+	 * // 로그인 처리
+	 * 
+	 * @PostMapping("/login") public String login(String userId, String password,
+	 * boolean remember, Model model, HttpSession session) { User user =
+	 * userService.loginUser(userId, password);
+	 * 
+	 * if (user != null) { // 로그인 성공 session.setAttribute("user", user);
+	 * 
+	 * // 로그인 상태 유지 설정 if (remember) { session.setMaxInactiveInterval(60 * 60 * 24 *
+	 * 7); // 7일 }
+	 * 
+	 * return "redirect:/"; // 메인 페이지로 리다이렉트 } else { // 로그인 실패
+	 * model.addAttribute("errorMsg", "로그인 실패! 아이디/비밀번호 확인"); return "user/login"; }
+	 * }
+	 * 
+	 * // 로그아웃
+	 * 
+	 * @GetMapping("/logout") public String logout(HttpSession session) {
+	 * session.invalidate(); return "redirect:/user/login"; }
+	 * 
+	 * // 회원가입 페이지
+	 * 
+	 * @GetMapping("/signup") public String signupForm() { return "user/signup"; }
+	 * 
+	 * // 회원가입 처리
+	 * 
+	 * @PostMapping("/signup") public String signup(User user, HttpSession session)
+	 * { userService.registerUser(user);
+	 * 
+	 * // 세션에 사용자 정보 저장 (환영 페이지에서 사용) session.setAttribute("user", user);
+	 * 
+	 * return "redirect:/user/terms"; }
+	 * 
+	 * // 이용약관 페이지
+	 * 
+	 * @GetMapping("/terms") public String termsForm() { return "user/terms"; }
+	 * 
+	 * // 이용약관 동의 처리
+	 * 
+	 * @PostMapping("/terms") public String termsAgree(HttpSession session) { // 약관
+	 * 동의 처리 로직 User user = (User) session.getAttribute("user"); if (user != null) {
+	 * userService.saveTermsAgreement(user.getUserId()); }
+	 * 
+	 * return "redirect:/user/welcome"; }
+	 * 
+	 * // 환영 페이지
+	 * 
+	 * @GetMapping("/welcome") public String welcome(Model model, HttpSession
+	 * session) { User user = (User) session.getAttribute("user");
+	 * model.addAttribute("user", user); return "user/welcome"; }
+	 * 
+	 * 
+	 * }
+	 */
     
     
     @Override

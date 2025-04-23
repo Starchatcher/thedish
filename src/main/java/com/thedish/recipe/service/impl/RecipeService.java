@@ -9,5 +9,5 @@ public interface RecipeService {
 	
 	
 	int selectListCount();
-	ArrayList<Recipe> selectListRecipe(Paging Paging);
+	ArrayList<Recipe> selectListRecipe(Paging paging);
 }

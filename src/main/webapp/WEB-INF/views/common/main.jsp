@@ -9,9 +9,14 @@
 
 </head>
 <body>
+
+<c:import url="/WEB-INF/views/common/menubar.jsp" />
 <header>
 	<h1>the dish</h1>
 </header>
 
+
+
+ <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

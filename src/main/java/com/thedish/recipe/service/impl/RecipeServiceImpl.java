@@ -22,9 +22,9 @@ public class RecipeServiceImpl implements RecipeService{
 
 
 	@Override
-	public ArrayList<Recipe> selectListRecipe(Paging Paging) {
+	public ArrayList<Recipe> selectListRecipe(Paging paging) {
 		
-		return recipeDao.selectListRecipe(Paging);
+		return recipeDao.selectListRecipe(paging);
 	}
 
 }

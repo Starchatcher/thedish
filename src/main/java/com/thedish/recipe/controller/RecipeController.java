@@ -38,7 +38,7 @@ public class RecipeController {
 			// 총 목록 갯수 조회해서, 총 페이지 수 계산함
 			int listCount = recipeService.selectListCount();
 			// 페이지 관련 항목들 계산 처리
-			Paging paging = new Paging(listCount, limit, currentPage, "nlist.do");
+			Paging paging = new Paging(listCount, limit, currentPage, "recipeList.do");
 			paging.calculate();
 
 			// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
@@ -49,9 +49,9 @@ public class RecipeController {
 				mv.addObject("list", list); // request.setAttribute("list", list) 와 같음
 				mv.addObject("paging", paging);
 
-				mv.setViewName("notice/noticeListView");
+				mv.setViewName("recipe/recipeList");
 			} else { // 조회 실패시
-				mv.addObject("message", currentPage + "페이지에 출력할 공지글 목록 조회 실패!");
+				mv.addObject("message", currentPage + "페이지에 출력할 레시피 목록 조회 실패!");
 				mv.setViewName("common/error");
 			}
 

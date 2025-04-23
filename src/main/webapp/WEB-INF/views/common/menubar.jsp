@@ -65,7 +65,7 @@
   <div class="menu">
     <a href="#home">홈</a>
     <a href="#about">소개</a>
-    <a href="#services">서비스</a>
+    <a href="${ pageContext.servletContext.contextPath }/recipeList.do">서비스</a>
     <a href="#contact">연락처</a>
   </div>
   <div>
@@ -73,5 +73,5 @@
   </div>
 </div>
 
-</body>
+</bo
 </html>
