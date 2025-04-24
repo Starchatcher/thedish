@@ -538,6 +538,7 @@ CREATE TABLE notice (
     content VARCHAR2(2000) NOT NULL,
     created_by VARCHAR2(50) NOT NULL,
     created_at DATE DEFAULT SYSDATE,
+   readcount number default 1 NOT NULL,
     CONSTRAINT fk_notice_created_by FOREIGN KEY (created_by) REFERENCES users(login_id)
 );
 
@@ -546,17 +547,18 @@ COMMENT ON COLUMN NOTICE.CREATED_BY IS '공지글작성자';
 COMMENT ON COLUMN NOTICE.CREATED_AT IS '공지등록일시';
 COMMENT ON COLUMN NOTICE.TITLE IS '공지제목';
 COMMENT ON COLUMN NOTICE.CONTENT IS '공지내용';
+COMMENT ON COLUMN NOTICE.READCOUNT IS '공지사항조회수';
 
 
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '24/12/30', '올해가 얼마 남지 않았습니다 여러분!', '안녕하세요, 맛있는 순간을 함께하는 여러분!
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '24/12/30', '올해가 얼마 남지 않았습니다 여러분!', '안녕하세요, 맛있는 순간을 함께하는 여러분!
 어느덧 2025년도 마지막 분기에 접어들었습니다.
 한 해 동안 저희 사이트를 찾아주시고, 사랑해주신 모든 분들께 진심으로 감사드립니다.
 다가오는 연말, 소중한 사람들과 따뜻한 음식을 나누며
 행복한 시간 보내시길 바라며, 저희도 더욱 맛있고 유익한 콘텐츠로 보답하겠습니다.
  올해 마지막까지도 여러분의 식탁에 즐거움을 더할 수 있도록 최선을 다하겠습니다.
 감사합니다!
-여러분의 입맛을 책임지는 [THE DISH 전 관리자들 드림]');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/01/01', '새해 복 많이 받으세요! THE DISH에서 인사드립니다.', '안녕하세요, THE DISH를 사랑해주시는 여러분!
+여러분의 입맛을 책임지는 [THE DISH 전 관리자들 드림]', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/01/01', '새해 복 많이 받으세요! THE DISH에서 인사드립니다.', '안녕하세요, THE DISH를 사랑해주시는 여러분!
 희망 가득한 2025년 새해가 밝았습니다.
 지난 한 해 동안 보내주신 관심과 사랑에 깊이 감사드리며,
 새해에도 여러분의 일상에 더 맛있고 행복한 순간들이 가득하시길 진심으로 기원합니다.
@@ -566,8 +568,8 @@ INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '
 올해도 여러분의 식탁에 웃음과 풍요가 함께하길 바라며,
 든든한 마음으로 항상 곁에 있는 THE DISH가 되겠습니다.
 새해 복 많이 받으세요! 
-– THE DISH 드림');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/01/12', '이번에 저희 THE DISH가 추가한 레시피를 소개합니다!', '안녕하세요, 미식의 즐거움을 전하는 THE DISH입니다!
+– THE DISH 드림', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/01/12', '이번에 저희 THE DISH가 추가한 레시피를 소개합니다!', '안녕하세요, 미식의 즐거움을 전하는 THE DISH입니다!
 더 풍성한 식탁을 위해 이번에 새롭게 맛과 정성을 담은 레시피들을 추가했습니다.
 하루 한 끼가 특별해지는 순간, 지금 바로 만나보세요!
  이번에 추가된 레시피 중 일부를 소개합니다:
@@ -577,8 +579,8 @@ INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '
  부드럽고 달콤한 ‘클래식 티라미수’
 지금 바로 THE DISH에서 새로운 레시피를 확인해보세요!
 여러분의 오늘이 더 맛있어지는 그 순간까지, 저희가 함께하겠습니다 
- [THE DISH 레시피 바로 가기]');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/01/23', '2025/01 신고 당한 회원자들입니다.', '안녕하세요, THE DISH 운영팀입니다.
+ [THE DISH 레시피 바로 가기]', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/01/23', '2025/01 신고 당한 회원자들입니다.', '안녕하세요, THE DISH 운영팀입니다.
 THE DISH는 모든 회원 여러분이 즐겁고 건강한 커뮤니티 환경을 누릴 수 있도록
 커뮤니티 이용 수칙을 바탕으로 운영되고 있습니다.
 이에 따라, 2025년 1월 한 달간
@@ -591,8 +593,8 @@ THE DISH는 모든 회원 여러분이 즐겁고 건강한 커뮤니티 환경�
 엄정하게 대응할 예정이며,
 모든 회원 여러분께서도 건전하고 따뜻한 소통 문화를 함께 만들어주시길 부탁드립니다.
 감사합니다.
-– THE DISH 운영팀 드림');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/02/10', '2025/02 이번달 추천 맛집 리스트입니다!.', '안녕하세요, THE DISH입니다!
+– THE DISH 운영팀 드림', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/02/10', '2025/02 이번달 추천 맛집 리스트입니다!.', '안녕하세요, THE DISH입니다!
 찬 바람 속에서도 식욕은 살아있다!
 이번 2월, THE DISH가 자신 있게 추천하는 이달의 맛집 리스트를 소개합니다.
 분위기, 맛, 서비스 모두 잡은 숨은 맛집부터 핫플레이스까지 한눈에 확인해보세요!
@@ -608,16 +610,16 @@ THE DISH는 언제나 여러분의 입맛과 감성을 책임지겠습니다!
 지금 바로 맛집 리스트 확인하고, 미식 여행 떠나보세요!
  [추천 맛집 전체 보기]
 감사합니다.
-– THE DISH 드림');
-INSERT INTO NOTICE (created_by, created_at, title, content)  VALUES ( 'ADMIN', '25/02/20', '2025/02 밸런타인데이 스페셜 디저트 소개', '안녕하세요, THE DISH입니다!
+– THE DISH 드림', default);
+INSERT INTO NOTICE (created_by, created_at, title, content, readcount)  VALUES ( 'ADMIN', '25/02/20', '2025/02 밸런타인데이 스페셜 디저트 소개', '안녕하세요, THE DISH입니다!
 사랑이 넘치는 2월, 밸런타인데이를 맞아 특별한 디저트를 준비했어요.
 딸기 가나슈 타르트
 하트 모양 수제 마카롱
 벨기에 다크초콜릿 케이크
 소중한 사람에게 달콤함을 전해보세요!
 [밸런타인 스페셜 디저트 보기]
-– THE DISH 드림');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/03/05', '2025/03 핫한 맛집 추천 리스트입니다!.', '안녕하세요, THE DISH입니다!
+– THE DISH 드림', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/03/05', '2025/03 핫한 맛집 추천 리스트입니다!.', '안녕하세요, THE DISH입니다!
 봄기운이 완연한 3월, 여러분의 입맛도 새롭게 깨어나는 계절입니다.
 이번 달에는 THE DISH가 엄선한 지금 가장 핫한 맛집들을 소개해드립니다!
 지금 가장 뜨고 있는 곳, 꼭 한 번 가봐야 할 맛집들을 한자리에 모았어요.
@@ -631,8 +633,8 @@ INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '
 지금 바로 THE DISH에서 확인해보시고, 여러분만의 맛집 리스트에 추가해보세요 
 [3월 추천 맛집 전체 보기]
 여러분의 맛있는 하루를 위해 늘 함께하는
-– THE DISH 드림');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/03/15', 'THE DISH 서비스 점검 안내 (3/17 새벽)', '안녕하세요, THE DISH입니다.
+– THE DISH 드림', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/03/15', 'THE DISH 서비스 점검 안내 (3/17 새벽)', '안녕하세요, THE DISH입니다.
 더 나은 서비스를 제공하기 위해 아래 일정으로 시스템 점검이 진행됩니다.
 
 📌 점검 일시: 2025년 3월 17일(월) 00:00 ~ 04:00
@@ -640,8 +642,8 @@ INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '
 
 점검 시간 동안 일시적으로 서비스 이용이 제한될 수 있습니다.
 이용에 불편을 드려 죄송하며, 양해 부탁드립니다.
-– THE DISH 드림');
-INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '25/04/01', '만우절 이벤트! 사실 그런 건 없습니다~!', '안녕하세요, THE DISH입니다!
+– THE DISH 드림', default);
+INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES ( 'ADMIN', '25/04/01', '만우절 이벤트! 사실 그런 건 없습니다~!', '안녕하세요, THE DISH입니다!
 설레는 마음으로 클릭하셨다면… 정말 죄송합니다.
 오늘은 바로 만우절!
 그래서 살~짝 장난을 쳐봤어요 😅
@@ -652,7 +654,7 @@ INSERT INTO NOTICE  (created_by, created_at, title, content) VALUES ( 'ADMIN', '
 언제나 여러분과 소통하며 더 즐거운 식탁 문화를 만들어가는
 THE DISH가 되겠습니다.
 모두 웃음 가득한 하루 보내세요!
-– THE DISH 드림');
+– THE DISH 드림', default);
 
 
 INSERT INTO notice (created_by, created_at, title, content) VALUES (
@@ -1192,3 +1194,14 @@ INSERT INTO health_recommend (reason, recipe_id, condition_id) VALUES
 CREATE INDEX idx_recipe_name ON recipe(name);
 CREATE INDEX idx_search_log_keyword ON search_log(keyword);
 CREATE INDEX idx_board_login_id ON board(login_id);
+
+
+
+
+-- 04/24 추가
+
+ALTER TABLE IMAGE
+ADD IMAGE_DATA BLOB;
+
+
+COMMENT ON COLUMN IMAGE.IMAGE_DATA IS '이미지 파일의 바이너리 데이터(BLOB 저장용)';
