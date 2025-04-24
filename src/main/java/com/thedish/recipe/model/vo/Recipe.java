@@ -1,6 +1,9 @@
 package com.thedish.recipe.model.vo;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.thedish.image.Image;
 
 public class Recipe implements java.io.Serializable{
 	
@@ -8,7 +11,7 @@ public class Recipe implements java.io.Serializable{
 	
 	private int recipeId;				//	RECIPE_ID	NUMBER
 	private String name;		//	NAME	VARCHAR2(200 BYTE)
-				//	RECIPE_CATEGORY	VARCHAR2(50 BYTE)
+	private String recipeCategory;			//	RECIPE_CATEGORY	VARCHAR2(50 BYTE)
 	private String description;		//	DESCRIPTION	VARCHAR2(500 BYTE)
 	private String 	createBy;//	CREATED_BY	VARCHAR2(50 BYTE)
 	private java.sql.Date createdAt;		//	CREATED_AT	DATE
@@ -17,14 +20,36 @@ public class Recipe implements java.io.Serializable{
 	private int avgRating;	//	AVG_RATING	NUMBER(3,1)
 	private int viewCount;		//	VIEW_COUNT	NUMBER
 	private String ingredientName;		//	INGREDIENT_NAME	VARCHAR2(2000 BYTE)
+	
+	private String imageUrl;  // 이미지 URL
+	
+	
+	
 	public Recipe() {
 		super();
 	}
-	public Recipe(int recipeId, String name, String description, String createBy, Date createdAt, String instructions,
-			int recommendNumber, int avgRating, int viewCount, String ingredientName) {
+	
+
+	
+	public String getRecipeCategory() {
+		return recipeCategory;
+	}
+
+
+
+	public void setRecipeCategory(String recipeCategory) {
+		this.recipeCategory = recipeCategory;
+	}
+
+
+
+	public Recipe(int recipeId, String name, String recipeCategory, String description, String createBy, Date createdAt,
+			String instructions, int recommendNumber, int avgRating, int viewCount, String ingredientName,
+			String imageUrl) {
 		super();
 		this.recipeId = recipeId;
 		this.name = name;
+		this.recipeCategory = recipeCategory;
 		this.description = description;
 		this.createBy = createBy;
 		this.createdAt = createdAt;
@@ -33,7 +58,19 @@ public class Recipe implements java.io.Serializable{
 		this.avgRating = avgRating;
 		this.viewCount = viewCount;
 		this.ingredientName = ingredientName;
+		this.imageUrl = imageUrl;
 	}
+
+
+
+	public String getImageUrl() {
+	    return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+	    this.imageUrl = imageUrl;
+	}
+
 	public int getRecipeId() {
 		return recipeId;
 	}
