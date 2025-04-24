@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <c:set var="nowpage" value="1" />
 <c:if test="${ !empty requestScope.paging.currentPage } ">
 	<c:set var="nowpage" value="${ requestScope.paging.currentPage }" />
@@ -11,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체게시판</title>
+<title>팁 공유 게시판</title>
 <style ="text/css">
 h1 {
 position: relative;
@@ -44,7 +43,7 @@ table td {
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp"></c:import>
 
-<h1>전체 게시판</h1>
+<h1>팁 공유 게시판</h1>
 
 <form action="search" method="get">
   <label for="search-type"></label>

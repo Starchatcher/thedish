@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <c:set var="nowpage" value="1" />
 <c:if test="${ !empty requestScope.paging.currentPage } ">
 	<c:set var="nowpage" value="${ requestScope.paging.currentPage }" />
@@ -11,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체게시판</title>
+<title>자유게시판</title>
 <style ="text/css">
 h1 {
 position: relative;
@@ -44,7 +43,7 @@ table td {
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp"></c:import>
 
-<h1>전체 게시판</h1>
+<h1>자유 게시판</h1>
 
 <form action="search" method="get">
   <label for="search-type"></label>
@@ -76,6 +75,7 @@ table td {
 			<td>${ board.boardId }</td>	<%-- 번호 --%>
 			<td id="title">
 				<%-- 원글과 댓글, 대댓글을 구분하기 위해 제목글자 앞에 ▶ 표시함 --%>
+				
 				 <c:url var="bd" value="boardDetail.do">
 					<c:param name="bno" value="${ board.boardId }" />
 					<c:param name="page" value="${ nowpage }" />
