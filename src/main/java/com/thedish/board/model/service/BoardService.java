@@ -12,7 +12,9 @@ public interface BoardService {
 	int selectReviewBoardListCount();
 	int selectTipBoardListCount();
 	Board selectBoard(int boardId);
+	
 	void updateViewCount(int boardId);
+	int insertBoard(Board board);
 	
 	ArrayList<Board> selectBoardList (Paging paging);
 	ArrayList<Board> selectFreeBoardList (Paging paging);

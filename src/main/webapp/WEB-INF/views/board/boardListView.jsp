@@ -14,20 +14,23 @@
 <title>전체게시판</title>
 <style ="text/css">
 h1 {
+text-align: center;
 position: relative;
-left: 300px;
+right: 260px;
 }
 
 form {
 position: relative;
-left: 700px;
+right: 185px;
 bottom: 10px;
+text-align: center;
+
 }
 
 table, tr, th, td{
 border-left: none;
 border-right: none;
-border-color: #8FBC8F ;
+border-color: #8FBC8F;
 }
 
 table td#title a {
@@ -35,9 +38,12 @@ text-decoration: none;
 color: black;
 }
 
-table td {
-
+#writeBtn {
+position: relative;
+left: 870px;
+top: 20px;
 }
+
 
 </style>
 </head>
@@ -45,6 +51,10 @@ table td {
 <c:import url="/WEB-INF/views/common/menubar.jsp"></c:import>
 
 <h1>전체 게시판</h1>
+
+<%-- <c:if test="${ !empty loginUser }"> --%>
+		<button id="writeBtn" onclick="location.href='boardWritePage.do';">작성</button>
+<%-- </c:if> --%>
 
 <form action="search" method="get">
   <label for="search-type"></label>
@@ -82,7 +92,7 @@ table td {
 				</c:url>
 				<a href="${ bd }">${ board.title }</a>	<%-- 제목 --%>
 			</td>
-			<td>${ board.loginId }</td> <%-- 작성자 --%>
+			<td>${ board.nickname }</td> <%-- 작성자 --%>
 			<td>${ board.createdAt }</td>
 			<td>${ board.viewCount }</td>
 		</tr>

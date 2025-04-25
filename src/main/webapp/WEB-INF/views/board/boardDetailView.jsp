@@ -7,16 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 상세보기</title>
+<script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
 <%-- 아래의 자바스크립트 함수에서 사용할 url 변수 만들기 --%>
 <c:url var="boardDel" value="boardDelete.do">
 	<c:param name="bno" value="${ board.boardId }" />
-	<c:param name="page" value="${ currentPage }" />
 </c:url>
 
 <c:url var="boardUpdate" value="boardUpdateView.do">
 	<c:param name="bno" value="${ board.boardId }" />
 	<c:param name="page" value="${ currentPage }" />
 </c:url>
+
 
 <script type="text/javascript">
 //삭제하기 버튼 클릭시 실행 함수
@@ -29,8 +30,6 @@ function requestUpdatePage(){
 	location.href = '${ boardUpdate }';
 }
 
-//목록 버튼 클릭시 실행 함수
-
 </script>
 </head>
 <body>
@@ -39,7 +38,7 @@ function requestUpdatePage(){
 <div>
 <table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
 	<tr><th>제 목</th><td>${ board.title }</td></tr>
-	<tr><th>작성자</th><td>${ board.loginId }</td></tr>
+	<tr><th>작성자</th><td>${ board.nickname }</td></tr>
 	<tr><th>등록날짜</th>
 		<td><fmt:formatDate value="${ board.createdAt }" pattern="yyyy-MM-dd" /></td></tr>
 	<tr><th>내 용</th><td>${ board.content }</td></tr>
@@ -57,7 +56,7 @@ function requestUpdatePage(){
 					<button onclick="">댓글달기</button> &nbsp;
 			</c:if>
 		</c:if>
-		<button onclick="location.href='boardList.do?page=${ requestScope.currentPage }';">전체게시판 목록</button> &nbsp;
+		<button onclick="location.href='boardList.do?page=${ requestScope.currentPage }';">목록</button> &nbsp;
 		<button onclick="history.go(-1);">이전 페이지로 이동</button>
 	</th></tr>
 </table>
