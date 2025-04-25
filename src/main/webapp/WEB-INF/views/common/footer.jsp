@@ -11,7 +11,7 @@
 	}
 </style>
 <body>
-<footer style="background-color: #A3D0A3; padding: 10px; font-family: Arial, sans-serif; font-size: 12px;">
+<footer style="background-color: #A3D0A3; padding: 10px; font-family: Arial, sans-serif; font-size: 12px; margin-top: auto">
   <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
     <!-- 왼쪽 텍스트 정보 -->
     <div style="max-width: 70%;">
