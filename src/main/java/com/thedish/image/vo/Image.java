@@ -1,7 +1,9 @@
 package com.thedish.image.vo;
 
-public class Image {
-    private int imageId;
+public class Image implements java.io.Serializable {
+  
+	private static final long serialVersionUID = -3125749606181670053L;
+	private int imageId;
     private int targetId;       // 연관된 레시피 ID 등
     private String targetType;   // 예: "recipe"
     private String  imageUrl;// private String imageUrl;  // URL 저장 필드: DB 저장 방식 변경 시 불필요하면 제거 가능

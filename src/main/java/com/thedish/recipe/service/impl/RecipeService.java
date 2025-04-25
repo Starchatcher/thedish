@@ -27,4 +27,6 @@ public interface RecipeService {
 	int updateRecipe(Recipe recipe);
 	
 	 int deleteRecipe(int recipeId);
+	 
+	 
 }

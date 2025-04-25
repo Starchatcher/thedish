@@ -1,8 +1,8 @@
 package com.thedish.recipe.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.thedish.comment.model.service.CommentService;
+import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.image.service.ImageService;
@@ -35,6 +37,9 @@ public class RecipeController {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	// 레시피 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
 		@RequestMapping("recipeList.do")
@@ -78,27 +83,59 @@ public class RecipeController {
 		
 		// 레시피 상세보기 요청 처리용
 		@RequestMapping("recipeDetail.do")
-		public ModelAndView recipeDetailMethod(@RequestParam("no") int recipeId, ModelAndView mv, HttpSession session) {
+		public ModelAndView recipeDetailMethod(@RequestParam("no") int recipeId, ModelAndView mv, HttpSession session,
+		                                       @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 
-			logger.info("recipeDetail.do : " + recipeId); // 값 확인
+		    logger.info("recipeDetail.do 호출 - recipeId: " + recipeId);
 
-			Recipe recipe = recipeService.selectRecipe(recipeId);
+		    Recipe recipe = recipeService.selectRecipe(recipeId);
+		    recipeService.updateAddReadCount(recipeId);
 
-			recipeService.updateAddReadCount(recipeId);
+		    if (recipe != null) {
+		        mv.addObject("recipe", recipe);
 
-			if (recipe != null) {
-				// 조회된 레시피를 모델에 담음
-				mv.addObject("recipe", recipe);
-				// 뷰 이름 지정 (예: recipe/recipeDetail.jsp)
-				mv.setViewName("recipe/recipeDetail");
-			} else {
-				mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
-				mv.setViewName("common/error");
-			}
+		        int commentsPerPage = 10;
+		        String targetType = "recipe";
 
-			return mv;
+		        // 댓글 총 개수 조회
+		        int totalComments = commentService.selectCommentCount(recipeId, targetType);
+		        logger.info("조회된 댓글 총 개수: " + totalComments);
+
+		        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
+		        if (totalPages == 0) totalPages = 1;
+
+		        if (page < 1) page = 1;
+		        if (page > totalPages) page = totalPages;
+
+		        int offset = (page - 1) * commentsPerPage;
+
+		        // 댓글 리스트 조회
+		        List<Comment> comments = commentService.selectComments(recipeId, targetType, offset, commentsPerPage);
+		        if (comments == null) {
+		            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
+		            comments = new ArrayList<>();
+		        }
+		        logger.info("조회된 댓글 리스트 크기: " + comments.size());
+		        for (Comment c : comments) {
+		            logger.info("댓글 ID: " + c.getCommentId() + ", 내용: " + c.getContent());
+		        }
+
+		        mv.addObject("comments", comments);
+		        mv.addObject("page", page);
+		        mv.addObject("totalPages", totalPages);
+
+		        mv.setViewName("recipe/recipeDetail");
+		    } else {
+		        mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
+		        mv.setViewName("common/error");
+		    }
+
+		    return mv;
 		}
 
+
+
+		// 레시피 검색 기능
 		@RequestMapping("recipeSearch.do")
 		public ModelAndView recipeSearchTitleMethod(ModelAndView mv, @RequestParam("action") String action,
 				@RequestParam("keyword") String keyword, @RequestParam(name = "page", required = false) String page,
@@ -130,9 +167,11 @@ public class RecipeController {
 
 			// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
 			ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
+			
 
 			if (list != null && list.size() > 0) { // 조회 성공시
 				// ModelAndView : Model + View
+				
 				mv.addObject("list", list); // request.setAttribute("list", list) 와 같음
 				mv.addObject("paging", paging);
 				mv.addObject("action", action);
