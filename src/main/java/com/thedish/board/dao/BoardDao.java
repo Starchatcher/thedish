@@ -65,4 +65,8 @@ public class BoardDao {
 		sqlSessionTemplate.update("boardMapper.updateViewCount", boardId);
 	}
 	
+	public int insertBoard(Board board) {
+		return sqlSessionTemplate.insert("boardMapper.insertBoard", board);
+	}
+	
 }
