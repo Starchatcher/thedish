@@ -9,4 +9,7 @@ public interface NoticeService {
 	
 	int selectListCount();
 	ArrayList<Notice> selectList(Paging paging);
+	Notice selectNotice(int noticeId);
+	//dml -------------------------------------------
+	void updateAddReadCount (int noticeId);
 }
