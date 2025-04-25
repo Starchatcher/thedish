@@ -70,7 +70,7 @@
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 
-
+<c:import url="/WEB-INF/views/common/sidebar.jsp" />
   <div class="container">
     <h2>아름답고 맛있는 미래 가치를 선도</h2>
 
