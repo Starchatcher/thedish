@@ -119,7 +119,7 @@ body {
 <body>
 	<nav class="navbar">
 	<div class="logo">
-    <a href="#">
+    <a href="${ pageContext.servletContext.contextPath }/main.do">
       <img src="/thedish/resources/images/thedishlogo.jpg"/>
     </a>
   </div>
@@ -156,7 +156,7 @@ body {
 				<div class="dropdown">
 					<div class="dropdown-column">
 						<h4>소통광장</h4>
-						 <a href="#">자유 게시판</a>
+						 <a href="${ pageContext.servletContext.contextPath }/boardList.do"">자유 게시판</a>
 						 <a href="#">후기 게시판</a>
 						 <a href="#">팁공유 게시판</a>
 						 <a href="#">공지사항</a>
