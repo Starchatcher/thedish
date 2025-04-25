@@ -24,4 +24,12 @@ public class NoticeDao {
 		List<Notice> list = sqlSessionTemplate.selectList("noticeMapper.selectList", paging);
 		return (ArrayList<Notice>)list;
 	}
+	
+	public Notice selectNotice(int noticeId) {
+		return sqlSessionTemplate.selectOne("noticeMapper.selectNotice", noticeId);
+	}
+	
+	public void updateAddReadDount(int noticeId) {
+		sqlSessionTemplate.update("noticeMapper.updateAddReadCount", noticeId);
+	}
 }

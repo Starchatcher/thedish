@@ -14,6 +14,8 @@ import com.thedish.common.Paging;
 import com.thedish.notice.model.service.NoticeService;
 import com.thedish.notice.model.vo.Notice;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class NoticeController {
 	// 이 클래스 안의 메소드들이 잘 동작하는지, 매개변수 또는 리턴값을 확인하는 용도로 로그 객체 생성
@@ -59,7 +61,39 @@ public class NoticeController {
 		
 		return mv;
 	}
-}
+	
+	@RequestMapping("ndetail.do")
+	public ModelAndView noticeDetailMethod(
+	    ModelAndView mv,
+	    @RequestParam("no") int noticeId) {
+	    
+	    logger.info("ndetail.do : " + noticeId); // 전송값 확인
+
+	    // 공지 조회
+	    Notice notice = noticeService.selectNotice(noticeId);
+
+	    // 조회수 1 증가
+	    noticeService.updateAddReadCount(noticeId);
+
+	    if (notice != null) {
+	        mv.addObject("notice", notice);
+	        mv.setViewName("notice/noticeDetailView");  // ✅ 모든 사용자 공통 뷰로 이동
+	    } else {
+	        mv.addObject("message", noticeId + "번 공지글 상세보기 요청 실패! 관리자에게 문의하세요.");
+	        mv.setViewName("common/error");
+	    }
+
+	    return mv;
+	}
+		
+	
+	
+	}
+
+	
+	
+	
+
 
 
 

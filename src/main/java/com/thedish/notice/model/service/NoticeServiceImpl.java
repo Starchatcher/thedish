@@ -24,5 +24,15 @@ public class NoticeServiceImpl implements NoticeService {
 	public ArrayList<Notice> selectList(Paging paging) {
 		return noticeDao.selectList(paging);
 	}
+
+	@Override
+	public Notice selectNotice(int noticeId) {
+		return noticeDao.selectNotice(noticeId);
+	}
+
+	@Override
+	public void updateAddReadCount(int noticeId) {
+		noticeDao.updateAddReadDount(noticeId);
+	}
  
 }
