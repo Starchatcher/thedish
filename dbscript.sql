@@ -1216,3 +1216,9 @@ ALTER TABLE COMMENT ADD TARGET_TYPE VARCHAR2(20);
 UPDATE comments
 SET target_type = 'board'
 WHERE target_type IS NULL;
+
+alter table board
+drop column recommend_number;
+
+
+
