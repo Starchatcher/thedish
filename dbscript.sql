@@ -1237,3 +1237,10 @@ rename column login_id to writer
 
 -- board, notice 테이블에 첨부파일 컬럼 추가 , post_file 테이블 삭제
 drop table post_file cascade constraints;
+
+
+
+ALTER TABLE recipe_INGREDIENT
+DROP COLUMN RECIPE_ID;
+
+
