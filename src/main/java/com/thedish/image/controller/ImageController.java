@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.thedish.image.service.ImageService;
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.service.ImageService;
+import com.thedish.image.model.vo.Image;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.recipe.model.vo.Recipe;
@@ -57,4 +58,19 @@ public class RecipeDao {
 	    return sqlSessionTemplate.delete("recipeMapper.deleteRecipe", recipeId);
 	}
 	
+    // 레시피에 포함된 알러지 정보 조회
+    public List<Allergy> selectAllergyByRecipeId(int recipeId) {
+        return sqlSessionTemplate.selectList("recipeMapper.selectAllergyByRecipeId", recipeId);       
+
+    }
+
+    public boolean incrementRecommendationCount(int recipeId) {
+        int rowsAffected = sqlSessionTemplate.update("recipeMapper.incrementRecommendationCount", recipeId);
+        return rowsAffected > 0; // 업데이트 성공 여부 반환
+    }
+
+    public int getRecommendationCount(int recipeId) {
+    	return sqlSessionTemplate.selectOne("recipeMapper.getRecommendationCount", recipeId);
+    }
+    
 }

@@ -168,22 +168,31 @@
     
     
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
 <script>
+$(document).ready(function() {
     $('#recommendBtn').click(function() {
+        const $button = $(this); // 현재 클릭된 버튼을 $button으로 선언
+        $button.prop('disabled', true); // 버튼 비활성화
+
         $.ajax({
-            url: 'recipe/recommend.do',
+            url: 'recommend.do',
             type: 'POST',
-            data: { recipeId: ${recipe.recipeId} },
+            data: { recipeId: "${recipe.recipeId}" },
             success: function(data) {
-                $('#recommendCount').text(data.recommendNumber);
+                $('#recommendCount').text(data.recommendNumber); // 추천수 업데이트
                 alert('추천해 주셔서 감사합니다!');
             },
             error: function() {
                 alert('추천 처리 중 오류가 발생했습니다.');
+            },
+            complete: function() {
+                $button.prop('disabled', false); // 요청 완료 후 버튼 활성화
             }
         });
     });
+});
+  
 </script>
 
 
@@ -226,15 +235,18 @@
 </c:choose>
             
         </div>
-    <c:if test="${not empty allergyList}">
+<c:if test="${not empty allergyList}">
     <div class="allergy-info">
         <h3>알러지 정보</h3>
         <ul>
             <c:forEach var="allergy" items="${allergyList}">
-                <li><strong>${allergy.allergy_name}</strong>: ${allergy.description}</li>
+                <li><strong>${allergy.name}</strong>: ${allergy.description}</li>
             </c:forEach>
         </ul>
     </div>
+</c:if>
+<c:if test="${empty allergyList}">
+    <p>알러지 정보가 없습니다.</p>
 </c:if>
     
 

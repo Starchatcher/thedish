@@ -1,10 +1,10 @@
-package com.thedish.image.service;
+package com.thedish.image.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thedish.image.dao.ImageDao;
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.vo.Image;
 
 @Service("ImageService")
 public class ImageServiceImpl implements ImageService {
