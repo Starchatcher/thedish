@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,16 +46,6 @@
     </c:choose>
 </div>
 
-<c:if test="${not empty allergyList}">
-    <div class="allergy-info">
-        <h3>알러지 정보</h3>
-        <ul>
-            <c:forEach var="allergy" items="${allergyList}">
-                <li><strong>${allergy.allergy_name}</strong>: ${allergy.description}</li>
-            </c:forEach>
-        </ul>
-    </div>
-</c:if>
 
 <div class="stats">
     <span>조회수: ${drink.viewCount}</span>
@@ -77,7 +69,7 @@
                     <p>댓글 ID: ${comment.commentId}</p>
 
                     <!-- 삭제 버튼 추가 -->
-                    <form action="deleteComment.do" method="post" style="display:inline;">
+                    <form action="deleteDrinkComment.do" method="post" style="display:inline;">
                         <input type="hidden" name="commentId" value="${comment.commentId}" />
                         <input type="hidden" name="drinkId" value="${drink.drinkId}" />
                         <input type="hidden" name="targetType" value="drink" />
@@ -116,7 +108,7 @@
 </div>
 
 <!-- 댓글 작성 폼 -->
-<form action="insertComment.do" method="post">
+<form action="insertDrinkComment.do" method="post">
     <input type="hidden" name="drinkId" value="${drink.drinkId}" />
     <textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요" required></textarea><br/>
     <input type="text" name="writer" placeholder="작성자 이름" required /><br/>

@@ -50,6 +50,28 @@ public class CommentServiceImpl implements CommentService{
 
 
 
+	@Override
+	public boolean deleteDrinkComment(int commentId, String targetType) {
+		 int result = commentDao.deleteDrinkComment(commentId, targetType);
+		    return result > 0;
+	}
+
+
+
+	@Override
+	public int insertDrinkComment(Comment comment) {
+		return commentDao.insertDrinkComment(comment);
+	}
+
+
+
+	@Override
+	public List<Comment> selectDrinkComments(int targetId, String targetType,int offset, int limit) {
+		return commentDao.selectDrinkComments(targetId, offset, limit);
+	}
+
+
+
 	
 
 	

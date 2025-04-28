@@ -43,5 +43,24 @@ public class CommentDao {
 	    return sqlSessionTemplate.delete("commentMapper.deleteComment", params);
 	}
 
-
+	public List<Comment> selectDrinkComments(int targetId, int offset, int limit) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("targetId", targetId);
+	    params.put("targetType", "drink"); 
+	    params.put("offset", offset);
+	    params.put("limit", limit);
+	    return sqlSessionTemplate.selectList("commentMapper.selectDrinkComments", params);
+	}
+	
+	public int insertDrinkComment(Comment comment) {
+		return sqlSessionTemplate.insert("commentMapper.insertDrinkComment", comment);
+				
+	}
+	
+	public int deleteDrinkComment(int commentId, String targetType) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("commentId", commentId);
+	    params.put("targetType", targetType);
+	    return sqlSessionTemplate.delete("commentMapper.deleteDrinkComment", params);
+	}
 }

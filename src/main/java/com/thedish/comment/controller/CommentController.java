@@ -25,7 +25,8 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
-	
+		@Autowired
+	private CommentService drinktService;
 	// 레시피 댓글등록 처리용 
 	@RequestMapping(value = "insertComment.do", method = RequestMethod.POST)
 	public String insertComment(@RequestParam("recipeId") int recipeId, @RequestParam("content") String content,
@@ -68,6 +69,49 @@ public class CommentController {
 
 	
 
-	
+	// drink 댓글등록 처리용 
+		@RequestMapping(value = "insertDrinkComment.do", method = RequestMethod.POST)
+		public String insertDrinkComment(@RequestParam("drinkId") int drinkId,
+				@RequestParam("content") String content,
+				@RequestParam("writer") String writer) {
 
+			logger.info("댓글 작성 요청: drinkId={}, writer={}, content={}", drinkId, writer, content);
+
+			Comment comment = new Comment();
+			comment.setTargetId(drinkId);
+			comment.setTargetType("drink");
+			comment.setContent(content);
+			comment.setLoginId(writer);
+
+			commentService.insertComment(comment);
+
+	// 작성 후 레시피 상세 페이지로 리다이렉트
+			return "redirect:/drinkDetail.do?no=" + drinkId + "&page=1";
+		}
+		
+		
+		// drknk상세 페이지 댓글 삭제용
+		@RequestMapping(value = "/deleteDrinkComment.do", method = RequestMethod.POST)
+		public String deleteDrinkComment(@RequestParam("commentId") int commentId,
+		                            @RequestParam("drinkId") int drinkId,
+		                            @RequestParam("targetType") String targetType,
+		                            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+		                            RedirectAttributes redirectAttributes) {
+
+			
+			
+		    boolean isDeleted = commentService.deleteComment(commentId, targetType);
+		   
+		    
+		    if (isDeleted) {
+		        redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
+		    } else {
+		        redirectAttributes.addFlashAttribute("message", "댓글 삭제에 실패했습니다.");
+		    }
+
+		    return "redirect:/drinkDetail.do?no=" + drinkId + "&page=" + page;
+		}
+
+		
+		
 }
