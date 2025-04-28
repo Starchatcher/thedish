@@ -141,6 +141,8 @@ CREATE TABLE board (
     board_category VARCHAR2(100) NOT NULL,
     view_count NUMBER DEFAULT 0 NOT NULL,
     avg_rating NUMBER(3,1) DEFAULT 0 NOT NULL,
+    original_file_name VARCHAR2(100),
+    rename_file_name VARCHAR2(100),
     recommend_number NUMBER DEFAULT 0 NOT NULL,
     CONSTRAINT fk_board_login_id FOREIGN KEY (login_id) REFERENCES users(login_id)
 );
@@ -155,6 +157,8 @@ comment on column board.updated_at is '수정일';
 comment on column board.board_category is '게시판 유형';
 comment on column board.view_count is '게시판 조회수';
 comment on column board.avg_rating is '게시글에 대한 평점';
+comment on column board.ORIGINAL_FILE_NAME IS '첨부파일';
+comment on column board.RENAME_FILE_NAME IS '수정된첨부파일';
 comment on column board.recommend_number is '추천 수';
 
 
@@ -538,6 +542,8 @@ CREATE TABLE notice (
     content VARCHAR2(2000) NOT NULL,
     created_by VARCHAR2(50) NOT NULL,
     created_at DATE DEFAULT SYSDATE,
+ original_file_name VARCHAR2(100),
+   rename_file_name VARCHAR2(100),
    readcount number default 1 NOT NULL,
     CONSTRAINT fk_notice_created_by FOREIGN KEY (created_by) REFERENCES users(login_id)
 );
@@ -547,6 +553,8 @@ COMMENT ON COLUMN NOTICE.CREATED_BY IS '공지글작성자';
 COMMENT ON COLUMN NOTICE.CREATED_AT IS '공지등록일시';
 COMMENT ON COLUMN NOTICE.TITLE IS '공지제목';
 COMMENT ON COLUMN NOTICE.CONTENT IS '공지내용';
+COMMENT ON COLUMN NOTICE.ORIGINAL_FILE_NAME IS '첨부파일';
+COMMENT ON COLUMN NOTICE.RENAME_FILE_NAME IS '수정된첨부파일';
 COMMENT ON COLUMN NOTICE.READCOUNT IS '공지사항조회수';
 
 
@@ -1224,3 +1232,8 @@ drop column recommend_number;
 alter table board
 drop column AVG_RATING;
 
+alter table board
+rename column login_id to writer
+
+-- board, notice 테이블에 첨부파일 컬럼 추가 , post_file 테이블 삭제
+drop table post_file cascade constraints;
