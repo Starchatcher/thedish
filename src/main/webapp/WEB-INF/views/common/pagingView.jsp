@@ -3,10 +3,12 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
  
  <c:set var="paging" value="${ requestScope.paging }" />
- <%-- url 뒤에 추가할 쿼리스트링으로 사용할 변수로 저장함 --%>
- <c:set var="queryParams" 
- value="action=${ requestScope.action }&keyword=${ requestScope.keyword }&begin=${ requestScope.begin }&end=${ end }" />
 
+<c:set var="queryParams" value="action=${action}&keyword=${keyword}&begin=${paging.startRow}&end=${paging.endRow}" />
+
+<c:if test="${ not empty category }">
+  <c:set var="queryParams" value="${queryParams}&category=${category}" />
+</c:if>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

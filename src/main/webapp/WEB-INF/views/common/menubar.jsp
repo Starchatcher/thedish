@@ -169,9 +169,9 @@ body {
         <div class="dropdown">
           <div class="dropdown-column">
             <h4>소통광장</h4>
-            <a href="${ pageContext.servletContext.contextPath }/freeBoardList.do">자유 게시판</a>
-            <a href="${ pageContext.servletContext.contextPath }/reviewBoardList.do">후기 게시판</a>
-            <a href="${ pageContext.servletContext.contextPath }/tipBoardList.do">팁공유 게시판</a>
+            <a href="${ pageContext.servletContext.contextPath }/boardList.do?category=자유">자유 게시판</a>
+			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=후기">후기 게시판</a>
+			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=팁공유">팁공유 게시판</a>
             <a href="${ pageContext.servletContext.contextPath }/noticeList.do">공지사항</a>
           </div>
         </div>

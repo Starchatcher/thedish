@@ -9,7 +9,16 @@ public class Search {
 	private Date begin;     //등록날짜 검색의 시작날짜
 	private Date end;       //등록날짜 검색의 끝날짜
 	private int age;		 //회원관리에서 연령대별 검색의 나이
+	private String boardCategory;
 	
+	public String getBoardCategory() {
+		return boardCategory;
+	}
+
+	public void setBoardCategory(String boardCategory) {
+		this.boardCategory = boardCategory;
+	}
+
 	public Search() {
 		super();
 	}
@@ -17,6 +26,17 @@ public class Search {
 	//getters and setters
 	public String getKeyword() {
 		return keyword;
+	}
+
+	public Search(String keyword, int startRow, int endRow, Date begin, Date end, int age, String boardCategory) {
+		super();
+		this.keyword = keyword;
+		this.startRow = startRow;
+		this.endRow = endRow;
+		this.begin = begin;
+		this.end = end;
+		this.age = age;
+		this.boardCategory = boardCategory;
 	}
 
 	public void setKeyword(String keyword) {
@@ -66,6 +86,6 @@ public class Search {
 	@Override
 	public String toString() {
 		return "Search [keyword=" + keyword + ", startRow=" + startRow + ", endRow=" + endRow + ", begin=" + begin
-				+ ", end=" + end + ", age=" + age + "]";
+				+ ", end=" + end + ", age=" + age + ", BoardCategory=" + boardCategory + "]";
 	}	
 }
