@@ -1220,5 +1220,7 @@ WHERE target_type IS NULL;
 alter table board
 drop column recommend_number;
 
-
+--04/28 추가
+alter table board
+drop column AVG_RATING;
 
