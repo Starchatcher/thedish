@@ -14,7 +14,7 @@ public class Board implements java.io.Serializable{
 	private int boardId;
 	private String title;
 	private String content;
-	private String loginId;
+	private String writer;
 	private java.sql.Date createdAt;
 	private java.sql.Date updatedAt;
 	private String boardCategory;
@@ -22,14 +22,14 @@ public class Board implements java.io.Serializable{
 	private int avgRating;
 	private String nickname;
 	
-	public Board(int boardId, String title, String content, String loginId, Date createdAt, Date updatedAt,
+	public Board(int boardId, String title, String content, String writer, Date createdAt, Date updatedAt,
 			String boardCategory, int viewCount, int avgRating,String nickname,
 			List<PostFile> fileList) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
 		this.content = content;
-		this.loginId = loginId;
+		this.writer = writer;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.boardCategory = boardCategory;
@@ -79,11 +79,11 @@ public class Board implements java.io.Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getLoginId() {
-		return loginId;
+	public String getWriter() {
+		return writer;
 	}
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public java.sql.Date getCreatedAt() {
 		return createdAt;
@@ -117,7 +117,7 @@ public class Board implements java.io.Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Board [boardId=" + boardId + ", title=" + title + ", content=" + content + ", loginId=" + loginId
+		return "Board [boardId=" + boardId + ", title=" + title + ", content=" + content + ", writer=" + writer
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", boardCategory=" + boardCategory
 				+ ", viewCount=" + viewCount + ", avgRating=" + avgRating + ", nickname=" + nickname + ", fileList=" + fileList + "]";
 	}

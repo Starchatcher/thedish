@@ -1,24 +1,23 @@
 package com.thedish.board.controller;
 
-
-
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
 import com.thedish.common.Paging;
+import com.thedish.common.Search;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -31,169 +30,50 @@ public class BoardController {
 	private BoardService boardService;
 
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
-	
+
 	// 게시글 작성 페이지 내보내기
 	@RequestMapping("boardWritePage.do")
 	public String moveWritePage() {
 		return "board/boardWriteView";
 	}
+
 	// 요청 처리용 메소드 ----------------------------------------------
 	@RequestMapping("boardList.do")
-	public ModelAndView selectListBoard(ModelAndView mv, 
-			@RequestParam(name = "page", required = false) String page,
-			@RequestParam(name = "limit", required = false) String slimit) {
-		// 페이징 처리
-		int currentPage = 1;
-		if (page != null) {
-			currentPage = Integer.parseInt(page);
-		}
+	public ModelAndView selectListBoard(ModelAndView mv, @RequestParam(name = "page", required = false) String page,
+			@RequestParam(name = "limit", required = false) String slimit,
+			@RequestParam(name = "category", required = false) String category) {
 
-		// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-		int limit = 10;
-		if (slimit != null) {
-			limit = Integer.parseInt(slimit);
-		}
+		int currentPage = (page != null) ? Integer.parseInt(page) : 1;
+		int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
 
-		// 총 목록 갯수 조회해서, 총 페이지 수 계산함
-		int listCount = boardService.selectBoardListCount();
-		// 페이지 관련 항목들 계산 처리
+		int listCount = (category != null) ? boardService.selectBoardCategoryCount(category)
+				: boardService.selectBoardListCount();
+
 		Paging paging = new Paging(listCount, limit, currentPage, "boardList.do");
 		paging.calculate();
 
-		// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-		ArrayList<Board> list = boardService.selectBoardList(paging);
+		List<Board> list;
+		if (category != null) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("startRow", paging.getStartRow());
+			param.put("endRow", paging.getEndRow());
+			param.put("category", category);
 
-		if (list != null && list.size() > 0) {
-			mv.addObject("list", list);
-			mv.addObject("paging", paging);
-			mv.setViewName("board/boardListView");
+			list = boardService.selectBoardCategoryList(param);
 		} else {
-			mv.addObject("message", currentPage + "게시글 목록 조회에 실패하였습니다.");
-			mv.setViewName("common/error");
+			list = boardService.selectBoardList(paging);
 		}
 
-		return mv;
-	}
-
-	// 자유게시판 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
-	@RequestMapping("freeBoardList.do")
-	public ModelAndView selectListFreeBoard(ModelAndView mv, 
-			@RequestParam(name = "page", required = false) String page,
-			@RequestParam(name = "limit", required = false) String slimit) {
-		// 페이징 처리
-		int currentPage = 1;
-		if (page != null) {
-			currentPage = Integer.parseInt(page);
-		}
-
-		// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-		int limit = 10;
-		if (slimit != null) {
-			limit = Integer.parseInt(slimit);
-		}
-
-		// 총 목록 갯수 조회해서, 총 페이지 수 계산함
-		int listCount = boardService.selectFreeBoardListCount();
-		// 페이지 관련 항목들 계산 처리
-		Paging paging = new Paging(listCount, limit, currentPage, "freeBoardList.do");
-		paging.calculate();
-
-		// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-		ArrayList<Board> list = boardService.selectFreeBoardList(paging);
-
-		if (list != null && list.size() > 0) {
-			mv.addObject("list", list);
-			mv.addObject("paging", paging);
-			mv.setViewName("board/freeBoardListView");
-		} else {
-			mv.addObject("message", currentPage + "게시글 목록 조회에 실패하였습니다.");
-			mv.setViewName("common/error");
-		}
-
-		return mv;
-	}
-
-	// 후기게시판 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
-	@RequestMapping("reviewBoardList.do")
-	public ModelAndView selectListReviewBoard(ModelAndView mv,
-			@RequestParam(name = "page", required = false) String page,
-			@RequestParam(name = "limit", required = false) String slimit) {
-		// 페이징 처리
-		int currentPage = 1;
-		if (page != null) {
-			currentPage = Integer.parseInt(page);
-		}
-
-		// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-		int limit = 10;
-		if (slimit != null) {
-			limit = Integer.parseInt(slimit);
-		}
-
-		// 총 목록 갯수 조회해서, 총 페이지 수 계산함
-		int listCount = boardService.selectReviewBoardListCount();
-		// 페이지 관련 항목들 계산 처리
-		Paging paging = new Paging(listCount, limit, currentPage, "reviewBoardList.do");
-		paging.calculate();
-
-		// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-		ArrayList<Board> list = boardService.selectReviewBoardList(paging);
-
-		if (list != null && list.size() > 0) {
-			mv.addObject("list", list);
-			mv.addObject("paging", paging);
-			mv.setViewName("board/reviewBoardListView");
-		} else {
-			mv.addObject("message", currentPage + "게시글 목록 조회에 실패하였습니다.");
-			mv.setViewName("common/error");
-		}
-
-		return mv;
-	}
-
-	// 팁 공유게시판 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
-	@RequestMapping("tipBoardList.do")
-	public ModelAndView selectListTipBoard(ModelAndView mv, 
-			@RequestParam(name = "page", required = false) String page,
-			@RequestParam(name = "limit", required = false) String slimit) {
-		// 페이징 처리
-		int currentPage = 1;
-		if (page != null) {
-			currentPage = Integer.parseInt(page);
-		}
-
-		// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-		int limit = 10;
-		if (slimit != null) {
-			limit = Integer.parseInt(slimit);
-		}
-
-		// 총 목록 갯수 조회해서, 총 페이지 수 계산함
-		int listCount = boardService.selectTipBoardListCount();
-		// 페이지 관련 항목들 계산 처리
-		Paging paging = new Paging(listCount, limit, currentPage, "tipBoardList.do");
-		paging.calculate();
-
-		// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-		ArrayList<Board> list = boardService.selectTipBoardList(paging);
-
-		if (list != null && list.size() > 0) {
-			mv.addObject("list", list);
-			mv.addObject("paging", paging);
-			mv.setViewName("board/tipBoardListView");
-		} else {
-			mv.addObject("message", currentPage + "게시글 목록 조회에 실패하였습니다.");
-			mv.setViewName("common/error");
-		}
-
+		mv.addObject("list", list);
+		mv.addObject("paging", paging);
+		mv.addObject("category", category);
+		mv.setViewName("board/boardListView");
 		return mv;
 	}
 
 	@RequestMapping("boardDetail.do")
-	public ModelAndView boardDetailView(
-			@RequestParam("bno") int boardId,
-			@RequestParam(name = "page", required = false) String page, 
-			ModelAndView mv) {
+	public ModelAndView boardDetailView(@RequestParam("bno") int boardId,
+			@RequestParam(name = "page", required = false) String page, ModelAndView mv) {
 
 		logger.info("boardDetail.do : " + boardId);
 
@@ -218,11 +98,34 @@ public class BoardController {
 
 		return mv;
 	}
-	
-	// 새 게시글 원글 등록 요청 처리용 (파일 업로드 기능 포함)
-	@RequestMapping(value = "boardInsert.do", method = RequestMethod.POST)
-	public String boardInsertMethod(Board board, @RequestParam(name = "ofile", required = false) MultipartFile mfile,
-			HttpServletRequest request, Model model) {
+
+	// 첨부파일 다운로드 요청 처리용 메소드
+	// 스프링에서 파일 다운로드는 스프링이 제공하는 View 클래스를 상속받은 클래스를 사용하도록 정함
+	// => 파일다운로드용 뷰 클래스를 따로 만듦 => 뷰리졸버에서 연결 처리함
+	// => 리턴타입은 반드시 ModelAndView 여야 함
+	@RequestMapping("")
+	public ModelAndView fileDownMethod(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("ofile") String originalFileName, @RequestParam("rfile") String renameFileName) {
+
+		// 게시글 첨부파일 저장 폴더 경로 지정
+		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
+		// 저장 폴더에서 읽을 파일에 대한 File 객체 생성
+		File downFile = new File(savePath + "\\" + renameFileName);
+		// 파일 다운시 브라우저로 내보낼 원래 파일에 대한 File 객체 생성
+		File originFile = new File(originalFileName);
+
+		// 파일 다운 처리용 뷰클래스 id명과 다운로드할 File 객체를 ModelAndView 에 담아서 리턴함
+		mv.setViewName("filedown"); // 뷰클래스의 id명 기입
+		mv.addObject("originFile", originFile);
+		mv.addObject("renameFile", downFile);
+
+		return mv;
+	}
+
+//	// 새 게시글 원글 등록 요청 처리용 (파일 업로드 기능 포함)
+//	@RequestMapping(value = "boardInsert.do", method = RequestMethod.POST)
+//	public String boardInsertMethod(Board board, @RequestParam(name = "ofile", required = false) MultipartFile mfile,
+//			HttpServletRequest request, Model model) {
 //		// 게시 원글 첨부파일 저장 폴더를 경로 저장
 //		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
 //
@@ -252,16 +155,200 @@ public class BoardController {
 //			board.setBoardOriginalFileName(fileName);
 //			board.setBoardRenameFileName(renameFileName);
 //		} // 첨부파일 있을 때
+//
+//		if (boardService.insertBoard(board) > 0) {
+//			// 새 게시 원글 등록 성공시, 공지 목록 페이지로 이동 처리
+//			return "redirect:boardList.do";
+//		} else {
+//			model.addAttribute("message", "새 게시글 등록 실패!");
+//			return "common/error";
+//		}
+//
+//	} // binsert.do closed
 
-		if (boardService.insertBoard(board) > 0) {
-			// 새 게시 원글 등록 성공시, 공지 목록 페이지로 이동 처리
-			return "redirect:boardList.do";
-		} else {
-			model.addAttribute("message", "새 게시글 등록 실패!");
-			return "common/error";
+	// 검색용 메소드 ------------------------------------------------------------------
+	// 전체 게시판 제목 검색 메소드
+	@RequestMapping("boardSearchTitleAll.do")
+	public ModelAndView boardSearchTitleAllMethod(
+	        ModelAndView mv,
+	        @RequestParam("action") String action,
+	        @RequestParam("keyword") String keyword,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit) {
+
+	    int currentPage = (page != null) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    int listCount = boardService.selectSearchTitleAllCount(keyword);
+
+	    Paging paging = new Paging(listCount, limit, currentPage, "boardSearchTitleAll.do");
+	    paging.calculate();
+
+	    Search search = new Search();
+	    search.setKeyword(keyword);
+	    search.setStartRow(paging.getStartRow());
+	    search.setEndRow(paging.getEndRow());
+
+	    ArrayList<Board> list = boardService.selectSearchTitleAll(search);
+
+	    if (list != null && !list.isEmpty()) {
+	        mv.addObject("list", list);
+	        mv.addObject("paging", paging);
+	        mv.addObject("action", action);
+	        mv.addObject("keyword", keyword);
+	        mv.setViewName("board/boardListView"); // 공통 뷰 사용
+	    } else {
+	        mv.addObject("message", "검색 결과가 존재하지 않습니다.");
+	        mv.setViewName("common/error");
+	    }
+
+	    return mv;
+	}
+	
+	// 전체 게시판 작성자 검색 메소드
+		@RequestMapping("boardSearchWriterAll.do")
+		public ModelAndView boardSearchWriterAllMethod(
+		        ModelAndView mv,
+		        @RequestParam("action") String action,
+		        @RequestParam("keyword") String keyword,
+		        @RequestParam(name = "page", required = false) String page,
+		        @RequestParam(name = "limit", required = false) String slimit) {
+
+		    int currentPage = (page != null) ? Integer.parseInt(page) : 1;
+		    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+		    int listCount = boardService.selectSearchWriterAllCount(keyword);
+
+		    Paging paging = new Paging(listCount, limit, currentPage, "boardSearchWriterAll.do");
+		    paging.calculate();
+
+		    Search search = new Search();
+		    search.setKeyword(keyword);
+		    search.setStartRow(paging.getStartRow());
+		    search.setEndRow(paging.getEndRow());
+
+		    ArrayList<Board> list = boardService.selectSearchWriterAll(search);
+
+		    if (list != null && !list.isEmpty()) {
+		        mv.addObject("list", list);
+		        mv.addObject("paging", paging);
+		        mv.addObject("action", action);
+		        mv.addObject("keyword", keyword);
+		        mv.setViewName("board/boardListView"); // 공통 뷰 사용
+		    } else {
+		        mv.addObject("message", "검색 결과가 존재하지 않습니다.");
+		        mv.setViewName("common/error");
+		    }
+
+		    return mv;
+		}
+	
+	// 게시판 유형에 따른 제목 검색 메소드
+	@RequestMapping("boardSearchTitle.do")
+	public ModelAndView boardSearchTitleMethod(ModelAndView mv, @RequestParam("action") String action,
+			@RequestParam("keyword") String keyword, @RequestParam("category") String category,
+			@RequestParam(name = "page", required = false) String page,
+			@RequestParam(name = "limit", required = false) String slimit) {
+
+		// 1. 페이지 설정
+		int currentPage = 1;
+		if (page != null) {
+			currentPage = Integer.parseInt(page);
 		}
 
-	} // binsert.do closed
-	
+		int limit = 10;
+		if (slimit != null) {
+			limit = Integer.parseInt(slimit);
+		}
+
+		// 2. 총 검색 결과 수 조회
+		Search searchCount = new Search();
+		searchCount.setKeyword(keyword);
+		searchCount.setBoardCategory(category);
+
+		int listCount = boardService.selectSearchTitleCount(searchCount);
+
+		// 3. 페이징 객체 생성
+		Paging paging = new Paging(listCount, limit, currentPage, "boardSearchTitle.do");
+		paging.calculate();
+
+		// 4. 실제 검색 조건 설정
+		Search search = new Search();
+		search.setKeyword(keyword);
+		search.setBoardCategory(category);
+		search.setStartRow(paging.getStartRow());
+		search.setEndRow(paging.getEndRow());
+
+		// 5. 검색 결과 조회
+		ArrayList<Board> list = boardService.selectSearchTitle(search);
+
+		if (list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.addObject("category", category); // 카테고리 유지
+			mv.setViewName("board/boardListView");
+		} else {
+			mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
+			mv.setViewName("common/error");
+		}
+
+		return mv;
+	}
+
+	//게시판 유형에 따른 작성자 검색 메소드
+	@RequestMapping("boardSearchWriter.do")
+	public ModelAndView boardSearchWriterMethod(ModelAndView mv, @RequestParam("action") String action,
+			@RequestParam("keyword") String keyword, @RequestParam("category") String category,
+			@RequestParam(name = "page", required = false) String page,
+			@RequestParam(name = "limit", required = false) String slimit) {
+
+		// 1. 페이지 설정
+		int currentPage = 1;
+		if (page != null) {
+			currentPage = Integer.parseInt(page);
+		}
+
+		int limit = 10;
+		if (slimit != null) {
+			limit = Integer.parseInt(slimit);
+		}
+
+		// 2. 총 검색 결과 수 조회
+		Search searchCount = new Search();
+		searchCount.setKeyword(keyword);
+		searchCount.setBoardCategory(category);
+
+		int listCount = boardService.selectSearchWriterCount(searchCount);
+
+		// 3. 페이징 객체 생성
+		Paging paging = new Paging(listCount, limit, currentPage, "boardSearchWriter.do");
+		paging.calculate();
+
+		// 4. 실제 검색 조건 설정
+		Search search = new Search();
+		search.setKeyword(keyword);
+		search.setBoardCategory(category);
+		search.setStartRow(paging.getStartRow());
+		search.setEndRow(paging.getEndRow());
+
+		// 5. 검색 결과 조회
+		ArrayList<Board> list = boardService.selectSearchWriter(search);
+
+		if (list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.addObject("category", category); // 카테고리 유지
+			mv.setViewName("board/boardListView");
+		} else {
+			mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
+			mv.setViewName("common/error");
+		}
+
+		return mv;
+	}
 
 }

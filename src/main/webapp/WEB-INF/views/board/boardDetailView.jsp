@@ -46,13 +46,13 @@ function requestUpdatePage(){
 		<%-- 로그인한 경우에 표시되게 함 --%>
 		<c:if test="${ !empty sessionScope.loginUser }">
 			<%-- 본인이 작성한 글 또는 관리자이면 수정, 삭제 버튼 제공함 --%>
-			<c:if test="${ loginUser.loginId eq board.loginId or loginUser.role eq 'ADMIN' }">
+			<c:if test="${ loginUser.writer eq board.writer or loginUser.role eq 'ADMIN' }">
 				<button onclick="requestUpdatePage(); return false;">수정페이지로 이동</button> &nbsp;
 				<button onclick="requestDelete(); return false;">글삭제</button> &nbsp;
 			</c:if>
 			
 			<%-- 본인이 작성한 글이 아니거나 관리자이면 댓글달기 버튼 표시함 --%>
-			<c:if test="${ loginUser.loginId ne board.loginId or loginUser.role eq 'ADMIN' }">
+			<c:if test="${ loginUser.writer ne board.writer or loginUser.role eq 'ADMIN' }">
 					<button onclick="">댓글달기</button> &nbsp;
 			</c:if>
 		</c:if>
