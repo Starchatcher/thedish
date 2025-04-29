@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.vo.Image;
 
 @Repository("imageDao")
 public class ImageDao {

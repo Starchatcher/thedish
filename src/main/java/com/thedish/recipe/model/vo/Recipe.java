@@ -3,7 +3,7 @@ package com.thedish.recipe.model.vo;
 import java.sql.Date;
 import java.util.List;
 
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.vo.Image;
 
 public class Recipe implements java.io.Serializable{
 	

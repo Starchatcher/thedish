@@ -9,7 +9,7 @@ import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.drink.dao.DrinkDao;
 import com.thedish.drink.model.vo.Drink;
-import com.thedish.image.service.ImageService;
+import com.thedish.image.model.service.ImageService;
 
 @Service("drinkService")
 public class DrinkServiceImpl implements DrinkService{

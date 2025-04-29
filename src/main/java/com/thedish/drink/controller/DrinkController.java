@@ -22,8 +22,8 @@ import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.service.impl.DrinkService;
-import com.thedish.image.service.ImageService;
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.service.ImageService;
+import com.thedish.image.model.vo.Image;
 import com.thedish.recipe.model.vo.Recipe;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -120,9 +120,9 @@ public class DrinkController {
 			        int offset = (page - 1) * commentsPerPage;
 
 			        // 댓글 리스트 조회
-			        List<Comment> comments = commentService.selectComments(drinkId, targetType, offset, commentsPerPage);
+			        List<Comment> comments = commentService.selectDrinkComments(drinkId, targetType, offset, commentsPerPage);
 			        if (comments == null) {
-			            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
+			            logger.warn("commentService.selectDrinkComments()가 null을 반환했습니다.");
 			            comments = new ArrayList<>();
 			        }
 			        logger.info("조회된 댓글 리스트 크기: " + comments.size());

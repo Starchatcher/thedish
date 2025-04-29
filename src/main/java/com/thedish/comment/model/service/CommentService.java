@@ -13,6 +13,11 @@ public interface CommentService   {
 	int selectCommentCount(int targetId, String targetType);
 	
 	boolean deleteComment(int commentId, String targetType);
+	
+	 List<Comment> selectDrinkComments(int targetId,String targetType, int offset, int limit);
 
+	 int insertDrinkComment(Comment comment);
+	 
+	boolean deleteDrinkComment(int commentId, String targetType);
     
 }

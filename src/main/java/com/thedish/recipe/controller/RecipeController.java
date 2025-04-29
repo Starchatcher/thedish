@@ -2,7 +2,9 @@ package com.thedish.recipe.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,16 +14,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thedish.comment.model.service.CommentService;
 import com.thedish.comment.model.vo.Comment;
+import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
-import com.thedish.image.service.ImageService;
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.service.ImageService;
+import com.thedish.image.model.vo.Image;
 import com.thedish.recipe.model.vo.Recipe;
 import com.thedish.recipe.service.impl.RecipeService;
 
@@ -82,24 +86,42 @@ public class RecipeController {
 		}
 		
 		// 레시피 상세보기 요청 처리용
-		@RequestMapping("recipeDetail.do")
-		public ModelAndView recipeDetailMethod(@RequestParam("no") int recipeId, ModelAndView mv, HttpSession session,
-		                                       @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+		@RequestMapping("/recipeDetail.do")
+		public ModelAndView recipeDetailMethod(
+		    @RequestParam("no") int recipeId, 
+		    ModelAndView mv, 
+		    HttpSession session,
+		    @RequestParam(value = "page", required = false, defaultValue = "1") int page
+		) {
+		    logger.info("recipeDetail.do 호출 - recipeId: {}", recipeId);
 
-		    logger.info("recipeDetail.do 호출 - recipeId: " + recipeId);
-
+		    // 레시피 조회
 		    Recipe recipe = recipeService.selectRecipe(recipeId);
-		    recipeService.updateAddReadCount(recipeId);
+		    recipeService.updateAddReadCount(recipeId); // 조회수 증가
 
+		   
+
+		    
 		    if (recipe != null) {
 		        mv.addObject("recipe", recipe);
 
+		        // 알러지 정보 조회
+		        List<Allergy> allergyList = recipeService.selectAllergyByRecipeId(recipeId);
+		        if (allergyList != null && !allergyList.isEmpty()) {
+		            logger.info("조회된 알러지 리스트: {}", allergyList);
+		            mv.addObject("allergyList", allergyList);
+		        } else {
+		            logger.warn("알러지 리스트가 비어 있습니다!");
+		            mv.addObject("allergyList", new ArrayList<>());
+		        }
+
+		        // 댓글 관련 처리
 		        int commentsPerPage = 10;
 		        String targetType = "recipe";
 
 		        // 댓글 총 개수 조회
 		        int totalComments = commentService.selectCommentCount(recipeId, targetType);
-		        logger.info("조회된 댓글 총 개수: " + totalComments);
+		        logger.info("조회된 댓글 총 개수: {}", totalComments);
 
 		        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
 		        if (totalPages == 0) totalPages = 1;
@@ -115,9 +137,9 @@ public class RecipeController {
 		            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
 		            comments = new ArrayList<>();
 		        }
-		        logger.info("조회된 댓글 리스트 크기: " + comments.size());
+		        logger.info("조회된 댓글 리스트 크기: {}", comments.size());
 		        for (Comment c : comments) {
-		            logger.info("댓글 ID: " + c.getCommentId() + ", 내용: " + c.getContent());
+		            logger.info("댓글 ID: {}, 내용: {}", c.getCommentId(), c.getContent());
 		        }
 
 		        mv.addObject("comments", comments);
@@ -126,6 +148,7 @@ public class RecipeController {
 
 		        mv.setViewName("recipe/recipeDetail");
 		    } else {
+		        logger.error("{}번 레시피가 존재하지 않습니다!", recipeId);
 		        mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
 		        mv.setViewName("common/error");
 		    }
@@ -311,4 +334,27 @@ public class RecipeController {
 		        return "redirect:/recipeList.do?page=" + page;
 		    }
 		
+		 
+		 // 추천기능
+		 
+		 @RequestMapping(value = "recommend.do", method = RequestMethod.POST)
+		    @ResponseBody
+		    public Map<String, Object> recommendRecipe(
+		    		@RequestParam("recipeId") int recipeId) {
+		        boolean isUpdated = recipeService.incrementRecommendationCount(recipeId);
+		        logger.info("받은 recipeId: " + recipeId);
+
+		        Map<String, Object> response = new HashMap<>();
+		        if (isUpdated) {
+		            int newCount = recipeService.getRecommendationCount(recipeId);
+		            response.put("recommendNumber", newCount);
+		            response.put("message", "추천해 주셔서 감사합니다!");
+		        } else {
+		            response.put("message", "추천 처리 중 오류가 발생했습니다.");
+		        }
+		        return response;
+		    }
+
+		 
 }
+

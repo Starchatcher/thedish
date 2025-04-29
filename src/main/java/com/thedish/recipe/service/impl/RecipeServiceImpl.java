@@ -1,14 +1,16 @@
 package com.thedish.recipe.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
-import com.thedish.image.service.ImageService;
+import com.thedish.image.model.service.ImageService;
 import com.thedish.recipe.dao.RecipeDao;
 import com.thedish.recipe.model.vo.Recipe;
 @Service("recipeService")
@@ -74,6 +76,25 @@ public class RecipeServiceImpl implements RecipeService{
 		imageService.deleteImageByTargetIdAndType(recipeId, "recipe");
 
 		return recipeDao.deleteRecipe(recipeId);
+	}
+
+
+	@Override
+	public List<Allergy> selectAllergyByRecipeId(int recipeId) {
+		
+		return recipeDao.selectAllergyByRecipeId(recipeId);
+	}
+
+
+	@Override
+	public boolean incrementRecommendationCount(int recipeId) {
+		return recipeDao.incrementRecommendationCount(recipeId);
+	}
+
+
+	@Override
+	public int getRecommendationCount(int recipeId) {
+		return recipeDao.getRecommendationCount(recipeId);
 	}
 
 

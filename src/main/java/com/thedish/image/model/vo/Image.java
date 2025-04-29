@@ -1,4 +1,4 @@
-package com.thedish.image.vo;
+package com.thedish.image.model.vo;
 
 public class Image implements java.io.Serializable {
   

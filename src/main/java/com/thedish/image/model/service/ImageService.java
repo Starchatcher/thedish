@@ -1,6 +1,6 @@
-package com.thedish.image.service;
+package com.thedish.image.model.service;
 
-import com.thedish.image.vo.Image;
+import com.thedish.image.model.vo.Image;
 
 public interface ImageService {
 	int insertImage(Image image);

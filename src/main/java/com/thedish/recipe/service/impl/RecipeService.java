@@ -1,7 +1,9 @@
 package com.thedish.recipe.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.recipe.model.vo.Recipe;
@@ -28,5 +30,9 @@ public interface RecipeService {
 	
 	 int deleteRecipe(int recipeId);
 	 
+	 List<Allergy> selectAllergyByRecipeId(int recipeId);
 	 
+	 boolean incrementRecommendationCount(int recipeId);
+	 
+	 int getRecommendationCount(int recipeId);
 }
