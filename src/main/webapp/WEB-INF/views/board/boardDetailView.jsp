@@ -1,67 +1,127 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 상세보기</title>
-<script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
-<%-- 아래의 자바스크립트 함수에서 사용할 url 변수 만들기 --%>
-<c:url var="boardDel" value="boardDelete.do">
-	<c:param name="bno" value="${ board.boardId }" />
-</c:url>
+<title>게시글 상세보기</title>
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath}/resources/css/style.css">
 
-<c:url var="boardUpdate" value="boardUpdateView.do">
-	<c:param name="bno" value="${ board.boardId }" />
-	<c:param name="page" value="${ currentPage }" />
-</c:url>
-
-
-<script type="text/javascript">
-//삭제하기 버튼 클릭시 실행 함수
-function requestDelete(){
-	location.href = '${ boardDel }';	
+<style>
+.container {
+	max-width: 800px;
+	margin: 40px auto;
+	background: #fff;
+	padding: 30px;
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-//수정페이지로 이동 버튼 클릭시 실행 함수
+.title {
+	font-size: 26px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.meta-info {
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 20px;
+}
+
+.content {
+	font-size: 16px;
+	margin-bottom: 30px;
+	line-height: 1.7;
+}
+
+.attachment {
+	margin-bottom: 20px;
+	background: #f8f8f8;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.button-row {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 30px;
+}
+
+.button-row button {
+	padding: 8px 16px;
+	background-color: #90bc90;
+	border: none;
+	border-radius: 6px;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.button-row button:hover {
+	background-color: #7da97d;
+}
+
+hr {
+	margin: 20px 0 20px;
+}
+</style>
+
+<script type="text/javascript">
+function requestDelete(){
+    location.href = '${pageContext.request.contextPath}/boardDelete.do?bno=${board.boardId}';
+}
 function requestUpdatePage(){
-	location.href = '${ boardUpdate }';
+    location.href = '${pageContext.request.contextPath}/boardUpdateView.do?bno=${board.boardId}&page=${currentPage}';
+}
+function goToList(){
+	location.href = '${pageContext.request.contextPath}/boardList.do?category=${board.boardCategory}&page=${currentPage}';
 }
 
 </script>
 </head>
 <body>
-<c:import url="/WEB-INF/views/common/menubar.jsp" />
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-<div>
-<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
-	<tr><th>제 목</th><td>${ board.title }</td></tr>
-	<tr><th>작성자</th><td>${ board.nickname }</td></tr>
-	<tr><th>등록날짜</th>
-		<td><fmt:formatDate value="${ board.createdAt }" pattern="yyyy-MM-dd" /></td></tr>
-	<tr><th>내 용</th><td>${ board.content }</td></tr>
-	<tr><th colspan="2">
-		<%-- 로그인한 경우에 표시되게 함 --%>
-		<c:if test="${ !empty sessionScope.loginUser }">
-			<%-- 본인이 작성한 글 또는 관리자이면 수정, 삭제 버튼 제공함 --%>
-			<c:if test="${ loginUser.writer eq board.writer or loginUser.role eq 'ADMIN' }">
-				<button onclick="requestUpdatePage(); return false;">수정페이지로 이동</button> &nbsp;
-				<button onclick="requestDelete(); return false;">글삭제</button> &nbsp;
-			</c:if>
-			
-			<%-- 본인이 작성한 글이 아니거나 관리자이면 댓글달기 버튼 표시함 --%>
-			<c:if test="${ loginUser.writer ne board.writer or loginUser.role eq 'ADMIN' }">
-					<button onclick="">댓글달기</button> &nbsp;
-			</c:if>
+	<div class="container">
+
+		<div class="title">${board.title}</div>
+
+		<div class="meta-info">
+			작성자: ${board.nickname} | 작성일:
+			<fmt:formatDate value="${board.createdAt}" pattern="yyyy.MM.dd. HH:mm" />
+		</div>
+<hr>
+		<div class="content">${board.content}</div>
+
+		<c:if test="${not empty board.originalFileName}">
+			<div class="attachment">
+				첨부파일: <a
+					href="${pageContext.servletContext.contextPath}/fileDown.do?ofile=${board.originalFileName}&rfile=${board.renameFileName}">
+					${board.originalFileName} </a>
+			</div>
 		</c:if>
-		<button onclick="location.href='boardList.do?page=${ requestScope.currentPage }';">목록</button> &nbsp;
-		<button onclick="history.go(-1);">이전 페이지로 이동</button>
-	</th></tr>
-</table>
-</div>
 
-<c:import url="/WEB-INF/views/common/footer.jsp" />
+		<%-- (여기에 나중에 댓글 영역 들어갈 예정) --%>
+
+		<div class="button-row">
+			<c:if test="${not empty sessionScope.loginUser}">
+				<c:if
+					test="${loginUser.writer eq board.writer || loginUser.role eq 'ADMIN'}">
+					<button type="button" onclick="requestUpdatePage();">수정</button>
+					<button type="button" onclick="requestDelete();">삭제</button>
+				</c:if>
+			</c:if>
+			<button type="button" onclick="goToList();">목록</button>
+		</div>
+
+	</div>
+
+	<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

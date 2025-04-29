@@ -94,5 +94,25 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectSearchWriterAllCount(keyword);
 	}
 
+	@Override
+	public int selectSearchContentCount(Search search) {
+		return boardDao.selectSearchContentCount(search);
+	}
+
+	@Override
+	public ArrayList<Board> selectSearchContent(Search search) {
+		return boardDao.selectSearchContent(search);
+	}
+
+	@Override
+	public int selectSearchContentAllCount(String keyword) {
+		return boardDao.selectSearchContentAllCount(keyword);
+	}
+
+	@Override
+	public ArrayList<Board> selectSearchContentAll(Search search) {
+		return boardDao.selectSearchContentAll(search);
+	}
+
 
 }
