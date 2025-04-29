@@ -4,8 +4,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.thedish.user.model.vo.User;
-import com.thedish.user.model.vo.VerificationCode;
+import com.thedish.users.model.vo.User;
+import com.thedish.users.model.vo.VerificationCode;
 
 @Repository
 public class UserDAOImpl implements UserDAO {

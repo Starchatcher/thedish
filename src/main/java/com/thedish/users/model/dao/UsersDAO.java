@@ -1,6 +1,6 @@
 package com.thedish.user.dao;
 
-import com.thedish.user.model.vo.User;
+import com.thedish.users.model.vo.User;
 
 public interface UserDAO {
     void insertUser(User user);

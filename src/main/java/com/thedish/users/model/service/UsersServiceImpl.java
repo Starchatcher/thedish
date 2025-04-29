@@ -1,4 +1,4 @@
-package com.thedish.user.service;
+package com.thedish.users.model.service;
 
 import java.util.ArrayList;
 
