@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thedish.common.Paging;
+import com.thedish.common.Search;
 import com.thedish.notice.model.dao.NoticeDao;
 import com.thedish.notice.model.vo.Notice;
 
@@ -33,6 +34,26 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void updateAddReadCount(int noticeId) {
 		noticeDao.updateAddReadDount(noticeId);
+	}
+
+	@Override
+	public int selectSearchTitleCount(String keyword) {
+		return noticeDao.selectSearchTitleCount(keyword);
+	}
+
+	@Override
+	public int selectSearchContentCount(String keyword) {
+		return noticeDao.selectSearchContentCount(keyword);
+	}
+
+	@Override
+	public ArrayList<Notice> selectSearchTitle(Search search) {
+		return noticeDao.selectSearchTitle(search);
+	}
+
+	@Override
+	public ArrayList<Notice> selectSearchContent(Search search) {
+		return noticeDao.selectSearchContent(search);
 	}
  
 }

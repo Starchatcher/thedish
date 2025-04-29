@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thedish.board.model.vo.Board;
 import com.thedish.common.Paging;
+import com.thedish.common.Search;
 import com.thedish.notice.model.service.NoticeService;
 import com.thedish.notice.model.vo.Notice;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class NoticeController {
@@ -85,8 +85,81 @@ public class NoticeController {
 
 	    return mv;
 	}
-		
+		//검색용 메소드 -----------------------------------------------------
 	
+	@RequestMapping("noticeSearchTitle.do")
+	public ModelAndView noticeSearchTitleMethod(
+	        ModelAndView mv,
+	        @RequestParam("action") String action,
+	        @RequestParam("keyword") String keyword,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit) {
+
+	    int currentPage = (page != null) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    int listCount = noticeService.selectSearchTitleCount(keyword);
+
+	    Paging paging = new Paging(listCount, limit, currentPage, "noticeSearchTitle.do");
+	    paging.calculate();
+
+	    Search search = new Search();
+	    search.setKeyword(keyword);
+	    search.setStartRow(paging.getStartRow());
+	    search.setEndRow(paging.getEndRow());
+
+	    ArrayList<Notice> list = noticeService.selectSearchTitle(search);
+
+	    if (list != null && !list.isEmpty()) {
+	        mv.addObject("list", list);
+	        mv.addObject("paging", paging);
+	        mv.addObject("action", action);
+	        mv.addObject("keyword", keyword);
+	        mv.setViewName("notice/noticeListView"); // 공통 뷰 사용
+	    } else {
+	        mv.addObject("message", "검색 결과가 존재하지 않습니다.");
+	        mv.setViewName("common/error");
+	    }
+
+	    return mv;
+	}
+	
+	@RequestMapping("noticeSearchContent.do")
+	public ModelAndView noticeSearchContentMethod(
+	        ModelAndView mv,
+	        @RequestParam("action") String action,
+	        @RequestParam("keyword") String keyword,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit) {
+
+	    int currentPage = (page != null) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    int listCount = noticeService.selectSearchContentCount(keyword);
+
+	    Paging paging = new Paging(listCount, limit, currentPage, "noticeSearchContent.do");
+	    paging.calculate();
+
+	    Search search = new Search();
+	    search.setKeyword(keyword);
+	    search.setStartRow(paging.getStartRow());
+	    search.setEndRow(paging.getEndRow());
+
+	    ArrayList<Notice> list = noticeService.selectSearchContent(search);
+
+	    if (list != null && !list.isEmpty()) {
+	        mv.addObject("list", list);
+	        mv.addObject("paging", paging);
+	        mv.addObject("action", action);
+	        mv.addObject("keyword", keyword);
+	        mv.setViewName("notice/noticeListView"); // 공통 뷰 사용
+	    } else {
+	        mv.addObject("message", "검색 결과가 존재하지 않습니다.");
+	        mv.setViewName("common/error");
+	    }
+
+	    return mv;
+	}
 	
 	}
 
