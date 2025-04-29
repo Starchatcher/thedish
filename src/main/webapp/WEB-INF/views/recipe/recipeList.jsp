@@ -1,69 +1,120 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title></title>
+    <meta charset="UTF-8">
+    <title>레시피 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-form input[type="search"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-form input[type="submit"] {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .search-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4열로 설정 */
+            gap: 20px; /* 카드들 사이의 간격 */
+            margin-top: 20px;
+        }
+        .recipe-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            height: 300px; /* 고정된 높이 */
+        }
+        .recipe-card img {
+            width: 100%; /* 카드 너비에 맞게 이미지 크기 조정 */
+            height: 150px; /* 고정된 이미지 높이 */
+            object-fit: cover; /* 이미지 비율 유지 */
+        }
+        .recipe-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .recipe-card p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .view-count {
+            color: #ff5722; /* 조회수를 강조하는 색상 */
+            font-weight: bold;
+        }
+        
+        
+    </style>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/common/menubar.jsp" />
-	<form action="recipeSearch.do" id="titleform" class="sform"
-		method="get">
-		<input type="hidden" name="action" value="title">
-		<fieldset>
-			<legend>검색할 제목을 입력하세요.</legend>
-			<input type="search" name="keyword" size="50"> &nbsp; <input
-				type="submit" value="검색">
-		</fieldset>
-	</form>
+    <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-	<a href="moveInsertRecipePage.do">등록</a>
-	<table align="center" width="500" border="1" cellspacing="0"
-		cellpadding="0">
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th><img></th>
-			<th>설명</th>
-			<th>조회수</th>
-		</tr>
-		<c:forEach items="${ requestScope.list }" var="recipe">
-			<tr align="center">
-				<td>${ recipe.recipeId }</td>
+    <form action="recipeSearch.do" id="titleform" class="sform" method="get">
+        <input type="hidden" name="action" value="title">
+        <fieldset>
+            <legend>검색할 제목을 입력하세요.</legend>
+            <input type="search" name="keyword" size="50"> &nbsp; 
+            <input type="submit" value="검색">
+        </fieldset>
+    </form>
 
-				<td><a href="recipeDetail.do?no=${ recipe.recipeId }">${ recipe.name }</a></td>
+    <a href="moveInsertRecipePage.do">등록</a>
+    
+    <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
+        <c:forEach items="${ requestScope.list }" var="recipe">
+            <div class="recipe-card"> <!-- 각 레시피 항목을 카드 형태로 -->
+                <a href="recipeDetail.do?no=${ recipe.recipeId }">
+                    <c:choose>
+                        <c:when test="${not empty recipe.imageUrl}">
+                            <img src="${recipe.imageUrl}" alt="이미지" />
+                        </c:when>
+                        <c:when test="${not empty recipe.imageId and recipe.imageId != 0}">
+                            <img src="${pageContext.request.contextPath}/image/view.do?imageId=${recipe.imageId}" alt="이미지" />
+                        </c:when>
+                        <c:otherwise>
+                            <img src="${pageContext.request.contextPath}/resources/images/default-image.png" alt="기본 이미지" />
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+                <h3>${ recipe.name }</h3>
+                <p>${ recipe.description }</p>
+                <p class="view-count">조회수: ${ recipe.viewCount }</p>
+            </div>
+        </c:forEach>
+    </div>
+    <br>
 
-				<td>
-    <c:choose>
-        <c:when test="${not empty recipe.imageUrl}">
-            <img src="${recipe.imageUrl}" alt="이미지" width="100" height="80" />
-        </c:when>
-        <c:when test="${not empty recipe.imageId and recipe.imageId != 0}">
-            <img src="${pageContext.request.contextPath}/image/view.do?imageId=${recipe.imageId}" alt="이미지" width="100" height="80" />
-            
-            
-        </c:when>
-        <c:otherwise>
-            이미지 없음
-        </c:otherwise>
-    </c:choose>
-</td>
-
-
-
-
-
-				<td>${ recipe.description }</td>
-
-				<td>${ recipe.viewCount }</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<br>
-
-	<c:import url="/WEB-INF/views/common/footer.jsp" />
+    <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

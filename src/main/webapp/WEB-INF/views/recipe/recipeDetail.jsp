@@ -39,11 +39,10 @@
         color: #555;
     }
 
-    .stats {
-        margin-bottom: 20px;
-        font-size: 14px;
-        color: #888;
-    }
+     .stats {
+            margin-top: 20px;
+            text-align: center;
+        }
 
     .comments-section {
         margin-top: 20px;
@@ -154,7 +153,7 @@
     #recommendBtn {
     margin-left: 10px;
     padding: 5px 12px;
-    background-color: #ff7043;
+    background-color: #8FBC8F;
     border: none;
     border-radius: 5px;
     color: white;
@@ -163,9 +162,15 @@
 }
 
 #recommendBtn:hover {
-    background-color: #e64a19;
+    background-color: green;
 }
-    
+       .map-container {
+            margin-top: 40px;
+            height: 400px; /* 지도 높이 설정 */
+            border: 1px solid #ddd; /* 지도 테두리 */
+            border-radius: 8px; /* 테두리 둥글게 */
+            overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+        }
     
     </style>
     <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
@@ -198,6 +203,8 @@ $(document).ready(function() {
 
 </head>
 <body>
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
+
 <a href="moveUpdateRecipePage.do?recipeId=${recipe.recipeId}&page=${currentPage != null ? currentPage : 1}">수정</a>
 
 <form action="deleteRecipe.do" method="post" style="display:inline;">
@@ -257,6 +264,14 @@ $(document).ready(function() {
     <button id="recommendBtn" type="button">추천하기 👍</button>
     <span>평균 평점: ${recipe.avgRating}</span>           
 </div>
+
+
+
+    <!-- 지도 정보를 출력할 구역 -->
+    <div class="map-container" id="map">
+        <!-- 나중에 JavaScript로 지도를 삽입할 수 있는 영역 -->
+        <p>지도 정보가 여기에 표시됩니다.</p>
+    </div>
 
 <!-- 댓글 리스트 -->
 <!-- 댓글 리스트 -->

@@ -59,7 +59,7 @@ public class RecipeDao {
 	}
 	
     // 레시피에 포함된 알러지 정보 조회
-    public List<Allergy> selectAllergyByRecipeId(int recipeId) {
+    public List<Allergy> selectAllergyByRecipeId(int recipeId) {    	
         return sqlSessionTemplate.selectList("recipeMapper.selectAllergyByRecipeId", recipeId);       
 
     }
