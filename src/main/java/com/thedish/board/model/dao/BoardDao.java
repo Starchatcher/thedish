@@ -91,4 +91,23 @@ public class BoardDao {
 		List<Board> list = sqlSessionTemplate.selectList("boardMapper.selectSearchWriter", search);
 		return (ArrayList<Board>)list;
 	}
+	
+	public int selectSearchContentCount(Search search) {
+		return sqlSessionTemplate.selectOne("boardMapper.selectSearchContentCount", search);
+	}
+	
+	public ArrayList<Board> selectSearchContent (Search search){
+		List<Board> list = sqlSessionTemplate.selectList("boardMapper.selectSearchContent", search);
+		return (ArrayList<Board>)list;
+	}
+	
+	public int selectSearchContentAllCount(String keyword) {
+		return sqlSessionTemplate.selectOne("boardMapper.selectSearchContentAllCount", keyword);
+	}
+	
+	public ArrayList<Board> selectSearchContentAll(Search search){
+		List<Board> list = sqlSessionTemplate.selectList("boardMapper.selectSearchContentAll", search);
+		return (ArrayList<Board>) list;
+	}
+	
 }

@@ -28,4 +28,9 @@ public interface BoardService {
 	int selectSearchTitleAllCount(String keyword);
 	ArrayList<Board> selectSearchWriterAll(Search search);
 	int selectSearchWriterAllCount(String keyword);
+	
+	int selectSearchContentCount(Search search);
+	ArrayList<Board> selectSearchContent(Search search);
+	int selectSearchContentAllCount(String keyword);
+	ArrayList<Board> selectSearchContentAll(Search search);
 }
