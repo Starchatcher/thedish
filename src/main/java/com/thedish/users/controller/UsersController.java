@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
-import com.thedish.user.model.vo.Users;
+import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

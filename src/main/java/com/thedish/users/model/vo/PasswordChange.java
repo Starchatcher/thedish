@@ -1,4 +1,4 @@
-package com.thedish.user.model.vo;
+package com.thedish.users.model.vo;
 
 public class PasswordChange {
     private String currentPassword;
