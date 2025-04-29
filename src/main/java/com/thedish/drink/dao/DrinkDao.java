@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thedish.common.Paging;
+import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
-import com.thedish.recipe.model.vo.Recipe;
 
 @Repository("drinkDao")
 public class DrinkDao {
@@ -60,4 +60,20 @@ public class DrinkDao {
 	    return sqlSessionTemplate.delete("drinkMapper.deleteDrink", drinkId);
 	}
 	
+	
+	
+    public boolean incrementRecommendationCount(int drinkId) {
+        int rowsAffected = sqlSessionTemplate.update("drinkMapper.incrementRecommendationCount", drinkId);
+        return rowsAffected > 0; // 업데이트 성공 여부 반환
+    }
+
+    public int getRecommendationCount(int drinkId) {
+    	return sqlSessionTemplate.selectOne("drinkMapper.getRecommendationCount", drinkId);
+    }
+    
+    
+    
+    public List<Pairing> selectPairingsByDrinkId(int drinkId) {        
+        return sqlSessionTemplate.selectList("drinkMapper.selectPairingsByDrinkId", drinkId);
+    }
 }

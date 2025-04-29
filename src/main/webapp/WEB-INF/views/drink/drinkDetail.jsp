@@ -6,10 +6,213 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${drink.name} 상세페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .map-container {
+            margin-top: 40px;
+            height: 400px; /* 지도 높이 설정 */
+            border: 1px solid #ddd; /* 지도 테두리 */
+            border-radius: 8px; /* 테두리 둥글게 */
+            overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+        }
+        .stats {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .comments-section {
+            margin-top: 40px;
+        }
+        .comments-section h3 {
+            margin-bottom: 10px;
+        }
+        .comments-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .comments-section li {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .label {
+            font-weight: bold;
+        }
+        
+        
+            #recommendBtn {
+    margin-left: 10px;
+    padding: 5px 12px;
+    background-color: #8FBC8F;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#recommendBtn:hover {
+    background-color: green;
+}
+
+
+ .comments-section {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .comments-section h3 {
+        margin-bottom: 15px;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .comments-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .comments-section li {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #eaeaea;
+        border-radius: 5px;
+        background-color: #fafafa;
+    }
+
+    .comments-section li strong {
+        display: block;
+        font-size: 16px;
+        color: #007bff;
+    }
+
+    .comments-section li span {
+        font-size: 12px;
+        color: #888;
+    }
+
+    .comments-section li p {
+        margin: 5px 0 0;
+        color: #555;
+    }
+    
+     .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .pagination a {
+        margin: 0 5px;
+        text-decoration: none;
+        padding: 8px 12px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        color: #007bff;
+        transition: background-color 0.3s;
+    }
+
+    .pagination a:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .pagination span {
+        margin: 0 5px;
+        padding: 8px 12px;
+        border-radius: 5px;
+        background-color: #e9ecef;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+    }
+
+    form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    form button {
+        margin-top: 10px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+    </style>
+
+<script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#recommendBtn').click(function() {
+        const $button = $(this); // 현재 클릭된 버튼을 $button으로 선언
+        $button.prop('disabled', true); // 버튼 비활성화
+
+        $.ajax({
+            url: 'recommendDrink.do',
+            type: 'POST',
+            data: { drinkId: "${drink.drinkId}" },
+            success: function(data) {
+                $('#recommendCount').text(data.recommendNumber); // 추천수 업데이트
+                alert('추천해 주셔서 감사합니다!');
+            },
+            error: function() {
+                alert('추천 처리 중 오류가 발생했습니다.');
+            },
+            complete: function() {
+                $button.prop('disabled', false); // 요청 완료 후 버튼 활성화
+            }
+        });
+    });
+});
+  
+</script>
+
 </head>
+
 <body>
-<body>
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
+
 <a href="moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">수정</a>
 
 <form action="deleteDrink.do" method="post" style="display:inline;">
@@ -46,6 +249,40 @@
     </c:choose>
 </div>
 
+<h2>이 술과 잘 어울리는 레시피</h2>
+
+<%-- 서버에서 전달받은 'pairingList'가 비어있지 않다면 --%>
+<c:choose>
+    <c:when test="${ not empty pairingList }">
+        <table>
+            <thead>
+                <tr>
+                    <th>레시피 이름</th>
+                    <th>페어링 이유</th>
+                    <%-- 필요하다면 추가 정보 컬럼 추가 (예: 이미지, 설명) --%>
+                </tr>
+            </thead>
+            <tbody>
+                <%-- pairingList의 각 항목(페어링 정보 객체)을 'pairing' 변수에 담아 반복 --%>
+                <c:forEach var="pairing" items="${ pairingList }">
+                    <tr>
+                        <%-- 'pairing' 객체의 속성(예: recipeName, reason)을 EL 표현식으로 출력 --%>
+                        <td>${ pairing.recipeName }</td>
+                        <td>${ pairing.reason }</td>
+                        <%-- 필요하다면 추가 정보 셀 추가 --%>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:when>
+    <%-- pairingList가 비어있다면 (페어링 정보가 없다면) --%>
+    <c:otherwise>
+        <p>아직 등록된 페어링 정보가 없습니다.</p>
+    </c:otherwise>
+</c:choose>
+
+
+
 
 <div class="stats">
     <span>조회수: ${drink.viewCount}</span>
@@ -53,6 +290,13 @@
     <button id="recommendBtn" type="button">추천하기 👍</button>
     <span>평균 평점: ${drink.avgRating}</span>           
 </div>
+
+
+    <!-- 지도 정보를 출력할 구역 -->
+    <div class="map-container" id="map">
+        <!-- 나중에 JavaScript로 지도를 삽입할 수 있는 영역 -->
+        <p>지도 정보가 여기에 표시됩니다.</p>
+    </div>
 
 <!-- 댓글 리스트 -->
 <div class="comments-section">
@@ -115,6 +359,6 @@
     <button type="submit">댓글 작성</button>
 </form>
 
-</body>
+
 </body>
 </html>

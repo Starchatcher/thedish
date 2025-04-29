@@ -7,6 +7,7 @@
 <title></title>
 </head>
 <body>
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 <h2>드링크 수정</h2>
 
