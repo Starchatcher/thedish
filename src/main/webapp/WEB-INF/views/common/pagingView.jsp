@@ -14,54 +14,68 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style type="text/css">
+.paging {
+    margin: 30px auto;
+    width: 650px;
+    text-align: center;
+}
+
+.paging a, .paging span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 2px;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #8FBC8F; /* 연한 초록 테두리 */
+    border-radius: 6px;
+    color: #8FBC8F; /* 초록색 글씨 */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: #fff; /* 기본은 흰색 */
+}
+
+.paging a:hover {
+    background-color: #8FBC8F; /* hover 시 초록색 채워짐 */
+    color: #fff; /* 글자색은 흰색으로 */
+}
+
+.paging .current-page {
+    background-color: #8FBC8F; /* 현재 페이지는 초록색 */
+    color: #fff;
+    font-weight: bold;
+}
+
+</style>
 </head>
 <body>
-<div style="text-align: center;">
-	<%-- 1페이지로 이동 --%>
-	<c:if test="${ paging.currentPage eq 1 }">
-		[맨처음] &nbsp;
-	</c:if>
-	<c:if test="${ paging.currentPage gt 1 }"> <%-- gt : greater than, > 연산자를 의미함 --%>
-		<a href="${ paging.urlMapping }?page=1&${ queryParams }">[맨처음]</a> &nbsp;
-	</c:if>
-	
-	<%-- 이전 페이지 그룹으로 이동 --%>
-	<%-- 이전 그룹이 있다면 --%>
-	<c:if test="${ (paging.currentPage - 10) lt paging.startPage and (paging.currentPage - 10) gt 1 }">
-		<a href="${ paging.urlMapping }?page=${paging.startPage - 10}&${ queryParams }">[이전그룹]</a> &nbsp;
-	</c:if>
-	<%-- 이전 그룹이 없다면 --%>
-	<c:if test="${ !((paging.currentPage - 10) lt paging.startPage and (paging.currentPage - 10) gt 1) }">
-		[이전그룹] &nbsp;
-	</c:if>
-	
-	<%-- 현재 출력할 페이지가 속한 페이지 그룹의 페이지 숫자 출력 : 10개 --%>
-	<c:forEach begin="${ paging.startPage }" end="${ paging.endPage }" step="1" var="p">
-		<c:if test="${ p eq paging.currentPage }">
-			<font color="blue" size="4"><b>${ p }</b></font>
-		</c:if>
-		<c:if test="${ p ne paging.currentPage }">
-			<a href="${ paging.urlMapping }?page=${ p }&${ queryParams }">${ p }</a>
-		</c:if>
-	</c:forEach>
-	
-	<%-- 다음 페이지 그룹으로 이동 --%>
-	<%-- 다음 그룹이 있다면 --%>
-	<c:if test="${ (paging.currentPage + 10) gt paging.startPage and (paging.currentPage + 10) lt paging.maxPage }">
-		<a href="${ paging.urlMapping }?page=${paging.startPage + 10}&${ queryParams }">[다음그룹]</a> &nbsp;
-	</c:if>
-	<%-- 다음 그룹이 없다면 --%>
-	<c:if test="${ !((paging.currentPage + 10) gt paging.startPage and (paging.currentPage + 10) lt paging.maxPage) }">
-		[다음그룹] &nbsp;
-	</c:if>
-	
-	<%-- 마지막 페이지로 이동 --%>
-	<c:if test="${ paging.currentPage ge paging.maxPage }"> <%-- ge : greater equal, >= 연산자임 --%>
-		[맨끝] &nbsp;
-	</c:if>
-	<c:if test="${ !(paging.currentPage ge paging.maxPage) }"> 
-		<a href="${ paging.urlMapping }?page=${ paging.maxPage }&${ queryParams }">[맨끝]</a> &nbsp;
-	</c:if>
+<div class="paging">
+    <c:if test="${ paging.currentPage eq 1 }">
+        <span>«</span>
+    </c:if>
+    <c:if test="${ paging.currentPage gt 1 }">
+        <a href="${ paging.urlMapping }?page=1&${ queryParams }">«</a>
+    </c:if>
+
+    <c:forEach begin="${ paging.startPage }" end="${ paging.endPage }" var="p">
+        <c:choose>
+            <c:when test="${ p eq paging.currentPage }">
+                <span class="current-page">${ p }</span>
+            </c:when>
+            <c:otherwise>
+                <a href="${ paging.urlMapping }?page=${ p }&${ queryParams }">${ p }</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+
+    <c:if test="${ paging.currentPage eq paging.maxPage }">
+        <span>»</span>
+    </c:if>
+    <c:if test="${ paging.currentPage lt paging.maxPage }">
+        <a href="${ paging.urlMapping }?page=${ paging.maxPage }&${ queryParams }">»</a>
+    </c:if>
 </div>
 </body>
 </html>
