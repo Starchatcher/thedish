@@ -1,4 +1,4 @@
-package com.thedish.user.controller;
+package com.thedish.users.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UsersController {
 
     @Autowired
     private UserService userService;
