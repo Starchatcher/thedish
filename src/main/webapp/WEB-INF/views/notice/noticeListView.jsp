@@ -8,33 +8,73 @@
 <meta charset="UTF-8">
 <title>The Dish 공지사항</title>
 <style ="text/css">
+
+
+body {
+font-family: 'Arial', sans-serif;
+background-color: #f4f4f4; / 배경 색상 */
+margin: 0;
+padding: 0;
+}
+
 h1 {
 text-align: center;
-position: relative;
-right: 260px;
+color: #2c3e50; / 제목 색상 */
+margin-top: 20px;
+margin-bottom: 30px;
 }
-
-form {
-position: relative;
-left: 185px;
-bottom: 10px;
+/* 검색 폼 스타일 */
+#search-area {
 text-align: center;
-
+margin-bottom: 20px;
+}
+#searchForm {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+#search-type {
+margin-right: 10px; /* 드롭다운과 입력란 사이의 간격 */
 }
 
-table, tr, th, td{
-border-left: none;
-border-right: none;
-border-color: #8FBC8F;
+table {
+width: 650px;
+margin: 0 auto;
+border-collapse: collapse; 
+background-color: white; 
+}
+th, td {
+border: 1px solid #8FBC8F; /* 테이블 셀 경계선 */
+padding: 10px;
+text-align: center;
+}
+
+th {
+background-color: #2c3e50; 
+color: white;
 }
 
 table td#title a {
 text-decoration: none;
-color: black;
+color: #2980b9; 
+}
+table td#title a:hover {
+text-decoration: underline; 
+color: #3498db;
 }
 
-table td {
-
+@media (max-width: 700px) {
+table {
+width: 100%; 
+}
+h1 {
+font-size: 24px; /* 제목 글자 크기 조정 */
+}
+#searchForm {
+flex-direction: column; /* 검색폼 수직 정렬 */
+}
+#search-type {
+margin-bottom: 10px; /* 드롭다운과 입력란 사이의 간격 조정 */
 }
 
 </style>
@@ -45,20 +85,40 @@ table td {
 
 <h1>공지사항</h1>
 
+<%
+  // 기본 검색 타입을 설정 (기본은 제목)
+  String defaultAction = request.getParameter("action");
+  if (defaultAction == null) defaultAction = "제목";
+%>
 <%-- 항목별 검색 기능 추가 --%>
-<form action="search" method="get">
-  <label for="search-type"></label>
-  <select id="search-type" name="searchType">
-    <option value="title">제목</option>
-    <option value="createdBy">작성자</option>
-    <!-- 필요에 따라 다른 검색 기준 추가 -->
-  </select>
+<div id="search-area">
+<form id="searchForm" method="get">
+   
+    <select id="search-type" name="action" onchange="updateAction();">
+        <option value="제목">제목</option>
+        <option value="내용">내용</option>
+    </select>
 
-  <label for="search-query"></label>
-  <input type="text" id="search-query" name="query" placeholder="검색어를 입력하세요">
-  <input type="submit" value="검색"></input>
+    <input type="text" id="search-query" name="keyword" placeholder="검색어를 입력하세요" required>
+    <input type="submit" value="검색" />
 </form>
+</div>
+<script type="text/javascript">
+function updateAction() {
+    var form = document.getElementById('searchForm');
+    var searchType = document.getElementById('search-type').value;
+   
 
+    if (searchType === "제목") {
+        form.action = "noticeSearchTitle.do";
+    } else if (searchType === "작성자") {
+        form.action = "noticeSearchContent.do";
+    }
+}
+
+// 페이지 처음 로딩할 때도 form action 설정
+window.onload = updateAction;
+</script>
 
 
 
@@ -89,8 +149,8 @@ table td {
 	</c:forEach>
 </table>
 <%-- << < 1 2 3 4 5 6 7 8 9 10 > >> 출력 : 공통 뷰로 따로 작업해서 import 해서 사용함 --%>
+	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
-
-	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
