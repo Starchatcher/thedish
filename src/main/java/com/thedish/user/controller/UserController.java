@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.thedish.common.PasswordPolicy;
 import com.thedish.user.model.vo.PasswordChange;
 import com.thedish.user.model.vo.User;
-import com.thedish.user.service.UserService;
+import com.thedish.user.service.UsersService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UsersService userService;
     
     // 회원가입 페이지
     @GetMapping("/signup")

@@ -2,7 +2,9 @@ package com.thedish.drink.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,12 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.thedish.comment.model.service.CommentService;
 import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
+import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.service.impl.DrinkService;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
-import com.thedish.recipe.model.vo.Recipe;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -89,59 +92,83 @@ public class DrinkController {
 	
 
 			// drink 상세보기 요청 처리용
-			@RequestMapping("drinkDetail.do")
-			public ModelAndView drinkDetailMethod(
-					@RequestParam("no") int drinkId, 
-					ModelAndView mv, 
-					HttpSession session,
-			        @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+			 @RequestMapping("drinkDetail.do")
+			    public ModelAndView drinkDetailMethod(
+			            @RequestParam("no") int drinkId,
+			            ModelAndView mv,
+			            HttpSession session,
+			            @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 
-			    logger.info("drinkDetail.do 호출 - drinkId: " + drinkId);
+			        logger.info("drinkDetail.do 호출 - drinkId: " + drinkId);
 
-			    Drink drink = drinkService.selectDrink(drinkId);
-			    drinkService.updateAddReadCount(drinkId);
+			        try {
+			            // 1. 술 상세 정보 조회 및 조회수 증가
+			            Drink drink = drinkService.selectDrink(drinkId);
+			            if (drink != null) {
+			                 drinkService.updateAddReadCount(drinkId); // 조회수 증가 로직
 
-			    if (drink != null) {
-			        mv.addObject("drink", drink);
+			                 mv.addObject("drink", drink); // 술 상세 정보 모델에 추가
 
-			        int commentsPerPage = 10;
-			        String targetType = "drink";
+			                 // *** 2. 페어링 정보 조회 로직 추가 ***
+			                 // PairingService를 통해 특정 drinkId에 해당하는 페어링 목록을 가져옵니다.
+			                 // 이 메소드는 List<PairingDTO>를 반환해야 합니다. PairingDTO는 Recipe 이름 등을 포함.
+			                 List<Pairing> pairingList = drinkService.selectPairingsByDrinkId(drinkId);
+			                 logger.info("조회된 페어링 목록 크기: " + (pairingList != null ? pairingList.size() : 0));
 
-			        // 댓글 총 개수 조회
-			        int totalComments = commentService.selectCommentCount(drinkId, targetType);
-			        logger.info("조회된 댓글 총 개수: " + totalComments);
+			                 // *** 페어링 목록을 ModelAndView 객체에 추가하여 JSP로 전달 ***
+			                 mv.addObject("pairingList", pairingList);
 
-			        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
-			        if (totalPages == 0) totalPages = 1;
 
-			        if (page < 1) page = 1;
-			        if (page > totalPages) page = totalPages;
+			                 // 3. 댓글 관련 로직 (기존 코드 유지)
+			                 int commentsPerPage = 10;
+			                 String targetType = "drink";
 
-			        int offset = (page - 1) * commentsPerPage;
+			                 // 댓글 총 개수 조회
+			                 int totalComments = commentService.selectCommentCount(drinkId, targetType);
+			                 logger.info("조회된 댓글 총 개수: " + totalComments);
 
-			        // 댓글 리스트 조회
-			        List<Comment> comments = commentService.selectDrinkComments(drinkId, targetType, offset, commentsPerPage);
-			        if (comments == null) {
-			            logger.warn("commentService.selectDrinkComments()가 null을 반환했습니다.");
-			            comments = new ArrayList<>();
+			                 int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
+			                 if (totalPages == 0) totalPages = 1;
+
+			                 if (page < 1) page = 1;
+			                 if (page > totalPages) totalPages = page; // totalPages보다 크면 totalPages로 설정
+
+			                 int offset = (page - 1) * commentsPerPage;
+
+			                 // 댓글 리스트 조회
+			                 List<Comment> comments = commentService.selectDrinkComments(drinkId, targetType, offset, commentsPerPage);
+			                 if (comments == null) {
+			                     logger.warn("commentService.selectDrinkComments()가 null을 반환했습니다.");
+			                     comments = new ArrayList<>();
+			                 }
+			                 logger.info("조회된 댓글 리스트 크기: " + comments.size());
+			                 // 댓글 로깅은 필요에 따라 유지 또는 제거 (상세 정보 확인용으로 남겨둠)
+			                 // for (Comment c : comments) {
+			                 //     logger.info("댓글 ID: " + c.getCommentId() + ", 내용: " + c.getContent());
+			                 // }
+
+			                 mv.addObject("comments", comments);
+			                 mv.addObject("page", page);
+			                 mv.addObject("totalPages", totalPages);
+
+			                 mv.setViewName("drink/drinkDetail"); // 정상 처리 시 drinkDetail.jsp로 이동
+
+			             } else {
+			                 // 술 정보가 존재하지 않을 경우
+			                 logger.warn(drinkId + "번 술 정보가 존재하지 않습니다.");
+			                 mv.addObject("message", drinkId + "번 술이 존재하지 않습니다.");
+			                 mv.setViewName("common/error"); // 에러 페이지로 이동
+			             }
+
+			        } catch (Exception e) {
+			            // 예외 발생 시 처리
+			            logger.error("drinkDetail.do 처리 중 오류 발생", e);
+			            mv.addObject("message", "술 상세 정보를 가져오는 중 오류가 발생했습니다.");
+			            mv.setViewName("common/error"); // 에러 페이지로 이동
 			        }
-			        logger.info("조회된 댓글 리스트 크기: " + comments.size());
-			        for (Comment c : comments) {
-			            logger.info("댓글 ID: " + c.getCommentId() + ", 내용: " + c.getContent());
-			        }
 
-			        mv.addObject("comments", comments);
-			        mv.addObject("page", page);
-			        mv.addObject("totalPages", totalPages);
-
-			        mv.setViewName("drink/drinkDetail");
-			    } else {
-			        mv.addObject("message", drinkId + "번 레시피가 존재하지 않습니다.");
-			        mv.setViewName("common/error");
+			        return mv; // ModelAndView 객체 반환
 			    }
-
-			    return mv;
-			}
 
 			// 레시피 검색 기능
 			@RequestMapping("drinkSearch.do")
@@ -320,5 +347,26 @@ public class DrinkController {
 
 		        return "redirect:/drinkList.do?page=" + page;
 		    }
+			
+			 // 추천기능
+			 
+			 @RequestMapping(value = "recommendDrink.do", method = RequestMethod.POST)
+			    @ResponseBody
+			    public Map<String, Object> recommendDrink(
+			    		@RequestParam("drinkId") int drinkId) {
+			        boolean isUpdated = drinkService.incrementRecommendationCount(drinkId);
+			        logger.info("받은 drinkId: " + drinkId);
+
+			        Map<String, Object> response = new HashMap<>();
+			        if (isUpdated) {
+			            int newCount = drinkService.getRecommendationCount(drinkId);
+			            response.put("recommendNumber", newCount);
+			            response.put("message", "추천해 주셔서 감사합니다!");
+			        } else {
+			            response.put("message", "추천 처리 중 오류가 발생했습니다.");
+			        }
+			        return response;
+			    }
+			 
 			
 }

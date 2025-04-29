@@ -1,11 +1,13 @@
 package com.thedish.drink.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thedish.common.Paging;
+import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.dao.DrinkDao;
 import com.thedish.drink.model.vo.Drink;
@@ -65,6 +67,22 @@ public class DrinkServiceImpl implements DrinkService{
 	@Override
 	public int deleteDrink(int drinkId) {
 		return drinkDao.deleteDrink(drinkId);
+	}
+
+	@Override
+	public boolean incrementRecommendationCount(int drinkId) {
+		return drinkDao.incrementRecommendationCount(drinkId);
+	}
+
+	@Override
+	public int getRecommendationCount(int drinkId) {
+		return drinkDao.getRecommendationCount(drinkId)
+				;
+	}
+
+	@Override
+	public List<Pairing> selectPairingsByDrinkId(int drinkId) {
+		return drinkDao.selectPairingsByDrinkId(drinkId);
 	}
 
 }

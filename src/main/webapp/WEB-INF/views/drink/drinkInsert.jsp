@@ -7,6 +7,7 @@
 <title></title>
 </head>
 <body>
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 <h1>드링크 등록</h1>
 <form action="${pageContext.request.contextPath}/drinkInsert.do" method="post" enctype="multipart/form-data">

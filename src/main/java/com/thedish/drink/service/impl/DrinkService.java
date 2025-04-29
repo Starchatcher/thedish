@@ -1,8 +1,10 @@
 package com.thedish.drink.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.thedish.common.Paging;
+import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
 
@@ -20,4 +22,9 @@ public interface DrinkService {
 	int updateDrink(Drink drink);
 	int deleteDrink(int drinkId); 
 
+	
+	boolean incrementRecommendationCount(int drinkId);
+	 
+	 int getRecommendationCount(int drinkId);
+	 List<Pairing> selectPairingsByDrinkId(int drinkId);
 }
