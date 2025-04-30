@@ -74,6 +74,47 @@
             font-weight: bold;
         }
         
+     #search-area {
+    width: 650px; /* 게시판 테이블과 같은 폭으로 맞추기 */
+    margin: 0 auto 20px; /* 가운데 정렬 + 아래 여백 */
+    display: flex;
+    justify-content: space-between; /* 좌우로 양쪽 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+#titleform select,
+#titleform input[type="search"],
+#titleform input[type="submit"] {
+    height: 36px; /* 높이 설정 */
+    padding: 0 10px; /* 좌우 패딩 */
+    font-size: 14px; /* 글자 크기 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 8px; /* 둥근 모서리 */
+}
+
+#titleform select {
+    min-width: 80px; /* 최소 너비 설정 */
+}
+
+#titleform input[type="search"] {
+    width: 220px; /* 검색 입력 필드 너비 설정 */
+}
+
+#titleform input[type="submit"] {
+    background-color: #8FBC8F; /* 버튼 배경색 */
+    color: white; /* 글자색 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 커서 포인터로 변경 */
+    transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+    padding: 12px 8px; /* 패딩 설정 */
+}
+
+#titleform input[type="submit"]:hover {
+    background-color: #7aa97a; /* 호버 시 배경색 변경 */
+}
+
+        
+        
         
     </style>
 </head>

@@ -98,6 +98,37 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 
+	@Override
+	public int selectUserRating(String loginId, int recipeId) {
+		return recipeDao.selectUserRating(loginId, recipeId);
+	}
+
+
+	@Override
+	public void insertRating(String loginId, int recipeId, double ratingScore, String targetType) {
+		recipeDao.insertRating(loginId, recipeId, ratingScore, targetType);
+	}
+
+
+	@Override
+	public void updateRating(String loginId, int recipeId, double ratingScore, String targetType) {
+		recipeDao.updateRating(loginId, recipeId, ratingScore, targetType);
+	}
+
+
+	@Override
+	public void updateAverageRating(int recipeId, double avgRating) {
+		recipeDao.updateAverageRating(recipeId, avgRating);
+	}
+
+
+	@Override
+	public double getAverageRating(int recipeId) {
+		
+		return recipeDao.getAverageRating(recipeId);
+	}
+
+
 	
 	
 	

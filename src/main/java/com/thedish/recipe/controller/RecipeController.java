@@ -28,6 +28,7 @@ import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
 import com.thedish.recipe.model.vo.Recipe;
 import com.thedish.recipe.service.impl.RecipeService;
+import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -43,8 +44,8 @@ public class RecipeController {
 	private ImageService imageService;
 	
 	@Autowired
-	private CommentService commentService;
-	
+	private CommentService commentService;	 
+	 
 	// 레시피 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
 		@RequestMapping("recipeList.do")
 		public ModelAndView recipeListMethod(ModelAndView mv, 
@@ -316,7 +317,7 @@ public class RecipeController {
 		        return "common/error";
 		}
 				 }
-		
+		// 레시피 삭제
 		 @RequestMapping(value = "deleteRecipe.do", method = RequestMethod.POST)
 		    public String deleteRecipe(
 		            @RequestParam("recipeId") int recipeId,
@@ -334,11 +335,50 @@ public class RecipeController {
 		        return "redirect:/recipeList.do?page=" + page;
 		    }
 		
+		 // 레시피 평점 기능
+		 @RequestMapping(value = "rateRecipe.do", method = RequestMethod.POST)
+		  
+		    public String rateRecipe(
+		            @RequestParam("recipeId") int recipeId,
+		            @RequestParam(value = "rating", defaultValue = "0") double ratingScore, // 평점 값, 기본값을 0으로 설정
+		            HttpSession session,
+		            RedirectAttributes redirectAttributes) {
+
+			
+
+		        // 1. 로그인한 사용자 정보 가져오기
+		        Users loggedInUser = (Users) session.getAttribute("loginUser");
+
+		        // 2. 로그인 상태 확인
+		     
+
+		        String loginId = loggedInUser.getLoginId(); // 로그인 ID 가져오기
+
+		        // 평점이 이미 존재하는지 확인
+		        int existingRatingCount = recipeService.selectUserRating(loginId, recipeId);
+		        if (existingRatingCount > 0) {
+		            // 이미 평점을 부여한 경우, 업데이트
+		            recipeService.updateRating(loginId, recipeId, ratingScore, "recipe");
+		            redirectAttributes.addFlashAttribute("message", "평점이 수정되었습니다.");
+		        } else {
+		            // 평점을 새로 추가
+		            recipeService.insertRating(loginId, recipeId, ratingScore, "recipe");
+		            redirectAttributes.addFlashAttribute("message", "평점이 등록되었습니다.");
+		        }
+
+		        // 평균 평점 업데이트
+		        double averageRating = recipeService.getAverageRating(recipeId);
+		        recipeService.updateAverageRating(recipeId, averageRating); // 평균 평점 업데이트
+
+		        redirectAttributes.addFlashAttribute("avgRating", averageRating); // 평균 평점 반환
+
+		        return "redirect:/recipeDetail.do?no=" + recipeId; // 레시피 상세 페이지로 리다이렉션
+
+		 }
 		 
-		
+		 
 		 
 
 
-		 
 }
 
