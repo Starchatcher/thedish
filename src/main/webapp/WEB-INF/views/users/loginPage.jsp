@@ -4,80 +4,55 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<title>login</title>
 <style type="text/css">
-body {
-    margin: 0;
-    padding: 0;
-    background: #f0f2f5;
-    font-family: 'Roboto', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.container {
-    background: #ffffff;
-    padding: 40px 50px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-    width: 400px;
-}
 h1 {
-    text-align: center;
-    font-size: 36px;
-    color: navy;
-    margin-bottom: 30px;
+	font-size: 48pt;
+	color: navy;
 }
-form {
-    display: flex;
-    flex-direction: column;
+div {
+	width: 500px;
+	height: 200px;
+	border: 2px solid navy;
+	position: relative;
+	left: 200px;
 }
-label {
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: navy;
-    font-weight: 700;
+div form {
+	font-size: 16pt;
+	color: navy;
+	font-weight: bold;
+	margin: 10px;
+	padding: 10px;
 }
-input[type="text"],
-input[type="password"] {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    font-size: 16px;
+div#loginForm form input.pos {
+	position: absolute;
+	left: 120px;
+	width: 300px;
+	height: 25px;
 }
-input[type="submit"] {
-    margin-top: 20px;
-    padding: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: navy;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-input[type="submit"]:hover {
-    background-color: #003366;
+div#loginForm form input[type=submit] {
+	margin: 10px;
+	width: 250px;
+	height: 40px;
+	position: absolute;
+	left: 120px;
+	background-color: navy;
+	color: white;
+	font-size: 16pt;
+	font-weight: bold;
 }
 </style>
+
 </head>
 <body>
+<h1 align="center">The Dish 로그인</h1>
+<div id="loginForm">
 
-<div class="container">
-    <h1>로그인</h1>
-    <form action="login.do" method="post">
-        <label for="userid">아이디
-            <input type="text" id="userid" name="userId" required>
-        </label>
-        <label for="userpwd">비밀번호
-            <input type="password" id="userpwd" name="userPwd" required>
-        </label>
-        <input type="submit" value="로그인">
-    </form>
+	<form action="login.do" method="post">
+		<label>아이디: <input type="text" id="loginId" name="loginId" class="pos"></label> <br>
+		<label>암호 : <input type="password" id="password" name="password" class="pos"></label> <br>
+		<input type="submit" value="로그인">
+	</form>
 </div>
 
 </body>
