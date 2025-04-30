@@ -180,7 +180,20 @@ body {
     </ul>
 
     <!-- 로그인 페이지 이동 -->
+    <c:if test="${ empty sessionScope.loginUser }">
  <button onclick="location.href='${pageContext.request.contextPath}/loginPage.do'">로그인</button>
+ </c:if>
+  <c:if test="${ !empty sessionScope.loginUser }">
+		<div id="loginBox" class="lineA">
+
+			${ loginUser.nickName } 님 &nbsp; <a href="logout.do">로그아웃</a> <br>
+			문의알림 0 <br>
+		
+			<a href="myinfo.do?loginId=${ sessionScope.loginUser.loginId }">내
+				정보 보기</a>
+		</div>
+			<%-- <% } %> --%>
+	</c:if>
   
 </nav>
 	
