@@ -150,7 +150,7 @@ body {
         <div class="dropdown">
           <div class="dropdown-column">
             <h4>맞춤형 추천</h4>
-            <a href="#">건강 맞춤형 추천</a>
+            <a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">건강 맞춤형 추천</a>
             <a href="#">술 페어링 추천</a>
           </div>
         </div>
