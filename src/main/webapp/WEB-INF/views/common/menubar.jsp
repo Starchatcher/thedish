@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -178,12 +179,9 @@ body {
       </li>
     </ul>
 
-    <!-- 로그인 버튼 -->
-    <div class="login-box">
-      <a href="#login" class="login-btn">login</a>
-    </div>
-
-  </div>
+    <!-- 로그인 페이지 이동 -->
+ <button onclick="location.href='${pageContext.request.contextPath}/loginPage.do'">로그인</button>
+  
 </nav>
 	
 
