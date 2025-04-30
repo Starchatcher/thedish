@@ -14,8 +14,8 @@ public class Notice	implements java.io.Serializable {
 	private String createdBy;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private java.sql.Date createdAt;
-	private String originalfilename;
-	private String renamefilename;
+	private String originalFileName;
+	private String renameFileName;
 	private int readCount;
 	
 	//Constructor
@@ -33,8 +33,8 @@ public class Notice	implements java.io.Serializable {
 		this.content = content;
 		this.createdBy = createdBy;
 		this.createdAt = createdAt;
-		this.originalfilename = originalfilename;
-		this.renamefilename = renamefilename;
+		this.originalFileName = originalfilename;
+		this.renameFileName = renamefilename;
 		this.readCount = readCount;
 	}
 
@@ -101,25 +101,25 @@ public class Notice	implements java.io.Serializable {
 
 
 	public String getOriginalfilename() {
-		return originalfilename;
+		return originalFileName;
 	}
 
 
 
 	public void setOriginalfilename(String originalfilename) {
-		this.originalfilename = originalfilename;
+		this.originalFileName = originalfilename;
 	}
 
 
 
 	public String getRenamefilename() {
-		return renamefilename;
+		return renameFileName;
 	}
 
 
 
 	public void setRenamefilename(String renamefilename) {
-		this.renamefilename = renamefilename;
+		this.renameFileName = renamefilename;
 	}
 
 
@@ -145,8 +145,8 @@ public class Notice	implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Notice [noticeId=" + noticeId + ", title=" + title + ", content=" + content + ", createdBy=" + createdBy
-				+ ", createdAt=" + createdAt + ", originalfilename=" + originalfilename + ", renamefilename="
-				+ renamefilename + ", readCount=" + readCount + "]";
+				+ ", createdAt=" + createdAt + ", originalfilename=" + originalFileName + ", renamefilename="
+				+ renameFileName + ", readCount=" + readCount + "]";
 	}
 
 

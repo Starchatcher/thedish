@@ -1,142 +1,162 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="error.jsp" %>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>The Dish main</title>
- <style>
- 
- 	div h3 {
- 	text-align: center;
- 	}
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: white;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 50px auto;
-      text-align: center;
-    }
-    h2 {
-      margin-bottom: 40px;
-      font-size: 24px;
-    }
-    .content {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-    }
-    .notice, .best {
-      flex: 1;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      text-align: left;
+<style>
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfefc;
+  }
 
+  .container {
+    max-width: 1100px;
+    margin: 60px auto;
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 50px;
+    font-size: 28px;
+    color: #2c3e50;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .notice, .best {
+    flex: 1;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  }
+
+  .notice h3, .best h3 {
+    text-align: center;
+    color: #27ae60;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+  }
+
+  /* 공지사항 테이블 */
+  .notice table {
+    width: 100%;
+    font-size: 14px;
+    border-collapse: collapse;
+  }
+
+  .notice th, .notice td {
+    border-bottom: 1px solid #ecf0f1;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .notice th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .notice td a {
+    text-decoration: none;
+    color: #34495e;
+  }
+
+  .notice td a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+  }
+
+  /* 추천 음식 */
+  .best img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+
+  .best img:hover {
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column;
     }
-    .notice ul {
-      padding-left: 20px;
-    }
-    .pagination {
-      text-align: center;
-      margin-top: 15px;
-    }
-    .pagination button {
-      background: white;
-      border: 1px solid #ccc;
-      margin: 0 3px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    .pagination button.active {
-      background: black;
-      color: white;
-    }
-    img {
-      width: 100%;
-      border-radius: 8px;
-    }
-  </style>
+  }
+</style>
+
+<script src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
+<script>
+  $(function(){
+    $.ajax({
+      url: 'ntop10.do',
+      type: 'post',
+      dataType: 'json',
+      success: function(data){
+        let values = '';
+        for(let i = 0; i < data.length; i++){
+          values += '<tr><td>' + data[i].noticeId 
+            + '</td><td><a href="ndetail.do?no=' + data[i].noticeId + '">' + data[i].title 
+            + '</a></td><td>' + data[i].createdAt + '</td></tr>';
+        }
+        $('#newnotice tbody').append(values);
+      },
+      error: function(xhr, status, error){
+        console.log('error:', xhr, status, error);
+      }
+    });
+  });
+</script>
 </head>
+
 <body>
 
-
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-
-
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
-  <div class="container">
-    <h2>아름답고 맛있는 미래 가치를 선도</h2>
 
-    <div class="content">
-      <!-- 공지사항 -->
-      <div class="notice">
-        <a href="noticeList.do"><h3>공지사항 (NOTICE)</h3></a>
-        <ul id="noticeList"></ul>
-        <div class="pagination" id="pagination"></div>
-      </div>
+<div class="container">
+  <h2>아름답고 맛있는 미래 가치를 선도</h2>
 
-      <!-- 이번주 추천 음식 -->
-      <div class="best">
-        <h3 id="rcm">이번주 추천 음식 (This Week’s Best)</h3>
-        <img src="dish.jpg" alt="추천 음식">
-      </div>
+  <div class="content">
+
+    <!-- 공지사항 -->
+    <div class="notice">
+      <h3>The Dish 공지사항</h3>
+      <table id="newnotice">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- AJAX로 공지글 삽입 -->
+        </tbody>
+      </table>
     </div>
+
+    <!-- 이번주 추천 음식 -->
+    <div class="best">
+      <h3>이번주 추천 음식 (This Week’s Best)</h3>
+      <img src="dish.jpg" alt="추천 음식">
+    </div>
+
   </div>
-	
-  <script>
-    const notices = [
-      "신제품 출시 안내: 고객 여러분의 많은 요청에 따라 동남아 퓨전 신메뉴를 출시합니다.",
-      "포인트 제도 변경 안내: 2025년 6월 1일부터 적립률이 조정됩니다.",
-      "고객 후기 이벤트: SNS에 공유하고 선물 받자! 5월 1일부터 20일까지 진행됩니다.",
-      "여름 한정 메뉴 출시 예정 안내",
-      "매장 운영시간 변경 공지",
-      "5월 휴무일 안내",
-      "단체예약 프로모션 안내",
-      "신규 지점 오픈 공지"
-    ];
+</div>
 
-    const itemsPerPage = 5;
-    let currentPage = 1;
-
-    function renderNotices() {
-      const list = document.getElementById('noticeList');
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      list.innerHTML = '';
-      notices.slice(start, end).forEach((item, idx) => {
-        list.innerHTML += `<li><strong>${start + idx + 1}.</strong> ${item}</li>`;
-      });
-    }
-
-    function renderPagination() {
-      const pagination = document.getElementById('pagination');
-      const pageCount = Math.ceil(notices.length / itemsPerPage);
-      pagination.innerHTML = '';
-      for (let i = 1; i <= pageCount; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.classList.toggle('active', i === currentPage);
-        btn.onclick = () => {
-          currentPage = i;
-          renderNotices();
-          renderPagination();
-        };
-        pagination.appendChild(btn);
-      }
-    }
-
-    renderNotices();
-    renderPagination();
-  </script>
-
- <c:import url="/WEB-INF/views/common/footer.jsp" />
-
+<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -6,11 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.thedish.board.model.vo.Board;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.notice.model.service.NoticeService;
@@ -159,8 +160,22 @@ public class NoticeController {
 	    }
 
 	    return mv;
+	   
+	}
+
+@RequestMapping(value = "ntop10.do", produces = "application/json; charset=UTF-8")
+@ResponseBody
+	public ArrayList<Notice> getTop10Notices() {
+	    return noticeService.selectTop10();
 	}
 	
+	//메인페이지 목록 출력
+	@RequestMapping("mainWithNotice.do")
+	public String showMainPage(Model model) {
+	    ArrayList<Notice> topNotices = noticeService.selectTop10();
+	    model.addAttribute("topNotices", topNotices);
+	    return "main"; // 메인 페이지 JSP 파일
+	}
 	}
 
 	
