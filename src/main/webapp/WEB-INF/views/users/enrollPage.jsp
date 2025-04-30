@@ -7,83 +7,113 @@
 <meta charset="UTF-8">
 <title>회원 가입</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style type="text/css">
+<style>
 body {
-    margin: 0;
-    padding: 0;
-    background: #f1f3f5;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.container {
-    background: #ffffff;
-    padding: 40px 50px;
-    border-radius: 12px;
-    width: 400px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+
+.signup-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  width: 420px;
+  text-align: center;
 }
+
 h1 {
-    text-align: center;
-    color: navy;
-    margin-bottom: 30px;
+  font-size: 1.8em;
+  margin-bottom: 25px;
+  color: #333;
 }
-form {
-    display: flex;
-    flex-direction: column;
-}
+
 .form-group {
-    margin-bottom: 20px;
+  text-align: left;
+  margin-bottom: 15px;
 }
+
 .form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: block;
+  color: #333;
 }
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="email"],
-.form-group input[type="tel"],
-.form-group input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
+
 .gender-group {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin-top: 8px;
 }
+
+.gender-group label {
+  font-weight: normal;
+  color: #555;
+}
+
+#dupCheckBtn {
+  margin-top: 8px;
+  width: 100%;
+  background-color: #f29abf;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#dupCheckBtn:hover {
+  background-color: #e77ca7;
+}
+
 .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
 }
+
 button, a.button-link {
-    background-color: navy;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #f29abf;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+
 button:hover, a.button-link:hover {
-    background-color: #003366;
+  background-color: #e77ca7;
 }
 </style>
 
-<script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
-<script type="text/javascript">
+<script src="${pageContext.servletContext.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+<script>
 function dupIdCheck() {
     $.ajax({
         url: 'idchk.do',
@@ -105,11 +135,11 @@ function dupIdCheck() {
 }
 
 function validate() {
-    var pwd = $('#userPwd').val();
-    var pwd2 = $('#userPwd2').val();
+    const pwd = $('#userPwd').val();
+    const pwd2 = $('#userPwd2').val();
     
     if (pwd !== pwd2) {
-        alert('암호와 암호확인이 일치하지 않습니다. 다시 입력하세요.');
+        alert('비밀번호와 확인이 일치하지 않습니다.');
         $('#userPwd').val('');
         $('#userPwd2').val('');
         $('#userPwd').focus();
@@ -121,14 +151,14 @@ function validate() {
 </head>
 
 <body>
-<div class="container">
+<div class="signup-container">
     <h1>회원 가입</h1>
     <form action="enroll.do" method="post" onsubmit="return validate();">
-        
+
         <div class="form-group">
             <label for="userId">아이디</label>
             <input type="text" name="userId" id="userId" required>
-            <button type="button" onclick="dupIdCheck();" style="margin-top:10px; width:100%;">아이디 중복검사</button>
+            <button type="button" id="dupCheckBtn" onclick="dupIdCheck();">아이디 중복검사</button>
         </div>
 
         <div class="form-group">
@@ -138,7 +168,7 @@ function validate() {
 
         <div class="form-group">
             <label for="userPwd2">비밀번호 확인</label>
-            <input type="password" id="userPwd2" required>
+            <input type="password" name="userPwd2" id="userPwd2" required>
         </div>
 
         <div class="form-group">
@@ -168,6 +198,12 @@ function validate() {
             <label for="email">이메일</label>
             <input type="email" name="email" required>
         </div>
+
+        <!-- 기본값 처리용 hidden 필드 -->
+        <input type="hidden" name="status" value="ACTIVE">
+        <input type="hidden" name="provider" value="local">
+        <input type="hidden" name="role" value="USER">
+        <input type="hidden" name="loginId" value="${userId}">
 
         <div class="button-group">
             <button type="submit">가입하기</button>
