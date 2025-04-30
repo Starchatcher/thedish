@@ -150,8 +150,9 @@ table td#title a {
     <input type="text" id="search-query" name="keyword" placeholder="검색어를 입력하세요" required>
     <input type="submit" value="검색" />
 </form>
-
-<button id="writeBtn" onclick="location.href='boardWritePage.do';">작성</button>
+	<c:if test="${ !empty sessionScope.loginUser }">
+		<button id="writeBtn" onclick="location.href='boardWritePage.do';">작성</button>
+	</c:if>
 </div>
 <script type="text/javascript">
 function updateAction() {

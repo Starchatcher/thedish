@@ -19,9 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
+import com.thedish.common.FileNameChange;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.users.model.vo.Users;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -76,7 +79,8 @@ public class BoardController {
 
 	@RequestMapping("boardDetail.do")
 	public ModelAndView boardDetailView(@RequestParam("bno") int boardId,
-			@RequestParam(name = "page", required = false) String page, ModelAndView mv) {
+			@RequestParam(name = "page", required = false) String page, @RequestParam("category") String category,
+			ModelAndView mv) {
 
 		logger.info("boardDetail.do : " + boardId);
 
@@ -93,6 +97,7 @@ public class BoardController {
 		if (board != null) {
 			mv.addObject("board", board);
 			mv.addObject("currentPage", currentPage);
+			mv.addObject("category", category);
 			mv.setViewName("board/boardDetailView");
 		} else {
 			mv.addObject("message", boardId + "번 게시글 상세보기 요청 실패!");
@@ -106,7 +111,7 @@ public class BoardController {
 	// 스프링에서 파일 다운로드는 스프링이 제공하는 View 클래스를 상속받은 클래스를 사용하도록 정함
 	// => 파일다운로드용 뷰 클래스를 따로 만듦 => 뷰리졸버에서 연결 처리함
 	// => 리턴타입은 반드시 ModelAndView 여야 함
-	@RequestMapping("")
+	@RequestMapping("boardFileDown.do")
 	public ModelAndView fileDownMethod(ModelAndView mv, HttpServletRequest request,
 			@RequestParam("ofile") String originalFileName, @RequestParam("rfile") String renameFileName) {
 
@@ -128,46 +133,46 @@ public class BoardController {
 	// 새 게시글 원글 등록 요청 처리용 (파일 업로드 기능 포함)
 	@RequestMapping(value = "boardInsert.do", method = RequestMethod.POST)
 	public String boardInsertMethod(Board board, @RequestParam(name = "ofile", required = false) MultipartFile mfile,
-			@RequestParam(name = "boardType") String category, HttpServletRequest request, Model model) {
-		// 게시 원글 첨부파일 저장 폴더를 경로 저장
+			@RequestParam(name = "boardType") String category, HttpServletRequest request, HttpSession session,
+			Model model) {
+
+		// ✅ 로그인 유저 세션에서 가져와 작성자 세팅
+		Users loginUser = (Users) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			model.addAttribute("message", "로그인이 필요합니다.");
+			return "common/error";
+		}
+		board.setWriter(loginUser.getLoginId()); // ← writer를 여기서 세팅
+		board.setBoardCategory(category);
+
+		// 파일 저장 로직은 그대로 유지
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
-
-		// 첨부파일이 있을 때
 		if (!mfile.isEmpty()) {
-			// 전송온 파일이름 추출함
 			String fileName = mfile.getOriginalFilename();
-			String renameFileName = null;
-
-			// 저장 폴더에는 변경된 파일이름으로 파일을 저장 처리함
-			// 바꿀 파일명 : 년월일시분초.확장자
 			if (fileName != null && fileName.length() > 0) {
-				renameFileName = FileNameChange.change(fileName, "yyyyMMddHHmmss");
-				logger.info("변경된 첨부 파일명 확인 : " + renameFileName);
-
+				String renameFileName = FileNameChange.change(fileName, "yyyyMMddHHmmss");
 				try {
-					// 저장 폴더에 바뀐 파일명으로 파일 저장하기
+					File saveDir = new File(savePath);
+					if (!saveDir.exists())
+						saveDir.mkdirs();
 					mfile.transferTo(new File(savePath + "\\" + renameFileName));
+					board.setOriginalFileName(fileName);
+					board.setRenameFileName(renameFileName);
 				} catch (Exception e) {
 					e.printStackTrace();
 					model.addAttribute("message", "첨부파일 저장 실패!");
 					return "common/error";
 				}
-			} // 파일명 바꾸어 저장하기
-
-			// board 객체에 첨부파일 정보 저장하기
-			board.setBoardOriginalFileName(fileName);
-			board.setBoardRenameFileName(renameFileName);
-		} // 첨부파일 있을 때
+			}
+		}
 
 		if (boardService.insertBoard(board) > 0) {
-			// 새 게시 원글 등록 성공시, 공지 목록 페이지로 이동 처리
 			return "redirect:boardList.do";
 		} else {
 			model.addAttribute("message", "새 게시글 등록 실패!");
 			return "common/error";
 		}
-
-	} // binsert.do closed
+	}
 
 	// 검색용 메소드 ------------------------------------------------------------------
 	// 전체 게시판 내용 검색 메소드
