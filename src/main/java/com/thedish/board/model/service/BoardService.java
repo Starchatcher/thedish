@@ -18,6 +18,8 @@ public interface BoardService {
 	
 	void updateViewCount(int boardId);
 	int insertBoard(Board board);
+	int updateBoard(Board board);
+	int deleteBoard(Board board);
 	
 	int selectSearchTitleCount(Search search);
 	int selectSearchWriterCount(Search search);

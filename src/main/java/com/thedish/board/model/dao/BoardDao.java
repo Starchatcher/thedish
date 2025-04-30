@@ -43,7 +43,6 @@ public class BoardDao {
 	}
 	
 	
-	// 게시판 목록 리스트 조회용 쿼리 --------------------------------------------------
 	
 	// dml -----------------------------------------------------------------------
 	public void updateViewCount(int boardId) {
@@ -54,6 +53,13 @@ public class BoardDao {
 		return sqlSessionTemplate.insert("boardMapper.insertBoard", board);
 	}
 	
+	public int updateBoard(Board board) {
+		return sqlSessionTemplate.update("boardMapper.updateBoard", board);
+	}
+
+	public int deleteBoard(Board board) {
+		return sqlSessionTemplate.delete("boardMapper.deleteBoard", board);
+	}
 	
 	// 검색 관련 --------------------------------------------------------------------
 	public ArrayList<Board> selectSearchTitleAll(Search search){

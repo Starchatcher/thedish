@@ -1,6 +1,7 @@
 package com.thedish.board.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,23 @@ public class BoardController {
 	@RequestMapping("boardWritePage.do")
 	public String moveWritePage() {
 		return "board/boardWriteView";
+	}
+
+	// 게시글 수정 페이지 내보내기
+	@RequestMapping("boardUpdatePage.do")
+	public String moveUpdatePage(Model model, @RequestParam("bno") int boardId, @RequestParam("page") int currentPage) {
+
+		// 수정 페이지로 전달할 board 정보 조회
+		Board board = boardService.selectBoard(boardId);
+		if (board != null) {
+			model.addAttribute("board", board);
+			model.addAttribute("page", currentPage);
+			return "board/boardUpdateView";
+		} else {
+			model.addAttribute("message", boardId + "번 게시글 수정페이지로 이동하는 것을 실패하였습니다. 관리자에게 문의하세요.");
+			return "common/error";
+		}
+
 	}
 
 	// 요청 처리용 메소드 ----------------------------------------------
@@ -136,13 +154,13 @@ public class BoardController {
 			@RequestParam(name = "boardType") String category, HttpServletRequest request, HttpSession session,
 			Model model) {
 
-		// ✅ 로그인 유저 세션에서 가져와 작성자 세팅
+		// 로그인 유저 세션에서 가져와 작성자 세팅
 		Users loginUser = (Users) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			model.addAttribute("message", "로그인이 필요합니다.");
 			return "common/error";
 		}
-		board.setWriter(loginUser.getLoginId()); // ← writer를 여기서 세팅
+		board.setWriter(loginUser.getLoginId());
 		board.setBoardCategory(category);
 
 		// 파일 저장 로직은 그대로 유지
@@ -172,6 +190,106 @@ public class BoardController {
 			model.addAttribute("message", "새 게시글 등록 실패!");
 			return "common/error";
 		}
+	}
+
+	// 게시글 수정 메소드
+	@RequestMapping(value = "boardUpdate.do", method = RequestMethod.POST)
+	public ModelAndView boardUpdateMethod(ModelAndView mv, Board board, HttpServletRequest request,
+			@RequestParam(name = "deleteFile", required = false) String delFlag,
+			@RequestParam(name = "ofile", required = false) MultipartFile mfile,
+			@RequestParam(name = "page", required = false) String page) {
+
+		int currentPage = 1;
+		if (page != null && !page.trim().isEmpty()) {
+			currentPage = Integer.parseInt(page.trim());
+		}
+
+		// 첨부파일 관련 변경 사항 처리
+		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
+
+		// 1. 원래 첨부파일이 있는데 파일삭제를 원할 경우
+		// OR 원래 첨부파일이 있는데 새로운 첨부파일로 변경할 경우
+		// => 이전 파일 정보 삭제
+		if (board.getOriginalFileName() != null && ("yes".equals(delFlag) || !mfile.isEmpty())) {
+			new File(savePath + "\\" + board.getRenameFileName()).delete();
+			board.setOriginalFileName(null);
+			board.setRenameFileName(null);
+		}
+
+		// 2. 첨부파일이 있을 때 (변경 OR 추가)
+		if (!mfile.isEmpty()) {
+			// 전송 온 파일이름 추출
+			String fileName = mfile.getOriginalFilename();
+			String renameFileName = null;
+
+			// 저장 폴더에는 변경된 파일이름으로 파일을 저장 처리함
+			// 바꿀 파일명 : 년월일시분초.확장자
+			if (fileName != null && fileName.length() > 0) {
+				renameFileName = FileNameChange.change(fileName, "yyyyMMddHHmmss");
+
+				try {
+					mfile.transferTo(new File(savePath + "\\" + renameFileName));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					mv.addObject("message", "첨부파일 저장에 실패하였습니다. 다시 시도해주세요.");
+					mv.setViewName("common/error");
+
+					return mv;
+				}
+			} // 파일명 바꾸어 저장
+
+			board.setOriginalFileName(fileName);
+			board.setRenameFileName(renameFileName);
+		}
+
+		if (boardService.updateBoard(board) > 0) {
+			mv.addObject("bno", board.getBoardId());
+			mv.addObject("category", board.getBoardCategory());
+			mv.setViewName("redirect:boardDetail.do?bno=" + board.getBoardId() + "&page=" + currentPage + "&category="
+					+ board.getBoardCategory());
+		} else {
+			mv.addObject("message", "게시글 수정에 실패하였습니다. 다시 시도해주세요.");
+			mv.setViewName("common/error");
+		}
+
+		return mv;
+	}
+
+	// 게시글 삭제용 메소드
+	@RequestMapping("boardDelete.do")
+	public ModelAndView boardDeleteMethod(@RequestParam("bno") int boardId,
+			@RequestParam(name = "page", required = false) String page,
+			@RequestParam(name = "category", required = false) String category, HttpServletRequest request,
+			ModelAndView mv) {
+
+		Board board = boardService.selectBoard(boardId); // 게시글 정보 조회
+
+		if (boardService.deleteBoard(board) > 0) {
+			// 첨부파일 삭제
+			if (board.getOriginalFileName() != null && board.getRenameFileName().length() > 0) {
+				String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
+				new File(savePath + "\\" + board.getRenameFileName()).delete();
+			}
+
+			// 리다이렉트 경로 설정
+			String redirectUrl = "redirect:boardList.do";
+			if (category != null && !category.trim().isEmpty()) {
+				redirectUrl += "?category=" + category;
+				if (page != null && !page.trim().isEmpty()) {
+					redirectUrl += "&page=" + page;
+				}
+			} else if (page != null && !page.trim().isEmpty()) {
+				redirectUrl += "?page=" + page;
+			}
+
+			mv.setViewName(redirectUrl);
+		} else {
+			mv.addObject("message", boardId + "번 게시글 삭제 실패!");
+			mv.setViewName("common/error");
+		}
+
+		return mv;
 	}
 
 	// 검색용 메소드 ------------------------------------------------------------------
