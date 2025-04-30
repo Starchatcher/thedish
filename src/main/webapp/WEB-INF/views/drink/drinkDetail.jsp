@@ -212,7 +212,7 @@ $(document).ready(function() {
 
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
-
+<c:if test="${  loginUser.role eq 'ADMIN' }">
 <a href="moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">수정</a>
 
 <form action="deleteDrink.do" method="post" style="display:inline;">
@@ -220,6 +220,7 @@ $(document).ready(function() {
     <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
     <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
 </form>
+</c:if>
 
 <div class="container">
     <h2>${drink.name}</h2>
@@ -306,14 +307,13 @@ $(document).ready(function() {
         <ul>
             <c:forEach var="comment" items="${comments}">
                 <li>
-                    <strong>${comment.loginId}</strong>
+                   <strong>${comment.nickName}</strong> <span>(${comment.createdAt})</span>
                     <span>(${comment.createdAt})</span>
                     <p>${comment.content}</p>
 
-                    <p>댓글 ID: ${comment.commentId}</p>
-
+                    
                     <!-- 삭제 버튼 추가 -->
-                    <c:if test="${ loginUser.loginId eq comment.loginId or loginUser.status eq 'ADMIN' }">
+                    <c:if test="${ loginUser.loginId eq comment.loginId or loginUser.role eq 'ADMIN' }">
                     <form action="deleteDrinkComment.do" method="post" style="display:inline;">
                         <input type="hidden" name="commentId" value="${comment.commentId}" />
                         <input type="hidden" name="drinkId" value="${drink.drinkId}" />
@@ -354,12 +354,24 @@ $(document).ready(function() {
 </div>
 
 <!-- 댓글 작성 폼 -->
-<form action="insertDrinkComment.do" method="post">
-    <input type="hidden" name="drinkId" value="${drink.drinkId}" />
-    <textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요" required></textarea><br/>
-    <input type="text" name="writer" placeholder="작성자 이름" required /><br/>
-    <button type="submit">댓글 작성</button>
-</form>
+<c:if test="${loginUser != null}">
+    <!-- 댓글 작성 폼 -->
+    <form action="insertDrinkComment.do" method="post">
+        <input type="hidden" name="drinkId" value="${drink.drinkId}" />
+
+        <%-- 작성자 닉네임 표시 및 수정 불가 설정 --%>
+        <input type="text" name="writer" placeholder="작성자 이름" required 
+               value="${loginUser.nickName}" readonly="readonly" /><br/>
+
+        <textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요" required></textarea><br/>
+
+        <button type="submit">댓글 작성</button>
+    </form>
+</c:if>
+<%-- 로그인하지 않은 사용자에게는 댓글 작성 폼이 보이지 않음 --%>
+<c:if test="${loginUser == null}">
+    <p>댓글을 작성하려면 <a href="loginPage.do">로그인</a>해주세요.</p> <%-- 예시: 로그인 페이지 링크 --%>
+</c:if>
 
 
 </body>

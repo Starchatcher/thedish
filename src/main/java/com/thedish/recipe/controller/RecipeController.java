@@ -335,25 +335,9 @@ public class RecipeController {
 		    }
 		
 		 
-		 // 추천기능
+		
 		 
-		 @RequestMapping(value = "recommend.do", method = RequestMethod.POST)
-		    @ResponseBody
-		    public Map<String, Object> recommendRecipe(
-		    		@RequestParam("recipeId") int recipeId) {
-		        boolean isUpdated = recipeService.incrementRecommendationCount(recipeId);
-		        logger.info("받은 recipeId: " + recipeId);
 
-		        Map<String, Object> response = new HashMap<>();
-		        if (isUpdated) {
-		            int newCount = recipeService.getRecommendationCount(recipeId);
-		            response.put("recommendNumber", newCount);
-		            response.put("message", "추천해 주셔서 감사합니다!");
-		        } else {
-		            response.put("message", "추천 처리 중 오류가 발생했습니다.");
-		        }
-		        return response;
-		    }
 
 		 
 }

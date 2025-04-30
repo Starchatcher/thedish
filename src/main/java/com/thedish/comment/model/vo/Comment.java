@@ -14,6 +14,15 @@ public class Comment implements java.io.Serializable {
     private java.sql.Date updatedAt;       // UPDATED_AT
     private int parentId;     // PARENT_ID (null 가능)
     private String targetType;    // TARGET_TYPE
+    
+    private String nickName;
+    
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public int getCommentId() {
 		return commentId;
 	}
