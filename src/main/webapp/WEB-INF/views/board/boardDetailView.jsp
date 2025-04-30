@@ -80,7 +80,14 @@ function requestUpdatePage(){
     location.href = '${pageContext.request.contextPath}/boardUpdateView.do?bno=${board.boardId}&page=${currentPage}';
 }
 function goToList(){
-	location.href = '${pageContext.request.contextPath}/boardList.do?category=${board.boardCategory}&page=${currentPage}';
+	const category = '${param.category}';
+	const page = '${currentPage}';
+
+	if (category == null || category == '' || category == 'all') {
+		location.href = '${pageContext.request.contextPath}/boardList.do?page=1';
+	} else {
+		location.href = '${pageContext.request.contextPath}/boardList.do?category=' + category + '&page=1';
+	}
 }
 
 </script>
@@ -102,7 +109,7 @@ function goToList(){
 		<c:if test="${not empty board.originalFileName}">
 			<div class="attachment">
 				첨부파일: <a
-					href="${pageContext.servletContext.contextPath}/fileDown.do?ofile=${board.originalFileName}&rfile=${board.renameFileName}">
+					href="${pageContext.servletContext.contextPath}/boardFileDown.do?ofile=${board.originalFileName}&rfile=${board.renameFileName}">
 					${board.originalFileName} </a>
 			</div>
 		</c:if>
@@ -117,6 +124,7 @@ function goToList(){
 					<button type="button" onclick="requestDelete();">삭제</button>
 				</c:if>
 			</c:if>
+			<button type="button" onclick="history.back();">이전 페이지</button>
 			<button type="button" onclick="goToList();">목록</button>
 		</div>
 
