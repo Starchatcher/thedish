@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,88 +208,7 @@ form button:hover {
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
 <script>
-$(document).ready(function() {
-    const $ratingForm = $('#ratingForm');
-    const $selectedRatingText = $('#selectedRatingText'); // 선택된 평점 표시할 span (선택 사항)
 
-    // 페이지 로드 시 사용자의 기존 평점 초기값 설정
-    // Controller에서 ${userRating} 값을 Model에 담아 JSP로 전달했다고 가정
-    const userRating = parseFloat('${userRating > 0 ? userRating : 0}'); // userRating 값을 숫자로 가져옴
-
-    if (userRating > 0) {
-        // 기존 평점에 해당하는 라디오 버튼 찾아서 체크
-        // value 속성으로 라디오 버튼을 찾습니다.
-        $ratingForm.find('input[name="rating"][value="' + userRating + '"]').prop('checked', true);
-        // 초기 로드 시 선택된 값 텍스트 업데이트 (선택 사항)
-        $selectedRatingText.text('(' + userRating + '점 선택됨)');
-    }
-
-    // 사용자가 별점을 클릭하여 라디오 버튼 선택 시 이벤트 처리
-    $ratingForm.find('input[name="rating"]').change(function() {
-        const selectedScore = $(this).val(); // 선택된 라디오 버튼의 value 값
-        // 선택된 값 텍스트 업데이트 (선택 사항)
-        $selectedRatingText.text('(' + selectedScore + '점 선택됨)');
-        // 이 값은 폼 제출 시 자동으로 name="rating"으로 전송됩니다.
-        // 별도의 hidden input이 필요 없습니다 (라디오 버튼 자체가 값을 가짐).
-    });
-
-
-    // 평점 폼 제출 이벤트 처리 (AJAX)
-    $ratingForm.submit(function(e) {
-        e.preventDefault(); // 기본 폼 제출 방지
-
-        const $form = $(this);
-        const selectedRating = $form.find('input[name="rating"]:checked').val(); // 체크된 라디오 버튼의 값
-
-        // 선택된 평점이 없을 경우
-        if (!selectedRating) {
-             alert('평점을 선택해주세요.');
-             return;
-        }
-
-        // 버튼 비활성화 (중복 제출 방지)
-        $form.find('button[type="submit"]').prop('disabled', true);
-
-        $.ajax({
-            url: $form.attr('action'), // 폼의 action 속성 (rateRecipe.do)
-            type: $form.attr('method'), // 폼의 method 속성 (POST)
-            data: $form.serialize(), // 폼의 모든 필드 값을 직렬화하여 전송 (recipeId, rating 포함)
-            dataType: 'json', // 서버 응답을 JSON으로 예상
-            success: function(response) {
-                 if (response.success) {
-                    // 서버 응답 예시: { success: true, message: "평점이 등록/수정되었습니다.", avgRating: 4.2, userRating: 4.5 }
-                     $('#avgRatingDisplay').text(response.avgRating); // 평균 평점 업데이트
-                     alert(response.message); // 성공 메시지
-
-                     // 사용자의 현재 평점 표시 부분 업데이트 (선택 사항)
-                     // 이미지를 새로고침하거나 별점 UI를 초기화해야 할 경우 Raty와 같은 플러그인이 더 쉬움
-                     // 순수 JS로는 현재 선택된 라디오 버튼 상태 유지만 하면 됨
-
-                 } else {
-                     // 서버에서 반환한 오류 메시지 처리 (로그인 필요 등)
-                     alert('오류: ' + response.message);
-                     // 로그인 필요 오류인 경우 로그인 페이지로 이동 안내 등 추가 가능
-                     if (response.redirectToLogin) { // 서버 응답에 로그인 페이지 이동 정보가 있다면
-                         window.location.href = response.redirectToLogin;
-                     }
-                 }
-            },
-            error: function(xhr, status, error) {
-                 console.error("AJAX Error: ", status, error, xhr.responseText);
-                 if (xhr.status === 401) { // Unauthorized
-                    alert('평점 기능은 로그인 후 이용 가능합니다.');
-                     // 로그인 페이지로 이동 안내 등 추가
-                 } else {
-                     alert('평점 처리 중 오류가 발생했습니다.');
-                 }
-            },
-            complete: function() {
-                 // 버튼 다시 활성화
-                 $form.find('button[type="submit"]').prop('disabled', false);
-            }
-        });
-    });
-});
 
   
 </script>
@@ -360,6 +280,7 @@ $(document).ready(function() {
 	<div class="stats">
 		<span>조회수: ${recipe.viewCount}</span>		
 		<span>평균 평점: ${recipe.avgRating}</span>
+
 		 <%-- 로그인한 사용자에게만 평점 입력 폼 표시 --%>
       <c:if test="${loginUser != null}">
         <div class="rating-form-area">
@@ -367,8 +288,7 @@ $(document).ready(function() {
             <%-- 평점 부여 폼 --%>
             <form id="ratingForm" action="rateRecipe.do" method="post">
                 <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
-
-                <%-- **별점 UI 컨테이너** --%>
+              
                <div class="starpoint_wrap">
   <div class="starpoint_box">
     <label for="starpoint_1" class="label_star" title="0.5"><span class="blind">0.5점</span></label>
@@ -381,26 +301,23 @@ $(document).ready(function() {
     <label for="starpoint_8" class="label_star" title="4"><span class="blind">4점</span></label>
     <label for="starpoint_9" class="label_star" title="4.5"><span class="blind">4.5점</span></label>
     <label for="starpoint_10" class="label_star" title="5"><span class="blind">5점</span></label>
-    <input type="radio" name="starpoint" id="starpoint_1" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_2" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_3" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_4" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_5" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_6" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_7" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_8" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_9" class="star_radio">
-    <input type="radio" name="starpoint" id="starpoint_10" class="star_radio">
+    <input type="radio" name="rating" id="starpoint_1" class="star_radio" value="0.5">
+    <input type="radio" name="rating" id="starpoint_2" class="star_radio" value="1.0">
+    <input type="radio" name="rating" id="starpoint_3" class="star_radio" value="1.5">
+    <input type="radio" name="rating" id="starpoint_4" class="star_radio" value="2.0">
+    <input type="radio" name="rating" id="starpoint_5" class="star_radio" value="2.5">
+    <input type="radio" name="rating" id="starpoint_6" class="star_radio" value="3.0">
+    <input type="radio" name="rating" id="starpoint_7" class="star_radio" value="3.5">
+    <input type="radio" name="rating" id="starpoint_8" class="star_radio" value="4.0">
+    <input type="radio" name="rating" id="starpoint_9" class="star_radio" value="4.5">
+    <input type="radio" name="rating" id="starpoint_10" class="star_radio" value="5.0">
     <span class="starpoint_bg"></span>
   </div>
 </div>
 
                 <button type="submit">평점 제출</button>
             </form>
-            <%-- 사용자의 현재 평점 표시 (선택 사항) --%>
-            <c:if test="${userRating > 0}">
-                <p>현재 내 평점: ${userRating}점</p>
-            </c:if>
+           
         </div>
     </c:if>
 

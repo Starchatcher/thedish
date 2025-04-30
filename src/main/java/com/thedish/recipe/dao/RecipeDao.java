@@ -1,7 +1,9 @@
 package com.thedish.recipe.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,44 @@ public class RecipeDao {
 
     public int getRecommendationCount(int recipeId) {
     	return sqlSessionTemplate.selectOne("recipeMapper.getRecommendationCount", recipeId);
+    }
+    // 특정 사용자가 특정 레시피에 대한 평점이 있는지 확인
+    public int selectUserRating(String loginId, int recipeId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("loginId", loginId);
+        params.put("recipeId", recipeId);
+        return sqlSessionTemplate.selectOne("recipeMapper.selectUserRating", params);
+    }
+
+    // 평점 추가
+    public void insertRating(String loginId, int recipeId, double ratingScore, String targetType) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("loginId", loginId);
+        params.put("recipeId", recipeId);
+        params.put("ratingScore", ratingScore);
+        params.put("targetType", targetType);
+        sqlSessionTemplate.insert("recipeMapper.insertRating", params);
+    }
+
+    // 평점 수정
+    public void updateRating(String loginId, int recipeId, double ratingScore, String targetType) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("loginId", loginId);
+        params.put("recipeId", recipeId);
+        params.put("ratingScore", ratingScore);
+        params.put("targetType", targetType);
+        sqlSessionTemplate.update("recipeMapper.updateRating", params);
+    }
+    
+    public void updateAverageRating(int recipeId, double avgRating) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("recipeId", recipeId);
+        params.put("avgRating", avgRating);
+        sqlSessionTemplate.update("recipeMapper.updateAverageRating", params);
+    }
+    
+    public double getAverageRating(int recipeId) {
+        return sqlSessionTemplate.selectOne("recipeMapper.getAverageRating", recipeId);
     }
     
 }

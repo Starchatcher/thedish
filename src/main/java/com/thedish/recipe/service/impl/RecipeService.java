@@ -35,4 +35,15 @@ public interface RecipeService {
 	 boolean incrementRecommendationCount(int recipeId);
 	 
 	 int getRecommendationCount(int recipeId);
+	 
+	 
+	 int selectUserRating(String loginId, int recipeId);
+	 
+	 void insertRating(String loginId, int recipeId, double ratingScore, String targetType);
+	 
+	 void updateRating(String loginId, int recipeId, double ratingScore, String targetType);
+	 
+	 void updateAverageRating(int recipeId, double avgRating);
+	 
+	 double getAverageRating(int recipeId);
 }
