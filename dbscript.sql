@@ -1,4 +1,4 @@
--- 🔻 DROP EXISTING OBJECTS
+-- DROP EXISTING OBJECTS
 
 DROP TABLE allergy CASCADE CONSTRAINTS;
 DROP TABLE board CASCADE CONSTRAINTS;
@@ -22,7 +22,7 @@ DROP TABLE users CASCADE CONSTRAINTS;
 DROP TABLE user_allergy CASCADE CONSTRAINTS;
 DROP TABLE visit_log CASCADE CONSTRAINTS;
 
--- 📦 CREATE TABLES
+-- CREATE TABLES
 
 -- CREATE TABLE: users
 CREATE TABLE users (
@@ -117,18 +117,59 @@ COMMENT ON COLUMN allergy.description IS '알레르기 설명';
 COMMENT ON COLUMN allergy.name IS '알레르기 이름';
 
 
-INSERT INTO allergy (name, description) VALUES ('땅콩', '땅콩 알레르기 반응을 유발하는 식품');
-INSERT INTO allergy (name, description) VALUES ('우유', '우유 및 유제품에 대한 알레르기');
-INSERT INTO allergy (name, description) VALUES ('계란', '계란 단백질에 의한 알레르기 반응');
-INSERT INTO allergy (name, description) VALUES ('대두', '대두 알레르기 반응을 유발하는 식품');
-INSERT INTO allergy (name, description) VALUES ('쌀', '쌀에 대한 알레르기');
-INSERT INTO allergy (name, description) VALUES ('밀', '밀 단백질에 의한 알레르기 반응');
-INSERT INTO allergy (name, description) VALUES ('게', '게에 대한 알레르기 반응을 유발하는 식품');
-INSERT INTO allergy (name, description) VALUES ('새우', '새우 단백질에 의한 알레르기 반응');
-INSERT INTO allergy (name, description) VALUES ('겨', '겨에 대한 알레르기');
-INSERT INTO allergy (name, description) VALUES ('깨', '깨에 대한 알레르기');
-INSERT INTO allergy (name, description) VALUES ('호두', '호두 단백질에 의한 알레르기 반응');
-INSERT INTO allergy (name, description) VALUES ('잣', '잣에 대한 알레르기 반응을 유발하는 식품');
+INSERT INTO allergy (name, description) VALUES ('땅콩', '두드러기, 가려움증, 붓기, 호흡 곤란, 구토, 설사, 어지럼증, 기절, 천식 발작, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('트리넛', '땅콩과 유사, 아나필락시스 높은 위험');
+INSERT INTO allergy (name, description) VALUES ('갑각류', '붓기, 빨갛게 변함, 위 통증, 구토, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('연체동물', '갑각류와 유사, 아나필락시스 가능');
+INSERT INTO allergy (name, description) VALUES ('생선', '피부 자극, 위장 문제, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('깨', '두드러기, 가려움증, 붓기, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('겨자', '두드러기, 구토, 어지러움, 목 부기, 호흡 곤란, 의식 상실');
+INSERT INTO allergy (name, description) VALUES ('루핀', '땅콩과 유사, 아나필락시스 높은 위험');
+INSERT INTO allergy (name, description) VALUES ('우유', '두드러기, 가려움증, 붓기, 위장 장애, 아나필락시스 (희귀)');
+INSERT INTO allergy (name, description) VALUES ('달걀', '피부 반응, 위장 증상, 아나필락시스 (희귀)');
+INSERT INTO allergy (name, description) VALUES ('밀', '피부, 위장, 호흡기 증상, 아나필락시스 (희귀)');
+INSERT INTO allergy (name, description) VALUES ('콩', '입 가려움, 코물음, 발진, 천식 증상, 아나필락시스 (희귀)');
+INSERT INTO allergy (name, description) VALUES ('셀러리', '입 가려움, 구토, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('아황산염', '천식 발작, 두드러기, 위장 불편');
+INSERT INTO allergy (name, description) VALUES ('옻', '피부 발진, 가려움증, 물집, 진물, 부종, 구역질, 구토, 어지럼증, 호흡 곤란, 장기 손상(염증/간 수치 상승), 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('호두', '두드러기, 가려움증, 구강 따끔거림, 구토, 복통, 설사, 호흡 곤란, 천식 발작, 어지럼증, 혈압 저하, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('쌀', '두드러기, 가려움증, 피부 발진, 구토, 설사, 복통, 호흡 곤란, 천식 발작, 아나필락시스(매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('게', '두드러기, 가려움증, 붓기, 구토, 복통, 호흡 곤란, 천식 발작, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('새우', '두드러기, 가려움증, 입안 따끔거림, 붓기, 구토, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('잣', '두드러기, 가려움증, 구강 알레르기 증후군(OAS), 구토, 복통, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('메밀', '두드러기, 가려움증, 구강 따끔거림, 구토, 복통, 설사, 호흡 곤란, 천식 발작, 어지럼증, 혈압 저하, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('녹두', '두드러기, 가려움증, 피부 발진, 구토, 복통, 설사, 호흡 곤란(드물게), 아나필락시스(매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('팥', '두드러기, 가려움증, 구강 가려움증(OAS), 복통, 설사, 호흡 곤란(드물게), 아나필락시스(매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('강낭콩', '두드러기, 가려움증, 구토, 복통, 설사, 호흡 곤란, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('렌틸콩', '두드러기, 가려움증, 구강 가려움증, 복통, 설사, 천식 발작, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('유청', '두드러기, 가려움증, 피부 부종, 구토, 설사, 복통, 호흡 곤란, 천식 발작, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('유당', '복부 팽만감, 복통, 설사, 메스꺼움, 구토, 방귀(알레르기 아님, 유당불내증 증상)');
+INSERT INTO allergy (name, description) VALUES ('고등어', '두드러기, 가려움증, 피부 부종, 구토, 설사, 호흡 곤란, 천식 발작, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('정어리', '두드러기, 가려움증, 구강 가려움증, 복통, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('멸치', '두드러기, 가려움증, 복통, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('연어', '두드러기, 가려움증, 피부 부종, 구토, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('참치', '두드러기, 가려움증, 복통, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('소고기', '두드러기, 가려움증, 구토, 설사, 호흡 곤란, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('돼지고기', '두드러기, 가려움증, 복통, 설사, 호흡 곤란, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('닭고기', '두드러기, 가려움증, 구강 가려움증, 복통, 호흡 곤란, 아나필락시스(매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('양고기', '두드러기, 가려움증, 복통, 설사, 호흡 곤란, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('오징어', '두드러기, 가려움증, 피부 부종, 구강 가려움증, 구토, 설사, 천식 발작, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('문어', '두드러기, 가려움증, 피부 부종, 구토, 복통, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('쭈꾸미', '두드러기, 가려움증, 구강 가려움증, 복통, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('홍합', '두드러기, 가려움증, 피부 부종, 구토, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('굴', '두드러기, 가려움증, 복통, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('가리비', '두드러기, 가려움증, 구강 가려움증, 복통, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('전복', '두드러기, 가려움증, 피부 부종, 구토, 호흡 곤란, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('소라', '두드러기, 가려움증, 복통, 설사, 호흡 곤란, 아나필락시스(드물게)');
+INSERT INTO allergy (name, description) VALUES ('키위', '두드러기, 가려움증, 입술/혀/목 부종, 구토, 설사, 호흡 곤란, 천식 발작, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('복숭아', '구강 가려움증, 두드러기, 부종, 호흡 곤란, 구토, 설사, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('토마토', '구강 가려움증, 두드러기, 부종, 구토, 설사, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('포유류 육류', '지연성 두드러기 (섭취 후 2~6시간), 부종, 구토, 설사, 호흡 곤란, 혈압 저하, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('젤라틴', '두드러기, 부종, 가려움증, 호흡 곤란, 아나필락시스');
+INSERT INTO allergy (name, description) VALUES ('바나나', '구강 가려움증, 두드러기, 부종, 구토, 설사, 호흡 곤란 (드물게), 아나필락시스 (매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('감자', '두드러기, 부종, 구토, 설사, 호흡 곤란 (드물게), 아나필락시스 (매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('사과', '구강 가려움증, 입술/혀 부종 (드물게), 두드러기 (드물게), 호흡 곤란 (매우 드물게)');
+INSERT INTO allergy (name, description) VALUES ('당근', '구강 가려움증, 입술/혀 부종 (드물게), 두드러기 (드물게), 호흡 곤란 (매우 드물게)');
 
 -- CREATE TABLE: board
 CREATE TABLE board (
