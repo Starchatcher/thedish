@@ -313,6 +313,7 @@ $(document).ready(function() {
                     <p>댓글 ID: ${comment.commentId}</p>
 
                     <!-- 삭제 버튼 추가 -->
+                    <c:if test="${ loginUser.loginId eq comment.loginId or loginUser.status eq 'ADMIN' }">
                     <form action="deleteDrinkComment.do" method="post" style="display:inline;">
                         <input type="hidden" name="commentId" value="${comment.commentId}" />
                         <input type="hidden" name="drinkId" value="${drink.drinkId}" />
@@ -320,6 +321,7 @@ $(document).ready(function() {
                         <input type="hidden" name="page" value="${page}" />
                         <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</button>
                     </form>
+                    </c:if>
                 </li>
             </c:forEach>
         </ul>
