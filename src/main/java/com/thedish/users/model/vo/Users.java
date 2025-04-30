@@ -123,6 +123,17 @@ public class Users implements java.io.Serializable{
 		public static long getSerialversionuid() {
 			return serialVersionUID;
 		}
+		
+		// 확인용 비밀번호 필드 (폼 검증용, DB 저장 X)
+		private String userPwd2;
+
+		public String getUserPwd2() {
+		    return userPwd2;
+		}
+
+		public void setUserPwd2(String userPwd2) {
+		    this.userPwd2 = userPwd2;
+		}
 
 		@Override
 		public String toString() {
