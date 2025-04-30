@@ -11,6 +11,9 @@ public interface NoticeService {
 	int selectListCount();
 	ArrayList<Notice> selectList(Paging paging);
 	Notice selectNotice(int noticeId);
+	
+	//메인페이지 목록 출력
+	ArrayList<Notice> selectTop10();
 	//dml -------------------------------------------
 	void updateAddReadCount (int noticeId);
 	

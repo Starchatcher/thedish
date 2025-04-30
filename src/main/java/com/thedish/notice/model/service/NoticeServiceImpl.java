@@ -55,5 +55,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public ArrayList<Notice> selectSearchContent(Search search) {
 		return noticeDao.selectSearchContent(search);
 	}
+	
+	//메인페이지 출력
+	@Override
+	public ArrayList<Notice> selectTop10() {
+	    return noticeDao.selectTop10();
+	}
  
 }

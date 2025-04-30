@@ -51,4 +51,10 @@ public class NoticeDao {
 		List<Notice> list = sqlSessionTemplate.selectList("noticeMapper.selectSearchContent", search);
 		return (ArrayList<Notice>)list;
 	}
+	
+	// 최신 공지사항 10개 조회 (메인용)
+	public ArrayList<Notice> selectTop10() {
+	    List<Notice> list = sqlSessionTemplate.selectList("noticeMapper.selectTop10");
+	    return (ArrayList<Notice>) list;
+	}
 }
