@@ -114,5 +114,15 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectSearchContentAll(search);
 	}
 
+	@Override
+	public int updateBoard(Board board) {
+		return boardDao.updateBoard(board);
+	}
+
+	@Override
+	public int deleteBoard(Board board) {
+		return boardDao.deleteBoard(board);
+	}
+
 
 }

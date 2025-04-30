@@ -109,9 +109,9 @@ form {
 		
 			<select name="boardType" required>
 				<option value="">게시판을 선택해 주세요.</option>
-				<option value="자유">자유게시판</option>
-				<option value="후기">후기게시판</option>
-				<option value="팁공유">팁공유게시판</option>
+				<option value="free">자유게시판</option>
+				<option value="review">후기게시판</option>
+				<option value="tip">팁공유게시판</option>
 			</select> 
 		</div>
 

@@ -74,10 +74,14 @@ hr {
 
 <script type="text/javascript">
 function requestDelete(){
-    location.href = '${pageContext.request.contextPath}/boardDelete.do?bno=${board.boardId}';
+    const bno = '${board.boardId}';
+    const page = '${currentPage}';
+    const category = '${param.category}';
+
+    location.href = '${pageContext.request.contextPath}/boardDelete.do?bno=' + bno + '&page=' + page + '&category=' + category;
 }
 function requestUpdatePage(){
-    location.href = '${pageContext.request.contextPath}/boardUpdateView.do?bno=${board.boardId}&page=${currentPage}';
+    location.href = '${pageContext.request.contextPath}/boardUpdatePage.do?bno=${board.boardId}&page=${currentPage}';
 }
 function goToList(){
 	const category = '${param.category}';
@@ -94,6 +98,7 @@ function goToList(){
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
+
 
 	<div class="container">
 
@@ -119,7 +124,7 @@ function goToList(){
 		<div class="button-row">
 			<c:if test="${not empty sessionScope.loginUser}">
 				<c:if
-					test="${loginUser.writer eq board.writer || loginUser.role eq 'ADMIN'}">
+					test="${loginUser.loginId eq board.writer || loginUser.role eq 'ADMIN'}">
 					<button type="button" onclick="requestUpdatePage();">수정</button>
 					<button type="button" onclick="requestDelete();">삭제</button>
 				</c:if>

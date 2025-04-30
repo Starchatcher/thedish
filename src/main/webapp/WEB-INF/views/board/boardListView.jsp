@@ -122,8 +122,14 @@ table td#title a {
 
 <h1 id="boardTitle">
   <c:choose>
-    <c:when test="${not empty category}">
-      ${category} 게시판
+    <c:when test="${category eq 'free'}">
+      자유게시판
+    </c:when>
+    <c:when test="${category eq 'review'}">
+      후기게시판
+    </c:when>
+    <c:when test="${category eq 'tip'}">
+      팁공유게시판
     </c:when>
     <c:otherwise>
       전체 게시판

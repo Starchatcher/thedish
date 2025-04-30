@@ -161,7 +161,7 @@ body {
           <div class="dropdown-column">
             <h4>정보 광장</h4>
             <a href="${ pageContext.servletContext.contextPath }/recipeList.do">레시피 정보</a>
-            <a href="#">술 정보</a>
+            <a href="${ pageContext.servletContext.contextPath }/drinkList.do">술 정보</a>
           </div>
         </div>
       </li>
@@ -170,9 +170,9 @@ body {
         <div class="dropdown">
           <div class="dropdown-column">
             <h4>소통광장</h4>
-            <a href="${ pageContext.servletContext.contextPath }/boardList.do?category=자유">자유 게시판</a>
-			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=후기">후기 게시판</a>
-			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=팁공유">팁공유 게시판</a>
+            <a href="${ pageContext.servletContext.contextPath }/boardList.do?category=free">자유 게시판</a>
+			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=review">후기 게시판</a>
+			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=tip">팁공유 게시판</a>
             <a href="${ pageContext.servletContext.contextPath }/noticeList.do">공지사항</a>
           </div>
         </div>
