@@ -4,28 +4,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>sidebar</title>
+<title>FAQ Sidebar</title>
 <style>
-.faq-fixed-link {				/*모양은 기능 넣고 추가*/
+.faq-fixed-link {
   position: fixed;
-  top: 120px;
-  right: 20px;
-  background-color: #1f2937; /* 어두운 그레이 */
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 9999px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  transition: background-color 0.3s;
+  top: 180px;
+  right: 15px;
+  width: 100px;
+  height: 100px;
+  background-color: transparent; /* ✅ 배경 제거 */
+  border: none;
+  z-index: 999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.faq-fixed-link:hover {
-  background-color: #4b5563;
+.faq-fixed-link img {
+  width: 115%;
+  height: 115%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); /* 그림자만 남김 */
+  transition: transform 0.3s ease;
+}
+
+.faq-fixed-link img:hover {
+  transform: scale(1.08);
 }
 </style>
 </head>
 <body>
-<a href="${ pageContext.servletContext.contextPath }/FAQList.do" class="faq-fixed-link">FAQ</a>
+
+<a href="${ pageContext.servletContext.contextPath }/FAQList.do" class="faq-fixed-link">
+  <img src="${ pageContext.request.contextPath }/resources/images/faqlogo.png" alt="FAQ">
+</a>
+
 </body>
 </html>
