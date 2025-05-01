@@ -116,22 +116,31 @@ button:hover, a.button-link:hover {
 <script src="${pageContext.servletContext.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script>
 
-function dupNicknameCheck() {
+function dupnickNameCheck() {
+    var nickName = $('#nickName').val();  // 닉네임 값 가져오기
+    
+    // 닉네임이 비어 있는지 확인
+    if (!nickName || nickName.trim() === '') {
+        alert('닉네임을 입력해주세요.');
+        $('#nickName').focus();
+        return;  // 빈 값이면 함수 종료
+    }
+    
     $.ajax({
-        url: 'nicknamechk.do',
+        url: 'nickNamechk.do',
         type: 'post',
-        data: { nickname: $('#nickname').val() },
+        data: { nickName: nickName },  // 닉네임 값 보내기
         success: function(data) {
-            if(data === 'ok') {
+            if (data === 'ok') {
                 alert('사용 가능한 닉네임입니다.');
                 $('#userPwd').focus();
             } else {
                 alert('이미 사용중인 닉네임입니다. 다시 입력하세요.');
-                $('#nickname').select();
+                $('#nickName').select();
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.log('nickname check error : ' + jqXHR + ', ' + textStatus + ', ' + errorThrown);
+            console.log('nickName check error : ' + jqXHR + ', ' + textStatus + ', ' + errorThrown);
         }
     });
 }
@@ -200,8 +209,8 @@ function validate() {
 
         <div class="form-group">
             <label for="nickname">닉네임</label>
-            <input type="text" name="nickname" id="nickname" required>
-            <button type="button" id="nicknameCheckBtn" onclick="dupNicknameCheck();">닉네임 중복검사</button>
+            <input type="text" name="nickName" id="nickName" required>
+            <button type="button" id="nickNameCheckBtn" onclick="dupnickNameCheck();">닉네임 중복검사</button>
         </div>
 
         <div class="form-group">

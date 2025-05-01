@@ -20,13 +20,13 @@ public interface UsersService {
     int selectCheckId(String userId);
 
     // 회원 정보 수정
-    int updateUsers(Users user);
+    int updateUser(Users user);
 
     // 회원 탈퇴
     int deleteUsers(String userId);
     
  // 닉네임 중복 체크
-    int selectCheckNickname(String nickname);
+    int selectChecknickName(String nickName);
 
     // 관리자 기능
     int selectListCount();
