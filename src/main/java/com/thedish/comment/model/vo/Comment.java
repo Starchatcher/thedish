@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class Comment implements java.io.Serializable {
 
+	private static final long serialVersionUID = -1521188059818762531L;
 	
-	private static final long serialVersionUID = 1L;
+	
 	private int commentId;        // COMMENT_ID
     private String loginId;       // LOGIN_ID
     private int targetId;         // TARGET_ID
     private String content;       // CONTENT
     private java.sql.Date createdAt;       // CREATED_AT
     private java.sql.Date updatedAt;       // UPDATED_AT
-    private int parentId;     // PARENT_ID (null 가능)
+    private Integer parentId;     // PARENT_ID (null 가능)
     private String targetType;    // TARGET_TYPE
-    
     private String nickName;
     
 	public String getNickName() {
@@ -59,11 +59,11 @@ public class Comment implements java.io.Serializable {
 	public void setUpdatedAt(java.sql.Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public int getParentId() {
-		return parentId;
+	public Integer getParentId() {
+	    return parentId;
 	}
-	public void setParentId(int parentId) {
-		this.parentId = parentId;
+	public void setParentId(Integer parentId) {
+	    this.parentId = parentId;
 	}
 	public String getTargetType() {
 		return targetType;

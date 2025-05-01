@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
+import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.FileNameChange;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
@@ -46,7 +47,8 @@ public class BoardController {
 
 	// 게시글 수정 페이지 내보내기
 	@RequestMapping("boardUpdatePage.do")
-	public String moveUpdatePage(Model model, @RequestParam("bno") int boardId, @RequestParam("page") int currentPage) {
+	public String moveUpdatePage(Model model, @RequestParam("boardId") int boardId,
+			@RequestParam("page") int currentPage) {
 
 		// 수정 페이지로 전달할 board 정보 조회
 		Board board = boardService.selectBoard(boardId);
@@ -95,9 +97,13 @@ public class BoardController {
 		return mv;
 	}
 
+	// 게시글 상세보기 (댓글 목록 포함)
 	@RequestMapping("boardDetail.do")
-	public ModelAndView boardDetailView(@RequestParam("bno") int boardId,
-			@RequestParam(name = "page", required = false) String page, @RequestParam("category") String category,
+	public ModelAndView boardDetailView(
+			@RequestParam("boardId") int boardId,
+			@RequestParam(name = "page", required = false) String page, 
+			@RequestParam("category") String category,
+			@RequestParam(name = "editCommentId", required = false) Integer editCommentId,
 			ModelAndView mv) {
 
 		logger.info("boardDetail.do : " + boardId);
@@ -108,14 +114,35 @@ public class BoardController {
 		}
 
 		Board board = boardService.selectBoard(boardId);
-
 		// 조회수 1증가 처리
 		boardService.updateViewCount(boardId);
 
 		if (board != null) {
-			mv.addObject("board", board);
-			mv.addObject("currentPage", currentPage);
-			mv.addObject("category", category);
+			// 댓글 개수 조회
+			int commentCount = boardService.selectBoardCommentCount(boardId);
+
+			int limit = 10; // 한 페이지에 보일 댓글 수
+			// 페이징 객체 생성해서 댓글 갯수에 따른 페이징 처리
+			Paging commentPaging = new Paging(commentCount, limit, currentPage, "boardDetail.do");
+			commentPaging.calculate();
+
+			// 댓글 목록 조회용 파라미터 구성
+			Map<String, Object> commentParam = new HashMap<>();
+			commentParam.put("targetId", boardId); // 대상 아이디
+			commentParam.put("startRow", commentPaging.getStartRow()); // 페이징 시작행
+			commentParam.put("endRow", commentPaging.getEndRow()); // 페이징 끝행
+
+			List<Comment> commentList = boardService.selectBoardComment(commentParam);
+
+			if (editCommentId != null) {
+				mv.addObject("editCommentId", editCommentId);
+			}
+			mv.addObject("commentCount", commentList.size()); // 댓글의 총 개수
+			mv.addObject("commentList", commentList); // 댓글 리스트
+			mv.addObject("board", board); // 게시글 객체
+			mv.addObject("currentPage", currentPage); // 게시글 페이지 정보
+			mv.addObject("category", category); // 게시글 카테고리
+			mv.addObject("commentPaging", commentPaging); // 댓글 페이징 객체
 			mv.setViewName("board/boardDetailView");
 		} else {
 			mv.addObject("message", boardId + "번 게시글 상세보기 요청 실패!");
@@ -152,18 +179,23 @@ public class BoardController {
 	@RequestMapping(value = "boardInsert.do", method = RequestMethod.POST)
 	public String boardInsertMethod(Board board, @RequestParam(name = "ofile", required = false) MultipartFile mfile,
 			@RequestParam(name = "boardType") String category, HttpServletRequest request, HttpSession session,
-			Model model) {
+			ModelAndView mv) {
 
 		// 로그인 유저 세션에서 가져와 작성자 세팅
 		Users loginUser = (Users) session.getAttribute("loginUser");
 		if (loginUser == null) {
-			model.addAttribute("message", "로그인이 필요합니다.");
-			return "common/error";
+			mv.setViewName("common/error");
+			mv.addObject("message", "로그인이 필요합니다.");
+			return "common/error"; // String 반환 형식은 변경되지 않음
 		}
 		board.setWriter(loginUser.getLoginId());
 		board.setBoardCategory(category);
 
-		// 파일 저장 로직은 그대로 유지
+		// 현재 시간 자동 설정
+		board.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
+		board.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
+
+		// 파일 저장 로직
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
 		if (!mfile.isEmpty()) {
 			String fileName = mfile.getOriginalFilename();
@@ -178,18 +210,22 @@ public class BoardController {
 					board.setRenameFileName(renameFileName);
 				} catch (Exception e) {
 					e.printStackTrace();
-					model.addAttribute("message", "첨부파일 저장 실패!");
+					mv.setViewName("common/error");
+					mv.addObject("message", "첨부파일 저장 실패!");
 					return "common/error";
 				}
 			}
 		}
 
+		// 게시글 등록
 		if (boardService.insertBoard(board) > 0) {
-			return "redirect:boardList.do";
+			mv.setViewName("redirect:boardList.do");
 		} else {
-			model.addAttribute("message", "새 게시글 등록 실패!");
-			return "common/error";
+			mv.setViewName("common/error");
+			mv.addObject("message", "새 게시글 등록 실패!");
 		}
+
+		return mv.getViewName(); // ModelAndView 객체의 viewName을 리턴
 	}
 
 	// 게시글 수정 메소드
@@ -244,10 +280,10 @@ public class BoardController {
 		}
 
 		if (boardService.updateBoard(board) > 0) {
-			mv.addObject("bno", board.getBoardId());
+			mv.addObject("boardId", board.getBoardId());
 			mv.addObject("category", board.getBoardCategory());
-			mv.setViewName("redirect:boardDetail.do?bno=" + board.getBoardId() + "&page=" + currentPage + "&category="
-					+ board.getBoardCategory());
+			mv.setViewName("redirect:boardDetail.do?boardId=" + board.getBoardId() + "&page=" + currentPage
+					+ "&category=" + board.getBoardCategory());
 		} else {
 			mv.addObject("message", "게시글 수정에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("common/error");
@@ -258,7 +294,7 @@ public class BoardController {
 
 	// 게시글 삭제용 메소드
 	@RequestMapping("boardDelete.do")
-	public ModelAndView boardDeleteMethod(@RequestParam("bno") int boardId,
+	public ModelAndView boardDeleteMethod(@RequestParam("boardId") int boardId,
 			@RequestParam(name = "page", required = false) String page,
 			@RequestParam(name = "category", required = false) String category, HttpServletRequest request,
 			ModelAndView mv) {
@@ -292,6 +328,98 @@ public class BoardController {
 		return mv;
 	}
 
+	// 댓글, 대댓글 작성용 메소드
+	@RequestMapping(value = "boardCommentInsert.do", method = RequestMethod.POST)
+	public ModelAndView insertBoardCommentMethod(ModelAndView mv, HttpSession session,
+			@RequestParam("boardId") int boardId, @RequestParam("content") String content,
+			@RequestParam(value = "parentId", required = false) Integer parentId,
+			@RequestParam("category") String category) {
+
+		// 로그인 체크
+		Users loginUser = (Users) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			mv.setViewName("redirect:loginPage.do");
+			return mv;
+		}
+
+		// 댓글 객체 생성 및 설정
+		Comment comment = new Comment();
+		comment.setTargetId(boardId);
+		comment.setContent(content);
+		comment.setLoginId(loginUser.getLoginId());
+		comment.setTargetType("board");
+
+		if (parentId != null) {
+			comment.setParentId(parentId); // 대댓글일 경우
+		}
+
+		// 댓글 등록
+		int result = boardService.insertBoardComment(comment);
+		if(result > 0) {
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+
+		}else {
+			mv.addObject("message", "댓글 등록에 실패하였습니다. 다시 시도해주세요.");
+			mv.setViewName("common/error");
+		}
+		return mv;
+		
+	}
+
+	// 댓글 수정용 메소드
+	@RequestMapping(value = "boardCommentUpdate.do", method = RequestMethod.POST)
+	public ModelAndView updateBoardCommentMethod(ModelAndView mv, HttpSession session,
+			@RequestParam("commentId") int commentId,
+			@RequestParam("content") String content,
+			@RequestParam("boardId") int boardId,
+			@RequestParam("category") String category) {
+
+		Users loginUser = (Users) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			mv.setViewName("redirect:loginPage.do");
+			return mv;
+		}
+
+		Comment comment = new Comment();
+		comment.setCommentId(commentId);
+		comment.setContent(content);
+		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인 용도
+
+		int result = boardService.updateBoardComment(comment);
+		if (result > 0) {
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+		} else {
+			mv.addObject("message", "댓글 수정에 실패하였습니다. 다시 시도해주세요.");
+			mv.setViewName("common/error");
+		}
+
+		return mv;
+	}
+	
+	// 댓글 삭제용 메소드
+	@RequestMapping(value = "boardCommentDelete.do", method = RequestMethod.POST)
+	public ModelAndView deleteBoardCommentMethod(ModelAndView mv, HttpSession session,
+			@RequestParam("commentId") int commentId,
+			@RequestParam("boardId") int boardId,
+			@RequestParam("category") String category) {
+
+		Users loginUser = (Users) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			mv.setViewName("redirect:loginPage.do");
+			return mv;
+		}
+
+		int result = boardService.deleteBoardComment(commentId);
+		if (result > 0) {
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+		} else {
+			mv.addObject("message", "댓글 삭제에 실패하였습니다. 다시 시도해주세요.");
+			mv.setViewName("common/error");
+		}
+
+		return mv;
+	}
+	
 	// 검색용 메소드 ------------------------------------------------------------------
 	// 전체 게시판 내용 검색 메소드
 	@RequestMapping("boardSearchContentAll.do")

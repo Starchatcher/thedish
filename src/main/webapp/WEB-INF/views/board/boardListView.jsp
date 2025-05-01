@@ -192,7 +192,7 @@ window.onload = updateAction;
 		<td>${ board.boardId }</td>
 		<td id="title">
 			<c:url var="bd" value="boardDetail.do">
-				<c:param name="bno" value="${ board.boardId }" />
+				<c:param name="boardId" value="${ board.boardId }" />
 				<c:param name="page" value="${ nowpage }" />
 				<c:param name="category" value="${category}" />
 			</c:url>

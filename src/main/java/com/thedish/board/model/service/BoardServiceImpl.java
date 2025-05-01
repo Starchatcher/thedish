@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.thedish.board.model.dao.BoardDao;
 import com.thedish.board.model.vo.Board;
+import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 
@@ -123,6 +124,32 @@ public class BoardServiceImpl implements BoardService{
 	public int deleteBoard(Board board) {
 		return boardDao.deleteBoard(board);
 	}
+
+	@Override
+	public int selectBoardCommentCount(int targetId) {
+		return boardDao.selectBoardCommentCount(targetId);
+	}
+
+	@Override
+	public List<Comment> selectBoardComment(Map<String, Object> param) {
+		return boardDao.selectBoardComment(param);
+	}
+
+	@Override
+	public int insertBoardComment(Comment comment) {
+		return boardDao.insertBoardComment(comment);
+	}
+
+	@Override
+	public int updateBoardComment(Comment comment) {
+		return boardDao.updateBoardComment(comment);
+	}
+
+	@Override
+	public int deleteBoardComment(int commentId) {
+		return boardDao.deleteBoardComment(commentId);
+	}
+
 
 
 }
