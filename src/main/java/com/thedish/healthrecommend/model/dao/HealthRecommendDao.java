@@ -33,5 +33,12 @@ public class HealthRecommendDao {
         List<Recipe> list = sqlSessionTemplate.selectList("healthMapper.selectRecipesByCondition", paramMap);
         return (ArrayList<Recipe>) list;
     }
+    
+    public List<String> autocompleteCondition(String keyword) {
+        return sqlSessionTemplate.selectList("healthMapper.autocompleteCondition", keyword + "%");
+    }
+    
+    public int countMatchingConditions(String keyword) {
+        return sqlSessionTemplate.selectOne("healthMapper.countConditionByName", keyword);
+    }
 }
-
