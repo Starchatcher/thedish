@@ -24,6 +24,9 @@ public interface UsersService {
 
     // 회원 탈퇴
     int deleteUsers(String userId);
+    
+ // 닉네임 중복 체크
+    int selectCheckNickname(String nickname);
 
     // 관리자 기능
     int selectListCount();

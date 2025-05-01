@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -120,83 +120,78 @@ body {
   background-color: #45a049;
   color: white;
 }
-
 </style>
 </head>
 <body>
 	<nav class="navbar">
-  <div class="navbar-container">
-    
-    <!-- 로고 -->
-    <div class="logo">
-      <a href="${ pageContext.servletContext.contextPath }/main.do">
-        <img src="/thedish/resources/images/thedishlogo.jpg" alt="로고"/>
-      </a>
-    </div>
+		<div class="navbar-container">
 
-    <!-- 메뉴 -->
-    <ul class="menu">
-      <li>
-        <a href="#">인사말</a>
-        <div class="dropdown">
-          <div class="dropdown-column">
-            <h4>사이트 소개</h4>
-            <a href="#">인사말</a>
-          </div>
-        </div>
-      </li>
-      <li>
-        <a href="#">DISH</a>
-        <div class="dropdown">
-          <div class="dropdown-column">
-            <h4>맞춤형 추천</h4>
-            <a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">건강 맞춤형 추천</a>
-            <a href="#">술 페어링 추천</a>
-          </div>
-        </div>
-      </li>
-      <li>
-        <a href="#">INFO</a>
-        <div class="dropdown">
-          <div class="dropdown-column">
-            <h4>정보 광장</h4>
-            <a href="${ pageContext.servletContext.contextPath }/recipeList.do">레시피 정보</a>
-            <a href="${ pageContext.servletContext.contextPath }/drinkList.do">술 정보</a>
-          </div>
-        </div>
-      </li>
-      <li>
-        <a href="${ pageContext.servletContext.contextPath }/boardList.do">Community</a>
-        <div class="dropdown">
-          <div class="dropdown-column">
-            <h4>소통광장</h4>
-            <a href="${ pageContext.servletContext.contextPath }/boardList.do?category=free">자유 게시판</a>
-			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=review">후기 게시판</a>
-			<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=tip">팁공유 게시판</a>
-            <a href="${ pageContext.servletContext.contextPath }/noticeList.do">공지사항</a>
-          </div>
-        </div>
-      </li>
-    </ul>
+			<!-- 로고 -->
+			<div class="logo">
+				<a href="${ pageContext.servletContext.contextPath }/main.do">
+					<img src="/thedish/resources/images/thedishlogo.jpg" alt="로고" />
+				</a>
+			</div>
 
-    <!-- 로그인 페이지 이동 -->
-    <c:if test="${ empty sessionScope.loginUser }">
- <button onclick="location.href='${pageContext.request.contextPath}/loginPage.do'">로그인</button>
- </c:if>
-  <c:if test="${ !empty sessionScope.loginUser }">
-		<div id="loginBox" class="lineA">
+			<!-- 메뉴 -->
+			<ul class="menu">
+				<li>
+					<a href="#">인사말</a>
+					<div class="dropdown">
+						<div class="dropdown-column">
+							<h4>사이트 소개</h4>
+							<a href="#">인사말</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#">DISH</a>
+					<div class="dropdown">
+						<div class="dropdown-column">
+							<h4>맞춤형 추천</h4>
+							<a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">건강 맞춤형 추천</a>
+							<a href="#">술 페어링 추천</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="#">INFO</a>
+					<div class="dropdown">
+						<div class="dropdown-column">
+							<h4>정보 광장</h4>
+							<a href="${ pageContext.servletContext.contextPath }/recipeList.do">레시피 정보</a>
+							<a href="${ pageContext.servletContext.contextPath }/drinkList.do">술 정보</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="${ pageContext.servletContext.contextPath }/boardList.do">Community</a>
+					<div class="dropdown">
+						<div class="dropdown-column">
+							<h4>소통광장</h4>
+							<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=free">자유 게시판</a>
+							<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=review">후기 게시판</a>
+							<a href="${ pageContext.servletContext.contextPath }/boardList.do?category=tip">팁공유 게시판</a>
+							<a href="${ pageContext.servletContext.contextPath }/noticeList.do">공지사항</a>
+						</div>
+					</div>
+				</li>
+			</ul>
 
-			${ loginUser.nickName } 님 &nbsp; <a href="logout.do">로그아웃</a> <br>
-			문의알림 0 <br>
-		
-			<a href="myinfo.do?loginId=${ sessionScope.loginUser.loginId }">내
-				정보 보기</a>
+			<!-- 로그인 or 로그인 후 -->
+			<c:if test="${ empty sessionScope.loginUser }">
+				<button onclick="location.href='${pageContext.request.contextPath}/loginPage.do'" class="login-btn">로그인</button>
+			</c:if>
+			
+			<c:if test="${ !empty sessionScope.loginUser }">
+				<div id="loginBox" class="lineA">
+					${ sessionScope.loginUser.nickname } 님 &nbsp;
+					<a href="logout.do">로그아웃</a><br>
+					문의알림 0 <br>
+					<a href="myinfo.do?loginId=${ sessionScope.loginUser.loginId }">내 정보 보기</a>
+				</div>
+			</c:if>
 		</div>
-			<%-- <% } %> --%>
-	</c:if>
-  
-</nav>
-	
-
+	</nav>
 </body>
 </html>
