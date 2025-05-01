@@ -1,124 +1,214 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="error.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" errorPage="error.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>The Dish main</title>
-<style>
-  body {
-    font-family: 'Noto Sans KR', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fdfefc;
-  }
-
-  .container {
-    max-width: 1100px;
-    margin: 60px auto;
-    text-align: center;
-  }
-
-  h2 {
-    margin-bottom: 50px;
-    font-size: 28px;
-    color: #2c3e50;
-  }
-
-  .content {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .notice, .best {
-    flex: 1;
-    background: #ffffff;
-    padding: 25px 30px;
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  }
-
-  .notice h3, .best h3 {
-    text-align: center;
-    color: #27ae60;
-    margin-bottom: 20px;
-    font-size: 20px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
-  }
-
-  /* 공지사항 테이블 */
-  .notice table {
-    width: 100%;
-    font-size: 14px;
-    border-collapse: collapse;
-  }
-
-  .notice th, .notice td {
-    border-bottom: 1px solid #ecf0f1;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .notice th {
-    background-color: #f5f5f5;
-    color: #333;
-    font-weight: bold;
-  }
-
-  .notice td a {
-    text-decoration: none;
-    color: #34495e;
-  }
-
-  .notice td a:hover {
-    color: #2980b9;
-    text-decoration: underline;
-  }
-
-  /* 추천 음식 */
-  .best img {
-    width: 100%;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-  }
-
-  .best img:hover {
-    transform: scale(1.02);
-  }
-
-  @media (max-width: 768px) {
-    .content {
-      flex-direction: column;
+  <meta charset="UTF-8">
+  <title>The Dish main</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfefc;
     }
-  }
-</style>
 
-<script src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
-<script>
-  $(function(){
-    $.ajax({
-      url: 'ntop10.do',
-      type: 'post',
-      dataType: 'json',
-      success: function(data){
-        let values = '';
-        for(let i = 0; i < data.length; i++){
-          values += '<tr><td>' + data[i].noticeId 
-            + '</td><td><a href="ndetail.do?no=' + data[i].noticeId + '">' + data[i].title 
-            + '</a></td><td>' + data[i].createdAt + '</td></tr>';
-        }
-        $('#newnotice tbody').append(values);
-      },
-      error: function(xhr, status, error){
-        console.log('error:', xhr, status, error);
+    .container {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    /* 추천 이미지 (상단 Hero 스타일) */
+   .hero {
+  margin: 80px 0;
+  text-align: center;
+}
+
+    .hero h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+
+    .hero img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .hero img:hover {
+      transform: scale(1.02);
+    }
+
+    /* 인삿말 섹션 */
+   .introduce {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+    .introduce-text {
+      flex: 1 1 480px;
+    }
+
+    .introduce-subtitle {
+      color: #7c6f42;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .introduce-title {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .introduce-description {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .more-button {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 10px 22px;
+      font-size: 15px;
+      color: #7c6f42;
+      border: 1.5px solid #7c6f42;
+      background-color: transparent;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .more-button:hover {
+      background-color: #7c6f42;
+      color: white;
+    }
+
+    .mainfood {
+      flex: 1 1 480px;
+    }
+
+    .mainfood img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* 공지사항 */
+   .notice {
+  margin-top: 40px;
+  margin-bottom: 80px;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+    .notice h3 {
+      text-align: center;
+      color: #27ae60;
+      margin-bottom: 20px;
+      font-size: 20px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .notice table {
+      width: 100%;
+      font-size: 14px;
+      border-collapse: collapse;
+    }
+
+    .notice th, .notice td {
+      border-bottom: 1px solid #ecf0f1;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .notice th {
+      background-color: #f5f5f5;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .notice td a {
+      text-decoration: none;
+      color: #34495e;
+    }
+
+    .notice td a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+
+    /* 애니메이션: 오른쪽에서 등장 */
+    .scroll-animated-right {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.8s ease;
+    }
+
+    .scroll-animated-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .our-story {
+        flex-direction: column;
       }
+    }
+  </style>
+
+  <script src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
+  <script>
+    $(function(){
+      $.ajax({
+        url: 'ntop10.do',
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+          let values = '';
+          for(let i = 0; i < data.length; i++){
+            values += '<tr><td>' + data[i].noticeId 
+              + '</td><td><a href="ndetail.do?no=' + data[i].noticeId + '">' + data[i].title 
+              + '</a></td><td>' + data[i].createdAt + '</td></tr>';
+          }
+          $('#newnotice tbody').append(values);
+        },
+        error: function(xhr, status, error){
+          console.log('error:', xhr, status, error);
+        }
+      });
     });
-  });
-</script>
+
+    // 스크롤 애니메이션 제어
+    window.addEventListener('DOMContentLoaded', () => {
+      const animatedEls = document.querySelectorAll('.scroll-animated-right');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active'); // 초기화
+          }
+        });
+      }, { threshold: 0.3 });
+
+      animatedEls.forEach(el => observer.observe(el));
+    });
+  </script>
 </head>
 
 <body>
@@ -127,34 +217,46 @@
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
 
 <div class="container">
-  <h2>아름답고 맛있는 미래 가치를 선도</h2>
 
-  <div class="content">
+  <!-- 추천 이미지 -->
+  <section class="hero">
+    <h2>이번주 추천 음식 (This Week’s Best)</h2>
+    <img src="<c:url value='/resources/images/dish.jpg'/>" alt="추천 음식">
+  </section>
 
-    <!-- 공지사항 -->
-    <div class="notice">
-      <h3>The Dish 공지사항</h3>
-      <table id="newnotice">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>날짜</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- AJAX로 공지글 삽입 -->
-        </tbody>
-      </table>
+  <!-- 인삿말 -->
+  <section class="introduce">
+    <div class="introduce-text">
+      <p class="introduce-subtitle">The-Dish</p>
+      <h3 class="introduce-title">우리는 맛과 건강을<br>중시하는 커뮤니티로<br>성장하고 있습니다</h3>
+      <p class="introduce-description">
+        우리는 건강을 위한 맞춤형 음식 추천을 제공합니다.<br>
+        다양한 술과 어울리는 요리를 통해 고객의 맛과 건강을 동시에 만족시킵니다.
+      </p>
+      <a href="theDishIntroduce.do" class="more-button">자세히 보기</a>
     </div>
-
-    <!-- 이번주 추천 음식 -->
-    <div class="best">
-      <h3>이번주 추천 음식 (This Week’s Best)</h3>
-      <img src="dish.jpg" alt="추천 음식">
+    <div class="mainfood scroll-animated-right">
+      <img src="<c:url value='/resources/images/mainfood.jpg'/>" alt="음식사진">
     </div>
+  </section>
 
-  </div>
+  <!-- 공지사항 -->
+  <section class="notice">
+    <h3>The Dish 공지사항</h3>
+    <table id="newnotice">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>날짜</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- AJAX로 삽입 -->
+      </tbody>
+    </table>
+  </section>
+
 </div>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
