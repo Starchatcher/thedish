@@ -1,5 +1,6 @@
 package com.thedish.board.model.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thedish.board.model.vo.Board;
+import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 
@@ -41,7 +43,6 @@ public class BoardDao {
 	public Board selectBoard(int boardId) {
 		return sqlSessionTemplate.selectOne("boardMapper.selectBoard", boardId);
 	}
-	
 	
 	
 	// dml -----------------------------------------------------------------------
@@ -115,5 +116,35 @@ public class BoardDao {
 		List<Board> list = sqlSessionTemplate.selectList("boardMapper.selectSearchContentAll", search);
 		return (ArrayList<Board>) list;
 	}
+	
+	// 게시판 댓글 조회용 쿼리
+	public int selectBoardCommentCount (int targetId) {
+		return sqlSessionTemplate.selectOne("commentMapper.selectBoardCommentCount", targetId);
+	}
+	
+	public List<Comment> selectBoardComment (Map<String, Object> param){
+		return sqlSessionTemplate.selectList("commentMapper.selectBoardComment", param);
+	}
+	
+	// 댓글 작성용 쿼리
+	public int insertBoardComment(Comment comment) {
+		return sqlSessionTemplate.insert("commentMapper.insertBoardComment", comment);
+	}
+	
+	// 댓글 수정용 쿼리
+	public int updateBoardComment(Comment comment) {
+		return sqlSessionTemplate.update("commentMapper.updateBoardComment", comment);
+	}
+	
+	// 댓글 삭제용 쿼리
+	public int deleteBoardComment(int commentId) {
+		return sqlSessionTemplate.delete("commentMapper.deleteBoardComment", commentId);
+	}
+	
+	
+	
+	
+	
+	
 	
 }

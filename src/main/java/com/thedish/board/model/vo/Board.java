@@ -12,9 +12,9 @@ public class Board implements java.io.Serializable{
 	private String title;
 	private String content;
 	private String writer;
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private java.sql.Date createdAt;
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private java.sql.Date updatedAt;
 	private String boardCategory;
 	private int viewCount;
