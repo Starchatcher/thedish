@@ -22,16 +22,7 @@ public class DrinkServiceImpl implements DrinkService{
 	@Autowired
 	private ImageService imageService; 
 	
-	@Override
-	public int selectListCount() {
-		
-		return drinkDao.selectListCount();
-	}
-
-	@Override
-	public ArrayList<Drink> selectListDrink(Paging paging) {
-		return drinkDao.selectListDrink(paging);
-	}
+	
 
 	@Override
 	public Drink selectDrink(int drinkId) {
@@ -83,6 +74,49 @@ public class DrinkServiceImpl implements DrinkService{
 	@Override
 	public List<Pairing> selectPairingsByDrinkId(int drinkId) {
 		return drinkDao.selectPairingsByDrinkId(drinkId);
+	}
+
+	@Override
+	public int selectUserRating(String loginId, int drinkId) {
+		return drinkDao.selectUserRating(loginId, drinkId);
+	}
+
+	@Override
+	public void insertRating(String loginId, int drinkId, double ratingScore, String targetType) {
+		drinkDao.insertRating(loginId, drinkId, ratingScore, targetType);
+	}
+
+	@Override
+	public void updateRating(String loginId, int drinkId, double ratingScore, String targetType) {
+		 // 디버깅 구문 삽입 (서비스 레벨)
+	    System.out.println("--- Debug Info (Service - updateRating) ---");
+	    System.out.println("loginId: " + loginId);
+	    System.out.println("drinkId: " + drinkId);
+	    System.out.println("ratingScore: " + ratingScore);
+	    System.out.println("targetType: " + targetType);
+	    System.out.println("-------------------------------------------");
+		drinkDao.updateRating(loginId, drinkId, ratingScore, targetType);
+	}
+
+	@Override
+	public void updateAverageRating(int drinkId, double avgRating) {
+		drinkDao.updateAverageRating(drinkId, avgRating);
+		
+	}
+
+	@Override
+	public double getAverageRating(int drinkId) {
+		return drinkDao.getAverageRating(drinkId);
+	}
+
+	@Override
+	public int selectListCount() {
+		return drinkDao.selectListCount();
+	}
+
+	@Override
+	public ArrayList<Drink> selectListDrink(Paging paging) {
+		return drinkDao.selectListDrink(paging);
 	}
 
 }

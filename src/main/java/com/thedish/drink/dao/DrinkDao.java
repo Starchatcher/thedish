@@ -1,7 +1,9 @@
 package com.thedish.drink.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class DrinkDao {
 	
 	
 	public ArrayList<Drink> selectListDrink(Paging paging) {
-		List<Drink> list = sqlSessionTemplate.selectList("drinkMapper.selectListDrink");
+		List<Drink> list = sqlSessionTemplate.selectList("drinkMapper.selectListDrink", paging);
 		return(ArrayList<Drink>) list;
 	}
 	
@@ -75,5 +77,45 @@ public class DrinkDao {
     
     public List<Pairing> selectPairingsByDrinkId(int drinkId) {        
         return sqlSessionTemplate.selectList("drinkMapper.selectPairingsByDrinkId", drinkId);
+    }
+    
+    
+    // 특정 사용자가 특정 레시피에 대한 평점이 있는지 확인
+    public int selectUserRating(String loginId, int drinkId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("loginId", loginId);
+        params.put("drinkId", drinkId);
+        return sqlSessionTemplate.selectOne("drinkMapper.selectUserRating", params);
+    }
+
+    // 평점 추가
+    public void insertRating(String loginId, int drinkId, double ratingScore, String targetType) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("loginId", loginId);
+        params.put("drinkId", drinkId);
+        params.put("ratingScore", ratingScore);
+        params.put("targetType", targetType);
+        sqlSessionTemplate.insert("drinkMapper.insertRating", params);
+    }
+
+    // 평점 수정
+    public void updateRating(String loginId, int drinkId, double ratingScore, String targetType) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("loginId", loginId);
+        params.put("drinkId", drinkId);
+        params.put("ratingScore", ratingScore);
+        params.put("targetType", targetType);
+        sqlSessionTemplate.update("drinkMapper.updateRating", params);
+    }
+    
+    public void updateAverageRating(int drinkId, double avgRating) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("drinkId", drinkId);
+        params.put("avgRating", avgRating);
+        sqlSessionTemplate.update("drinkMapper.updateAverageRating", params);
+    }
+    
+    public double getAverageRating(int drinkId) {
+        return sqlSessionTemplate.selectOne("drinkMapper.getAverageRating", drinkId);
     }
 }

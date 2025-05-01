@@ -9,8 +9,7 @@ public class Drink implements java.io.Serializable {
 	    private double alcoholContent;    // alcohol_content
 	    private int price;            // price
 	    private String pairingFood;       // pairing_food
-	    private String description;       // description
-	    private int recommendNumber;  // recommend_number
+	    private String description;       // description	   
 	    private double avgRating;         // avg_rating
 	    private Integer viewCount;        // view_count
 	    
@@ -77,12 +76,7 @@ public class Drink implements java.io.Serializable {
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		public int getRecommendNumber() {
-			return recommendNumber;
-		}
-		public void setRecommendNumber(int recommendNumber) {
-			this.recommendNumber = recommendNumber;
-		}
+		
 		public double getAvgRating() {
 			return avgRating;
 		}
@@ -98,12 +92,7 @@ public class Drink implements java.io.Serializable {
 		public static long getSerialversionuid() {
 			return serialVersionUID;
 		}
-		@Override
-		public String toString() {
-			return "Drink [drinkId=" + drinkId + ", name=" + name + ", alcoholContent=" + alcoholContent + ", price="
-					+ price + ", pairingFood=" + pairingFood + ", description=" + description + ", recommendNumber="
-					+ recommendNumber + ", avgRating=" + avgRating + ", viewCount=" + viewCount + "]";
-		}
+		
 	    
 	    
 }
