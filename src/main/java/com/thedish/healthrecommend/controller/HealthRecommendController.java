@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thedish.healthrecommend.model.service.HealthRecommendService;
 import com.thedish.recipe.model.vo.Recipe;
@@ -54,5 +56,16 @@ public class HealthRecommendController {
         List<Recipe> recipes = healthRecommendService.getRecipesByConditionExcludingIngredients(conditionName, excluded);
         model.addAttribute("recipes", recipes);
         return "healthrecommend/recipeList";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "autocompleteCondition.do", method = RequestMethod.GET)
+    public List<String> autocompleteCondition(@RequestParam("keyword") String keyword) {
+        return healthRecommendService.autocompleteCondition(keyword);
+    }
+    @ResponseBody
+    @RequestMapping("checkConditionExists.do")
+    public boolean checkConditionExists(@RequestParam("keyword") String keyword) {
+        return healthRecommendService.doesConditionExist(keyword);
     }
 }

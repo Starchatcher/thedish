@@ -24,6 +24,14 @@ public class HealthRecommendServiceImpl implements HealthRecommendService {
 	public List<Recipe> getRecipesByConditionExcludingIngredients(String conditionName, List<String> excluded) {
 		 return healthRecommendDao.selectRecipesByCondition(conditionName, excluded);
 	}
-
+	@Override
+	public List<String> autocompleteCondition(String keyword) {
+	    return healthRecommendDao.autocompleteCondition(keyword);
+	}
+	
+	@Override
+	public boolean doesConditionExist(String keyword) {
+	    return healthRecommendDao.countMatchingConditions(keyword) > 0;
+	}
 	
 }
