@@ -108,6 +108,54 @@ public class UsersController {
         }
     }
 
+    // 회원 정보 수정 처리
+    @RequestMapping(value = "updateUser.do", method = RequestMethod.POST)
+    public String updateUser(Users user, Model model, HttpSession session) {
+        logger.info("updateUser.do : " + user);
+
+        String encPwd = bcryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encPwd);
+
+        int result = usersService.updateUser(user);  // 사용자 정보 수정
+
+        if (result > 0) {
+            session.setAttribute("loginUser", usersService.selectUsers(user.getLoginId()));  // 수정된 정보로 세션 업데이트
+            return "redirect:myinfo.do?loginId=" + user.getLoginId();  // 내 정보 페이지로 리다이렉트
+        } else {
+            model.addAttribute("message", "회원정보 수정에 실패했습니다.");
+            return "common/error";
+        }
+    }
+
+    // 회원 탈퇴 페이지로 이동 (탈퇴 확인 페이지로 리디렉션)
+    @RequestMapping("confirmDelete.do")
+    public String confirmDelete(@RequestParam("loginId") String loginId, Model model) {
+        model.addAttribute("loginId", loginId);
+        return "users/deleteConfirmationPage";  // 탈퇴 확인 페이지로 리디렉션
+    }
+
+    // 회원 탈퇴 처리
+    @RequestMapping(value = "deleteUser.do", method = RequestMethod.POST)
+    public String deleteUser(@RequestParam("loginId") String loginId, HttpSession session, Model model) {
+        logger.info("Attempting to delete user with loginId: " + loginId); // 로그 추가
+
+        // 회원 탈퇴 처리
+        int result = usersService.deleteUsers(loginId);
+
+        if (result > 0) {
+            logger.info("User deletion successful for loginId: " + loginId); // 성공 로그 추가
+            // 세션이 존재하는 경우에만 invalidate 호출
+            if (session != null && session.getAttribute("loginUser") != null) {
+                session.invalidate();
+            }
+            return "redirect:loginPage.do";  // 메인 페이지로 리다이렉트
+        } else {
+            logger.error("Failed to delete user with loginId: " + loginId); // 실패 로그 추가
+            model.addAttribute("message", "회원 탈퇴에 실패했습니다. 관리자에게 문의하세요.");
+            return "common/error";
+        }
+    }
+
     // 아이디 중복 확인
     @ResponseBody
     @RequestMapping(value = "idchk.do", method = RequestMethod.POST)
@@ -118,9 +166,9 @@ public class UsersController {
 
     // 닉네임 중복 확인
     @ResponseBody
-    @RequestMapping(value = "nicknamechk.do", method = RequestMethod.POST)
-    public String checkNickname(@RequestParam("nickname") String nickname) {
-        int result = usersService.selectCheckNickname(nickname);
+    @RequestMapping(value = "nickNamechk.do", method = RequestMethod.POST)
+    public String checknickName(@RequestParam("nickName") String nickName) {
+        int result = usersService.selectChecknickName(nickName);  // 메서드 이름 및 필드 일치
         return (result == 0) ? "ok" : "dup";
     }
-} 
+}

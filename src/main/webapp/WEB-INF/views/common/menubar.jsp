@@ -140,7 +140,7 @@ body {
 					<div class="dropdown">
 						<div class="dropdown-column">
 							<h4>사이트 소개</h4>
-							<a href="#">인사말</a>
+							<a href="${ pageContext.servletContext.contextPath }/theDishIntroduce.do">인사말</a>
 						</div>
 					</div>
 				</li>
@@ -185,7 +185,7 @@ body {
 			
 			<c:if test="${ !empty sessionScope.loginUser }">
 				<div id="loginBox" class="lineA">
-					${ sessionScope.loginUser.nickname } 님 &nbsp;
+					${ sessionScope.loginUser.nickName } 님 &nbsp;
 					<a href="logout.do">로그아웃</a><br>
 					문의알림 0 <br>
 					<a href="myinfo.do?loginId=${ sessionScope.loginUser.loginId }">내 정보 보기</a>

@@ -10,7 +10,7 @@ public class Users implements java.io.Serializable {
     private String password;       // ← name="userPwd"
     private String userPwd2;       // ← 비밀번호 확인용 (DB 저장 X)
     private String userName;       // ← name="userName"
-    private String nickname;       // ← name="nickname"
+    private String nickName;       // ← name="nickName"
     private String gender;         // ← name="gender"
     private int age;               // ← name="age"
     private String phone;          // ← name="phone"
@@ -26,13 +26,13 @@ public class Users implements java.io.Serializable {
     // 생성자
     public Users() {}
 
-    public Users(String userId, String password, String userName, String nickname, String gender, int age,
+    public Users(String userId, String password, String userName, String nickName, String gender, int age,
                  String phone, String email, String status, String provider, String role,
                  String loginId, Date createdAt) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
-        this.nickname = nickname;
+        this.nickName = nickName;
         this.gender = gender;
         this.age = age;
         this.phone = phone;
@@ -87,12 +87,12 @@ public class Users implements java.io.Serializable {
         this.userName = userName;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getnickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setnickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getGender() {
@@ -170,7 +170,7 @@ public class Users implements java.io.Serializable {
     @Override
     public String toString() {
         return "Users [userId=" + userId + ", password=" + password + ", userPwd2=" + userPwd2 +
-               ", userName=" + userName + ", nickname=" + nickname + ", gender=" + gender +
+               ", userName=" + userName + ", nickName=" + nickName + ", gender=" + gender +
                ", age=" + age + ", phone=" + phone + ", email=" + email +
                ", status=" + status + ", provider=" + provider + ", role=" + role +
                ", loginId=" + loginId + ", createdAt=" + createdAt + "]";
