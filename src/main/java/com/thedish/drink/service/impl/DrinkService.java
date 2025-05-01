@@ -10,9 +10,9 @@ import com.thedish.drink.model.vo.Drink;
 
 public interface DrinkService {
 	
-	int selectListCount();
+	 int selectListCount();
+	 ArrayList<Drink> selectListDrink(Paging paging);
 	
-	ArrayList<Drink> selectListDrink(Paging paging);
 	Drink selectDrink(int drinkId);
 	void updateAddReadCount(int drinkId); 
 	int selectSearchTitleCount(String keyword);
@@ -27,4 +27,11 @@ public interface DrinkService {
 	 
 	 int getRecommendationCount(int drinkId);
 	 List<Pairing> selectPairingsByDrinkId(int drinkId);
+	 
+	 int selectUserRating(String loginId, int drinkId);
+	 void insertRating(String loginId, int drinkId, double ratingScore, String targetType);
+	 void updateRating(String loginId, int drinkId, double ratingScore, String targetType);
+	 void updateAverageRating(int drinkId, double avgRating);
+	 double getAverageRating(int drinkId) ;
+	 
 }

@@ -133,7 +133,8 @@
     <a href="moveInsertRecipePage.do">등록</a>
     
     <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
-        <c:forEach items="${ requestScope.list }" var="recipe">
+        <c:forEach items="${ requestScope.list }" var="recipe" varStatus="status">
+        <c:if test="${status.index < 12}">
             <div class="recipe-card"> <!-- 각 레시피 항목을 카드 형태로 -->
                 <a href="recipeDetail.do?no=${ recipe.recipeId }">
                     <c:choose>
@@ -152,10 +153,12 @@
                 <p>${ recipe.description }</p>
                 <p class="view-count">조회수: ${ recipe.viewCount }</p>
             </div>
+            </c:if>
         </c:forEach>
+        
     </div>
     <br>
-
+	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
     <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

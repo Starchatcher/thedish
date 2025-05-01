@@ -28,6 +28,7 @@ import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.service.impl.DrinkService;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
+import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -52,7 +53,7 @@ public class DrinkController {
 	
 	// 드링크 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
 			@RequestMapping("drinkList.do")
-			public ModelAndView recipeListMethod(ModelAndView mv, 
+			public ModelAndView drinkListMethod(ModelAndView mv, 
 					@RequestParam(name = "page", required = false) String page,
 					@RequestParam(name = "limit", required = false) String slimit) {
 				// 페이징 처리
@@ -61,8 +62,8 @@ public class DrinkController {
 					currentPage = Integer.parseInt(page);
 				}
 
-				// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-				int limit = 10;
+				// 한 페이지에 출력할 목록 갯수 기본 12개로 지정함
+				int limit = 12;
 				if (slimit != null) {
 					limit = Integer.parseInt(slimit);
 				}
@@ -111,7 +112,7 @@ public class DrinkController {
 
 			                 // *** 2. 페어링 정보 조회 로직 추가 ***
 			                 // PairingService를 통해 특정 drinkId에 해당하는 페어링 목록을 가져옵니다.
-			                 // 이 메소드는 List<PairingDTO>를 반환해야 합니다. PairingDTO는 Recipe 이름 등을 포함.
+			                 
 			                 List<Pairing> pairingList = drinkService.selectPairingsByDrinkId(drinkId);
 			                 logger.info("조회된 페어링 목록 크기: " + (pairingList != null ? pairingList.size() : 0));
 
@@ -185,7 +186,7 @@ public class DrinkController {
 				}
 
 				// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-				int limit = 10;
+				int limit = 12;
 				if (slimit != null) {
 					limit = Integer.parseInt(slimit);
 				}
@@ -225,7 +226,7 @@ public class DrinkController {
 			}
 			
 			@RequestMapping("moveInsertDrink.do")
-			public String moveInsertRecipe() {
+			public String moveInsertDrink() {
 				return "drink/drinkInsert";
 			}
 			
@@ -348,25 +349,54 @@ public class DrinkController {
 		        return "redirect:/drinkList.do?page=" + page;
 		    }
 			
-			 // 추천기능
-			 
-			 @RequestMapping(value = "recommendDrink.do", method = RequestMethod.POST)
-			    @ResponseBody
-			    public Map<String, Object> recommendDrink(
-			    		@RequestParam("drinkId") int drinkId) {
-			        boolean isUpdated = drinkService.incrementRecommendationCount(drinkId);
-			        logger.info("받은 drinkId: " + drinkId);
+			// 레시피 평점 기능
+			 @RequestMapping(value = "rateDrink.do", method = RequestMethod.POST)
+			  
+			    public String rateDrink(
+			            @RequestParam("drinkId") int drinkId,
+			            @RequestParam(value = "rating", defaultValue = "0") double ratingScore, // 평점 값, 기본값을 0으로 설정
+			            HttpSession session,
+			            RedirectAttributes redirectAttributes) {
 
-			        Map<String, Object> response = new HashMap<>();
-			        if (isUpdated) {
-			            int newCount = drinkService.getRecommendationCount(drinkId);
-			            response.put("recommendNumber", newCount);
-			            response.put("message", "추천해 주셔서 감사합니다!");
+				
+
+			        // 1. 로그인한 사용자 정보 가져오기
+			        Users loggedInUser = (Users) session.getAttribute("loginUser");
+
+			        // 2. 로그인 상태 확인
+			     
+
+			        String loginId = loggedInUser.getLoginId(); // 로그인 ID 가져오기
+
+			        System.out.println("--- Debug Info (Controller) ---");
+			        System.out.println("loginId: " + loginId);
+			        System.out.println("drinkId: " + drinkId);
+			        System.out.println("ratingScore: " + ratingScore);
+			        System.out.println("-------------------------------");
+
+			        
+			        
+			        // 평점이 이미 존재하는지 확인
+			        int existingRatingCount = drinkService.selectUserRating(loginId, drinkId);
+			        if (existingRatingCount > 0) {
+			            // 이미 평점을 부여한 경우, 업데이트
+			        	drinkService.updateRating(loginId, drinkId, ratingScore, "drink");
+			            redirectAttributes.addFlashAttribute("message", "평점이 수정되었습니다.");
 			        } else {
-			            response.put("message", "추천 처리 중 오류가 발생했습니다.");
+			            // 평점을 새로 추가
+			        	drinkService.insertRating(loginId, drinkId, ratingScore, "drink");
+			            redirectAttributes.addFlashAttribute("message", "평점이 등록되었습니다.");
 			        }
-			        return response;
-			    }
+
+			        // 평균 평점 업데이트
+			        double averageRating = drinkService.getAverageRating(drinkId);
+			        drinkService.updateAverageRating(drinkId, averageRating); // 평균 평점 업데이트
+
+			        redirectAttributes.addFlashAttribute("avgRating", averageRating); // 평균 평점 반환
+
+			        return "redirect:/drinkDetail.do?no=" + drinkId; // 레시피 상세 페이지로 리다이렉션
+
+			 }
 			 
 			
 }

@@ -29,7 +29,7 @@ public class RecipeDao {
 	
 	
 	public ArrayList<Recipe> selectListRecipe(Paging paging) {
-		List<Recipe> list = sqlSessionTemplate.selectList("recipeMapper.selectListRecipe");
+		List<Recipe> list = sqlSessionTemplate.selectList("recipeMapper.selectListRecipe",paging);
 		return(ArrayList<Recipe>) list;
 	}
 	public Recipe selectRecipe(int recipeId) {

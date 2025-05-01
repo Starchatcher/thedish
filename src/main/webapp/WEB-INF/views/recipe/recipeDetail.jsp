@@ -241,7 +241,7 @@ form button:hover {
 		<p class="info">${recipe.description}</p>
 
 		<span class="label">조리법:</span>
-		<p class="info">${recipe.instructions}</p>
+		<p class="info">${sortedInstructions}</p>
 
 
 
@@ -410,7 +410,7 @@ form button:hover {
 
         <%-- 작성자 닉네임 표시 및 수정 불가 설정 --%>
         <input type="text" name="writer" placeholder="작성자 이름" required
-               value="${loginUser.nickName}" readonly="readonly" /><br />
+               value="${loginUser.loginId}" readonly="readonly" /><br />
 
         <button type="submit">댓글 작성</button>
     </form>
@@ -421,6 +421,6 @@ form button:hover {
 </c:if>
 
 	</div>
-
+<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
