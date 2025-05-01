@@ -61,17 +61,18 @@ input[type="number"] {
 
 .gender-group {
   display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  margin-top: 8px;
+  gap: 8px;  /* ← 간격 줄임 */
 }
 
 .gender-group label {
-  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 4px;   /* ← '남자'와 체크박스 사이 간격 */
+  flex-direction: row-reverse;
   color: #555;
 }
 
-#dupCheckBtn {
+#dupCheckBtn, #nicknameCheckBtn {
   margin-top: 8px;
   width: 100%;
   background-color: #f29abf;
@@ -84,7 +85,7 @@ input[type="number"] {
   transition: background-color 0.3s;
 }
 
-#dupCheckBtn:hover {
+#dupCheckBtn:hover, #nicknameCheckBtn:hover {
   background-color: #e77ca7;
 }
 
@@ -114,6 +115,27 @@ button:hover, a.button-link:hover {
 
 <script src="${pageContext.servletContext.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <script>
+
+function dupNicknameCheck() {
+    $.ajax({
+        url: 'nicknamechk.do',
+        type: 'post',
+        data: { nickname: $('#nickname').val() },
+        success: function(data) {
+            if(data === 'ok') {
+                alert('사용 가능한 닉네임입니다.');
+                $('#userPwd').focus();
+            } else {
+                alert('이미 사용중인 닉네임입니다. 다시 입력하세요.');
+                $('#nickname').select();
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('nickname check error : ' + jqXHR + ', ' + textStatus + ', ' + errorThrown);
+        }
+    });
+}
+
 function dupIdCheck() {
     $.ajax({
         url: 'idchk.do',
@@ -174,6 +196,12 @@ function validate() {
         <div class="form-group">
             <label for="userName">이름</label>
             <input type="text" name="userName" id="userName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">닉네임</label>
+            <input type="text" name="nickname" id="nickname" required>
+            <button type="button" id="nicknameCheckBtn" onclick="dupNicknameCheck();">닉네임 중복검사</button>
         </div>
 
         <div class="form-group">

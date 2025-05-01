@@ -30,6 +30,16 @@ public class UsersServiceImpl implements UsersService {
     public int insertUser(Users user) {
         return usersDao.insertUser(user);
     }
+    
+    @Override
+    public int selectCheckNickname(String nickname) {
+        return usersDao.selectCheckNickname(nickname);
+    }
+    
+    @Override
+    public int selectCheckId(String userId) {
+        return usersDao.selectCheckId(userId);
+    }
 
 //    @Override
 //    public int selectCheckId(String userId) {

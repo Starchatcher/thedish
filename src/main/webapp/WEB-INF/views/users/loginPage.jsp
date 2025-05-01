@@ -96,12 +96,12 @@
       font-size: 0.95em;
     }
 
-	.signup-link a {
-	  color: #f29abf;
-	  text-decoration: none;
-	  font-weight: bold;
-	  margin-left: 8px; 
-	}
+    .signup-link a {
+      color: #f29abf;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 8px;
+    }
 
     .signup-link a:hover {
       text-decoration: underline;
@@ -117,7 +117,7 @@
     
     <form action="login.do" method="post">
       <input type="text" id="loginId" name="loginId" class="login-input" placeholder="아이디" required>
-      <input type="password" id="password" name="password" class="login-input" placeholder="비밀번호" required>
+      <input type="password" id="userPwd" name="userPwd" class="login-input" placeholder="비밀번호" required>
 
       <div class="options">
         <label><input type="checkbox" name="remember"> 기억하기</label>
@@ -128,7 +128,7 @@
     </form>
 
     <div class="signup-link">
- <button onclick="location.href='${pageContext.request.contextPath}/enrollPage.do'">회원가입</button>
+      <button onclick="location.href='${pageContext.request.contextPath}/enrollPage.do'">회원가입</button>
     </div>
   </div>
 

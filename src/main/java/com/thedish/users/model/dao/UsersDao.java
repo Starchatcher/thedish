@@ -45,6 +45,11 @@ public class UsersDao {
     public int deleteUsers(String userId) {
         return sqlSessionTemplate.delete("usersMapper.deleteUsers", userId);
     }
+    
+ // 닉네임 중복 체크
+    public int selectCheckNickname(String nickname) {
+        return sqlSessionTemplate.selectOne("usersMapper.selectCheckNickname", nickname);
+    }
 
     // 관리자용 전체 회원 수
     public int selectListCount() {
