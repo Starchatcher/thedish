@@ -129,6 +129,13 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 
+	@Override
+	public Recipe selectRandomRecipe() {
+		
+		return recipeDao.selectRandomRecipe();
+	}
+
+
 	
 	
 	

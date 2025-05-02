@@ -220,9 +220,48 @@
 
   <!-- 추천 이미지 -->
   <section class="hero">
-    <h2>이번주 추천 음식 (This Week’s Best)</h2>
-    <img src="<c:url value='/resources/images/dish.jpg'/>" alt="추천 음식">
-  </section>
+        <h2>이번주 추천 음식 (This Week’s Best)</h2>
+        <%-- 컨트롤러에서 전달받은 randomRecipe 객체와 randomRecipeImage 객체를 사용합니다. --%>
+        <c:choose>
+            <%-- randomRecipe 객체가 존재하고 이미지 정보 객체도 존재하는 경우 --%>
+            <c:when test="${not empty randomRecipe and not empty randomRecipeImage}">
+                <a href="recipeDetail.do?no=${ randomRecipe.recipeId }"> <%-- 상세 페이지 링크 --%>
+                    <c:choose>
+                        <%-- IMAGE_URL 컬럼 값이 있는 경우 --%>
+                        <c:when test="${not empty randomRecipeImage.imageUrl}">
+                            <img src="${randomRecipeImage.imageUrl}" alt="${randomRecipe.name} 이미지" />
+                        </c:when>
+                        <%-- IMAGE_URL이 없고 IMAGE_ID가 유효한 경우 (image/view.do 사용) --%>
+                        <c:when test="${not empty randomRecipeImage.imageId and randomRecipeImage.imageId != 0}">
+                            <img src="${pageContext.request.contextPath}/image/view.do?imageId=${randomRecipeImage.imageId}" alt="${randomRecipe.name} 이미지" />
+                        </c:when>
+                        <c:otherwise>
+                            <%-- 이미지 정보는 있지만 URL이나 ID가 없는 경우 (발생 가능성 낮음) --%>
+                            <img src="<c:url value='/resources/images/default-image.png'/>" alt="이미지 없음" />
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+                 <%-- 추천 레시피의 이름과 설명 표시 --%>
+                 <h3>${ randomRecipe.name }</h3>
+                 <p>${ randomRecipe.description }</p>
+            </c:when>
+             <%-- 랜덤 레시피는 있지만 이미지 정보가 없는 경우 --%>
+            <c:when test="${not empty randomRecipe and empty randomRecipeImage}">
+                <%-- 레시피 정보는 표시하고 이미지는 기본 이미지를 사용 --%>
+                <a href="recipeDetail.do?no=${ randomRecipe.recipeId }">
+                    <img src="<c:url value='/resources/images/default-image.png'/>" alt="이미지 없음" />
+                </a>
+                <h3>${ randomRecipe.name }</h3>
+                <p>${ randomRecipe.description }</p>
+            </c:when>
+            <c:otherwise>
+                <%-- 랜덤 레시피 자체를 가져오지 못한 경우 --%>
+                <img src="<c:url value='/resources/images/default-image.png'/>" alt="추천 레시피 이미지 없음" />
+                <h3>추천 레시피를 찾을 수 없습니다.</h3>
+                <p>나중에 다시 시도해주세요.</p>
+            </c:otherwise>
+        </c:choose>
+    </section>
 
   <!-- 인삿말 -->
   <section class="introduce">

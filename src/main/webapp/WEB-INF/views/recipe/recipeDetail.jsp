@@ -241,7 +241,7 @@ form button:hover {
 		<p class="info">${recipe.description}</p>
 
 		<span class="label">조리법:</span>
-		<p class="info">${sortedInstructions}</p>
+		<p class="info">${recipe.instructions}</p>
 
 
 

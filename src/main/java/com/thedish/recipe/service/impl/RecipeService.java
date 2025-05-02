@@ -46,4 +46,6 @@ public interface RecipeService {
 	 void updateAverageRating(int recipeId, double avgRating);
 	 
 	 double getAverageRating(int recipeId);
+	 
+	 Recipe selectRandomRecipe();
 }

@@ -8,4 +8,5 @@ public interface ImageService {
 	 Image selectImageById(int imageId);
 	 
 	 int deleteImageByTargetIdAndType(int targetId, String targetType);
+	 Image selectImageByTarget(int targetId, String targetType);
 }
