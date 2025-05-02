@@ -31,6 +31,15 @@ h1 {
     align-items: center;
 }
 
+  fieldset {
+        border: none; /* 테두리 제거 */
+        padding: 8px; /* 내부 여백 */
+        background-color: #ffffff; /* 흰색 배경 */
+        border-radius: 8px; /* 둥근 모서리 */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+    }
+
+
 #titleform select, /* 검색 입력 필드 및 버튼 */
 #titleform input[type="search"],
 #titleform input[type="submit"] {
@@ -201,7 +210,7 @@ h1 {
     <form action="drinkSearch.do" id="titleform" class="sform" method="get">
         <input type="hidden" name="action" value="title">
         <fieldset>
-            <legend>검색할 제목을 입력하세요.</legend>
+           
             <input type="search" name="keyword" size="50"> &nbsp; 
             <input type="submit" value="검색">
         </fieldset>

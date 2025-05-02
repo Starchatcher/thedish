@@ -3,6 +3,8 @@ package com.thedish.drink.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,14 @@ import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.dao.DrinkDao;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 import com.thedish.image.model.service.ImageService;
 
 @Service("drinkService")
 public class DrinkServiceImpl implements DrinkService{
 
+	
+	  private static final Logger logger = LoggerFactory.getLogger(DrinkServiceImpl.class);
 	@Autowired
 	private DrinkDao drinkDao;
 	
@@ -119,4 +124,16 @@ public class DrinkServiceImpl implements DrinkService{
 		return drinkDao.selectListDrink(paging);
 	}
 
+	@Override
+	public String selectStoreAddressByDrinkId(int drinkId) {
+		String address = drinkDao.selectStoreAddressByDrinkId(drinkId);
+	    logger.info("Service에서 반환될 스토어 주소: " + address); // 이 줄 추가
+	    return address;
+	}
+
+	
+	
+
+
+	
 }

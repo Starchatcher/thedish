@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${drink.name} 상세페이지</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -350,8 +351,7 @@
 
     <!-- 지도 정보를 출력할 구역 -->
     <div class="map-container" id="map">
-        <!-- 나중에 JavaScript로 지도를 삽입할 수 있는 영역 -->
-        <p>지도 정보가 여기에 표시됩니다.</p>
+     
     </div>
 
 <!-- 댓글 리스트 -->
@@ -427,7 +427,66 @@
 <c:if test="${loginUser == null}">
     <p>댓글을 작성하려면 <a href="loginPage.do">로그인</a>해주세요.</p> <%-- 예시: 로그인 페이지 링크 --%>
 </c:if>
+<c:import url="/WEB-INF/views/common/footer.jsp" />
 
+<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services&callback=initMap"></script>
+<script type="text/javascript">
+var storeAddress = "${storeAddress}";
+
+// 주소 값이 유효한지 확인합니다.
+if (storeAddress && storeAddress.trim() !== "") {
+    // 주소 값이 있을 경우 지도 표시 로직 실행
+
+    var mapContainer = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
+    var mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 초기 중심 좌표 (서울 시청) - 주소 검색 성공 시 이 좌표는 무시됩니다.
+        level: 3 // 지도의 확대 레벨 (숫자가 작을수록 확대)
+    };
+
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(storeAddress, function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+
+            // 검색 결과의 첫 번째 좌표를 가져옵니다.
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도 객체
+                position: coords // 마커의 위치
+            });
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+
+        
+
+
+        } else {
+            // 주소 검색 실패 시 처리
+            console.error('주소-좌표 변환 실패. Status:', status);
+            // 지도를 표시하지 않거나, 오류 메시지를 div 영역에 표시합니다.
+            mapContainer.innerHTML = "<p>매장 주소를 좌표로 변환하는데 실패했습니다.</p>";
+        }
+    });
+
+} else {
+    // 스토어 주소 값이 없는 경우
+    console.log("전달된 스토어 주소가 없습니다.");
+    // 지도를 표시하지 않고, 해당 div 영역에 메시지를 표시합니다.
+    var mapContainer = document.getElementById('map');
+    mapContainer.innerHTML = "<p>해당 술에 대한 매장 정보가 없습니다.</p>";
+}
+</script>
 
 </body>
 </html>
