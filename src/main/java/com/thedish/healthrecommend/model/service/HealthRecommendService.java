@@ -6,8 +6,10 @@ import com.thedish.recipe.model.vo.Recipe;
 
 public interface HealthRecommendService {
 
-	List<String> getRecommendedIngredients(String conditionName);
-    List<Recipe> getRecipesByConditionExcludingIngredients(String conditionName, List<String> excluded);
+	int getConditionIdByName(String conditionName);
+    List<String> getRecommendedIngredients(int conditionId);
+    List<String> getExcludedIngredients(int conditionId);
+    List<Recipe> getFilteredRecipes(List<String> included, List<String> excluded);
 	List<String> autocompleteCondition(String keyword);
-	boolean doesConditionExist(String keyword);
+	int countCondition(String keyword);
 }
