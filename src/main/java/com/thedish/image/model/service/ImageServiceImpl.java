@@ -35,5 +35,10 @@ public class ImageServiceImpl implements ImageService {
 		return imageDao.deleteImageByTargetIdAndType(targetId, targetType);
 	}
 
+	@Override
+	public Image selectImageByTarget(int targetId, String targetType) {
+		return imageDao.selectImageByTarget(targetId, targetType);
+	}
+
 
 }

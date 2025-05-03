@@ -113,4 +113,9 @@ public class RecipeDao {
         return sqlSessionTemplate.selectOne("recipeMapper.getAverageRating", recipeId);
     }
     
+    
+    public Recipe selectRandomRecipe() {
+        
+        return sqlSessionTemplate.selectOne("recipeMapper.selectRandomRecipe");
+    }
 }
