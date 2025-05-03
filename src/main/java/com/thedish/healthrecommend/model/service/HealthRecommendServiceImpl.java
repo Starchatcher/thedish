@@ -15,23 +15,33 @@ public class HealthRecommendServiceImpl implements HealthRecommendService {
 	@Autowired
 	private HealthRecommendDao healthRecommendDao;
 	
-	@Override
-	public List<String> getRecommendedIngredients(String conditionName) {
-		return healthRecommendDao.selectRecommendedIngredients(conditionName);
-	}
+	  @Override
+	    public int getConditionIdByName(String conditionName) {
+	        return healthRecommendDao.getConditionIdByName(conditionName);
+	    }
 
-	@Override
-	public List<Recipe> getRecipesByConditionExcludingIngredients(String conditionName, List<String> excluded) {
-		 return healthRecommendDao.selectRecipesByCondition(conditionName, excluded);
+	    @Override
+	    public List<String> getRecommendedIngredients(int conditionId) {
+	        return healthRecommendDao.getRecommendedIngredients(conditionId);
+	    }
+
+	    @Override
+	    public List<String> getExcludedIngredients(int conditionId) {
+	        return healthRecommendDao.getExcludedIngredients(conditionId);
+	    }
+
+	    @Override
+	    public List<Recipe> getFilteredRecipes(List<String> included, List<String> excluded) {
+	        return healthRecommendDao.getSafeRecipes(included, excluded);
+	    }
+
+		@Override
+		public List<String> autocompleteCondition(String keyword) {
+			return healthRecommendDao.autocompleteCondition(keyword);
+		}
+
+		@Override
+		public int countCondition(String keyword) {
+			return healthRecommendDao.countCondition(keyword);
+		}
 	}
-	@Override
-	public List<String> autocompleteCondition(String keyword) {
-	    return healthRecommendDao.autocompleteCondition(keyword);
-	}
-	
-	@Override
-	public boolean doesConditionExist(String keyword) {
-	    return healthRecommendDao.countMatchingConditions(keyword) > 0;
-	}
-	
-}
