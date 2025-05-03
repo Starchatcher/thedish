@@ -7,6 +7,7 @@ import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 
 public interface DrinkService {
 	
@@ -21,7 +22,7 @@ public interface DrinkService {
 	int insertDrink(Drink drink); 
 	int updateDrink(Drink drink);
 	int deleteDrink(int drinkId); 
-
+ 
 	
 	boolean incrementRecommendationCount(int drinkId);
 	 
@@ -34,4 +35,5 @@ public interface DrinkService {
 	 void updateAverageRating(int drinkId, double avgRating);
 	 double getAverageRating(int drinkId) ;
 	 
+	 String selectStoreAddressByDrinkId(int drinkId);
 }

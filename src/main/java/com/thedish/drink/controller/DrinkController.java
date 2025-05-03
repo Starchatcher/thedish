@@ -2,9 +2,7 @@ package com.thedish.drink.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +23,7 @@ import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 import com.thedish.drink.service.impl.DrinkService;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
@@ -120,6 +119,12 @@ public class DrinkController {
 			                 mv.addObject("pairingList", pairingList);
 
 
+			                 String storeAddress = drinkService.selectStoreAddressByDrinkId(drinkId); // 서비스 메서드 호출
+			                 logger.info("조회된 스토어 주소: " + storeAddress);
+			                 logger.info("컨트롤러에서 모델에 추가될 스토어 주소: " + storeAddress);
+			                 mv.addObject("storeAddress", storeAddress); // JSP로 전달
+
+			                 
 			                 // 3. 댓글 관련 로직 (기존 코드 유지)
 			                 int commentsPerPage = 10;
 			                 String targetType = "drink";
@@ -349,7 +354,7 @@ public class DrinkController {
 		        return "redirect:/drinkList.do?page=" + page;
 		    }
 			
-			// 레시피 평점 기능
+			// drink 평점 기능
 			 @RequestMapping(value = "rateDrink.do", method = RequestMethod.POST)
 			  
 			    public String rateDrink(
@@ -397,6 +402,7 @@ public class DrinkController {
 			        return "redirect:/drinkDetail.do?no=" + drinkId; // 레시피 상세 페이지로 리다이렉션
 
 			 }
-			 
+			
+
 			
 }

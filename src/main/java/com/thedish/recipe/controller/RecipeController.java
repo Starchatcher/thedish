@@ -34,29 +34,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
-class RecipeStep implements Comparable<RecipeStep> {
-    int stepNumber;
-    String stepContent;
 
-    public RecipeStep(int stepNumber, String stepContent) {
-        this.stepNumber = stepNumber;
-        this.stepContent = stepContent;
-    }
-
-    public int getStepNumber() {
-        return stepNumber;
-    }
-
-    public String getStepContent() {
-        return stepContent;
-    }
-
-    // 번호를 기준으로 오름차순 정렬하기 위한 compareTo 메소드 구현
-    @Override
-    public int compareTo(RecipeStep other) {
-        return Integer.compare(this.stepNumber, other.stepNumber);
-    }
-}
 
 @Controller
 public class RecipeController {
@@ -112,167 +90,77 @@ public class RecipeController {
 		}
 		
 		// 레시피 상세보기 요청 처리용
-		@RequestMapping("/recipeDetail.do")
-		public ModelAndView recipeDetailMethod(
-		    @RequestParam("no") int recipeId, 
-		    ModelAndView mv, 
-		    HttpSession session,
-		    @RequestParam(value = "page", required = false, defaultValue = "1") int page
-		) {
-		    logger.info("recipeDetail.do 호출 - recipeId: {}", recipeId);
+		// 레시피 상세보기 요청 처리용
+				@RequestMapping("/recipeDetail.do")
+				public ModelAndView recipeDetailMethod(
+				    @RequestParam("no") int recipeId, 
+				    ModelAndView mv, 
+				    HttpSession session,
+				    @RequestParam(value = "page", required = false, defaultValue = "1") int page
+				) {
+				    logger.info("recipeDetail.do 호출 - recipeId: {}", recipeId);
 
-		    // 레시피 조회
-		    Recipe recipe = recipeService.selectRecipe(recipeId);
-		    recipeService.updateAddReadCount(recipeId); // 조회수 증가   
+				    // 레시피 조회
+				    Recipe recipe = recipeService.selectRecipe(recipeId);
+				    recipeService.updateAddReadCount(recipeId); // 조회수 증가
 
-		    
-		    if (recipe != null) {
-		    	logger.info("레시피 데이터 조회 성공. 파싱 및 정렬 로직 시작.");
+				   
 
-		        String rawInstructions = recipe.getInstructions();
-		        if (rawInstructions != null && !rawInstructions.trim().isEmpty()) {
-		        	  List<RecipeStep> steps = new ArrayList<>();
-		              // 줄 단위로 분리합니다. (다양한 줄 바꿈 문자 처리)
-		              String[] lines = rawInstructions.split("\\r?\\n");
+				    
+				    if (recipe != null) {
+				        mv.addObject("recipe", recipe);
 
-		              // 줄의 시작이 "숫자. " 패턴인지 확인하는 패턴
-		              Pattern stepStartPattern = Pattern.compile("^(\\d+)\\.\\s*(.*)");
+				        // 알러지 정보 조회
+				        List<Allergy> allergyList = recipeService.selectAllergyByRecipeId(recipeId);
+				        if (allergyList != null && !allergyList.isEmpty()) {
+				            logger.info("조회된 알러지 리스트: {}", allergyList);
+				            mv.addObject("allergyList", allergyList);
+				        } else {
+				            logger.warn("알러지 리스트가 비어 있습니다!");
+				            mv.addObject("allergyList", new ArrayList<>());
+				        }
 
-		              int currentStepNumber = -1;
-		              StringBuilder currentStepContent = new StringBuilder();
+				        // 댓글 관련 처리
+				        int commentsPerPage = 10;
+				        String targetType = "recipe";
 
-		              for (String line : lines) {
-		                  line = line.trim(); // 각 줄의 앞뒤 공백 제거
-		                  if (line.isEmpty()) {
-		                      continue; // 빈 줄은 건너뜁니다.
-		                  }
+				        // 댓글 총 개수 조회
+				        int totalComments = commentService.selectCommentCount(recipeId, targetType);
+				        logger.info("조회된 댓글 총 개수: {}", totalComments);
 
-		                  Matcher matcher = stepStartPattern.matcher(line);
+				        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
+				        if (totalPages == 0) totalPages = 1;
 
-		                  if (matcher.find()) {
-		                      // 현재 줄이 새로운 단계의 시작인 경우
-		                      // 이전까지 모아둔 내용이 있다면, 이전 단계를 확정하고 리스트에 추가
-		                      if (currentStepContent.length() > 0 && currentStepNumber != -1) {
-		                           steps.add(new RecipeStep(currentStepNumber, currentStepContent.toString().trim()));
-		                           currentStepContent = new StringBuilder(); // 새로운 단계 내용을 모을 StringBuilder 초기화
-		                      } else if (currentStepContent.length() > 0 && currentStepNumber == -1) {
-		                           
-		                           // 현재 로직에서는 새로운 단계로 시작하는 것으로 간주합니다.
-		                           logger.warn("번호 없이 시작하는 내용 후 새로운 단계 시작: {}", line);
-		                           currentStepContent = new StringBuilder(); // 새로운 단계 내용을 모을 StringBuilder 초기화
-		                      }
+				        if (page < 1) page = 1;
+				        if (page > totalPages) page = totalPages;
 
-		                      try {
-		                          currentStepNumber = Integer.parseInt(matcher.group(1)); // 새로운 단계 번호 추출
-		                          currentStepContent.append(matcher.group(2).trim()); // 새로운 단계 내용의 첫 부분 추가
-		                      } catch (NumberFormatException e) {
-		                          logger.error("조리법 번호 파싱 오류 (새로운 단계 시작 시): {}", matcher.group(1), e);
-		                        
-		                           currentStepNumber = -1; // 번호 오류이므로 유효한 단계 번호가 아닙니다.
-		                           
-		                      }
-		                  } else {
-		                     
-		                      if (currentStepContent.length() > 0) {
-		                          // 이전 단계의 내용이 있다면, 현재 줄을 추가합니다.
-		                          currentStepContent.append("\n").append(line); // 줄 바꿈으로 구분하여 추가
-		                      } else {
-		                         
-		                           logger.warn("처리되지 않은 조리법 줄 (내용 없음): {}", line);
-		                      }
-		                  }
-		              }
+				        int offset = (page - 1) * commentsPerPage;
 
-		              // 반복문이 끝난 후, 마지막으로 모아둔 내용을 리스트에 추가합니다.
-		              if (currentStepContent.length() > 0 && currentStepNumber != -1) {
-		                  steps.add(new RecipeStep(currentStepNumber, currentStepContent.toString().trim()));
-		              } else if (currentStepContent.length() > 0 && currentStepNumber == -1) {
-		                   
-		                   logger.warn("처리되지 않은 조리법 내용 (마지막 부분): {}", currentStepContent.toString());
-		              }
+				        // 댓글 리스트 조회
+				        List<Comment> comments = commentService.selectComments(recipeId, targetType, offset, commentsPerPage);
+				        if (comments == null) {
+				            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
+				            comments = new ArrayList<>();
+				        }
+				        logger.info("조회된 댓글 리스트 크기: {}", comments.size());
+				        for (Comment c : comments) {
+				            logger.info("댓글 ID: {}, 내용: {}", c.getCommentId(), c.getContent());
+				        }
 
+				        mv.addObject("comments", comments);
+				        mv.addObject("page", page);
+				        mv.addObject("totalPages", totalPages);
 
-		              // 번호를 기준으로 오름차순 정렬
-		              Collections.sort(steps); // RecipeStep 클래스에 compareTo 메소드가 구현되어 있어 바로 정렬 가능
+				        mv.setViewName("recipe/recipeDetail");
+				    } else {
+				        logger.error("{}번 레시피가 존재하지 않습니다!", recipeId);
+				        mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
+				        mv.setViewName("common/error");
+				    }
 
-		              // 정렬된 단계를 다시 하나의 문자열로 조합 (번호와 함께)
-		              StringBuilder sortedInstructionsBuilder = new StringBuilder();
-		              for (int i = 0; i < steps.size(); i++) {
-		                  sortedInstructionsBuilder.append(steps.get(i).getStepNumber())
-		                                            .append(". ")
-		                                            .append(steps.get(i).getStepContent().trim()); // 최종 내용 앞뒤 공백 다시 제거
-		                  if (i < steps.size() - 1) {
-		                      sortedInstructionsBuilder.append("\n"); // 각 단계별 줄 바꿈
-		                  }
-		              }
-		               
+				    return mv;
+				}
 
-		              // Recipe 객체의 instructions 필드를 정렬된 문자열로 업데이트
-		              recipe.setInstructions(sortedInstructionsBuilder.toString());
-
-		          } 
-
-		          mv.addObject("recipe", recipe);
-
-		          if (rawInstructions != null && !rawInstructions.trim().isEmpty()) {
-		              // 파싱 및 정렬이 성공적으로 수행되어 recipe 객체가 업데이트된 경우
-		              mv.addObject("sortedInstructions", recipe.getInstructions()); // 업데이트된 recipe 객체의 instructions 사용
-		          } else {
-		              // 파싱 로직이 실행되지 않은 경우 (instructions가 비어있거나 null)
-		              mv.addObject("sortedInstructions", ""); // 또는 원본 내용 mv.addObject("sortedInstructions", rawInstructions);
-		          }
-		          
-		          
-		        // 알러지 정보 조회
-		        List<Allergy> allergyList = recipeService.selectAllergyByRecipeId(recipeId);
-		        if (allergyList != null && !allergyList.isEmpty()) {
-		            logger.info("조회된 알러지 리스트: {}", allergyList);
-		            mv.addObject("allergyList", allergyList);
-		        } else {
-		            logger.warn("알러지 리스트가 비어 있습니다!");
-		            mv.addObject("allergyList", new ArrayList<>());
-		        }
-
-		        // 댓글 관련 처리
-		        int commentsPerPage = 10;
-		        String targetType = "recipe";
-
-		        // 댓글 총 개수 조회
-		        int totalComments = commentService.selectCommentCount(recipeId, targetType);
-		        logger.info("조회된 댓글 총 개수: {}", totalComments);
-
-		        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
-		        if (totalPages == 0) totalPages = 1;
-
-		        if (page < 1) page = 1;
-		        if (page > totalPages) page = totalPages;
-
-		        int offset = (page - 1) * commentsPerPage;
-
-		        // 댓글 리스트 조회
-		        List<Comment> comments = commentService.selectComments(recipeId, targetType, offset, commentsPerPage);
-		        if (comments == null) {
-		            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
-		            comments = new ArrayList<>();
-		        }
-		        logger.info("조회된 댓글 리스트 크기: {}", comments.size());
-		        for (Comment c : comments) {
-		            logger.info("댓글 ID: {}, 내용: {}", c.getCommentId(), c.getContent());
-		        }
-
-		        mv.addObject("comments", comments);
-		        mv.addObject("page", page);
-		        mv.addObject("totalPages", totalPages);
-
-		        mv.setViewName("recipe/recipeDetail");
-		    } else {
-		        logger.error("{}번 레시피가 존재하지 않습니다!", recipeId);
-		        mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
-		        mv.setViewName("common/error");
-		    }
-
-		    return mv;
-		}
 
 
 

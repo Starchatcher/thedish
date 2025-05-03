@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +15,12 @@ import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 
 @Repository("drinkDao")
 public class DrinkDao {
+	
+	 private static final Logger logger = LoggerFactory.getLogger(DrinkDao.class);
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -118,4 +123,14 @@ public class DrinkDao {
     public double getAverageRating(int drinkId) {
         return sqlSessionTemplate.selectOne("drinkMapper.getAverageRating", drinkId);
     }
+    
+    public String selectStoreAddressByDrinkId(int drinkId) {
+       
+        String address = sqlSessionTemplate.selectOne("drinkMapper.selectStoreAddressByDrinkId", drinkId);
+        logger.info("DAO에서 조회된 스토어 주소: " + address); // 이 줄 추가
+        return address;
+
+    }
+   
+ 
 }

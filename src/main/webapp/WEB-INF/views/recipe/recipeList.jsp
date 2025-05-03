@@ -74,49 +74,70 @@
             font-weight: bold;
         }
         
-     #search-area {
-    width: 650px; /* 게시판 테이블과 같은 폭으로 맞추기 */
-    margin: 0 auto 20px; /* 가운데 정렬 + 아래 여백 */
-    display: flex;
-    justify-content: space-between; /* 좌우로 양쪽 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-}
-
-#titleform select,
-#titleform input[type="search"],
-#titleform input[type="submit"] {
-    height: 36px; /* 높이 설정 */
-    padding: 0 10px; /* 좌우 패딩 */
-    font-size: 14px; /* 글자 크기 */
-    border: 1px solid #ccc; /* 테두리 설정 */
-    border-radius: 8px; /* 둥근 모서리 */
-}
-
-#titleform select {
-    min-width: 80px; /* 최소 너비 설정 */
-}
-
-#titleform input[type="search"] {
-    width: 220px; /* 검색 입력 필드 너비 설정 */
-}
-
-#titleform input[type="submit"] {
-    background-color: #8FBC8F; /* 버튼 배경색 */
-    color: white; /* 글자색 */
-    border: none; /* 테두리 제거 */
-    cursor: pointer; /* 커서 포인터로 변경 */
-    transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
-    padding: 12px 8px; /* 패딩 설정 */
-}
-
-#titleform input[type="submit"]:hover {
-    background-color: #7aa97a; /* 호버 시 배경색 변경 */
-}
-
+        fieldset {
+        border: none; /* 테두리 제거 */
+        padding: 8px; /* 내부 여백 */
+        background-color: #ffffff; /* 흰색 배경 */
+        border-radius: 8px; /* 둥근 모서리 */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+    }
         
+       #search-area {
+        max-width: 800px; /* 검색 영역 최대 너비 */
+        width: 100%;
+        margin: 0 auto 30px; /* 가운데 정렬 + 아래 여백 증가 */
+        display: flex;
+        justify-content: center; /* 검색 폼 가운데 정렬 */
+        align-items: center;
+        padding: 15px 20px; /* 검색 영역 패딩 */
+        background-color: #ffffff; /* 흰색 배경 */
+        border-radius: 8px; /* 둥근 모서리 */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+        border: none; /* 테두리 제거 */
+    }
+
+    #titleform {
+         display: flex; /* flexbox 사용하여 요소 정렬 */
+         align-items: center; /* 수직 가운데 정렬 */
+         gap: 10px; /* 요소들 사이 간격 */
+         width: 100%; /* 부모 너비에 맞춤 */
+         justify-content: center; /* 내부 요소 가운데 정렬 */
+    }
+
+    #titleform select,
+    #titleform input[type="search"],
+    #titleform input[type="submit"] {
+        height: 36px; /* 높이 설정 */
+        padding: 0 10px; /* 좌우 패딩 */
+        font-size: 14px; /* 글자 크기 */
+        border: none; /* 테두리 제거 */
+        border-radius: 8px; /* 둥근 모서리 */
+        box-sizing: border-box; /* 패딩 포함 */
         
-        
-    </style>
+    }
+
+    #titleform select {
+        min-width: 80px; /* 최소 너비 설정 */
+    }
+
+    #titleform input[type="search"] {
+        width: 220px; /* 검색 입력 필드 너비 설정 */
+    }
+
+    #titleform input[type="submit"] {
+        background-color: #8FBC8F; /* 버튼 배경색 */
+        color: white; /* 글자색 */
+        border: none; /* 테두리 제거 */
+        cursor: pointer; /* 커서 포인터로 변경 */
+        transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+        padding: 12px 8px; /* 패딩 설정 */
+    }
+
+    #titleform input[type="submit"]:hover {
+        background-color: #7aa97a; /* 호버 시 배경색 변경 */
+    }
+
+</style>
 </head>
 <body>
     <c:import url="/WEB-INF/views/common/menubar.jsp" />
@@ -124,7 +145,7 @@
     <form action="recipeSearch.do" id="titleform" class="sform" method="get">
         <input type="hidden" name="action" value="title">
         <fieldset>
-            <legend>검색할 제목을 입력하세요.</legend>
+           
             <input type="search" name="keyword" size="50"> &nbsp; 
             <input type="submit" value="검색">
         </fieldset>
