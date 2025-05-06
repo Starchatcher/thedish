@@ -176,7 +176,7 @@ public class RecipeController {
 			}
 
 			// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-			int limit = 10;
+			int limit = 12;
 			if (slimit != null) {
 				limit = Integer.parseInt(slimit);
 			}
