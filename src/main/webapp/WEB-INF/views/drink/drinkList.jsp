@@ -9,112 +9,155 @@
     <title>음료 목록</title>
      <style>
 
+/* body 배경 스타일 (이전 예시와 동일) */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    font-family: 'Arial', sans-serif;
+    /* 이전 예시의 그라디언트 배경 적용 */
+    background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
     margin: 0;
     padding: 20px;
 }
 
-/* 제목 스타일 (예시) */
-h1 {
+/* 주요 콘텐츠를 감싸는 컨테이너 (스타일 적용을 위해 추가) */
+/* 이 div로 <h1>, #search-area, .grid, .paging 전체를 감싸주세요. */
+.content-container {
+    background-color: rgba(255, 255, 255, 0.8); /* 투명한 흰색 배경 */
+    padding: 30px; /* 내부 여백 */
+    border-radius: 15px; /* 둥근 모서리 */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    max-width: 1200px; /* 전체 컨테이너 최대 너비 설정 (그리드 고려) */
+    margin: 50px auto; /* 페이지 중앙 배치 및 상하 마진 */
+}
+
+/* 컨테이너 내부 요소들에 대한 스타일 조정 */
+
+.content-container h1 { /* 컨테이너 내부의 h1 */
     text-align: center;
     margin-bottom: 20px;
+    color: #333; /* 글자색 조정 */
 }
 
-/* 검색 폼 스타일 (recipeList.jsp와 동일하게 적용) */
-#search-area { /* 검색 폼 컨테이너 */
-    width: 650px; /* 너비 조정 필요시 */
-    margin: 0 auto 20px;
-    display: flex;
-    justify-content: space-between;
+/* 검색 폼 컨테이너 */
+/* fieldset 또는 #search-area는 .content-container 내부에 위치한다고 가정 */
+#search-area, fieldset { /* 둘 다 사용 가능, 또는 하나로 통일 */
+    max-width: 800px; /* 검색 영역 최대 너비 (필요시 조정) */
+    width: 100%;
+    margin: 0 auto 30px; /* 가운데 정렬 + 아래 여백 증가 */
+    display: flex; /* flexbox 유지 */
+    justify-content: center; /* 내부 요소 가운데 정렬 */
     align-items: center;
+    padding: 15px 20px; /* 패딩 조정 */
+    background-color: #ffffff; /* 흰색 배경 */
+    border-radius: 8px; /* 둥근 모서리 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+    border: none; /* 테두리 제거 */
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
 }
 
-  fieldset {
-        border: none; /* 테두리 제거 */
-        padding: 8px; /* 내부 여백 */
-        background-color: #ffffff; /* 흰색 배경 */
-        border-radius: 8px; /* 둥근 모서리 */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
-    }
+#titleform { /* 검색 입력 필드 및 버튼 묶음 */
+    display: flex; /* flexbox 유지 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 10px; /* 요소들 사이 간격 */
+    width: 100%; /* 부모 너비에 맞춤 */
+    justify-content: center; /* 내부 요소 가운데 정렬 */
+}
 
 
 #titleform select, /* 검색 입력 필드 및 버튼 */
 #titleform input[type="search"],
 #titleform input[type="submit"] {
-    height: 36px;
-    padding: 0 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
+    height: 38px; /* 높이 조정 */
+    padding: 0 12px; /* 좌우 패딩 조정 */
+    font-size: 15px; /* 글자 크기 조정 */
+    border: 1px solid #ddd; /* 테두리 추가 (구분감) */
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
 #titleform select { /* 검색 폼 select */
-    min-width: 80px;
+    min-width: 100px; /* 최소 너비 조정 */
+    border: 1px solid #ddd; /* select 박스 테두리 추가 */
 }
 
+
 #titleform input[type="search"] { /* 검색 입력 필드 */
-    width: 220px; /* 너비 조정 필요시 */
+    width: 250px; /* 너비 조정 */
 }
 
 #titleform input[type="submit"] { /* 검색 버튼 */
-    background-color: #8FBC8F; /* 색상 조정 필요시 */
+    /* 이전 예시 버튼 색상 계열 적용 */
+    background-color: #f29abf;
     color: white;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    padding: 12px 8px;
+    padding: 0 15px; /* 패딩 조정 */
 }
 
 #titleform input[type="submit"]:hover { /* 검색 버튼 호버 */
-    background-color: #7aa97a; /* 색상 조정 필요시 */
+    /* 이전 예시 호버 색상 계열 적용 */
+    background-color: #e089a8;
 }
 
 /* 그리드 컨테이너 */
+/* .grid는 .content-container 내부에 위치한다고 가정 */
 .grid {
     display: grid;
- 
-     grid-template-columns: repeat(4, 1fr);
+    /* 화면 너비에 따라 자동으로 열 개수 조절 */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 반응형 4열 (최소 250px) */
     gap: 20px; /* 카드들 사이의 간격 */
     margin-top: 20px;
-    padding: 0 20px; /* 좌우 여백 (필요시 조정) */
-    max-width: 1200px; /* 그리드 최대 너비 지정 (선택 사항, 가운데 정렬 시 유용) */
-    margin-left: auto;  /* 가운데 정렬 */
-    margin-right: auto; /* 가운데 정렬 */
+    padding: 0; /* 컨테이너에 이미 패딩이 있으므로 그리드 패딩 제거 */
+    /* max-width 및 margin-left/right: auto는 .content-container에 적용했으므로 여기서 제거 */
+    /* max-width: 1200px; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
 }
 
 /* 각 항목 카드 스타일 (음료 목록: .drink-card) */
+/* .drink-card는 .grid 내부에 위치한다고 가정 */
 .drink-card {
-    /* ... (이전 .drink-card 스타일 유지: 배경, 그림자, 패딩, 높이, flex 설정 등) ... */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
     padding: 10px;
-    height: 350px; /* 카드 높이 (콘텐츠 양에 따라 조정) */
+    height: 350px; /* 카드 높이 유지 또는 조정 */
     position: relative;
-    padding-bottom: 60px;
+    padding-bottom: 60px; /* 하단 푸터 영역 확보 */
     display: flex;
     flex-direction: column;
+    cursor: pointer; /* 클릭 가능한 느낌 */
+    transition: transform 0.2s ease; /* 호버 애니메이션 */
+}
+
+.drink-card:hover {
+    transform: translateY(-5px); /* 호버 시 살짝 위로 */
 }
 
 /* 카드 내 이미지 스타일 (음료 목록: .drink-card) */
-.drink-card img { /* <-- 클래스 선택자 수정 */
-    width: 100%; /* 카드 너비에 맞게 이미지 크기 조정 */
-    height: 150px; /* 고정된 이미지 높이 */
-    object-fit: cover; /* 이미지 비율 유지 (잘리지 않고 꽉 채움) */
-    border-bottom: 1px solid #eee; /* 이미지 하단 구분선 */
+.drink-card img {
+    width: 100%;
+    height: 180px; /* 이미지 높이 조정 (카드 높이에 따라) */
+    object-fit: cover;
+    border-radius: 4px; /* 이미지 모서리 둥글게 */
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee; /* 이미지 하단 구분선 유지 */
 }
 
 .drink-card h3 { /* 카드 내 제목 스타일 */
     font-size: 18px;
-    margin: 10px 0 5px 0;
+    margin: 0 0 5px 0; /* 간격 조정 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     flex-shrink: 0;
+    color: #555; /* 글자색 조정 */
+}
+.drink-card h3 a { /* 제목 링크 스타일 */
+    text-decoration: none;
+    color: inherit;
 }
 
 .drink-card p { /* 카드 내 p 태그 스타일 */
@@ -122,13 +165,24 @@ h1 {
      font-size: 14px;
      margin: 5px 0;
      /* 설명에 여러 줄 말줄임표 필요시 추가 스타일링 */
+     flex-grow: 1; /* 남은 공간 채우기 */
+     overflow: hidden; /* 넘치는 내용 숨김 */
+     text-overflow: ellipsis; /* 말줄임표 */
+     display: -webkit-box;
+     -webkit-line-clamp: 4; /* 2줄까지만 표시 */
+     -webkit-box-orient: vertical;
+     word-wrap: break-word; /* 단어 단위 줄바꿈 */
+     line-height: 1.4; /* 줄 간격 */
+     
 }
 
+
 /* 음료에 특화된 정보 (가격, 도수) 스타일 */
-.drink-card .drink-info { /* HTML에서 <p class="drink-info">... </p> 로 감쌌다고 가정 */
+.drink-card .drink-info {
     font-size: 14px;
     color: #333;
     margin-top: 5px;
+    margin-bottom: 20px; /* 하단 푸터와의 간격 */
     flex-shrink: 0;
 }
 .drink-card .drink-info strong {
@@ -136,7 +190,7 @@ h1 {
 }
 
 /* 카드 하단 정보 (조회수 등) 컨테이너 스타일 */
-.drink-card .card-footer { /* HTML에서 <div class="card-footer">...</div> 로 감쌌다고 가정 */
+.drink-card .card-footer {
     position: absolute;
     bottom: 10px;
     left: 0;
@@ -151,41 +205,46 @@ h1 {
 
 /* 조회수 등 특정 정보 강조 스타일 */
 .drink-card .view-count {
-     color: #ff5722;
+     color: #ff5722; /* 조회수 색상 유지 */
      font-weight: bold;
 }
 
 
-/* 페이징 영역 스타일 (recipeList.jsp와 동일하게 적용) */
+/* 페이징 영역 스타일 */
+/* .paging는 .content-container 내부에 위치한다고 가정 */
 .paging {
-    margin: 30px auto;
-    width: 650px; /* 너비 조정 필요시 */
+    margin: 30px auto; /* 상하 마진 및 중앙 정렬 */
+    /* width는 .content-container에 맞춰지므로 여기서 고정 너비 제거 */
+    /* width: 650px; */
     text-align: center;
 }
 
 .paging a, .paging span { /* 페이징 링크/숫자 스타일 */
     display: inline-block;
-    width: 30px; /* 너비 조정 필요시 */
-    height: 30px; /* 높이 조정 필요시 */
-    line-height: 30px;
-    margin: 0 2px;
+    width: 35px; /* 너비 조정 */
+    height: 35px; /* 높이 조정 */
+    line-height: 35px;
+    margin: 0 4px; /* 간격 조정 */
     text-align: center;
-    font-size: 14px; /* 글자 크기 조정 필요시 */
-    border: 1px solid #8FBC8F; /* 테두리 색상 조정 필요시 */
+    font-size: 15px; /* 글자 크기 조정 */
+    /* 페이징 색상 이전 예시 계열로 변경 */
+    border: 1px solid #f29abf;
     border-radius: 6px;
-    color: #8FBC8F; /* 글자 색상 조정 필요시 */
+    color: #f29abf;
     text-decoration: none;
     transition: all 0.3s ease;
     background-color: #fff;
 }
 
 .paging a:hover { /* 페이징 링크 호버 */
-    background-color: #8FBC8F; /* 색상 조정 필요시 */
+    /* 페이징 호버 색상 이전 예시 계열로 변경 */
+    background-color: #f29abf;
     color: #fff;
 }
 
 .paging .current-page { /* 현재 페이지 스타일 */
-    background-color: #8FBC8F; /* 색상 조정 필요시 */
+    /* 현재 페이지 색상 이전 예시 계열로 변경 */
+    background-color: #f29abf;
     color: #fff;
     font-weight: bold;
     cursor: default;
@@ -199,10 +258,127 @@ h1 {
     background-color: #f9f9f9;
 }
 
-        
-        
-        
-    </style>
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1200px) {
+    .content-container {
+        max-width: 960px; /* 더 작은 화면에서는 최대 너비 줄이기 */
+    }
+    .grid {
+         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* 카드 너비 조정 */
+    }
+}
+
+@media (max-width: 992px) {
+    .content-container {
+        max-width: 720px;
+        padding: 25px;
+        margin: 40px auto;
+    }
+     .grid {
+         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+         gap: 15px;
+     }
+     #search-area, fieldset {
+         max-width: 100%; /* 전체 너비 사용 */
+         flex-direction: column; /* 세로 정렬 */
+         align-items: stretch; /* 전체 너비 사용 */
+         padding: 15px;
+     }
+     #titleform {
+         flex-direction: column; /* 세로 정렬 */
+         align-items: stretch; /* 전체 너비 사용 */
+         gap: 8px; /* 간격 조정 */
+     }
+     #titleform select,
+     #titleform input[type="search"],
+     #titleform input[type="submit"] {
+         width: 100%; /* 전체 너비 사용 */
+         margin: 0; /* 마진 제거 */
+     }
+     .paging {
+        margin: 20px auto;
+     }
+     .paging a, .paging span {
+         width: 30px;
+         height: 30px;
+         line-height: 30px;
+         font-size: 14px;
+         margin: 0 3px;
+     }
+     .drink-card {
+         height: 320px; /* 카드 높이 조정 */
+         padding-bottom: 55px;
+     }
+      .drink-card img {
+         height: 150px; /* 이미지 높이 조정 */
+     }
+
+}
+
+@media (max-width: 768px) {
+     .grid {
+         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* 태블릿 세로 등 */
+         gap: 15px;
+     }
+     .content-container {
+         padding: 20px;
+     }
+      .drink-card {
+         height: 300px; /* 카드 높이 조정 */
+         padding-bottom: 50px;
+     }
+     .drink-card img {
+         height: 140px; /* 이미지 높이 조정 */
+     }
+}
+
+@media (max-width: 576px) {
+     .grid {
+         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 모바일 */
+         gap: 10px;
+     }
+     .content-container {
+         padding: 15px;
+         margin: 20px auto;
+         border-radius: 10px; /* 모서리 덜 둥글게 */
+     }
+      .drink-card {
+         height: 280px; /* 카드 높이 조정 */
+         padding-bottom: 45px;
+         padding: 8px;
+     }
+     .drink-card img {
+         height: 120px; /* 이미지 높이 조정 */
+         margin-bottom: 8px;
+     }
+     .drink-card h3 {
+         font-size: 16px;
+     }
+     .drink-card p, .drink-card .drink-info, .drink-card .card-footer {
+         font-size: 12px;
+     }
+     .paging a, .paging span {
+         width: 25px;
+         height: 25px;
+         line-height: 25px;
+         font-size: 12px;
+         margin: 0 2px;
+     }
+     #search-area, fieldset {
+          padding: 10px;
+          margin-bottom: 20px;
+     }
+     #titleform select,
+     #titleform input[type="search"],
+     #titleform input[type="submit"] {
+         height: 32px;
+         font-size: 13px;
+         padding: 0 8px;
+     }
+}
+
+</style>
+
 </head>
 <body>
     <c:import url="/WEB-INF/views/common/menubar.jsp" />
