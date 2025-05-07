@@ -239,6 +239,7 @@ textarea:focus {
 .post-actions {
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .post-actions button {
@@ -327,11 +328,33 @@ textarea:focus {
 		<div class="post-actions">
 		    <button class="like-btn" data-id="${board.boardId}">
 			    <span class="like-icon">${liked ? '❤️ 좋아요' : '🤍 좋아요'}</span>
-			</button>		    
-			<button class="report-btn" onclick="reportPost(${board.boardId})">
-		        🚨 신고
-		    </button>
+			</button>
+			
+			<c:if test="${ loginUser.role ne 'ADMIN' and loginUser.loginId ne board.writer }">
+				<form id="reportForm" action="boardReportPage.do" method="get" style="display: inline;">
+					<input type="hidden" name="targetId" value="${ board.boardId }">
+					<input type="hidden" name="category" value="${ category }">
+					<button type="submit">🚨 신고</button>
+				</form>
+			</c:if>
+			
+			<c:if test="${loginUser.loginId eq board.writer || loginUser.role eq 'ADMIN'}">
+		        <form action="boardUpdatePage.do" method="get" style="display:inline;">
+		            <input type="hidden" name="boardId" value="${board.boardId}" />
+		            <input type="hidden" name="page" value="${currentPage}" />
+		            <button type="submit" class="report-btn">✏️ 수정</button>
+		        </form>
+		
+		        <form action="boardDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+		            <input type="hidden" name="boardId" value="${board.boardId}" />
+		            <input type="hidden" name="category" value="${category}" />
+		            <input type="hidden" name="page" value="${currentPage}" />
+		            <button type="submit" class="report-btn">🗑️ 삭제</button>
+		        </form>
+		    </c:if>
 		</div>
+		
+		
 		
 		<c:if test="${not empty board.originalFileName}">
 			<div class="attachment">
@@ -503,7 +526,11 @@ textarea:focus {
     <button type="button" class="go-list-btn" onclick="goList();">📋 목록</button>
 </div>
 
-
+<c:if test="${param.reportSuccess eq 'true'}">
+    <script>
+        alert('🚨 신고가 완료되었습니다.');
+    </script>
+</c:if>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />	
 
@@ -579,7 +606,7 @@ textarea:focus {
             }
         });
     }
-    
+
 </script>
 </body>
 </html>
