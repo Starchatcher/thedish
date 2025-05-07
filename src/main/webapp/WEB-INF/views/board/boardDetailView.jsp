@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <title>게시글 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+<script>
+    const commentCount = ${commentCount};
+</script>
 <style>
 .container {
 	max-width: 800px;
@@ -131,7 +133,7 @@ hr {
 /* 댓글 입력 영역 (최상단 폼) */
 .comment-form {
 	margin-top: 30px;
-	margin-bottom: 80px;
+	margin-bottom: 20px;
 	background-color: #f8f8f8;
 	padding: 20px;
 	border-radius: 8px;
@@ -234,8 +236,74 @@ textarea:focus {
 	background-color: #7da97d;
 }
 
-</style>
+.post-actions {
+    text-align: center;
+    margin-top: 20px;
+}
 
+.post-actions button {
+    font-size: 16px;
+    padding: 10px 16px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.like-btn {
+    background-color: #ffecec;
+    color: #d32f2f;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.like-btn:hover {
+    background-color: #ffd4d4;
+    font-family: Arial, sans-serif;
+}
+
+.report-btn {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.report-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.go-list-btn-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 24px 40px 0;
+}
+
+.go-list-btn {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.go-list-btn:hover {
+    background-color: #f9f9f9;
+    border-color: #999;
+}
+
+#like-count-display{
+	margin-bottom:10px;
+}
+</style>
 
 </head>
 <body>
@@ -256,6 +324,15 @@ textarea:focus {
 			${board.content}
 		</div>
 		
+		<div class="post-actions">
+		    <button class="like-btn" data-id="${board.boardId}">
+			    <span class="like-icon">${liked ? '❤️ 좋아요' : '🤍 좋아요'}</span>
+			</button>		    
+			<button class="report-btn" onclick="reportPost(${board.boardId})">
+		        🚨 신고
+		    </button>
+		</div>
+		
 		<c:if test="${not empty board.originalFileName}">
 			<div class="attachment">
 				<h4>첨부파일</h4>
@@ -267,7 +344,9 @@ textarea:focus {
 		
 <!-- 댓글 출력 -->
 <div class="comment-section">
-    <div class="comment-title">댓글 ${commentCount}</div>
+    <div id="like-count-display">
+	    댓글 ${commentCount} &nbsp; ❤️ <span id="like-num">${board.likeCount}</span>
+	</div>
 
     <c:forEach var="c" items="${commentList}">
         <c:if test="${empty c.parentId}">
@@ -303,12 +382,14 @@ textarea:focus {
                 <c:if test="${empty editCommentId or editCommentId ne c.commentId}">
 				    <div class="comment-buttons">
 				        <!-- 답글달기 -->
+				        <c:if test="${ !empty loginUser.loginId }">
 				        <form action="boardDetail.do" method="get" style="display:inline;">
 				            <input type="hidden" name="boardId" value="${board.boardId}" />
 				            <input type="hidden" name="category" value="${param.category}" />
 				            <input type="hidden" name="replyTargetId" value="${c.commentId}" />
 				            <button type="submit">답글달기</button>
 				        </form>
+				        </c:if>
 				
 				        <!-- 수정/삭제 버튼 -->
 				        <c:if test="${loginUser.loginId eq c.loginId || loginUser.role eq 'ADMIN'}">
@@ -418,56 +499,87 @@ textarea:focus {
     </div>
 </c:if>
 
+<div class="go-list-btn-wrap">
+    <button type="button" class="go-list-btn" onclick="goList();">📋 목록</button>
+</div>
 
-	<c:import url="/WEB-INF/views/common/footer.jsp" />
-	
-	
-<!-- defer 로딩 방식으로 script가 HTML 파싱 완료 후 실행되도록 함 -->
+
+
+<c:import url="/WEB-INF/views/common/footer.jsp" />	
+
 <script type="text/javascript">
     const boardId = '${board.boardId}';
     const category = '${param.category}';
     const page = '${currentPage}';
     const ctx = '${pageContext.request.contextPath}';
-
+    
+    // 댓글 지우기
     window.requestDelete = function() {
         location.href = `${ctx}/boardDelete.do?boardId=${boardId}&page=${page}&category=${category}`;
     }
 
+    // 댓글 수정하기
     window.requestUpdatePage = function() {
         location.href = `${ctx}/boardUpdatePage.do?boardId=${boardId}&page=${page}`;
     }
 
-    window.goToList = function() {
-        if (!category || category === 'all') {
-            location.href = `${ctx}/boardList.do?page=1`;
+    // 목록
+    window.goList = function() {
+        if (!category || category === 'all' || category === 'indefined') {
+            location.href = ctx + `/boardList.do?page=1`;
         } else {
-            location.href = `${ctx}/boardList.do?category=${category}&page=1`;
+            location.href = ctx + `/boardList.do?category=${category}&page=1`;
         }
     }
     
-    function toggleReplyForm(commentId) {
-        const container = document.getElementById('replyForm-' + commentId);
-        if (!container) return;
+    $(document).ready(function () {
+        // JSP 변수 commentCount를 JavaScript로 전달
+        const commentCount = ${commentCount};
 
-        if (container.innerHTML.trim() !== "") {
-            container.innerHTML = "";
+        $('.like-btn').on('click', function () {
+            const boardId = $(this).data('id');
+            toggleLike(boardId, this, commentCount);
+        });
+    });
+
+    function toggleLike(boardId, buttonElement, commentCount) {
+        if (!boardId) {
+            console.error("❗ boardId 값이 없습니다.");
             return;
         }
 
-        container.innerHTML = `
-            <form action="boardReplyInsert.do" method="post">
-                <input type="hidden" name="boardId" value="${board.boardId}" />
-                <input type="hidden" name="parentId" value="${commentId}" />
-                <input type="hidden" name="category" value="${param.category}" />
-                <textarea name="content" placeholder="답글을 입력하세요" required style="width:100%; height:80px;"></textarea>
-                <div style="margin-top: 8px;">
-                    <button type="submit">등록</button>
-                    <button type="button" onclick="document.getElementById('replyForm-${commentId}').innerHTML = '';">취소</button>
-                </div>
-            </form>
-        `;
-    }
-</script>
+        const loginId = '${sessionScope.loginUser.loginId}';
+        if (!loginId) {
+            alert("로그인이 필요합니다.");
+            location.href = 'loginPage.do';
+            return;
+        }
 
+        $.ajax({
+            url: 'toggleLike.do',
+            method: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({ loginId, targetId: boardId }),
+            success: function (response) {
+                const $btn = $(buttonElement);
+                const count = response.likeCount;
+
+                // 텍스트만 교체
+                const iconText = (response.status === 'liked')
+                    ? '❤️ 좋아요'
+                    : '🤍 좋아요';
+
+                $btn.find('.like-icon').text(iconText); // ← 버튼 안 이모지만 바꿔줌
+
+                // 댓글 + 좋아요 숫자만 교체
+                $('#like-num').text(count);
+            },
+            error: function () {
+                alert('좋아요 처리 중 오류가 발생했습니다.');
+            }
+        });
+    }
+    
+</script>
 </body>
 </html>
