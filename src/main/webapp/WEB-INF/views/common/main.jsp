@@ -11,7 +11,7 @@
       font-family: 'Noto Sans KR', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #fdfefc;
+      background-color:#ffffff;;
     }
 
     .container {
@@ -24,6 +24,7 @@
    .hero {
   margin: 80px 0;
   text-align: center;
+  margin-top: 200px;
 }
 
     .hero h2 {
@@ -220,7 +221,6 @@
 </head>
 
 <body>
-
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
 
@@ -308,4 +308,5 @@
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
+<hr>
 </html>

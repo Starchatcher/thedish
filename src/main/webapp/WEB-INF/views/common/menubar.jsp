@@ -7,30 +7,41 @@
 <meta charset="UTF-8" />
 <title>드롭다운 메뉴</title>
 <style>
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
 }
 
 .navbar {
-  background-color: #8FBC8F;
-  width: 100%;
+  background: white;
+
 }
 
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
+  margin-bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  border-radius: 0 0 20px 20px;
+  padding: 10px 40px;
+  background-color: transparent;
   flex-wrap: wrap;
 }
 
 /* 로고 */
 .logo img {
-  height: 80px;
-  width: auto;
+  height: 150px;
+  width: 200px;
+  filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
 }
 
 /* 메뉴 */
@@ -49,13 +60,15 @@ body {
 .menu > li > a {
   display: block;
   padding: 20px 40px;
-  color: black;
+   color: #4e342e;
   text-decoration: none;
+  font-family: 'Noto Sans KR', sans-serif;
   font-weight: bold;
+  font-size: 23px;
 }
 
 .menu > li:hover {
-  background-color: green;
+  background-color: gray; /* 주황 hover */
 }
 
 /* 드롭다운 */
@@ -66,14 +79,18 @@ body {
   background-color: rgba(0, 0, 0, 0.9);
   min-width: 250px;
   padding: 20px;
-  display: none;
-  color: white;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
   z-index: 1000;
 }
 
 .menu > li:hover .dropdown {
-  display: flex;
-  gap: 40px;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
 }
 
 .dropdown-column {
@@ -82,9 +99,9 @@ body {
 }
 
 .dropdown-column h4 {
-  color: #fff;
+  color: white;
   margin-bottom: 10px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .dropdown-column a {
@@ -96,7 +113,8 @@ body {
 }
 
 .dropdown-column a:hover {
-  color: orange;
+  color: #d84315;
+  font-weight: bold;
 }
 
 /* 로그인 버튼 */
@@ -106,7 +124,7 @@ body {
 }
 
 .login-btn {
-  background-color: #426B1F;
+  background-color: black;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -117,12 +135,15 @@ body {
 }
 
 .login-btn:hover {
-  background-color: #45a049;
+  background-color: gray;
   color: white;
 }
+
+
 </style>
 </head>
 <body>
+
 	<nav class="navbar">
 		<div class="navbar-container">
 
@@ -136,7 +157,7 @@ body {
 			<!-- 메뉴 -->
 			<ul class="menu">
 				<li>
-					<a href="#">인사말</a>
+					<a href="${ pageContext.servletContext.contextPath }/theDishIntroduce.do">인사말</a>
 					<div class="dropdown">
 						<div class="dropdown-column">
 							<h4>사이트 소개</h4>
@@ -145,17 +166,17 @@ body {
 					</div>
 				</li>
 				<li>
-					<a href="#">DISH</a>
+					<a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">DISH</a>
 					<div class="dropdown">
 						<div class="dropdown-column">
 							<h4>맞춤형 추천</h4>
 							<a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">건강 맞춤형 추천</a>
-							<a href="#">술 페어링 추천</a>
+							<a href="${ pageContext.servletContext.contextPath }/drinkSearchForm.do">술 페어링 추천</a>
 						</div>
 					</div>
 				</li>
 				<li>
-					<a href="#">INFO</a>
+					<a href="${ pageContext.servletContext.contextPath }/recipeList.do">INFO</a>
 					<div class="dropdown">
 						<div class="dropdown-column">
 							<h4>정보 광장</h4>
@@ -193,5 +214,7 @@ body {
 			</c:if>
 		</div>
 	</nav>
+	<div style="background-color: #f0f0f0; text-align: center; padding-top: 2px;">
+</div>
 </body>
 </html>
