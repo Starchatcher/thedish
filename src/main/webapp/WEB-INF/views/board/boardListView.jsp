@@ -13,9 +13,10 @@
 <head>
 <meta charset="UTF-8">
 <title>${category} 게시판</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style type="text/css">
 table#boardTable {
-    width: 650px;
+    width: 800px;
     margin: 30px auto;
     border-collapse: collapse;
     text-align: center;
@@ -33,12 +34,20 @@ table#boardTable th {
     font-weight: bold;
 }
 
-table#boardTable td#title a {
+table#boardTable td.board-title a {
     text-decoration: none;
     color: #333;
 }
 
-table#boardTable td#title a:hover {
+.board-title a {
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;         /* 줄바꿈 없이 한 줄 */
+    overflow: hidden;            /* 넘치는 부분 숨김 */
+    text-overflow: ellipsis;     /* 말줄임표 (…) */
+}
+
+table#boardTable td.board-title a:hover {
     text-decoration: underline;
 }
 
@@ -49,7 +58,7 @@ tr:hover {
 h1#boardTitle {
     font-size: 32px;
     font-weight: bold;
-    width: 650px; /* 테이블과 같은 폭으로 */
+    width: 800px; /* 테이블과 같은 폭으로 */
     margin: 40px auto 30px; /* 위-좌우-아래 여백 */
     text-align: center;
     color: #2F4F4F;
@@ -61,13 +70,15 @@ table, tr, th, td {
 	border-left: none;
 	border-right: none;
 	border-color: #8FBC8F;
+	word-break: break-word;
+    overflow-wrap: break-word;
 }
-table td#title a {
+table td.board-title a {
 	text-decoration: none;
 	color: black;
 }
 #search-area {
-    width: 650px; /* 게시판 테이블과 같은 폭으로 맞추기 */
+    width: 800px; /* 게시판 테이블과 같은 폭으로 맞추기 */
     margin: 0 auto 20px; /* 가운데 정렬 + 아래 여백 */
     display: flex;
     justify-content: space-between; /* 좌우로 양쪽 정렬 */
@@ -154,10 +165,10 @@ table td#title a {
     </select>
 
     <input type="text" id="search-query" name="keyword" placeholder="검색어를 입력하세요" required>
-    <input type="submit" value="검색" />
+    <input type="submit" value="🔎검색" />
 </form>
 	<c:if test="${ !empty sessionScope.loginUser }">
-		<button id="writeBtn" onclick="location.href='boardWritePage.do';">작성</button>
+		<button id="writeBtn" onclick="location.href='boardWritePage.do';">📝작성</button>
 	</c:if>
 </div>
 <script type="text/javascript">
@@ -181,26 +192,27 @@ window.onload = updateAction;
 
 <table id="boardTable">
 	<tr>
-		<th>번호</th>
+		<th>조회수</th>
 		<th>제목</th>
 		<th>작성자</th>
 		<th>작성일</th>
-		<th>조회수</th>
+		<th>좋아요</th>
 	</tr>
 	<c:forEach items="${ list }" var="board">
 	<tr align="center">
-		<td>${ board.boardId }</td>
-		<td id="title">
+		<td>${ board.viewCount }</td>
+		<td class="board-title">
 			<c:url var="bd" value="boardDetail.do">
 				<c:param name="boardId" value="${ board.boardId }" />
 				<c:param name="page" value="${ nowpage }" />
-				<c:param name="category" value="${category}" />
+				<c:param name="category" value="${ category }" />
+				<c:param name="likeCount" value="${ board.likeCount }" />
 			</c:url>
-			<a href="${ bd }">${ board.title }</a>
+			<a href="${ bd }">${ board.title } <span style="color: crimson;">[${ board.commentCount }]</span></a>
 		</td>
 		<td>${ board.nickname }</td>
 		<td><fmt:formatDate value="${ board.createdAt }" pattern="yyyy-MM-dd" /></td>
-		<td>${ board.viewCount }</td>
+		<td>${ board.likeCount }</td>
 	</tr>
 	</c:forEach>
 </table>

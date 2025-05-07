@@ -1,7 +1,6 @@
 package com.thedish.board.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,14 +19,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
+import com.thedish.comment.model.service.CommentService;
 import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.FileNameChange;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.like.model.service.LikeService;
 import com.thedish.users.model.vo.Users;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
@@ -36,6 +37,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private LikeService likeService;
 
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
 
@@ -89,6 +93,16 @@ public class BoardController {
 		} else {
 			list = boardService.selectBoardList(paging);
 		}
+		
+		for (Board board : list) {
+		    int likeCount = likeService.countLikes(board.getBoardId());
+		    board.setLikeCount(likeCount);  // Board VO에 likeCount 필드 필요
+		}
+		
+		for (Board board : list) {
+		    int commentCount = boardService.selectBoardCommentCount(board.getBoardId());
+		    board.setCommentCount(commentCount);
+		}
 
 		mv.addObject("list", list);
 		mv.addObject("paging", paging);
@@ -104,16 +118,24 @@ public class BoardController {
 			@RequestParam(name = "page", required = false) String page, 
 			@RequestParam("category") String category,
 			@RequestParam(name = "editCommentId", required = false) Integer editCommentId,
-			ModelAndView mv) {
+			ModelAndView mv, HttpSession session, HttpServletRequest request) {
 
 		logger.info("boardDetail.do : " + boardId);
 
+		Users loginUser = (Users) session.getAttribute("loginUser");
+		
+		if(loginUser != null) {
+			boolean liked = likeService.isLiked(loginUser.getLoginId(), boardId);
+			request.setAttribute("liked", liked);
+		}
+		
 		int currentPage = 1; // 상세보기 페이지에서 목록 버튼 누르면, 보고있던 목록 페이지로 돌아가기 위해 저장함
 		if (page != null) {
 			currentPage = Integer.parseInt(page);
 		}
 
 		Board board = boardService.selectBoard(boardId);
+		board.setLikeCount(likeService.countLikes(boardId));
 		// 조회수 1증가 처리
 		boardService.updateViewCount(boardId);
 
