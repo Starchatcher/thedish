@@ -46,6 +46,9 @@ body {
   margin: 8px 0;
   font-size: 14px;
   color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 텍스트 사이 간격 */
 }
 
 .sidebar button {
@@ -90,7 +93,8 @@ body {
 
 .form-section input[type="text"],
 .form-section input[type="email"],
-.form-section input[type="password"] {
+.form-section input[type="password"],
+.form-section input[type="tel"] {
   width: 100%;
   padding: 10px;
   margin-top: 6px;
@@ -143,7 +147,17 @@ function validate() {
   <!-- 사이드바 유저 정보 -->
   <div class="sidebar">
     <h2>${users.nickName}</h2>
-    <div class="info-item"><span class="info-label">📞 Phone :</span> ${users.phone}</div>
+    <div class="info-item">
+      <span class="info-label">📞 Phone :</span>
+      <c:choose>
+        <c:when test="${not empty users.phone}">
+          ${users.phone}
+        </c:when>
+        <c:otherwise>
+          <span style="color:gray;">미입력</span>
+        </c:otherwise>
+      </c:choose>
+    </div>
     <div class="info-item"><span class="info-label">✉ Email :</span> ${users.email}</div>
     <button type="button" onclick="alert('좌측 정보는 아래 폼에서 수정 가능합니다.')">개인정보설정 변경</button>
   </div>
@@ -154,6 +168,10 @@ function validate() {
       <h3>회원정보 수정</h3>
       <form action="updateUser.do" method="post" onsubmit="return validate();">
         <input type="hidden" name="loginId" value="${users.loginId}">
+
+        <label>이름</label>
+        <input type="text" name="userName" value="${users.userName}" required>
+
         <label>비밀번호</label>
         <input type="password" name="password" id="password" required>
 
@@ -166,9 +184,13 @@ function validate() {
         <label>이메일</label>
         <input type="email" name="email" value="${users.email}">
 
+        <label>전화번호</label>
+        <input type="tel" name="phone" id="phone" value="${users.phone}" required>
+
         <input type="submit" value="수정하기">
         <input type="reset" value="취소">
       </form>
+
       <!-- 탈퇴하기 버튼 추가 -->
       <br>
       <a href="confirmDelete.do?loginId=${users.loginId}" style="color: red; font-weight: bold; text-decoration: underline;">탈퇴하기</a>
