@@ -2,6 +2,7 @@ package com.thedish.drink.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
@@ -20,6 +21,8 @@ public interface DrinkService {
 	ArrayList<Drink> selectSearchTitle(Search search);
 	
 	int insertDrink(Drink drink); 
+	
+	
 	int updateDrink(Drink drink);
 	int deleteDrink(int drinkId); 
  
@@ -35,5 +38,11 @@ public interface DrinkService {
 	 void updateAverageRating(int drinkId, double avgRating);
 	 double getAverageRating(int drinkId) ;
 	 
-	 String selectStoreAddressByDrinkId(int drinkId);
+	 Map<String, Object> selectStoreInfoByDrinkId(int drinkId);
+	 
+	 List<DrinkStore> selectDrinkStoresByDrinkId(int drinkId);
+
+	    // *** 판매처 삭제 메소드 선언 ***
+	    int deleteDrinkStore(int storeId); 
+	    int insertDrinkStore(DrinkStore drinkStore); 
 }

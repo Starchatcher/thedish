@@ -116,18 +116,50 @@
     <label for="description">설명 (DESCRIPTION):</label>
     <textarea id="description" name="description" maxlength="4000" rows="4"></textarea>
 
-    <!-- 추천 수, 평균 평점, 조회수는 기본값 0으로 서버에서 처리하므로 숨김 필드로 관리 (필요시) -->
-    <input type="hidden" id="recommendNumber" name="recommendNumber" value="0" />
-    <input type="hidden" id="avgRating" name="avgRating" value="0" />
-    <input type="hidden" id="viewCount" name="viewCount" value="0" />
+     <h2>판매 장소 정보</h2>
+
+    <label for="storeName">판매 장소명:</label>
+    <input type="text" id="storeName" name="storeName" maxlength="255" />
+
+    <label for="storeAddress">판매 장소 주소:</label>
+    <input type="text" id="storeAddress" name="storeAddress" maxlength="500" />
 
     <!-- 이미지 업로드 필드 -->
     <label for="imageFile">이미지 업로드:</label>
     <input type="file" id="imageFile" name="imageFile" accept="image/*" />
+<!-- 이미지 미리보기 창 -->
+<div id="imagePreview" style="margin-top: 10px; border: 1px solid #ccc; width: 150px; height: 150px; overflow: hidden;">
+    <img id="previewImage" src="#" alt="이미지 미리보기" style="max-width: 100%; max-height: 100%; display: none;" />
+</div>
+<script>
+    // JavaScript 코드를 여기에 작성합니다.
+    const fileInput = document.getElementById('imageFile');
+    const previewImage = document.getElementById('previewImage');
 
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0]; // 선택된 파일 중 첫 번째 파일 가져오기
+
+        if (file) {
+            const reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체 생성
+
+            reader.onload = function(event) {
+                // 파일 읽기가 완료되면 실행될 함수
+                previewImage.src = event.target.result; // 미리보기 이미지의 src를 읽어온 파일 데이터 URL로 설정
+                previewImage.style.display = 'block'; // 미리보기 이미지를 보이도록 설정
+            }
+
+            reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽어오기
+        } else {
+            // 파일 선택이 취소된 경우
+            previewImage.src = '#'; // 이미지 src 초기화
+            previewImage.style.display = 'none'; // 미리보기 이미지를 숨김
+        }
+    });
+</script>
     <button type="submit" class="submit-btn">등록하기</button>
 
 </form>
+<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -99,6 +99,61 @@ body {
     background-color: #e089a8;
 }
 
+.sort-options {
+    display: flex; /* 정렬 버튼들(input 태그)을 가로로 나열 */
+    align-items: center; /* 정렬 버튼들 세로 가운데 정렬 */
+    gap: 8px; /* 정렬 버튼들 사이의 간격 */
+    flex-shrink: 0;
+    /* --- 추가: 이 요소를 가능한 오른쪽으로 밀어냅니다. --- */
+    margin-left: auto;
+    /* --- 추가 끝 --- */
+}
+
+/* 개별 정렬 버튼 (input type="button" 태그) 스타일 */
+.sort-options input[type="button"] {
+    /* 브라우저 기본 input 버튼 스타일 초기화 */
+    appearance: none; /* 기본 OS/브라우저 스타일 제거 */
+    -webkit-appearance: none; /* 웹킷 기반 브라우저용 */
+    -moz-appearance: none; /* 파이어폭스용 */
+    background: none;
+    color: inherit;
+    border: none; /* 초기화 */
+    padding: 0; /* 초기화 */
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin: 0; /* 기본 마진 제거 */
+
+    /* 원하는 버튼 스타일 적용 */
+    display: inline-block;
+    padding: 8px 12px; /* 버튼 형태를 위한 패딩 */
+    color: #333;
+    border: 1px solid #ccc; /* 테두리 다시 설정 */
+    border-radius: 8px; /* 버튼 모서리 둥글게 */
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    font-size: 14px; /* 글자 크기 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    height: 34px; /* 필드셋 내부 세로 가운데 정렬을 위해 높이 조정 (패딩 고려) */
+    box-sizing: border-box; /* 패딩과 보더가 높이에 포함되도록 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* 현재 선택된 정렬 버튼 (input type="button" 태그) 스타일 */
+.sort-options input[type="button"].active {
+    font-weight: bold;
+    color: #fff; /* 활성화된 버튼 글자색 */
+    background-color: #f29abf; /* 활성화된 버튼 배경색 */
+    border-color: #f29abf; /* 활성화된 버튼 테두리색 */
+}
+
+/* 정렬 버튼 호버 스타일 (활성화되지 않은 버튼만) */
+.sort-options input[type="button"]:hover:not(.active) {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+    color: #000;
+}
+
+
 /* 그리드 컨테이너 */
 /* .grid는 .content-container 내부에 위치한다고 가정 */
 .grid {
@@ -383,17 +438,33 @@ body {
 <body>
     <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-    <form action="drinkSearch.do" id="titleform" class="sform" method="get">
+       <form action="drinkSearch.do" id="titleform" class="sform" method="get">
         <input type="hidden" name="action" value="title">
+        <%-- 정렬 기준을 저장할 숨겨진 필드 추가 (폼 안에 있어야 합니다) --%>
+        <%-- value="${param.sortType}" 를 사용하여 현재 정렬 기준을 유지합니다. --%>
+        <input type="hidden" name="sortType" id="sortType" value="${param.sortType}">
+
+        <%-- fieldset 안에 검색 입력, 버튼, 정렬 옵션을 함께 배치합니다. --%>
+        <%-- fieldset에 display: flex가 적용되어 요소들이 가로로 나열될 것입니다. --%>
         <fieldset>
-           
-            <input type="search" name="keyword" size="50"> &nbsp; 
+            <%-- 검색어 입력 필드: value="${param.keyword}" 를 사용하여 검색어 유지 --%>
+            <input type="search" name="keyword" size="50" value="${param.keyword}"> &nbsp;
             <input type="submit" value="검색">
+
+            <!-- 정렬 옵션 버튼 추가 - fieldset 안에 배치 -->
+            <div class="sort-options">
+                <%-- 정렬 옵션을 INPUT type="button" 태그로 변경 --%>
+                <%-- 버튼 텍스트는 value 속성에 지정합니다. --%>
+                <%-- onclick 이벤트로 sortRecipes 함수 호출 --%>
+                 <input type="button" onclick="sortRecipes(event, 'latest');" class="${param.sortType == 'latest' || param.sortType == null ? 'active' : ''}" value="최신순">
+                <input type="button" onclick="sortRecipes(event, 'viewCount');" class="${param.sortType == 'viewCount' ? 'active' : ''}" value="조회수 순">
+                <input type="button" onclick="sortRecipes(event, 'rating');" class="${param.sortType == 'rating' ? 'active' : ''}" value="평점 순">
+            </div>
         </fieldset>
     </form>
-
+<c:if test="${  loginUser.role eq 'ADMIN' }">
     <a href="moveInsertDrink.do">등록</a>
-    
+    </c:if>
     <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
         <c:forEach items="${ requestScope.list }" var="drink" varStatus="status">
             <c:if test="${status.index < 12}"> <!-- 12개 항목만 출력 -->
@@ -407,7 +478,7 @@ body {
                                 <img src="${pageContext.request.contextPath}/image/view.do?imageId=${drink.imageId}" alt="이미지" />
                             </c:when>
                             <c:otherwise>
-                                <img src="${pageContext.request.contextPath}/resources/images/default-image.png" alt="기본 이미지" />
+                                <img src="${pageContext.request.contextPath}/resources/images/thedishlogo.jpg" alt="기본 이미지" />
                             </c:otherwise>
                         </c:choose>
                     </a>
@@ -421,6 +492,42 @@ body {
     </div>
     <br>
 	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
+	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
     <c:import url="/WEB-INF/views/common/footer.jsp" />
+        <%-- 정렬 기준 변경 및 폼 제출을 위한 JavaScript 함수 --%>
+ <script type="text/javascript">
+    // 함수 시그니처에 event 객체를 받도록 수정
+    function sortRecipes(event, sortType) {
+        console.log("sortRecipes 함수 호출됨. sortType:", sortType); // 디버깅 로그 추가
+
+        // 클릭된 버튼 요소를 가져옵니다.
+        const clickedButton = event.target;
+        console.log("클릭된 요소:", clickedButton); // 디버깅 로그 추가
+
+        // 클릭된 버튼의 가장 가까운 부모 form 요소를 찾습니다.
+        const form = clickedButton.closest('form');
+        console.log("찾은 form 요소:", form); // 디버깅 로그 추가
+
+        if (form) {
+            // 해당 form 내부에서 id가 'sortType'인 hidden input을 찾습니다.
+            const sortTypeInput = form.querySelector('#sortType');
+             console.log("찾은 sortType input 요소:", sortTypeInput); // 디버깅 로그 추가
+
+            if (sortTypeInput) {
+                // hidden input의 값을 설정
+                sortTypeInput.value = sortType;
+                console.log("sortType input value 설정:", sortTypeInput.value); // 디버깅 로그 추가
+
+                // 폼 제출
+                console.log("폼 제출 시도..."); // 디버깅 로그 추가
+                form.submit();
+            } else {
+                console.error("오류: id가 'sortType'인 숨겨진 입력 필드를 폼 내에서 찾을 수 없습니다.");
+            }
+        } else {
+            console.error("오류: 클릭된 버튼의 상위 form 요소를 찾을 수 없습니다.");
+        }
+    }
+    </script>
 </body>
 </html>

@@ -114,6 +114,7 @@ legend {
 </style>
 </head>
 <body>
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 <h2>레시피 수정</h2>
 
@@ -180,7 +181,7 @@ function previewImage(event) {
 
     <button type="submit">수정 완료</button>
 </form>
-
+<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

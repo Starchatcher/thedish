@@ -245,7 +245,7 @@
                     </c:when>
                     <c:otherwise>
                         <%-- 이미지 정보는 있지만 URL이나 ID가 없는 경우 (발생 가능성 낮음) --%>
-                        <img src="<c:url value='/resources/images/default-image.png'/>" alt="이미지 없음" class="recommended-image"/> <%-- 클래스 추가 --%>
+                        <img src="<c:url value='/resources/images/thedishlogo.jpg'/>" alt="이미지 없음" class="recommended-image"/> <%-- 클래스 추가 --%>
                     </c:otherwise>
                 </c:choose>
             </a>

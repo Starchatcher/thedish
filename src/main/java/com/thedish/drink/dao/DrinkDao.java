@@ -60,6 +60,7 @@ public class DrinkDao {
 		return sqlSessionTemplate.insert("drinkMapper.insertDrink", drink);
 	}
 	
+	
 	public int updateDrink(Drink drink) {
 		return sqlSessionTemplate.update("drinkMapper.updateDrink", drink);
 	}
@@ -124,13 +125,41 @@ public class DrinkDao {
         return sqlSessionTemplate.selectOne("drinkMapper.getAverageRating", drinkId);
     }
     
-    public String selectStoreAddressByDrinkId(int drinkId) {
-       
-        String address = sqlSessionTemplate.selectOne("drinkMapper.selectStoreAddressByDrinkId", drinkId);
-        logger.info("DAO에서 조회된 스토어 주소: " + address); // 이 줄 추가
-        return address;
+    public Map<String, Object> selectStoreInfoByDrinkId(int drinkId) { // 메소드 이름도 변경하는 것이 더 의미 명확
+        // 또는 public Map<String, String> selectStoreInfoByDrinkId(int drinkId) { ... }
 
+            // sqlSessionTemplate.selectOne 호출 시 매퍼 ID는 그대로 사용
+            // 매퍼의 resultType이 Map이므로 반환 타입을 Map으로 받습니다.
+            Map<String, Object> storeInfo = sqlSessionTemplate.selectOne("drinkMapper.selectStoreAddressByDrinkId", drinkId);
+            // Map<String, String> storeInfo = sqlSessionTemplate.selectOne("drinkMapper.selectStoreAddressByDrinkId", drinkId);
+
+
+            if (storeInfo != null) {
+                logger.info("DAO에서 조회된 스토어 정보: " + storeInfo.toString());
+                // 조회된 정보 (예: storeInfo.get("STORE_ADDRESS"), storeInfo.get("STORE_NAME")) 사용 가능
+            } else {
+                logger.info("DAO에서 조회된 스토어 정보가 없습니다.");
+            }
+
+            return storeInfo; // Map 객체 자체를 반환
+        }
+
+    public List<DrinkStore> selectDrinkStoresByDrinkId(int drinkId) { // *** String drinkName을 파라미터로 받음 ***
+        // "drinkMapper.selectDrinkStoresByDrinkName"는 drinkMapper.xml 파일에 정의될 select 쿼리의 id
+        // resultType/resultMap은 DrinkStore 타입으로 지정해야 합니다.
+        return sqlSessionTemplate.selectList("drinkMapper.selectDrinkStoresByDrinkId", drinkId);
     }
-   
+
+    public int insertDrinkStore(DrinkStore drinkStore) { // *** DrinkStore 객체를 파라미터로 받음 ***
+        // "drinkMapper.insertDrinkStore"는 drinkMapper.xml 파일에 정의될 insert 쿼리의 id 입니다.
+        // 쿼리에서는 DrinkStore 객체의 drinkName 필드를 사용하도록 수정해야 합니다.
+        return sqlSessionTemplate.insert("drinkMapper.insertDrinkStore", drinkStore);
+    }
+    
+    // *** 특정 Store ID에 해당하는 판매처 삭제 메소드 추가 ***
+    public int deleteDrinkStore(int storeId) { // *** int storeId를 파라미터로 받음 ***
+        // "drinkMapper.deleteDrinkStore"는 drinkMapper.xml 파일에 정의될 delete 쿼리의 id
+        return sqlSessionTemplate.delete("drinkMapper.deleteDrinkStore", storeId);
+    }
  
 }
