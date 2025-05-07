@@ -38,21 +38,47 @@ public class UsersController {
         return "users/enrollPage";
     }
 
-    // 로그인 처리
+ // 로그인 시도
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     public String loginMethod(Users users, HttpSession session, SessionStatus status, Model model) {
-        logger.info("login.do : " + users);
-        Users loginUser = usersService.selectUsers(users.getLoginId());
+        logger.info("로그인 시도: " + users.getLoginId());
+        Users loginUser = usersService.selectLogin(users);
 
-        if (loginUser != null && bcryptPasswordEncoder.matches(users.getPassword(), loginUser.getPassword())) {
-            session.setAttribute("loginUser", loginUser);
-            status.setComplete();
-            return "common/main";
-        } else {
-            model.addAttribute("message", "로그인 실패! 아이디나 암호를 다시 확인하세요. 또는 로그인 제한 회원입니다. 관리자에게 문의하세요.");
+        // 1. 아이디가 존재하지 않음
+        if (loginUser == null) {
+            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
             return "common/error";
         }
+
+        // 2. 비밀번호 불일치
+        String dbPw = loginUser.getPassword();
+        boolean isBcrypt = dbPw.startsWith("$2a$") || dbPw.startsWith("$2b$") || dbPw.startsWith("$2y$");
+        boolean match = isBcrypt
+                ? bcryptPasswordEncoder.matches(users.getPassword(), dbPw)
+                : users.getPassword().equals(dbPw);
+
+        if (!match) {
+            model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+            return "common/error";
+        }
+
+        // 3. 탈퇴 또는 비활성 회원
+        if (!"ACTIVE".equals(loginUser.getStatus())) {
+            model.addAttribute("msg", "탈퇴했거나 제한된 계정입니다. 관리자에게 문의하세요.");
+            return "common/error";
+        }
+
+        // 4. 로그인 성공
+        session.setAttribute("loginUser", loginUser);
+        
+        // 5. 관리자 여부에 따라 분기 처리
+        if ("ADMIN".equalsIgnoreCase(loginUser.getRole())) {
+            return "redirect:/admin/dashboard.do";
+        }
+        return "redirect:main.do";
     }
+
+    
 
     // 회원가입 처리
     @RequestMapping(value = "enroll.do", method = RequestMethod.POST)
@@ -170,5 +196,14 @@ public class UsersController {
     public String checknickName(@RequestParam("nickName") String nickName) {
         int result = usersService.selectChecknickName(nickName);  // 메서드 이름 및 필드 일치
         return (result == 0) ? "ok" : "dup";
+    }
+    
+    // 관리자 비밀번호 암호화 확인용
+    @ResponseBody
+    @RequestMapping("encodeAdminPwd.do")
+    public String encodeAdminPassword() {
+        String rawPwd = "admin1234";
+        String encodedPwd = bcryptPasswordEncoder.encode(rawPwd);
+        return "암호화된 관리자 비밀번호: " + encodedPwd;
     }
 }

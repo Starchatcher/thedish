@@ -62,7 +62,7 @@ public class Users implements java.io.Serializable {
         this.password = password;
     }
 
-    // ✅ 추가: JSP에서 넘어오는 userPwd 값을 password에 매핑하도록
+    // 추가: JSP에서 넘어오는 userPwd 값을 password에 매핑하도록
     public void setUserPwd(String userPwd) {
         this.password = userPwd;
     }
