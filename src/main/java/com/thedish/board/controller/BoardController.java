@@ -25,6 +25,8 @@ import com.thedish.common.FileNameChange;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
 import com.thedish.like.model.service.LikeService;
+import com.thedish.reportPost.model.service.ReportPostService;
+import com.thedish.reportPost.model.vo.ReportPost;
 import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +43,11 @@ public class BoardController {
 	@Autowired
 	private LikeService likeService;
 
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private ReportPostService reportPostService;
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
 
 	// 게시글 작성 페이지 내보내기
@@ -48,7 +55,20 @@ public class BoardController {
 	public String moveWritePage() {
 		return "board/boardWriteView";
 	}
+	
+	// 게시글 신고 페이지 내보내기
+	@RequestMapping("boardReportPage.do")
+	public ModelAndView moveReportPage(
+	        @RequestParam("targetId") int targetId,
+	        @RequestParam("category") String category,
+	        ModelAndView mv) {
 
+	    mv.addObject("targetId", targetId);
+	    mv.addObject("category", category);
+	    mv.setViewName("board/boardReportView");
+	    return mv;
+	}
+	
 	// 게시글 수정 페이지 내보내기
 	@RequestMapping("boardUpdatePage.do")
 	public String moveUpdatePage(Model model, @RequestParam("boardId") int boardId,
@@ -319,8 +339,22 @@ public class BoardController {
 	public ModelAndView boardDeleteMethod(@RequestParam("boardId") int boardId,
 			@RequestParam(name = "page", required = false) String page,
 			@RequestParam(name = "category", required = false) String category, HttpServletRequest request,
-			ModelAndView mv) {
+			ModelAndView mv,
+			HttpSession session) {
 
+		Users loginUser = (Users) session.getAttribute("loginUser");
+	    if (loginUser == null) {
+	        mv.setViewName("redirect:loginPage.do");
+	        return mv;
+	    }
+
+	    // 댓글 & 대댓글 먼저 삭제
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("targetType", "board");
+	    param.put("targetId", boardId);
+
+	    boardService.deleteCommentsByBoardId(param);
+		
 		Board board = boardService.selectBoard(boardId); // 게시글 정보 조회
 
 		if (boardService.deleteBoard(board) > 0) {
@@ -349,44 +383,6 @@ public class BoardController {
 
 		return mv;
 	}
-
-//	// 댓글, 대댓글 작성용 메소드
-//	@RequestMapping(value = "boardCommentInsert.do", method = RequestMethod.POST)
-//	public ModelAndView insertBoardCommentMethod(ModelAndView mv, HttpSession session,
-//			@RequestParam("boardId") int boardId, @RequestParam("content") String content,
-//			@RequestParam(value = "parentId", required = false) Integer parentId,
-//			@RequestParam("category") String category) {
-//
-//		// 로그인 체크
-//		Users loginUser = (Users) session.getAttribute("loginUser");
-//		if (loginUser == null) {
-//			mv.setViewName("redirect:loginPage.do");
-//			return mv;
-//		}
-//
-//		// 댓글 객체 생성 및 설정
-//		Comment comment = new Comment();
-//		comment.setTargetId(boardId);
-//		comment.setContent(content);
-//		comment.setLoginId(loginUser.getLoginId());
-//		comment.setTargetType("board");
-//
-//		if (parentId != null) {
-//			comment.setParentId(parentId); // 대댓글일 경우
-//		}
-//
-//		// 댓글 등록
-//		int result = boardService.insertBoardComment(comment);
-//		if(result > 0) {
-//			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
-//
-//		}else {
-//			mv.addObject("message", "댓글 등록에 실패하였습니다. 다시 시도해주세요.");
-//			mv.setViewName("common/error");
-//		}
-//		return mv;
-//		
-//	}
 	
 	// 댓글 작성용 메소드
 	@RequestMapping(value = "boardCommentInsert.do", method = RequestMethod.POST)
@@ -497,8 +493,12 @@ public class BoardController {
 			mv.setViewName("redirect:loginPage.do");
 			return mv;
 		}
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("commentId", commentId);
+		param.put("targetType", "board");
 
-		int result = boardService.deleteBoardComment(commentId);
+		int result = boardService.deleteBoardComment(param);
 		if (result > 0) {
 			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
 		} else {
@@ -776,5 +776,35 @@ public class BoardController {
 
 		return mv;
 	}
+	
+	// 게시글 신고 처리용 메소드
+	@RequestMapping(value = "boardReportInsert.do", method = RequestMethod.POST)
+	public ModelAndView insertBoardReport(ModelAndView mv, HttpSession session,
+	                                      @RequestParam("targetId") int boardId,
+	                                      @RequestParam("category") String category,
+	                                      @RequestParam("reason") String reason) {
 
+	    Users loginUser = (Users) session.getAttribute("loginUser");
+	    if (loginUser == null) {
+	        mv.setViewName("redirect:loginPage.do");
+	        return mv;
+	    }
+
+	    ReportPost report = new ReportPost();
+	    report.setBoardId(boardId);
+	    report.setReason(reason);
+	    report.setReporterId(loginUser.getLoginId());
+
+	    int result = reportPostService.insertBoardReport(report);
+
+	    if (result > 0) {
+	    	mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
+	    } else {
+	        mv.addObject("message", "신고 등록 실패! 다시 시도해주세요.");
+	        mv.setViewName("common/error");
+	    }
+
+	    return mv;
+	}
+	
 }
