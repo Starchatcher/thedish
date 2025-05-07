@@ -1782,26 +1782,6 @@ INSERT INTO faq ( question, answer) VALUES
 INSERT INTO faq ( question, answer) VALUES 
 ( '추천된 술은 구매할 수 있나요?', '현재는 정보 제공만 가능하며, 구매 기능은 연계된 주류몰 링크를 통해 이용하실 수 있습니다.');
 
---수정------------------------------------------------------------------------------------------------------------------------------------------------------------
--- CREATE TABLE: health_condition
-CREATE TABLE health_condition (
-    condition_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    condition_name VARCHAR2(500) NOT NULL,
-    description VARCHAR2(4000)
-);
-
-COMMENT ON COLUMN health_condition.condition_id IS '건강 상태 고유 ID (자동 생성)';
-COMMENT ON COLUMN health_condition.condition_name IS '건강 상태명 (예: 당뇨, 고혈압 등)';
-COMMENT ON COLUMN health_condition.description IS '건강 상태에 대한 상세 설명';
-
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('고혈압', '혈압이 높은 상태로, 나트륨 섭취를 줄이고 칼륨이 풍부한 식단이 권장됩니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('고지혈증', '혈중 콜레스테롤 수치가 높은 상태로, 포화지방 대신 불포화지방을 섭취하는 것이 좋습니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('당뇨병', '혈당 조절이 어려운 상태로, 저당질 식품과 섬유질이 풍부한 식단이 도움이 됩니다.');
-
-
-
-
-
 -- CREATE TABLE: likes
 CREATE TABLE likes (
     like_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -11634,7 +11614,7 @@ COMMENT ON COLUMN recipe_ingredient.ingredient_id IS '고유 ID';
 
 
 
-INSERT INTO recipe_ingredient ( ingredient_name, allergy_id) VALUES ( '새우 ', NULL);
+
 INSERT INTO recipe_ingredient ( ingredient_name, allergy_id) VALUES ( '달걀', 3);        -- 계란
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '생크림', 2);       -- 우유
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '무염버터', 2);     -- 우유
@@ -16557,42 +16537,6 @@ INSERT INTO image (target_id, target_type, image_url)
 
 
 
--- 수정-------------------------------------------------------------
--- CREATE TABLE: health_recommend
-CREATE TABLE health_recommend (
-    recommend_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    reason VARCHAR2(300),
-    INGREDIENT_ID NUMBER NOT NULL,
-    condition_id NUMBER NOT NULL,
-    CONSTRAINT fk_health_recommend_INGREDIENT FOREIGN KEY (INGREDIENT_ID) REFERENCES RECIPE_INGREDIENT(INGREDIENT_ID),
-    CONSTRAINT fk_health_recommend_condition FOREIGN KEY (condition_id) REFERENCES health_condition(condition_id)
-);
-
-COMMENT ON COLUMN health_recommend.recommend_id IS '추천 고유 ID (자동 생성)';
-COMMENT ON COLUMN health_recommend.reason IS '추천 사유 또는 설명';
-COMMENT ON COLUMN health_recommend.INGREDIENT_ID IS '추천 레시피 ID (RECIPE_INGREDIENT 테이블 참조)';
-COMMENT ON COLUMN health_recommend.condition_id IS '건강 상태 ID (health_condition 테이블 참조)';
-
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토는(은) 고혈압에 좋은 재료로 알려져 있다.', 163, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('퀴노아는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('가지는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 고혈압에 좋은 재료로 알려져 있다.', 136, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('등푸른 생선은(는) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('저지방 우유는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 고혈압에 좋은 재료로 알려져 있다.', 85, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('케일은(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아보카도는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(은) 고혈압에 좋은 재료로 알려져 있다.', 181, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미는(은) 고혈압에 좋은 재료로 알려져 있다.', 120, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('콩은(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호박은(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-
-
 CREATE TABLE RATING (
     RATING_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     LOGIN_ID VARCHAR2(50 BYTE),
@@ -16624,57 +16568,6 @@ ADD (AGE NUMBER(3));
 -- 성별 컬럼 추가
 ALTER TABLE USERS
 ADD (GENDER VARCHAR2(10));
-
--- 질병에 대한 비추천 재료 테이블 추가
-CREATE TABLE HEALTH_EXCLUDED_INGREDIENTS (
-   EXCLUDED_ID     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    CONDITION_ID    NUMBER NOT NULL,
-    INGREDIENT_NAME VARCHAR2(100 BYTE) NOT NULL,
-    CONSTRAINT FK_PROHIBIT_CONDITION
-      FOREIGN KEY (CONDITION_ID)
-      REFERENCES HEALTH_CONDITION(CONDITION_ID)
-      ON DELETE CASCADE
-);
-
--- 코멘트 추가
-COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.EXCLUDED_ID IS '고유 금기 식재료 ID';
-COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.CONDITION_ID IS '관련 질병의 ID';
-COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.INGREDIENT_NAME IS '질병에 금기인 음식 재료 이름';
-
--- 데이터 삽입 추가
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '소금');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '간장');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '된장');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '고추장');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '액젓');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '맛소금');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이컨');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '햄');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '소시지');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '참치캔');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '훈제연어');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '육포');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '라면');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '고추기름');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '김치');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '장아찌');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '젓갈');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '버터');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '마요네즈');
-
-
-
--- 레시피 재료 테이블 인서트문 추가
-INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '바나나', null);      
-INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '고구마', null);     
-
-
-
-
-
-
-
 
 -- 제공된 모든 식재료 목록과 업데이트된 알레르기 ID를 기반으로 생성된 INSERT 구문 (중복 쌍 제거)
 
@@ -17111,152 +17004,8 @@ CREATE TABLE drink_store (
 INSERT INTO drink_store (drink_name, store_name, store_address) 
 VALUES ('조니워커 블루 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
 
-
--- 추가 데이터 삽입 헬스컨디션
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('빈혈', '혈액 내 헤모글로빈 수치가 낮은 상태로, 철분과 비타민C를 함께 섭취하면 좋습니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('위염', '위 점막이 손상된 상태로, 자극적이지 않은 식단이 권장됩니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('변비', '장운동이 원활하지 않은 상태로, 식이섬유가 풍부한 식단이 필요합니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('골다공증', '뼈의 밀도가 낮아져 쉽게 부러질 수 있는 상태로, 칼슘과 비타민D 섭취가 필요합니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('심장질환', '심장의 기능이 약화된 상태로, 염분과 지방 섭취를 줄이고 항산화 식품이 도움이 됩니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('간 건강', '간 기능이 저하된 상태로, 해독 작용이 있는 식품 위주의 섭취가 필요합니다.');
-INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('면역력 저하', '체내 방어 능력이 약해진 상태로, 항산화 물질과 유익균 식품 섭취가 좋습니다.');
-
--- 추가 데이터 삽입 헬스 리커맨드
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 고혈압에 좋은 재료로 알려져 있다.', 5, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토는(은) 고혈압에 좋은 재료로 알려져 있다.', 163, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 고혈압에 좋은 재료로 알려져 있다.', 6, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 고혈압에 좋은 재료로 알려져 있다.', 136, 1);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는(은) 고혈압에 좋은 재료로 알려져 있다.', NULL, 1);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 고지혈증에 좋은 재료로 알려져 있다.', 136, 2);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('참치는(은) 고지혈증에 좋은 재료로 알려져 있다.', NULL, 2);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아보카도는(은) 고지혈증에 좋은 재료로 알려져 있다.', NULL, 2);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('올리브유는(은) 고지혈증에 좋은 재료로 알려져 있다.', NULL, 2);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는(은) 고지혈증에 좋은 재료로 알려져 있다.', 13, 2);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는(은) 당뇨병에 좋은 재료로 알려져 있다.', NULL, 3);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('병아리콩는(은) 당뇨병에 좋은 재료로 알려져 있다.', NULL, 3);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 당뇨병에 좋은 재료로 알려져 있다.', NULL, 3);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미는(은) 당뇨병에 좋은 재료로 알려져 있다.', 120, 3);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는(은) 당뇨병에 좋은 재료로 알려져 있다.', NULL, 3);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('간는(은) 빈혈에 좋은 재료로 알려져 있다.', NULL, 4);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는(은) 빈혈에 좋은 재료로 알려져 있다.', NULL, 4);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('검정콩는(은) 빈혈에 좋은 재료로 알려져 있다.', NULL, 4);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('붉은살고기는(은) 빈혈에 좋은 재료로 알려져 있다.', NULL, 4);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('오렌지는(은) 빈혈에 좋은 재료로 알려져 있다.', NULL, 4);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양배추는(은) 위염에 좋은 재료로 알려져 있다.', NULL, 5);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('감자는(은) 위염에 좋은 재료로 알려져 있다.', 179, 5);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근는(은) 위염에 좋은 재료로 알려져 있다.', 181, 5);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 위염에 좋은 재료로 알려져 있다.', 5, 5);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('꿀는(은) 위염에 좋은 재료로 알려져 있다.', NULL, 5);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('키위는(은) 변비에 좋은 재료로 알려져 있다.', NULL, 6);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 변비에 좋은 재료로 알려져 있다.', 6, 6);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아마씨는(은) 변비에 좋은 재료로 알려져 있다.', NULL, 6);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양배추는(은) 변비에 좋은 재료로 알려져 있다.', NULL, 6);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('케일는(은) 변비에 좋은 재료로 알려져 있다.', NULL, 6);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('멸치는(은) 골다공증에 좋은 재료로 알려져 있다.', 28, 7);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 골다공증에 좋은 재료로 알려져 있다.', 85, 7);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 골다공증에 좋은 재료로 알려져 있다.', NULL, 7);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는(은) 골다공증에 좋은 재료로 알려져 있다.', NULL, 7);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 골다공증에 좋은 재료로 알려져 있다.', 294, 7);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 심장질환에 좋은 재료로 알려져 있다.', 136, 8);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는(은) 심장질환에 좋은 재료로 알려져 있다.', 112, 8);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는(은) 심장질환에 좋은 재료로 알려져 있다.', NULL, 8);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토는(은) 심장질환에 좋은 재료로 알려져 있다.', 163, 8);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('녹차는(은) 심장질환에 좋은 재료로 알려져 있다.', NULL, 8);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘는(은) 간 건강에 좋은 재료로 알려져 있다.', NULL, 9);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는(은) 간 건강에 좋은 재료로 알려져 있다.', NULL, 9);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 간 건강에 좋은 재료로 알려져 있다.', NULL, 9);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 간 건강에 좋은 재료로 알려져 있다.', 85, 9);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('된장는(은) 간 건강에 좋은 재료로 알려져 있다.', 93, 9);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('표고버섯는(은) 면역력 저하에 좋은 재료로 알려져 있다.', NULL, 10);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘는(은) 면역력 저하에 좋은 재료로 알려져 있다.', NULL, 10);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 면역력 저하에 좋은 재료로 알려져 있다.', 6, 10);
---INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 면역력 저하에 좋은 재료로 알려져 있다.', NULL, 10);
-INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 면역력 저하에 좋은 재료로 알려져 있다.', 294, 10);
-
-
-
-
-
 --금기재료 추가 데이터 삽입
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '버터');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '생크림');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '삼겹살');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '베이컨');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '햄');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '소시지');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '마요네즈');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '튀김옷');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '전지분유');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '라면스프');
 
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '설탕');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '물엿');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '흰밀가루');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '쌀');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '감자');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '당근');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '콘시럽');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '버터');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '마가린');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '전분');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '튀김가루');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '설탕절임과일');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '초콜릿칩');
-
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '고춧가루');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '청양고추');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '후추');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '마늘');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '생강');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '커피');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '탄산수');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '식초');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '김치');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '장아찌');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '튀김가루');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '라면스프');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '햄');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '베이컨');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '소시지');
-
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '흰쌀밥');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '밀가루');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '도넛');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '치즈');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '버터');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '마요네즈');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '초콜릿');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '튀김');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '햄버거');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '햄');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '베이컨');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '소시지');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '라면');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '카페인');
-
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (6, '소금');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (6, '카페인');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (6, '콜라');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (6, '인산염');
-
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (7, '베이컨');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (7, '소시지');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (7, '버터');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (7, '라면스프');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (7, '치즈');
-
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (8, '소주');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (8, '맥주');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (8, '돼지비계');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (8, '튀김가루');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (8, '버터');
-
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (9, '설탕');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (9, '트랜스지방');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (9, '케이크');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (9, '사탕');
-INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (9, '마가린');
 
 
 -- 05/07 수정 : 좋아요 중복 방지 유니크 제약조건 설정
@@ -17723,3 +17472,640 @@ INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아녹 
 INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아녹 12년', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
 INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아녹 24년', '주류상회Be', '경기 수원시 팔달구 세지로 430 103호');
 
+-- 05/07 수정 : 좋아요 중복 방지 유니크 제약조건 설정
+alter table likes
+add constraint unique_login_target
+unique (login_id, target_id);
+
+
+--수정------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- CREATE TABLE: health_condition
+CREATE TABLE health_condition (
+    condition_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    condition_name VARCHAR2(500) NOT NULL,
+    description VARCHAR2(4000)
+);
+
+COMMENT ON COLUMN health_condition.condition_id IS '건강 상태 고유 ID (자동 생성)';
+COMMENT ON COLUMN health_condition.condition_name IS '건강 상태명 (예: 당뇨, 고혈압 등)';
+COMMENT ON COLUMN health_condition.description IS '건강 상태에 대한 상세 설명';
+
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('고혈압', '혈압이 높은 상태로, 나트륨 섭취를 줄이고 칼륨이 풍부한 식단이 권장됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('고지혈증', '혈중 콜레스테롤 수치가 높은 상태로, 포화지방 대신 불포화지방을 섭취하는 것이 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('당뇨병', '혈당 조절이 어려운 상태로, 저당질 식품과 섬유질이 풍부한 식단이 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('빈혈', '혈액 내 헤모글로빈 수치가 낮은 상태로, 철분과 비타민C를 함께 섭취하면 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('위염', '위 점막이 손상된 상태로, 자극적이지 않은 식단이 권장됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('변비', '장운동이 원활하지 않은 상태로, 식이섬유가 풍부한 식단이 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('골다공증', '뼈의 밀도가 낮아져 쉽게 부러질 수 있는 상태로, 칼슘과 비타민D 섭취가 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('심장질환', '심장의 기능이 약화된 상태로, 염분과 지방 섭취를 줄이고 항산화 식품이 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('간 건강', '간 기능이 저하된 상태로, 해독 작용이 있는 식품 위주의 섭취가 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('면역력 저하', '체내 방어 능력이 약해진 상태로, 항산화 물질과 유익균 식품 섭취가 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('감기', '바이러스 감염으로 인한 증상으로, 비타민 C와 따뜻한 수분 섭취가 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('장염', '장에 염증이 생긴 상태로, 자극적인 음식은 피하고 수분과 전해질 보충이 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('소화불량', '소화 기능이 저하된 상태로, 기름지지 않고 부드러운 음식을 섭취하는 것이 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('불면증', '잠들기 어렵거나 자주 깨는 증상으로, 트립토판이 풍부한 음식이나 허브티가 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('피부 트러블', '여드름, 건조함 등 피부에 생기는 문제로, 항산화 식품과 수분 섭취가 중요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('과민성 대장증후군', '복통이나 설사, 변비 등이 반복되는 장 질환으로, 저FODMAP 식단이 권장됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('스트레스성 질환', '스트레스로 인해 생기는 신체·정신적 증상으로, 마그네슘과 오메가3 섭취가 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('탈모', '두피와 모근 약화로 인한 머리카락 빠짐으로, 단백질, 철분, 비오틴이 풍부한 식단이 도움이 됩니다.');
+
+
+
+--레시피 재료 데이터 추가
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '바나나', null);      
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '고구마', null);     
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('망고', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('블루베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크랜베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치즈볼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마늘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양파', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('생강', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레몬', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라임', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('오렌지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('무', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('깻잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('단호박', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('참나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('취나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('열무', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쪽파', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('생표고버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('새송이버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('느타리버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('팽이버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양송이버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('청경채', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브로콜리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양배추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('콜리플라워', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파프리카', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('애호박', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('청양고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('건고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피망', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('당근', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레드비트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('연근', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('우엉', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('도라지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('생강청', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유자청', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('모과청', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍시', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('곶감', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('밤단호박', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('계피', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타임', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('로즈마리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바질', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('건표고버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('토란', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고사리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('미역', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('다시마', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('김', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('톳', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('매생이', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가쓰오부시', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치킨스톡', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('베이킹파우더', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('베이킹소다', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소다수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('탄산수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('계피가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('강황가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('흑설탕', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('황설탕', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('설탕', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('천일염', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('맛소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('깨소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('후춧가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('화이트페퍼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레드페퍼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바닐라익스트랙', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('우스타소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('스리라차소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('케첩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('굴소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('칠리소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마라소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('두반장', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라유', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('참치캔', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('옥수수캔', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버섯스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('야채스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('우유크림스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('잡채당면', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쫄면사리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라이스누들', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파래김', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양상추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('로메인', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('루꼴라', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('케일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비타민채소', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('겨자잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('무순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비트잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브로콜리순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('적양배추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('구운마늘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('흑임자 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('트러플오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('대추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바질', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('렌틸콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('넛맥', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('보리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('황기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('커민', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아사이베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('귀리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파프리카 가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍삼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타르타르 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비건버터', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마늘종', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('햄프씨드', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('율무', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('팔각', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('검정깨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('당귀', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('흑마늘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('케이퍼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마카다미아', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('페타치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('산딸기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('블랙커런트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('렌즈콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('병아리콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('알로에', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유부', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('방풍나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('곤약', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('두릅', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('취청오이', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가자미살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쭈꾸미젓갈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피스타치오', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('검은콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('차조', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('보리순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('클로렐라', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('스피루리나', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('토란대', NULL);
+commit;
+
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아보카도 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마리네이드 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('말린 바질', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('샬롯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비유제품 휘핑크림', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유자차 페이스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('완두콩 순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캐슈 크림', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레몬 제스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양파 가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('세이지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('페코리노 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('링귀니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버터넛 스쿼시', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버번', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브로콜리니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('샐러드 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('통조림 토마토', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('월계수잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('베이컨 비트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('농부빵', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('구운 크랜베리 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('냉동 완두콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캐슈넛', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('플랜테인', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비스킷 반죽', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('프로볼로네 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크러스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('하프앤하프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파이크러스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아스파라거스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타라곤', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('애로루트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크레페', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('염소 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('누텔라', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브리 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('옥수수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('딜', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타마리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('초콜릿', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('수야 페퍼 스파이스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양파 파우더', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피쉬 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('김치 즙', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('코코넛 넥타', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('셰리 식초', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('골파', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('밀전병', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('한국식 마리네이드', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쌀 식초', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고추 페이스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고추 플레이크', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('엑스트라 버진 올리브 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('완두콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('민트 잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('냉동 야채믹스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('스테비아', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('나마 쇼유', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아마씨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('녹두', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라면 스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('골든 시럽', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('코셔 소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('시나몬', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바닐라 포드', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('전유', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('드라이 셰리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('샴페인 포도', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('정향', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('카다멈 씨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아사페티다', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아지완 씨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아티초크 하트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피칸테 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('킬바사', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('나무젓가락', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('오일 스프레이', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('애호박잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('페투치니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('오레가노 가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('푸룬', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라임 제스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피자 반죽', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아이싱', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캔디 콘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캔디 눈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('단백질 파우더', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치즈스틱', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('핫 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('감자전분', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아보카도', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('올리브오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('시금치', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버섯', NULL);
+commit;
+
+
+
+
+
+-- 수정 05/07 수정-------------------------------------------------------------
+-- CREATE TABLE: health_recommend
+CREATE TABLE health_recommend (
+    recommend_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    reason VARCHAR2(300),
+   ingredient_id NUMBER NOT NULL,
+    condition_id NUMBER NOT NULL,
+    CONSTRAINT fk_health_recommend_ingredient FOREIGN KEY (ingredient_id) REFERENCES recipe_ingredient(ingredient_id),
+    CONSTRAINT fk_health_recommend_condition FOREIGN KEY (condition_id) REFERENCES health_condition(condition_id)
+);
+
+COMMENT ON COLUMN health_recommend.recommend_id IS '추천 고유 ID';
+COMMENT ON COLUMN health_recommend.reason IS '추천 사유 또는 설명';
+COMMENT ON COLUMN health_recommend.ingredient_id IS '추천 레시피 ID (RECIPE_INGREDIENT 테이블 참조)';
+COMMENT ON COLUMN health_recommend.condition_id IS '건강 상태 ID (health_condition 테이블 참조)';
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는(은) 고혈압에 좋은 재료로 알려져 있다.', 558, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 고혈압에 좋은 재료로 알려져 있다.', 82, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나은(는) 고혈압에 좋은 재료로 알려져 있다.', 313, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마은(는) 고혈압에 좋은 재료로 알려져 있다.', 314, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부은(는) 고혈압에 좋은 재료로 알려져 있다.', 82, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 고혈압에 좋은 재료로 알려져 있다.', 117, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어은(는) 고혈압에 좋은 재료로 알려져 있다.', 133, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토은(는) 고혈압에 좋은 재료로 알려져 있다.', 160, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 고혈압에 좋은 재료로 알려져 있다.', 178, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리은(는) 고혈압에 좋은 재료로 알려져 있다.', 339, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(는) 고혈압에 좋은 재료로 알려져 있다.', 320, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파은(는) 고혈압에 좋은 재료로 알려져 있다.', 321, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('케일은(는) 고혈압에 좋은 재료로 알려져 있다.', 412, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리은(는) 고혈압에 좋은 재료로 알려져 있다.', 430, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('가지은(는) 고혈압에 좋은 재료로 알려져 있다.', 555, 1);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아보카도는(은) 고지혈증에 좋은 재료로 알려져 있다.', 556, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('올리브유는(은) 고지혈증에 좋은 재료로 알려져 있다.', 557, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는(은) 고지혈증에 좋은 재료로 알려져 있다.', 10, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는 고지혈증에 좋은 재료로 알려져 있다.', 430, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는 고지혈증에 좋은 재료로 알려져 있다.', 339, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는 고지혈증에 좋은 재료로 알려져 있다.', 321, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은 고지혈증에 좋은 재료로 알려져 있다.', 320, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는 고지혈증에 좋은 재료로 알려져 있다.', 133, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는 고지혈증에 좋은 재료로 알려져 있다.', 109, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('엑스트라 버진올리브오일은 고지혈증에 좋은 재료로 알려져 있다.', 517, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미는 고지혈증에 좋은 재료로 알려져 있다.', 117, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는 고지혈증에 좋은 재료로 알려져 있다.', 82, 2);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('귀리는 당뇨병에 좋은 재료로 알려져 있다.', 430, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('현미는 당뇨병에 좋은 재료로 알려져 있다.', 120, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('브로콜리는 당뇨병에 좋은 재료로 알려져 있다.', 345, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('양파는 당뇨병에 좋은 재료로 알려져 있다.', 327, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('마늘은 당뇨병에 좋은 재료로 알려져 있다.', 326, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('두부는 당뇨병에 좋은 재료로 알려져 있다.', 85, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('아보카도 오일은 당뇨병에 좋은 재료로 알려져 있다.', 464, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('블루베리는 당뇨병에 좋은 재료로 알려져 있다.', 317, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('산딸기는 당뇨병에 좋은 재료로 알려져 있다.', 445, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('병아리콩은 당뇨병에 좋은 재료로 알려져 있다.', 448, 3);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('쇠고기는(은) 빈혈에 좋은 재료로 알려져 있다.', 135, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('조개는(은) 빈혈에 좋은 재료로 알려져 있다.', 248, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('달걀노른자는(은) 빈혈에 좋은 재료로 알려져 있다.', 65, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 빈혈에 좋은 재료로 알려져 있다.', 82, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('콩(백태)는(은) 빈혈에 좋은 재료로 알려져 있다.', 88, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('오렌지는(은) 철분 흡수를 도와 빈혈에 좋은 재료로 알려져 있다.', 325, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(은) 철분 흡수에 도움을 주는 비타민 A가 풍부해 빈혈에 좋다.', 349, 4);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 변비에 좋은 재료로 알려져 있다.', 313, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 변비에 좋은 재료로 알려져 있다.', 314, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('사과는(은) 변비에 좋은 재료로 알려져 있다.', 177, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근는(은) 변비에 좋은 재료로 알려져 있다.', 349, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미는(은) 변비에 좋은 재료로 알려져 있다.', 120, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 변비에 좋은 재료로 알려져 있다.', 291, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는(은) 변비에 좋은 재료로 알려져 있다.', 321, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 변비에 좋은 재료로 알려져 있다.', 345, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양배추는(은) 변비에 좋은 재료로 알려져 있다.', 340, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('우엉는(은) 변비에 좋은 재료로 알려져 있다.', 352, 5);
+
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리은(는) 골다공증에 좋은 재료로 알려져 있다.', 345, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파은(는) 골다공증에 좋은 재료로 알려져 있다.', 321, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 골다공증에 좋은 재료로 알려져 있다.', 120, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 골다공증에 좋은 재료로 알려져 있다.', 349, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(는) 골다공증에 좋은 재료로 알려져 있다.', 320, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('우유은(는) 골다공증에 좋은 재료로 알려져 있다.', 200, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부은(는) 골다공증에 좋은 재료로 알려져 있다.', 82, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리은(는) 골다공증에 좋은 재료로 알려져 있다.', 430, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('완두콩은(는) 골다공증에 좋은 재료로 알려져 있다.', 518, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('알로에은(는) 골다공증에 좋은 재료로 알려져 있다.', 449, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 골다공증에 좋은 재료로 알려져 있다.', 120, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트은(는) 골다공증에 좋은 재료로 알려져 있다.', 291, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('플레인 요구르트은(는) 골다공증에 좋은 재료로 알려져 있다.', 55, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연유은(는) 골다공증에 좋은 재료로 알려져 있다.', 60, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('저염치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 225, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 53, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('파르메산 치즈가루은(는) 골다공증에 좋은 재료로 알려져 있다.', 250, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('페타치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 444, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('크림치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 303, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('염소 치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 498, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('모짜렐라치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 59, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('멸치는(은) 칼슘이 풍부해 골다공증에 좋은 재료로 알려져 있다.', 131, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 비타민 D가 풍부해 칼슘 흡수를 도와 골다공증 예방에 좋다.', 133, 6);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어은(는) 심장질환에 좋은 재료로 알려져 있다.', 133, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리은(는) 심장질환에 좋은 재료로 알려져 있다.', 345, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파은(는) 심장질환에 좋은 재료로 알려져 있다.', 321, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(는) 심장질환에 좋은 재료로 알려져 있다.', 320, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나은(는) 심장질환에 좋은 재료로 알려져 있다.', 313, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 심장질환에 좋은 재료로 알려져 있다.', 349, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 심장질환에 좋은 재료로 알려져 있다.', 120, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부은(는) 심장질환에 좋은 재료로 알려져 있다.', 82, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토은(는) 심장질환에 좋은 재료로 알려져 있다.', 160, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 심장질환에 좋은 재료로 알려져 있다.', 349, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('병아리콩은(는) 심장질환에 좋은 재료로 알려져 있다.', 448, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('렌즈콩은(는) 심장질환에 좋은 재료로 알려져 있다.', 447, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양송이버섯은(는) 심장질환에 좋은 재료로 알려져 있다.', 337, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('잣은(는) 심장질환에 좋은 재료로 알려져 있다.', 128, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('엑스트라 버진 올리브 오일은 심장질환 예방에 좋은 건강한 지방입니다.', 517, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는 오메가-3 지방산이 풍부해 심장 건강에 도움이 됩니다.', 133, 7);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는 간 해독 효소를 활성화시켜 간 건강에 좋습니다.', 345, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는 항산화 물질이 풍부해 간의 독소 제거에 도움이 됩니다.', 321, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은 간 효소를 자극해 해독 기능을 높여줍니다.', 320, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('녹두는 해독 작용이 뛰어나 간 기능 강화에 효과적입니다.', 524, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('도라지는 염증 억제 작용으로 간 건강에 도움이 됩니다.', 353, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는 간의 염증을 줄이고 해독을 돕는 항산화 성분이 풍부합니다.', 558, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('강황은 간의 해독 효소 활동을 촉진하여 간 건강에 좋습니다.', 380, 8);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은 항바이러스 및 항균 작용으로 면역력 강화에 효과적입니다.', 320, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는 퀘르세틴 등의 항산화 성분으로 면역력을 높이는 데 도움이 됩니다.', 321, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는 비타민 A와 C가 풍부하여 면역 세포 기능을 도와줍니다.', 558, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는 면역세포를 보호하는 항산화 물질이 많습니다.', 345, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은 베타카로틴이 풍부해 면역 기능을 강화합니다.', 349, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('버섯류는 면역세포 활성화에 효과적인 베타글루칸을 함유하고 있습니다.', 559, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('홍삼은 면역력 향상과 피로 회복에 효과적입니다.', 432, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는 장 건강을 도와 면역력 증가에 기여합니다.', 291, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귤류 과일인 오렌지는 비타민 C가 풍부해 면역력 강화에 도움이 됩니다.', 325, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는 강력한 항산화 성분으로 면역력을 향상시킵니다.', 317, 9);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘는(은) 감기에 좋은 재료로 알려져 있다.', 320, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 감기에 좋은 재료로 알려져 있다.', 322, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('유자청는(은) 감기에 좋은 재료로 알려져 있다.', 355, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('레몬는(은) 감기에 좋은 재료로 알려져 있다.', 323, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('홍삼은(는) 감기에 좋은 재료로 알려져 있다.', 432, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는(은) 감기에 좋은 재료로 알려져 있다.', 321, 10);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 장염에 좋은 재료로 알려져 있다.', 313, 11);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 장염에 좋은 재료로 알려져 있다.', 314, 11);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 장염에 좋은 재료로 알려져 있다.', 322, 11);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('사과는(은) 장염에 좋은 재료로 알려져 있다.', 177, 11);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 소화불량에 좋은 재료로 알려져 있다.', 322, 12);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('민트는(은) 소화불량에 좋은 재료로 알려져 있다.', 519, 12);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 소화불량에 좋은 재료로 알려져 있다.', 291, 12);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양배추는(은) 소화불량에 좋은 재료로 알려져 있다.', 340, 12);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('우유는(은) 불면증에 좋은 재료로 알려져 있다.', 50, 13);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는(은) 불면증에 좋은 재료로 알려져 있다.', 109, 13);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 불면증에 좋은 재료로 알려져 있다.', 313, 13);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 317, 14);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 345, 14);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 349, 14);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 133, 14);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 291, 15);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 430, 15);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 313, 15);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('감자는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 176, 15);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 198, 16);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 133, 16);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 313, 16);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('초콜릿는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 504, 16);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('달걀은 단백질과 비오틴이 풍부하여 모발 성장에 도움이 됩니다.', 1, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는 오메가3 지방산이 풍부하여 두피 건강에 도움이 됩니다.', 133, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는 식물성 단백질이 풍부하여 탈모 예방에 좋습니다.', 82, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는 비타민 E가 풍부해 두피 순환과 모발 건강에 좋습니다.', 10, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는 오메가3와 셀레늄이 포함되어 탈모 방지에 효과적입니다.', 109, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는 철분과 엽산이 풍부해 모낭에 산소 공급을 도와줍니다.', 558, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('달걀노른자는 비오틴을 다량 함유하고 있어 탈모 예방에 좋습니다.', 65, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는 항산화 성분이 풍부하여 두피 세포를 보호합니다.', 317, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('해바라기씨는 아연과 비타민 B가 풍부하여 탈모 방지에 도움을 줍니다.', 8, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는 철분과 섬유질이 풍부하여 두피 건강에 도움을 줍니다.', 430, 17);
+
+-- 질병에 대한 비추천 재료 테이블 추가
+CREATE TABLE HEALTH_EXCLUDED_INGREDIENTS (
+   EXCLUDED_ID     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    CONDITION_ID    NUMBER NOT NULL,
+    INGREDIENT_NAME VARCHAR2(100 BYTE) NOT NULL,
+    CONSTRAINT FK_PROHIBIT_CONDITION
+      FOREIGN KEY (CONDITION_ID)
+      REFERENCES HEALTH_CONDITION(CONDITION_ID)
+      ON DELETE CASCADE
+);
+
+-- 코멘트 추가
+COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.EXCLUDED_ID IS '고유 금기 식재료 ID';
+COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.CONDITION_ID IS '관련 질병의 ID';
+COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.INGREDIENT_NAME IS '질병에 금기인 음식 재료 이름';
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '간편어간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '감자전분');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '국간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '굴소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '깨소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '된장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '들기름');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '라면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '레드와인');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '리코타치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '마요네즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '맛소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '모짜렐라치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '무염버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '버섯스프');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이컨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이킹소다');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이킹파우더');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '사골육수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '생청국장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '생크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '식용유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '쌈장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '어간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '연유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '옥수수캔');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '우스타소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '우유크림스프');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염베이컨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '전분');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '정종');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '참기름');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '참치캔');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '청국장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈볼');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치킨스톡');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '카레가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '케첩');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '크림치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '통조림 햄');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '파르메산 치즈가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '핫 소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '해물육수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '화이트와인');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '휘핑크림');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '휘핑크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '생크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '마요네즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '달걀노른자');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '베이컨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '통삼겹살');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '소고기');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '돼지고기');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '닭껍질');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '사골육수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '양념치킨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '라면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '튀김가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '햄');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '통조림 햄');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '설탕');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '흑설탕');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '황설탕');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '연유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '초콜릿');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '케첩');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '휘핑크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '감자');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '고구마');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '바나나');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '옥수수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '흰쌀밥');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '밀가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '떡');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '라면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '우동면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '쫄면사리');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '카레가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '달걀노른자');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '라면 스프');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '우유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '휘핑크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '저염치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '플레인 요구르트');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '리코타치즈');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '청양고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '홍고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '건고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '마늘');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '양파');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '생강');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '카레가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '후춧가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '고추장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '된장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '청국장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '김치 즙');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '피쉬 소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '탄산수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '천일염');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '맛소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '깨소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '초콜릿');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '식초');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '마라소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '스리라차소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '케첩');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '굴소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '우스타소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '바나나');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '우유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '생크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '휘핑크림');
+
+
+commit;
