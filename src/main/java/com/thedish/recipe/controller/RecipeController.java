@@ -165,55 +165,65 @@ public class RecipeController {
 
 
 		// 레시피 검색 기능
-		@RequestMapping("recipeSearch.do")
-		public ModelAndView recipeSearchTitleMethod(ModelAndView mv, @RequestParam("action") String action,
-				@RequestParam("keyword") String keyword, @RequestParam(name = "page", required = false) String page,
-				@RequestParam(name = "limit", required = false) String slimit) {
-			// 페이징 처리
-			int currentPage = 1;
-			if (page != null) {
-				currentPage = Integer.parseInt(page);
-			}
+				 @RequestMapping("recipeSearch.do")
+				    public ModelAndView recipeSearchTitleMethod(
+				            ModelAndView mv,
+				            @RequestParam("action") String action,
+				            @RequestParam("keyword") String keyword,
+				            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 타입을 int로 변경하고 기본값 설정
+				            @RequestParam(name = "limit", required = false, defaultValue = "12") int limit, // limit 파라미터 타입을 int로 변경하고 기본값 설정
+				            @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType) { // @RequestParam에 sortType 추가
 
-			// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-			int limit = 12;
-			if (slimit != null) {
-				limit = Integer.parseInt(slimit);
-			}
+				        // @RequestParam의 defaultValue와 required=false 속성을 사용하여
+				        // 파라미터가 없을 경우 기본값이 적용되도록 처리했습니다.
+				        // 따라서 page, limit, sortType에 대한 null 체크 로직이 간소화됩니다.
 
-			// 검색결과가 적용된 총 목록 갯수 조회해서, 총 페이지 수 계산함
-			int listCount = recipeService.selectSearchTitleCount(keyword);
-			// 페이지 관련 항목들 계산 처리
-			Paging paging = new Paging(listCount, limit, currentPage, "recipeSearch.do");
-			paging.calculate();
+				        // logger.info("recipeSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}", keyword, currentPage, limit, sortType); // 로그 출력 예시
 
-			// 마이바티스 매퍼에서 사용되는 메소드는 Object 1개만 전달할 수 있음
-			// paging.startRow, paging.endRow, keyword 같이 전달해야 하므로 => 객체 하나를 만들어서 저장해서 보냄
-			Search search = new Search();
-			search.setKeyword(keyword);
-			search.setStartRow(paging.getStartRow());
-			search.setEndRow(paging.getEndRow());
+				        // 검색결과가 적용된 총 목록 갯수 조회 (정렬 기준과 무관)
+				        int listCount = recipeService.selectSearchTitleCount(keyword);
 
-			// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-			ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
-			
+				        // 페이지 관련 항목 계산
+				        Paging paging = new Paging(listCount, limit, currentPage, "recipeSearch.do");
+				        paging.calculate();
 
-			if (list != null && list.size() > 0) { // 조회 성공시
-				// ModelAndView : Model + View
-				
-				mv.addObject("list", list); // request.setAttribute("list", list) 와 같음
-				mv.addObject("paging", paging);
-				mv.addObject("action", action);
-				mv.addObject("keyword", keyword);
+				        // 검색, 페이징, 정렬 정보를 담을 객체
+				        Search search = new Search();
+				        search.setKeyword(keyword);
+				        search.setStartRow(paging.getStartRow());
+				        search.setEndRow(paging.getEndRow());
+				        search.setSortType(sortType); // *** Search 객체에 sortType 설정 ***
 
-				mv.setViewName("recipe/recipeList");
-			} else { // 조회 실패시
-				mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
-				mv.setViewName("common/error");
-			}
+				        // 서비스 메소드 호출 (Search 객체 전달)
+				        ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
 
-			return mv;
-		}
+				        if (list != null && !list.isEmpty()) { // 조회 성공시 (목록이 비어있지 않으면)
+				            // ModelAndView에 결과 및 페이징 정보 담기
+				            mv.addObject("list", list);
+				            mv.addObject("paging", paging);
+				            mv.addObject("action", action);
+				            mv.addObject("keyword", keyword);
+				            mv.addObject("sortType", sortType); // *** 현재 정렬 기준 값을 JSP로 다시 전달 ***
+
+				            mv.setViewName("recipe/recipeList"); // 결과 페이지 경로 확인
+				        } else { // 조회 결과 없음
+				            // mv.addObject("message", "'" + keyword + "'에 대한 검색 결과가 존재하지 않습니다.");
+				            // mv.setViewName("common/error"); // 또는 검색 결과 없음 페이지로 이동
+				            // 검색 결과가 없을 때도 페이지는 표시하되 목록만 비어있도록 처리하는 경우가 많습니다.
+				            // 이 경우 list와 paging 객체를 그대로 add해도 JSP에서 목록 크기를 체크하여 처리할 수 있습니다.
+				             mv.addObject("list", list); // 빈 목록 전달
+				             mv.addObject("paging", paging);
+				             mv.addObject("action", action);
+				             mv.addObject("keyword", keyword);
+				             mv.addObject("sortType", sortType); // 정렬 기준 유지
+				             mv.setViewName("recipe/recipeList"); // 목록 페이지로 이동
+				        }
+
+				        return mv;
+				    }
+
+		
+		
 
 		@RequestMapping("moveInsertRecipePage.do")
 		public String moveInsertRecipe() {

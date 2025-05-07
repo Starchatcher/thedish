@@ -2,11 +2,13 @@ package com.thedish.drink.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
@@ -125,12 +127,30 @@ public class DrinkServiceImpl implements DrinkService{
 	}
 
 	@Override
-	public String selectStoreAddressByDrinkId(int drinkId) {
-		String address = drinkDao.selectStoreAddressByDrinkId(drinkId);
-	    logger.info("Service에서 반환될 스토어 주소: " + address); // 이 줄 추가
-	    return address;
+	public Map<String, Object> selectStoreInfoByDrinkId(int drinkId) {
+		
+		return drinkDao.selectStoreInfoByDrinkId(drinkId);
 	}
 
+	
+
+	@Override
+	public int deleteDrinkStore(int storeId) {
+		return drinkDao.deleteDrinkStore(storeId);
+	}
+
+	@Override
+	public List<DrinkStore> selectDrinkStoresByDrinkId(int drinkId) {
+		return drinkDao.selectDrinkStoresByDrinkId(drinkId);
+	}
+
+	@Override
+	public int insertDrinkStore(DrinkStore drinkStore) {
+		return drinkDao.insertDrinkStore(drinkStore);
+	}
+
+	
+	
 	
 	
 

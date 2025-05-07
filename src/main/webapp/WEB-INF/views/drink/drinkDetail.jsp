@@ -225,7 +225,7 @@
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 <c:if test="${  loginUser.role eq 'ADMIN' }">
 <a href="moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">수정</a>
-
+ <a href="moveInsertDrinkStorePage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">판매처 등록</a>
 <form action="deleteDrink.do" method="post" style="display:inline;">
     <input type="hidden" name="drinkId" value="${drink.drinkId}" />
     <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
@@ -413,10 +413,7 @@
     <!-- 댓글 작성 폼 -->
     <form action="insertDrinkComment.do" method="post">
         <input type="hidden" name="drinkId" value="${drink.drinkId}" />
-
-        <%-- 작성자 닉네임 표시 및 수정 불가 설정 --%>
-        <input type="text" name="writer" placeholder="작성자 이름" required 
-               value="${loginUser.loginId}" readonly="readonly" /><br/>
+        
 
         <textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요" required></textarea><br/>
 
@@ -432,7 +429,14 @@
 <script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services&callback=initMap"></script>
 <script type="text/javascript">
-var storeAddress = "${storeAddress}";
+// 서버에서 전달받은 주소 및 장소 이름 변수 (예: Spring MVC 모델에 담겨 JSP로 전달)
+// 서버 코드 수정 후 ${storeInfo['STORE_ADDRESS']} 형태로 접근 가능하다고 가정
+var storeAddress = "${storeInfo['STORE_ADDRESS']}";
+var storeName = "${storeInfo['STORE_NAME']}"; // <-- 새롭게 추가된 변수
+
+console.log("JSP에서 EL 처리 후 storeAddress 값:", storeAddress);
+console.log("JSP에서 EL 처리 후 storeName 값:", storeName);
+
 
 // 주소 값이 유효한지 확인합니다.
 if (storeAddress && storeAddress.trim() !== "") {
@@ -462,14 +466,45 @@ if (storeAddress && storeAddress.trim() !== "") {
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도 객체
-                position: coords // 마커의 위치
+                position: coords, // 마커의 위치
+                clickable: true // 마커 클릭 가능하도록 설정
             });
+
+         // 마커 위에 표시할 커스텀 오버레이를 생성합니다.
+            var customOverlay = new kakao.maps.CustomOverlay({
+                position: coords, // 마커와 동일한 위치에 표시
+                // 커스텀 오버레이에 표시할 내용 (HTML 문자열)
+                content: '<div style="padding:5px; font-size:12px; background: white; border: 1px solid #ccc; z-index: 2; white-space: nowrap; position: absolute; transform: translate(-50%, -230%); pointer-events: none;">' + storeName + '</div>',
+                yAnchor: 0 // yAnchor 값을 0으로 설정하여 마커 위쪽에 표시
+            });
+
+            // 지도에 커스텀 오버레이를 표시합니다.
+            customOverlay.setMap(map);
+
+
+// 지도에 커스텀 오버레이를 표시합니다.
+customOverlay.setMap(map);
+
+
+            // 지도에 커스텀 오버레이를 표시합니다.
+            customOverlay.setMap(map);
+
+
+            // 마커에 클릭 이벤트를 등록합니다.
+      kakao.maps.event.addListener(marker, 'click', function() {
+    // 정보창(InfoWindow)을 여는 코드는 여기에 넣지 않습니다.
+    // CustomOverlay는 setMap(map)으로 이미 지도에 표시되어 있습니다.
+
+    // 클릭 시 카카오맵 웹사이트로 이동할 URL을 생성합니다.
+    var searchUrl = 'https://map.kakao.com/?q=' + encodeURIComponent(storeAddress);
+
+    // 새 탭으로 카카오맵 웹사이트를 엽니다.
+    window.open(searchUrl, '_blank');
+});
+
 
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);
-
-        
-
 
         } else {
             // 주소 검색 실패 시 처리
@@ -488,5 +523,6 @@ if (storeAddress && storeAddress.trim() !== "") {
 }
 </script>
 
+<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 </body>
 </html>

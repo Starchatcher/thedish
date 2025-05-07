@@ -104,7 +104,7 @@
 
 <div class="search-container">
     <h2>검색 키워드</h2>
-    <p>검색하실 음식를 입력하세요.<br>EX) 치즈, 튀김</p>
+    <p>검색하실 키워드를 입력하세요.<br>EX) 치즈, 12년, 꿀</p>
     
     <form action="drinkSearchRecommend.do" method="get">
         <div class="input-group">
@@ -121,7 +121,7 @@
         <div class="slider-container">
             <label for="maxPrice">최대 가격:</label>
             <input type="range" id="maxPrice" name="maxPrice" min="0" max="100000" value="100000" step="1000">
-            <span id="maxPriceValue">100000원</span>
+            <span id="maxPriceValue">500000원</span>
         </div>
 
         <div class="slider-container">
