@@ -17004,9 +17004,6 @@ CREATE TABLE drink_store (
 INSERT INTO drink_store (drink_name, store_name, store_address) 
 VALUES ('조니워커 블루 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
 
---금기재료 추가 데이터 삽입
-
-
 
 -- 05/07 수정 : 좋아요 중복 방지 유니크 제약조건 설정
 alter table likes
@@ -18109,3 +18106,49 @@ INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (
 
 
 commit;
+
+
+
+-- recipe_ingredient 데이터 추가 05/08 -------------------------
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마늘쫑', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('돌나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치커리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레몬밤', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양배추잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('청상추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('알배추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라즈베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('블랙베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('산딸기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('패션후르츠', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('용과', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('무화과', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍시퓨레', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('배', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양지머리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('도가니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('염통', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('사태', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('돼지껍데기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가브리살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('항정살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('게맛살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('연어알', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가리비', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('보리새우', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피조개', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('멍게', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('해삼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마요네즈소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유자소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('된장소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('머스타드소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홀그레인소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크림소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('불고기양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('닭갈비양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('갈비양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소불고기양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('카레소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양념치킨소스', NULL);
