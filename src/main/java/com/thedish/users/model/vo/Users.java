@@ -21,14 +21,20 @@ public class Users implements java.io.Serializable {
     private String loginId;        // ← name="loginId"
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    private java.sql.Date createdAt;
+    private Date createdAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private Date updatedAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private Date withdrawnAt;
 
     // 생성자
     public Users() {}
 
     public Users(String userId, String password, String userName, String nickName, String gender, int age,
                  String phone, String email, String status, String provider, String role,
-                 String loginId, Date createdAt) {
+                 String loginId, Date createdAt, Date updatedAt, Date withdrawnAt) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
@@ -42,6 +48,8 @@ public class Users implements java.io.Serializable {
         this.role = role;
         this.loginId = loginId;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.withdrawnAt = withdrawnAt;
     }
 
     // Getter & Setter
@@ -49,7 +57,6 @@ public class Users implements java.io.Serializable {
     public String getUserId() {
         return userId;
     }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -57,16 +64,13 @@ public class Users implements java.io.Serializable {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    // 추가: JSP에서 넘어오는 userPwd 값을 password에 매핑하도록
     public void setUserPwd(String userPwd) {
         this.password = userPwd;
     }
-
     public String getUserPwd() {
         return this.password;
     }
@@ -74,7 +78,6 @@ public class Users implements java.io.Serializable {
     public String getUserPwd2() {
         return userPwd2;
     }
-
     public void setUserPwd2(String userPwd2) {
         this.userPwd2 = userPwd2;
     }
@@ -82,23 +85,20 @@ public class Users implements java.io.Serializable {
     public String getUserName() {
         return userName;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getnickName() {
+    public String getNickName() {
         return nickName;
     }
-
-    public void setnickName(String nickName) {
+    public void setNickName(String nickName) {
         this.nickName = nickName;
     }
 
     public String getGender() {
         return gender;
     }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
@@ -106,7 +106,6 @@ public class Users implements java.io.Serializable {
     public int getAge() {
         return age;
     }
-
     public void setAge(int age) {
         this.age = age;
     }
@@ -114,7 +113,6 @@ public class Users implements java.io.Serializable {
     public String getPhone() {
         return phone;
     }
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -122,7 +120,6 @@ public class Users implements java.io.Serializable {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -130,7 +127,6 @@ public class Users implements java.io.Serializable {
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
@@ -138,7 +134,6 @@ public class Users implements java.io.Serializable {
     public String getProvider() {
         return provider;
     }
-
     public void setProvider(String provider) {
         this.provider = provider;
     }
@@ -146,7 +141,6 @@ public class Users implements java.io.Serializable {
     public String getRole() {
         return role;
     }
-
     public void setRole(String role) {
         this.role = role;
     }
@@ -154,7 +148,6 @@ public class Users implements java.io.Serializable {
     public String getLoginId() {
         return loginId;
     }
-
     public void setLoginId(String loginId) {
         this.loginId = loginId;
     }
@@ -162,9 +155,22 @@ public class Users implements java.io.Serializable {
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getWithdrawnAt() {
+        return withdrawnAt;
+    }
+    public void setWithdrawnAt(Date withdrawnAt) {
+        this.withdrawnAt = withdrawnAt;
     }
 
     @Override
@@ -173,6 +179,7 @@ public class Users implements java.io.Serializable {
                ", userName=" + userName + ", nickName=" + nickName + ", gender=" + gender +
                ", age=" + age + ", phone=" + phone + ", email=" + email +
                ", status=" + status + ", provider=" + provider + ", role=" + role +
-               ", loginId=" + loginId + ", createdAt=" + createdAt + "]";
+               ", loginId=" + loginId + ", createdAt=" + createdAt +
+               ", updatedAt=" + updatedAt + ", withdrawnAt=" + withdrawnAt + "]";
     }
 }
