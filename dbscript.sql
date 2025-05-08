@@ -18152,3 +18152,13 @@ INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('갈비양�
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소불고기양념', NULL);
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('카레소스', NULL);
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양념치킨소스', NULL);
+
+-- 뷰로그 테이블 생성
+CREATE TABLE view_log (
+    log_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, -- 자동 증가 기본 키
+    user_id VARCHAR2(255),                            -- 사용자 ID
+    post_id NUMBER,                                   -- 접속한 게시글의 ID
+    post_type VARCHAR2(50),                           -- 게시글 타입
+    visit_time DATE DEFAULT SYSDATE                   -- 방문 시각 (기본값 SYSDATE)
+    
+);
