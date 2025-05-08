@@ -117,7 +117,7 @@
 
     .notice h3 {
       text-align: center;
-      color: #27ae60;
+      color: black;
       margin-bottom: 20px;
       font-size: 20px;
       border-bottom: 2px solid #e0e0e0;
@@ -177,6 +177,186 @@
     display: block; /* 이미지를 블록 요소로 만들어 레이아웃에 영향을 덜 받게 함 */
     margin: 0 auto; /* 가운데 정렬 (옵션) */
 }
+
+/* 상단 히어로 메시지 섹션 */
+.main-hero {
+  background-image: url('<c:url value="resources/images/mainfood.jpeg"/>');
+  background-size: cover;
+  background-position: center;
+  padding: 130px 0px; /* 위아래 넉넉한 여백 */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 180%;
+  background-color: rgba(0, 0, 0, 0.45); /* 어두운 반투명 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text {
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* Join Us 특징 소개 섹션 */
+.join-us {
+  background-color: #fff;
+  padding: 80px 0;
+  border-top: 1px solid #eee;
+}
+
+.join-us-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 0 20px;
+}
+
+.join-us-left {
+  flex: 1;
+  min-width: 200px;
+  text-align: left;
+}
+
+.join-us-left .dot {
+  width: 14px;
+  height: 14px;
+  background-color: #fbb03b;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.join-us-left h2 {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.join-us-left p {
+  font-size: 20px;
+  color: #8d939a;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.join-us-right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.feature-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feature-text strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+
+.feature-text span {
+  font-size: 14px;
+  color: #333;
+}
+
+.feature-btn {
+  background-color: #111;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feature-btn:hover {
+  background-color: #444;
+}
+
+
+/* 초기 상태 */
+.dot.scroll-animated-fade {
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  width: 23px;
+  height: 23px;
+  /* delay 제거! */
+}
+
+/* 등장 시 */
+.dot.scroll-animated-fade.active {
+  opacity: 1;
+  transform: scale(1.5);
+  transition-delay: 0.2s; /* 등장할 때만 0.5초 기다림 */
+}
+
+.title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.title-wrapper h2 {
+  position: relative;
+  z-index: 2;               /* 텍스트는 항상 위에 */
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.dot {
+  position: absolute;
+  top: 2px;                 /* 텍스트 높이 정렬 */
+  left: -4px;              /* J 뒤로 절반 정도 숨김 */
+  background-color: #fbb03b;
+  border-radius: 50%;
+  z-index: 1;               /* 텍스트 뒤로 */
+  opacity: 0;
+ 
+}
+
+.dot.active {
+  opacity: 1;
+  transform: scale(1);      /* 등장 시 자연스럽게 커짐 */
+
+}
   </style>
 
   <script src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
@@ -201,16 +381,16 @@
       });
     });
 
-    // 스크롤 애니메이션 제어
+ // 스크롤 애니메이션 제어
     window.addEventListener('DOMContentLoaded', () => {
-      const animatedEls = document.querySelectorAll('.scroll-animated-right');
+      const animatedEls = document.querySelectorAll('.scroll-animated-right, .scroll-animated-fade');
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
           } else {
-            entry.target.classList.remove('active'); // 초기화
+            entry.target.classList.remove('active'); // 반복적으로 보여주고 싶을 경우
           }
         });
       }, { threshold: 0.3 });
@@ -218,11 +398,30 @@
       animatedEls.forEach(el => observer.observe(el));
     });
   </script>
+  
 </head>
 
 <body>
+
+
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
+
+
+<!-- 메인 히어로 메시지 섹션 -->
+<section class="main-hero">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>맛있는 건강의 시작<br>여기서 시작하세요</h1>
+      <p>
+        우리는 건강을 위한 음식 추천과 술 페어링을 제공합니다.<br>
+        다양한 레시피와 정보를 통해 당신의 식탁을 더욱 풍성하게 만들어 드립니다.
+      </p>
+    </div>
+  </div>
+</section>
+
 
 <div class="container">
 
@@ -286,6 +485,50 @@
       <img src="<c:url value='/resources/images/mainfood.jpg'/>" alt="음식사진">
     </div>
   </section>
+  
+
+<!-- Join Us 특징 섹션 -->
+<section class="join-us">
+  <div class="join-us-container">
+   <div class="join-us-left">
+  <div class="title-wrapper">
+    <div class="dot scroll-animated-fade"></div>
+      <h2>Join Us</h2>
+      </div>
+      <p>The Dish를<br>즐기는 방법</p>
+    </div>
+    <div class="join-us-right">
+      <div class="feature-row">
+        <div class="feature-text">
+          <strong>건강 맞춤형 추천</strong>
+          <span>건강과 맛 동시에 챙기고 싶나요?</span>
+        </div>
+        <button class="feature-btn">지금 시작하기</button>
+      </div>
+      <div class="feature-row">
+        <div class="feature-text">
+          <strong>술 페어링 추천</strong>
+          <span>술에 어울리는 음식을 원하시나요?</span>
+        </div>
+        <button class="feature-btn">지금 시작하기</button>
+      </div>
+      <div class="feature-row">
+        <div class="feature-text">
+          <strong>커뮤니티</strong>
+          <span>여러분들만의 시간이 필요하신가요?</span>
+        </div>
+        <button class="feature-btn">지금 시작하기</button>
+      </div>
+      <div class="feature-row">
+        <div class="feature-text">
+          <strong>FAQ</strong>
+          <span>사이트에 질문사항이 생기셨나요?</span>
+        </div>
+        <button class="feature-btn">자세히 보기</button>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- 공지사항 -->
   <section class="notice">
