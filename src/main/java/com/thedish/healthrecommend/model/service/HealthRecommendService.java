@@ -1,6 +1,7 @@
 package com.thedish.healthrecommend.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.thedish.recipe.model.vo.Recipe;
 
@@ -12,4 +13,7 @@ public interface HealthRecommendService {
     List<Recipe> getFilteredRecipes(List<String> included, List<String> excluded);
 	List<String> autocompleteCondition(String keyword);
 	int countCondition(String keyword);
+	int getFilteredRecipeCount(List<String> included, List<String> excluded);
+	List<Recipe> getFilteredRecipesPaging(Map<String, Object> param);
+
 }

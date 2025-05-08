@@ -9,97 +9,111 @@
         body {
             margin: 0;
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f7fdf8;
+            background-color: #fff9f0; /* 검색창과 같은 톤 */
             color: #333;
         }
 
         .main-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 60px auto;
             padding: 40px;
-            background-color: #ffffff;
+            background-color: #fffdf7;
             border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
         h2 {
-            font-size: 28px;
-            color: #2e7d32;
-            margin-bottom: 30px;
+            font-size: 26px;
+            color: #d84315;
+            margin-bottom: 24px;
+            text-align: center;
         }
 
-        p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
+        .dual-box {
+            display: flex;
+            gap: 40px;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        /* 회전 접시 구조 */
-        .plate-wrapper {
-            position: relative;
-            width: 420px;
-            height: 400px;
-            margin: 0 auto 30px;
-        }
-
-        .plate-rotate-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: url('<c:url value="/resources/images/plate.jpg"/>'); /* 천 없이 접시만! */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 50%;
-            animation: spin 20s linear infinite;
-            z-index: 1;
-        }
-
-        .plate-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
+        .include-box, .exclude-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #fffaf2;
+            box-shadow: 0 2px 6px rgba(255, 138, 101, 0.1);
+            max-height: 500px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 6px;
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .include-box h3,
+        .exclude-box h3 {
+            font-size: 18px;
+            margin-bottom: 14px;
+            color: #ff7043;
+        }
+
+        .ingredient-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+            max-height: 400px; /* 추천 재료 10개 이상 시 스크롤 */
+            padding-right: 6px;
         }
 
         .ingredient-item {
-            background-color: rgba(255, 255, 255, 0.92);
-            padding: 4px 8px;
+            background-color: #fff;
+            padding: 6px 12px;
             border-radius: 999px;
-            font-size: 13px;
-            min-width: 160px;
-            max-width: 200px;
-            white-space: nowrap;
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            border: 1px solid #ffe0b2;
         }
 
         .ingredient-item:hover {
-            transform: scale(1.05);
-            background-color: #f1f8e9;
+            background-color: #fff3e0;
         }
 
-        /* 체크된 재료 반투명 처리 */
         .ingredient-item input[type="checkbox"]:checked + span {
             opacity: 0.5;
         }
 
+        .bad-list {
+            list-style: disc;
+            padding-left: 20px;
+            color: #e53935;
+            font-size: 14px;
+            overflow-y: auto;
+            max-height: 360px; /* 금기 재료 20개 이상 시 스크롤 */
+        }
+
+        .bad-list li {
+            margin-bottom: 6px;
+        }
+
+        /* 스크롤바 커스터마이징 */
+        .ingredient-list::-webkit-scrollbar,
+        .bad-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .ingredient-list::-webkit-scrollbar-thumb,
+        .bad-list::-webkit-scrollbar-thumb {
+            background-color: #ffab91;
+            border-radius: 3px;
+        }
+
         button[type="submit"] {
+            display: block;
+            margin: 30px auto 0;
             padding: 14px 40px;
-            background-color: #66bb6a;
+            background-color: #ff7043;
             color: white;
             font-size: 16px;
             border: none;
@@ -109,7 +123,7 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #43a047;
+            background-color: #bf360c;
         }
     </style>
 </head>
@@ -119,30 +133,41 @@
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
 
 <div class="main-container">
-    <h2>"${condition}" 관련 추천 재료 목록</h2>
+    <h2>"${condition}"에 대한 건강 맞춤 재료 선택</h2>
 
     <form action="recommendRecipes.do" method="post">
         <input type="hidden" name="condition" value="${condition}" />
-    
-        <p>싫어하는 재료를 선택하세요 (선택한 재료는 제외됩니다):</p>
 
-        <div class="plate-wrapper">
-            <div class="plate-rotate-bg"></div> <!-- 회전 접시 -->
-            <div class="plate-content"> <!-- 고정된 재료들 -->
-                <c:forEach var="ingredient" items="${ingredients}">
-                    <div class="ingredient-item">
-                        <label>
-                            <input type="checkbox" name="excludedIngredients" value="${ingredient}" />
-                            <span>${ingredient}</span>
-                        </label>
-                    </div>
-                </c:forEach>
+        <div class="dual-box">
+            <!-- 추천 재료 (체크박스) -->
+            <div class="include-box">
+                <h3>🥗 좋은 재료 <br> 
+                (싫어하는 재료는 체크해서 제외!)</h3>
+                <div class="ingredient-list">
+                    <c:forEach var="ingredient" items="${recommendedIngredients}">
+                        <div class="ingredient-item">
+                            <label>
+                                <input type="checkbox" name="excludedIngredients" value="${ingredient}" />
+                                <span>${ingredient}</span>
+                            </label>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+
+            <!-- 금기 재료 (표시만) -->
+            <div class="exclude-box">
+                <h3>🚫 금기 재료 (드시지 마세요!)</h3>
+                <ul class="bad-list">
+                    <c:forEach var="bad" items="${excludedIngredients}">
+                        <li>${bad}</li>
+                    </c:forEach>
+                </ul>
             </div>
         </div>
 
         <button type="submit">레시피 추천받기</button>
     </form>
-    
 </div>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
