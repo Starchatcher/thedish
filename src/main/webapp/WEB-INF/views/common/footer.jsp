@@ -5,63 +5,54 @@
   <meta charset="UTF-8">
   <title>The Dish - 음식과 술 추천</title>
   <style>
-    html, body {
-      height: 100%;
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      height: 100%;
+    }
+
     body {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+
+    }
+
+    .content {
+      flex: 1;
     }
 
     footer {
       background: #222020;
-      padding: 30px 40px 10px;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 20px;
-      color: black;
-      border-top: 1px solid black;
-      margin-top: auto;
-    }
-
-    .footer-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
+      color: #c8c8c8;
       text-align: center;
-    }
-
-    .footer-info {
-      flex: 1;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 18px;
       line-height: 1.8;
-      color: #C8C8C8;
+      padding: 30px 20px 10px;
+      border-top: 1px solid #d1c3ad; /* 베이지 구분선 */
     }
 
-    .footer-info p {
-      margin: 0;
+    footer p {
+      margin: 4px 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- (본문 내용이 있다면 여기에 작성) -->
+  <div class="content">
+    <!-- 여기에 본문 내용이 들어갑니다 -->
+  </div>
 
   <footer>
-    <div class="footer-container">
-      <div class="footer-info">
-        <p>
-          The Dish<br>
-          대표이사:비밀<br>
-          서울시 강남구 신사동00빌딩<br>
-          T.02-123-4567 TheDish@gmail.com<br>
-        </p>
-      </div>
-    </div>
+    <p>The Dish</p>
+    <p>대표이사:비밀</p>
+    <p>서울시 강남구 신사동00빌딩</p>
+    <p>T.02-123-4567 TheDish@gmail.com</p>
   </footer>
 
 </body>

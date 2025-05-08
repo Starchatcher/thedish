@@ -1,83 +1,68 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>건강 맞춤형 추천 검색</title>
+  <title>맞춤형 건강 레시피 추천</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Noto Sans KR', sans-serif;
-      background-color: #f7fdf8;
-      color: #333;
+      background-color: #fff9f0;
     }
+
     .main-container {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 40px;
-      background-color: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      width: 100%;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
     }
+
+    .search-box {
+      background-color: #ffffffcc;
+      backdrop-filter: blur(5px);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .search-box h2 {
+      font-size: 24px;
+      color: #d84315;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    input[type="text"] {
+      padding: 14px 18px;
+      width: 100%;
+      border: 2px solid #ffab91;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
     .invalid-input {
       border-color: #f44336;
     }
-    .no-result {
-      padding: 10px;
-      color: #f44336;
-      text-align: center;
-      font-weight: bold;
-    }
-    h2 {
-      font-size: 28px;
-      color: #2e7d32;
-      margin-bottom: 20px;
-    }
-    form {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      position: relative;
-    }
-    input[type="text"] {
-      padding: 12px 16px;
-      width: 60%;
-      border: 2px solid #c8e6c9;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    ul#suggestions {
-      position: absolute;
-      top: 58px;
-      left: 20%;
-      width: 60%;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-radius: 0 0 8px 8px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      z-index: 999;
-      display: none;
-    }
-    ul#suggestions li {
-      padding: 10px;
-      text-align: left;
-      cursor: pointer;
-    }
-    ul#suggestions li:hover,
-    ul#suggestions li.highlight {
-      background-color: #c8e6c9;
-      font-weight: bold;
-    }
+
     button[type="submit"] {
       padding: 12px 24px;
-      background-color: #66bb6a;
+      background-color: #ff7043;
       color: white;
       font-size: 16px;
       border: none;
@@ -85,34 +70,83 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     button[type="submit"]:hover {
-      background-color: #43a047;
+      background-color: #bf360c;
     }
+
+    ul#suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 0 0 8px 8px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: none;
+      z-index: 999;
+    }
+
+    ul#suggestions li {
+      padding: 10px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    ul#suggestions li:hover,
+    ul#suggestions li.highlight {
+      background-color: #ffe0b2;
+      font-weight: bold;
+    }
+
+    .no-result {
+      padding: 10px;
+      color: #f44336;
+      font-weight: bold;
+      text-align: center;
+    }
+
     @media (max-width: 600px) {
-      input[type="text"] {
-        width: 100%;
-      }
-      ul#suggestions {
-        left: 0;
-        width: 100%;
+      .search-box {
+        padding: 30px 20px;
       }
     }
+    .chef-hat {
+  position: absolute;
+  top: -80px;        /* 더 아래로 내려서 씌운 느낌 */
+  left: -65px;       /* 왼쪽 모서리에 딱 맞게 */
+  width: 150px;      /* 확실하게 크고 눈에 띄게 */
+  transform: rotate(-29deg) scaleX(1.6);
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.15));
+}
+
+
   </style>
 </head>
 <body>
 
-<c:import url="/WEB-INF/views/common/menubar.jsp" />
+<!-- ✅ 공통 메뉴바 -->
+<c:import url="/WEB-INF/views/common/recommendMenubar.jsp" />
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
-
+<!-- ✅ 메인 영역 -->
 <div class="main-container">
-  <h2>예방하고 싶은 질병을 입력하세요</h2>
-  <form action="recommendIngredients.do" method="get" onsubmit="return validateSearch();">
-    <input type="text" name="condition" id="conditionInput" placeholder="예: 고혈압, 당뇨" autocomplete="off" />
-    <ul id="suggestions"></ul>
-    <button type="submit">추천 재료 보기</button>
-  </form>
+  <div class="search-box">
+  <img src="${pageContext.request.contextPath}/resources/images/chef-hat.png" class="chef-hat" alt="요리사 모자" />
+    <h2>🍽 어떤 질병이든,<br/>맛있게 이겨낼 수 있어요!</h2>
+    <form action="recommendIngredients.do" method="get" onsubmit="return validateSearch();">
+      <input type="text" name="condition" id="conditionInput" placeholder="예: 감기, 고혈압, 당뇨병" autocomplete="off" />
+      <ul id="suggestions"></ul>
+      <button type="submit">🥗 맞춤 재료 추천 받기</button>
+    </form>
+  </div>
 </div>
 
+<!-- ✅ 자동완성 스크립트 -->
 <script>
 $(document).ready(function () {
   let selectedIndex = -1;
@@ -145,7 +179,7 @@ $(document).ready(function () {
 
   $('#conditionInput').on('keyup', function (e) {
     const query = $(this).val();
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'Enter') return;
+    if (['ArrowDown', 'ArrowUp', 'Enter'].includes(e.key)) return;
     selectedIndex = -1;
     if (query.length > 0) {
       $.ajax({
@@ -180,9 +214,7 @@ $(document).ready(function () {
     selectedIndex = -1;
   });
 });
-</script>
 
-<script>
 function validateSearch() {
   const keyword = $('#conditionInput').val();
   if (keyword.length < 1) {
@@ -210,6 +242,7 @@ function validateSearch() {
 }
 </script>
 
-<c:import url="/WEB-INF/views/common/footer.jsp" />
+<!-- ✅ 공통 푸터 -->
+<c:import url="/WEB-INF/views/common/recommendFooter.jsp" />
 </body>
 </html>

@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="queryParams" value="condition=${condition}" />
+<c:if test="${empty condition}">
+    <c:redirect url="healthSearchForm.do" />
+</c:if>
+
 <html>
 <head>
     <title>추천 레시피 결과</title>
@@ -8,79 +14,105 @@
         body {
             margin: 0;
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f7fdf8;
-            color: #333;
+            background-color: #FFF8F0;
+            color: #444;
         }
 
         .main-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 60px auto;
             padding: 40px;
-            background-color: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff5ec;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         }
 
         h2 {
             font-size: 28px;
-            color: #2e7d32;
+            color: #FF6F00;
             margin-bottom: 30px;
             text-align: center;
         }
 
+        .recipe-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
         .recipe-card {
-            border: 1px solid #c8e6c9;
-            border-radius: 12px;
+            background-color: #fffaf3;
+            border: 1px solid #ffcaa6;
+            border-radius: 16px;
             padding: 20px;
-            margin-bottom: 20px;
-            background-color: #f1f8e9;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .recipe-card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: scale(1.015);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
         }
 
         .recipe-card h3 {
-            font-size: 22px;
-            color: #388e3c;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #FF6F00;
+        }
+
+        .recipe-card h3 a {
+            text-decoration: none;
+            color: #FF6F00;
+        }
+
+        .recipe-card h3 a:hover {
+            text-decoration: underline;
         }
 
         .recipe-card p {
-            font-size: 15px;
-            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 4px 0;
         }
 
         .no-result {
             text-align: center;
-            color: #999;
+            color: #888;
             font-size: 16px;
             margin-top: 30px;
         }
+        
+
+        /* paging 스타일은 pagingView.jsp에 정의되어 있음 */
     </style>
 </head>
 <body>
 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 
 <div class="main-container">
-    <h2>당신을 위한 건강 맞춤형 레시피</h2>
+    <h2>🥕 "${condition}" 건강 맞춤형 레시피 목록</h2>
 
     <c:if test="${empty recipes}">
         <p class="no-result">조건에 맞는 레시피가 없습니다.</p>
     </c:if>
 
-    <c:forEach var="recipe" items="${recipes}">
-        <div class="recipe-card">
-            <h3>${recipe.name}</h3>
-            <p><strong>설명:</strong> ${recipe.description}</p>
-            <p><strong>재료:</strong> ${recipe.ingredientName}</p>
-            <p><strong>추천 수:</strong> ${recipe.recommendNumber} / <strong>평점:</strong> ${recipe.avgRating}</p>
-        </div>
-    </c:forEach>
+    <div class="recipe-list">
+        <c:forEach var="recipe" items="${recipes}">
+            <div class="recipe-card">
+                <h3>
+                    <a href="${pageContext.request.contextPath}/recipeDetail.do?no=${recipe.recipeId}">
+                        ${recipe.name}
+                    </a>
+                </h3>
+                <p><strong>설명:</strong> ${recipe.description}</p>
+                <p><strong>재료:</strong> ${recipe.ingredientName}</p>
+                <p><strong>추천 수:</strong> ${recipe.recommendNumber} / <strong>평점:</strong> ${recipe.avgRating}</p>
+            </div>
+        </c:forEach>
+    </div>
+
+    <c:import url="/WEB-INF/views/common/pagingView.jsp" />
 </div>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
