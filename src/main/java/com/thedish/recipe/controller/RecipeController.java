@@ -1,11 +1,10 @@
 package com.thedish.recipe.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,7 @@ import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
 import com.thedish.recipe.model.vo.Recipe;
@@ -92,23 +92,113 @@ public class RecipeController {
 		// 레시피 상세보기 요청 처리용
 		// 레시피 상세보기 요청 처리용
 				@RequestMapping("/recipeDetail.do")
+				
 				public ModelAndView recipeDetailMethod(
 				    @RequestParam("no") int recipeId, 
 				    ModelAndView mv, 
 				    HttpSession session,
+				    HttpServletRequest request,
 				    @RequestParam(value = "page", required = false, defaultValue = "1") int page
 				) {
 				    logger.info("recipeDetail.do 호출 - recipeId: {}", recipeId);
 
 				    // 레시피 조회
 				    Recipe recipe = recipeService.selectRecipe(recipeId);
-				    recipeService.updateAddReadCount(recipeId); // 조회수 증가
-
-				   
-
-				    
 				    if (recipe != null) {
-				        mv.addObject("recipe", recipe);
+			            // 1. 게시글 조회수 증가 (기존 로직)
+			            // 조회수 증가 로직과 로그 기록 로직은 별개로 처리될 수 있습니다.
+			            recipeService.updateAddReadCount(recipeId);
+			            logger.info("{}번 레시피 조회수 증가", recipeId);
+
+
+			            // ====== 게시글 조회 로그 기록 로직 (컨트롤러에서 직접 처리) ======
+
+			            // 1. 사용자 ID 가져오기 (로그인된 경우, 아니면 IP 주소 등 활용)
+			            String userId = null;
+			            // 세션에서 로그인된 사용자 정보를 가져오는 로직 (예시)
+			            Object userObj = session.getAttribute("loginUser"); // 예: 세션에 "loggedInUser"라는 이름으로 저장됨
+			            if (userObj != null) {
+			                 try {
+			                     // 임시로 사용자 객체의 특정 메소드나 필드를 통해 ID를 가져온다고 가정
+			                     // 실제 사용자 객체 구조에 맞게 수정하세요.
+			                     // 예: LoginUser user = (LoginUser) userObj; userId = user.getUserId();
+			                     // 아래는 리플렉션을 사용한 예시이며, 캐스팅 후 직접 접근하는 것이 더 일반적입니다.
+			                     Method getUserIdMethod = userObj.getClass().getMethod("getUserId"); // 또는 getLoginId 등
+			                     userId = (String) getUserIdMethod.invoke(userObj);
+			                 } catch (Exception e) {
+			                     logger.error("세션에서 사용자 ID를 가져오는 중 오류 발생", e);
+			                     // 오류 발생 시 비로그인 처리 또는 다른 로직 수행
+			                     userId = request.getRemoteAddr(); // 비로그인 사용자로 처리 (IP 주소 사용)
+			                 }
+			                 logger.info("로그인된 사용자 ID 확인: {}", userId);
+			            } else {
+			                // 로그인하지 않은 사용자의 경우 IP 주소 사용
+			                userId = request.getRemoteAddr();
+			                logger.info("비로그인 사용자 (IP): {}", userId);
+			            }
+
+			            // 2. 게시글 타입 정의
+			            String postType = "recipe"; // 레시피 게시글 타입 지정
+
+			            // 파라미터 유효성 검사 (컨트롤러에서 해도 됩니다)
+			            if (userId == null || userId.trim().isEmpty() || recipeId <= 0 || postType == null || postType.trim().isEmpty()) {
+			                 logger.warn("유효하지 않은 정보로 로그 기록 요청 무시 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType);
+			            } else { // 정보가 유효한 경우에만 로그 로직 진행
+			                 try {
+			                    // 3. Service/DAO를 통해 특정 사용자, 특정 게시글에 대한 가장 최근 로그 기록 조회
+			                    // Service의 getLatestPostViewLog 메소드는 DAO의 동일 메소드를 호출할 것입니다.
+			                    ViewLog latestLog = recipeService.getLatestPostViewLog(userId, recipeId);
+			                    logger.debug("가장 최근 로그 조회 결과 (컨트롤러): {}", latestLog);
+
+			                    // 4. 24시간 체크
+			                    boolean needsLogging = true; // 기본적으로는 로그 기록 필요
+			                    if (latestLog != null) {
+			                        // ViewLog 객체에서 방문 시간 가져오기 (java.util.Date 등)
+			                        Date latestVisitTime = latestLog.getVisitTime(); // ViewLog에 getVisitTime() 메소드가 있다고 가정
+
+			                        if (latestVisitTime != null) {
+			                            long currentTimeMillis = System.currentTimeMillis(); // 현재 시각 (밀리초)
+			                            long latestLogTimeMillis = latestVisitTime.getTime(); // 최근 로그 시각 (밀리초)
+
+			                            // 최근 로그 기록이 24시간(24 * 60 * 60 * 1000 밀리초) 이내인지 확인
+			                            if (currentTimeMillis - latestLogTimeMillis < 24 * 60 * 60 * 1000) {
+			                                needsLogging = false; // 24시간 이내에 이미 기록됨
+			                                logger.debug("24시간 이내 기록 확인 (컨트롤러). 로그 기록 생략.");
+			                            } else {
+			                                logger.debug("마지막 기록이 24시간 지남 (컨트롤러). 로그 기록 필요.");
+			                            }
+			                        } else {
+			                             logger.warn("최근 로그 기록의 visitTime이 NULL입니다 (컨트롤러). 새로운 로그 기록 진행.");
+			                        }
+			                    } else {
+			                         logger.debug("이 사용자/게시글에 대한 기존 로그 기록 없음 (컨트롤러). 새로운 로그 기록 필요.");
+			                    }
+
+			                    // 5. 로그 기록이 필요한 경우 삽입
+			                    if (needsLogging) {
+			                        // ViewLog 객체 생성 및 데이터 설정
+			                        ViewLog newLog = new ViewLog();
+			                        newLog.setUserId(userId);
+			                        newLog.setPostId(recipeId);
+			                        newLog.setPostType(postType);
+			                        // visitTime, logId는 DB에서 자동 처리
+
+			                        // Service/DAO를 통해 로그 삽입
+			                        // Service의 insertPostViewLog 메소드는 DAO의 동일 메소드를 호출할 것입니다.
+			                        recipeService.insertPostViewLog(newLog);
+			                        logger.info("게시글 조회 로그 기록 완료 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType);
+			                    }
+
+			                 } catch (Exception e) {
+			                    // 로그 기록 중 예외 발생 시 에러 로깅
+			                    logger.error("게시글 조회 로그 기록 중 오류 발생 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType, e);
+			                    // 컨트롤러에서 예외를 잡았으므로, 여기서 에러 페이지로 리다이렉트하거나 다른 처리를 할 수 있습니다.
+			                    // 여기서는 로깅만 하고 원래 흐름을 계속합니다.
+			                 }
+			            } 
+
+
+			            mv.addObject("recipe", recipe);
 
 				        // 알러지 정보 조회
 				        List<Allergy> allergyList = recipeService.selectAllergyByRecipeId(recipeId);
