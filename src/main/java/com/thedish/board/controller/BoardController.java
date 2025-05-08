@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
-import com.thedish.comment.model.service.CommentService;
 import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.FileNameChange;
 import com.thedish.common.Paging;
@@ -42,9 +41,6 @@ public class BoardController {
 	
 	@Autowired
 	private LikeService likeService;
-
-	@Autowired
-	private CommentService commentService;
 	
 	@Autowired
 	private ReportPostService reportPostService;
