@@ -1,9 +1,6 @@
 package com.thedish.drink.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -416,114 +414,88 @@ public class DrinkController {
 
 			 }
 			
-			 @RequestMapping("moveInsertDrinkStorePage.do")
-			    public ModelAndView moveInsertDrinkStorePage(
-			            ModelAndView mv,
-			            @RequestParam("drinkId") int drinkId, // *** drinkName 대신 drinkId로 받습니다. ***
-			            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage) {
+			    @RequestMapping(value = "/drinkStoreInsert.do", method = RequestMethod.GET) // .do 확장자와 GET 메소드 매핑
+			    public String moveInsertDrinkStorePage(@RequestParam("drinkId") int drinkId,
+			                                          @RequestParam(value = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 (필수 아님, 기본값 1)
+			                                          Model model) {
+			    	logger.info(">>> moveInsertDrinkStorePage (리다이렉트 후): @RequestParam으로 받은 drinkId 값: " + drinkId);
+			        // 1. drinkId를 사용하여 음료 정보 조회
+			      
+			    	int drinkIdFromRequest = drinkId; // @RequestParam으로 받은 값
 
-			        logger.info("판매처 등록 페이지 이동 요청 받음. Drink ID: {}, Current Page: {}", drinkId, currentPage);
+			    	logger.info(">>> Controller: Calling drinkService.getById with ID: " + drinkIdFromRequest);
+			    	
+			    	Drink drink = drinkService.getDrinkById(drinkIdFromRequest);
 
-			        // *** 1. 해당 drinkId에 연결된 기존 판매처 목록 조회 (Service 메소드 변경 필요) ***
-			        // Service 메소드도 drinkId를 받도록 수정해야 합니다.
-			        // 전제 조건: DRINK_STORE 테이블에 DRINK_ID 컬럼이 존재해야 합니다.
-			        List<DrinkStore> existingStores = drinkService.selectDrinkStoresByDrinkId(drinkId); // Service 메소드 호출
-
-			        logger.info("기존 판매처 목록 조회 결과: {} 개", existingStores != null ? existingStores.size() : 0);
-
-			        // ModelAndView에 필요한 정보를 담습니다.
-			        mv.addObject("drinkId", drinkId); // 어떤 음료에 대한 판매처 등록/조회인지 (ID 사용)
-			        mv.addObject("currentPage", currentPage); // 등록 완료 후 돌아갈 페이지
-			        mv.addObject("existingStores", existingStores); // 조회된 기존 판매처 목록
-
-
-			     // 판매처 등록 폼을 보여줄 JSP 페이지 경로 지정
-			     mv.setViewName("drink/drinkStoreInsert"); // 예시 경로. 실제 JSP 경로로 수정하세요.
-
-			     return mv;
-			 }
-			 
-			  @RequestMapping(value = "insertDrinkStore.do", method = RequestMethod.POST)
-			    public String insertDrinkStore(
-			            @RequestParam("drinkName") String drinkName,
-			            @RequestParam("storeName") String storeName,
-			            @RequestParam("storeAddress") String storeAddress,
-			            @RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage,
-			            RedirectAttributes redirectAttributes) {
-
-			        logger.info("판매처 등록 요청 받음. Drink Name: {}, Store Name: {}, Store Address: {}", drinkName, storeName, storeAddress);
-
-			        // DrinkStore 객체 생성 및 데이터 설정
-			        DrinkStore drinkStore = new DrinkStore();
-			        drinkStore.setDrinkName(drinkName);
-			        drinkStore.setStoreName(storeName);
-			        drinkStore.setStoreAddress(storeAddress);
-
-			        try {
-			            int result = drinkService.insertDrinkStore(drinkStore);
-
-			            if (result > 0) {
-			                logger.info("판매처 등록 성공: Drink Name={}, Store Name={}", drinkName, storeName);
-			                redirectAttributes.addFlashAttribute("successMessage", "판매처 정보가 성공적으로 등록되었습니다.");
-			            } else {
-			                 logger.warn("판매처 등록 실패. Drink Name={}, Store Name={}", drinkName, storeName);
-			                 redirectAttributes.addFlashAttribute("errorMessage", "판매처 등록에 실패했습니다.");
-			            }
-
-			        } catch (Exception e) {
-			            logger.error("판매처 등록 중 오류 발생. Drink Name={}", drinkName, e);
-			             redirectAttributes.addFlashAttribute("errorMessage", "판매처 등록 중 오류가 발생했습니다: " + e.getMessage());
+			    	logger.info(">>> Controller: Returned from drinkService.getById.");
+			        
+			        if (drink != null) {
+			            logger.info(">>> moveInsertDrinkStorePage: 조회된 Drink 객체의 drinkId: " + drink.getDrinkId());
+			        } else {
+			            logger.warn(">>> moveInsertDrinkStorePage: drinkService.getDrinkById 결과가 null입니다.");
+			        }
+			        
+			        if (drink == null) {
+			            // 해당 음료가 없을 경우 처리
+			            model.addAttribute("errorMessage", "해당 음료 정보를 찾을 수 없습니다.");
+			            return "errorPage"; // 예시
 			        }
 
-			        // 등록 후 현재 페이지 (판매처 등록 및 목록 페이지)로 리다이렉트
-			        // *** 리다이렉트 URL 생성 시 drinkName 값을 URL 인코딩합니다. ***
-			        try {
-			            String encodedDrinkName = URLEncoder.encode(drinkName, StandardCharsets.UTF_8.toString()); // UTF-8로 인코딩
-			            return "redirect:/moveInsertDrinkStorePage.do?drinkName=" + encodedDrinkName + "&page=" + currentPage;
-			        } catch (UnsupportedEncodingException e) {
-			             logger.error("URL 인코딩 오류 발생", e);
-			             redirectAttributes.addFlashAttribute("errorMessage", "페이지 이동 중 오류가 발생했습니다.");
-			             // 인코딩 실패 시 에러 페이지나 기본 페이지로 리다이렉트
-			             return "redirect:/common/error"; // 적절한 에러 페이지 경로로 수정
-			        }
+			        // 2. 해당 음료의 이름으로 기존 판매처 목록 조회
+			        List<DrinkStore> drinkStores = drinkService.getStoresByDrinkName(drink.getName());
+
+			        // 3. 모델에 음료 정보와 판매처 목록 담기
+			        model.addAttribute("drink", drink);
+			        model.addAttribute("drinkStores", drinkStores);
+			        model.addAttribute("currentPage", currentPage); // 필요하다면 페이지 번호도 전달
+
+			        // 4. 판매처 관리 JSP 페이지 반환
+			        // JSP 파일 이름에 따라 반환 값 조정
+			        return "/drink/drinkStoreInsert";
 			    }
 
-			    // 판매처 삭제 처리 메소드
-			    @RequestMapping(value = "deleteDrinkStore.do", method = RequestMethod.POST)
-			    public String deleteDrinkStore(
-			            @RequestParam("storeId") int storeId,
-			            @RequestParam("drinkName") String drinkName, // 삭제 후 돌아갈 페이지의 drinkName
-			            @RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage,
-			            RedirectAttributes redirectAttributes) {
+			    @RequestMapping(value = "/drinkStoreInsert.do", method = RequestMethod.POST)
+			    @ResponseBody // 이 어노테이션을 사용하여 메소드의 반환 값이 HTTP 응답 본문에 직접 쓰여지도록 합니다.
+			    public String addDrinkStoreAjax(DrinkStore drinkStore,
+			                                   @RequestParam("drinkId") int drinkId) { // drinkId는 필요하다면 계속 받습니다.
 
-			        logger.info("판매처 삭제 요청 받음. Store ID: {}", storeId);
+			        // logger 추가 (요청 받은 drinkId 값 확인)
+			        logger.info(">>> addDrinkStoreAjax: @RequestParam으로 받은 drinkId 값: " + drinkId);
+			        logger.info(">>> addDrinkStoreAjax: 받은 DrinkStore 객체: " + drinkStore.toString()); // DrinkStore 객체 내용 확인
 
-			        try {
-			            int result = drinkService.deleteDrinkStore(storeId);
+			        
+			        int result = drinkService.insertDrinkStore(drinkStore);
 
-			            if (result > 0) {
-			                logger.info("판매처 삭제 성공. Store ID: {}", storeId);
-			                redirectAttributes.addFlashAttribute("successMessage", "판매처가 성공적으로 삭제되었습니다.");
-			            } else {
-			                 logger.warn("판매처 삭제 실패 또는 해당 ID의 판매처 없음. Store ID: {}", storeId);
-			                 redirectAttributes.addFlashAttribute("errorMessage", "판매처 삭제에 실패했습니다.");
-			            }
-
-			        } catch (Exception e) {
-			            logger.error("판매처 삭제 중 오류 발생. Store ID: {}", storeId, e);
-			             redirectAttributes.addFlashAttribute("errorMessage", "판매처 삭제 중 오류가 발생했습니다: " + e.getMessage());
+			        // 등록 결과에 따라 클라이언트에 보낼 문자열 결정
+			        if (result > 0) {
+			            // 등록 성공 시 'success' 문자열 반환
+			            logger.info(">>> addDrinkStoreAjax: 판매처 등록 성공.");
+			            return "success";
+			        } else {
+			            // 등록 실패 시 'fail' 문자열 반환
+			            logger.warn(">>> addDrinkStoreAjax: 판매처 등록 실패.");
+			            return "fail";
 			        }
 
-			        // 삭제 후 현재 페이지 (판매처 등록 및 목록 페이지)로 리다이렉트
-			        // *** 리다이렉트 URL 생성 시 drinkName 값을 URL 인코딩합니다. ***
-			         try {
-			            String encodedDrinkName = URLEncoder.encode(drinkName, StandardCharsets.UTF_8.toString()); // UTF-8로 인코딩
-			            return "redirect:/moveInsertDrinkStorePage.do?drinkName=" + encodedDrinkName + "&page=" + currentPage;
-			        } catch (UnsupportedEncodingException e) {
-			             logger.error("URL 인코딩 오류 발생", e);
-			             redirectAttributes.addFlashAttribute("errorMessage", "페이지 이동 중 오류가 발생했습니다.");
-			             // 인코딩 실패 시 에러 페이지나 기본 페이지로 리다이렉트
-			             return "redirect:/common/error"; // 적절한 에러 페이지 경로로 수정
+			       
+			    }
+			    @RequestMapping(value = "/deleteDrinkStore.do", method = RequestMethod.POST) // POST 메소드에 /deleteDrinkStore.do 경로 매핑
+			    @ResponseBody // 클라이언트에 응답 본문을 직접 반환합니다.
+			    public String deleteDrinkStoreAjax(@RequestParam("storeId") int storeId) { // 쿼리 스트링 또는 폼 데이터로 storeId 받음
+
+			        logger.info(">>> deleteDrinkStoreAjax: @RequestParam으로 받은 storeId 값: " + storeId);
+
+			        // Service를 호출하여 판매처 삭제
+			        // drinkService에 deleteStore(int storeId) 메소드가 있다고 가정합니다.
+			        int result = drinkService.deleteStore(storeId); // <-- 이 메소드는 직접 구현하셔야 합니다.
+
+			        // 삭제 결과에 따라 클라이언트에 보낼 문자열 결정
+			        if (result > 0) {
+			            logger.info(">>> deleteDrinkStoreAjax: 판매처 삭제 성공 (ID: {}).", storeId);
+			            return "success"; // 삭제 성공 시 'success' 문자열 반환
+			        } else {
+			            logger.warn(">>> deleteDrinkStoreAjax: 판매처 삭제 실패 (ID: {}).", storeId);
+			            return "fail"; // 삭제 실패 시 'fail' 문자열 반환
 			        }
 			    }
 

@@ -143,23 +143,24 @@ public class DrinkDao {
 
             return storeInfo; // Map 객체 자체를 반환
         }
-
-    public List<DrinkStore> selectDrinkStoresByDrinkId(int drinkId) { // *** String drinkName을 파라미터로 받음 ***
-        // "drinkMapper.selectDrinkStoresByDrinkName"는 drinkMapper.xml 파일에 정의될 select 쿼리의 id
-        // resultType/resultMap은 DrinkStore 타입으로 지정해야 합니다.
-        return sqlSessionTemplate.selectList("drinkMapper.selectDrinkStoresByDrinkId", drinkId);
-    }
-
-    public int insertDrinkStore(DrinkStore drinkStore) { // *** DrinkStore 객체를 파라미터로 받음 ***
-        // "drinkMapper.insertDrinkStore"는 drinkMapper.xml 파일에 정의될 insert 쿼리의 id 입니다.
-        // 쿼리에서는 DrinkStore 객체의 drinkName 필드를 사용하도록 수정해야 합니다.
-        return sqlSessionTemplate.insert("drinkMapper.insertDrinkStore", drinkStore);
+    public Drink getDrinkById(int drinkId) {
+    	logger.info(">>> DrinkDAO.getDrinkById: 파라미터 drinkId = " + drinkId);
+        return sqlSessionTemplate.selectOne("drinkMapper.getDrinkById", drinkId);
     }
     
-    // *** 특정 Store ID에 해당하는 판매처 삭제 메소드 추가 ***
-    public int deleteDrinkStore(int storeId) { // *** int storeId를 파라미터로 받음 ***
-        // "drinkMapper.deleteDrinkStore"는 drinkMapper.xml 파일에 정의될 delete 쿼리의 id
-        return sqlSessionTemplate.delete("drinkMapper.deleteDrinkStore", storeId);
+    public List<DrinkStore> getStoresByDrinkName(String drinkName) {
+        // "네임스페이스.쿼리ID" 형태로 호출
+        return sqlSessionTemplate.selectList("drinkStoreMapper.getStoresByDrinkName", drinkName); // 실제 매퍼 네임스페이스와 쿼리 ID로 변경
     }
- 
+    public int insertDrinkStore(DrinkStore drinkStore) { // 실제 VO/DTO 타입으로 변경
+        // 네임스페이스와 쿼리 ID 확인 및 수정
+        // sqlSession.insert("네임스페이스.쿼리ID", 파라미터 객체) 형태로 호출
+        return sqlSessionTemplate.insert("drinkStoreMapper.insertDrinkStore", drinkStore);
+    }
+    
+    public int deleteStore(int storeId) {
+    	return sqlSessionTemplate.delete("drinkStoreMapper.deleteStore",storeId);
+    }
+    
+    
 }

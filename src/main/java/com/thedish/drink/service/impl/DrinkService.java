@@ -40,9 +40,9 @@ public interface DrinkService {
 	 
 	 Map<String, Object> selectStoreInfoByDrinkId(int drinkId);
 	 
-	 List<DrinkStore> selectDrinkStoresByDrinkId(int drinkId);
-
-	    // *** 판매처 삭제 메소드 선언 ***
-	    int deleteDrinkStore(int storeId); 
-	    int insertDrinkStore(DrinkStore drinkStore); 
+	 Drink getDrinkById(int drinkId);
+	 List<DrinkStore> getStoresByDrinkName(String drinkName);
+	 
+	 int insertDrinkStore(DrinkStore drinkStore);
+	 int deleteStore(int storeId);
 }
