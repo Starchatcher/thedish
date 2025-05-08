@@ -9,57 +9,105 @@
 <title>${drink.name} 상세페이지</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .map-container {
-            margin-top: 40px;
-            height: 400px; /* 지도 높이 설정 */
-            border: 1px solid #ddd; /* 지도 테두리 */
-            border-radius: 8px; /* 테두리 둥글게 */
-            overflow: hidden; /* 내용이 넘칠 경우 숨김 */
-        }
-        .stats {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .comments-section {
-            margin-top: 40px;
-        }
-        .comments-section h3 {
-            margin-bottom: 10px;
-        }
-        .comments-section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .comments-section li {
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .label {
-            font-weight: bold;
-        }
-        
-        
-            #recommendBtn {
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    margin-top: 40px;
+    height: 400px; /* 지도 높이 설정 */
+    border: 1px solid #ddd; /* 지도 테두리 */
+    border-radius: 8px; /* 테두리 둥글게 */
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+#map {
+    height: 400px
+    width: 100%;
+    margin-top: 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* z-index가 작동하려면 position 속성이 static 외의 값이어야 합니다. */
+    z-index: 10; /* 다른 요소들보다 높은 값 설정 */
+    flex-shrink: 0;
+}
+
+.stats {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Comments Section 스타일 통합 */
+.comments-section {
+    margin-top: 20px; /* 나중에 정의된 20px 적용 */
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Comments Section h3 스타일 통합 */
+.comments-section h3 {
+    margin-bottom: 15px; /* 나중에 정의된 15px 적용 */
+    font-size: 24px;
+    color: #333;
+}
+
+/* Comments Section ul 스타일 통합 */
+.comments-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Comments Section li 스타일 통합 */
+.comments-section li {
+    margin-bottom: 15px; /* 나중에 정의된 15px 적용 */
+    padding: 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    background-color: #fafafa; /* 나중에 정의된 #fafafa 적용 */
+}
+
+.comments-section li strong {
+    display: block;
+    font-size: 16px;
+    color: #007bff;
+}
+
+.comments-section li span {
+    font-size: 12px;
+    color: #888;
+}
+
+.comments-section li p {
+    margin: 5px 0 0;
+    color: #555;
+}
+
+.label {
+    font-weight: bold;
+}
+
+#recommendBtn {
     margin-left: 10px;
     padding: 5px 12px;
     background-color: #8FBC8F;
@@ -74,112 +122,68 @@
     background-color: green;
 }
 
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
 
- .comments-section {
-        margin-top: 20px;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+.pagination a {
+    margin: 0 5px;
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    transition: background-color 0.3s;
+}
 
-    .comments-section h3 {
-        margin-bottom: 15px;
-        font-size: 24px;
-        color: #333;
-    }
+.pagination a:hover {
+    background-color: #007bff;
+    color: white;
+}
 
-    .comments-section ul {
-        list-style-type: none;
-        padding: 0;
-    }
+.pagination span {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+}
 
-    .comments-section li {
-        margin-bottom: 15px;
-        padding: 10px;
-        border: 1px solid #eaeaea;
-        border-radius: 5px;
-        background-color: #fafafa;
-    }
+form {
+    margin-top: 20px;
+}
 
-    .comments-section li strong {
-        display: block;
-        font-size: 16px;
-        color: #007bff;
-    }
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
 
-    .comments-section li span {
-        font-size: 12px;
-        color: #888;
-    }
+form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
 
-    .comments-section li p {
-        margin: 5px 0 0;
-        color: #555;
-    }
-    
-     .pagination {
-        margin-top: 20px;
-        text-align: center;
-    }
+form button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-    .pagination a {
-        margin: 0 5px;
-        text-decoration: none;
-        padding: 8px 12px;
-        border: 1px solid #007bff;
-        border-radius: 5px;
-        color: #007bff;
-        transition: background-color 0.3s;
-    }
+form button:hover {
+    background-color: #0056b3;
+}
 
-    .pagination a:hover {
-        background-color: #007bff;
-        color: white;
-    }
-
-    .pagination span {
-        margin: 0 5px;
-        padding: 8px 12px;
-        border-radius: 5px;
-        background-color: #e9ecef;
-    }
-
-    form {
-        margin-top: 20px;
-    }
-
-    form textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: vertical;
-    }
-
-    form input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-top: 10px;
-    }
-
-    form button {
-        margin-top: 10px;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    form button:hover {
-        background-color: #0056b3;
-    }
     
     
     
@@ -211,6 +215,17 @@
 
 .blind{position:absolute;clip:rect(0 0 0 0);margin:-1px;width:1px;height: 1px;overflow:hidden;}
     
+    .custom-overlay-content {
+    position: relative;
+    background-color: white; /* 배경색 */
+    border: 1px solid #ddd; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    padding: 10px; /* 안쪽 여백 */
+    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+}
+    
+    
     </style>
 
 <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
@@ -225,7 +240,7 @@
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 <c:if test="${  loginUser.role eq 'ADMIN' }">
 <a href="moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">수정</a>
- <a href="moveInsertDrinkStorePage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">판매처 등록</a>
+ <a href="drinkStoreInsert.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">판매처 등록</a>
 <form action="deleteDrink.do" method="post" style="display:inline;">
     <input type="hidden" name="drinkId" value="${drink.drinkId}" />
     <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
@@ -263,7 +278,7 @@
 
 <h2>이 술과 잘 어울리는 레시피</h2>
 
-<%-- 서버에서 전달받은 'pairingList'가 비어있지 않다면 --%>
+<!-- 서버에서 전달받은 'pairingList'가 비어있지 않다면 -->
 <c:choose>
     <c:when test="${ not empty pairingList }">
         <table>
@@ -271,23 +286,23 @@
                 <tr>
                     <th>레시피 이름</th>
                     <th>페어링 이유</th>
-                    <%-- 필요하다면 추가 정보 컬럼 추가 (예: 이미지, 설명) --%>
+                    <!-- 필요하다면 추가 정보 컬럼 추가 (예: 이미지, 설명) -->
                 </tr>
             </thead>
             <tbody>
-                <%-- pairingList의 각 항목(페어링 정보 객체)을 'pairing' 변수에 담아 반복 --%>
+                <!-- pairingList의 각 항목(페어링 정보 객체)을 'pairing' 변수에 담아 반복 -->
                 <c:forEach var="pairing" items="${ pairingList }">
                     <tr>
-                        <%-- 'pairing' 객체의 속성(예: recipeName, reason)을 EL 표현식으로 출력 --%>
+                       <!--  'pairing' 객체의 속성(예: recipeName, reason)을 EL 표현식으로 출력 -->
                         <td>${ pairing.recipeName }</td>
                         <td>${ pairing.reason }</td>
-                        <%-- 필요하다면 추가 정보 셀 추가 --%>
+                        <!-- 필요하다면 추가 정보 셀 추가 -->
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
     </c:when>
-    <%-- pairingList가 비어있다면 (페어링 정보가 없다면) --%>
+    
     <c:otherwise>
         <p>아직 등록된 페어링 정보가 없습니다.</p>
     </c:otherwise>
@@ -299,11 +314,11 @@
 <div class="stats">
     <span>조회수: ${drink.viewCount}</span>    
     <span>평균 평점: ${drink.avgRating}</span>       
-    <%-- 로그인한 사용자에게만 평점 입력 폼 표시 --%>
+    <!-- 로그인한 사용자에게만 평점 입력 폼 표시 -->
       <c:if test="${loginUser != null}">
         <div class="rating-form-area">
             <h4>내 평점 부여/수정</h4>
-            <%-- 평점 부여 폼 --%>
+            <!-- 평점 부여 폼 -->
             <form id="ratingForm" action="rateDrink.do" method="post">
                 <input type="hidden" name="drinkId" value="${drink.drinkId}" />
               
@@ -341,18 +356,20 @@
 
       
 </div>
-  <%-- 로그인하지 않은 사용자에게 안내 메시지 표시 --%>
+  <!-- 로그인하지 않은 사용자에게 안내 메시지 표시 -->
     <c:if test="${loginUser == null}">
          <div class="rating-form-area">
-             <p>평점을 부여하려면 <a href="loginPage.do">로그인</a>해주세요.</p> <%-- 예시: 로그인 페이지 URL --%>
+             <p>평점을 부여하려면 <a href="loginPage.do">로그인</a>해주세요.</p> 
          </div>
     </c:if>
-	</div>
+	
 
     <!-- 지도 정보를 출력할 구역 -->
     <div class="map-container" id="map">
      
     </div>
+	    
+
 
 <!-- 댓글 리스트 -->
 <div class="comments-section">
@@ -420,109 +437,139 @@
         <button type="submit">댓글 작성</button>
     </form>
 </c:if>
-<%-- 로그인하지 않은 사용자에게는 댓글 작성 폼이 보이지 않음 --%>
+<!-- 로그인하지 않은 사용자에게는 댓글 작성 폼이 보이지 않음 -->
 <c:if test="${loginUser == null}">
-    <p>댓글을 작성하려면 <a href="loginPage.do">로그인</a>해주세요.</p> <%-- 예시: 로그인 페이지 링크 --%>
+    <p>댓글을 작성하려면 <a href="loginPage.do">로그인</a>해주세요.</p> 
 </c:if>
+
+ 
+<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 
 <script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services&callback=initMap"></script>
-<script type="text/javascript">
-// 서버에서 전달받은 주소 및 장소 이름 변수 (예: Spring MVC 모델에 담겨 JSP로 전달)
-// 서버 코드 수정 후 ${storeInfo['STORE_ADDRESS']} 형태로 접근 가능하다고 가정
-var storeAddress = "${storeInfo['STORE_ADDRESS']}";
-var storeName = "${storeInfo['STORE_NAME']}"; // <-- 새롭게 추가된 변수
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services&autoload=false"></script>
+<!-- 2. initMap 함수를 정의하는 스크립트 -->
+  <script type="text/javascript">
+        console.log("--- 지도 스크립트 블록 시작 (Geocoding 활성화 시도) ---"); // 로그 변경
+        var storeAddress = "${storeInfo['STORE_ADDRESS']}"; // EL 치환
+        var storeName = "${storeInfo['STORE_NAME']}";     // EL 치환
+        console.log("JSP에서 EL 처리 후 storeAddress 값:", storeAddress);
+        console.log("JSP에서 EL 처리 후 storeName 값:", storeName);
+        console.log("initMap 함수 정의 전");
 
-console.log("JSP에서 EL 처리 후 storeAddress 값:", storeAddress);
-console.log("JSP에서 EL 처리 후 storeName 값:", storeName);
+        function initMap() {
+            console.log(">>> initMap 함수 내부 진입! (Geocoding 활성화) <<<"); // 로그 변경
 
+            var mapContainer = document.getElementById('map');
+             if (!mapContainer) {
+                 console.error("ID 'map'을 가진 지도를 담을 HTML 요소를 찾을 수 없습니다.");
+                 return;
+            }
 
-// 주소 값이 유효한지 확인합니다.
-if (storeAddress && storeAddress.trim() !== "") {
-    // 주소 값이 있을 경우 지도 표시 로직 실행
+           
+             console.log("JS에서 mapContainer 높이 설정:", mapContainer.style.height); 
+            var mapOption = {
+                center: new kakao.maps.LatLng(37.566826, 126.9786567), // 초기 중심 좌표 (주소 검색 실패 시 사용)
+                level: 3
+            };
+            console.log("mapOption 객체 정의 완료");
 
-    var mapContainer = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
-    var mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 초기 중심 좌표 (서울 시청) - 주소 검색 성공 시 이 좌표는 무시됩니다.
-        level: 3 // 지도의 확대 레벨 (숫자가 작을수록 확대)
-    };
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+            console.log("지도 생성 성공!");
 
-    // 지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+           
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+            console.log("Geocoder 객체 생성 성공!"); // <<-- 이 로그가 나오는지 확인
 
-    // 주소-좌표 변환 객체를 생성합니다
-    var geocoder = new kakao.maps.services.Geocoder();
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch(storeAddress, function(result, status) {
+                console.log("Geocoder Status:", status); // <<-- 이 로그와 상태값 (OK 여부) 확인
+                if (status === kakao.maps.services.Status.OK) {
+                    console.log("주소 검색 성공! 좌표:", result[0].y, result[0].x); // 검색된 좌표 로그
 
-    // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(storeAddress, function(result, status) {
+                    // 검색 결과의 첫 번째 좌표를 가져옵니다.
+                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        // 정상적으로 검색이 완료됐으면
-        if (status === kakao.maps.services.Status.OK) {
+                    
+                    map.setCenter(coords);
+                    console.log("지도를 검색된 주소 위치로 이동");
 
-            // 검색 결과의 첫 번째 좌표를 가져옵니다.
-            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                    // 중요: 중심 이동 후 레이아웃을 다시 계산하도록 요청
+                    map.relayout();
+                    console.log("map.relayout() 호출 완료");
 
-            // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
-                map: map, // 마커를 표시할 지도 객체
-                position: coords, // 마커의 위치
-                clickable: true // 마커 클릭 가능하도록 설정
+                    
+                    // 결과값으로 받은 위치를 마커로 표시합니다
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도 객체
+                        position: coords, // 마커의 위치
+                        clickable: true // 마커 클릭 가능하도록 설정
+                    });
+                    console.log("마커 생성 성공!"); // <<-- 이 로그가 나오는지 확인
+
+                     // 마커 위에 표시할 커스텀 오버레이를 생성합니다.
+                     var customOverlay = new kakao.maps.CustomOverlay({
+                         position: coords, // 마커와 동일한 위치에 표시
+                         content: '<div class="custom-overlay-content">' + storeName + '</div>',
+                         yAnchor: 1.9 // 마커 이미지 위에 텍스트가 오도록 조정
+                     });
+                     customOverlay.setMap(map);
+                     console.log("커스텀 오버레이 생성 및 표시 성공!"); // <<-- 이 로그가 나오는지 확인
+
+                    // 마커에 클릭 이벤트를 등록합니다.
+                    kakao.maps.event.addListener(marker, 'click', function() {
+                        var searchUrl = 'https://map.kakao.com/?q=' + encodeURIComponent(storeAddress);
+                        window.open(searchUrl, '_blank');
+                    });
+                     console.log("마커 클릭 이벤트 등록 완료"); // <<-- 이 로그가 나오는지 확인
+
+                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                    map.setCenter(coords);
+                    console.log("지도를 검색된 주소 위치로 이동"); // <<-- 이 로그가 나오는지 확인
+
+                } else {
+                    // 주소 검색 실패 시 처리
+                    console.error('주소-좌표 변환 실패. Status:', status); // 실패 상태값 확인
+                     if (mapContainer) {
+                         mapContainer.innerHTML = "<p>매장 주소를 좌표로 변환하는데 실패했습니다.</p>";
+                     }
+                }
             });
 
-         // 마커 위에 표시할 커스텀 오버레이를 생성합니다.
-            var customOverlay = new kakao.maps.CustomOverlay({
-                position: coords, // 마커와 동일한 위치에 표시
-                // 커스텀 오버레이에 표시할 내용 (HTML 문자열)
-                content: '<div style="padding:5px; font-size:12px; background: white; border: 1px solid #ccc; z-index: 2; white-space: nowrap; position: absolute; transform: translate(-50%, -230%); pointer-events: none;">' + storeName + '</div>',
-                yAnchor: 0 // yAnchor 값을 0으로 설정하여 마커 위쪽에 표시
-            });
-
-            // 지도에 커스텀 오버레이를 표시합니다.
-            customOverlay.setMap(map);
+            // Geocoding 주석 처리 시 초기 중심 좌표로 이동했던 코드는 제거하거나 주석 처리합니다.
+            // map.setCenter(mapOption.center);
+            // console.log("지도를 초기 중심 좌표로 이동 (Geocoding 주석 처리 상태)");
 
 
-// 지도에 커스텀 오버레이를 표시합니다.
-customOverlay.setMap(map);
-
-
-            // 지도에 커스텀 오버레이를 표시합니다.
-            customOverlay.setMap(map);
-
-
-            // 마커에 클릭 이벤트를 등록합니다.
-      kakao.maps.event.addListener(marker, 'click', function() {
-    // 정보창(InfoWindow)을 여는 코드는 여기에 넣지 않습니다.
-    // CustomOverlay는 setMap(map)으로 이미 지도에 표시되어 있습니다.
-
-    // 클릭 시 카카오맵 웹사이트로 이동할 URL을 생성합니다.
-    var searchUrl = 'https://map.kakao.com/?q=' + encodeURIComponent(storeAddress);
-
-    // 새 탭으로 카카오맵 웹사이트를 엽니다.
-    window.open(searchUrl, '_blank');
-});
-
-
-            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-            map.setCenter(coords);
-
-        } else {
-            // 주소 검색 실패 시 처리
-            console.error('주소-좌표 변환 실패. Status:', status);
-            // 지도를 표시하지 않거나, 오류 메시지를 div 영역에 표시합니다.
-            mapContainer.innerHTML = "<p>매장 주소를 좌표로 변환하는데 실패했습니다.</p>";
         }
-    });
 
-} else {
-    // 스토어 주소 값이 없는 경우
-    console.log("전달된 스토어 주소가 없습니다.");
-    // 지도를 표시하지 않고, 해당 div 영역에 메시지를 표시합니다.
-    var mapContainer = document.getElementById('map');
-    mapContainer.innerHTML = "<p>해당 술에 대한 매장 정보가 없습니다.</p>";
-}
-</script>
+        console.log("initMap 함수 정의 후");
 
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+        // window.addEventListener('load', ...)`는 그대로 유지합니다.
+        window.addEventListener('load', function() {
+           console.log(">>> window 'load' 이벤트 발생 <<<");
+            console.log(">>> kakao 객체 확인 시도 <<<");
+
+            console.log("Type of kakao:", typeof kakao);
+            console.log("Type of kakao.maps:", typeof kakao.maps);
+            console.log("Type of kakao.maps.load:", typeof kakao.maps.load);
+
+
+            if (typeof kakao !== 'undefined' && typeof kakao.maps !== 'undefined' && typeof kakao.maps.load === 'function') {
+                 console.log(">>> Kakao Maps SDK 로드 확인. kakao.maps.load(initMap) 호출 시도 <<<");
+                 kakao.maps.load(initMap); // SDK 로드가 완료된 후에 initMap 실행 요청
+                 console.log(">>> kakao.maps.load(initMap) 호출 완료 <<<");
+            } else {
+                 console.error(">>> Kakao Maps SDK가 로드되지 않았거나 kakao.maps.load 함수를 사용할 수 없습니다. <<<");
+                 var mapContainer = document.getElementById('map');
+                 if (mapContainer) {
+                     mapContainer.innerHTML = "<p>지도 로딩에 실패했습니다. 잠시 후 다시 시도해주세요.</p>";
+                 }
+            }
+        });
+        
+    </script> 
+   
 </body>
 </html>

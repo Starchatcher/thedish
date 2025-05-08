@@ -132,22 +132,31 @@ public class DrinkServiceImpl implements DrinkService{
 		return drinkDao.selectStoreInfoByDrinkId(drinkId);
 	}
 
-	
-
 	@Override
-	public int deleteDrinkStore(int storeId) {
-		return drinkDao.deleteDrinkStore(storeId);
+	public Drink getDrinkById(int drinkId) {
+		logger.info(">>> DrinkServiceImpl.getDrinkById: 파라미터 drinkId = " + drinkId);
+		return drinkDao.getDrinkById(drinkId);
 	}
 
 	@Override
-	public List<DrinkStore> selectDrinkStoresByDrinkId(int drinkId) {
-		return drinkDao.selectDrinkStoresByDrinkId(drinkId);
+	public List<DrinkStore> getStoresByDrinkName(String drinkName) {
+		return drinkDao.getStoresByDrinkName(drinkName);
 	}
 
 	@Override
 	public int insertDrinkStore(DrinkStore drinkStore) {
 		return drinkDao.insertDrinkStore(drinkStore);
 	}
+
+	@Override
+	public int deleteStore(int storeId) {
+		
+		return drinkDao.deleteStore(storeId);
+	}
+
+	
+
+	
 
 	
 	
