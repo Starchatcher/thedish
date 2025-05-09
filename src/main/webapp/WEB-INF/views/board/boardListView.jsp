@@ -17,7 +17,7 @@
 <style type="text/css">
 /* 게시판 테이블 */
 table#boardTable {
-    width: 800px;
+    width: 80%;
     margin: 30px auto;
     border-collapse: collapse;
     text-align: left;
@@ -64,7 +64,7 @@ tr:hover {
 h1#boardTitle {
     font-size: 24px;
     font-weight: 600;
-    width: 800px;
+    width: 80%;
     margin: 40px auto 24px;
     text-align: center;
     color: #333333;
@@ -74,7 +74,7 @@ h1#boardTitle {
 
 /* 검색 영역 */
 #search-area {
-    width: 800px;
+    width: 80%;
     margin: 0 auto 20px;
     display: flex;
     justify-content: space-between;

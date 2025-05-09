@@ -293,6 +293,36 @@ textarea:focus {
 #like-count-display {
 	margin-bottom: 10px;
 }
+
+.comment-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.comment-pagination .page-link {
+  padding: 6px 12px;
+  background-color: #f1f1f1;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.comment-pagination .page-link:hover {
+  background-color: #ddd;
+}
+
+.comment-pagination .page-link.active {
+  background-color: #4A5568;
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+  border-color: #4A5568;
+}
 </style>
 
 </head>
@@ -376,6 +406,8 @@ textarea:focus {
 				                <input type="hidden" name="commentId" value="${c.commentId}" />
 				                <input type="hidden" name="boardId" value="${board.boardId}" />
 				                <input type="hidden" name="category" value="${param.category}" />
+				                <input type="hidden" name="page" value="${currentPage}" />
+							    <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 				                <textarea name="content" required style="width:100%; height:80px;">${c.content}</textarea>
 				                <div class="edit-buttons" style="margin-top:8px;">
 				                    <button type="submit">저장</button>
@@ -399,6 +431,8 @@ textarea:focus {
 				            <input type="hidden" name="boardId" value="${board.boardId}" />
 				            <input type="hidden" name="category" value="${param.category}" />
 				            <input type="hidden" name="replyTargetId" value="${c.commentId}" />
+				            <input type="hidden" name="page" value="${currentPage}" />
+						    <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 				            <button type="submit">답글달기</button>
 				        </form>
 				        </c:if>
@@ -409,12 +443,16 @@ textarea:focus {
 				                <input type="hidden" name="boardId" value="${board.boardId}" />
 				                <input type="hidden" name="category" value="${param.category}" />
 				                <input type="hidden" name="editCommentId" value="${c.commentId}" />
+				                <input type="hidden" name="page" value="${currentPage}" />
+    							<input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 				                <button type="submit">수정</button>
 				            </form>
 				            <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
 				                <input type="hidden" name="commentId" value="${c.commentId}" />
 				                <input type="hidden" name="boardId" value="${board.boardId}" />
 				                <input type="hidden" name="category" value="${param.category}" />
+				                <input type="hidden" name="page" value="${currentPage}" />
+						   		<input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 				                <button type="submit">삭제</button>
 				            </form>
 				        </c:if>
@@ -427,12 +465,14 @@ textarea:focus {
 				        <input type="hidden" name="boardId" value="${board.boardId}" />
 				        <input type="hidden" name="parentId" value="${c.commentId}" />
 				        <input type="hidden" name="category" value="${param.category}" />
+				        <input type="hidden" name="page" value="${currentPage}" />
+					    <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 				        <textarea name="content" required placeholder="답글 입력"></textarea>
 				
 				        <div class="comment-buttons">
 				            <button type="submit">등록</button>
-				            <button type="button"
-				                    onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}'">취소</button>
+				            <button type="button" onclick="location.href='boardDetail.do?boardId=${board.boardId}
+				            &category=${param.category}'">취소</button>
 				        </div>
 				    </form>
 				</c:if>
@@ -455,6 +495,8 @@ textarea:focus {
                                         <input type="hidden" name="commentId" value="${r.commentId}" />
                                         <input type="hidden" name="boardId" value="${board.boardId}" />
                                         <input type="hidden" name="category" value="${param.category}" />
+                                        <input type="hidden" name="page" value="${currentPage}" />
+    									<input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
                                         <textarea name="content" required style="width:100%; height:80px;">${r.content}</textarea>
                                         <div class="edit-buttons" style="margin-top:8px;">
                                             <button type="submit">저장</button>
@@ -469,7 +511,6 @@ textarea:focus {
                                 </c:otherwise>
                             </c:choose>
                         </div>
-
                         <!-- 대댓글 버튼 -->
                         <c:if test="${loginUser.loginId eq r.loginId || loginUser.role eq 'ADMIN'}">
 						    <c:if test="${empty editCommentId or editCommentId ne r.commentId}">
@@ -478,12 +519,16 @@ textarea:focus {
 						                <input type="hidden" name="boardId" value="${board.boardId}" />
 						                <input type="hidden" name="category" value="${param.category}" />
 						                <input type="hidden" name="editCommentId" value="${r.commentId}" />
+						                <input type="hidden" name="page" value="${currentPage}" />
+									    <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 						                <button type="submit">수정</button>
 						            </form>
 						            <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
 						                <input type="hidden" name="commentId" value="${r.commentId}" />
 						                <input type="hidden" name="boardId" value="${board.boardId}" />
 						                <input type="hidden" name="category" value="${param.category}" />
+						                <input type="hidden" name="page" value="${currentPage}" />
+									    <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
 						                <button type="submit">삭제</button>
 						            </form>
 						        </div>
@@ -496,6 +541,17 @@ textarea:focus {
         </c:if>
     </c:forEach>
 </div>
+<!-- 댓글 페이징 -->
+<c:if test="${commentPaging.maxPage > 1}">
+  <div class="comment-pagination">
+    <c:forEach var="p" begin="${commentPaging.startPage}" end="${commentPaging.endPage}">
+      <a href="boardDetail.do?boardId=${board.boardId}&category=${category}&page=${currentPage}&cpage=${p}"
+         class="page-link ${p == commentPaging.currentPage ? 'active' : ''}">
+        ${p}
+      </a>
+    </c:forEach>
+  </div>
+</c:if>
 
 <!-- 새 댓글 작성 폼 -->
 <c:if test="${!empty sessionScope.loginUser}">
@@ -503,6 +559,8 @@ textarea:focus {
         <form action="boardCommentInsert.do" method="post">
             <input type="hidden" name="boardId" value="${board.boardId}" />
             <input type="hidden" name="category" value="${param.category}" />
+            <input type="hidden" name="page" value="${currentPage}" />
+    		<input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
             <textarea name="content" placeholder="댓글을 입력하세요" required style="width:100%; height:80px;"></textarea>
             <div style="margin-top: 8px;">
                 <button class="comment-submit-btn" type="submit">작성</button>
