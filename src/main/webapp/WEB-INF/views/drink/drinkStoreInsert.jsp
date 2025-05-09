@@ -172,26 +172,9 @@
         background-color: #c82333;
     }
 
-   .address-suggestions {
-        border: 1px solid #ccc;
-        background-color: #fff;
-        max-height: 200px;
-        overflow-y: auto;
-        position: absolute; /* 위치 조정 */
-        z-index: 1000; /* 다른 요소 위에 표시 */
-        width: calc(100% - 2px); /* 입력 필드와 동일한 너비 */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-    }
-
-    .address-suggestions div {
-        padding: 10px;
-        cursor: pointer;
-    }
-
-    .address-suggestions div:hover {
-        background-color: #f1f1f1; /* 호버 시 배경색 */
-    }
+    /* 추가적인 관리자 페이지 느낌 요소 */
+    /* 예: 사이드바나 상단바가 있다고 가정하고 컨테이너 패딩 등을 조정할 수 있습니다. */
+    /* 현재는 단일 페이지 구성에 맞춰 스타일링 */
 
 </style>
 
@@ -229,10 +212,9 @@
             <input type="text" id="storeName" name="storeName" required>
         </div>
         <div>
-    <label for="storeAddress">판매처 주소:</label>
-    <input type="text" id="storeAddress" name="storeAddress" required onkeyup="searchAddress(this.value);" autocomplete="off">
-    <div id="addressSuggestions" class="address-suggestions" style="display: none;"></div> <!-- 검색 결과 표시 영역 -->
-</div>
+            <label for="storeAddress">판매처 주소:</label>
+            <input type="text" id="storeAddress" name="storeAddress" required>
+        </div>
         <button type="submit">판매처 등록</button>
     </form>
 
@@ -432,39 +414,7 @@
             }
         }
     </script>
-<script  type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services"></script> <!-- 카카오 지도 API 스크립트 -->
 
-<script>
-    function searchAddress(query) {
-        if (query.length < 2) { // 최소 2글자 이상 입력 시 검색
-            document.getElementById('addressSuggestions').style.display = 'none'; // 검색어가 짧으면 숨김
-            return;
-        }
-
-        // 카카오 주소 검색 API 호출
-        const geocoder = new kakao.maps.services.Geocoder();
-        geocoder.addressSearch(query, function(result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                const suggestions = document.getElementById('addressSuggestions');
-                suggestions.innerHTML = ''; // 이전 검색 결과 초기화
-                suggestions.style.display = 'block'; // 검색 결과 표시
-
-                for (let i = 0; i < result.length; i++) {
-                    const address = result[i].address_name; // 주소
-                    const suggestionDiv = document.createElement('div');
-                    suggestionDiv.textContent = address; // 주소 텍스트 설정
-                    suggestionDiv.onclick = function() {
-                        document.getElementById('storeAddress').value = address; // 주소 입력 필드에 설정
-                        suggestions.style.display = 'none'; // 검색 결과 숨김
-                    };
-                    suggestions.appendChild(suggestionDiv); // 검색 결과 목록에 추가
-                }
-            } else {
-                document.getElementById('addressSuggestions').style.display = 'none'; // 검색 결과 숨김
-            }
-        });
-    }
-</script>
 
 </div>
 <c:import url="/WEB-INF/views/common/footer.jsp" />
