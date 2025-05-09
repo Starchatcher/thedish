@@ -173,12 +173,17 @@ p {
   </c:if>
 
 	<div class="qna-action-buttons">
+		<button type="button" onclick="history.back()" class="qna-btn back">🔙 목록</button>
+		<c:if test="${ qna.isAnswered eq 'N' }">
+		<form action="qnaUpdateForm.do" method="get">
+	    	<input type="hidden" name="qnaId" value="${ qna.qnaId }" />
+	    	<button type="submit" class="qna-btn update">✏️ 수정</button>
+	    </form>
 	    <form action="qnaDelete.do" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-	        <input type="hidden" name="qnaId" value="${qna.qnaId}" />
+	        <input type="hidden" name="qnaId" value="${ qna.qnaId }" />
 	        <button type="submit" class="qna-btn delete">🗑️ 삭제</button>
 	    </form>
-	
-	    <button type="button" onclick="history.back()" class="qna-btn back">🔙 목록</button>
+	    </c:if>
 	</div>
 </div>
 

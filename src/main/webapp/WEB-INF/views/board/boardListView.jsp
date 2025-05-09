@@ -33,6 +33,7 @@ table#boardTable td {
     padding: 14px;
     border-bottom: 1px solid #e0e0e0;
     color: #333333;
+    text-align: center;
 }
 
 table#boardTable th {
