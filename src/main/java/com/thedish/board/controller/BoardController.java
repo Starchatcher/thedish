@@ -549,10 +549,13 @@ public class BoardController {
 			mv.addObject("paging", paging);
 			mv.addObject("action", action);
 			mv.addObject("keyword", keyword);
-			mv.setViewName("board/boardListView"); // 공통 뷰 사용
+			mv.setViewName("board/boardListView");
 		} else {
-			mv.addObject("message", "검색 결과가 존재하지 않습니다.");
-			mv.setViewName("common/error");
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.setViewName("board/boardListView");
 		}
 
 		return mv;
@@ -584,10 +587,13 @@ public class BoardController {
 			mv.addObject("paging", paging);
 			mv.addObject("action", action);
 			mv.addObject("keyword", keyword);
-			mv.setViewName("board/boardListView"); // 공통 뷰 사용
+			mv.setViewName("board/boardListView");
 		} else {
-			mv.addObject("message", "검색 결과가 존재하지 않습니다.");
-			mv.setViewName("common/error");
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.setViewName("board/boardListView"); 
 		}
 
 		return mv;
@@ -621,8 +627,11 @@ public class BoardController {
 			mv.addObject("keyword", keyword);
 			mv.setViewName("board/boardListView"); // 공통 뷰 사용
 		} else {
-			mv.addObject("message", "검색 결과가 존재하지 않습니다.");
-			mv.setViewName("common/error");
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.setViewName("board/boardListView");
 		}
 
 		return mv;
@@ -675,8 +684,12 @@ public class BoardController {
 			mv.addObject("category", category); // 카테고리 유지
 			mv.setViewName("board/boardListView");
 		} else {
-			mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
-			mv.setViewName("common/error");
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.addObject("category", category);
+			mv.setViewName("board/boardListView");
 		}
 
 		return mv;
@@ -729,8 +742,12 @@ public class BoardController {
 			mv.addObject("category", category); // 카테고리 유지
 			mv.setViewName("board/boardListView");
 		} else {
-			mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
-			mv.setViewName("common/error");
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.addObject("category", category); // 카테고리 유지
+			mv.setViewName("board/boardListView");
 		}
 
 		return mv;
@@ -783,8 +800,12 @@ public class BoardController {
 			mv.addObject("category", category); // 카테고리 유지
 			mv.setViewName("board/boardListView");
 		} else {
-			mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
-			mv.setViewName("common/error");
+			mv.addObject("list", list);
+			mv.addObject("paging", paging);
+			mv.addObject("action", action);
+			mv.addObject("keyword", keyword);
+			mv.addObject("category", category); // 카테고리 유지
+			mv.setViewName("board/boardListView");
 		}
 
 		return mv;
