@@ -155,37 +155,36 @@ body {
 
 
 /* 그리드 컨테이너 */
-/* .grid는 .content-container 내부에 위치한다고 가정 */
-.grid {
+  .grid {
     display: grid;
-    /* 화면 너비에 따라 자동으로 열 개수 조절 */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 반응형 4열 (최소 250px) */
+    grid-template-columns: repeat(4, 1fr); /* 4열 고정 설정 */
     gap: 20px; /* 카드들 사이의 간격 */
-    margin-top: 20px;
-    padding: 0; /* 컨테이너에 이미 패딩이 있으므로 그리드 패딩 제거 */
-    /* max-width 및 margin-left/right: auto는 .content-container에 적용했으므로 여기서 제거 */
-    /* max-width: 1200px; */
-    /* margin-left: auto; */
-    /* margin-right: auto; */
+    margin: 20px auto; /* 상하 여백 및 중앙 정렬 */
+    max-width: 1200px; /* 최대 너비 설정 (필요에 따라 조정) */
 }
 
-/* 각 항목 카드 스타일 (음료 목록: .drink-card) */
-/* .drink-card는 .grid 내부에 위치한다고 가정 */
+/* 음료 카드 스타일 */
 .drink-card {
-    background-color: #fff;
+    background-color: #fff; /* 카드 배경은 흰색 유지 (구분감을 위해) */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
     padding: 10px;
-    height: 350px; /* 카드 높이 유지 또는 조정 */
-    position: relative;
-    padding-bottom: 60px; /* 하단 푸터 영역 확보 */
-    display: flex;
-    flex-direction: column;
+    height: 380px; /* 고정된 높이 조정 (내용 길이에 따라 조절 필요) */
+    display: flex; /* 카드 내용을 위한 flexbox */
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: space-between; /* 내용 간격 벌리기 */
     cursor: pointer; /* 클릭 가능한 느낌 */
     transition: transform 0.2s ease; /* 호버 애니메이션 */
 }
+
+/* 카드 내용이 넘칠 경우 스크롤 가능하도록 설정 */
+.drink-card-content {
+    overflow-y: auto; /* 세로 방향 스크롤 */
+    flex-grow: 1; /* 남은 공간을 채우도록 설정 */
+}
+
 
 .drink-card:hover {
     transform: translateY(-5px); /* 호버 시 살짝 위로 */
@@ -465,31 +464,33 @@ body {
 <c:if test="${  loginUser.role eq 'ADMIN' }">
     <a href="moveInsertDrink.do">등록</a>
     </c:if>
-    <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
-        <c:forEach items="${ requestScope.list }" var="drink" varStatus="status">
-            <c:if test="${status.index < 12}"> <!-- 12개 항목만 출력 -->
-                <div class="drink-card"> <!-- 각 음료 항목을 카드 형태로 -->
-                    <a href="drinkDetail.do?no=${ drink.drinkId }">
-                        <c:choose>
-                            <c:when test="${not empty drink.imageUrl}">
-                                <img src="${drink.imageUrl}" alt="이미지" />
-                            </c:when>
-                            <c:when test="${not empty drink.imageId and drink.imageId != 0}">
-                                <img src="${pageContext.request.contextPath}/image/view.do?imageId=${drink.imageId}" alt="이미지" />
-                            </c:when>
-                            <c:otherwise>
-                                <img src="${pageContext.request.contextPath}/resources/images/thedishlogo.jpg" alt="기본 이미지" />
-                            </c:otherwise>
-                        </c:choose>
-                    </a>
+  <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
+    <c:forEach items="${ requestScope.list }" var="drink" varStatus="status">
+        <c:if test="${status.index < 12}"> <!-- 12개 항목만 출력 -->
+            <div class="drink-card"> <!-- 각 음료 항목을 카드 형태로 -->
+                <a href="drinkDetail.do?no=${ drink.drinkId }">
+                    <c:choose>
+                        <c:when test="${not empty drink.imageUrl}">
+                            <img src="${drink.imageUrl}" alt="이미지" />
+                        </c:when>
+                        <c:when test="${not empty drink.imageId and drink.imageId != 0}">
+                            <img src="${pageContext.request.contextPath}/image/view.do?imageId=${drink.imageId}" alt="이미지" />
+                        </c:when>
+                        <c:otherwise>
+                            <img src="${pageContext.request.contextPath}/resources/images/thedishlogo.jpg" alt="기본 이미지" />
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+                <div class="drink-card-content"> <!-- 카드 내용 감싸기 -->
                     <h3>${ drink.name }</h3>
                     <p>${ drink.description }</p>
                     <p class="view-count">조회수: ${ drink.viewCount }</p>
                     <p>알콜도수: ${ drink.alcoholContent }</p>
                 </div>
-            </c:if>
-        </c:forEach>
-    </div>
+            </div>
+        </c:if>
+    </c:forEach>
+</div>
     <br>
 	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
 	<c:import url="/WEB-INF/views/common/sidebar.jsp" />

@@ -225,6 +225,100 @@ form button:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
 }
     
+  .drink-pairing-section {
+        margin-top: 30px; /* 상단 여백 */
+        margin-bottom: 30px; /* 하단 여백 */
+        padding: 20px; /* 내부 여백 */
+        background-color: #ffffff; /* 섹션 배경색 */
+        border-radius: 8px; /* 모서리 둥글게 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+    }
+
+    .drink-pairing-section h2 {
+        color: #4a4a4a; /* 제목 색상 */
+        border-bottom: 2px solid #eeeeee; /* 제목 아래 구분선 */
+        padding-bottom: 10px; /* 아래 여백 */
+        margin-top: 0; /* 상단 여백 제거 (컨테이너 패딩과 병합) */
+        margin-bottom: 20px; /* 아래 여백 */
+        font-size: 1.8rem; /* 제목 글자 크기 */
+    }
+
+    /* 테이블 스타일 */
+    .drink-pairing-section table {
+        width: 100%; /* 테이블 너비 100% */
+        border-collapse: collapse; /* 테이블 테두리 합치기 */
+        margin-top: 15px; /* 위쪽 여백 */
+        border: 1px solid #ddd; /* 테이블 전체 테두리 (선택 사항) */
+    }
+
+    .drink-pairing-section th, .drink-pairing-section td {
+        padding: 12px; /* 셀 내부 여백 */
+        text-align: left; /* 텍스트 왼쪽 정렬 */
+        border-bottom: 1px solid #eee; /* 행 아래 구분선 */
+    }
+
+    .drink-pairing-section th {
+        background-color: #f8f8f8; /* 헤더 배경색 */
+        font-weight: bold; /* 글자 두껍게 */
+        color: #555;
+         border-bottom: 2px solid #ddd; /* 헤더 아래 선 강조 */
+    }
+
+     /* 첫 번째 th/td와 마지막 th/td 스타일 (선택 사항) */
+    .drink-pairing-section th:first-child,
+    .drink-pairing-section-section td:first-child {
+        /* border-left: none; */
+    }
+     .drink-pairing-section th:last-child,
+    .drink-pairing-section td:last-child {
+        /* border-right: none; */
+    }
+
+
+    .drink-pairing-section tbody tr:nth-child(even) {
+        background-color: #fbfbfb; /* 짝수 행 배경색 (더 연한 색) */
+    }
+
+    .drink-pairing-section tbody tr:hover {
+        background-color: #f0f0f0; /* 행 호버 시 배경색 */
+    }
+
+     .drink-pairing-section p {
+        font-style: italic; /* 메시지 기울임꼴 */
+        color: #777; /* 메시지 색상 */
+        text-align: center; /* 가운데 정렬 */
+        margin-top: 20px;
+     }
+
+
+    /* 페어링 등록 버튼 스타일 */
+    .drink-pairing-section button {
+        display: inline-block; /* 버튼을 인라인 블록 요소로 */
+        margin-top: 20px; /* 테이블 또는 메시지와의 간격 */
+        background-color: #5a67d8; /* 브랜드 주 색상 */
+        color: white; /* 글자색 */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px; /* 모서리 둥글게 */
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.2s ease-in-out; /* 호버 시 전환 효과 */
+    }
+
+    .drink-pairing-section button:hover {
+        background-color: #434190; /* 호버 시 배경색 어둡게 */
+    }
+    .drink-pairing-section table td a {
+        text-decoration: none; /* 밑줄 제거 */
+        color: inherit; /* 부모 요소(td)의 글자색 상속 */
+        cursor: pointer; /* 마우스 오버 시 포인터 모양 변경 */
+    }
+
+    /* (선택 사항) 호버 시 스타일 변경 */
+    .drink-pairing-section table td a:hover {
+        color: #5a67d8; /* 호버 시 색상 변경 예시 */
+        /* text-decoration: underline; /* 호버 시 밑줄 다시 표시 예시 */
+    }
     
     </style>
 
@@ -276,38 +370,52 @@ form button:hover {
     </c:choose>
 </div>
 
-<h2>이 술과 잘 어울리는 레시피</h2>
 
-<!-- 서버에서 전달받은 'pairingList'가 비어있지 않다면 -->
-<c:choose>
-    <c:when test="${ not empty pairingList }">
-        <table>
-            <thead>
-                <tr>
-                    <th>레시피 이름</th>
-                    <th>페어링 이유</th>
-                    <!-- 필요하다면 추가 정보 컬럼 추가 (예: 이미지, 설명) -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- pairingList의 각 항목(페어링 정보 객체)을 'pairing' 변수에 담아 반복 -->
-                <c:forEach var="pairing" items="${ pairingList }">
+
+<div class="drink-pairing-section"> <%-- 이 술과 잘 어울리는 레시피 섹션 시작 --%>
+
+    <h2>이 술과 잘 어울리는 레시피</h2>
+
+    <!-- 서버에서 전달받은 'pairingList'가 비어있지 않다면 -->
+    <c:choose>
+        <c:when test="${ not empty pairingList }">
+            <table>
+                <thead>
                     <tr>
-                       <!--  'pairing' 객체의 속성(예: recipeName, reason)을 EL 표현식으로 출력 -->
-                        <td>${ pairing.recipeName }</td>
-                        <td>${ pairing.reason }</td>
-                        <!-- 필요하다면 추가 정보 셀 추가 -->
+                        <th>레시피 이름</th>
+                        <th>페어링 이유</th>
+                        <!-- 필요하다면 추가 정보 컬럼 추가 (예: 이미지, 설명) -->
+                        <%-- 관리자 삭제 기능을 위한 헤더 (필요하다면 여기에 추가) --%>
+                         
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </c:when>
-    
-    <c:otherwise>
-        <p>아직 등록된 페어링 정보가 없습니다.</p>
-    </c:otherwise>
-</c:choose>
+                </thead>
+                <tbody>
+                    <!-- pairingList의 각 항목(페어링 정보 객체)을 'pairing' 변수에 담아 반복 -->
+                    <c:forEach var="pairing" items="${ pairingList }">
+                        <tr>
+                           <td>  <a href="${ pageContext.request.contextPath }/recipeDetail.do?no=${ pairing.recipeId }">
+                                    ${ pairing.recipeName }
+                                </a></td>
+                            <td>${ pairing.reason }</td>
+                            
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:when>
 
+        <c:otherwise>
+            <p>아직 등록된 페어링 정보가 없습니다.</p>
+        </c:otherwise>
+    </c:choose>
+
+    <%-- *** 로그인한 사용자에게만 레시피 등록 버튼 표시 *** --%>
+    <%-- 세션에 'loginUser' 정보가 있을 경우 버튼을 표시합니다. --%>
+    <c:if test="${ not empty sessionScope.loginUser }">
+        <button onclick="location.href='${ pageContext.request.contextPath }/pairingInsert.do?drinkId=${ drink.drinkId }'">페어링 등록</button> <%-- 버튼 URL 수정 --%>
+    </c:if>
+
+</div> <%-- 이 술과 잘 어울리는 레시피 섹션 끝 --%>
 
 
 
@@ -450,6 +558,7 @@ form button:hover {
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services&autoload=false"></script>
 <!-- 2. initMap 함수를 정의하는 스크립트 -->
   <script type="text/javascript">
+  
         console.log("--- 지도 스크립트 블록 시작 (Geocoding 활성화 시도) ---"); // 로그 변경
         var storeAddress = "${storeInfo['STORE_ADDRESS']}"; // EL 치환
         var storeName = "${storeInfo['STORE_NAME']}";     // EL 치환
