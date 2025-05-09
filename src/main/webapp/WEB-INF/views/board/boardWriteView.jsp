@@ -21,74 +21,85 @@ form {
   align-items: center;
   width: 100%;
   gap: 20px;
-  margin-bottom: 20px;
-  margin-top:20px;
+  margin: 20px 0;
 }
 
-/* 게시판 선택 드롭다운과 제목 입력 공통 */
+/* 드롭다운 + 제목 입력 공통 */
 .title-row select,
 .title-row .title-input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #d0d0d0;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 15px;
   box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  transition: border 0.2s ease;
+}
+
+.title-row select:focus,
+.title-row .title-input:focus {
+  border-color: #aaa;
+  outline: none;
 }
 
 /* 내용 작성 textarea */
 .editor {
   width: 100%;
   min-height: 250px;
-  border: 1px solid #ccc;
+  height: 400px;
+  border: 1px solid #d0d0d0;
   border-radius: 6px;
   background-color: #fff;
   padding: 12px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
   box-sizing: border-box;
   margin-bottom: 20px;
-  height: 400px;
+  color: #333;
+  resize: vertical;
 }
 
-/* 파일 선택 버튼 영역 (왼쪽 정렬) */
+/* 파일 선택 영역 */
 .file-upload {
   display: flex;
-  justify-content: flex-start; /* 왼쪽 정렬 */
+  justify-content: flex-start;
   margin-bottom: 30px;
 }
 
 /* 파일 선택 버튼 */
 .file-upload input[type="file"] {
-  padding: 8px;
+  padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
+  background-color: #fff;
+  color: #444;
 }
 
-/* 등록/취소 버튼 영역 (오른쪽 정렬) */
+/* 버튼 영역 */
 .button-row {
   display: flex;
-  justify-content: flex-end; /* 오른쪽 정렬 */
+  justify-content: flex-end;
   gap: 10px;
   margin-bottom: 50px;
 }
 
-/* 등록/취소 버튼 스타일 */
+/* 등록/취소 버튼 */
 .button-row button {
-  background-color: #90bc90;
+  background-color: #888;
   border: none;
   border-radius: 6px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 14px;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease;
 }
 
-/* 버튼 hover 효과 */
 .button-row button:hover {
-  background-color: #7da97d;
+  background-color: #555;
 }
 </style>
 

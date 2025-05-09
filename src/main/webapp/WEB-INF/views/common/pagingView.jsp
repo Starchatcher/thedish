@@ -29,36 +29,43 @@
     width: 650px;
     text-align: center;
 }
-.paging a, .paging span {
+
+.paging a,
+.paging span {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    margin: 0 2px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 3px;
+    font-size: 13px;
     text-align: center;
-    font-size: 14px;
-    border: 1px solid #8FBC8F;
+    color: #333;
+    border: 1px solid #d0d0d0;
     border-radius: 6px;
-    color: #8FBC8F;
-    text-decoration: none;
-    transition: all 0.3s ease;
     background-color: #fff;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
+
 .paging a:hover {
-    background-color: #8FBC8F;
-    color: #fff;
+    background-color: #f0f0f0;
+    border-color: #bbb;
+    color: #000;
 }
+
 .paging .current-page {
-    background-color: #8FBC8F;
-    color: #fff;
-    font-weight: bold;
-    cursor: default;
-}
-.paging .disabled {
-    color: #ccc;
+    background-color: #e0e0e0;
+    color: #000;
+    font-weight: 600;
     border-color: #ccc;
     cursor: default;
+}
+
+.paging .disabled {
+    color: #aaa;
+    border-color: #e0e0e0;
     background-color: #f9f9f9;
+    cursor: not-allowed;
 }
 </style>
 </head>

@@ -19,37 +19,44 @@
 	background: #fff;
 	padding: 30px;
 	border-radius: 12px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.container:last-of-type {
+  margin-bottom: 60px; /* footer와의 간격 확보 */
 }
 
 .title {
-	font-size: 26px;
-	font-weight: bold;
+	font-size: 24px;
+	font-weight: 600;
 	margin-bottom: 10px;
+	color: #2e2e2e;
 }
 
 .meta-info {
-	font-size: 14px;
-	color: #666;
+	font-size: 13px;
+	color: #777;
 	margin-bottom: 20px;
 }
 
 .content {
-	font-size: 16px;
+	font-size: 15px;
 	margin-bottom: 30px;
 	line-height: 1.7;
-	background-color: #f9f9f9;
-	padding: 15px;
+	background-color: #fafafa;
+	padding: 16px;
 	border-radius: 8px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+	color: #2e2e2e;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 /* 첨부파일 영역 */
 .attachment {
 	margin-bottom: 20px;
-	background: #f8f8f8;
+	background: #f5f5f5;
 	padding: 10px;
 	border-radius: 8px;
+	color: #444;
 }
 
 .button-row {
@@ -61,17 +68,17 @@
 
 .button-row button {
 	padding: 8px 16px;
-	background-color: #90bc90;
+	background-color: #888;
 	border: none;
 	border-radius: 6px;
 	color: white;
 	font-size: 14px;
 	cursor: pointer;
-	transition: background-color 0.3s;
+	transition: background-color 0.2s ease;
 }
 
 .button-row button:hover {
-	background-color: #7da97d;
+	background-color: #555;
 }
 
 hr {
@@ -80,27 +87,25 @@ hr {
 	border-top: 1px solid #ddd;
 }
 
-/* 댓글 전체 영역 */
+/* 댓글 영역 */
 .comment-section {
 	margin-top: 40px;
-	background-color: #fafafa;
+	background-color: #f7f7f7;
 	padding: 15px;
 	border-radius: 8px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-/* 댓글 제목 */
 .comment-title {
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 600;
 	margin-bottom: 15px;
-	color: #333;
+	color: #2e2e2e;
 }
 
-/* 댓글 박스 */
 .comment-box {
 	padding: 12px 16px;
-	background-color: #f8f9fa;
+	background-color: #fcfcfc;
 	border-radius: 10px;
 	margin-bottom: 14px;
 	border: 1px solid #e0e0e0;
@@ -108,61 +113,53 @@ hr {
 
 .comment-box.reply {
 	margin-left: 24px;
-	background-color: #fcfcfc;
+	background-color: #fdfdfd;
 	border-left: 3px solid #d0d0d0;
 }
 
-/* 댓글 메타 정보 */
 .comment-meta {
 	font-size: 13px;
 	color: #888;
 	margin-bottom: 6px;
 }
 
-/* 댓글 본문 */
 .comment-content {
 	font-size: 15px;
 	line-height: 1.6;
-	font-weight: 400;
-	color: #333;
+	color: #2e2e2e;
 	padding: 6px 0;
-	white-space: normal;
 	word-break: break-word;
 }
 
-/* 댓글 입력 영역 (최상단 폼) */
 .comment-form {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	background-color: #f8f8f8;
 	padding: 20px;
 	border-radius: 8px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-	position: relative; /* ⭐ 이게 핵심입니다 */
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+	position: relative;
 }
 
 .comment-form textarea {
 	width: 100%;
 	height: 100px;
-	padding: 12px 90px 12px 12px; /* ← 오른쪽 공간 확보 */
+	padding: 12px 90px 12px 12px;
 	border-radius: 8px;
 	border: 1px solid #ccc;
 	font-size: 14px;
-	resize: vertical;
 	background-color: #fdfdfd;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-	transition: border-color 0.3s, box-shadow 0.3s;
+	transition: border-color 0.2s, box-shadow 0.2s;
 	box-sizing: border-box;
 	resize: none;
 }
 
 .comment-form textarea:focus {
 	outline: none;
-	border-color: #90bc90;
-	box-shadow: 0 0 0 3px rgba(144, 188, 144, 0.2);
+	border-color: #aaa;
+	box-shadow: 0 0 0 3px rgba(160, 160, 160, 0.2);
 }
 
-/* 공통 textarea 스타일 (대댓글, 수정 등) */
 textarea {
 	width: 100%;
 	max-width: 100%;
@@ -172,18 +169,19 @@ textarea {
 	border-radius: 6px;
 	font-size: 14px;
 	resize: none;
-	box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 	box-sizing: border-box;
 }
 
 textarea:focus {
 	outline: none;
-	border-color: #90bc90;
-	box-shadow: 0 0 0 3px rgba(144, 188, 144, 0.2);
+	border-color: #aaa;
+	box-shadow: 0 0 0 3px rgba(160, 160, 160, 0.2);
 }
 
-/* 버튼 그룹 공통 */
-.comment-buttons {
+/* 공통 버튼 그룹 */
+.comment-buttons,
+.edit-buttons {
 	display: flex;
 	gap: 6px;
 	flex-wrap: wrap;
@@ -193,116 +191,107 @@ textarea:focus {
 .comment-buttons button,
 .comment-buttons form button,
 .edit-buttons button {
-	background-color: #e3e3e3;
+	background-color: #e0e0e0;
 	border: none;
 	border-radius: 6px;
 	padding: 5px 12px;
 	font-size: 13px;
 	cursor: pointer;
 	transition: background-color 0.2s;
+	color: #333;
 }
 
 .comment-buttons button:hover,
 .comment-buttons form button:hover,
 .edit-buttons button:hover {
-	background-color: #cfcfcf;
+	background-color: #ccc;
 }
 
-/* 수정 버튼 전용 */
-.edit-buttons {
-	margin-top: 8px;
-	display: flex;
-	gap: 6px;
-}
-
-/* 댓글 전용 작성 버튼 (오른쪽 하단 고정) */
+/* 댓글 전용 작성 버튼 */
 .comment-submit-btn {
 	position: absolute;
-	top: auto;
-	bottom: 40px; /* 더 위로 올림 */
+	bottom: 40px;
 	right: 27px;
 	padding: 6px 14px;
-	background-color: #90bc90;
+	background-color: #888;
 	border: none;
 	border-radius: 6px;
 	color: white;
-	font-size: 14px;
+	font-size: 13px;
 	cursor: pointer;
-	transition: background-color 0.3s;
-	
+	transition: background-color 0.2s ease;
 }
 
 .comment-submit-btn:hover {
-	background-color: #7da97d;
+	background-color: #555;
 }
 
 .post-actions {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
-.post-actions button {
-    font-size: 16px;
-    padding: 10px 16px;
-    margin: 0 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
+/* 좋아요 버튼 (기존 그대로 유지) */
 .like-btn {
-    background-color: #ffecec;
-    color: #d32f2f;
-    font-size: 15px;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 14px;
-    cursor: pointer;
-    transition: 0.2s ease;
+	background-color: #ffecec;
+	color: #d32f2f;
+	font-size: 15px;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 14px;
+	cursor: pointer;
+	transition: 0.2s ease;
 }
 
 .like-btn:hover {
-    background-color: #ffd4d4;
-    font-family: Arial, sans-serif;
+	background-color: #ffd4d4;
+	font-family: Arial, sans-serif;
 }
 
+/* 신고 버튼 – 스타일 통일, 색상만 다르게 */
 .report-btn {
-    background-color: #f4f4f4;
-    color: #333;
+	background-color: #fff5e6;     /* 연한 주황 배경 */
+	color: #d35400;                /* 주황 텍스트 */
+	font-size: 15px;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 14px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
 }
 
 .report-btn:hover {
-    background-color: #e0e0e0;
+	background-color: #ffe3c6;
 }
 
+/* 리스트로 돌아가기 */
 .go-list-btn-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px 24px 40px 0;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	padding: 20px 24px 40px 0;
 }
 
 .go-list-btn {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    color: #333;
-    font-size: 14px;
-    padding: 8px 18px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    transition: all 0.2s ease;
-    cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	color: #333;
+	font-size: 14px;
+	padding: 8px 18px;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+	transition: all 0.2s ease;
+	cursor: pointer;
 }
 
 .go-list-btn:hover {
-    background-color: #f9f9f9;
-    border-color: #999;
+	background-color: #f9f9f9;
+	border-color: #999;
 }
 
-#like-count-display{
-	margin-bottom:10px;
+#like-count-display {
+	margin-bottom: 10px;
 }
 </style>
 
@@ -334,7 +323,7 @@ textarea:focus {
 				<form id="reportForm" action="boardReportPage.do" method="get" style="display: inline;">
 					<input type="hidden" name="targetId" value="${ board.boardId }">
 					<input type="hidden" name="category" value="${ category }">
-					<button type="submit">🚨 신고</button>
+					<button type="submit" class="report-btn">🚨 신고</button>
 				</form>
 			</c:if>
 			
