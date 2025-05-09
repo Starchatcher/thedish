@@ -151,6 +151,15 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 
+	@Override
+	public List<Recipe> getAllRecipes() {
+		return recipeDao.getAllRecipes();
+	}
+
+
+	
+
+
 	
 
 

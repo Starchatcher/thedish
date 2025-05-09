@@ -114,65 +114,71 @@
     color: #000;
 }
     /* 그리드 스타일 */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 반응형 4열 설정 */
-        gap: 20px; /* 카드들 사이의 간격 */
-        margin-top: 20px;
-    }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4열 고정 설정 */
+    gap: 20px; /* 카드들 사이의 간격 */
+    margin: 20px auto; /* 상하 여백 및 중앙 정렬 */
+    max-width: 1200px; /* 최대 너비 설정 (필요에 따라 조정) */
+}
+/* 레시피 카드 스타일 */
+.recipe-card {
+    background-color: #fff; /* 카드 배경은 흰색 유지 (구분감을 위해) */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    height: 380px; /* 고정된 높이 조정 (내용 길이에 따라 조절 필요) */
+    display: flex; /* 카드 내용을 위한 flexbox */
+    flex-direction: column; /* 세로 방향 정렬 */
+    justify-content: space-between; /* 내용 간격 벌리기 */
+    cursor: pointer; /* 클릭 가능한 느낌 */
+    transition: transform 0.2s ease; /* 호버 애니메이션 */
+}
+/* 카드 내용이 넘칠 경우 스크롤 가능하도록 설정 */
+.recipe-card-content {
+    overflow-y: auto; /* 세로 방향 스크롤 */
+    flex-grow: 1; /* 남은 공간을 채우도록 설정 */
+}
 
-    /* 레시피 카드 스타일 */
-    .recipe-card {
-        background-color: #fff; /* 카드 배경은 흰색 유지 (구분감을 위해) */
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        text-align: center;
-        padding: 10px;
-        height: 320px; /* 고정된 높이 조정 (내용 길이에 따라 조절 필요) */
-        display: flex; /* 카드 내용을 위한 flexbox */
-        flex-direction: column; /* 세로 방향 정렬 */
-        justify-content: space-between; /* 내용 간격 벌리기 */
-        cursor: pointer; /* 클릭 가능한 느낌 */
-        transition: transform 0.2s ease; /* 호버 애니메이션 */
-    }
-    
-    .recipe-card:hover {
-        transform: translateY(-5px); /* 호버 시 살짝 위로 */
-    }
+/* 호버 효과 */
+.recipe-card:hover {
+    transform: translateY(-5px); /* 호버 시 살짝 위로 */
+}
 
-    .recipe-card img {
-        width: 100%;
-        height: 160px; /* 고정된 이미지 높이 조정 */
-        object-fit: cover;
-        border-radius: 4px; /* 이미지 모서리 살짝 둥글게 */
-        margin-bottom: 10px;
-    }
+.recipe-card img {
+    width: 100%;
+    height: 160px; /* 고정된 이미지 높이 조정 */
+    object-fit: cover;
+    border-radius: 4px; /* 이미지 모서리 살짝 둥글게 */
+    margin-bottom: 10px;
+}
 
-    .recipe-card h3 {
-        font-size: 18px;
-        margin: 0 0 5px 0; /* 간격 조정 */
-        color: #555; /* 글자색 조정 */
-    }
-    
-    .recipe-card h3 a { /* 제목 링크 스타일 */
-        text-decoration: none;
-        color: inherit;
-    }
+.recipe-card h3 {
+    font-size: 18px;
+    margin: 0 0 5px 0; /* 간격 조정 */
+    color: #555; /* 글자색 조정 */
+}
 
-    .recipe-card p {
-        color: #666;
-        font-size: 14px;
-        margin: 0 0 5px 0; /* 간격 조정 */
-        flex-grow: 1; /* 남은 공간 채우기 (조회수 아래로 밀기) */
-    }
+.recipe-card h3 a { /* 제목 링크 스타일 */
+    text-decoration: none;
+    color: inherit;
+}
 
-    .view-count {
-        color: #ff5722; /* 조회수 색상 유지 (강조) */
-        font-weight: bold;
-        font-size: 14px;
-        margin-top: auto; /* 항상 하단에 위치 */
-    }
+.recipe-card p {
+    color: #666;
+    font-size: 14px;
+    margin: 0 0 5px 0; /* 간격 조정 */
+    flex-grow: 1; /* 남은 공간 채우기 (조회수 아래로 밀기) */
+}
+
+.view-count {
+    color: #ff5722; /* 조회수 색상 유지 (강조) */
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: auto; /* 항상 하단에 위치 */
+}
     
    #search-area, fieldset { /* fieldset 사용 시 이 규칙이 적용됨 */
     max-width: 800px; /* 검색 영역 최대 너비 (필요시 조정) */
@@ -307,7 +313,7 @@
     <a href="moveInsertRecipePage.do">등록</a>
   </c:if>  
     <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
-        <c:forEach items="${ requestScope.list }" var="recipe" varStatus="status">
+    <c:forEach items="${ requestScope.list }" var="recipe" varStatus="status">
         <c:if test="${status.index < 12}">
             <div class="recipe-card"> <!-- 각 레시피 항목을 카드 형태로 -->
                 <a href="recipeDetail.do?no=${ recipe.recipeId }">
@@ -323,14 +329,15 @@
                         </c:otherwise>
                     </c:choose>
                 </a>
-                <h3>${ recipe.name }</h3>
-                <p>${ recipe.description }</p>
-                <p class="view-count">조회수: ${ recipe.viewCount }</p>
+                <div class="recipe-card-content"> <!-- 카드 내용 감싸기 -->
+                    <h3>${ recipe.name }</h3>
+                    <p>${ recipe.description }</p>
+                    <p class="view-count">조회수: ${ recipe.viewCount }</p>
+                </div>
             </div>
-            </c:if>
-        </c:forEach>
-        
-    </div>
+        </c:if>
+    </c:forEach>
+</div>
     <br>
 	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
     <c:import url="/WEB-INF/views/common/footer.jsp" />
