@@ -140,8 +140,7 @@ legend {
         <label for="description">설명 (DESCRIPTION):</label>
         <textarea id="description" name="description" maxlength="500" rows="3"></textarea>
 
-        <label for="createBy">작성자 (CREATED_BY) <span style="color:red">*</span>:</label>
-        <input type="text" id="createBy" name="createBy" maxlength="50" required />
+        
 
         <label for="instructions">조리 방법 (INSTRUCTIONS) <span style="color:red">*</span>:</label>
         <textarea id="instructions" name="instructions" maxlength="4000" rows="6" required></textarea>

@@ -116,13 +116,7 @@
     <label for="description">설명 (DESCRIPTION):</label>
     <textarea id="description" name="description" maxlength="4000" rows="4"></textarea>
 
-     <h2>판매 장소 정보</h2>
-
-    <label for="storeName">판매 장소명:</label>
-    <input type="text" id="storeName" name="storeName" maxlength="255" />
-
-    <label for="storeAddress">판매 장소 주소:</label>
-    <input type="text" id="storeAddress" name="storeAddress" maxlength="500" />
+    
 
     <!-- 이미지 업로드 필드 -->
     <label for="imageFile">이미지 업로드:</label>
