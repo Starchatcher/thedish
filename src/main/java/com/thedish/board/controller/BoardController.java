@@ -134,6 +134,7 @@ public class BoardController {
 			@RequestParam(name = "page", required = false) String page, 
 			@RequestParam("category") String category,
 			@RequestParam(name = "editCommentId", required = false) Integer editCommentId,
+			@RequestParam(name ="cpage", required = false) String cpageStr,
 			ModelAndView mv, HttpSession session, HttpServletRequest request) {
 
 		logger.info("boardDetail.do : " + boardId);
@@ -150,18 +151,21 @@ public class BoardController {
 			currentPage = Integer.parseInt(page);
 		}
 
+		int commentPage = 1;
+		if(cpageStr != null) {
+			commentPage = Integer.parseInt(cpageStr);
+		}
+		
 		Board board = boardService.selectBoard(boardId);
 		board.setLikeCount(likeService.countLikes(boardId));
-		// 조회수 1증가 처리
-		boardService.updateViewCount(boardId);
+		boardService.updateViewCount(boardId); // 조회수 1증가 처리
 
 		if (board != null) {
 			// 댓글 개수 조회
 			int commentCount = boardService.selectBoardCommentCount(boardId);
-
 			int limit = 10; // 한 페이지에 보일 댓글 수
 			// 페이징 객체 생성해서 댓글 갯수에 따른 페이징 처리
-			Paging commentPaging = new Paging(commentCount, limit, currentPage, "boardDetail.do");
+			Paging commentPaging = new Paging(commentCount, limit, commentPage, "boardDetail.do");
 			commentPaging.calculate();
 
 			// 댓글 목록 조회용 파라미터 구성
@@ -384,30 +388,39 @@ public class BoardController {
 	public ModelAndView insertComment(ModelAndView mv, HttpSession session,
 	        @RequestParam("boardId") int boardId,
 	        @RequestParam("content") String content,
-	        @RequestParam("category") String category) {
+	        @RequestParam("category") String category,
+	        @RequestParam("page") int page) {
 
-	    // 로그인 체크
 	    Users loginUser = (Users) session.getAttribute("loginUser");
 	    if (loginUser == null) {
 	        mv.setViewName("redirect:loginPage.do");
 	        return mv;
 	    }
 
-	    // 댓글 객체 생성
 	    Comment comment = new Comment();
 	    comment.setTargetId(boardId);
 	    comment.setContent(content);
 	    comment.setLoginId(loginUser.getLoginId());
-	    comment.setTargetType("board"); // 대상이 게시판
-	    comment.setParentId(null); // 일반 댓글
+	    comment.setTargetType("board");
+	    comment.setParentId(null);
 
 	    int result = boardService.insertBoardComment(comment);
+
 	    if (result > 0) {
-	        mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+	        // ⭐ insert가 완료된 후 정확한 최신 댓글 수로 cpage 계산
+	        int totalCount = boardService.selectBoardCommentCount(boardId);
+	        int limit = 10;
+	        int cpage = (int) Math.ceil((double) totalCount / limit);
+
+	        mv.setViewName("redirect:boardDetail.do?boardId=" + boardId +
+	                       "&category=" + category +
+	                       "&page=" + page +
+	                       "&cpage=" + cpage); // ← 최신 페이지로 이동
 	    } else {
 	        mv.addObject("message", "댓글 등록에 실패하였습니다. 다시 시도해주세요.");
 	        mv.setViewName("common/error");
 	    }
+
 	    return mv;
 	}
 	
@@ -416,27 +429,30 @@ public class BoardController {
 	public ModelAndView insertReply(ModelAndView mv, HttpSession session,
 	        @RequestParam("boardId") int boardId,
 	        @RequestParam("content") String content,
-	        @RequestParam("parentId") int parentId, // 필수!
-	        @RequestParam("category") String category) {
+	        @RequestParam("parentId") int parentId,
+	        @RequestParam("category") String category,
+	        @RequestParam("page") int page,
+	        @RequestParam("cpage") int cpage) {
 
-	    // 로그인 체크
 	    Users loginUser = (Users) session.getAttribute("loginUser");
 	    if (loginUser == null) {
 	        mv.setViewName("redirect:loginPage.do");
 	        return mv;
 	    }
 
-	    // 대댓글 객체 생성
 	    Comment comment = new Comment();
 	    comment.setTargetId(boardId);
 	    comment.setContent(content);
 	    comment.setLoginId(loginUser.getLoginId());
 	    comment.setTargetType("board");
-	    comment.setParentId(parentId); // 대댓글임을 명시
+	    comment.setParentId(parentId);
 
 	    int result = boardService.insertBoardComment(comment);
 	    if (result > 0) {
-	        mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+	        mv.setViewName("redirect:boardDetail.do?boardId=" + boardId +
+	                       "&category=" + category +
+	                       "&page=" + page +
+	                       "&cpage=" + cpage);
 	    } else {
 	        mv.addObject("message", "답글 등록에 실패하였습니다. 다시 시도해주세요.");
 	        mv.setViewName("common/error");
@@ -452,7 +468,9 @@ public class BoardController {
 			@RequestParam("commentId") int commentId,
 			@RequestParam("content") String content,
 			@RequestParam("boardId") int boardId,
-			@RequestParam("category") String category) {
+			@RequestParam("category") String category,
+			@RequestParam("cpage") int cpage,
+			@RequestParam("page") int page) {
 
 		Users loginUser = (Users) session.getAttribute("loginUser");
 		if (loginUser == null) {
@@ -467,7 +485,7 @@ public class BoardController {
 
 		int result = boardService.updateBoardComment(comment);
 		if (result > 0) {
-			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&page=" + page + "&cpage=" + cpage);
 		} else {
 			mv.addObject("message", "댓글 수정에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("common/error");
