@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Qna implements java.io.Serializable{
 	private static final long serialVersionUID = -7370875045617624684L;
 
-	private int qanId;
+	private int qnaId;
 	private String title;
 	private String content;
 	private String userId;
@@ -15,16 +15,19 @@ public class Qna implements java.io.Serializable{
 	private String answer;
 	private java.sql.Date answeredAt;
 	private String status;
+	private String originalFileName;
+	private String renameFileName;
 
 	public Qna() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Qna(int qanId, String title, String content, String userId, String createdBy, Date createdAt,
-			String isAnswered, String answer, Date answeredAt, String status) {
+	public Qna(int qnaId, String title, String content, String userId, String createdBy, Date createdAt,
+			String isAnswered, String answer, Date answeredAt, String status, String originalFileName,
+			String renameFileName) {
 		super();
-		this.qanId = qanId;
+		this.qnaId = qnaId;
 		this.title = title;
 		this.content = content;
 		this.userId = userId;
@@ -34,14 +37,32 @@ public class Qna implements java.io.Serializable{
 		this.answer = answer;
 		this.answeredAt = answeredAt;
 		this.status = status;
+		this.originalFileName = originalFileName;
+		this.renameFileName = renameFileName;
 	}
 
-	public int getQanId() {
-		return qanId;
+	public String getOriginalFileName() {
+		return originalFileName;
 	}
 
-	public void setQanId(int qanId) {
-		this.qanId = qanId;
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+
+	public String getRenameFileName() {
+		return renameFileName;
+	}
+
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
+	}
+
+	public int getQnaId() {
+		return qnaId;
+	}
+
+	public void setQnaId(int qnaId) {
+		this.qnaId = qnaId;
 	}
 
 	public String getTitle() {
@@ -122,9 +143,10 @@ public class Qna implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Qna [qanId=" + qanId + ", title=" + title + ", content=" + content + ", userId=" + userId
+		return "Qna [qnaId=" + qnaId + ", title=" + title + ", content=" + content + ", userId=" + userId
 				+ ", createdBy=" + createdBy + ", createdAt=" + createdAt + ", isAnswered=" + isAnswered + ", answer="
-				+ answer + ", answeredAt=" + answeredAt + ", status=" + status + "]";
+				+ answer + ", answeredAt=" + answeredAt + ", status=" + status + ", originalFileName="
+				+ originalFileName + ", renameFileName=" + renameFileName + "]";
 	}
 	
 }

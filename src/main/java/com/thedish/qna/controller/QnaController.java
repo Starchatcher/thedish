@@ -1,16 +1,22 @@
 package com.thedish.qna.controller;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thedish.common.FileNameChange;
 import com.thedish.qna.model.service.QnaService;
 import com.thedish.qna.model.vo.Qna;
 import com.thedish.users.model.vo.Users;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -43,7 +49,7 @@ public class QnaController {
 		mv.setViewName("redirect:loginPage.do");	// 비회원은 로그인 페이지로 이동
 		return mv;
 	}
-	String userId = loginUser.getUserId();
+	String userId = loginUser.getLoginId();
 	List<Qna> qnaList = qnaService.selectQnaList(userId);
 	
 	mv.addObject("qnaList", qnaList);
@@ -52,4 +58,105 @@ public class QnaController {
 	return mv;
 	
 	}
+	
+	// 파일 다운로드 메소드
+	@RequestMapping("qnaFileDown.do")
+	public ModelAndView fileDownMethod(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("ofile") String originalFileName, @RequestParam("rfile") String renameFileName) {
+
+		// 게시글 첨부파일 저장 폴더 경로 지정
+		String savePath = request.getSession().getServletContext().getRealPath("resources/qna_upfiles");
+		// 저장 폴더에서 읽을 파일에 대한 File 객체 생성
+		File downFile = new File(savePath + "\\" + renameFileName);
+		// 파일 다운시 브라우저로 내보낼 원래 파일에 대한 File 객체 생성
+		File originFile = new File(originalFileName);
+
+		// 파일 다운 처리용 뷰클래스 id명과 다운로드할 File 객체를 ModelAndView 에 담아서 리턴함
+		mv.setViewName("filedown"); // 뷰클래스의 id명 기입
+		mv.addObject("originFile", originFile);
+		mv.addObject("renameFile", downFile);
+
+		return mv;
+	}
+	
+	// 문의 등록 메소드 (파일 업로드 기능 포함)
+	@RequestMapping(value="qnaInsert.do", method=RequestMethod.POST)
+	public ModelAndView qnaInsertMethod(ModelAndView mv, Qna qna,
+			@RequestParam(name="ofile", required=false) MultipartFile mfile,
+			HttpServletRequest request, HttpSession session) {
+		
+		Users loginUser = (Users) session.getAttribute("loginUser");
+		
+		qna.setUserId(loginUser.getLoginId());
+		qna.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
+		
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/qna_upfiles");
+		if (!mfile.isEmpty()) {
+			String fileName = mfile.getOriginalFilename();
+			if (fileName != null && fileName.length() > 0) {
+				String renameFileName = FileNameChange.change(fileName, "yyyyMMddHHmmss");
+				try {
+					File saveDir = new File(savePath);
+					if (!saveDir.exists())
+						saveDir.mkdirs();
+					mfile.transferTo(new File(savePath + "\\" + renameFileName));
+					qna.setOriginalFileName(fileName);
+					qna.setRenameFileName(renameFileName);
+				} catch (Exception e) {
+					e.printStackTrace();
+					mv.setViewName("common/error");
+					mv.addObject("message", "첨부파일 저장 실패!");
+					return mv;
+				}
+			}
+		}
+		
+		if(qnaService.insertQna(qna) > 0) {
+			mv.setViewName("redirect:qnaList.do");
+		}else {
+			mv.addObject("message", "문의 등록 실패. 다시 시도해주세요.");
+			mv.setViewName("common/error");
+		}
+		
+		return mv;
+	}
+	
+	// 내 문의 상세보기
+	@RequestMapping("qnaDetail.do")
+	public ModelAndView qnaDetailView(ModelAndView mv,
+			@RequestParam("qnaId") int qnaId) {
+		
+		Qna qna = qnaService.selectQnaById(qnaId);
+		mv.addObject("qna", qna);
+		mv.setViewName("qna/qnaDetailView");
+		
+		return mv;
+	}
+	
+	// 문의 삭제
+	@RequestMapping("qnaDelete.do")
+	public ModelAndView qnaDeleteMethod(ModelAndView mv,
+			HttpServletRequest request,
+			@RequestParam("qnaId") int qnaId) {
+		
+		
+		Qna qna = qnaService.selectQnaById(qnaId);
+		
+		if(qnaService.deleteQna(qnaId) > 0) {
+			if(qna.getOriginalFileName() != null && qna.getRenameFileName().length() > 0) {
+				String savePath = request.getSession().getServletContext().getRealPath("resources/qna_upfiles");
+				new File(savePath + "\\" + qna.getRenameFileName()).delete();
+			}
+			
+			mv.setViewName("redirect:qnaList.do");
+		}else {
+			mv.addObject("message", "문의글 삭제에 실패하였습니다. 다시 시도해주세요.");
+			mv.setViewName("common/error");
+
+		}
+		
+		return mv;
+	}
+	
 }

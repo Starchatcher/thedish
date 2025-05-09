@@ -19,4 +19,19 @@ public class QnaDao {
 	public List<Qna> selectQnaList (String userId){
 		return sqlSessionTemplate.selectList("qnaMapper.selectQnaList", userId);
 	}
+	
+	// 문의 등록
+	public int insertQna (Qna qna) {
+		return sqlSessionTemplate.insert("qnaMapper.insertQna", qna);
+	}
+	
+	// 문의 상세보기
+	public Qna selectQnaById (int qnaId) {
+		return sqlSessionTemplate.selectOne("qnaMapper.selectQnaById", qnaId);
+	}
+	
+	// 문의 삭제
+	public int deleteQna (int qnaId) {
+		return sqlSessionTemplate.delete("qnaMapper.deleteQna", qnaId);
+	}
 }

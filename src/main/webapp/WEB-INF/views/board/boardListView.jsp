@@ -15,88 +15,88 @@
 <title>${category} 게시판</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style type="text/css">
+/* 게시판 테이블 */
 table#boardTable {
     width: 800px;
     margin: 30px auto;
     border-collapse: collapse;
-    text-align: center;
-    font-size: 15px;
+    text-align: left;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-table#boardTable th, table#boardTable td {
-    padding: 12px;
-    border-bottom: 1px solid #8FBC8F; /* 줄 색 통일 */
+table#boardTable th,
+table#boardTable td {
+    padding: 14px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333333;
 }
 
 table#boardTable th {
-    background-color: #8FBC8F;
-    color: white;
-    font-weight: bold;
-}
-
-table#boardTable td.board-title a {
-    text-decoration: none;
-    color: #333;
+    background-color: #f5f5f5;
+    font-weight: 600;
+    color: #222;
 }
 
 .board-title a {
     display: inline-block;
     max-width: 100%;
-    white-space: nowrap;         /* 줄바꿈 없이 한 줄 */
-    overflow: hidden;            /* 넘치는 부분 숨김 */
-    text-overflow: ellipsis;     /* 말줄임표 (…) */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: #333333;
 }
 
-table#boardTable td.board-title a:hover {
+.board-title a:hover {
     text-decoration: underline;
 }
 
 tr:hover {
-    background-color: #f0f8f0; /* 연한 초록 계열 hover 효과 */
+    background-color: #fafafa;
 }
 
+/* 제목 */
 h1#boardTitle {
-    font-size: 32px;
-    font-weight: bold;
-    width: 800px; /* 테이블과 같은 폭으로 */
-    margin: 40px auto 30px; /* 위-좌우-아래 여백 */
+    font-size: 24px;
+    font-weight: 600;
+    width: 800px;
+    margin: 40px auto 24px;
     text-align: center;
-    color: #2F4F4F;
-    border-bottom: 2px solid #8FBC8F;
-    padding-bottom: 10px;
+    color: #333333;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
 }
 
-table, tr, th, td {
-	border-left: none;
-	border-right: none;
-	border-color: #8FBC8F;
-	word-break: break-word;
-    overflow-wrap: break-word;
-}
-table td.board-title a {
-	text-decoration: none;
-	color: black;
-}
+/* 검색 영역 */
 #search-area {
-    width: 800px; /* 게시판 테이블과 같은 폭으로 맞추기 */
-    margin: 0 auto 20px; /* 가운데 정렬 + 아래 여백 */
+    width: 800px;
+    margin: 0 auto 20px;
     display: flex;
-    justify-content: space-between; /* 좌우로 양쪽 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: space-between;
+    align-items: center;
 }
 
 #searchForm select,
 #searchForm input[type="text"],
 #searchForm input[type="submit"] {
     height: 36px;
-    padding: 0 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 13px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #333333;
+    transition: border 0.2s ease;
+    outline: none;
 }
 
-#searchForm select {
-    min-width: 80px;
+#searchForm select:focus,
+#searchForm input[type="text"]:focus {
+    border-color: #bbb;
 }
 
 #searchForm input[type="text"] {
@@ -104,27 +104,31 @@ table td.board-title a {
 }
 
 #searchForm input[type="submit"] {
-    background-color: #8FBC8F;
+    background-color: #888;
     color: white;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    pading: 12px 8px;
+    transition: background-color 0.2s ease;
 }
 
 #searchForm input[type="submit"]:hover {
-    background-color: #7aa97a;
+    background-color: #555;
 }
 
+/* 글쓰기 버튼 */
 #writeBtn {
-    padding: 8px 12px;
-    background-color: #8FBC8F;
+    padding: 8px 14px;
+    background-color: #888;
     color: white;
     border: none;
-    font-size: 14px;
-    border-radius: 8px;
+    font-size: 13px;
+    border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+}
+
+#writeBtn:hover {
+    background-color: #555;
 }
 </style>
 </head>
