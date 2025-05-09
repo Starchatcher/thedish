@@ -241,7 +241,7 @@ form button:hover {
 		<p class="info">${recipe.description}</p>
 
 		<span class="label">조리법:</span>
-		<p class="info">${sortedInstructions}</p>
+		<p class="info">${recipe.instructions}</p>
 
 
 
@@ -319,9 +319,7 @@ form button:hover {
             </form>
            
         </div>
-    </c:if>
-
-  
+    </c:if>  
    
 
     <%-- 로그인하지 않은 사용자에게 안내 메시지 표시 --%>
@@ -330,17 +328,8 @@ form button:hover {
              <p>평점을 부여하려면 <a href="loginPage.do">로그인</a>해주세요.</p> <%-- 예시: 로그인 페이지 URL --%>
          </div>
     </c:if>
-	</div>
+	</div>	
 
-
-
-	<!-- 지도 정보를 출력할 구역 -->
-	<div class="map-container" id="map">
-		<!-- 나중에 JavaScript로 지도를 삽입할 수 있는 영역 -->
-		<p>지도 정보가 여기에 표시됩니다.</p>
-	</div>
-
-	<!-- 댓글 리스트 -->
 	<!-- 댓글 리스트 -->
 	<div class="comments-section">
 		<h3>댓글</h3>
@@ -408,9 +397,7 @@ form button:hover {
             required></textarea>
         <br />
 
-        <%-- 작성자 닉네임 표시 및 수정 불가 설정 --%>
-        <input type="text" name="writer" placeholder="작성자 이름" required
-               value="${loginUser.loginId}" readonly="readonly" /><br />
+        
 
         <button type="submit">댓글 작성</button>
     </form>
@@ -421,6 +408,7 @@ form button:hover {
 </c:if>
 
 	</div>
+	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -85,7 +85,7 @@ input[type="number"] {
   transition: background-color 0.3s;
 }
 
-#dupCheckBtn:hover, #nicknameCheckBtn:hover {
+#dupCheckBtn:hover, #nickNameCheckBtn:hover {
   background-color: #e77ca7;
 }
 
@@ -208,7 +208,7 @@ function validate() {
         </div>
 
         <div class="form-group">
-            <label for="nickname">닉네임</label>
+            <label for="nickName">닉네임</label>
             <input type="text" name="nickName" id="nickName" required>
             <button type="button" id="nickNameCheckBtn" onclick="dupnickNameCheck();">닉네임 중복검사</button>
         </div>

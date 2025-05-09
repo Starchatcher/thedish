@@ -1,10 +1,12 @@
 package com.thedish.users.model.service;
 
 import java.util.ArrayList;
-import org.slf4j.Logger;  // 추가
-import org.slf4j.LoggerFactory;  // 추가
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import jakarta.servlet.http.HttpSession;
 
 import com.thedish.common.Paging;
@@ -15,12 +17,11 @@ import com.thedish.users.model.vo.Users;
 @Service("usersService")
 public class UsersServiceImpl implements UsersService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);  // logger 초기화
+    private static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
 
     @Autowired
     private UsersDao usersDao;
 
-    // 세션을 처리하기 위한 의존성 주입
     @Autowired
     private HttpSession session;
 
@@ -49,72 +50,73 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.selectCheckId(userId);
     }
 
-    // 회원 정보 수정
     @Override
     public int updateUser(Users user) {
-        return usersDao.updateUser(user); // updateUser 메서드를 호출
+        return usersDao.updateUser(user);
     }
 
-    // 회원 탈퇴
     @Override
     public int deleteUsers(String userId) {
-        logger.info("Attempting to delete user with loginId: " + userId); // 로그 추가
-
+        logger.info("Attempting to delete user with loginId: " + userId);
         int result = usersDao.deleteUsers(userId);
-
         if (result > 0) {
-            logger.info("User successfully deleted: " + userId); // 성공 로그 추가
+            logger.info("User successfully deleted: " + userId);
             session.invalidate();
         } else {
-            logger.error("Failed to delete user: " + userId); // 실패 로그 추가
+            logger.error("Failed to delete user: " + userId);
         }
-
         return result;
     }
 
-    // 검색 관련 메서드 구현
+    // ✅ 비밀번호 변경
+    @Override
+    public int updatePassword(Users user) {
+        logger.info("Updating password for userId: " + user.getUserId());
+        return usersDao.updatePassword(user);
+    }
+
     @Override
     public int selectListCount() {
-        return usersDao.selectListCount();  // 전체 회원 수 조회
+        return usersDao.selectListCount();
     }
 
     @Override
     public ArrayList<Users> selectList(Paging paging) {
-        return usersDao.selectList(paging); // 페이징 처리된 회원 리스트 조회
+        return usersDao.selectList(paging);
     }
 
     @Override
     public int updateStatus(Users users) {
-        return usersDao.updateLoginOk(users); // 사용자 상태 업데이트
+        return usersDao.updateLoginOk(users);
     }
 
     @Override
     public int selectSearchUserIdCount(String keyword) {
-        return usersDao.selectSearchUserIdCount(keyword);  // 사용자 아이디로 검색된 갯수
+        return usersDao.selectSearchUserIdCount(keyword);
     }
 
     @Override
     public int selectSearchCreatedAtCount(Search search) {
-        return usersDao.selectSearchCreatedAtCount(search);  // 생성일자로 검색된 갯수
+        return usersDao.selectSearchCreatedAtCount(search);
     }
 
     @Override
     public int selectSearchStatusCount(String keyword) {
-        return usersDao.selectSearchStatusCount(keyword);  // 사용자 상태로 검색된 갯수
+        return usersDao.selectSearchStatusCount(keyword);
     }
 
     @Override
     public ArrayList<Users> selectSearchUserId(Search search) {
-        return usersDao.selectSearchUserId(search); // 사용자 아이디로 검색된 리스트
+        return usersDao.selectSearchUserId(search);
     }
 
     @Override
     public ArrayList<Users> selectSearchCreatedAt(Search search) {
-        return usersDao.selectSearchCreatedAt(search); // 생성일자로 검색된 리스트
+        return usersDao.selectSearchCreatedAt(search);
     }
 
     @Override
     public ArrayList<Users> selectSearchStatus(Search search) {
-        return usersDao.selectSearchStatus(search); // 상태로 검색된 리스트
+        return usersDao.selectSearchStatus(search);
     }
 }

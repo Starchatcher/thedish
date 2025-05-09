@@ -2,11 +2,13 @@ package com.thedish.drink.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 
 public interface DrinkService {
 	
@@ -19,9 +21,11 @@ public interface DrinkService {
 	ArrayList<Drink> selectSearchTitle(Search search);
 	
 	int insertDrink(Drink drink); 
+	
+	
 	int updateDrink(Drink drink);
 	int deleteDrink(int drinkId); 
-
+ 
 	
 	boolean incrementRecommendationCount(int drinkId);
 	 
@@ -34,4 +38,11 @@ public interface DrinkService {
 	 void updateAverageRating(int drinkId, double avgRating);
 	 double getAverageRating(int drinkId) ;
 	 
+	 Map<String, Object> selectStoreInfoByDrinkId(int drinkId);
+	 
+	 Drink getDrinkById(int drinkId);
+	 List<DrinkStore> getStoresByDrinkName(String drinkName);
+	 
+	 int insertDrinkStore(DrinkStore drinkStore);
+	 int deleteStore(int storeId);
 }

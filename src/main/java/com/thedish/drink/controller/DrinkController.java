@@ -2,7 +2,6 @@ package com.thedish.drink.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +24,7 @@ import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 import com.thedish.drink.service.impl.DrinkService;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
@@ -120,6 +120,24 @@ public class DrinkController {
 			                 mv.addObject("pairingList", pairingList);
 
 
+			                 Map<String, Object> storeInfo = drinkService.selectStoreInfoByDrinkId(drinkId);
+
+			                 if (storeInfo != null) {
+			                     String storeAddress = (String) storeInfo.get("STORE_ADDRESS"); // Map에서 주소 추출
+			                     String storeName = (String) storeInfo.get("STORE_NAME");       // Map에서 이름 추출 (매퍼 SELECT 절의 별칭 사용)
+
+			                     logger.info("조회된 스토어 정보: 주소=" + storeAddress + ", 이름=" + storeName);
+			                     // JSP에서 Map 형태로 접근할 수 있도록 Map 자체를 추가
+			                     mv.addObject("storeInfo", storeInfo);
+			                     // 또는 각각의 값을 별도로 추가
+			                     // mv.addObject("storeAddress", storeAddress);
+			                     // mv.addObject("storeName", storeName);
+			                 } else {
+			                     logger.info("해당 drinkId에 대한 스토어 정보가 없습니다.");
+			                     mv.addObject("storeInfo", null); // 정보가 없음을 JSP에 전달
+			                 }
+
+			                 
 			                 // 3. 댓글 관련 로직 (기존 코드 유지)
 			                 int commentsPerPage = 10;
 			                 String targetType = "drink";
@@ -172,58 +190,56 @@ public class DrinkController {
 			    }
 
 			// 레시피 검색 기능
-			@RequestMapping("drinkSearch.do")
-			public ModelAndView drinkSearchTitleMethod(
-					ModelAndView mv, 
-					@RequestParam("action") String action,
-					@RequestParam("keyword") String keyword, 
-					@RequestParam(name = "page", required = false) String page,
-					@RequestParam(name = "limit", required = false) String slimit) {
-				// 페이징 처리
-				int currentPage = 1;
-				if (page != null) {
-					currentPage = Integer.parseInt(page);
-				}
+			 @RequestMapping("drinkSearch.do")
+			    public ModelAndView drinkSearchTitleMethod(
+			            ModelAndView mv,
+			            @RequestParam("action") String action,
+			            @RequestParam("keyword") String keyword,
+			            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 타입을 int로 변경하고 기본값 설정
+			            @RequestParam(name = "limit", required = false, defaultValue = "12") int limit, // limit 파라미터 타입을 int로 변경하고 기본값 설정
+			            @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType) { // @RequestParam에 sortType 추가
 
-				// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-				int limit = 12;
-				if (slimit != null) {
-					limit = Integer.parseInt(slimit);
-				}
+			        // logger.info("drinkSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}", keyword, currentPage, limit, sortType); // 로그 출력 예시
 
-				// 검색결과가 적용된 총 목록 갯수 조회해서, 총 페이지 수 계산함
-				int listCount = drinkService.selectSearchTitleCount(keyword);
-				// 페이지 관련 항목들 계산 처리
-				Paging paging = new Paging(listCount, limit, currentPage, "drinkSearch.do");
-				paging.calculate();
+			        // 검색결과가 적용된 총 목록 갯수 조회 (정렬 기준과 무관)
+			        int listCount = drinkService.selectSearchTitleCount(keyword);
 
-				// 마이바티스 매퍼에서 사용되는 메소드는 Object 1개만 전달할 수 있음
-				// paging.startRow, paging.endRow, keyword 같이 전달해야 하므로 => 객체 하나를 만들어서 저장해서 보냄
-				Search search = new Search();
-				search.setKeyword(keyword);
-				search.setStartRow(paging.getStartRow());
-				search.setEndRow(paging.getEndRow());
+			        // 페이지 관련 항목 계산
+			        Paging paging = new Paging(listCount, limit, currentPage, "drinkSearch.do"); // URL 이름 확인
+			        paging.calculate();
 
-				// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-				ArrayList<Drink> list = drinkService.selectSearchTitle(search);
-				
+			        // 검색, 페이징, 정렬 정보를 담을 객체
+			        Search search = new Search(); // Search 객체 사용
+			        search.setKeyword(keyword);
+			        search.setStartRow(paging.getStartRow());
+			        search.setEndRow(paging.getEndRow());
+			        search.setSortType(sortType); // *** Search 객체에 sortType 설정 ***
 
-				if (list != null && list.size() > 0) { // 조회 성공시
-					// ModelAndView : Model + View
-					
-					mv.addObject("list", list); // request.setAttribute("list", list) 와 같음
-					mv.addObject("paging", paging);
-					mv.addObject("action", action);
-					mv.addObject("keyword", keyword);
+			        // 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
+			        // DrinkService의 메소드가 Search 객체를 받도록 수정해야 합니다.
+			        ArrayList<Drink> list = drinkService.selectSearchTitle(search);
 
-					mv.setViewName("drink/drinkList");
-				} else { // 조회 실패시
-					mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
-					mv.setViewName("common/error");
-				}
+			        if (list != null && !list.isEmpty()) { // 조회 성공시 (목록이 비어있지 않으면)
+			            // ModelAndView에 결과 및 페이징 정보 담기
+			            mv.addObject("list", list); // 음료 목록 (타입 확인)
+			            mv.addObject("paging", paging);
+			            mv.addObject("action", action);
+			            mv.addObject("keyword", keyword);
+			            mv.addObject("sortType", sortType); // *** 현재 정렬 기준 값을 JSP로 다시 전달 ***
 
-				return mv;
-			}
+			            mv.setViewName("drink/drinkList"); // 결과 페이지 경로 확인
+			        } else { // 조회 결과 없음
+			             // 검색 결과가 없을 때도 페이지는 표시하되 목록만 비어있도록 처리
+			             mv.addObject("list", list); // 빈 목록 전달
+			             mv.addObject("paging", paging);
+			             mv.addObject("action", action);
+			             mv.addObject("keyword", keyword);
+			             mv.addObject("sortType", sortType); // 정렬 기준 유지
+			             mv.setViewName("drink/drinkList"); // 목록 페이지로 이동
+			        }
+
+			        return mv;
+			    }
 			
 			@RequestMapping("moveInsertDrink.do")
 			public String moveInsertDrink() {
@@ -349,7 +365,7 @@ public class DrinkController {
 		        return "redirect:/drinkList.do?page=" + page;
 		    }
 			
-			// 레시피 평점 기능
+			// drink 평점 기능
 			 @RequestMapping(value = "rateDrink.do", method = RequestMethod.POST)
 			  
 			    public String rateDrink(
@@ -397,6 +413,91 @@ public class DrinkController {
 			        return "redirect:/drinkDetail.do?no=" + drinkId; // 레시피 상세 페이지로 리다이렉션
 
 			 }
-			 
+			
+			    @RequestMapping(value = "/drinkStoreInsert.do", method = RequestMethod.GET) // .do 확장자와 GET 메소드 매핑
+			    public String moveInsertDrinkStorePage(@RequestParam("drinkId") int drinkId,
+			                                          @RequestParam(value = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 (필수 아님, 기본값 1)
+			                                          Model model) {
+			    	logger.info(">>> moveInsertDrinkStorePage (리다이렉트 후): @RequestParam으로 받은 drinkId 값: " + drinkId);
+			        // 1. drinkId를 사용하여 음료 정보 조회
+			      
+			    	int drinkIdFromRequest = drinkId; // @RequestParam으로 받은 값
+
+			    	logger.info(">>> Controller: Calling drinkService.getById with ID: " + drinkIdFromRequest);
+			    	
+			    	Drink drink = drinkService.getDrinkById(drinkIdFromRequest);
+
+			    	logger.info(">>> Controller: Returned from drinkService.getById.");
+			        
+			        if (drink != null) {
+			            logger.info(">>> moveInsertDrinkStorePage: 조회된 Drink 객체의 drinkId: " + drink.getDrinkId());
+			        } else {
+			            logger.warn(">>> moveInsertDrinkStorePage: drinkService.getDrinkById 결과가 null입니다.");
+			        }
+			        
+			        if (drink == null) {
+			            // 해당 음료가 없을 경우 처리
+			            model.addAttribute("errorMessage", "해당 음료 정보를 찾을 수 없습니다.");
+			            return "errorPage"; // 예시
+			        }
+
+			        // 2. 해당 음료의 이름으로 기존 판매처 목록 조회
+			        List<DrinkStore> drinkStores = drinkService.getStoresByDrinkName(drink.getName());
+
+			        // 3. 모델에 음료 정보와 판매처 목록 담기
+			        model.addAttribute("drink", drink);
+			        model.addAttribute("drinkStores", drinkStores);
+			        model.addAttribute("currentPage", currentPage); // 필요하다면 페이지 번호도 전달
+
+			        // 4. 판매처 관리 JSP 페이지 반환
+			        // JSP 파일 이름에 따라 반환 값 조정
+			        return "/drink/drinkStoreInsert";
+			    }
+
+			    @RequestMapping(value = "/drinkStoreInsert.do", method = RequestMethod.POST)
+			    @ResponseBody // 이 어노테이션을 사용하여 메소드의 반환 값이 HTTP 응답 본문에 직접 쓰여지도록 합니다.
+			    public String addDrinkStoreAjax(DrinkStore drinkStore,
+			                                   @RequestParam("drinkId") int drinkId) { // drinkId는 필요하다면 계속 받습니다.
+
+			        // logger 추가 (요청 받은 drinkId 값 확인)
+			        logger.info(">>> addDrinkStoreAjax: @RequestParam으로 받은 drinkId 값: " + drinkId);
+			        logger.info(">>> addDrinkStoreAjax: 받은 DrinkStore 객체: " + drinkStore.toString()); // DrinkStore 객체 내용 확인
+
+			        
+			        int result = drinkService.insertDrinkStore(drinkStore);
+
+			        // 등록 결과에 따라 클라이언트에 보낼 문자열 결정
+			        if (result > 0) {
+			            // 등록 성공 시 'success' 문자열 반환
+			            logger.info(">>> addDrinkStoreAjax: 판매처 등록 성공.");
+			            return "success";
+			        } else {
+			            // 등록 실패 시 'fail' 문자열 반환
+			            logger.warn(">>> addDrinkStoreAjax: 판매처 등록 실패.");
+			            return "fail";
+			        }
+
+			       
+			    }
+			    @RequestMapping(value = "/deleteDrinkStore.do", method = RequestMethod.POST) // POST 메소드에 /deleteDrinkStore.do 경로 매핑
+			    @ResponseBody // 클라이언트에 응답 본문을 직접 반환합니다.
+			    public String deleteDrinkStoreAjax(@RequestParam("storeId") int storeId) { // 쿼리 스트링 또는 폼 데이터로 storeId 받음
+
+			        logger.info(">>> deleteDrinkStoreAjax: @RequestParam으로 받은 storeId 값: " + storeId);
+
+			        // Service를 호출하여 판매처 삭제
+			        // drinkService에 deleteStore(int storeId) 메소드가 있다고 가정합니다.
+			        int result = drinkService.deleteStore(storeId); // <-- 이 메소드는 직접 구현하셔야 합니다.
+
+			        // 삭제 결과에 따라 클라이언트에 보낼 문자열 결정
+			        if (result > 0) {
+			            logger.info(">>> deleteDrinkStoreAjax: 판매처 삭제 성공 (ID: {}).", storeId);
+			            return "success"; // 삭제 성공 시 'success' 문자열 반환
+			        } else {
+			            logger.warn(">>> deleteDrinkStoreAjax: 판매처 삭제 실패 (ID: {}).", storeId);
+			            return "fail"; // 삭제 실패 시 'fail' 문자열 반환
+			        }
+			    }
+
 			
 }

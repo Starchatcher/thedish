@@ -36,19 +36,24 @@ public class UsersDao {
         return sqlSessionTemplate.selectOne("usersMapper.selectCheckId", userId);
     }
 
-    // 회원 정보 수정 (updateUser 쿼리 호출)
+    // 닉네임 중복 체크
+    public int selectChecknickName(String nickName) {
+        return sqlSessionTemplate.selectOne("usersMapper.selectChecknickName", nickName);
+    }
+
+    // 회원 정보 수정
     public int updateUser(Users user) {
         return sqlSessionTemplate.update("usersMapper.updateUser", user);
+    }
+
+    // 비밀번호 변경 ← 추가된 메서드!
+    public int updatePassword(Users user) {
+        return sqlSessionTemplate.update("usersMapper.updatePassword", user);
     }
 
     // 회원 탈퇴
     public int deleteUsers(String userId) {
         return sqlSessionTemplate.delete("usersMapper.deleteUsers", userId);
-    }
-
-    // 닉네임 중복 체크
-    public int selectChecknickName(String nickName) {
-        return sqlSessionTemplate.selectOne("usersMapper.selectChecknickName", nickName);
     }
 
     // 관리자용 전체 회원 수

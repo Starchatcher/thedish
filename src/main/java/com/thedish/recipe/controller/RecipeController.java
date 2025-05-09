@@ -1,11 +1,10 @@
 package com.thedish.recipe.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,7 @@ import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
 import com.thedish.recipe.model.vo.Recipe;
@@ -34,29 +34,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 
-class RecipeStep implements Comparable<RecipeStep> {
-    int stepNumber;
-    String stepContent;
 
-    public RecipeStep(int stepNumber, String stepContent) {
-        this.stepNumber = stepNumber;
-        this.stepContent = stepContent;
-    }
-
-    public int getStepNumber() {
-        return stepNumber;
-    }
-
-    public String getStepContent() {
-        return stepContent;
-    }
-
-    // 번호를 기준으로 오름차순 정렬하기 위한 compareTo 메소드 구현
-    @Override
-    public int compareTo(RecipeStep other) {
-        return Integer.compare(this.stepNumber, other.stepNumber);
-    }
-}
 
 @Controller
 public class RecipeController {
@@ -112,220 +90,230 @@ public class RecipeController {
 		}
 		
 		// 레시피 상세보기 요청 처리용
-		@RequestMapping("/recipeDetail.do")
-		public ModelAndView recipeDetailMethod(
-		    @RequestParam("no") int recipeId, 
-		    ModelAndView mv, 
-		    HttpSession session,
-		    @RequestParam(value = "page", required = false, defaultValue = "1") int page
-		) {
-		    logger.info("recipeDetail.do 호출 - recipeId: {}", recipeId);
+		// 레시피 상세보기 요청 처리용
+				@RequestMapping("/recipeDetail.do")
+				
+				public ModelAndView recipeDetailMethod(
+				    @RequestParam("no") int recipeId, 
+				    ModelAndView mv, 
+				    HttpSession session,
+				    HttpServletRequest request,
+				    @RequestParam(value = "page", required = false, defaultValue = "1") int page
+				) {
+				    logger.info("recipeDetail.do 호출 - recipeId: {}", recipeId);
 
-		    // 레시피 조회
-		    Recipe recipe = recipeService.selectRecipe(recipeId);
-		    recipeService.updateAddReadCount(recipeId); // 조회수 증가   
-
-		    
-		    if (recipe != null) {
-		    	logger.info("레시피 데이터 조회 성공. 파싱 및 정렬 로직 시작.");
-
-		        String rawInstructions = recipe.getInstructions();
-		        if (rawInstructions != null && !rawInstructions.trim().isEmpty()) {
-		        	  List<RecipeStep> steps = new ArrayList<>();
-		              // 줄 단위로 분리합니다. (다양한 줄 바꿈 문자 처리)
-		              String[] lines = rawInstructions.split("\\r?\\n");
-
-		              // 줄의 시작이 "숫자. " 패턴인지 확인하는 패턴
-		              Pattern stepStartPattern = Pattern.compile("^(\\d+)\\.\\s*(.*)");
-
-		              int currentStepNumber = -1;
-		              StringBuilder currentStepContent = new StringBuilder();
-
-		              for (String line : lines) {
-		                  line = line.trim(); // 각 줄의 앞뒤 공백 제거
-		                  if (line.isEmpty()) {
-		                      continue; // 빈 줄은 건너뜁니다.
-		                  }
-
-		                  Matcher matcher = stepStartPattern.matcher(line);
-
-		                  if (matcher.find()) {
-		                      // 현재 줄이 새로운 단계의 시작인 경우
-		                      // 이전까지 모아둔 내용이 있다면, 이전 단계를 확정하고 리스트에 추가
-		                      if (currentStepContent.length() > 0 && currentStepNumber != -1) {
-		                           steps.add(new RecipeStep(currentStepNumber, currentStepContent.toString().trim()));
-		                           currentStepContent = new StringBuilder(); // 새로운 단계 내용을 모을 StringBuilder 초기화
-		                      } else if (currentStepContent.length() > 0 && currentStepNumber == -1) {
-		                           
-		                           // 현재 로직에서는 새로운 단계로 시작하는 것으로 간주합니다.
-		                           logger.warn("번호 없이 시작하는 내용 후 새로운 단계 시작: {}", line);
-		                           currentStepContent = new StringBuilder(); // 새로운 단계 내용을 모을 StringBuilder 초기화
-		                      }
-
-		                      try {
-		                          currentStepNumber = Integer.parseInt(matcher.group(1)); // 새로운 단계 번호 추출
-		                          currentStepContent.append(matcher.group(2).trim()); // 새로운 단계 내용의 첫 부분 추가
-		                      } catch (NumberFormatException e) {
-		                          logger.error("조리법 번호 파싱 오류 (새로운 단계 시작 시): {}", matcher.group(1), e);
-		                        
-		                           currentStepNumber = -1; // 번호 오류이므로 유효한 단계 번호가 아닙니다.
-		                           
-		                      }
-		                  } else {
-		                     
-		                      if (currentStepContent.length() > 0) {
-		                          // 이전 단계의 내용이 있다면, 현재 줄을 추가합니다.
-		                          currentStepContent.append("\n").append(line); // 줄 바꿈으로 구분하여 추가
-		                      } else {
-		                         
-		                           logger.warn("처리되지 않은 조리법 줄 (내용 없음): {}", line);
-		                      }
-		                  }
-		              }
-
-		              // 반복문이 끝난 후, 마지막으로 모아둔 내용을 리스트에 추가합니다.
-		              if (currentStepContent.length() > 0 && currentStepNumber != -1) {
-		                  steps.add(new RecipeStep(currentStepNumber, currentStepContent.toString().trim()));
-		              } else if (currentStepContent.length() > 0 && currentStepNumber == -1) {
-		                   
-		                   logger.warn("처리되지 않은 조리법 내용 (마지막 부분): {}", currentStepContent.toString());
-		              }
+				    // 레시피 조회
+				    Recipe recipe = recipeService.selectRecipe(recipeId);
+				    if (recipe != null) {
+			            // 1. 게시글 조회수 증가 (기존 로직)
+			            // 조회수 증가 로직과 로그 기록 로직은 별개로 처리될 수 있습니다.
+			            recipeService.updateAddReadCount(recipeId);
+			            logger.info("{}번 레시피 조회수 증가", recipeId);
 
 
-		              // 번호를 기준으로 오름차순 정렬
-		              Collections.sort(steps); // RecipeStep 클래스에 compareTo 메소드가 구현되어 있어 바로 정렬 가능
+			            // ====== 게시글 조회 로그 기록 로직 (컨트롤러에서 직접 처리) ======
 
-		              // 정렬된 단계를 다시 하나의 문자열로 조합 (번호와 함께)
-		              StringBuilder sortedInstructionsBuilder = new StringBuilder();
-		              for (int i = 0; i < steps.size(); i++) {
-		                  sortedInstructionsBuilder.append(steps.get(i).getStepNumber())
-		                                            .append(". ")
-		                                            .append(steps.get(i).getStepContent().trim()); // 최종 내용 앞뒤 공백 다시 제거
-		                  if (i < steps.size() - 1) {
-		                      sortedInstructionsBuilder.append("\n"); // 각 단계별 줄 바꿈
-		                  }
-		              }
-		               
+			            // 1. 사용자 ID 가져오기 (로그인된 경우, 아니면 IP 주소 등 활용)
+			            String userId = null;
+			            // 세션에서 로그인된 사용자 정보를 가져오는 로직 (예시)
+			            Object userObj = session.getAttribute("loginUser"); // 예: 세션에 "loggedInUser"라는 이름으로 저장됨
+			            if (userObj != null) {
+			                 try {
+			                     // 임시로 사용자 객체의 특정 메소드나 필드를 통해 ID를 가져온다고 가정
+			                     // 실제 사용자 객체 구조에 맞게 수정하세요.
+			                     // 예: LoginUser user = (LoginUser) userObj; userId = user.getUserId();
+			                     // 아래는 리플렉션을 사용한 예시이며, 캐스팅 후 직접 접근하는 것이 더 일반적입니다.
+			                     Method getUserIdMethod = userObj.getClass().getMethod("getUserId"); // 또는 getLoginId 등
+			                     userId = (String) getUserIdMethod.invoke(userObj);
+			                 } catch (Exception e) {
+			                     logger.error("세션에서 사용자 ID를 가져오는 중 오류 발생", e);
+			                     // 오류 발생 시 비로그인 처리 또는 다른 로직 수행
+			                     userId = request.getRemoteAddr(); // 비로그인 사용자로 처리 (IP 주소 사용)
+			                 }
+			                 logger.info("로그인된 사용자 ID 확인: {}", userId);
+			            } else {
+			                // 로그인하지 않은 사용자의 경우 IP 주소 사용
+			                userId = request.getRemoteAddr();
+			                logger.info("비로그인 사용자 (IP): {}", userId);
+			            }
 
-		              // Recipe 객체의 instructions 필드를 정렬된 문자열로 업데이트
-		              recipe.setInstructions(sortedInstructionsBuilder.toString());
+			            // 2. 게시글 타입 정의
+			            String postType = "recipe"; // 레시피 게시글 타입 지정
 
-		          } 
+			            // 파라미터 유효성 검사 (컨트롤러에서 해도 됩니다)
+			            if (userId == null || userId.trim().isEmpty() || recipeId <= 0 || postType == null || postType.trim().isEmpty()) {
+			                 logger.warn("유효하지 않은 정보로 로그 기록 요청 무시 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType);
+			            } else { // 정보가 유효한 경우에만 로그 로직 진행
+			                 try {
+			                    // 3. Service/DAO를 통해 특정 사용자, 특정 게시글에 대한 가장 최근 로그 기록 조회
+			                    // Service의 getLatestPostViewLog 메소드는 DAO의 동일 메소드를 호출할 것입니다.
+			                    ViewLog latestLog = recipeService.getLatestPostViewLog(userId, recipeId);
+			                    logger.debug("가장 최근 로그 조회 결과 (컨트롤러): {}", latestLog);
 
-		          mv.addObject("recipe", recipe);
+			                    // 4. 24시간 체크
+			                    boolean needsLogging = true; // 기본적으로는 로그 기록 필요
+			                    if (latestLog != null) {
+			                        // ViewLog 객체에서 방문 시간 가져오기 (java.util.Date 등)
+			                        Date latestVisitTime = latestLog.getVisitTime(); // ViewLog에 getVisitTime() 메소드가 있다고 가정
 
-		          if (rawInstructions != null && !rawInstructions.trim().isEmpty()) {
-		              // 파싱 및 정렬이 성공적으로 수행되어 recipe 객체가 업데이트된 경우
-		              mv.addObject("sortedInstructions", recipe.getInstructions()); // 업데이트된 recipe 객체의 instructions 사용
-		          } else {
-		              // 파싱 로직이 실행되지 않은 경우 (instructions가 비어있거나 null)
-		              mv.addObject("sortedInstructions", ""); // 또는 원본 내용 mv.addObject("sortedInstructions", rawInstructions);
-		          }
-		          
-		          
-		        // 알러지 정보 조회
-		        List<Allergy> allergyList = recipeService.selectAllergyByRecipeId(recipeId);
-		        if (allergyList != null && !allergyList.isEmpty()) {
-		            logger.info("조회된 알러지 리스트: {}", allergyList);
-		            mv.addObject("allergyList", allergyList);
-		        } else {
-		            logger.warn("알러지 리스트가 비어 있습니다!");
-		            mv.addObject("allergyList", new ArrayList<>());
-		        }
+			                        if (latestVisitTime != null) {
+			                            long currentTimeMillis = System.currentTimeMillis(); // 현재 시각 (밀리초)
+			                            long latestLogTimeMillis = latestVisitTime.getTime(); // 최근 로그 시각 (밀리초)
 
-		        // 댓글 관련 처리
-		        int commentsPerPage = 10;
-		        String targetType = "recipe";
+			                            // 최근 로그 기록이 24시간(24 * 60 * 60 * 1000 밀리초) 이내인지 확인
+			                            if (currentTimeMillis - latestLogTimeMillis < 24 * 60 * 60 * 1000) {
+			                                needsLogging = false; // 24시간 이내에 이미 기록됨
+			                                logger.debug("24시간 이내 기록 확인 (컨트롤러). 로그 기록 생략.");
+			                            } else {
+			                                logger.debug("마지막 기록이 24시간 지남 (컨트롤러). 로그 기록 필요.");
+			                            }
+			                        } else {
+			                             logger.warn("최근 로그 기록의 visitTime이 NULL입니다 (컨트롤러). 새로운 로그 기록 진행.");
+			                        }
+			                    } else {
+			                         logger.debug("이 사용자/게시글에 대한 기존 로그 기록 없음 (컨트롤러). 새로운 로그 기록 필요.");
+			                    }
 
-		        // 댓글 총 개수 조회
-		        int totalComments = commentService.selectCommentCount(recipeId, targetType);
-		        logger.info("조회된 댓글 총 개수: {}", totalComments);
+			                    // 5. 로그 기록이 필요한 경우 삽입
+			                    if (needsLogging) {
+			                        // ViewLog 객체 생성 및 데이터 설정
+			                        ViewLog newLog = new ViewLog();
+			                        newLog.setUserId(userId);
+			                        newLog.setPostId(recipeId);
+			                        newLog.setPostType(postType);
+			                        // visitTime, logId는 DB에서 자동 처리
 
-		        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
-		        if (totalPages == 0) totalPages = 1;
+			                        // Service/DAO를 통해 로그 삽입
+			                        // Service의 insertPostViewLog 메소드는 DAO의 동일 메소드를 호출할 것입니다.
+			                        recipeService.insertPostViewLog(newLog);
+			                        logger.info("게시글 조회 로그 기록 완료 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType);
+			                    }
 
-		        if (page < 1) page = 1;
-		        if (page > totalPages) page = totalPages;
+			                 } catch (Exception e) {
+			                    // 로그 기록 중 예외 발생 시 에러 로깅
+			                    logger.error("게시글 조회 로그 기록 중 오류 발생 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType, e);
+			                    // 컨트롤러에서 예외를 잡았으므로, 여기서 에러 페이지로 리다이렉트하거나 다른 처리를 할 수 있습니다.
+			                    // 여기서는 로깅만 하고 원래 흐름을 계속합니다.
+			                 }
+			            } 
 
-		        int offset = (page - 1) * commentsPerPage;
 
-		        // 댓글 리스트 조회
-		        List<Comment> comments = commentService.selectComments(recipeId, targetType, offset, commentsPerPage);
-		        if (comments == null) {
-		            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
-		            comments = new ArrayList<>();
-		        }
-		        logger.info("조회된 댓글 리스트 크기: {}", comments.size());
-		        for (Comment c : comments) {
-		            logger.info("댓글 ID: {}, 내용: {}", c.getCommentId(), c.getContent());
-		        }
+			            mv.addObject("recipe", recipe);
 
-		        mv.addObject("comments", comments);
-		        mv.addObject("page", page);
-		        mv.addObject("totalPages", totalPages);
+				        // 알러지 정보 조회
+				        List<Allergy> allergyList = recipeService.selectAllergyByRecipeId(recipeId);
+				        if (allergyList != null && !allergyList.isEmpty()) {
+				            logger.info("조회된 알러지 리스트: {}", allergyList);
+				            mv.addObject("allergyList", allergyList);
+				        } else {
+				            logger.warn("알러지 리스트가 비어 있습니다!");
+				            mv.addObject("allergyList", new ArrayList<>());
+				        }
 
-		        mv.setViewName("recipe/recipeDetail");
-		    } else {
-		        logger.error("{}번 레시피가 존재하지 않습니다!", recipeId);
-		        mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
-		        mv.setViewName("common/error");
-		    }
+				        // 댓글 관련 처리
+				        int commentsPerPage = 10;
+				        String targetType = "recipe";
 
-		    return mv;
-		}
+				        // 댓글 총 개수 조회
+				        int totalComments = commentService.selectCommentCount(recipeId, targetType);
+				        logger.info("조회된 댓글 총 개수: {}", totalComments);
+
+				        int totalPages = (int) Math.ceil((double) totalComments / commentsPerPage);
+				        if (totalPages == 0) totalPages = 1;
+
+				        if (page < 1) page = 1;
+				        if (page > totalPages) page = totalPages;
+
+				        int offset = (page - 1) * commentsPerPage;
+
+				        // 댓글 리스트 조회
+				        List<Comment> comments = commentService.selectComments(recipeId, targetType, offset, commentsPerPage);
+				        if (comments == null) {
+				            logger.warn("commentService.selectComments()가 null을 반환했습니다.");
+				            comments = new ArrayList<>();
+				        }
+				        logger.info("조회된 댓글 리스트 크기: {}", comments.size());
+				        for (Comment c : comments) {
+				            logger.info("댓글 ID: {}, 내용: {}", c.getCommentId(), c.getContent());
+				        }
+
+				        mv.addObject("comments", comments);
+				        mv.addObject("page", page);
+				        mv.addObject("totalPages", totalPages);
+
+				        mv.setViewName("recipe/recipeDetail");
+				    } else {
+				        logger.error("{}번 레시피가 존재하지 않습니다!", recipeId);
+				        mv.addObject("message", recipeId + "번 레시피가 존재하지 않습니다.");
+				        mv.setViewName("common/error");
+				    }
+
+				    return mv;
+				}
+
 
 
 
 		// 레시피 검색 기능
-		@RequestMapping("recipeSearch.do")
-		public ModelAndView recipeSearchTitleMethod(ModelAndView mv, @RequestParam("action") String action,
-				@RequestParam("keyword") String keyword, @RequestParam(name = "page", required = false) String page,
-				@RequestParam(name = "limit", required = false) String slimit) {
-			// 페이징 처리
-			int currentPage = 1;
-			if (page != null) {
-				currentPage = Integer.parseInt(page);
-			}
+				 @RequestMapping("recipeSearch.do")
+				    public ModelAndView recipeSearchTitleMethod(
+				            ModelAndView mv,
+				            @RequestParam("action") String action,
+				            @RequestParam("keyword") String keyword,
+				            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 타입을 int로 변경하고 기본값 설정
+				            @RequestParam(name = "limit", required = false, defaultValue = "12") int limit, // limit 파라미터 타입을 int로 변경하고 기본값 설정
+				            @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType) { // @RequestParam에 sortType 추가
 
-			// 한 페이지에 출력할 목록 갯수 기본 10개로 지정함
-			int limit = 10;
-			if (slimit != null) {
-				limit = Integer.parseInt(slimit);
-			}
+				        // @RequestParam의 defaultValue와 required=false 속성을 사용하여
+				        // 파라미터가 없을 경우 기본값이 적용되도록 처리했습니다.
+				        // 따라서 page, limit, sortType에 대한 null 체크 로직이 간소화됩니다.
 
-			// 검색결과가 적용된 총 목록 갯수 조회해서, 총 페이지 수 계산함
-			int listCount = recipeService.selectSearchTitleCount(keyword);
-			// 페이지 관련 항목들 계산 처리
-			Paging paging = new Paging(listCount, limit, currentPage, "recipeSearch.do");
-			paging.calculate();
+				        // logger.info("recipeSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}", keyword, currentPage, limit, sortType); // 로그 출력 예시
 
-			// 마이바티스 매퍼에서 사용되는 메소드는 Object 1개만 전달할 수 있음
-			// paging.startRow, paging.endRow, keyword 같이 전달해야 하므로 => 객체 하나를 만들어서 저장해서 보냄
-			Search search = new Search();
-			search.setKeyword(keyword);
-			search.setStartRow(paging.getStartRow());
-			search.setEndRow(paging.getEndRow());
+				        // 검색결과가 적용된 총 목록 갯수 조회 (정렬 기준과 무관)
+				        int listCount = recipeService.selectSearchTitleCount(keyword);
 
-			// 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
-			ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
-			
+				        // 페이지 관련 항목 계산
+				        Paging paging = new Paging(listCount, limit, currentPage, "recipeSearch.do");
+				        paging.calculate();
 
-			if (list != null && list.size() > 0) { // 조회 성공시
-				// ModelAndView : Model + View
-				
-				mv.addObject("list", list); // request.setAttribute("list", list) 와 같음
-				mv.addObject("paging", paging);
-				mv.addObject("action", action);
-				mv.addObject("keyword", keyword);
+				        // 검색, 페이징, 정렬 정보를 담을 객체
+				        Search search = new Search();
+				        search.setKeyword(keyword);
+				        search.setStartRow(paging.getStartRow());
+				        search.setEndRow(paging.getEndRow());
+				        search.setSortType(sortType); // *** Search 객체에 sortType 설정 ***
 
-				mv.setViewName("recipe/recipeList");
-			} else { // 조회 실패시
-				mv.addObject("message", action + "에 대한 " + keyword + " 검색 결과가 존재하지 않습니다.");
-				mv.setViewName("common/error");
-			}
+				        // 서비스 메소드 호출 (Search 객체 전달)
+				        ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
 
-			return mv;
-		}
+				        if (list != null && !list.isEmpty()) { // 조회 성공시 (목록이 비어있지 않으면)
+				            // ModelAndView에 결과 및 페이징 정보 담기
+				            mv.addObject("list", list);
+				            mv.addObject("paging", paging);
+				            mv.addObject("action", action);
+				            mv.addObject("keyword", keyword);
+				            mv.addObject("sortType", sortType); // *** 현재 정렬 기준 값을 JSP로 다시 전달 ***
+
+				            mv.setViewName("recipe/recipeList"); // 결과 페이지 경로 확인
+				        } else { // 조회 결과 없음
+				            // mv.addObject("message", "'" + keyword + "'에 대한 검색 결과가 존재하지 않습니다.");
+				            // mv.setViewName("common/error"); // 또는 검색 결과 없음 페이지로 이동
+				            // 검색 결과가 없을 때도 페이지는 표시하되 목록만 비어있도록 처리하는 경우가 많습니다.
+				            // 이 경우 list와 paging 객체를 그대로 add해도 JSP에서 목록 크기를 체크하여 처리할 수 있습니다.
+				             mv.addObject("list", list); // 빈 목록 전달
+				             mv.addObject("paging", paging);
+				             mv.addObject("action", action);
+				             mv.addObject("keyword", keyword);
+				             mv.addObject("sortType", sortType); // 정렬 기준 유지
+				             mv.setViewName("recipe/recipeList"); // 목록 페이지로 이동
+				        }
+
+				        return mv;
+				    }
+
+		
+		
 
 		@RequestMapping("moveInsertRecipePage.do")
 		public String moveInsertRecipe() {

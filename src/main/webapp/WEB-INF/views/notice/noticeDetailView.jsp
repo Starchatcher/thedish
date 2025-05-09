@@ -11,7 +11,6 @@
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #eaf6f1;
             color: #333;
             margin: 0;
             padding: 0;
@@ -29,7 +28,7 @@
         .section-title {
             font-size: 22px;
             font-weight: bold;
-            border-bottom: 2px solid #8fbc8f;
+            border-bottom: 2px solid gray;
             padding-bottom: 6px;
             margin-bottom: 30px;
             color: #2e5f4d;
@@ -44,7 +43,7 @@
 
         .meta-info {
             font-size: 14px;
-            color: #666;
+            color: gray;
             margin-bottom: 30px;
             display: flex;
             gap: 20px;
@@ -53,11 +52,11 @@
 
         .meta-info span i {
             margin-right: 6px;
-            color: #2e8b57;
+            color: gray;
         }
 
         .notice-content {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.8;
             white-space: pre-line;
             margin-bottom: 40px;
@@ -70,7 +69,7 @@
         }
 
         .btn-group button {
-            background-color: #8fbc8f;
+            background-color: black;
             color: white;
             padding: 10px 20px;
             font-size: 14px;
@@ -81,7 +80,7 @@
         }
 
         .btn-group button:hover {
-            background-color: #77a977;
+            background-color: gray;
         }
     </style>
 </head>

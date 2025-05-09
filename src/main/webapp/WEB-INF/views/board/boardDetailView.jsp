@@ -9,7 +9,9 @@
 <meta charset="UTF-8">
 <title>게시글 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+<script>
+    const commentCount = ${commentCount};
+</script>
 <style>
 .container {
 	max-width: 800px;
@@ -36,8 +38,13 @@
 	font-size: 16px;
 	margin-bottom: 30px;
 	line-height: 1.7;
+	background-color: #f9f9f9;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* 첨부파일 영역 */
 .attachment {
 	margin-bottom: 20px;
 	background: #f8f8f8;
@@ -68,190 +75,236 @@
 }
 
 hr {
-	margin: 20px 0 20px;
+	margin: 20px 0;
+	border: 0;
+	border-top: 1px solid #ddd;
 }
 
-/* 게시글 내용 영역 */
-.content {
-    font-size: 16px;
-    margin-bottom: 30px;
-    line-height: 1.7;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* 댓글 영역 */
+/* 댓글 전체 영역 */
 .comment-section {
-    margin-top: 40px;
-    background-color: #fafafa;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+	margin-top: 40px;
+	background-color: #fafafa;
+	padding: 15px;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* 댓글 제목 스타일 */
+/* 댓글 제목 */
 .comment-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #333;
 }
 
-/* 댓글 박스 스타일 */
+/* 댓글 박스 */
 .comment-box {
-    padding: 12px 16px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    margin-bottom: 14px;
-    border: 1px solid #e0e0e0;
-}
-
-.comment-buttons {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.comment-buttons button,
-.comment-buttons form button {
-    background-color: #e3e3e3;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.comment-buttons button:hover {
-    background-color: #cfcfcf;
-}
-
-.comment-meta {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 6px;
-}
-
-.comment-content {
-    font-size: 15px;
-    line-height: 1.6;
-    font-weight: 400;        /* 일반 굵기 */
-    color: #333;             /* 너무 진하지 않게 */
-    padding: 6px 0;
-    white-space: normal;
-    word-break: break-word;
-}
-
-/* 댓글 박스 구분선 */
-hr {
-    margin: 20px 0;
-    border: 0;
-    border-top: 1px solid #ddd;
-}
-
-.comment-form {
-    margin-top: 30px;
-    background-color: #f8f8f8;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    position: relative;
-}
-
-.comment-form textarea {
-    width: 100%;
-    height: 100px;
-    padding: 12px 90px 12px 12px; /* 오른쪽 공간 확보 */
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    resize: vertical;
-    background-color: #fdfdfd;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-}
-
-.comment-form textarea:focus {
-    outline: none;
-    border-color: #90bc90;
-    box-shadow: 0 0 0 3px rgba(144, 188, 144, 0.2);
-}
-
-.comment-submit-btn {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 8px 16px;
-    background-color: #90bc90;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.comment-submit-btn:hover {
-    background-color: #7da97d;
+	padding: 12px 16px;
+	background-color: #f8f9fa;
+	border-radius: 10px;
+	margin-bottom: 14px;
+	border: 1px solid #e0e0e0;
 }
 
 .comment-box.reply {
-    margin-left: 24px;
-    background-color: #fcfcfc;
-    border-left: 3px solid #d0d0d0;
+	margin-left: 24px;
+	background-color: #fcfcfc;
+	border-left: 3px solid #d0d0d0;
 }
 
+/* 댓글 메타 정보 */
+.comment-meta {
+	font-size: 13px;
+	color: #888;
+	margin-bottom: 6px;
+}
+
+/* 댓글 본문 */
+.comment-content {
+	font-size: 15px;
+	line-height: 1.6;
+	font-weight: 400;
+	color: #333;
+	padding: 6px 0;
+	white-space: normal;
+	word-break: break-word;
+}
+
+/* 댓글 입력 영역 (최상단 폼) */
+.comment-form {
+	margin-top: 30px;
+	margin-bottom: 20px;
+	background-color: #f8f8f8;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+	position: relative; /* ⭐ 이게 핵심입니다 */
+}
+
+.comment-form textarea {
+	width: 100%;
+	height: 100px;
+	padding: 12px 90px 12px 12px; /* ← 오른쪽 공간 확보 */
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	resize: vertical;
+	background-color: #fdfdfd;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+	transition: border-color 0.3s, box-shadow 0.3s;
+	box-sizing: border-box;
+	resize: none;
+}
+
+.comment-form textarea:focus {
+	outline: none;
+	border-color: #90bc90;
+	box-shadow: 0 0 0 3px rgba(144, 188, 144, 0.2);
+}
+
+/* 공통 textarea 스타일 (대댓글, 수정 등) */
 textarea {
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-    padding: 10px;
-    width: 100%;
-    resize: vertical;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+	width: 100%;
+	max-width: 100%;
+	height: 80px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 14px;
+	resize: none;
+	box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+	box-sizing: border-box;
 }
 
 textarea:focus {
-    outline: none;
-    border-color: #90bc90;
-    box-shadow: 0 0 0 3px rgba(144, 188, 144, 0.2);
+	outline: none;
+	border-color: #90bc90;
+	box-shadow: 0 0 0 3px rgba(144, 188, 144, 0.2);
 }
 
-#replyForm-123 {
-    margin-top: 10px;
+/* 버튼 그룹 공통 */
+.comment-buttons {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	margin-top: 8px;
 }
 
+.comment-buttons button,
+.comment-buttons form button,
 .edit-buttons button {
-    background-color: #e3e3e3;
+	background-color: #e3e3e3;
+	border: none;
+	border-radius: 6px;
+	padding: 5px 12px;
+	font-size: 13px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.comment-buttons button:hover,
+.comment-buttons form button:hover,
+.edit-buttons button:hover {
+	background-color: #cfcfcf;
+}
+
+/* 수정 버튼 전용 */
+.edit-buttons {
+	margin-top: 8px;
+	display: flex;
+	gap: 6px;
+}
+
+/* 댓글 전용 작성 버튼 (오른쪽 하단 고정) */
+.comment-submit-btn {
+	position: absolute;
+	top: auto;
+	bottom: 40px; /* 더 위로 올림 */
+	right: 27px;
+	padding: 6px 14px;
+	background-color: #90bc90;
+	border: none;
+	border-radius: 6px;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	
+}
+
+.comment-submit-btn:hover {
+	background-color: #7da97d;
+}
+
+.post-actions {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.post-actions button {
+    font-size: 16px;
+    padding: 10px 16px;
+    margin: 0 10px;
     border: none;
     border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 13px;
     cursor: pointer;
-    transition: background-color 0.2s;
-    margin-right: 6px;
+    transition: 0.2s ease;
 }
 
-.edit-buttons button:hover {
-    background-color: #cfcfcf;
-}
-
-.comment-content textarea {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: 14px;
+.like-btn {
+    background-color: #ffecec;
+    color: #d32f2f;
+    font-size: 15px;
+    border: none;
     border-radius: 6px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.like-btn:hover {
+    background-color: #ffd4d4;
+    font-family: Arial, sans-serif;
+}
+
+.report-btn {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.report-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.go-list-btn-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 24px 40px 0;
+}
+
+.go-list-btn {
+    background-color: #fff;
     border: 1px solid #ccc;
-    resize: vertical;
+    color: #333;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.go-list-btn:hover {
+    background-color: #f9f9f9;
+    border-color: #999;
+}
+
+#like-count-display{
+	margin-bottom:10px;
 }
 </style>
-
 
 </head>
 <body>
@@ -269,93 +322,134 @@ textarea:focus {
 		<hr>
 		
 		<div class="content">
-			<!-- 게시글 내용 출력 -->
-			${board.content} <!-- HTML 형태로 저장된 게시글 내용 출력 -->
-
-			<!-- 첨부파일을 게시글 내용 중간에 삽입 -->
-			<c:if test="${not empty board.originalFileName}">
-				<c:set var="ext" value="${fn:toLowerCase(fn:substringAfter(board.originalFileName, '.'))}"/>
-
-				<c:choose>
-					<c:when test="${ext eq 'jpg' || ext eq 'jpeg' || ext eq 'png' || ext eq 'gif' || ext eq 'webp'}">
-						<!-- 이미지 파일을 게시글 내용 중에 삽입 -->
-						<p>
-							<img src="${pageContext.servletContext.contextPath}/resources/board_upfiles/${board.renameFileName}"
-								alt="${board.originalFileName}" style="max-width: 100%; height: auto; border-radius: 6px; margin-top: 10px;" />
-						</p>
-					</c:when>
-					<c:otherwise>
-						<!-- 다른 파일은 다운로드 링크로 삽입 -->
-						<a href="${pageContext.servletContext.contextPath}/boardFileDown.do?ofile=${board.originalFileName}&rfile=${board.renameFileName}">
-							${board.originalFileName} 다운로드
-						</a>
-					</c:otherwise>
-				</c:choose>
-			</c:if>
+			${board.content}
 		</div>
 		
-		<!-- 댓글 출력 -->
+		<div class="post-actions">
+		    <button class="like-btn" data-id="${board.boardId}">
+			    <span class="like-icon">${liked ? '❤️ 좋아요' : '🤍 좋아요'}</span>
+			</button>
+			
+			<c:if test="${ loginUser.role ne 'ADMIN' and loginUser.loginId ne board.writer }">
+				<form id="reportForm" action="boardReportPage.do" method="get" style="display: inline;">
+					<input type="hidden" name="targetId" value="${ board.boardId }">
+					<input type="hidden" name="category" value="${ category }">
+					<button type="submit">🚨 신고</button>
+				</form>
+			</c:if>
+			
+			<c:if test="${loginUser.loginId eq board.writer || loginUser.role eq 'ADMIN'}">
+		        <form action="boardUpdatePage.do" method="get" style="display:inline;">
+		            <input type="hidden" name="boardId" value="${board.boardId}" />
+		            <input type="hidden" name="page" value="${currentPage}" />
+		            <button type="submit" class="report-btn">✏️ 수정</button>
+		        </form>
+		
+		        <form action="boardDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+		            <input type="hidden" name="boardId" value="${board.boardId}" />
+		            <input type="hidden" name="category" value="${category}" />
+		            <input type="hidden" name="page" value="${currentPage}" />
+		            <button type="submit" class="report-btn">🗑️ 삭제</button>
+		        </form>
+		    </c:if>
+		</div>
+		
+		
+		
+		<c:if test="${not empty board.originalFileName}">
+			<div class="attachment">
+				<h4>첨부파일</h4>
+				<a href="${pageContext.servletContext.contextPath}/boardFileDown.do?ofile=${board.originalFileName}&rfile=${board.renameFileName}">
+					${board.originalFileName}
+				</a>
+			</div>
+		</c:if>
+		
+<!-- 댓글 출력 -->
 <div class="comment-section">
-    <div class="comment-title">댓글 ${commentCount}</div>
+    <div id="like-count-display">
+	    댓글 ${commentCount} &nbsp; ❤️ <span id="like-num">${board.likeCount}</span>
+	</div>
 
     <c:forEach var="c" items="${commentList}">
         <c:if test="${empty c.parentId}">
-            <!--  부모 댓글 -->
+            <!-- 부모 댓글 -->
             <div class="comment-box">
                 <div class="comment-meta">
                     <strong>${c.nickName}</strong> |
                     <fmt:formatDate value="${c.createdAt}" pattern="MM.dd HH:mm" />
                 </div>
 
-                <!-- 댓글 내용 or 수정 폼 -->
                 <div class="comment-content">
-                    <c:choose>
-                        <c:when test="${not empty editCommentId and editCommentId eq c.commentId}">
-                            <form action="boardCommentUpdate.do" method="post">
-                                <input type="hidden" name="commentId" value="${c.commentId}" />
-                                <input type="hidden" name="boardId" value="${board.boardId}" />
-                                <input type="hidden" name="category" value="${param.category}" />
-                                <textarea name="content" style="width:100%; height:80px;">${c.content}</textarea>
-                                <div class="edit-buttons" style="margin-top:8px;">
-                                    <button type="submit">저장</button>
-                                    <a href="boardDetail.do?boardId=${board.boardId}&category=${param.category}">
-                                        <button type="button">취소</button>
-                                    </a>
-                                </div>
-                            </form>
-                        </c:when>
-                        <c:otherwise>
-						   ${ c.content }
-						</c:otherwise>
-                    </c:choose>
-                </div>
+				    <c:choose>
+				        <c:when test="${not empty editCommentId and editCommentId eq c.commentId}">
+				            <form action="boardCommentUpdate.do" method="post">
+				                <input type="hidden" name="commentId" value="${c.commentId}" />
+				                <input type="hidden" name="boardId" value="${board.boardId}" />
+				                <input type="hidden" name="category" value="${param.category}" />
+				                <textarea name="content" required style="width:100%; height:80px;">${c.content}</textarea>
+				                <div class="edit-buttons" style="margin-top:8px;">
+				                    <button type="submit">저장</button>
+				                    <a href="boardDetail.do?boardId=${board.boardId}&category=${param.category}">
+				                        <button type="button">취소</button>
+				                    </a>
+				                </div>
+				            </form>
+				        </c:when>
+				        <c:otherwise>
+				            ${c.content}
+				        </c:otherwise>
+				    </c:choose>
+				</div>
 
-                <!-- 버튼: 수정 중일 때 숨김 -->
                 <c:if test="${empty editCommentId or editCommentId ne c.commentId}">
-                    <div class="comment-buttons" style="margin-top: 8px;">
-                        <c:if test="${loginUser.loginId eq c.loginId || loginUser.role eq 'ADMIN'}">
-                            <form action="boardDetail.do" method="get" style="display:inline;">
-                                <input type="hidden" name="boardId" value="${board.boardId}" />
-                                <input type="hidden" name="category" value="${param.category}" />
-                                <input type="hidden" name="editCommentId" value="${c.commentId}" />
-                                <button type="submit">수정</button>
-                            </form>
-                            <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                                <input type="hidden" name="commentId" value="${c.commentId}" />
-                                <input type="hidden" name="boardId" value="${board.boardId}" />
-                                <input type="hidden" name="category" value="${param.category}" />
-                                <button type="submit">삭제</button>
-                            </form>
-                        </c:if>
-                        <c:if test="${!empty sessionScope.loginUser}">
-                           <button type="button" onclick="toggleReplyForm(${c.commentId})">답글달기</button>
-                        </c:if>
-                    </div>
-                    <div id="replyForm-${c.commentId}" style="margin-top: 8px;"></div>
-                </c:if>
+				    <div class="comment-buttons">
+				        <!-- 답글달기 -->
+				        <c:if test="${ !empty loginUser.loginId }">
+				        <form action="boardDetail.do" method="get" style="display:inline;">
+				            <input type="hidden" name="boardId" value="${board.boardId}" />
+				            <input type="hidden" name="category" value="${param.category}" />
+				            <input type="hidden" name="replyTargetId" value="${c.commentId}" />
+				            <button type="submit">답글달기</button>
+				        </form>
+				        </c:if>
+				
+				        <!-- 수정/삭제 버튼 -->
+				        <c:if test="${loginUser.loginId eq c.loginId || loginUser.role eq 'ADMIN'}">
+				            <form action="boardDetail.do" method="get" style="display:inline;">
+				                <input type="hidden" name="boardId" value="${board.boardId}" />
+				                <input type="hidden" name="category" value="${param.category}" />
+				                <input type="hidden" name="editCommentId" value="${c.commentId}" />
+				                <button type="submit">수정</button>
+				            </form>
+				            <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+				                <input type="hidden" name="commentId" value="${c.commentId}" />
+				                <input type="hidden" name="boardId" value="${board.boardId}" />
+				                <input type="hidden" name="category" value="${param.category}" />
+				                <button type="submit">삭제</button>
+				            </form>
+				        </c:if>
+				    </div>
+				</c:if>
+
+                <!-- 대댓글 작성 폼 -->
+                <c:if test="${param.replyTargetId eq c.commentId}">
+				    <form action="boardReplyInsert.do" method="post" style="margin-top: 8px;">
+				        <input type="hidden" name="boardId" value="${board.boardId}" />
+				        <input type="hidden" name="parentId" value="${c.commentId}" />
+				        <input type="hidden" name="category" value="${param.category}" />
+				        <textarea name="content" required placeholder="답글 입력"></textarea>
+				
+				        <div class="comment-buttons">
+				            <button type="submit">등록</button>
+				            <button type="button"
+				                    onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}'">취소</button>
+				        </div>
+				    </form>
+				</c:if>
             </div>
 
-            <!-- 🔵 대댓글 출력 -->
+            <!-- 대댓글 루프: 부모 댓글 바로 아래 출력 -->
             <c:forEach var="r" items="${commentList}">
                 <c:if test="${r.parentId eq c.commentId}">
                     <div class="comment-box reply">
@@ -363,122 +457,155 @@ textarea:focus {
                             <strong>${r.nickName}</strong> |
                             <fmt:formatDate value="${r.createdAt}" pattern="MM.dd HH:mm" />
                         </div>
-                        <div class="comment-content">${r.content}</div>
-                        <div class="comment-buttons" style="margin-top: 8px;">
-                            <c:if test="${loginUser.loginId eq board.writer || loginUser.role eq 'ADMIN'}">
-                                <form action="boardDetail.do" method="get" style="display:inline;">
-                                    <input type="hidden" name="boardId" value="${board.boardId}" />
-                                    <input type="hidden" name="category" value="${param.category}" />
-                                    <input type="hidden" name="editCommentId" value="${r.commentId}" />
-                                    <button type="submit">수정</button>
-                                </form>
-                                <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                                    <input type="hidden" name="commentId" value="${r.commentId}" />
-                                    <input type="hidden" name="boardId" value="${board.boardId}" />
-                                    <input type="hidden" name="category" value="${param.category}" />
-                                    <button type="submit">삭제</button>
-                                </form>
-                            </c:if>
+
+                        <!-- 대댓글 수정 or 보기 -->
+                        <div class="comment-content">
+                            <c:choose>
+                                <c:when test="${not empty editCommentId and editCommentId eq r.commentId}">
+                                    <form action="boardCommentUpdate.do" method="post">
+                                        <input type="hidden" name="commentId" value="${r.commentId}" />
+                                        <input type="hidden" name="boardId" value="${board.boardId}" />
+                                        <input type="hidden" name="category" value="${param.category}" />
+                                        <textarea name="content" required style="width:100%; height:80px;">${r.content}</textarea>
+                                        <div class="edit-buttons" style="margin-top:8px;">
+                                            <button type="submit">저장</button>
+                                            <a href="boardDetail.do?boardId=${board.boardId}&category=${param.category}">
+                                                <button type="button">취소</button>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </c:when>
+                                <c:otherwise>
+                                    ${r.content}
+                                </c:otherwise>
+                            </c:choose>
                         </div>
+
+                        <!-- 대댓글 버튼 -->
+                        <c:if test="${loginUser.loginId eq r.loginId || loginUser.role eq 'ADMIN'}">
+						    <c:if test="${empty editCommentId or editCommentId ne r.commentId}">
+						        <div class="comment-buttons" style="margin-top: 8px;">
+						            <form action="boardDetail.do" method="get" style="display:inline;">
+						                <input type="hidden" name="boardId" value="${board.boardId}" />
+						                <input type="hidden" name="category" value="${param.category}" />
+						                <input type="hidden" name="editCommentId" value="${r.commentId}" />
+						                <button type="submit">수정</button>
+						            </form>
+						            <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+						                <input type="hidden" name="commentId" value="${r.commentId}" />
+						                <input type="hidden" name="boardId" value="${board.boardId}" />
+						                <input type="hidden" name="category" value="${param.category}" />
+						                <button type="submit">삭제</button>
+						            </form>
+						        </div>
+						    </c:if>
+						</c:if>
+
                     </div>
                 </c:if>
             </c:forEach>
-
         </c:if>
     </c:forEach>
 </div>
 
-		
-		<!-- 댓글 작성 폼 -->
-		<c:if test="${!empty sessionScope.loginUser}">
-		    <div class="comment-form">
-		        <form action="boardCommentInsert.do" method="post">
-		            <input type="hidden" name="boardId" value="${board.boardId}">
-		            <input type="hidden" name="category" value="${board.boardCategory}">
-		            <div style="position: relative;">
-		                <textarea name="content" id="commentContent" placeholder="댓글을 작성하세요." required></textarea>
-		                <input type="submit" value="작성" class="comment-submit-btn">
-		            </div>
-		        </form>
-		    </div>
-		</c:if>
-
-		<div class="button-row">
-			<c:if test="${not empty sessionScope.loginUser}">
-				<c:if
-					test="${loginUser.loginId eq board.writer || loginUser.role eq 'ADMIN'}">
-					<button type="button" onclick="requestUpdatePage();">수정</button>
-					<button type="button" onclick="requestDelete();">삭제</button>
-				</c:if>
-			</c:if>
-			<button type="button" onclick="history.back();">이전 페이지</button>
-			<button type="button" onclick="goToList();">목록</button>
-		</div>
-
-	</div>
-
-	<c:import url="/WEB-INF/views/common/footer.jsp" />
-<script type="text/javascript">
-
-const boardId = '${board.boardId}';
-const category = '${param.category}';
-
-function requestDelete(){
-    const boardId = '${board.boardId}';
-    const page = '${currentPage}';
-    const category = '${param.category}';
-
-    location.href = '${pageContext.request.contextPath}/boardDelete.do?boardId=' + boardId + '&page=' + page + '&category=' + category;
-}
-function requestUpdatePage(){
-    location.href = '${pageContext.request.contextPath}/boardUpdatePage.do?boardId=${board.boardId}&page=${currentPage}';
-}
-function goToList(){
-	const category = '${param.category}';
-	const page = '${currentPage}';
-
-	if (category == null || category == '' || category == 'all') {
-		location.href = '${pageContext.request.contextPath}/boardList.do?page=1';
-	} else {
-		location.href = '${pageContext.request.contextPath}/boardList.do?category=' + category + '&page=1';
-	}
-}
-
-
-
-
-
-function toggleReplyForm(commentId) {
-    const container = document.getElementById(`replyForm-${commentId}`);
-    if (!container) return;
-
-    if (container.innerHTML.trim() !== "") {
-        container.innerHTML = "";
-        return;
-    }
-    
-    console.log("댓글 ID:", commentId);
-    console.log("boardId:", boardId);
-    console.log("category:", category);
-
-    container.innerHTML = `
-        <form action="boardCommentInsert.do" method="post" class="reply-form">
-            <input type="hidden" name="boardId" value="` + boardId + `" />
-            <input type="hidden" name="parentId" value="` + commentId + `" />
-            <input type="hidden" name="category" value="` + category + `" />
-            <textarea name="content" placeholder="답글을 입력하세요" required></textarea>
-            <div class="reply-buttons">
-                <button type="submit">등록</button>
-                <button type="button" onclick="cancelReplyForm(` + commentId + `)">취소</button>
+<!-- 새 댓글 작성 폼 -->
+<c:if test="${!empty sessionScope.loginUser}">
+    <div class="comment-form" style="margin-top: 30px;">
+        <form action="boardCommentInsert.do" method="post">
+            <input type="hidden" name="boardId" value="${board.boardId}" />
+            <input type="hidden" name="category" value="${param.category}" />
+            <textarea name="content" placeholder="댓글을 입력하세요" required style="width:100%; height:80px;"></textarea>
+            <div style="margin-top: 8px;">
+                <button class="comment-submit-btn" type="submit">작성</button>
             </div>
         </form>
-    `;
-}
+    </div>
+</c:if>
 
-function cancelReplyForm(commentId) {
-    const container = document.getElementById(`replyForm-${commentId}`);
-    if (container) container.innerHTML = "";
-}
+<div class="go-list-btn-wrap">
+    <button type="button" class="go-list-btn" onclick="goList();">📋 목록</button>
+</div>
+
+<c:if test="${param.reportSuccess eq 'true'}">
+    <script>
+        alert('🚨 신고가 완료되었습니다.');
+    </script>
+</c:if>
+
+<c:import url="/WEB-INF/views/common/footer.jsp" />	
+
+<script type="text/javascript">
+    const boardId = '${board.boardId}';
+    const category = '${param.category}';
+    const page = '${currentPage}';
+    const ctx = '${pageContext.request.contextPath}';
+    
+    // 댓글 지우기
+    window.requestDelete = function() {
+        location.href = `${ctx}/boardDelete.do?boardId=${boardId}&page=${page}&category=${category}`;
+    }
+
+    // 댓글 수정하기
+    window.requestUpdatePage = function() {
+        location.href = `${ctx}/boardUpdatePage.do?boardId=${boardId}&page=${page}`;
+    }
+
+    // 목록
+    window.goList = function() {
+        if (!category || category === 'all' || category === 'indefined') {
+            location.href = ctx + `/boardList.do?page=1`;
+        } else {
+            location.href = ctx + `/boardList.do?category=${category}&page=1`;
+        }
+    }
+    
+    $(document).ready(function () {
+        // JSP 변수 commentCount를 JavaScript로 전달
+        const commentCount = ${commentCount};
+
+        $('.like-btn').on('click', function () {
+            const boardId = $(this).data('id');
+            toggleLike(boardId, this, commentCount);
+        });
+    });
+
+    function toggleLike(boardId, buttonElement, commentCount) {
+        if (!boardId) {
+            console.error("❗ boardId 값이 없습니다.");
+            return;
+        }
+
+        const loginId = '${sessionScope.loginUser.loginId}';
+        if (!loginId) {
+            alert("로그인이 필요합니다.");
+            location.href = 'loginPage.do';
+            return;
+        }
+
+        $.ajax({
+            url: 'toggleLike.do',
+            method: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify({ loginId, targetId: boardId }),
+            success: function (response) {
+                const $btn = $(buttonElement);
+                const count = response.likeCount;
+
+                // 텍스트만 교체
+                const iconText = (response.status === 'liked')
+                    ? '❤️ 좋아요'
+                    : '🤍 좋아요';
+
+                $btn.find('.like-icon').text(iconText); // ← 버튼 안 이모지만 바꿔줌
+
+                // 댓글 + 좋아요 숫자만 교체
+                $('#like-num').text(count);
+            },
+            error: function () {
+                alert('좋아요 처리 중 오류가 발생했습니다.');
+            }
+        });
+    }
 
 </script>
 </body>

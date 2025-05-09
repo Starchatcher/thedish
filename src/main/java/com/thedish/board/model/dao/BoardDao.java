@@ -137,11 +137,13 @@ public class BoardDao {
 	}
 	
 	// 댓글 삭제용 쿼리
-	public int deleteBoardComment(int commentId) {
-		return sqlSessionTemplate.delete("commentMapper.deleteBoardComment", commentId);
+	public int deleteBoardComment(Map<String, Object> param) {
+		return sqlSessionTemplate.delete("commentMapper.deleteBoardComment", param);
 	}
 	
-	
+	public int deleteCommentsByBoardId(Map<String, Object> param) {
+		return sqlSessionTemplate.delete("commentMapper.deleteCommentsByBoardId", param);
+	}
 	
 	
 	

@@ -3,191 +3,196 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<title>My Page</title>
+<meta charset="UTF-8">
+<title>마이페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f6f8fb;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 40px auto;
+.wrapper {
   display: flex;
-  gap: 30px;
-  padding: 0 20px;
+  max-width: 1600px; /* ← 전체 폭 확장 */
+  margin: 40px auto;
 }
 
 .sidebar {
-  background: white;
-  padding: 30px;
-  width: 320px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  text-align: left;
+  width: 260px;
+  background-color: #ffffff;
+  padding: 30px 24px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
-.sidebar h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.sidebar h3 {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
   color: #2c3e50;
-  text-align: center;
+  border-bottom: 1px solid #dcdde1;
+  padding-bottom: 6px;
 }
 
-.sidebar .info-label {
-  font-weight: bold;
-  color: #444;
-  margin-bottom: 5px;
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 25px 0;
 }
 
-.sidebar .info-item {
-  margin: 8px 0;
-  font-size: 14px;
-  color: #555;
+.sidebar ul li {
+  margin: 10px 0;
 }
 
-.sidebar button {
+.sidebar ul li a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #2980b9;
+  transition: all 0.2s ease-in-out;
   display: block;
-  margin: 20px auto 0;
-  background: #2ecc71;
-  color: white;
-  border: none;
-  padding: 10px 25px;
+  padding: 6px 10px;
   border-radius: 6px;
-  cursor: pointer;
 }
 
-.sidebar button:hover {
-  background: #27ae60;
+.sidebar ul li a:hover {
+  background-color: #eaf6ff;
+  color: #1a5e89;
+  font-weight: 600;
 }
 
-.content {
+.main-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  background-color: #fff;
+  padding: 50px; /* ← 여백 증가 */
+  border-radius: 10px;
+  margin-left: 30px; /* ← 좌우 간격 증가 */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
-.box {
-  background: white;
-  border-radius: 12px;
-  padding: 25px 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+.main-content h2 {
+  margin-bottom: 35px;
+  font-size: 24px;
+  color: #2c3e50;
+  font-weight: 700;
 }
 
-.box h3 {
-  margin-bottom: 10px;
-  font-size: 17px;
-  color: #333;
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  margin-top: 20px;
+  color: #34495e;
+  font-size: 15px;
 }
 
-.box p {
-  font-size: 14px;
-  color: #666;
-}
-
-.form-section input[type="text"],
-.form-section input[type="email"],
-.form-section input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  margin-bottom: 15px;
+  padding: 12px;
+  font-size: 15px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
-.form-section input[type="submit"],
-.form-section input[type="reset"] {
-  padding: 10px 20px;
+.btn-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.btn-group button,
+input[type="submit"],
+input[type="reset"] {
+  flex: 1;
+  min-width: 140px;
+  padding: 14px 0;
+  font-size: 15px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #3498db;
   color: white;
   cursor: pointer;
-  margin-right: 10px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.form-section input[type="submit"]:hover {
+.btn-group button:hover,
+input[type="submit"]:hover {
   background-color: #2980b9;
 }
-.form-section a {
-  margin-left: 10px;
-  text-decoration: none;
-  color: #e74c3c;
+
+.danger-btn {
+  background-color: #3498db !important;
+  color: white;
+}
+
+.danger-btn:hover {
+  background-color: #2980b9 !important;
 }
 </style>
 
-<script src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
 <script>
-function validate() {
-    var passwordValue = $('#password').val();
-    var passwordValue2 = $('#password2').val();
-    if (passwordValue !== passwordValue2) {
-        alert('암호와 암호확인이 일치하지 않습니다. 다시 입력하세요.');
-        $('#password').val('');
-        $('#password2').val('');
-        $('#password').focus();
-        return false;
-    }
-    return true;
+function checkPw() {
+  var pw = document.getElementById("password").value;
+  var pw2 = document.getElementById("password2").value;
+  if (pw !== pw2) {
+    alert("비밀번호가 일치하지 않습니다.");
+    return false;
+  }
+  return true;
 }
 </script>
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-<div class="container">
-  <!-- 사이드바 유저 정보 -->
-  <div class="sidebar">
-    <h2>${users.nickName}</h2>
-    <div class="info-item"><span class="info-label">📞 Phone :</span> ${users.phone}</div>
-    <div class="info-item"><span class="info-label">✉ Email :</span> ${users.email}</div>
-    <button type="button" onclick="alert('좌측 정보는 아래 폼에서 수정 가능합니다.')">개인정보설정 변경</button>
-  </div>
+<div class="wrapper">
+<div class="sidebar">
+  <h3>회원정보</h3>
+  <ul>
+    <li><a href="${pageContext.request.contextPath}/myPage.do">메인페이지</a></li>
+    <li><a href="${pageContext.request.contextPath}/confirmDelete.do?loginId=${users.loginId}">회원 탈퇴</a></li>
+  </ul>
 
-  <!-- 우측 기능 폼 -->
-  <div class="content">
-    <div class="box form-section">
-      <h3>회원정보 수정</h3>
-      <form action="updateUser.do" method="post" onsubmit="return validate();">
-        <input type="hidden" name="loginId" value="${users.loginId}">
-        <label>비밀번호</label>
-        <input type="password" name="password" id="password" required>
+  <h3>Community</h3>
+  <ul>
+    <li><a href="${pageContext.request.contextPath}/inquiryList.do">1:1 문의</a></li>
+    <li><a href="${pageContext.request.contextPath}/myBoardList.do">내가 쓴 글</a></li>
+    <li><a href="${pageContext.request.contextPath}/faqList.do">FAQ</a></li>
+    <li><a href="${pageContext.request.contextPath}/qnaList.do">Q&A</a></li>
+  </ul>
+</div>
+  <div class="main-content">
+    <h2>회원정보 수정</h2>
+    <form action="updateUser.do" method="post" onsubmit="return checkPw();">
+      <input type="hidden" name="loginId" value="${users.loginId}" />
 
-        <label>비밀번호 확인</label>
-        <input type="password" id="password2" required>
+      <label>이름</label>
+      <input type="text" name="userName" value="${users.userName}" required />
 
-        <label>닉네임</label>
-        <input type="text" name="nickName" value="${users.nickName}">
+      <label>비밀번호</label>
+      <input type="password" name="password" id="password" required />
 
-        <label>이메일</label>
-        <input type="email" name="email" value="${users.email}">
+      <label>비밀번호 확인</label>
+      <input type="password" id="password2" required />
 
-        <input type="submit" value="수정하기">
-        <input type="reset" value="취소">
-      </form>
-      <!-- 탈퇴하기 버튼 추가 -->
-      <br>
-      <a href="confirmDelete.do?loginId=${users.loginId}" style="color: red; font-weight: bold; text-decoration: underline;">탈퇴하기</a>
-    </div>
+      <label>닉네임</label>
+      <input type="text" name="nickName" value="${users.nickName}" />
 
-    <div class="box">
-      <h3>🔔 알림 설정</h3>
-      <p>The Dish 서비스의 알림 여부를 설정할 수 있습니다.</p>
-    </div>
+      <label>이메일</label>
+      <input type="email" name="email" value="${users.email}" />
 
-    <div class="box">
-      <h3>🔒 비밀번호 변경</h3>
-      <p>주기적인 비밀번호 변경을 통해 개인정보를 안전하게 보호하세요.</p>
-    </div>
-
-    <div class="box">
-      <h3>📝 내 문의</h3>
-      <p>내가 남긴 문의를 확인할 수 있습니다.</p>
-    </div>
+      <label>전화번호</label>
+      <input type="tel" name="phone" value="${users.phone}" />
+<div class="btn-group">
+  <button type="submit">수정하기</button>
+  <button type="button" onclick="location.href='changePassword.do?loginId=${users.loginId}'">비밀번호 변경</button>
+  <button type="button" onclick="location.href='confirmDelete.do?loginId=${users.loginId}'">회원탈퇴</button>
+</div>  
+    </form>
   </div>
 </div>
 

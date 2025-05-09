@@ -27,6 +27,8 @@ public interface UsersService {
     
  // 닉네임 중복 체크
     int selectChecknickName(String nickName);
+    
+    int updatePassword(Users user);
 
     // 관리자 기능
     int selectListCount();
