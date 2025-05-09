@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.drink.dao.DrinkDao;
 import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.model.vo.DrinkStore;
@@ -152,6 +153,32 @@ public class DrinkServiceImpl implements DrinkService{
 	public int deleteStore(int storeId) {
 		
 		return drinkDao.deleteStore(storeId);
+	}
+
+	@Override
+	public void insertPostViewLog(ViewLog log) {
+		drinkDao.insertPostViewLog(log);		
+	}
+
+	@Override
+	public ViewLog getLatestPostViewLog(String userId, int postId) {
+		return drinkDao.getLatestPostViewLog(userId, postId);
+	}
+
+	@Override
+	public List<Pairing> selectPairings(int drinkId) {
+		return drinkDao.selectPairings(drinkId);
+	}
+
+	@Override
+	public int insertPairing(Pairing pairing) {
+		
+		return drinkDao.insertPairing(pairing);
+	}
+
+	@Override
+	public int deletePairing(int pairingId) {
+		return drinkDao.deletePairing( pairingId) ;
 	}
 
 	

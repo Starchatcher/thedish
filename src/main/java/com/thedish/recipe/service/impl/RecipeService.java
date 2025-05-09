@@ -54,5 +54,8 @@ public interface RecipeService {
 	 
 	 ViewLog getLatestPostViewLog(String userId, int postId);
 	 
-
+	
+	  List<Recipe> getAllRecipes();
+ 		
+ 	
 }

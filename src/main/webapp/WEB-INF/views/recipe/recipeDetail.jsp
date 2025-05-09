@@ -166,14 +166,32 @@ form button:hover {
 	background-color: green;
 }
 
-.map-container {
-	margin-top: 40px;
-	height: 400px; /* 지도 높이 설정 */
-	border: 1px solid #ddd; /* 지도 테두리 */
-	border-radius: 8px; /* 테두리 둥글게 */
-	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+.allergy-info-container {
+    background-color: #f9f9f9; /* 배경색 설정 */
+    border: 1px solid #ddd; /* 테두리 설정 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    padding: 15px; /* 내부 여백 설정 */
+    margin-top: 20px; /* 상단 여백 설정 */
 }
 
+.allergy-info h3 {
+    color: #ff5722; /* 제목 색상 설정 */
+    margin-bottom: 10px; /* 제목과 내용 간격 설정 */
+}
+
+.allergy-info ul {
+    list-style-type: none; /* 기본 리스트 스타일 제거 */
+    padding: 0; /* 패딩 제거 */
+}
+
+.allergy-info li {
+    margin-bottom: 5px; /* 리스트 항목 간격 설정 */
+    color: #333; /* 리스트 항목 글자색 설정 */
+}
+
+.allergy-info li strong {
+    color: #ff5722; /* 알러지 이름 강조 색상 설정 */
+}
 .starpoint_wrap{display:inline-block;}
 .starpoint_box{position:relative;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;font-size:0;}
 .starpoint_box .starpoint_bg{display:block;position:absolute;top:0;left:0;height:18px;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;pointer-events:none;}
@@ -262,18 +280,21 @@ form button:hover {
 
 	</div>
 	<c:if test="${not empty allergyList}">
-		<div class="allergy-info">
-			<h3>알러지 정보</h3>
-			<ul>
-				<c:forEach var="allergy" items="${allergyList}">
-					<li><strong>${allergy.name}</strong>: ${allergy.description}</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</c:if>
-	<c:if test="${empty allergyList}">
-		<p>알러지 정보가 없습니다.</p>
-	</c:if>
+    <div class="allergy-info-container"> <!-- 컨테이너 추가 -->
+        <div class="allergy-info">
+            <h3>알러지 정보</h3>
+            <ul>
+                <c:forEach var="allergy" items="${allergyList}">
+                    <li><strong>${allergy.name}</strong>: ${allergy.description}</li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</c:if>
+<c:if test="${empty allergyList}">
+    <p>알러지 정보가 없습니다.</p>
+</c:if>
+
 
 
 

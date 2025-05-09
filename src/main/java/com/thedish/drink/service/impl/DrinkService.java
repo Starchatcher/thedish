@@ -7,6 +7,7 @@ import java.util.Map;
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.model.vo.DrinkStore;
 
@@ -40,9 +41,21 @@ public interface DrinkService {
 	 
 	 Map<String, Object> selectStoreInfoByDrinkId(int drinkId);
 	 
+	 
 	 Drink getDrinkById(int drinkId);
-	 List<DrinkStore> getStoresByDrinkName(String drinkName);
+	
 	 
 	 int insertDrinkStore(DrinkStore drinkStore);
 	 int deleteStore(int storeId);
+	 
+	 
+void insertPostViewLog(ViewLog log);
+	 
+	 ViewLog getLatestPostViewLog(String userId, int postId);
+	 
+	 List<Pairing> selectPairings(int drinkId);
+	 
+	 int insertPairing(Pairing pairing); 
+	 int deletePairing(int pairingId);
+	List<DrinkStore> getStoresByDrinkName(String drinkName); 
 }

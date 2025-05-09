@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.model.vo.DrinkStore;
 
@@ -163,4 +164,28 @@ public class DrinkDao {
     }
     
     
+    public void insertPostViewLog(ViewLog log) {
+
+        sqlSessionTemplate.insert("drinkMapper.insertPostViewLog", log);
+    }
+    public ViewLog getLatestPostViewLog(String userId, int postId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("postId", postId);
+
+       
+        return sqlSessionTemplate.selectOne("drinkMapper.getLatestPostViewLog", params);
+    }
+    
+    public List<Pairing> selectPairings(int drinkId) {
+        // NAMESPACE와 select 쿼리 ID를 조합하여 호출
+        return sqlSessionTemplate.selectList( "drinkMapper.selectPairings", drinkId);
+    }
+    
+    public  int insertPairing(Pairing pairing) {
+    	return sqlSessionTemplate.insert("drinkMapper.insertPairing", pairing);
+    }
+    public int deletePairing(int pairingId) {
+    	return sqlSessionTemplate.delete("drinkMapper.deletePairing",pairingId);
+    }
 }

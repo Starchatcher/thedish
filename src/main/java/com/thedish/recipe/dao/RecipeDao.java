@@ -131,6 +131,8 @@ public class RecipeDao {
        
         return sqlSessionTemplate.selectOne("recipeMapper.getLatestPostViewLog", params);
     }
-    
+    	public List<Recipe> getAllRecipes(){
+    		return sqlSessionTemplate.selectList("recipeMapper.selectAllRecipes");
+    	}
     
 }

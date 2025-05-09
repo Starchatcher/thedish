@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -88,11 +89,9 @@ public class RecipeController {
 
 			return mv;
 		}
-		
-		// 레시피 상세보기 요청 처리용
-		// 레시피 상세보기 요청 처리용
-				@RequestMapping("/recipeDetail.do")
 				
+		// 레시피 상세보기 요청 처리용
+				@RequestMapping("/recipeDetail.do")				
 				public ModelAndView recipeDetailMethod(
 				    @RequestParam("no") int recipeId, 
 				    ModelAndView mv, 
@@ -108,21 +107,15 @@ public class RecipeController {
 			            // 1. 게시글 조회수 증가 (기존 로직)
 			            // 조회수 증가 로직과 로그 기록 로직은 별개로 처리될 수 있습니다.
 			            recipeService.updateAddReadCount(recipeId);
-			            logger.info("{}번 레시피 조회수 증가", recipeId);
-
-
-			            // ====== 게시글 조회 로그 기록 로직 (컨트롤러에서 직접 처리) ======
+			            logger.info("{}번 레시피 조회수 증가", recipeId);		         
 
 			            // 1. 사용자 ID 가져오기 (로그인된 경우, 아니면 IP 주소 등 활용)
 			            String userId = null;
 			            // 세션에서 로그인된 사용자 정보를 가져오는 로직 (예시)
 			            Object userObj = session.getAttribute("loginUser"); // 예: 세션에 "loggedInUser"라는 이름으로 저장됨
 			            if (userObj != null) {
-			                 try {
-			                     // 임시로 사용자 객체의 특정 메소드나 필드를 통해 ID를 가져온다고 가정
-			                     // 실제 사용자 객체 구조에 맞게 수정하세요.
-			                     // 예: LoginUser user = (LoginUser) userObj; userId = user.getUserId();
-			                     // 아래는 리플렉션을 사용한 예시이며, 캐스팅 후 직접 접근하는 것이 더 일반적입니다.
+			                 try {	                    
+			                     
 			                     Method getUserIdMethod = userObj.getClass().getMethod("getUserId"); // 또는 getLoginId 등
 			                     userId = (String) getUserIdMethod.invoke(userObj);
 			                 } catch (Exception e) {
@@ -145,8 +138,7 @@ public class RecipeController {
 			                 logger.warn("유효하지 않은 정보로 로그 기록 요청 무시 (컨트롤러) - userId: {}, postId: {}, postType: {}", userId, recipeId, postType);
 			            } else { // 정보가 유효한 경우에만 로그 로직 진행
 			                 try {
-			                    // 3. Service/DAO를 통해 특정 사용자, 특정 게시글에 대한 가장 최근 로그 기록 조회
-			                    // Service의 getLatestPostViewLog 메소드는 DAO의 동일 메소드를 호출할 것입니다.
+			                  
 			                    ViewLog latestLog = recipeService.getLatestPostViewLog(userId, recipeId);
 			                    logger.debug("가장 최근 로그 조회 결과 (컨트롤러): {}", latestLog);
 
@@ -483,7 +475,6 @@ public class RecipeController {
 		 
 		 
 		 
-
 
 }
 

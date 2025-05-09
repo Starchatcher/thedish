@@ -107,7 +107,26 @@ public class CommentController {
 		        return "redirect:/recipeDetail.do?no=" + recipeId; // 댓글 등록 후 해당 레시피 상세 페이지로 이동 (page 파라미터는 필요시 추가)
 		    }
 
-	
+		  @RequestMapping(value = "/deleteComment.do", method = RequestMethod.POST)
+			public String deleteComment(@RequestParam("commentId") int commentId,
+			                            @RequestParam("recipeId") int recipeId,
+			                            @RequestParam("targetType") String targetType,
+			                            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+			                            RedirectAttributes redirectAttributes) {
+
+				
+				
+			    boolean isDeleted = commentService.deleteComment(commentId, targetType);
+			   
+			    
+			    if (isDeleted) {
+			        redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
+			    } else {
+			        redirectAttributes.addFlashAttribute("message", "댓글 삭제에 실패했습니다.");
+			    }
+
+			    return "redirect:/recipeDetail.do?no=" + recipeId + "&page=" + page;
+			}
 
 	
 

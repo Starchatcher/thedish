@@ -1,7 +1,9 @@
 package com.thedish.drink.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,11 +25,14 @@ import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.drink.model.vo.Drink;
 import com.thedish.drink.model.vo.DrinkStore;
 import com.thedish.drink.service.impl.DrinkService;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.image.model.vo.Image;
+import com.thedish.recipe.model.vo.Recipe;
+import com.thedish.recipe.service.impl.RecipeService;
 import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,7 +54,8 @@ public class DrinkController {
 	@Autowired
 	private CommentService commentService;
 	
-	
+	@Autowired
+	private RecipeService recipeService;
 	
 	// 드링크 전체 목록보기 요청 처리용 (페이징 처리 : 한 페이지에 10개씩 출력 처리)
 			@RequestMapping("drinkList.do")
@@ -98,6 +104,7 @@ public class DrinkController {
 			            @RequestParam("no") int drinkId,
 			            ModelAndView mv,
 			            HttpSession session,
+			            HttpServletRequest request,
 			            @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
 
 			        logger.info("drinkDetail.do 호출 - drinkId: " + drinkId);
@@ -110,6 +117,86 @@ public class DrinkController {
 
 			                 mv.addObject("drink", drink); // 술 상세 정보 모델에 추가
 
+			                 String userId = null;
+			                 // 세션에서 로그인된 사용자 정보를 가져오는 로직 (예시)
+			                 Object userObj = session.getAttribute("loginUser"); // 예: 세션에 "loginUser"라는 이름으로 저장됨
+			                 if (userObj != null) {
+			                      try {
+			                          // 사용자 객체에서 ID를 가져오는 메소드명 확인 후 사용
+			                          Method getUserIdMethod = userObj.getClass().getMethod("getUserId"); // 또는 getLoginId 등
+			                          userId = (String) getUserIdMethod.invoke(userObj);
+			                      } catch (Exception e) {
+			                          logger.error("세션에서 사용자 ID를 가져오는 중 오류 발생 (음료 상세)", e);
+			                          // 오류 발생 시 비로그인 처리 또는 다른 로직 수행
+			                          userId = request.getRemoteAddr(); // 비로그인 사용자로 처리 (IP 주소 사용)
+			                      }
+			                      logger.info("로그인된 사용자 ID 확인 (음료 상세): {}", userId);
+			                 } else {
+			                     // 로그인하지 않은 사용자의 경우 IP 주소 사용
+			                     userId = request.getRemoteAddr();
+			                     logger.info("비로그인 사용자 (IP - 음료 상세): {}", userId);
+			                 }
+
+			                 // 2-2. 게시글 타입 정의
+			                 String postType = "drink"; // **음료 게시글 타입 지정**
+
+			                 // 2-3. 파라미터 유효성 검사 (컨트롤러에서 해도 됩니다)
+			                 if (userId == null || userId.trim().isEmpty() || drinkId <= 0 || postType == null || postType.trim().isEmpty()) {
+			                      logger.warn("유효하지 않은 정보로 로그 기록 요청 무시 (음료 상세) - userId: {}, postId: {}, postType: {}", userId, drinkId, postType);
+			                 } else { // 정보가 유효한 경우에만 로그 로직 진행
+			                      try {
+			                         // 2-4. 최근 로그 조회 (ViewLogService 또는 drinkService 사용)
+			                         // ViewLogService에 userId, postId, postType으로 최근 로그를 조회하는 메소드가 있다고 가정합니다.
+			                         // ViewLog 객체에는 방문 시각(visitTime) 필드가 있어야 합니다.
+			                         ViewLog latestLog = drinkService.getLatestPostViewLog(userId, drinkId); // postType 함께 전달
+			                         logger.debug("가장 최근 로그 조회 결과 (음료 상세): {}", latestLog);
+
+			                         // 2-5. 24시간 체크
+			                         boolean needsLogging = true; // 기본적으로는 로그 기록 필요
+			                         if (latestLog != null) {
+			                             // ViewLog 객체에서 방문 시간 가져오기 (java.util.Date 등)
+			                             Date latestVisitTime = latestLog.getVisitTime(); // ViewLog에 getVisitTime() 메소드가 있다고 가정
+
+			                             if (latestVisitTime != null) {
+			                                 long currentTimeMillis = System.currentTimeMillis(); // 현재 시각 (밀리초)
+			                                 long latestLogTimeMillis = latestVisitTime.getTime(); // 최근 로그 시각 (밀리초)
+
+			                                 // 최근 로그 기록이 24시간(24 * 60 * 60 * 1000 밀리초) 이내인지 확인
+			                                 if (currentTimeMillis - latestLogTimeMillis < 24 * 60 * 60 * 1000) {
+			                                     needsLogging = false; // 24시간 이내에 이미 기록됨
+			                                     logger.debug("24시간 이내 기록 확인 (음료 상세). 로그 기록 생략.");
+			                                 } else {
+			                                     logger.debug("마지막 기록이 24시간 지남 (음료 상세). 로그 기록 필요.");
+			                                 }
+			                             } else {
+			                                  logger.warn("최근 로그 기록의 visitTime이 NULL입니다 (음료 상세). 새로운 로그 기록 진행.");
+			                             }
+			                         } else {
+			                              logger.debug("이 사용자/게시글에 대한 기존 로그 기록 없음 (음료 상세). 새로운 로그 기록 필요.");
+			                         }
+
+			                         // 2-6. 로그 기록이 필요한 경우 삽입
+			                         if (needsLogging) {
+			                             // ViewLog 객체 생성 및 데이터 설정
+			                             ViewLog newLog = new ViewLog();
+			                             newLog.setUserId(userId);
+			                             newLog.setPostId(drinkId); // **음료 ID 설정**
+			                             newLog.setPostType(postType); // **게시글 타입 'drink' 설정**
+			                             // visitTime, logId는 DB에서 자동 처리되도록 설계하는 것이 일반적입니다.
+
+			                             // Service/DAO를 통해 로그 삽입 (ViewLogService 또는 drinkService 사용)
+			                             drinkService.insertPostViewLog(newLog); // 로그 삽입 메소드 호출
+			                             logger.info("게시글 조회 로그 기록 완료 (음료 상세) - userId: {}, postId: {}, postType: {}", userId, drinkId, postType);
+			                         }
+
+			                      } catch (Exception e) {
+			                         // 로그 기록 중 예외 발생 시 에러 로깅
+			                         logger.error("게시글 조회 로그 기록 중 오류 발생 (음료 상세) - userId: {}, postId: {}, postType: {}", userId, drinkId, postType, e);
+			                         // 컨트롤러에서 예외를 잡았으므로, 여기서 로깅만 하고 원래 흐름을 계속합니다.
+			                      }
+			                 }
+
+			                 
 			                 // *** 2. 페어링 정보 조회 로직 추가 ***
 			                 // PairingService를 통해 특정 drinkId에 해당하는 페어링 목록을 가져옵니다.
 			                 
@@ -189,7 +276,7 @@ public class DrinkController {
 			        return mv; // ModelAndView 객체 반환
 			    }
 
-			// 레시피 검색 기능
+			// 드링크 검색 기능
 			 @RequestMapping("drinkSearch.do")
 			    public ModelAndView drinkSearchTitleMethod(
 			            ModelAndView mv,
@@ -499,5 +586,120 @@ public class DrinkController {
 			        }
 			    }
 
-			
+			    @RequestMapping(value = "/pairingInsert.do", method = RequestMethod.GET) // URL 매핑
+			    public ModelAndView pairingInsertView(@RequestParam("drinkId") int drinkId, ModelAndView mv) {
+			        logger.info(">>> /pairingInsertView.do (GET) 요청 - drinkId: {}", drinkId); // 컨트롤러 진입 로그
+			        logger.info("{}번 드링크에 대한 페어링 등록 페이지로 이동 시도", drinkId);
+
+			        // TODO: 나중에 로그인 여부를 체크하는 로직 추가
+
+			        // 1. 해당 drinkId에 해당하는 기존 페어링 목록 조회 (Service 호출)
+			        List<Pairing> existingPairingList = drinkService.selectPairings(drinkId);
+			        logger.info("기존 페어링 목록 조회 결과: {}", existingPairingList); 
+			        logger.info("{}번 드링크에 대한 기존 페어링 목록 크기: {}", drinkId, (existingPairingList != null ? existingPairingList.size() : 0));
+
+			        List<Recipe> recipeList = recipeService.getAllRecipes(); // 모든 레시피를 가져오는 메소드
+			        mv.addObject("recipeList", recipeList);
+			        
+			        // 2. 조회된 existingPairingList와 drinkId를 ModelAndView에 담아 JSP로 전달
+			        mv.addObject("existingPairingList", existingPairingList);
+			        mv.addObject("drinkId", drinkId);
+
+			        // 3. 페어링 등록 페이지 JSP 파일 이름 지정
+			        mv.setViewName("drink/pairingInsert"); // /WEB-INF/views/pairingInsert.jsp
+
+			        logger.info(">>> pairingInsert.jsp 뷰로 이동");
+
+			        return mv;
+			    }
+			    
+			    @RequestMapping(value = "/insertPairing.do", method = RequestMethod.POST)
+			    public String insertPairing(
+			            @RequestParam("drinkId") int drinkId, // 폼에서 hidden 필드로 전달받음
+			            @RequestParam("recipeId") int recipeId, // 폼에서 hidden 필드로 전달받음 (레시피 선택 시 설정됨)
+			            @RequestParam("reason") String reason, // 폼에서 textarea로 입력받음
+			            RedirectAttributes redirectAttributes // 리다이렉트 시 메시지 전달용 (선택 사항)
+			            // TODO: 등록자 정보가 필요하다면 HttpSession 등을 통해 로그인 사용자 정보 받기
+			            // HttpSession session
+			            ) {
+			        logger.info(">>> /insertPairing.do (POST) 요청 받음");
+			        logger.info("받은 데이터 - drinkId: {}, recipeId: {}, reason: {}", drinkId, recipeId, reason);
+
+			       
+
+
+			       
+			        Pairing newPairing = new Pairing();
+			        // PAIRING_ID는 DB에서 자동 생성 (Mapper selectKey 설정)
+			        newPairing.setDrinkId(drinkId); // 폼에서 받은 drinkId 설정
+			        newPairing.setRecipeId(recipeId); // 폼에서 받은 recipeId 설정
+			        newPairing.setReason(reason); // 폼에서 받은 reason 설정
+			        // newPairing.setCreatedBy(createdBy); // 등록자 설정 (필요하다면)
+
+
+			        int result = 0; // 삽입 결과 (영향받은 행 수)
+			        try {
+			            // Service를 통해 페어링 등록 수행
+			            // PairingService에는 insertPairing(Pairing pairing) 메소드가 필요합니다.
+			            result = drinkService.insertPairing(newPairing);
+			            logger.info("페어링 등록 결과: {} (성공 시 1)", result);
+
+			            if (result > 0) {
+			                // 등록 성공 시
+			                // 등록된 드링크의 상세 페이지로 리다이렉트하는 것이 일반적입니다.
+			                redirectAttributes.addFlashAttribute("message", "페어링이 성공적으로 등록되었습니다.");
+			                // drinkId를 리다이렉트 URL에 파라미터로 추가
+			                return "redirect:/drinkDetail.do?no=" + drinkId; // <-- 리다이렉트 URL 확인 (성공 시 이동할 곳)
+			            } else {
+			                // 등록 실패 시 (삽입된 행 수가 0)
+			                logger.warn("페어링 등록 실패 (영향받은 행 0)");
+			                redirectAttributes.addFlashAttribute("errorMsg", "페어링 등록에 실패했습니다.");
+			                // 실패 시 페어링 등록 페이지로 돌아가거나 오류 페이지로 이동
+			                return "redirect:/pairingInsertView.do?no=" + drinkId; // <-- 실패 시 리다이렉트 URL 확인
+			            }
+
+			        } catch (Exception e) {
+			            // 데이터베이스 오류 등 예외 발생 시
+			            logger.error("페어링 등록 중 예외 발생: {}", e.getMessage());
+			            e.printStackTrace(); // 오류 스택 트레이스 출력 (개발 중 유용)
+
+			            redirectAttributes.addFlashAttribute("errorMsg", "페어링 등록 중 오류가 발생했습니다.");
+			            // 오류 발생 시 페어링 등록 페이지로 돌아가거나 오류 페이지로 이동
+			            return "redirect:/pairingInsertView.do?drinkId=" + drinkId; // <-- 오류 시 리다이렉트 URL 확인
+			        }
+			    }
+			   // 페어링 삭제기능
+			    @RequestMapping(value = "/deletePairing.do", method = RequestMethod.POST) // POST 방식으로 요청받는 것이 권장됩니다.
+			    @ResponseBody // 이 어노테이션을 사용하면 반환하는 문자열이 View 이름이 아닌 HTTP 응답 본문으로 직접 전송됩니다.
+			    public String deletePairing(@RequestParam("pairingId") int pairingId
+			           
+			            ) {
+			        logger.info(">>> /deletePairing.do (POST) 요청 받음 - pairingId: {}", pairingId);
+
+			        
+
+			        int result = 0; // 삭제 결과 (영향받은 행 수)
+			        try {
+			            // Service를 통해 페어링 삭제 수행
+			            // PairingService 인터페이스와 구현체에 deletePairing(int pairingId) 메소드가 구현되어 있어야 합니다.
+			            // 이 메소드 안에서 DAO/Mapper를 호출하여 실제 DELETE 쿼리를 실행합니다.
+			            result = drinkService.deletePairing(pairingId);
+
+			            if (result > 0) {
+			                // 삭제 성공 (영향받은 행 수가 1 이상)
+			                logger.info("페어링 삭제 성공: pairingId {}", pairingId);
+			                return "success"; // 삭제 성공을 알리는 문자열 반환
+			            } else {
+			                // 삭제 실패 (영향받은 행 수가 0) - 해당 ID의 페어링이 없었거나 이미 삭제된 경우
+			                logger.warn("페어링 삭제 실패 (영향받은 행 0): pairingId {}", pairingId);
+			                return "fail"; // 삭제 실패를 알리는 문자열 반환
+			            }
+
+			        } catch (Exception e) {
+			            // 데이터베이스 오류 등 예외 발생 시
+			            logger.error("페어링 삭제 중 예외 발생: pairingId {}", pairingId, e); // 예외 객체도 로그에 포함
+			            // e.printStackTrace(); // 개발 중에는 스택 트레이스 출력
+			            return "error"; // 삭제 중 오류 발생을 알리는 문자열 반환
+			        }
+			    }
 }
