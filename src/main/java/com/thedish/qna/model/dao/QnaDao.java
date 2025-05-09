@@ -25,6 +25,11 @@ public class QnaDao {
 		return sqlSessionTemplate.insert("qnaMapper.insertQna", qna);
 	}
 	
+	// 문의 수정
+	public int updateQna (Qna qna) {
+		return sqlSessionTemplate.update("qnaMapper.updateQna", qna);
+	}
+	
 	// 문의 상세보기
 	public Qna selectQnaById (int qnaId) {
 		return sqlSessionTemplate.selectOne("qnaMapper.selectQnaById", qnaId);

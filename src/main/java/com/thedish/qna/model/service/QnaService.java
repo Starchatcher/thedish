@@ -10,4 +10,5 @@ public interface QnaService {
 	int insertQna (Qna qna);
 	Qna selectQnaById (int qnaId);
 	int deleteQna (int qnaId);
+	int updateQna (Qna qna);
 }

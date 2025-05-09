@@ -319,7 +319,6 @@ public class BoardController {
 
 		if (boardService.updateBoard(board) > 0) {
 			mv.addObject("boardId", board.getBoardId());
-			mv.addObject("category", board.getBoardCategory());
 			mv.setViewName("redirect:boardDetail.do?boardId=" + board.getBoardId() + "&page=" + currentPage
 					+ "&category=" + board.getBoardCategory());
 		} else {

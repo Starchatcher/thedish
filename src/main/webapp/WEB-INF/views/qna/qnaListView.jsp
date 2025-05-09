@@ -24,7 +24,9 @@ h2 {
 }
 
 table {
-	width: 100%;
+	width: 80%;
+	margin: 0 auto;
+	align: center;
 	border-collapse: collapse;
 	background-color: #fff;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
