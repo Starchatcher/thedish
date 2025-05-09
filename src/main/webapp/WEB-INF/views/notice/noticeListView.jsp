@@ -9,7 +9,6 @@
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #eaf6f1;
             margin: 0;
             padding: 0;
         }
@@ -36,13 +35,13 @@
         #search-type, #search-query {
             padding: 8px;
             font-size: 14px;
-            border: 1px solid #8fbc8f;
+            border: 1px solid gray;
             border-radius: 4px;
         }
 
         #searchForm input[type="submit"] {
             padding: 8px 16px;
-            background-color: #8fbc8f;
+            background-color: black;
             color: white;
             border: none;
             border-radius: 4px;
@@ -50,11 +49,11 @@
         }
 
         #searchForm input[type="submit"]:hover {
-            background-color: #77a977;
+            background-color: gray;
         }
 
         table {
-            width: 80%;
+            width: 100%;
             margin: 0 auto 40px;
             border-collapse: collapse;
             background-color: white;
@@ -62,13 +61,13 @@
         }
 
         th, td {
-            border: 1px solid #8fbc8f;
-            padding: 12px;
+            border: 1px solid gray;
+            padding: 10px;
             text-align: center;
         }
 
         th {
-            background-color: #8fbc8f;
+            background-color: black;
             color: white;
         }
 
@@ -79,8 +78,7 @@
         }
 
         td#title a:hover {
-            color: #3a7a5a;
-            text-decoration: underline;
+            color: gray;
         }
 
         @media (max-width: 768px) {
@@ -154,7 +152,7 @@
         </c:forEach>
     </table>
 
-    <c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
     <c:import url="/WEB-INF/views/common/pagingView.jsp" />
     <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>

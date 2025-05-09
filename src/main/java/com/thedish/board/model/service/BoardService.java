@@ -42,5 +42,6 @@ public interface BoardService {
 	int insertBoardComment(Comment comment);
 	
 	int updateBoardComment(Comment comment);
-	int deleteBoardComment(int commentId);
+	int deleteBoardComment(Map<String, Object> param);
+	int deleteCommentsByBoardId(Map<String, Object> param);
 }

@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.image.model.service.ImageService;
 import com.thedish.recipe.dao.RecipeDao;
 import com.thedish.recipe.model.vo.Recipe;
@@ -127,6 +129,29 @@ public class RecipeServiceImpl implements RecipeService{
 		
 		return recipeDao.getAverageRating(recipeId);
 	}
+
+
+	@Override
+	public Recipe selectRandomRecipe() {
+		
+		return recipeDao.selectRandomRecipe();
+	}
+
+
+	@Override
+	public void insertPostViewLog(ViewLog log) {
+		recipeDao.insertPostViewLog(log);
+	}
+
+
+	@Override
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public ViewLog getLatestPostViewLog(String userId, int postId) {
+		return recipeDao.getLatestPostViewLog(userId, postId);
+	}
+
+
+	
 
 
 	

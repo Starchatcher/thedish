@@ -6,18 +6,18 @@ public class HealthRecommend implements java.io.Serializable {
 	
 	private int recommendId;
     private String reason;
-    private int recipeId;
-    private String conditionName;
+    private int ingredientId;
+    private int conditionId;
 
 	public HealthRecommend() {
 		super();
 	}
-	public HealthRecommend(int recommendId, String reason, int recipeId, String conditionName) {
+	public HealthRecommend(int recommendId, String reason, int ingredientId, int conditionId) {
 		super();
 		this.recommendId = recommendId;
 		this.reason = reason;
-		this.recipeId = recipeId;
-		this.conditionName = conditionName;
+		this.ingredientId = ingredientId;
+		this.conditionId = conditionId;
 	}
 	public int getRecommendId() {
 		return recommendId;
@@ -31,25 +31,25 @@ public class HealthRecommend implements java.io.Serializable {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public int getRecipeId() {
-		return recipeId;
+	public int getIngredientId() {
+		return ingredientId;
 	}
-	public void setRecipeId(int recipeId) {
-		this.recipeId = recipeId;
+	public void setIngredientId(int ingredientId) {
+		this.ingredientId = ingredientId;
 	}
-	public String getConditionName() {
-		return conditionName;
+	public int getConditionId() {
+		return conditionId;
 	}
-	public void setConditionName(String conditionName) {
-		this.conditionName = conditionName;
+	public void setConditionId(int conditionId) {
+		this.conditionId = conditionId;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	@Override
 	public String toString() {
-		return "HealthRecommend [recommendId=" + recommendId + ", reason=" + reason + ", recipeId=" + recipeId
-				+ ", conditionName=" + conditionName + "]";
+		return "HealthRecommend [recommendId=" + recommendId + ", reason=" + reason + ", ingredientId=" + ingredientId
+				+ ", conditionId=" + conditionId + "]";
 	}
     
     

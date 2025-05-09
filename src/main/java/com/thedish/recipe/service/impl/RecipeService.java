@@ -6,6 +6,7 @@ import java.util.List;
 import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.recipe.model.vo.Recipe;
 
 public interface RecipeService {
@@ -46,4 +47,12 @@ public interface RecipeService {
 	 void updateAverageRating(int recipeId, double avgRating);
 	 
 	 double getAverageRating(int recipeId);
+	 
+	 Recipe selectRandomRecipe();
+	 
+	 void insertPostViewLog(ViewLog log);
+	 
+	 ViewLog getLatestPostViewLog(String userId, int postId);
+	 
+
 }

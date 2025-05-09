@@ -115,6 +115,8 @@ legend {
     </style>
 </head>
 <body>
+	<c:import url="/WEB-INF/views/common/menubar.jsp" />
+
     <h1>레시피 등록</h1>
     <form action="${pageContext.request.contextPath}/insertRecipe.do" method="post" enctype="multipart/form-data">
 	
@@ -150,8 +152,44 @@ legend {
         <!-- 이미지 업로드 필드 -->
         <label for="images">이미지 업로드:</label>
         <input type="file" id="images" name="imageFile" accept="image/*"  />
+<div id="imagePreview" style="margin-top: 10px; border: 1px solid #ccc; width: 150px; height: 150px; overflow: hidden;">
+    <img id="previewImage" src="#" alt="이미지 미리보기" style="max-width: 100%; max-height: 100%; display: none;" />
+</div>
 
+<script>
+    // JavaScript 코드를 여기에 작성합니다.
+    // 요소를 찾을 때 HTML의 id 값인 'images'를 사용합니다.
+    const fileInput = document.getElementById('images');
+    const previewImage = document.getElementById('previewImage'); // 이 ID는 HTML에 그대로 있습니다.
+
+    // fileInput 요소가 제대로 찾아졌는지 확인하는 로직을 추가하는 것도 좋습니다.
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0]; // 선택된 파일 중 첫 번째 파일 가져오기
+
+            if (file) {
+                const reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체 생성
+
+                reader.onload = function(event) {
+                    // 파일 읽기가 완료되면 실행될 함수
+                    previewImage.src = event.target.result; // 미리보기 이미지의 src를 읽어온 파일 데이터 URL로 설정
+                    previewImage.style.display = 'block'; // 미리보기 이미지를 보이도록 설정
+                }
+
+                reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽어오기
+            } else {
+                // 파일 선택이 취소된 경우
+                previewImage.src = '#'; // 이미지 src 초기화
+                previewImage.style.display = 'none'; // 미리보기 이미지를 숨김
+            }
+        });
+    } else {
+        console.error("오류: 'images' ID를 가진 input 요소를 찾을 수 없습니다.");
+    }
+</script>
         <button type="submit" class="submit-btn">등록하기</button>
     </form>
+    <c:import url="/WEB-INF/views/common/sidebar.jsp" />
+    <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

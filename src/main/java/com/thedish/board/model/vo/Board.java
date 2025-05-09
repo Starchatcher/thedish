@@ -22,30 +22,51 @@ public class Board implements java.io.Serializable{
 	private String nickname;
 	private String originalFileName;
 	private String renameFileName;
+	private int likeCount;
+	private int commentCount;
 	
-	//Constructor
+	public int getCommentCount() {
+		return commentCount;
+	}
+	
+	
+
+	public Board(int boardId, String title, String content, String writer, Date createdAt, Date updatedAt,
+			String boardCategory, int viewCount, int avgRating, String nickname, String originalFileName,
+			String renameFileName, int likeCount, int commentCount) {
+		super();
+		this.boardId = boardId;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.boardCategory = boardCategory;
+		this.viewCount = viewCount;
+		this.avgRating = avgRating;
+		this.nickname = nickname;
+		this.originalFileName = originalFileName;
+		this.renameFileName = renameFileName;
+		this.likeCount = likeCount;
+		this.commentCount = commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+		//Constructor
 		public Board() {
 			super();
 		}
-		
-		public Board(int boardId, String title, String content, String writer, Date createdAt, Date updatedAt,
-				String boardCategory, int viewCount, int avgRating, String nickname, String originalFileName,
-				String renameFileName) {
-			super();
-			this.boardId = boardId;
-			this.title = title;
-			this.content = content;
-			this.writer = writer;
-			this.createdAt = createdAt;
-			this.updatedAt = updatedAt;
-			this.boardCategory = boardCategory;
-			this.viewCount = viewCount;
-			this.avgRating = avgRating;
-			this.nickname = nickname;
-			this.originalFileName = originalFileName;
-			this.renameFileName = renameFileName;
+
+	public int getLikeCount() {
+			return likeCount;
 		}
-	    
+
+		public void setLikeCount(int likeCount) {
+			this.likeCount = likeCount;
+		}
 
 	public String getOriginalFileName() {
 		return originalFileName;
@@ -134,7 +155,8 @@ public class Board implements java.io.Serializable{
 		return "Board [boardId=" + boardId + ", title=" + title + ", content=" + content + ", writer=" + writer
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", boardCategory=" + boardCategory
 				+ ", viewCount=" + viewCount + ", avgRating=" + avgRating + ", nickname=" + nickname
-				+ ", originalFileName=" + originalFileName + ", renameFileName=" + renameFileName + "]";
+				+ ", originalFileName=" + originalFileName + ", renameFileName=" + renameFileName + ", likeCount="
+				+ likeCount + ", commentCount=" + commentCount + "]";
 	}
 	
 	

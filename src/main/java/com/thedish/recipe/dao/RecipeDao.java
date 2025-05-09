@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.thedish.common.Allergy;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.common.ViewLog;
 import com.thedish.recipe.model.vo.Recipe;
 
 
@@ -112,5 +113,24 @@ public class RecipeDao {
     public double getAverageRating(int recipeId) {
         return sqlSessionTemplate.selectOne("recipeMapper.getAverageRating", recipeId);
     }
+    
+    
+    public Recipe selectRandomRecipe() {
+        
+        return sqlSessionTemplate.selectOne("recipeMapper.selectRandomRecipe");
+    }
+    public void insertPostViewLog(ViewLog log) {
+
+        sqlSessionTemplate.insert("recipeMapper.insertPostViewLog", log);
+    }
+    public ViewLog getLatestPostViewLog(String userId, int postId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("postId", postId);
+
+       
+        return sqlSessionTemplate.selectOne("recipeMapper.getLatestPostViewLog", params);
+    }
+    
     
 }

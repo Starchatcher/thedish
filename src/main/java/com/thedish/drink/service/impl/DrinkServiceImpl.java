@@ -2,20 +2,27 @@ package com.thedish.drink.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.thedish.common.Paging;
 import com.thedish.common.Pairing;
 import com.thedish.common.Search;
 import com.thedish.drink.dao.DrinkDao;
 import com.thedish.drink.model.vo.Drink;
+import com.thedish.drink.model.vo.DrinkStore;
 import com.thedish.image.model.service.ImageService;
 
 @Service("drinkService")
 public class DrinkServiceImpl implements DrinkService{
 
+	
+	  private static final Logger logger = LoggerFactory.getLogger(DrinkServiceImpl.class);
 	@Autowired
 	private DrinkDao drinkDao;
 	
@@ -119,4 +126,43 @@ public class DrinkServiceImpl implements DrinkService{
 		return drinkDao.selectListDrink(paging);
 	}
 
+	@Override
+	public Map<String, Object> selectStoreInfoByDrinkId(int drinkId) {
+		
+		return drinkDao.selectStoreInfoByDrinkId(drinkId);
+	}
+
+	@Override
+	public Drink getDrinkById(int drinkId) {
+		logger.info(">>> DrinkServiceImpl.getDrinkById: 파라미터 drinkId = " + drinkId);
+		return drinkDao.getDrinkById(drinkId);
+	}
+
+	@Override
+	public List<DrinkStore> getStoresByDrinkName(String drinkName) {
+		return drinkDao.getStoresByDrinkName(drinkName);
+	}
+
+	@Override
+	public int insertDrinkStore(DrinkStore drinkStore) {
+		return drinkDao.insertDrinkStore(drinkStore);
+	}
+
+	@Override
+	public int deleteStore(int storeId) {
+		
+		return drinkDao.deleteStore(storeId);
+	}
+
+	
+
+	
+
+	
+	
+	
+	
+
+
+	
 }

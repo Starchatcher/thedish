@@ -11,7 +11,6 @@ DROP TABLE image CASCADE CONSTRAINTS;
 DROP TABLE likes CASCADE CONSTRAINTS;
 DROP TABLE notice CASCADE CONSTRAINTS;
 DROP TABLE pairing CASCADE CONSTRAINTS;
-DROP TABLE post_file CASCADE CONSTRAINTS;
 DROP TABLE qna CASCADE CONSTRAINTS;
 DROP TABLE recipe CASCADE CONSTRAINTS;
 DROP TABLE recipe_ingredient CASCADE CONSTRAINTS;
@@ -21,8 +20,8 @@ DROP TABLE search_log CASCADE CONSTRAINTS;
 DROP TABLE users CASCADE CONSTRAINTS;
 DROP TABLE user_allergy CASCADE CONSTRAINTS;
 DROP TABLE visit_log CASCADE CONSTRAINTS;
-DROP TABLE visit_log CASCADE CONSTRAINTS;
-
+DROP TABLE rating CASCADE CONSTRAINTS;
+DROP TABLE HEALTH_EXCLUDED_INGREDIENTS CASCADE CONSTRAINTS;
 
 -- CREATE TABLES
 
@@ -207,140 +206,140 @@ comment on column board.RENAME_FILE_NAME IS '수정된첨부파일';
 
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('서울에서 곱창 맛집 추천받아요!', '곱창 좋아하는데 요즘 어디가 괜찮을까요?', 'user01', '자유');
+('서울에서 곱창 맛집 추천받아요!', '곱창 좋아하는데 요즘 어디가 괜찮을까요?', 'user01', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('오늘 날씨 진짜 좋네요!', '한강에 피크닉 가고 싶은 날씨에요.', 'user02', '자유');
+('오늘 날씨 진짜 좋네요!', '한강에 피크닉 가고 싶은 날씨에요.', 'user02', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('새로 산 노트북 자랑!', '이번에 큰 맘 먹고 최신 노트북 질렀습니다!', 'user03', '자유');
+('새로 산 노트북 자랑!', '이번에 큰 맘 먹고 최신 노트북 질렀습니다!', 'user03', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('이번 주말 영화 추천', '이번 주말에 볼 만한 영화 있을까요?', 'user01', '자유');
+('이번 주말 영화 추천', '이번 주말에 볼 만한 영화 있을까요?', 'user01', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('가성비 좋은 블루투스 이어폰 추천', '음질 괜찮고 가격 착한 이어폰 찾고 있어요!', 'user02', '자유');
+('가성비 좋은 블루투스 이어폰 추천', '음질 괜찮고 가격 착한 이어폰 찾고 있어요!', 'user02', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('다이어트 식단 공유', '제가 요즘 먹고 있는 다이어트 식단 공유합니다!', 'user03', '자유');
+('다이어트 식단 공유', '제가 요즘 먹고 있는 다이어트 식단 공유합니다!', 'user03', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('여행 계획 같이 짜실 분!', '다음 달에 제주도 가는데 같이 계획 짜실 분 있나요?', 'user01', '자유');
+('여행 계획 같이 짜실 분!', '다음 달에 제주도 가는데 같이 계획 짜실 분 있나요?', 'user01', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('취업 성공 후기', '드디어 꿈에 그리던 회사에 취업했습니다!', 'user02', '자유');
+('취업 성공 후기', '드디어 꿈에 그리던 회사에 취업했습니다!', 'user02', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('집에서 간단하게 만들 수 있는 요리', '초보도 쉽게 따라 할 수 있는 요리 레시피 공유해요!', 'user03', '자유');
+('집에서 간단하게 만들 수 있는 요리', '초보도 쉽게 따라 할 수 있는 요리 레시피 공유해요!', 'user03', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('오늘 로또 당첨되신 분 있나요?', '혹시 로또 1등 되신 분 계신가요? 부럽습니다!', 'user01', '자유');
+('오늘 로또 당첨되신 분 있나요?', '혹시 로또 1등 되신 분 계신가요? 부럽습니다!', 'user01', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('고양이 사진 자랑', '저희 집 고양이 너무 귀엽죠?', 'user02', '자유');
+('고양이 사진 자랑', '저희 집 고양이 너무 귀엽죠?', 'user02', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('새로운 게임 찾아요!', '요즘 할 만한 스팀 게임 추천 부탁드립니다.', 'user03', '자유');
+('새로운 게임 찾아요!', '요즘 할 만한 스팀 게임 추천 부탁드립니다.', 'user03', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('주식 투자 팁 공유', '주식 초보인데 투자 팁 좀 알려주세요!', 'user01', '자유');
+('주식 투자 팁 공유', '주식 초보인데 투자 팁 좀 알려주세요!', 'user01', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('인생 드라마 추천', '살면서 꼭 봐야 할 드라마 있으면 추천해주세요!', 'user02', '자유');
+('인생 드라마 추천', '살면서 꼭 봐야 할 드라마 있으면 추천해주세요!', 'user02', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('오늘 점심 뭐 먹을까요?', '매일 하는 고민...점심 메뉴 추천해주세요!', 'user03', '자유');
+('오늘 점심 뭐 먹을까요?', '매일 하는 고민...점심 메뉴 추천해주세요!', 'user03', 'free');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('초보도 쉽게 만드는 김치볶음밥 황금레시피!', '백종원 레시피 참고해서 만들었는데 정말 맛있어요!', 'user01', '팁공유');
+('초보도 쉽게 만드는 김치볶음밥 황금레시피!', '백종원 레시피 참고해서 만들었는데 정말 맛있어요!', 'user01', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('라면 맛있게 끓이는 꿀팁 대방출!', '물 조절, 면 넣는 타이밍, 스프 넣는 순서까지!', 'user02', '팁공유');
+('라면 맛있게 끓이는 꿀팁 대방출!', '물 조절, 면 넣는 타이밍, 스프 넣는 순서까지!', 'user02', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('에어프라이어로 만드는 초간단 스테이크 레시피', '겉바속촉 스테이크, 이제 집에서도 즐기세요!', 'user03', '팁공유');
+('에어프라이어로 만드는 초간단 스테이크 레시피', '겉바속촉 스테이크, 이제 집에서도 즐기세요!', 'user03', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('자취생 필수템! 전자레인지 활용 요리 꿀팁', '햇반, 계란찜, 라면까지 전자레인지로 OK!', 'user01', '팁공유');
+('자취생 필수템! 전자레인지 활용 요리 꿀팁', '햇반, 계란찜, 라면까지 전자레인지로 OK!', 'user01', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('캠핑 가서 해먹기 좋은 바베큐 레시피', '목살, 삼겹살, 소세지 완벽 조합!', 'user02', '팁공유');
+('캠핑 가서 해먹기 좋은 바베큐 레시피', '목살, 삼겹살, 소세지 완벽 조합!', 'user02', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('다이어트 중에도 포기할 수 없는 닭가슴살 요리 꿀팁', '샐러드, 볶음밥, 스테이크 다양하게 즐겨보세요!', 'user03', '팁공유');
+('다이어트 중에도 포기할 수 없는 닭가슴살 요리 꿀팁', '샐러드, 볶음밥, 스테이크 다양하게 즐겨보세요!', 'user03', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('손님 초대 요리, 밀푀유나베 황금레시피', '비주얼도 맛도 최고! 손님 칭찬 гарантирован!', 'user01', '팁공유');
+('손님 초대 요리, 밀푀유나베 황금레시피', '비주얼도 맛도 최고! 손님 칭찬 гарантирован!', 'user01', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('집에서 만드는 칵테일 레시피', '간단한 재료로 분위기 있는 칵테일 만들기!', 'user02', '팁공유');
+('집에서 만드는 칵테일 레시피', '간단한 재료로 분위기 있는 칵테일 만들기!', 'user02', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('아이 간식으로 좋은 수제 요거트 만드는 법', '첨가물 없이 건강하게!', 'user03', '팁공유');
+('아이 간식으로 좋은 수제 요거트 만드는 법', '첨가물 없이 건강하게!', 'user03', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('남은 치킨 활용 요리, 치킨마요덮밥 레시피', '간단하고 맛있게!', 'user01', '팁공유');
+('남은 치킨 활용 요리, 치킨마요덮밥 레시피', '간단하고 맛있게!', 'user01', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('고구마 맛있게 굽는 꿀팁', '에어프라이어, 오븐, 전자레인지 활용법!', 'user02', '팁공유');
+('고구마 맛있게 굽는 꿀팁', '에어프라이어, 오븐, 전자레인지 활용법!', 'user02', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('커피 맛있게 내리는 꿀팁', '핸드드립, 에스프레소, 더치커피!', 'user03', '팁공유');
+('커피 맛있게 내리는 꿀팁', '핸드드립, 에스프레소, 더치커피!', 'user03', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('파스타 면 삶는 꿀팁', '알덴테 식감 제대로 살리기!', 'user01', '팁공유');
+('파스타 면 삶는 꿀팁', '알덴테 식감 제대로 살리기!', 'user01', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('계란찜 폭탄처럼 만드는 꿀팁', '전자레인지로 간단하게!', 'user02', '팁공유');
+('계란찜 폭탄처럼 만드는 꿀팁', '전자레인지로 간단하게!', 'user02', 'tip');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('식빵 맛있게 먹는 꿀팁', '토스트, 샌드위치, 러스크!', 'user03', '팁공유');
+('식빵 맛있게 먹는 꿀팁', '토스트, 샌드위치, 러스크!', 'user03', 'tip');
 
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('강남역 맛집 "육통령" 솔직 후기', '육즙 가득한 삼겹살과 푸짐한 밑반찬 최고!', 'user01', '후기');
+('강남역 맛집 "육통령" 솔직 후기', '육즙 가득한 삼겹살과 푸짐한 밑반찬 최고!', 'user01', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('홍대 "미미네" 떡볶이 후기', '국물 떡볶이와 김말이 환상 조합!', 'user02', '후기');
+('홍대 "미미네" 떡볶이 후기', '국물 떡볶이와 김말이 환상 조합!', 'user02', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('부산 해운대 "개미집" 낙곱새 후기', '매콤한 낙곱새, 볶음밥 필수!', 'user03', '후기');
+('부산 해운대 "개미집" 낙곱새 후기', '매콤한 낙곱새, 볶음밥 필수!', 'user03', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('제주도 "흑돼지 돈까스" 맛집 후기', '겉바속촉 흑돼지 돈까스, 인생 돈까스 등극!', 'user01', '후기');
+('제주도 "흑돼지 돈까스" 맛집 후기', '겉바속촉 흑돼지 돈까스, 인생 돈까스 등극!', 'user01', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('속초 "대포항 튀김골목" 후기', '새우튀김, 오징어튀김, 게튀김 종류별로 다 먹어봤어요!', 'user02', '후기');
+('속초 "대포항 튀김골목" 후기', '새우튀김, 오징어튀김, 게튀김 종류별로 다 먹어봤어요!', 'user02', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('전주 "왱이콩나물국밥" 후기', '시원한 콩나물국밥, 아침 식사로 딱!', 'user03', '후기');
+('전주 "왱이콩나물국밥" 후기', '시원한 콩나물국밥, 아침 식사로 딱!', 'user03', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('여수 "낭만포차" 후기', '밤바다 보면서 해산물 먹으니 낭만적!', 'user01', '후기');
+('여수 "낭만포차" 후기', '밤바다 보면서 해산물 먹으니 낭만적!', 'user01', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('경주 "황리단길" 맛집 투어 후기', '다양한 음식과 예쁜 카페 가득!', 'user02', '후기');
+('경주 "황리단길" 맛집 투어 후기', '다양한 음식과 예쁜 카페 가득!', 'user02', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('가평 "닭갈비" 맛집 후기', '숯불 닭갈비, 막국수 환상 조합!', 'user03', '후기');
+('가평 "닭갈비" 맛집 후기', '숯불 닭갈비, 막국수 환상 조합!', 'user03', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('을지로 "노가리 골목" 후기', '저렴한 가격에 맥주 한 잔!', 'user01', '후기');
+('을지로 "노가리 골목" 후기', '저렴한 가격에 맥주 한 잔!', 'user01', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('대구 "막창 골목" 후기', '고소한 막창, 술안주로 최고!', 'user02', '후기');
+('대구 "막창 골목" 후기', '고소한 막창, 술안주로 최고!', 'user02', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('광주 "육전" 맛집 후기', '따뜻하고 부드러운 육전, 막걸리와 함께!', 'user03', '후기');
+('광주 "육전" 맛집 후기', '따뜻하고 부드러운 육전, 막걸리와 함께!', 'user03', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('수원 "통닭 골목" 후기', '바삭하고 촉촉한 옛날 통닭!', 'user01', '후기');
+('수원 "통닭 골목" 후기', '바삭하고 촉촉한 옛날 통닭!', 'user01', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('인천 "차이나타운" 맛집 투어 후기', '다양한 중국 음식 맛보기!', 'user02', '후기');
+('인천 "차이나타운" 맛집 투어 후기', '다양한 중국 음식 맛보기!', 'user02', 'review');
 
 INSERT INTO board (title, content, writer, board_category) VALUES
-('강릉 "중앙시장" 먹거리 후기', '닭강정, 호떡, 아이스크림 호떡!', 'user03', '후기');
+('강릉 "중앙시장" 먹거리 후기', '닭강정, 호떡, 아이스크림 호떡!', 'user03', 'review');
 
 
 
@@ -444,1313 +443,1315 @@ COMMENT ON COLUMN drink.avg_rating IS '술에 대한 평점';
 COMMENT ON COLUMN drink.view_count IS '조회수';
 
 
-
 -- Inserting drink data into the drink table
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('조니워커 블루 750ml', '40', 268900, '과일 샐러드', 'Aroma: 건포도, 스모키, 샌달우드, 다크 초콜릿; Taste: 헤이즐넛, 꿀, 장미꽃, 셰리, 오렌지; Finish: 스파이스, 블랙 페퍼, 스모키, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('조니워커 블루 750ml', 40.0, 268900, '과일 샐러드', 'Aroma: 건포도, 스모키, 샌달우드, 다크 초콜릿; Taste: 헤이즐넛, 꿀, 장미꽃, 셰리, 오렌지; Finish: 스파이스, 블랙 페퍼, 스모키, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('더 글렌리', '40', 16400, '바비큐 립', 'Aroma: 은은한, 꿀, 향신료, 오크; Taste: 바닐라, 토피, 오렌지, 가벼운; Finish: 부드러운, 크리미, 캐러멜', DEFAULT, DEFAULT);
+VALUES ('더 글렌리', 40.0, 16400, '바비큐 립', 'Aroma: 은은한, 꿀, 향신료, 오크; Taste: 바닐라, 토피, 오렌지, 가벼운; Finish: 부드러운, 크리미, 캐러멜', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('와일드 터키 레어브리드 1L', '58.4', 79900, '스테이크', 'Aroma: 후추, 아몬드, 꿀, 건포도; Taste: 오렌지, 견과류, 구운 빵, 캐러멜; Finish: 스파이시, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('와일드 터키 레어브리드 1L', 58.4, 79900, '스테이크', 'Aroma: 후추, 아몬드, 꿀, 건포도; Taste: 오렌지, 견과류, 구운 빵, 캐러멜; Finish: 스파이시, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('에반 윌리엄스 블랙', '43', 24900, '과일 타르트', 'Aroma: 바닐라, 민트, 오렌지 껍질; Taste: 오크, 흑설탕, 캐러멜; Finish: 부드러운, 풍부한, 가죽', DEFAULT, DEFAULT);
+VALUES ('에반 윌리엄스 블랙', 43.0, 24900, '과일 타르트', 'Aroma: 바닐라, 민트, 오렌지 껍질; Taste: 오크, 흑설탕, 캐러멜; Finish: 부드러운, 풍부한, 가죽', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('와일드 터키 12년 700ml', '50.5', 145000, '그릴드 양갈비', 'Aroma: 토피, 오렌지, 바닐라, 견과류, 오크, 가죽; Taste: 캐러멜, 오렌지, 바닐라, 버터스카치, 꿀, 허브, 육두구, 후추; Finish: 긴 여운, 크렘 브륄레, 메이플 시럽, 시나몬, 오크, 달콤한', DEFAULT, DEFAULT);
+VALUES ('와일드 터키 12년 700ml', 50.5, 145000, '그릴드 양갈비', 'Aroma: 토피, 오렌지, 바닐라, 견과류, 오크, 가죽; Taste: 캐러멜, 오렌지, 바닐라, 버터스카치, 꿀, 허브, 육두구, 후추; Finish: 긴 여운, 크렘 브륄레, 메이플 시럽, 시나몬, 오크, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('맥캘란 12년 셰리 오크', '40', 139000, '과일 타르트', 'Aroma: 말린 과일, 오크, 향신료; Taste: 육두구, 부드러운, 향신료; Finish: 긴 여운, 따뜻한, 생강', DEFAULT, DEFAULT);
+VALUES ('맥캘란 12년 셰리 오크', 40.0, 139000, '과일 타르트', 'Aroma: 말린 과일, 오크, 향신료; Taste: 육두구, 부드러운, 향신료; Finish: 긴 여운, 따뜻한, 생강', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('히비키 하모니', '43', 198000, '과일 타르트', 'Aroma: 과일, 로즈마리, 장미; Taste: 화이트 초콜릿, 꿀, 오렌지; Finish: 긴 여운, 부드러운, 은은한', DEFAULT, DEFAULT);
+VALUES ('히비키 하모니', 43.0, 198000, '과일 타르트', 'Aroma: 과일, 로즈마리, 장미; Taste: 화이트 초콜릿, 꿀, 오렌지; Finish: 긴 여운, 부드러운, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('포 로지스 스트레이트 버번 1L', '40', 34900, '스모크 치즈', 'Aroma: 플로럴, 꿀, 캐러멜, 레몬 껍질, 오렌지; Taste: 사과, 오크, 배, 바닐라, 꽃, 부드러운; Finish: 긴 여운, 스파이시, 오크, 오렌지', DEFAULT, DEFAULT);
+VALUES ('포 로지스 스트레이트 버번 1L', 40.0, 34900, '스모크 치즈', 'Aroma: 플로럴, 꿀, 캐러멜, 레몬 껍질, 오렌지; Taste: 사과, 오크, 배, 바닐라, 꽃, 부드러운; Finish: 긴 여운, 스파이시, 오크, 오렌지', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발렌타인 21년', '40', 202300, '과일 타르트', 'Aroma: 풍부한, 달콤한, 사과, 꽃; Taste: 감초, 스파이스, 균형 잡힌; Finish: 긴 여운, 그윽한, 말린 과일', DEFAULT, DEFAULT);
+VALUES ('발렌타인 21년', 40.0, 202300, '과일 타르트', 'Aroma: 풍부한, 달콤한, 사과, 꽃; Taste: 감초, 스파이스, 균형 잡힌; Finish: 긴 여운, 그윽한, 말린 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('커티 삭 프로히비션', '50', 34900, '바비큐 립', 'Aroma: 건포도, 배, 감귤, 시트러스, 자두; Taste: 복숭아, 다크 초콜릿, 바닐라 퍼지; Finish: 견과류, 몰트, 캐러멜, 토피', DEFAULT, DEFAULT);
+VALUES ('커티 삭 프로히비션', 50.0, 34900, '바비큐 립', 'Aroma: 건포도, 배, 감귤, 시트러스, 자두; Taste: 복숭아, 다크 초콜릿, 바닐라 퍼지; Finish: 견과류, 몰트, 캐러멜, 토피', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('미스터 보스턴 아이리시 1L', '40', 16500, '초콜릿 디저트', 'Aroma: 사과, 배, 꿀, 은은한; Taste: 달콤한, 부드러운, 토피; Finish: 견과류, 몰트, 오크', DEFAULT, DEFAULT);
+VALUES ('미스터 보스턴 아이리시 1L', 40.0, 16500, '초콜릿 디저트', 'Aroma: 사과, 배, 꿀, 은은한; Taste: 달콤한, 부드러운, 토피; Finish: 견과류, 몰트, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로얄살루트 21년 700ml', '40', 219000, '과일 타르트', 'Aroma: 감귤, 꽃, 바닐라, 서양 배, 체리; Taste: 마멀레이드, 멜론, 스모키, 헤이즐넛; Finish: 향긋한, 풍부한, 긴 여운, 오크', DEFAULT, DEFAULT);
+VALUES ('로얄살루트 21년 700ml', 40.0, 219000, '과일 타르트', 'Aroma: 감귤, 꽃, 바닐라, 서양 배, 체리; Taste: 마멀레이드, 멜론, 스모키, 헤이즐넛; Finish: 향긋한, 풍부한, 긴 여운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('산토리 가쿠빈', '40', 37900, '소시지', 'Aroma: 바닐라, 벌집, 아이스크림, 꽃; Taste: 감귤, 시트러스, 계피, 자몽; Finish: 꿀, 몰트, 후추, 견과류', DEFAULT, DEFAULT);
+VALUES ('산토리 가쿠빈', 40.0, 37900, '소시지', 'Aroma: 바닐라, 벌집, 아이스크림, 꽃; Taste: 감귤, 시트러스, 계피, 자몽; Finish: 꿀, 몰트, 후추, 견과류', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('포 로지스 싱글배럴', '50', 99900, '다크 초콜릿', 'Aroma: 메이플 시럽, 배, 코코아, 향신료; Taste: 잘 익은 자두, 바닐라, 체리; Finish: 긴 여운, 부드러운, 섬세한', DEFAULT, DEFAULT);
+VALUES ('포 로지스 싱글배럴', 50.0, 99900, '다크 초콜릿', 'Aroma: 메이플 시럽, 배, 코코아, 향신료; Taste: 잘 익은 자두, 바닐라, 체리; Finish: 긴 여운, 부드러운, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('짐빔 화이트 750ml', '40', 23900, '버거', 'Aroma: 부드러운, 바닐라, 향긋한; Taste: 달콤한, 캐러멜, 조화로운; Finish: 오크, 견과류, 꿀', DEFAULT, DEFAULT);
+VALUES ('짐빔 화이트 750ml', 40.0, 23900, '버거', 'Aroma: 부드러운, 바닐라, 향긋한; Taste: 달콤한, 캐러멜, 조화로운; Finish: 오크, 견과류, 꿀', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('조니워커 블랙 700ml', '40', 43800, '그릴드 치킨', 'Aroma: 사과, 배, 시트러스, 오크; Taste: 바닐라, 크리미, 말린 과일; Finish: 스모키, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('조니워커 블랙 700ml', 40.0, 43800, '그릴드 치킨', 'Aroma: 사과, 배, 시트러스, 오크; Taste: 바닐라, 크리미, 말린 과일; Finish: 스모키, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌피딕 15년', '40', 117900, '베이컨', 'Aroma: 꿀, 바닐라, 구운 사과, 호두, 오렌지; Taste: 달콤한, 셰리, 스파이스, 건포도; Finish: 설탕에 절인 과일, 향신료, 오크', DEFAULT, DEFAULT);
+VALUES ('글렌피딕 15년', 40.0, 117900, '베이컨', 'Aroma: 꿀, 바닐라, 구운 사과, 호두, 오렌지; Taste: 달콤한, 셰리, 스파이스, 건포도; Finish: 설탕에 절인 과일, 향신료, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('듀어스 12년', '40', 44900, '스테이크', 'Aroma: 과일, 레몬, 몰트, 바닐라; Taste: 꿀, 버터스카치, 피트; Finish: 달콤한, 부드러운, 가벼운 스모키', DEFAULT, DEFAULT);
+VALUES ('듀어스 12년', 40.0, 44900, '스테이크', 'Aroma: 과일, 레몬, 몰트, 바닐라; Taste: 꿀, 버터스카치, 피트; Finish: 달콤한, 부드러운, 가벼운 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('와일드 터키 레어브리드', '58.4', 89900, '다크 초콜릿', 'Aroma: 풍부한, 꽃, 후추, 아몬드, 꿀, 대추야자; Taste: 따뜻한, 스모키, 곡물, 향신료; Finish: 긴 여운, 풍부한, 스파이시', DEFAULT, DEFAULT);
+VALUES ('와일드 터키 레어브리드', 58.4, 89900, '다크 초콜릿', 'Aroma: 풍부한, 꽃, 후추, 아몬드, 꿀, 대추야자; Taste: 따뜻한, 스모키, 곡물, 향신료; Finish: 긴 여운, 풍부한, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌드로낙 12년(구형)', '43', 105000, '샤퀴테리', 'Aroma: 달콤한, 바닐라, 견과류; Taste: 사과, 오크, 캐러멜, 토피; Finish: 건포도, 과일, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('글렌드로낙 12년(구형)', 43.0, 105000, '샤퀴테리', 'Aroma: 달콤한, 바닐라, 견과류; Taste: 사과, 오크, 캐러멜, 토피; Finish: 건포도, 과일, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하이랜드 퀸 셰리 캐스크 피니시', '40', 17900, '과일 타르트', 'Aroma: 셰리, 건포도, 바닐라; Taste: 견과류, 달콤한, 고소한; Finish: 복합적인, 크리미, 스모키', DEFAULT, DEFAULT);
+VALUES ('하이랜드 퀸 셰리 캐스크 피니시', 40.0, 17900, '과일 타르트', 'Aroma: 셰리, 건포도, 바닐라; Taste: 견과류, 달콤한, 고소한; Finish: 복합적인, 크리미, 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아드벡 10년', '46', 92000, '치킨 윙', 'Aroma: 스모키, 다크 초콜릿, 레몬, 라임, 흑후추; Taste: 피트, 구운 파인애플, 배, 아몬드, 토피; Finish: 허브, 배, 소나무, 바닐라, 계피, 헤이즐넛', DEFAULT, DEFAULT);
+VALUES ('아드벡 10년', 46.0, 92000, '치킨 윙', 'Aroma: 스모키, 다크 초콜릿, 레몬, 라임, 흑후추; Taste: 피트, 구운 파인애플, 배, 아몬드, 토피; Finish: 허브, 배, 소나무, 바닐라, 계피, 헤이즐넛', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('네이키드 몰트', '40', 49900, '감자튀김', 'Aroma: 셰리, 말린 과일, 시트러스; Taste: 캐러멜, 달콤한, 몰트, 과수원; Finish: 부드러운, 오크, 버터, 토피', DEFAULT, DEFAULT);
+VALUES ('네이키드 몰트', 40.0, 49900, '감자튀김', 'Aroma: 셰리, 말린 과일, 시트러스; Taste: 캐러멜, 달콤한, 몰트, 과수원; Finish: 부드러운, 오크, 버터, 토피', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('잭 다니엘스', '40', 38000, '스테이크', 'Aroma: 달콤한, 바닐라, 과일; Taste: 캐러멜, 토피, 향신료; Finish: 부드러운, 그을린 오크, 커피', DEFAULT, DEFAULT);
+VALUES ('잭 다니엘스', 40.0, 38000, '스테이크', 'Aroma: 달콤한, 바닐라, 과일; Taste: 캐러멜, 토피, 향신료; Finish: 부드러운, 그을린 오크, 커피', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발렌타인 30년', '40', 600000, '소시지', 'Aroma: 오크, 바닐라, 과일; Taste: 셰리, 바닐라, 벌꿀, 꽃; Finish: 긴 여운, 우아한, 복합적인', DEFAULT, DEFAULT);
+VALUES ('발렌타인 30년', 40.0, 600000, '소시지', 'Aroma: 오크, 바닐라, 과일; Taste: 셰리, 바닐라, 벌꿀, 꽃; Finish: 긴 여운, 우아한, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌피딕 12년 셰리 캐스크 피니시', '43', 92900, '샤퀴테리', 'Aroma: 배, 말린 과일, 스파이스; Taste: 구운 사과, 육두구, 오크, 계피; Finish: 긴 여운, 말린 과일, 스파이스', DEFAULT, DEFAULT);
+VALUES ('글렌피딕 12년 셰리 캐스크 피니시', 43.0, 92900, '샤퀴테리', 'Aroma: 배, 말린 과일, 스파이스; Taste: 구운 사과, 육두구, 오크, 계피; Finish: 긴 여운, 말린 과일, 스파이스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로크로몬드 12년 700ml', '46', 89000, '크림 디저트', 'Aroma: 감귤, 배, 청사과; Taste: 레몬, 바닐라, 복숭아, 비스킷; Finish: 부드러운, 스모키', DEFAULT, DEFAULT);
+VALUES ('로크로몬드 12년 700ml', 46.0, 89000, '크림 디저트', 'Aroma: 감귤, 배, 청사과; Taste: 레몬, 바닐라, 복숭아, 비스킷; Finish: 부드러운, 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌라씨', '40', 18500, '과일 샐러드', 'Aroma: 피트, 시트러스, 몰트; Taste: 달콤한, 바닐라, 부드러운; Finish: 스모키, 가벼운, 몰트', DEFAULT, DEFAULT);
+VALUES ('글렌라씨', 40.0, 18500, '과일 샐러드', 'Aroma: 피트, 시트러스, 몰트; Taste: 달콤한, 바닐라, 부드러운; Finish: 스모키, 가벼운, 몰트', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라가불린 16년', '43', 145000, '크림 디저트', 'Aroma: 강한 피트, 스모키, 홍차, 셰리, 바닐라; Taste: 베이컨, 해초, 말린 과일, 몰트, 따뜻한; Finish: 드라이한, 스파이시, 달콤한, 바닐라', DEFAULT, DEFAULT);
+VALUES ('라가불린 16년', 43.0, 145000, '크림 디저트', 'Aroma: 강한 피트, 스모키, 홍차, 셰리, 바닐라; Taste: 베이컨, 해초, 말린 과일, 몰트, 따뜻한; Finish: 드라이한, 스파이시, 달콤한, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌파클라스 15년', '46', 139000, '소시지', 'Aroma: 말린 과일, 복합적인, 셰리, 버터스카치; Taste: 건포도, 견과류, 달콤한, 몰트, 셰리; Finish: 긴 여운, 달콤한, 셰리, 크리스마스 케이크', DEFAULT, DEFAULT);
+VALUES ('글렌파클라스 15년', 46.0, 139000, '소시지', 'Aroma: 말린 과일, 복합적인, 셰리, 버터스카치; Taste: 건포도, 견과류, 달콤한, 몰트, 셰리; Finish: 긴 여운, 달콤한, 셰리, 크리스마스 케이크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아란 10년', '46', 89000, '그릴드 치킨', 'Aroma: 과일, 시트러스; Taste: 바닐라, 시나몬, 오렌지, 오크; Finish: 사과, 달콤한, 시트러스', DEFAULT, DEFAULT);
+VALUES ('아란 10년', 46.0, 89000, '그릴드 치킨', 'Aroma: 과일, 시트러스; Taste: 바닐라, 시나몬, 오렌지, 오크; Finish: 사과, 달콤한, 시트러스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('미스터 보스턴 캐나디안 1L', '40', 16500, '과일 타르트', 'Aroma: 캐러멜, 오크, 시나몬; Taste: 옥수수, 달콤한, 향신료; Finish: 부드러운, 스파이시', DEFAULT, DEFAULT);
+VALUES ('미스터 보스턴 캐나디안 1L', 40.0, 16500, '과일 타르트', 'Aroma: 캐러멜, 오크, 시나몬; Taste: 옥수수, 달콤한, 향신료; Finish: 부드러운, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('달모어 12년', '40', 120000, '크림소스 생선요리', 'Aroma: 스파이시, 열대 과일, 초콜릿; Taste: 바닐라, 셰리, 열대 과일; Finish: 로스팅한 커피, 스모키, 초콜릿', DEFAULT, DEFAULT);
+VALUES ('달모어 12년', 40.0, 120000, '크림소스 생선요리', 'Aroma: 스파이시, 열대 과일, 초콜릿; Taste: 바닐라, 셰리, 열대 과일; Finish: 로스팅한 커피, 스모키, 초콜릿', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('맥캘란 18년 더블 캐스크', '43', 489000, '버거', 'Aroma: 말린 과일, 생강, 오렌지; Taste: 바닐라, 생강, 스파이스, 캐러멜; Finish: 생강, 오렌지, 오크', DEFAULT, DEFAULT);
+VALUES ('맥캘란 18년 더블 캐스크', 43.0, 489000, '버거', 'Aroma: 말린 과일, 생강, 오렌지; Taste: 바닐라, 생강, 스파이스, 캐러멜; Finish: 생강, 오렌지, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('러셀 리저브 15년', '58.6', 519000, '그릴드 양갈비', 'Aroma: 말린 과일, 캐러멜, 넛맥, 클로브, 흙내음; Taste: 체리, 자두, 과일, 커피, 오크, 타바코; Finish: 코코아, 캐러멜, 부드러운, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('러셀 리저브 15년', 58.6, 519000, '그릴드 양갈비', 'Aroma: 말린 과일, 캐러멜, 넛맥, 클로브, 흙내음; Taste: 체리, 자두, 과일, 커피, 오크, 타바코; Finish: 코코아, 캐러멜, 부드러운, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌알라키 15년', '46', 189000, '스테이크', 'Aroma: 다크 체리, 시럽, 향신료, 토피; Taste: 헤더 꿀, 오렌지 껍질, 코코아, 생강; Finish: 흑설탕, 무화과 절임, 헤이즐넛', DEFAULT, DEFAULT);
+VALUES ('글렌알라키 15년', 46.0, 189000, '스테이크', 'Aroma: 다크 체리, 시럽, 향신료, 토피; Taste: 헤더 꿀, 오렌지 껍질, 코코아, 생강; Finish: 흑설탕, 무화과 절임, 헤이즐넛', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('시바스 리갈 18년', '40', 129000, '마카롱', 'Aroma: 말린 과일, 향신료, 버터, 토피; Taste: 다크 초콜릿, 꽃, 스모키; Finish: 부드러운, 긴 여운, 온화한', DEFAULT, DEFAULT);
+VALUES ('시바스 리갈 18년', 40.0, 129000, '마카롱', 'Aroma: 말린 과일, 향신료, 버터, 토피; Taste: 다크 초콜릿, 꽃, 스모키; Finish: 부드러운, 긴 여운, 온화한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('더 글렌그란트 10년', '40', 49000, '치즈 플래터', 'Aroma: 달콤한, 페이스트리, 바닐라, 배; Taste: 몰트, 프루티, 달콤한; Finish: 과수원, 버터스카치', DEFAULT, DEFAULT);
+VALUES ('더 글렌그란트 10년', 40.0, 49000, '치즈 플래터', 'Aroma: 달콤한, 페이스트리, 바닐라, 배; Taste: 몰트, 프루티, 달콤한; Finish: 과수원, 버터스카치', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('기원 유니콘', '46', 118800, '크림 디저트', 'Aroma: 피트, 낙엽, 장작; Taste: 오렌지 껍질, 스파이스, 떫은; Finish: 오크, 꿀, 자두', DEFAULT, DEFAULT);
+VALUES ('기원 유니콘', 46.0, 118800, '크림 디저트', 'Aroma: 피트, 낙엽, 장작; Taste: 오렌지 껍질, 스파이스, 떫은; Finish: 오크, 꿀, 자두', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('더 글렌리벳 15년', '40', 126000, '그릴드 치킨', 'Aroma: 스파이시, 견과류, 과일; Taste: 과일, 토피 초콜릿, 오크; Finish: 헤이즐넛, 진한, 풍부한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('더 글렌리벳 15년', 40.0, 126000, '그릴드 치킨', 'Aroma: 스파이시, 견과류, 과일; Taste: 과일, 토피 초콜릿, 오크; Finish: 헤이즐넛, 진한, 풍부한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌피딕 14년 버번 배럴 리저브', '43', 98000, '해산물 파스타', 'Aroma: 레몬, 리치, 파인애플; Taste: 망고, 패션프루트, 아몬드; Finish: 달콤한, 사과, 시나몬', DEFAULT, DEFAULT);
+VALUES ('글렌피딕 14년 버번 배럴 리저브', 43.0, 98000, '해산물 파스타', 'Aroma: 레몬, 리치, 파인애플; Taste: 망고, 패션프루트, 아몬드; Finish: 달콤한, 사과, 시나몬', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌피딕 18년 500ml', '40', 124000, '그릴드 양갈비', 'Aroma: 포도, 사과, 나무, 시나몬; Taste: 과일, 생강, 셰리; Finish: 달콤한', DEFAULT, DEFAULT);
+VALUES ('글렌피딕 18년 500ml', 40.0, 124000, '그릴드 양갈비', 'Aroma: 포도, 사과, 나무, 시나몬; Taste: 과일, 생강, 셰리; Finish: 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발렌타인 17년 750ml', '40', 169000, '스모크 치즈', 'Aroma: 오크, 바닐라, 스모키; Taste: 벌꿀, 감초, 스파이시; Finish: 긴 여운, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('발렌타인 17년 750ml', 40.0, 169000, '스모크 치즈', 'Aroma: 오크, 바닐라, 스모키; Taste: 벌꿀, 감초, 스파이시; Finish: 긴 여운, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('보모어 18년 Deep and Complex', '43', 224000, '샤퀴테리', 'Aroma: 다크 초콜릿, 당밀, 토피, 대추; Taste: 오렌지, 시트러스, 피트, 스모키, 커피; Finish: 실키, 모카, 마카다미아, 초콜릿', DEFAULT, DEFAULT);
+VALUES ('보모어 18년 Deep and Complex', 43.0, 224000, '샤퀴테리', 'Aroma: 다크 초콜릿, 당밀, 토피, 대추; Taste: 오렌지, 시트러스, 피트, 스모키, 커피; Finish: 실키, 모카, 마카다미아, 초콜릿', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌 기어리 12년', '48', 129000, '마카롱', 'Aroma: 꿀, 헤더 꽃, 배, 몰트, 달콤한; Taste: 크렘 브륄레, 바나나, 오크, 배, 부드러운; Finish: 향긋한, 균형 잡힌, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('글렌 기어리 12년', 48.0, 129000, '마카롱', 'Aroma: 꿀, 헤더 꽃, 배, 몰트, 달콤한; Taste: 크렘 브륄레, 바나나, 오크, 배, 부드러운; Finish: 향긋한, 균형 잡힌, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('조니워커 골드 750ml', '40', 71900, '해산물 파스타', 'Aroma: 달콤한, 스모키, 부드러운; Taste: 과일, 꿀, 크리미, 화려한; Finish: 긴 여운, 달콤한, 스모키', DEFAULT, DEFAULT);
+VALUES ('조니워커 골드 750ml', 40.0, 71900, '해산물 파스타', 'Aroma: 달콤한, 스모키, 부드러운; Taste: 과일, 꿀, 크리미, 화려한; Finish: 긴 여운, 달콤한, 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('잭 다니엘스 맥라렌 에디션', '40', 44900, '바비큐 립', 'Aroma: 달콤한, 바닐라, 과일; Taste: 캐러멜, 토피, 향신료; Finish: 부드러운, 그을린 오크, 커피', DEFAULT, DEFAULT);
+VALUES ('잭 다니엘스 맥라렌 에디션', 40.0, 44900, '바비큐 립', 'Aroma: 달콤한, 바닐라, 과일; Taste: 캐러멜, 토피, 향신료; Finish: 부드러운, 그을린 오크, 커피', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌파클라스 105 CS', '60', 127000, '다크 초콜릿', 'Aroma: 달콤한, 오크, 사과, 서양 배, 토피, 견과류; Taste: 대담한, 스파이시, 오크, 셰리, 과일; Finish: 실키, 따뜻한, 스모키, 후추', DEFAULT, DEFAULT);
+VALUES ('글렌파클라스 105 CS', 60.0, 127000, '다크 초콜릿', 'Aroma: 달콤한, 오크, 사과, 서양 배, 토피, 견과류; Taste: 대담한, 스파이시, 오크, 셰리, 과일; Finish: 실키, 따뜻한, 스모키, 후추', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오켄토션 아메리칸 오크', '40', 39000, '시트러스 샐러드', 'Aroma: 바닐라, 코코넛, 시트러스, 감귤; Taste: 바닐라, 부드러운, 백도, 상쾌한; Finish: 크리스피, 설탕을 뿌린 자몽, 향신료', DEFAULT, DEFAULT);
+VALUES ('오켄토션 아메리칸 오크', 40.0, 39000, '시트러스 샐러드', 'Aroma: 바닐라, 코코넛, 시트러스, 감귤; Taste: 바닐라, 부드러운, 백도, 상쾌한; Finish: 크리스피, 설탕을 뿌린 자몽, 향신료', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌피딕 21년', '43.2', 378000, '바비큐 립', 'Aroma: 꿀, 오렌지, 초콜릿, 흑설탕; Taste: 과일, 바닐라, 생강, 스파이스, 오크; Finish: 마멀레이드, 긴 여운, 모카', DEFAULT, DEFAULT);
+VALUES ('글렌피딕 21년', 43.2, 378000, '바비큐 립', 'Aroma: 꿀, 오렌지, 초콜릿, 흑설탕; Taste: 과일, 바닐라, 생강, 스파이스, 오크; Finish: 마멀레이드, 긴 여운, 모카', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('조니워커 더블 블랙 700ml', '40', 48900, '구운 아스파라거스', 'Aroma: 강렬한, 사과, 배, 시트러스; Taste: 스모키, 바닐라, 크리미, 말린 과일; Finish: 달콤한, 오크, 부드러운', DEFAULT, DEFAULT);
+VALUES ('조니워커 더블 블랙 700ml', 40.0, 48900, '구운 아스파라거스', 'Aroma: 강렬한, 사과, 배, 시트러스; Taste: 스모키, 바닐라, 크리미, 말린 과일; Finish: 달콤한, 오크, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('더 글렌드로낙 12년', '43', 85000, '구운 아스파라거스', 'Aroma: 캐러멜, 시트러스, 후추, 서양 배; Taste: 셰리, 바닐라, 무화과, 생강, 오크; Finish: 건포도, 견과류, 중후한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('더 글렌드로낙 12년', 43.0, 85000, '구운 아스파라거스', 'Aroma: 캐러멜, 시트러스, 후추, 서양 배; Taste: 셰리, 바닐라, 무화과, 생강, 오크; Finish: 건포도, 견과류, 중후한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 더블우드 12년', '40', 120000, '감자튀김', 'Aroma: 과일, 셰리, 벌꿀, 바닐라; Taste: 견과류, 계피, 셰리, 스파이스; Finish: 긴 여운, 복합적인, 부드러운', DEFAULT, DEFAULT);
+VALUES ('발베니 더블우드 12년', 40.0, 120000, '감자튀김', 'Aroma: 과일, 셰리, 벌꿀, 바닐라; Taste: 견과류, 계피, 셰리, 스파이스; Finish: 긴 여운, 복합적인, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 캐리비안 캐스크 14년', '43', 163000, '그릴드 양갈비', 'Aroma: 토피, 바닐라, 과일, 신선한; Taste: 바닐라, 오크, 과일, 달콤한; Finish: 따뜻한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('발베니 캐리비안 캐스크 14년', 43.0, 163000, '그릴드 양갈비', 'Aroma: 토피, 바닐라, 과일, 신선한; Taste: 바닐라, 오크, 과일, 달콤한; Finish: 따뜻한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 15년 마데이라 캐스크', '43', 263000, '베이컨', 'Aroma: 블랙커런트, 브램블, 생강, 스파이시, 잘 익은 자두; Taste: 시트러스, 오렌지, 헤이즐넛, 잘 익은 자두; Finish: 긴 여운', DEFAULT, DEFAULT);
+VALUES ('발베니 15년 마데이라 캐스크', 43.0, 263000, '베이컨', 'Aroma: 블랙커런트, 브램블, 생강, 스파이시, 잘 익은 자두; Taste: 시트러스, 오렌지, 헤이즐넛, 잘 익은 자두; Finish: 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 16년 프렌치 오크', '47.6', 330000, '과일 타르트', 'Aroma: 다채로운, 셰리, 사과; Taste: 꿀, 달콤한, 자몽, 스파이시; Finish: 복숭아, 생강, 오크, 후추', DEFAULT, DEFAULT);
+VALUES ('발베니 16년 프렌치 오크', 47.6, 330000, '과일 타르트', 'Aroma: 다채로운, 셰리, 사과; Taste: 꿀, 달콤한, 자몽, 스파이시; Finish: 복숭아, 생강, 오크, 후추', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 더블우드 17년', '43', 650000, '크림소스 생선요리', 'Aroma: 오크, 바닐라, 벌꿀, 그린 애플; Taste: 말린 과일, 샤베트, 구운 아몬드, 계피, 토피, 바닐라; Finish: 바닐라, 오크, 벌꿀, 스파이시, 달콤한', DEFAULT, DEFAULT);
+VALUES ('발베니 더블우드 17년', 43.0, 650000, '크림소스 생선요리', 'Aroma: 오크, 바닐라, 벌꿀, 그린 애플; Taste: 말린 과일, 샤베트, 구운 아몬드, 계피, 토피, 바닐라; Finish: 바닐라, 오크, 벌꿀, 스파이시, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 25년 레어 메리지', '48', 1245900, '소시지', 'Aroma: 오크, 꽃, 꿀, 구운 마시멜로; Taste: 서양 배, 바닐라, 시트러스, 감귤; Finish: 생강, 향신료, 시나몬, 사과 파이', DEFAULT, DEFAULT);
+VALUES ('발베니 25년 레어 메리지', 48.0, 1245900, '소시지', 'Aroma: 오크, 꽃, 꿀, 구운 마시멜로; Taste: 서양 배, 바닐라, 시트러스, 감귤; Finish: 생강, 향신료, 시나몬, 사과 파이', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('맥캘란 12년 셰리 오크', '40', 139000, '바비큐 립', 'Aroma: 말린 과일, 오크, 향신료; Taste: 육두구, 부드러운, 향신료; Finish: 긴 여운, 따뜻한, 생강', DEFAULT, DEFAULT);
+VALUES ('맥캘란 12년 셰리 오크', 40.0, 139000, '바비큐 립', 'Aroma: 말린 과일, 오크, 향신료; Taste: 육두구, 부드러운, 향신료; Finish: 긴 여운, 따뜻한, 생강', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('맥캘란 18년 셰리 오크 2024', '43', 550000, '시트러스 샐러드', 'Aroma: 타르트, 생강 줄기, 셰리에 절인 건포도, 오렌지, 시나몬; Taste: 다크 초콜릿, 생강, 대추야자, 말린 살구, 오크, 바닐라; Finish: 긴 여운, 말린 과일, 생강, 오크', DEFAULT, DEFAULT);
+VALUES ('맥캘란 18년 셰리 오크 2024', 43.0, 550000, '시트러스 샐러드', 'Aroma: 타르트, 생강 줄기, 셰리에 절인 건포도, 오렌지, 시나몬; Taste: 다크 초콜릿, 생강, 대추야자, 말린 살구, 오크, 바닐라; Finish: 긴 여운, 말린 과일, 생강, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('벡스 리슬링', '11.5', 12800, '다크 초콜릿', 'Aroma: 오렌지 꽃, 라임, 시트러스; Taste: 복숭아, 청사과, 살구; Finish: 깔끔한, 감귤, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('벡스 리슬링', 11.5, 12800, '다크 초콜릿', 'Aroma: 오렌지 꽃, 라임, 시트러스; Taste: 복숭아, 청사과, 살구; Finish: 깔끔한, 감귤, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스톤 베이 소비뇽 블랑', '12.5', 22100, '소시지', 'Aroma: 허브, 건초, 레몬, 시트러스; Taste: 풋사과, 풀, 산뜻한, 청포도; Finish: 부드러운, 청량한, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('스톤 베이 소비뇽 블랑', 12.5, 22100, '소시지', 'Aroma: 허브, 건초, 레몬, 시트러스; Taste: 풋사과, 풀, 산뜻한, 청포도; Finish: 부드러운, 청량한, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('유 원 프리미티보 디 만두리아', '14.5', 22000, '리조또', 'Aroma: 라즈베리, 블루베리, 바닐라, 허브; Taste: 체리, 자두, 초콜릿; Finish: 라즈베리, 부드러운, 오크', DEFAULT, DEFAULT);
+VALUES ('유 원 프리미티보 디 만두리아', 14.5, 22000, '리조또', 'Aroma: 라즈베리, 블루베리, 바닐라, 허브; Taste: 체리, 자두, 초콜릿; Finish: 라즈베리, 부드러운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('무초 마스 레드', '13 ', 19900, '과일 샐러드', 'Aroma: 블랙베리, 발사믹, 가죽, 바닐라; Taste: 오크, 자두, 체리, 초콜릿; Finish: 타바코, 코코아, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('무초 마스 레드', 13.5, 19900, '과일 샐러드', 'Aroma: 블랙베리, 발사믹, 가죽, 바닐라; Taste: 오크, 자두, 체리, 초콜릿; Finish: 타바코, 코코아, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('킨즈마라울리 마라니 킨즈마라울리 레드 세미 스위트', '11.5', 36900, '감자튀김', 'Aroma: 레드베리, 딸기, 플로럴; Taste: 달콤한, 잘 익은 포도, 쥬시, 홍차; Finish: 붉은 과일, 흙내음, 신선한', DEFAULT, DEFAULT);
+VALUES ('킨즈마라울리 마라니 킨즈마라울리 레드 세미 스위트', 11.5, 36900, '감자튀김', 'Aroma: 레드베리, 딸기, 플로럴; Taste: 달콤한, 잘 익은 포도, 쥬시, 홍차; Finish: 붉은 과일, 흙내음, 신선한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('보시오 트로피칼 모스카토 망고', '5.5', 13200, '구운 아스파라거스', 'Aroma: 청포도, 망고, 꽃; Taste: 산뜻한, 과일, 달콤한; Finish: 복숭아, 꿀, 향긋한', DEFAULT, DEFAULT);
+VALUES ('보시오 트로피칼 모스카토 망고', 5.5, 13200, '구운 아스파라거스', 'Aroma: 청포도, 망고, 꽃; Taste: 산뜻한, 과일, 달콤한; Finish: 복숭아, 꿀, 향긋한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그라함 20년 토니 포트 와인', '20', 115000, '버거', 'Aroma: 오크, 초콜릿, 캐러멜, 타바코, 토피; Taste: 견과류, 바닐라, 오렌지 껍질, 커피; Finish: 긴 여운, 달콤한, 우아한, 잘 익은 과일', DEFAULT, DEFAULT);
+VALUES ('그라함 20년 토니 포트 와인', 20.0, 115000, '버거', 'Aroma: 오크, 초콜릿, 캐러멜, 타바코, 토피; Taste: 견과류, 바닐라, 오렌지 껍질, 커피; Finish: 긴 여운, 달콤한, 우아한, 잘 익은 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('칸티 모스카토 다스티 DOCG', '5.5', 14500, '샤퀴테리', 'Aroma: 은은한, 아카시아, 달콤한; Taste: 자스민, 꿀, 배, 탄산감; Finish: 상쾌한, 부드러운, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('칸티 모스카토 다스티 DOCG', 5.5, 14500, '샤퀴테리', 'Aroma: 은은한, 아카시아, 달콤한; Taste: 자스민, 꿀, 배, 탄산감; Finish: 상쾌한, 부드러운, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('프로메사 모스카토', '7 ', 11100, '크림 디저트', 'Aroma: 사과, 감귤, 시트러스, 그린 애플; Taste: 복숭아, 파인애플, 망고, 미네랄리티; Finish: 꽃, 구아바, 체리, 달콤한, 오렌지', DEFAULT, DEFAULT);
+VALUES ('프로메사 모스카토', 7.5, 11100, '크림 디저트', 'Aroma: 사과, 감귤, 시트러스, 그린 애플; Taste: 복숭아, 파인애플, 망고, 미네랄리티; Finish: 꽃, 구아바, 체리, 달콤한, 오렌지', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오트 쿠튀르 프렌치 버블스', '11', 25000, '다크 초콜릿', 'Aroma: 빵, 아몬드, 고소한; Taste: 배, 복숭아; Finish: 달콤한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('오트 쿠튀르 프렌치 버블스', 11.0, 25000, '다크 초콜릿', 'Aroma: 빵, 아몬드, 고소한; Taste: 배, 복숭아; Finish: 달콤한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('싸베 씨 말보로 소비뇽 블랑', '13', 25000, '베이컨', 'Aroma: 멜론, 자몽, 패션프루트, 허브; Taste: 구스베리, 멜론, 자몽, 열대 과일, 복숭아, 미네랄리티; Finish: 깔끔한, 신선한', DEFAULT, DEFAULT);
+VALUES ('싸베 씨 말보로 소비뇽 블랑', 13.0, 25000, '베이컨', 'Aroma: 멜론, 자몽, 패션프루트, 허브; Taste: 구스베리, 멜론, 자몽, 열대 과일, 복숭아, 미네랄리티; Finish: 깔끔한, 신선한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('투 리버즈 소비뇽 블랑', '13 ', 32000, '초콜릿 디저트', 'Aroma: 감귤, 미네랄리티, 시트러스, 허브; Taste: 열대 과일, 파인애플, 패션프루트; Finish: 구스베리, 라임, 아스파라거스, 자몽', DEFAULT, DEFAULT);
+VALUES ('투 리버즈 소비뇽 블랑', 13.2, 32000, '초콜릿 디저트', 'Aroma: 감귤, 미네랄리티, 시트러스, 허브; Taste: 열대 과일, 파인애플, 패션프루트; Finish: 구스베리, 라임, 아스파라거스, 자몽', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('레이크 찰리스 네스트 소비뇽 블랑', '12 ', 23700, '과일 타르트', 'Aroma: 레몬, 감귤, 시트러스, 자몽; Taste: 망고, 청사과, 파인애플, 패션프루트; Finish: 구스베리, 미네랄리티, 열대 과일, 풀', DEFAULT, DEFAULT);
+VALUES ('레이크 찰리스 네스트 소비뇽 블랑', 12.5, 23700, '과일 타르트', 'Aroma: 레몬, 감귤, 시트러스, 자몽; Taste: 망고, 청사과, 파인애플, 패션프루트; Finish: 구스베리, 미네랄리티, 열대 과일, 풀', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('테일러 파인 토니 포트 와인', '20', 19900, '마카롱', 'Aroma: 베리, 부드러운; Taste: 버터스카치, 무화과, 자두, 견과류, 스파이시; Finish: 둥근, 부드러운, 풍부한, 딸기 잼', DEFAULT, DEFAULT);
+VALUES ('테일러 파인 토니 포트 와인', 20.0, 19900, '마카롱', 'Aroma: 베리, 부드러운; Taste: 버터스카치, 무화과, 자두, 견과류, 스파이시; Finish: 둥근, 부드러운, 풍부한, 딸기 잼', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('투 리버즈 소비뇽 블랑', '13 ', 32000, '리조또', 'Aroma: 감귤, 미네랄리티, 시트러스, 허브; Taste: 열대 과일, 파인애플, 패션프루트; Finish: 구스베리, 라임, 아스파라거스, 자몽', DEFAULT, DEFAULT);
+VALUES ('투 리버즈 소비뇽 블랑', 13.2, 32000, '리조또', 'Aroma: 감귤, 미네랄리티, 시트러스, 허브; Taste: 열대 과일, 파인애플, 패션프루트; Finish: 구스베리, 라임, 아스파라거스, 자몽', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('루이 페드리에 브뤼', '11', 9900, '다크 초콜릿', 'Aroma: 사과, 살구, 복숭아, 멜론; Taste: 청사과, 배, 시트러스, 감귤, 미네랄리티; Finish: 레몬, 라임, 자몽, 꿀', DEFAULT, DEFAULT);
+VALUES ('루이 페드리에 브뤼', 11.0, 9900, '다크 초콜릿', 'Aroma: 사과, 살구, 복숭아, 멜론; Taste: 청사과, 배, 시트러스, 감귤, 미네랄리티; Finish: 레몬, 라임, 자몽, 꿀', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아리온, 러스치케토 로쏘', '6.5', 10000, '과일 타르트', 'Aroma: 플로럴, 향긋한, 신선한; Taste: 달콤한, 붉은 베리류, 쥬시; Finish: 균형 잡힌, 풍부한, 탄산감', DEFAULT, DEFAULT);
+VALUES ('아리온, 러스치케토 로쏘', 6.5, 10000, '과일 타르트', 'Aroma: 플로럴, 향긋한, 신선한; Taste: 달콤한, 붉은 베리류, 쥬시; Finish: 균형 잡힌, 풍부한, 탄산감', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('마스카 델 타코 수수마니엘로', '14.5', 31000, '바비큐 립', 'Aroma: 블루베리, 바닐라, 허브, 초콜릿; Taste: 자두, 블랙베리, 라즈베리, 체리; Finish: 우아한, 신선한, 부드러운, 오크', DEFAULT, DEFAULT);
+VALUES ('마스카 델 타코 수수마니엘로', 14.5, 31000, '바비큐 립', 'Aroma: 블루베리, 바닐라, 허브, 초콜릿; Taste: 자두, 블랙베리, 라즈베리, 체리; Finish: 우아한, 신선한, 부드러운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('텍스트북 나파 까베르네 소비뇽', '13.3', 74000, '시트러스 샐러드', 'Aroma: 후추, 블랙커런트, 담배, 연필심; Taste: 자두, 체리, 유칼립투스, 블루베리; Finish: 부드러운 타닌, 자두, 카시스', DEFAULT, DEFAULT);
+VALUES ('텍스트북 나파 까베르네 소비뇽', 13.3, 74000, '시트러스 샐러드', 'Aroma: 후추, 블랙커런트, 담배, 연필심; Taste: 자두, 체리, 유칼립투스, 블루베리; Finish: 부드러운 타닌, 자두, 카시스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('칸티 모스카토 다스티 DOCG', '5.5', 13800, '그릴드 양갈비', 'Aroma: 은은한, 아카시아, 달콤한; Taste: 자스민, 꿀, 배, 탄산감; Finish: 상쾌한, 부드러운, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('칸티 모스카토 다스티 DOCG', 5.5, 13800, '그릴드 양갈비', 'Aroma: 은은한, 아카시아, 달콤한; Taste: 자스민, 꿀, 배, 탄산감; Finish: 상쾌한, 부드러운, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('루이 에슈너 골드 22K 스파클링', '11', 30500, '크림소스 생선요리', 'Aroma: 열대 과일, 복숭아, 향긋한; Taste: 핵과류, 상큼한, 자두; Finish: 상쾌한, 산뜻한, 경쾌한', DEFAULT, DEFAULT);
+VALUES ('루이 에슈너 골드 22K 스파클링', 11.0, 30500, '크림소스 생선요리', 'Aroma: 열대 과일, 복숭아, 향긋한; Taste: 핵과류, 상큼한, 자두; Finish: 상쾌한, 산뜻한, 경쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('유 원 프리미티보 디 만두리아', '14.5', 24500, '과일 샐러드', 'Aroma: 라즈베리, 블루베리, 바닐라, 허브; Taste: 체리, 자두, 초콜릿; Finish: 라즈베리, 부드러운, 오크', DEFAULT, DEFAULT);
+VALUES ('유 원 프리미티보 디 만두리아', 14.5, 24500, '과일 샐러드', 'Aroma: 라즈베리, 블루베리, 바닐라, 허브; Taste: 체리, 자두, 초콜릿; Finish: 라즈베리, 부드러운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로쉐 마제, 까베르네 소비뇽', '12.5', 12000, '구운 아스파라거스', 'Aroma: 블랙베리, 오크, 체리, 가죽; Taste: 강렬한, 건포도, 구운 견과류; Finish: 타닌, 스모키, 부드러운', DEFAULT, DEFAULT);
+VALUES ('로쉐 마제, 까베르네 소비뇽', 12.5, 12000, '구운 아스파라거스', 'Aroma: 블랙베리, 오크, 체리, 가죽; Taste: 강렬한, 건포도, 구운 견과류; Finish: 타닌, 스모키, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('배비치 블랙 라벨 말보로 소비뇽 블랑', '13 ', 38000, '치즈 플래터', 'Aroma: 자몽, 레몬, 열대 과일, 패션프루트; Taste: 청사과, 감귤, 파인애플, 라임; Finish: 신선한, 깔끔한, 싱그러운', DEFAULT, DEFAULT);
+VALUES ('배비치 블랙 라벨 말보로 소비뇽 블랑', 13.5, 38000, '치즈 플래터', 'Aroma: 자몽, 레몬, 열대 과일, 패션프루트; Taste: 청사과, 감귤, 파인애플, 라임; Finish: 신선한, 깔끔한, 싱그러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('마츠 엘 비에호', '15', 55000, '구운 아스파라거스', 'Aroma: 잘 익은 과일; Taste: 타닌, 초콜릿; Finish: 복합적인', DEFAULT, DEFAULT);
+VALUES ('마츠 엘 비에호', 15.0, 55000, '구운 아스파라거스', 'Aroma: 잘 익은 과일; Taste: 타닌, 초콜릿; Finish: 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('레 부흐가헬 피노 누아', '12 ', 25000, '구운 아스파라거스', 'Aroma: 바닐라, 코코아, 오크; Taste: 스모키, 후추, 체리; Finish: 풀잎, 딸기, 허브', DEFAULT, DEFAULT);
+VALUES ('레 부흐가헬 피노 누아', 13.0, 25000, '구운 아스파라거스', 'Aroma: 바닐라, 코코아, 오크; Taste: 스모키, 후추, 체리; Finish: 풀잎, 딸기, 허브', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('브레드 앤 버터 피노 누아', '13.5', 30900, '샤퀴테리', 'Aroma: 체리, 카시스, 오크; Taste: 라즈베리, 산딸기, 스모키; Finish: 긴 여운, 부드러운 타닌, 섬세한', DEFAULT, DEFAULT);
+VALUES ('브레드 앤 버터 피노 누아', 13.5, 30900, '샤퀴테리', 'Aroma: 체리, 카시스, 오크; Taste: 라즈베리, 산딸기, 스모키; Finish: 긴 여운, 부드러운 타닌, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('구에리에로 델라 테라', '15', 66500, '초콜릿 디저트', 'Aroma: 블랙베리, 체리, 자두 잼, 향신료, 멘톨; Taste: 라즈베리, 바닐라, 잘 익은 과일, 초콜릿; Finish: 풍성한, 향긋한, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('구에리에로 델라 테라', 15.0, 66500, '초콜릿 디저트', 'Aroma: 블랙베리, 체리, 자두 잼, 향신료, 멘톨; Taste: 라즈베리, 바닐라, 잘 익은 과일, 초콜릿; Finish: 풍성한, 향긋한, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('싸베 씨 말보로 소비뇽 블랑', '13', 25000, '그릴드 양갈비', 'Aroma: 멜론, 자몽, 패션프루트, 허브; Taste: 구스베리, 멜론, 자몽, 열대 과일, 복숭아, 미네랄리티; Finish: 깔끔한, 신선한', DEFAULT, DEFAULT);
+VALUES ('싸베 씨 말보로 소비뇽 블랑', 13.0, 25000, '그릴드 양갈비', 'Aroma: 멜론, 자몽, 패션프루트, 허브; Taste: 구스베리, 멜론, 자몽, 열대 과일, 복숭아, 미네랄리티; Finish: 깔끔한, 신선한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('루이 페드리에 브뤼', '11', 9900, '크림 디저트', 'Aroma: 사과, 살구, 복숭아, 멜론; Taste: 청사과, 배, 시트러스, 감귤, 미네랄리티; Finish: 레몬, 라임, 자몽, 꿀', DEFAULT, DEFAULT);
+VALUES ('루이 페드리에 브뤼', 11.0, 9900, '크림 디저트', 'Aroma: 사과, 살구, 복숭아, 멜론; Taste: 청사과, 배, 시트러스, 감귤, 미네랄리티; Finish: 레몬, 라임, 자몽, 꿀', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('무초 마스 레드 매그넘 1.5L', '13 ', 31100, '초콜릿 디저트', 'Aroma: 블랙베리, 발사믹, 가죽, 바닐라; Taste: 오크, 자두, 체리, 초콜릿; Finish: 타바코, 코코아, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('무초 마스 레드 매그넘 1.5L', 14.0, 31100, '초콜릿 디저트', 'Aroma: 블랙베리, 발사믹, 가죽, 바닐라; Taste: 오크, 자두, 체리, 초콜릿; Finish: 타바코, 코코아, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라파우라 스프링스 소비뇽 블랑', '13.5', 21000, '과일 샐러드', 'Aroma: 자몽, 시트러스, 레몬 껍질; Taste: 열대 과일, 패션프루트, 신선한; Finish: 향긋한, 복숭아, 청사과', DEFAULT, DEFAULT);
+VALUES ('라파우라 스프링스 소비뇽 블랑', 13.5, 21000, '과일 샐러드', 'Aroma: 자몽, 시트러스, 레몬 껍질; Taste: 열대 과일, 패션프루트, 신선한; Finish: 향긋한, 복숭아, 청사과', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('바이올렛 7', '7', 32900, '다크 초콜릿', 'Aroma: 플로럴, 상큼한, 열대 과일; Taste: 자몽, 자스민, 레몬; Finish: 섬세한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('바이올렛 7', 7.0, 32900, '다크 초콜릿', 'Aroma: 플로럴, 상큼한, 열대 과일; Taste: 자몽, 자스민, 레몬; Finish: 섬세한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('루이 페드리에 브뤼', '11', 11200, '감자튀김', 'Aroma: 사과, 살구, 복숭아, 멜론; Taste: 청사과, 배, 시트러스, 감귤, 미네랄리티; Finish: 레몬, 라임, 자몽, 꿀', DEFAULT, DEFAULT);
+VALUES ('루이 페드리에 브뤼', 11.0, 11200, '감자튀김', 'Aroma: 사과, 살구, 복숭아, 멜론; Taste: 청사과, 배, 시트러스, 감귤, 미네랄리티; Finish: 레몬, 라임, 자몽, 꿀', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('베서니 블루 쿼리 쉬라즈', '14.5', 49500, '과일 샐러드', 'Aroma: 블랙 체리, 정향, 향긋한; Taste: 오크, 다크 초콜릿, 블랙베리; Finish: 향신료, 풍부한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('베서니 블루 쿼리 쉬라즈', 14.5, 49500, '과일 샐러드', 'Aroma: 블랙 체리, 정향, 향긋한; Taste: 오크, 다크 초콜릿, 블랙베리; Finish: 향신료, 풍부한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아마란타 몬테풀치아노 다브루쪼', '14', 41000, '치즈 플래터', 'Aroma: 바닐라, 오크, 초콜릿; Taste: 자두, 블랙베리, 블랙커런트; Finish: 블랙 체리, 라즈베리, 체리', DEFAULT, DEFAULT);
+VALUES ('아마란타 몬테풀치아노 다브루쪼', 14.0, 41000, '치즈 플래터', 'Aroma: 바닐라, 오크, 초콜릿; Taste: 자두, 블랙베리, 블랙커런트; Finish: 블랙 체리, 라즈베리, 체리', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('롱반 샤르도네', '13 ', 18500, '소시지', 'Aroma: 오크, 바닐라, 버터, 아몬드; Taste: 바닐라, 오일리, 사과; Finish: 파인애플, 열대 과일, 망고', DEFAULT, DEFAULT);
+VALUES ('롱반 샤르도네', 13.5, 18500, '소시지', 'Aroma: 오크, 바닐라, 버터, 아몬드; Taste: 바닐라, 오일리, 사과; Finish: 파인애플, 열대 과일, 망고', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('서브미션 샤르도네', '13.5', 23000, '과일 타르트', 'Aroma: 오크, 바닐라, 배, 청사과, 타임; Taste: 바닐라, 버터, 파인애플, 오렌지, 망고; Finish: 꿀, 미네랄리티, 레몬, 라임', DEFAULT, DEFAULT);
+VALUES ('서브미션 샤르도네', 13.5, 23000, '과일 타르트', 'Aroma: 오크, 바닐라, 배, 청사과, 타임; Taste: 바닐라, 버터, 파인애플, 오렌지, 망고; Finish: 꿀, 미네랄리티, 레몬, 라임', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('캔달 잭슨 빈트너스 리저브 샤르도네', '13 ', 47000, '과일 타르트', 'Aroma: 청사과, 사과, 복숭아, 멜론, 살구; Taste: 버터, 바닐라, 파인애플, 캐러멜, 배; Finish: 오크, 삼나무, 코코넛, 부드러운', DEFAULT, DEFAULT);
+VALUES ('캔달 잭슨 빈트너스 리저브 샤르도네', 13.5, 47000, '과일 타르트', 'Aroma: 청사과, 사과, 복숭아, 멜론, 살구; Taste: 버터, 바닐라, 파인애플, 캐러멜, 배; Finish: 오크, 삼나무, 코코넛, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('델링퀀트 스크리밍 베티', '12', 25900, '치즈 플래터', 'Aroma: 매실, 복숭아; Taste: 시트러스, 감귤, 신선한, 자몽; Finish: 멜론, 미네랄리티, 배, 사과', DEFAULT, DEFAULT);
+VALUES ('델링퀀트 스크리밍 베티', 12.0, 25900, '치즈 플래터', 'Aroma: 매실, 복숭아; Taste: 시트러스, 감귤, 신선한, 자몽; Finish: 멜론, 미네랄리티, 배, 사과', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오스틴 호프, 까베르네 소비뇽 2021', '14.5', 112000, '크림소스 생선요리', 'Aroma: 블루베리, 검은 과일, 커피; Taste: 타닌, 후추, 바닐라; Finish: 균형 잡힌, 미묘한, 허브', DEFAULT, DEFAULT);
+VALUES ('오스틴 호프, 까베르네 소비뇽 2021', 14.5, 112000, '크림소스 생선요리', 'Aroma: 블루베리, 검은 과일, 커피; Taste: 타닌, 후추, 바닐라; Finish: 균형 잡힌, 미묘한, 허브', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('유 원 프리미티보 디 만두리아', '14.5', 24500, '시트러스 샐러드', 'Aroma: 라즈베리, 블루베리, 바닐라, 허브; Taste: 체리, 자두, 초콜릿; Finish: 라즈베리, 부드러운, 오크', DEFAULT, DEFAULT);
+VALUES ('유 원 프리미티보 디 만두리아', 14.5, 24500, '시트러스 샐러드', 'Aroma: 라즈베리, 블루베리, 바닐라, 허브; Taste: 체리, 자두, 초콜릿; Finish: 라즈베리, 부드러운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('브레드 앤 버터 피노 누아', '13.5', 30900, '그릴드 양갈비', 'Aroma: 체리, 카시스, 오크; Taste: 라즈베리, 산딸기, 스모키; Finish: 긴 여운, 부드러운 타닌, 섬세한', DEFAULT, DEFAULT);
+VALUES ('브레드 앤 버터 피노 누아', 13.5, 30900, '그릴드 양갈비', 'Aroma: 체리, 카시스, 오크; Taste: 라즈베리, 산딸기, 스모키; Finish: 긴 여운, 부드러운 타닌, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('구에리에로 델라 테라', '15', 66500, '과일 샐러드', 'Aroma: 블랙베리, 체리, 자두 잼, 향신료, 멘톨; Taste: 라즈베리, 바닐라, 잘 익은 과일, 초콜릿; Finish: 풍성한, 향긋한, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('구에리에로 델라 테라', 15.0, 66500, '과일 샐러드', 'Aroma: 블랙베리, 체리, 자두 잼, 향신료, 멘톨; Taste: 라즈베리, 바닐라, 잘 익은 과일, 초콜릿; Finish: 풍성한, 향긋한, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('안동맥주 경화수월 만취 에디션', '7', 13900, '크림 디저트', 'Aroma: 플로럴, 향기로운, 배; Taste: 달콤한, 쌉쌀한, 바나나; Finish: 은은한, 향신료, 부드러운', DEFAULT, DEFAULT);
+VALUES ('안동맥주 경화수월 만취 에디션', 7.0, 13900, '크림 디저트', 'Aroma: 플로럴, 향기로운, 배; Taste: 달콤한, 쌉쌀한, 바나나; Finish: 은은한, 향신료, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('듀체스 드 부르고뉴 750ml', '6.2', 17000, '소시지', 'Aroma: 블랙베리, 건자두, 체리; Taste: 와인, 상큼한, 효모; Finish: 상큼한, 풍부한, 과일', DEFAULT, DEFAULT);
+VALUES ('듀체스 드 부르고뉴 750ml', 6.2, 17000, '소시지', 'Aroma: 블랙베리, 건자두, 체리; Taste: 와인, 상큼한, 효모; Finish: 상큼한, 풍부한, 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('홉스플래쉬 IPA 500ml', '6.7', 6900, '과일 타르트', 'Aroma: 파인애플, 오렌지; Taste: 열대 과일, 시트러스; Finish: 쌉쌀한, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('홉스플래쉬 IPA 500ml', 6.7, 6900, '과일 타르트', 'Aroma: 파인애플, 오렌지; Taste: 열대 과일, 시트러스; Finish: 쌉쌀한, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('트리펠 까르멜리엇 750ml', '8.4', 14900, '초콜릿 디저트', 'Aroma: 감귤, 시트러스, 우아한, 허브; Taste: 레몬, 귀리, 달콤한, 밀, 바나나, 향신료; Finish: 깔끔한, 부드러운, 진한', DEFAULT, DEFAULT);
+VALUES ('트리펠 까르멜리엇 750ml', 8.4, 14900, '초콜릿 디저트', 'Aroma: 감귤, 시트러스, 우아한, 허브; Taste: 레몬, 귀리, 달콤한, 밀, 바나나, 향신료; Finish: 깔끔한, 부드러운, 진한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아사히 슈퍼 드라이 생맥주 캔 340ml', '5', 4900, '해산물 파스타', 'Aroma: 풍부한, 맥아, 은은한; Taste: 홉, 보리, 고소한; Finish: 시원한, 청량감, 부드러운', DEFAULT, DEFAULT);
+VALUES ('아사히 슈퍼 드라이 생맥주 캔 340ml', 5.0, 4900, '해산물 파스타', 'Aroma: 풍부한, 맥아, 은은한; Taste: 홉, 보리, 고소한; Finish: 시원한, 청량감, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('기린 이치방 캔 500ml', '5', 4500, '마카롱', 'Aroma: 몰트, 진한, 풍부한; Taste: 부드러운, 보리, 맑은; Finish: 깨끗한, 섬세한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('기린 이치방 캔 500ml', 5.0, 4500, '마카롱', 'Aroma: 몰트, 진한, 풍부한; Taste: 부드러운, 보리, 맑은; Finish: 깨끗한, 섬세한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오리지널비어컴퍼니 불락 스타우트', '9', 35000, '마카롱', 'Aroma: 커피, 다크 초콜릿; Taste: 캐러멜, 견과류; Finish: 참나무, 오크, 바닐라', DEFAULT, DEFAULT);
+VALUES ('오리지널비어컴퍼니 불락 스타우트', 9.0, 35000, '마카롱', 'Aroma: 커피, 다크 초콜릿; Taste: 캐러멜, 견과류; Finish: 참나무, 오크, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아잉거 우르바이스', '5.8', 5800, '베이컨', 'Aroma: 토스트, 바나나, 정향; Taste: 부드러운, 고소한; Finish: 균형 잡힌, 알싸한', DEFAULT, DEFAULT);
+VALUES ('아잉거 우르바이스', 5.8, 5800, '베이컨', 'Aroma: 토스트, 바나나, 정향; Taste: 부드러운, 고소한; Finish: 균형 잡힌, 알싸한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오드 괴즈 분', '7', 13900, '과일 타르트', 'Aroma: 상큼한, 레몬, 청사과; Taste: 포도, 브렛, 균형 잡힌; Finish: 풍부한, 탄산감, 쿰쿰한', DEFAULT, DEFAULT);
+VALUES ('오드 괴즈 분', 7.0, 13900, '과일 타르트', 'Aroma: 상큼한, 레몬, 청사과; Taste: 포도, 브렛, 균형 잡힌; Finish: 풍부한, 탄산감, 쿰쿰한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라 트라페 쿼드루펠', '10', 19500, '베이컨', 'Aroma: 정향, 견과류, 바닐라, 건포도, 바나나; Taste: 묵직한, 대추, 캐러멜, 몰트; Finish: 부드러운, 쌉쌀한', DEFAULT, DEFAULT);
+VALUES ('라 트라페 쿼드루펠', 10.0, 19500, '베이컨', 'Aroma: 정향, 견과류, 바닐라, 건포도, 바나나; Taste: 묵직한, 대추, 캐러멜, 몰트; Finish: 부드러운, 쌉쌀한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('기네스 드래프트 캔 440ml', '4.2', 4900, '해산물 파스타', 'Aroma: 구운 몰트, 로스팅한 커피, 다크 초콜릿; Taste: 로스팅한 커피, 카카오; Finish: 긴 여운, 부드러운', DEFAULT, DEFAULT);
+VALUES ('기네스 드래프트 캔 440ml', 4.2, 4900, '해산물 파스타', 'Aroma: 구운 몰트, 로스팅한 커피, 다크 초콜릿; Taste: 로스팅한 커피, 카카오; Finish: 긴 여운, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('태평양조 토마 호프', '5.3', 6900, '시트러스 샐러드', 'Aroma: 향긋한, 신선한, 홉; Taste: 토마토, 허브, 산뜻한; Finish: 깔끔한, 부드러운, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('태평양조 토마 호프', 5.3, 6900, '시트러스 샐러드', 'Aroma: 향긋한, 신선한, 홉; Taste: 토마토, 허브, 산뜻한; Finish: 깔끔한, 부드러운, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('고양이가 우주를 구한다 선생', '5.5', 7500, '그릴드 양갈비', 'Aroma: 시트러스, 향긋한, 망고; Taste: 열대 과일, 화사한, 코코넛; Finish: 부드러운, 풍성한, 오렌지', DEFAULT, DEFAULT);
+VALUES ('고양이가 우주를 구한다 선생', 5.5, 7500, '그릴드 양갈비', 'Aroma: 시트러스, 향긋한, 망고; Taste: 열대 과일, 화사한, 코코넛; Finish: 부드러운, 풍성한, 오렌지', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아사히 캔 500ml', '5', 4900, '다크 초콜릿', 'Aroma: 향긋한, 시트러스, 홉; Taste: 맥아, 고소한, 상쾌한; Finish: 청량한, 경쾌한 탄산, 가벼운', DEFAULT, DEFAULT);
+VALUES ('아사히 캔 500ml', 5.0, 4900, '다크 초콜릿', 'Aroma: 향긋한, 시트러스, 홉; Taste: 맥아, 고소한, 상쾌한; Finish: 청량한, 경쾌한 탄산, 가벼운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('대만 망고 맥주', '2.8', 3900, '샤퀴테리', 'Aroma: 향긋한, 망고, 열대 과일; Taste: 신선한, 달콤한, 상큼한; Finish: 깔끔한, 상쾌한, 가벼운', DEFAULT, DEFAULT);
+VALUES ('대만 망고 맥주', 2.8, 3900, '샤퀴테리', 'Aroma: 향긋한, 망고, 열대 과일; Taste: 신선한, 달콤한, 상큼한; Finish: 깔끔한, 상쾌한, 가벼운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로덴바흐 그랑 크뤼', '6', 16900, '버거', 'Aroma: 레드베리, 체리, 오크; Taste: 붉은 과일, 레드 커런트, 상큼한; Finish: 나무, 긴 여운, 발사믹', DEFAULT, DEFAULT);
+VALUES ('로덴바흐 그랑 크뤼', 6.0, 16900, '버거', 'Aroma: 레드베리, 체리, 오크; Taste: 붉은 과일, 레드 커런트, 상큼한; Finish: 나무, 긴 여운, 발사믹', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('노을 수제 에일 캔 500ml', '4.5', 4000, '크림 디저트', 'Aroma: 신선한, 캐러멜, 비스킷; Taste: 몰트, 빵, 곡물; Finish: 홉, 감귤, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('노을 수제 에일 캔 500ml', 4.5, 4000, '크림 디저트', 'Aroma: 신선한, 캐러멜, 비스킷; Taste: 몰트, 빵, 곡물; Finish: 홉, 감귤, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('델리리움 트레멘스 750ml', '8.5', 18500, '해산물 파스타', 'Aroma: 스파이시, 청량한, 몰트, 꽃; Taste: 달콤한, 향긋한, 사과, 배; Finish: 긴 여운, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('델리리움 트레멘스 750ml', 8.5, 18500, '해산물 파스타', 'Aroma: 스파이시, 청량한, 몰트, 꽃; Taste: 달콤한, 향긋한, 사과, 배; Finish: 긴 여운, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카스 캔 500ml', '4.5', 2800, '샤퀴테리', 'Aroma: 레몬, 홉, 보리; Taste: 비스킷, 캐러멜, 깔끔한; Finish: 몰트, 고소한, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('카스 캔 500ml', 4.5, 2800, '샤퀴테리', 'Aroma: 레몬, 홉, 보리; Taste: 비스킷, 캐러멜, 깔끔한; Finish: 몰트, 고소한, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스트라프 헨드릭 트리펠 750ml', '9', 14900, '과일 샐러드', 'Aroma: 흑후추, 진저, 향긋한; Taste: 캐러멜, 시트러스, 잘 익은 바나나; Finish: 균형 잡힌, 긴 여운, 달콤한', DEFAULT, DEFAULT);
+VALUES ('스트라프 헨드릭 트리펠 750ml', 9.0, 14900, '과일 샐러드', 'Aroma: 흑후추, 진저, 향긋한; Taste: 캐러멜, 시트러스, 잘 익은 바나나; Finish: 균형 잡힌, 긴 여운, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('프로젝트 해피 호빵이', '7', 7900, '피자', 'Aroma: 신선한, 시트러스, 향긋한; Taste: 망고, 파파야, 청포도; Finish: 은은한, 싱그러운, 풍성한', DEFAULT, DEFAULT);
+VALUES ('프로젝트 해피 호빵이', 7.0, 7900, '피자', 'Aroma: 신선한, 시트러스, 향긋한; Taste: 망고, 파파야, 청포도; Finish: 은은한, 싱그러운, 풍성한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('호가든 캔 500ml', '4.9', 4900, '시트러스 샐러드', 'Aroma: 향긋한, 코리앤더 씨드; Taste: 시트러스, 산뜻한, 부드러운; Finish: 오렌지 껍질, 가벼운', DEFAULT, DEFAULT);
+VALUES ('호가든 캔 500ml', 4.9, 4900, '시트러스 샐러드', 'Aroma: 향긋한, 코리앤더 씨드; Taste: 시트러스, 산뜻한, 부드러운; Finish: 오렌지 껍질, 가벼운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('이네딧 담 750ml', '5', 22000, '과일 샐러드', 'Aroma: 가벼운, 상쾌한, 가벼운; Taste: 상쾌한, 깔끔한, 과일; Finish: 가벼운, 상큼한, 깔끔한, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('이네딧 담 750ml', 5.0, 22000, '과일 샐러드', 'Aroma: 가벼운, 상쾌한, 가벼운; Taste: 상쾌한, 깔끔한, 과일; Finish: 가벼운, 상큼한, 깔끔한, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아잉거 브로바이스', '5.1', 5800, '크림소스 생선요리', 'Aroma: 부드러운, 달콤한, 바닐라, 꽃; Taste: 달콤한, 부드러운; Finish: 쌉쌀한, 가벼운', DEFAULT, DEFAULT);
+VALUES ('아잉거 브로바이스', 5.1, 5800, '크림소스 생선요리', 'Aroma: 부드러운, 달콤한, 바닐라, 꽃; Taste: 달콤한, 부드러운; Finish: 쌉쌀한, 가벼운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('세인트 버나두스 앱 12', '10', 15900, '스모크 치즈', 'Aroma: 흑설탕, 건포도, 캐러멜, 꿀; Taste: 초콜릿, 구운 빵, 복합적인; Finish: 부드러운, 쌉쌀한, 커피, 체리', DEFAULT, DEFAULT);
+VALUES ('세인트 버나두스 앱 12', 10.0, 15900, '스모크 치즈', 'Aroma: 흑설탕, 건포도, 캐러멜, 꿀; Taste: 초콜릿, 구운 빵, 복합적인; Finish: 부드러운, 쌉쌀한, 커피, 체리', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파우웰 콱 750ml', '8.4', 14900, '그릴드 양갈비', 'Aroma: 캐러멜, 달콤한, 사탕; Taste: 오렌지 마멀레이드, 비스킷, 바나나; Finish: 쌉쌀한, 허브, 스파이시', DEFAULT, DEFAULT);
+VALUES ('파우웰 콱 750ml', 8.4, 14900, '그릴드 양갈비', 'Aroma: 캐러멜, 달콤한, 사탕; Taste: 오렌지 마멀레이드, 비스킷, 바나나; Finish: 쌉쌀한, 허브, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('에비스 캔 500ml', '5', 5000, '스모크 치즈', 'Aroma: 꽃, 몰트, 은은한; Taste: 청량한, 고소한, 부드러운; Finish: 깔끔한, 쌉쌀한, 은은한', DEFAULT, DEFAULT);
+VALUES ('에비스 캔 500ml', 5.0, 5000, '스모크 치즈', 'Aroma: 꽃, 몰트, 은은한; Taste: 청량한, 고소한, 부드러운; Finish: 깔끔한, 쌉쌀한, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아잉거 알트 바이리쉬 둔켈', '5.8', 5800, '과일 타르트', 'Aroma: 구운 몰트, 캐러멜, 꽃; Taste: 커피, 견과류, 토피, 부드러운; Finish: 쌉쌀한, 홉, 초콜릿', DEFAULT, DEFAULT);
+VALUES ('아잉거 알트 바이리쉬 둔켈', 5.8, 5800, '과일 타르트', 'Aroma: 구운 몰트, 캐러멜, 꽃; Taste: 커피, 견과류, 토피, 부드러운; Finish: 쌉쌀한, 홉, 초콜릿', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('슈무커 헤페바이젠', '5', 5200, '과일 타르트', 'Aroma: 바나나, 효모, 사과; Taste: 바나나, 부드러운, 효모; Finish: 꽃, 부드러운, 풍부한', DEFAULT, DEFAULT);
+VALUES ('슈무커 헤페바이젠', 5.0, 5200, '과일 타르트', 'Aroma: 바나나, 효모, 사과; Taste: 바나나, 부드러운, 효모; Finish: 꽃, 부드러운, 풍부한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오리지널비어컴퍼니 코스모스 에일', '4.5', 26000, '소시지', 'Aroma: 향긋한, 유자, 제피; Taste: 프루티, 시트러스, 감귤; Finish: 청량한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('오리지널비어컴퍼니 코스모스 에일', 4.5, 26000, '소시지', 'Aroma: 향긋한, 유자, 제피; Taste: 프루티, 시트러스, 감귤; Finish: 청량한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('듀체스 드 부르고뉴 750ml', '6.2', 21000, '소시지', 'Aroma: 블랙베리, 건자두, 체리; Taste: 와인, 상큼한, 효모; Finish: 상큼한, 풍부한, 과일', DEFAULT, DEFAULT);
+VALUES ('듀체스 드 부르고뉴 750ml', 6.2, 21000, '소시지', 'Aroma: 블랙베리, 건자두, 체리; Taste: 와인, 상큼한, 효모; Finish: 상큼한, 풍부한, 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('크로넨버그 1664 블랑 캔 500ml', '5', 4500, '그릴드 양갈비', 'Aroma: 열대 과일, 몰트, 은은한; Taste: 균형 잡힌, 달콤한, 쌉쌀한, 홉; Finish: 긴 여운, 부드러운, 오렌지', DEFAULT, DEFAULT);
+VALUES ('크로넨버그 1664 블랑 캔 500ml', 5.0, 4500, '그릴드 양갈비', 'Aroma: 열대 과일, 몰트, 은은한; Taste: 균형 잡힌, 달콤한, 쌉쌀한, 홉; Finish: 긴 여운, 부드러운, 오렌지', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('듀퐁 본 뵈', '9.5', 13000, '과일 타르트', 'Aroma: 바나나, 오렌지, 향긋한; Taste: 시트러스, 헤이즐넛, 캐러멜; Finish: 레몬, 가죽, 스파이스', DEFAULT, DEFAULT);
+VALUES ('듀퐁 본 뵈', 9.5, 13000, '과일 타르트', 'Aroma: 바나나, 오렌지, 향긋한; Taste: 시트러스, 헤이즐넛, 캐러멜; Finish: 레몬, 가죽, 스파이스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스텔라 아르투아 캔 740ml', '5', 5400, '버거', 'Aroma: 오렌지, 홉, 은은한, 레몬; Taste: 빵, 보리, 고소한; Finish: 경쾌한 탄산, 깔끔한, 청량한', DEFAULT, DEFAULT);
+VALUES ('스텔라 아르투아 캔 740ml', 5.0, 5400, '버거', 'Aroma: 오렌지, 홉, 은은한, 레몬; Taste: 빵, 보리, 고소한; Finish: 경쾌한 탄산, 깔끔한, 청량한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스트라프 헨드릭 쿼드루펠 750ml', '11', 18400, '그릴드 치킨', 'Aroma: 구운 오크, 다크 초콜릿, 우아한; Taste: 깔끔한, 단단한 구조감, 복합적인, 코리앤더 씨드, 다크 베리; Finish: 균형 잡힌, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('스트라프 헨드릭 쿼드루펠 750ml', 11.0, 18400, '그릴드 치킨', 'Aroma: 구운 오크, 다크 초콜릿, 우아한; Taste: 깔끔한, 단단한 구조감, 복합적인, 코리앤더 씨드, 다크 베리; Finish: 균형 잡힌, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('세인트 버나두스 앱 12', '10', 24900, '버거', 'Aroma: 흑설탕, 건포도, 캐러멜, 꿀; Taste: 초콜릿, 구운 빵, 복합적인; Finish: 부드러운, 쌉쌀한, 커피, 체리', DEFAULT, DEFAULT);
+VALUES ('세인트 버나두스 앱 12', 10.0, 24900, '버거', 'Aroma: 흑설탕, 건포도, 캐러멜, 꿀; Taste: 초콜릿, 구운 빵, 복합적인; Finish: 부드러운, 쌉쌀한, 커피, 체리', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('고양이가 우주를 구한다 타이 얌이', '5.5', 7500, '시트러스 샐러드', 'Aroma: 시트러스, 향긋한, 화사한; Taste: 열대 과일, 레몬, 라임; Finish: 풍성한, 오렌지, 후추', DEFAULT, DEFAULT);
+VALUES ('고양이가 우주를 구한다 타이 얌이', 5.5, 7500, '시트러스 샐러드', 'Aroma: 시트러스, 향긋한, 화사한; Taste: 열대 과일, 레몬, 라임; Finish: 풍성한, 오렌지, 후추', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('세종 듀퐁', '6.5', 10900, '구운 아스파라거스', 'Aroma: 후추, 향신료, 꽃; Taste: 레몬, 청포도, 풀; Finish: 부드러운, 쌉쌀한, 복합적인', DEFAULT, DEFAULT);
+VALUES ('세종 듀퐁', 6.5, 10900, '구운 아스파라거스', 'Aroma: 후추, 향신료, 꽃; Taste: 레몬, 청포도, 풀; Finish: 부드러운, 쌉쌀한, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아트몬스터 사랑범벅', '5.9', 6000, '과일 타르트', 'Aroma: 초콜릿, 구운 몰트, 땅콩; Taste: 땅콩 버터, 부드러운, 달콤한; Finish: 캐러멜, 초콜릿, 커피', DEFAULT, DEFAULT);
+VALUES ('아트몬스터 사랑범벅', 5.9, 6000, '과일 타르트', 'Aroma: 초콜릿, 구운 몰트, 땅콩; Taste: 땅콩 버터, 부드러운, 달콤한; Finish: 캐러멜, 초콜릿, 커피', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('사이공 스페셜 캔 330ml', '4.9', 2500, '스모크 치즈', 'Aroma: 풀, 꽃, 홉, 맥아; Taste: 신선한, 상쾌한, 청량감; Finish: 은은한 단맛, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('사이공 스페셜 캔 330ml', 4.9, 2500, '스모크 치즈', 'Aroma: 풀, 꽃, 홉, 맥아; Taste: 신선한, 상쾌한, 청량감; Finish: 은은한 단맛, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('슈무커 헤페바이젠', '5', 5200, '치킨 윙', 'Aroma: 바나나, 효모, 사과; Taste: 바나나, 부드러운, 효모; Finish: 꽃, 부드러운, 풍부한', DEFAULT, DEFAULT);
+VALUES ('슈무커 헤페바이젠', 5.0, 5200, '치킨 윙', 'Aroma: 바나나, 효모, 사과; Taste: 바나나, 부드러운, 효모; Finish: 꽃, 부드러운, 풍부한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('슈렝케를라 메르첸', '5.1', 10500, '피자', 'Aroma: 숯불, 훈제 베이컨, 토스트; Taste: 보리, 오크, 로스팅한 커피; Finish: 은은한, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('슈렝케를라 메르첸', 5.1, 10500, '피자', 'Aroma: 숯불, 훈제 베이컨, 토스트; Taste: 보리, 오크, 로스팅한 커피; Finish: 은은한, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('슈렝케를라 메르첸', '5.1', 10500, '다크 초콜릿', 'Aroma: 숯불, 훈제 베이컨, 토스트; Taste: 보리, 오크, 로스팅한 커피; Finish: 은은한, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('슈렝케를라 메르첸', 5.1, 10500, '다크 초콜릿', 'Aroma: 숯불, 훈제 베이컨, 토스트; Taste: 보리, 오크, 로스팅한 커피; Finish: 은은한, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하이네켄 캔 500ml', '5', 4900, '마카롱', 'Aroma: 레몬, 보리, 홉, 은은한; Taste: 몰트, 빵, 곡물; Finish: 깔끔한, 탄산감, 깔끔한 탄산감', DEFAULT, DEFAULT);
+VALUES ('하이네켄 캔 500ml', 5.0, 4900, '마카롱', 'Aroma: 레몬, 보리, 홉, 은은한; Taste: 몰트, 빵, 곡물; Finish: 깔끔한, 탄산감, 깔끔한 탄산감', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('크릭 분', '4', 17300, '베이컨', 'Aroma: 체리, 검붉은 과일, 과일; Taste: 상큼한, 과일 잼, 레드 와인; Finish: 산미, 부드러운, 은은한 탄산감', DEFAULT, DEFAULT);
+VALUES ('크릭 분', 4.0, 17300, '베이컨', 'Aroma: 체리, 검붉은 과일, 과일; Taste: 상큼한, 과일 잼, 레드 와인; Finish: 산미, 부드러운, 은은한 탄산감', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오리지널비어컴퍼니 월롱 블랑', '4.5', 26000, '바비큐 립', 'Aroma: 오렌지 껍질, 코리앤더 씨드; Taste: 시트러스, 감귤, 상쾌한; Finish: 부드러운, 우아한', DEFAULT, DEFAULT);
+VALUES ('오리지널비어컴퍼니 월롱 블랑', 4.5, 26000, '바비큐 립', 'Aroma: 오렌지 껍질, 코리앤더 씨드; Taste: 시트러스, 감귤, 상쾌한; Finish: 부드러운, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('안동맥주 석복', '4.1', 19900, '스모크 치즈', 'Aroma: 상큼한, 시트러스, 상쾌한; Taste: 짭짤한, 감칠맛, 방아 잎; Finish: 가벼운, 산뜻한, 복합적인', DEFAULT, DEFAULT);
+VALUES ('안동맥주 석복', 4.1, 19900, '스모크 치즈', 'Aroma: 상큼한, 시트러스, 상쾌한; Taste: 짭짤한, 감칠맛, 방아 잎; Finish: 가벼운, 산뜻한, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('코젤 다크 캔 500ml', '3.8', 4900, '과일 샐러드', 'Aroma: 시나몬, 커피, 고소한; Taste: 달콤한, 다크 초콜릿; Finish: 청량한, 깔끔한 탄산감', DEFAULT, DEFAULT);
+VALUES ('코젤 다크 캔 500ml', 3.8, 4900, '과일 샐러드', 'Aroma: 시나몬, 커피, 고소한; Taste: 달콤한, 다크 초콜릿; Finish: 청량한, 깔끔한 탄산감', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('혁명소주 42 500ml', '42', 6900, '치즈 플래터', 'Aroma: 파인애플, 달콤한, 향긋한; Taste: 사과, 깔끔한, 산뜻한; Finish: 배, 부드러운, 곡물', DEFAULT, DEFAULT);
+VALUES ('혁명소주 42 500ml', 42.0, 6900, '치즈 플래터', 'Aroma: 파인애플, 달콤한, 향긋한; Taste: 사과, 깔끔한, 산뜻한; Finish: 배, 부드러운, 곡물', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('토끼소주 블랙 750ml', '40', 35800, '초콜릿 디저트', 'Aroma: 바나나, 배, 바닐라; Taste: 계피, 무화과, 메이플 시럽, 오크; Finish: 강렬한, 스파이시, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('토끼소주 블랙 750ml', 40.0, 35800, '초콜릿 디저트', 'Aroma: 바나나, 배, 바닐라; Taste: 계피, 무화과, 메이플 시럽, 오크; Finish: 강렬한, 스파이시, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('일품진로 오크 25', '25', 12000, '그릴드 치킨', 'Aroma: 오크, 쌀, 향긋한; Taste: 은은한, 부드러운, 깔끔한; Finish: 긴 여운, 은은한, 매끄러운', DEFAULT, DEFAULT);
+VALUES ('일품진로 오크 25', 25.0, 12000, '그릴드 치킨', 'Aroma: 오크, 쌀, 향긋한; Taste: 은은한, 부드러운, 깔끔한; Finish: 긴 여운, 은은한, 매끄러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 X.P 500ml', '41', 85900, '감자튀김', 'Aroma: 오크, 블랙커런트, 복숭아; Taste: 곡물, 코코넛, 캐러멜; Finish: 오크, 부드러운, 흑설탕', DEFAULT, DEFAULT);
+VALUES ('화요 X.P 500ml', 41.0, 85900, '감자튀김', 'Aroma: 오크, 블랙커런트, 복숭아; Taste: 곡물, 코코넛, 캐러멜; Finish: 오크, 부드러운, 흑설탕', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 53 청사 에디션 750ml', '53', 86000, '다크 초콜릿', 'Aroma: 꽃, 은은한, 쌀 고유의 단맛; Taste: 몰트, 풍부한, 부드러운; Finish: 과일, 깔끔한, 강렬한', DEFAULT, DEFAULT);
+VALUES ('화요 53 청사 에디션 750ml', 53.0, 86000, '다크 초콜릿', 'Aroma: 꽃, 은은한, 쌀 고유의 단맛; Taste: 몰트, 풍부한, 부드러운; Finish: 과일, 깔끔한, 강렬한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 41 500ml', '41', 29900, '시트러스 샐러드', 'Aroma: 쌀, 꽃, 구수한; Taste: 곡물, 균형 잡힌, 원숙한; Finish: 부드러운, 섬세한', DEFAULT, DEFAULT);
+VALUES ('화요 41 500ml', 41.0, 29900, '시트러스 샐러드', 'Aroma: 쌀, 꽃, 구수한; Taste: 곡물, 균형 잡힌, 원숙한; Finish: 부드러운, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('일품진로 오크 43', '43', 23000, '시트러스 샐러드', 'Aroma: 오크, 쌀, 향긋한; Taste: 깊은, 부드러운, 깔끔한; Finish: 은은한, 긴 여운, 나무', DEFAULT, DEFAULT);
+VALUES ('일품진로 오크 43', 43.0, 23000, '시트러스 샐러드', 'Aroma: 오크, 쌀, 향긋한; Taste: 깊은, 부드러운, 깔끔한; Finish: 은은한, 긴 여운, 나무', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 X.P 500ml', '41', 135000, '감자튀김', 'Aroma: 오크, 블랙커런트, 복숭아; Taste: 곡물, 코코넛, 캐러멜; Finish: 오크, 부드러운, 흑설탕', DEFAULT, DEFAULT);
+VALUES ('화요 X.P 500ml', 41.0, 135000, '감자튀김', 'Aroma: 오크, 블랙커런트, 복숭아; Taste: 곡물, 코코넛, 캐러멜; Finish: 오크, 부드러운, 흑설탕', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 25 750ml', '25', 20500, '크림소스 생선요리', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 우아한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('화요 25 750ml', 25.0, 20500, '크림소스 생선요리', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 우아한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 41 나혼렙 에디션', '41', 40900, '치킨 윙', 'Aroma: 쌀, 꽃, 곡물; Taste: 구수한, 균형 잡힌, 원숙한; Finish: 부드러운, 섬세한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('화요 41 나혼렙 에디션', 41.0, 40900, '치킨 윙', 'Aroma: 쌀, 꽃, 곡물; Taste: 구수한, 균형 잡힌, 원숙한; Finish: 부드러운, 섬세한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('사락 33', '33', 18800, '그릴드 양갈비', 'Aroma: 깊은, 보리, 향긋한; Taste: 진한, 부드러운, 고소한; Finish: 깊은, 깔끔한, 오크', DEFAULT, DEFAULT);
+VALUES ('사락 33', 33.0, 18800, '그릴드 양갈비', 'Aroma: 깊은, 보리, 향긋한; Taste: 진한, 부드러운, 고소한; Finish: 깊은, 깔끔한, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 17 375ml', '17', 12900, '소시지', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 순수한', DEFAULT, DEFAULT);
+VALUES ('화요 17 375ml', 17.0, 12900, '소시지', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 순수한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 25 375ml', '25', 14500, '스테이크', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('화요 25 375ml', 25.0, 14500, '스테이크', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('일품진로', '25', 13000, '초콜릿 디저트', 'Aroma: 쌀, 깔끔한, 달콤한; Taste: 쌀, 담백한, 고소한, 부드러운; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('일품진로', 25.0, 13000, '초콜릿 디저트', 'Aroma: 쌀, 깔끔한, 달콤한; Taste: 쌀, 담백한, 고소한, 부드러운; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('한라산 1950', '25', 12000, '과일 타르트', 'Aroma: 가벼운 오크, 쌀, 은은한; Taste: 쌀 고유의 단맛, 깊은, 깨끗한; Finish: 부드러운, 풍부한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('한라산 1950', 25.0, 12000, '과일 타르트', 'Aroma: 가벼운 오크, 쌀, 은은한; Taste: 쌀 고유의 단맛, 깊은, 깨끗한; Finish: 부드러운, 풍부한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('한라산 1950', '25', 10200, '바비큐 립', 'Aroma: 가벼운 오크, 쌀, 은은한; Taste: 쌀 고유의 단맛, 깊은, 깨끗한; Finish: 부드러운, 풍부한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('한라산 1950', 25.0, 10200, '바비큐 립', 'Aroma: 가벼운 오크, 쌀, 은은한; Taste: 쌀 고유의 단맛, 깊은, 깨끗한; Finish: 부드러운, 풍부한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('일품진로 오크 43', '43', 21600, '초콜릿 디저트', 'Aroma: 오크, 쌀, 향긋한; Taste: 깊은, 부드러운, 깔끔한; Finish: 은은한, 긴 여운, 나무', DEFAULT, DEFAULT);
+VALUES ('일품진로 오크 43', 43.0, 21600, '초콜릿 디저트', 'Aroma: 오크, 쌀, 향긋한; Taste: 깊은, 부드러운, 깔끔한; Finish: 은은한, 긴 여운, 나무', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 25 750ml', '25', 19500, '소시지', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 우아한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('화요 25 750ml', 25.0, 19500, '소시지', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 우아한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('다이야메 900ml 25', '25', 47800, '마카롱', 'Aroma: 화려한, 리치, 장미, 사과, 배; Taste: 부드러운, 달콤한, 과일; Finish: 라임, 오렌지 껍질, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('다이야메 900ml 25', 25.0, 47800, '마카롱', 'Aroma: 화려한, 리치, 장미, 사과, 배; Taste: 부드러운, 달콤한, 과일; Finish: 라임, 오렌지 껍질, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 53 750ml', '53', 75000, '그릴드 양갈비', 'Aroma: 꽃, 쌀, 은은한; Taste: 몰트, 풍부한, 쌀 고유의 단맛; Finish: 과일, 깔끔한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('화요 53 750ml', 53.0, 75000, '그릴드 양갈비', 'Aroma: 꽃, 쌀, 은은한; Taste: 몰트, 풍부한, 쌀 고유의 단맛; Finish: 과일, 깔끔한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('삼해 소주', '45', 38000, '마카롱', 'Aroma: 고소한, 쌀, 누룩; Taste: 쌀 고유의 단맛, 곡물, 풍부한; Finish: 부드러운, 깔끔한, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('삼해 소주', 45.0, 38000, '마카롱', 'Aroma: 고소한, 쌀, 누룩; Taste: 쌀 고유의 단맛, 곡물, 풍부한; Finish: 부드러운, 깔끔한, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('명인 안동소주 35', '35', 8000, '과일 샐러드', 'Aroma: 부드러운, 은은한, 깊은; Taste: 맑은, 달콤한, 쌉쌀한; Finish: 감칠맛, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('명인 안동소주 35', 35.0, 8000, '과일 샐러드', 'Aroma: 부드러운, 은은한, 깊은; Taste: 맑은, 달콤한, 쌉쌀한; Finish: 감칠맛, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('명인 안동소주 22', '22', 5500, '해산물 파스타', 'Aroma: 부드러운, 은은한, 깊은; Taste: 맑은, 달콤한, 쌉쌀한; Finish: 감칠맛, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('명인 안동소주 22', 22.0, 5500, '해산물 파스타', 'Aroma: 부드러운, 은은한, 깊은; Taste: 맑은, 달콤한, 쌉쌀한; Finish: 감칠맛, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 53 750ml', '53', 78000, '바비큐 립', 'Aroma: 꽃, 쌀, 은은한; Taste: 몰트, 풍부한, 쌀 고유의 단맛; Finish: 과일, 깔끔한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('화요 53 750ml', 53.0, 78000, '바비큐 립', 'Aroma: 꽃, 쌀, 은은한; Taste: 몰트, 풍부한, 쌀 고유의 단맛; Finish: 과일, 깔끔한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 17 750ml', '17', 20000, '리조또', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 순수한', DEFAULT, DEFAULT);
+VALUES ('화요 17 750ml', 17.0, 20000, '리조또', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 순수한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 41 375ml', '41', 27000, '그릴드 치킨', 'Aroma: 꽃, 쌀; Taste: 구수한, 곡물, 원숙한, 균형 잡힌; Finish: 부드러운, 섬세한', DEFAULT, DEFAULT);
+VALUES ('화요 41 375ml', 41.0, 27000, '그릴드 치킨', 'Aroma: 꽃, 쌀; Taste: 구수한, 곡물, 원숙한, 균형 잡힌; Finish: 부드러운, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('안동소주 양반탈 800ml', '45', 43000, '치즈 플래터', 'Aroma: 쌀, 은은한, 달콤한; Taste: 부드러운, 감칠맛, 쌀 고유의 단맛; Finish: 깨끗한, 알코올감, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('안동소주 양반탈 800ml', 45.0, 43000, '치즈 플래터', 'Aroma: 쌀, 은은한, 달콤한; Taste: 부드러운, 감칠맛, 쌀 고유의 단맛; Finish: 깨끗한, 알코올감, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('비잔 클리어', '25', 24800, '크림소스 생선요리', 'Aroma: 쌀, 부드러운, 스파이시; Taste: 쌀, 부드러운, 은은한, 누룽지; Finish: 깔끔한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('비잔 클리어', 25.0, 24800, '크림소스 생선요리', 'Aroma: 쌀, 부드러운, 스파이시; Taste: 쌀, 부드러운, 은은한, 누룽지; Finish: 깔끔한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 25 나혼렙 에디션', '25', 19900, '스테이크', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 우아한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('화요 25 나혼렙 에디션', 25.0, 19900, '스테이크', 'Aroma: 달콤한, 쌀, 은은한; Taste: 곡물, 과일, 깔끔한; Finish: 부드러운, 우아한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('가무치 소주 43', '43', 38000, '과일 타르트', 'Aroma: 신선한, 은은한, 과일; Taste: 묵직한, 쌀 고유의 단맛, 곡물; Finish: 달콤한, 부드러운, 오일리', DEFAULT, DEFAULT);
+VALUES ('가무치 소주 43', 43.0, 38000, '과일 타르트', 'Aroma: 신선한, 은은한, 과일; Taste: 묵직한, 쌀 고유의 단맛, 곡물; Finish: 달콤한, 부드러운, 오일리', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('동해 소주 22', '22', 7000, '과일 타르트', 'Aroma: 쌀, 향기로운, 은은한; Taste: 청량감, 미네랄리티, 쌀 고유의 단맛; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('동해 소주 22', 22.0, 7000, '과일 타르트', 'Aroma: 쌀, 향기로운, 은은한; Taste: 청량감, 미네랄리티, 쌀 고유의 단맛; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('명인 박재서 안동소주 호리병 800ml', '45', 36500, '그릴드 양갈비', 'Aroma: 쌀, 은은한; Taste: 부드러운, 은은한, 감칠맛, 쌀 고유의 단맛; Finish: 깨끗한', DEFAULT, DEFAULT);
+VALUES ('명인 박재서 안동소주 호리병 800ml', 45.0, 36500, '그릴드 양갈비', 'Aroma: 쌀, 은은한; Taste: 부드러운, 은은한, 감칠맛, 쌀 고유의 단맛; Finish: 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 53 500ml', '53', 47900, '치킨 윙', 'Aroma: 꽃, 은은한, 쌀; Taste: 풍부한, 몰트; Finish: 과일, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('화요 53 500ml', 53.0, 47900, '치킨 윙', 'Aroma: 꽃, 은은한, 쌀; Taste: 풍부한, 몰트; Finish: 과일, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('고소리술 40', '375', 28800, '마카롱', 'Aroma: 신선한, 꽃, 곡물; Taste: 달콤한, 감칠맛; Finish: 강렬한, 복합적인, 스파이시', DEFAULT, DEFAULT);
+VALUES ('고소리술 40', 375.0, 28800, '마카롱', 'Aroma: 신선한, 꽃, 곡물; Taste: 달콤한, 감칠맛; Finish: 강렬한, 복합적인, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('허벅술', '35', 31500, '치즈 플래터', 'Aroma: 그윽한, 담백한, 쌀; Taste: 강렬한, 은은한, 달콤한; Finish: 부드러운, 산뜻한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('허벅술', 35.0, 31500, '치즈 플래터', 'Aroma: 그윽한, 담백한, 쌀; Taste: 강렬한, 은은한, 달콤한; Finish: 부드러운, 산뜻한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('요카이치 이모', '25', 37700, '치킨 윙', 'Aroma: 고구마, 달콤한, 향기로운; Taste: 감칠맛, 깊은, 복합적인; Finish: 달콤한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('요카이치 이모', 25.0, 37700, '치킨 윙', 'Aroma: 고구마, 달콤한, 향기로운; Taste: 감칠맛, 깊은, 복합적인; Finish: 달콤한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('가무치 소주 25', '25', 18000, '바비큐 립', 'Aroma: 꽃, 배, 쌀; Taste: 은은한, 달콤한, 곡물; Finish: 깔끔한, 고소한, 바닐라', DEFAULT, DEFAULT);
+VALUES ('가무치 소주 25', 25.0, 18000, '바비큐 립', 'Aroma: 꽃, 배, 쌀; Taste: 은은한, 달콤한, 곡물; Finish: 깔끔한, 고소한, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 53 청사 에디션 750ml', '53', 75000, '과일 샐러드', 'Aroma: 꽃, 은은한, 쌀 고유의 단맛; Taste: 몰트, 풍부한, 부드러운; Finish: 과일, 깔끔한, 강렬한', DEFAULT, DEFAULT);
+VALUES ('화요 53 청사 에디션 750ml', 53.0, 75000, '과일 샐러드', 'Aroma: 꽃, 은은한, 쌀 고유의 단맛; Taste: 몰트, 풍부한, 부드러운; Finish: 과일, 깔끔한, 강렬한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 41 750ml', '41', 44800, '리조또', 'Aroma: 쌀, 꽃; Taste: 곡물, 구수한, 균형 잡힌, 원숙한; Finish: 부드러운, 섬세한', DEFAULT, DEFAULT);
+VALUES ('화요 41 750ml', 41.0, 44800, '리조또', 'Aroma: 쌀, 꽃; Taste: 곡물, 구수한, 균형 잡힌, 원숙한; Finish: 부드러운, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('코즈루 쿠로', '24 ', 41700, '과일 샐러드', 'Aroma: 고구마, 달콤한; Taste: 감칠맛, 달콤한, 깊은; Finish: 고구마, 부드러운, 은은한', DEFAULT, DEFAULT);
+VALUES ('코즈루 쿠로', 24.5, 41700, '과일 샐러드', 'Aroma: 고구마, 달콤한; Taste: 감칠맛, 달콤한, 깊은; Finish: 고구마, 부드러운, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('토끼소주 골드 750ml', '46', 69900, '치킨 윙', 'Aroma: 바닐라, 캐러멜, 오크; Taste: 다크 체리, 다크 초콜릿; Finish: 구운 견과류, 유칼립투스', DEFAULT, DEFAULT);
+VALUES ('토끼소주 골드 750ml', 46.0, 69900, '치킨 윙', 'Aroma: 바닐라, 캐러멜, 오크; Taste: 다크 체리, 다크 초콜릿; Finish: 구운 견과류, 유칼립투스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('려 고구마 증류 소주 25', '25', 21900, '감자튀김', 'Aroma: 달콤한, 고구마, 풋사과, 풀; Taste: 달콤한, 볼륨감, 감칠맛; Finish: 깔끔한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('려 고구마 증류 소주 25', 25.0, 21900, '감자튀김', 'Aroma: 달콤한, 고구마, 풋사과, 풀; Taste: 달콤한, 볼륨감, 감칠맛; Finish: 깔끔한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('구로 기리시마 900ml', '25', 47000, '샤퀴테리', 'Aroma: 과일, 향긋한, 은은한; Taste: 부드러운, 고구마, 섬세한; Finish: 신선한, 깔끔한, 감칠맛', DEFAULT, DEFAULT);
+VALUES ('구로 기리시마 900ml', 25.0, 47000, '샤퀴테리', 'Aroma: 과일, 향긋한, 은은한; Taste: 부드러운, 고구마, 섬세한; Finish: 신선한, 깔끔한, 감칠맛', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('사락 33', '33', 28000, '스모크 치즈', 'Aroma: 깊은, 보리, 향긋한; Taste: 진한, 부드러운, 고소한; Finish: 깊은, 깔끔한, 오크', DEFAULT, DEFAULT);
+VALUES ('사락 33', 33.0, 28000, '스모크 치즈', 'Aroma: 깊은, 보리, 향긋한; Taste: 진한, 부드러운, 고소한; Finish: 깊은, 깔끔한, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('키 소주 38', '38', 35000, '구운 아스파라거스', 'Aroma: 우아한, 은은한, 플로럴; Taste: 달콤한, 부드러운, 감칠맛, 곡물; Finish: 개운한, 깔끔한, 시원한', DEFAULT, DEFAULT);
+VALUES ('키 소주 38', 38.0, 35000, '구운 아스파라거스', 'Aroma: 우아한, 은은한, 플로럴; Taste: 달콤한, 부드러운, 감칠맛, 곡물; Finish: 개운한, 깔끔한, 시원한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('이이치코 실루엣', '25', 44000, '마카롱', 'Aroma: 깊은, 그윽한, 가벼운; Taste: 보리, 향긋한, 균형 잡힌; Finish: 섬세한, 과일, 풍성한', DEFAULT, DEFAULT);
+VALUES ('이이치코 실루엣', 25.0, 44000, '마카롱', 'Aroma: 깊은, 그윽한, 가벼운; Taste: 보리, 향긋한, 균형 잡힌; Finish: 섬세한, 과일, 풍성한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('잔파 블랙 아와모리', '30', 31300, '치즈 플래터', 'Aroma: 산뜻한, 누룩, 과일, 레몬; Taste: 진한, 산미; Finish: 부드러운, 은은한', DEFAULT, DEFAULT);
+VALUES ('잔파 블랙 아와모리', 30.0, 31300, '치즈 플래터', 'Aroma: 산뜻한, 누룩, 과일, 레몬; Taste: 진한, 산미; Finish: 부드러운, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('담솔 500ml', '40', 27800, '소시지', 'Aroma: 소나무, 향긋한, 시원한; Taste: 솔잎, 부드러운, 알싸한; Finish: 진한, 깔끔한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('담솔 500ml', 40.0, 27800, '소시지', 'Aroma: 소나무, 향긋한, 시원한; Taste: 솔잎, 부드러운, 알싸한; Finish: 진한, 깔끔한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화요 X.P 750ml', '41', 300000, '마카롱', 'Aroma: 풍부한, 오크; Taste: 열대 과일, 은은한, 곡물; Finish: 오크, 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('화요 X.P 750ml', 41.0, 300000, '마카롱', 'Aroma: 풍부한, 오크; Taste: 열대 과일, 은은한, 곡물; Finish: 오크, 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('일품진로 오크 25', '25', 15000, '치킨 윙', 'Aroma: 오크, 쌀, 향긋한; Taste: 은은한, 부드러운, 깔끔한; Finish: 긴 여운, 매끄러운, 오크', DEFAULT, DEFAULT);
+VALUES ('일품진로 오크 25', 25.0, 15000, '치킨 윙', 'Aroma: 오크, 쌀, 향긋한; Taste: 은은한, 부드러운, 깔끔한; Finish: 긴 여운, 매끄러운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('세키토바 720ml', '25', 59000, '스테이크', 'Aroma: 깨끗한, 상쾌한, 과일; Taste: 담백한, 부드러운, 고소한; Finish: 섬세한, 은은한, 고구마', DEFAULT, DEFAULT);
+VALUES ('세키토바 720ml', 25.0, 59000, '스테이크', 'Aroma: 깨끗한, 상쾌한, 과일; Taste: 담백한, 부드러운, 고소한; Finish: 섬세한, 은은한, 고구마', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('려 고구마 증류 소주 40', '40', 39900, '감자튀김', 'Aroma: 풋사과, 달콤한, 고구마; Taste: 볼륨감, 진한, 감칠맛; Finish: 깔끔한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('려 고구마 증류 소주 40', 40.0, 39900, '감자튀김', 'Aroma: 풋사과, 달콤한, 고구마; Taste: 볼륨감, 진한, 감칠맛; Finish: 깔끔한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('황금보리 17', '17', 8100, '해산물 파스타', 'Aroma: 부드러운, 보리, 청량한, 구수한; Taste: 시원한, 누룩, 산뜻한; Finish: 깨끗한', DEFAULT, DEFAULT);
+VALUES ('황금보리 17', 17.0, 8100, '해산물 파스타', 'Aroma: 부드러운, 보리, 청량한, 구수한; Taste: 시원한, 누룩, 산뜻한; Finish: 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('한주 35 360ml', '35', 13400, '피자', 'Aroma: 그윽한, 누룩, 쌀; Taste: 맑은, 부드러운, 밀; Finish: 깔끔한, 묵직한, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('한주 35 360ml', 35.0, 13400, '피자', 'Aroma: 그윽한, 누룩, 쌀; Taste: 맑은, 부드러운, 밀; Finish: 깔끔한, 묵직한, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('백년의 고독', '40', 180000, '스테이크', 'Aroma: 보리, 향긋한, 오크; Taste: 곡물, 깔끔한, 위스키; Finish: 깊은, 부드러운', DEFAULT, DEFAULT);
+VALUES ('백년의 고독', 40.0, 180000, '스테이크', 'Aroma: 보리, 향긋한, 오크; Taste: 곡물, 깔끔한, 위스키; Finish: 깊은, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('삼해 소주', '45', 40000, '바비큐 립', 'Aroma: 고소한, 쌀, 누룩; Taste: 쌀 고유의 단맛, 곡물, 풍부한; Finish: 부드러운, 깔끔한, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('삼해 소주', 45.0, 40000, '바비큐 립', 'Aroma: 고소한, 쌀, 누룩; Taste: 쌀 고유의 단맛, 곡물, 풍부한; Finish: 부드러운, 깔끔한, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('가무치 소주 43', '43', 34000, '구운 아스파라거스', 'Aroma: 신선한, 은은한, 과일; Taste: 묵직한, 쌀 고유의 단맛, 곡물; Finish: 달콤한, 부드러운, 오일리', DEFAULT, DEFAULT);
+VALUES ('가무치 소주 43', 43.0, 34000, '구운 아스파라거스', 'Aroma: 신선한, 은은한, 과일; Taste: 묵직한, 쌀 고유의 단맛, 곡물; Finish: 달콤한, 부드러운, 오일리', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('민속주 안동소주 600ml', '45', 39000, '리조또', 'Aroma: 쌀, 구수한, 누룩; Taste: 쌀 고유의 단맛, 곡물, 담백한; Finish: 부드러운, 향긋한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('민속주 안동소주 600ml', 45.0, 39000, '리조또', 'Aroma: 쌀, 구수한, 누룩; Taste: 쌀 고유의 단맛, 곡물, 담백한; Finish: 부드러운, 향긋한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('일엽편주 소주 38', '38', 98000, '과일 타르트', 'Aroma: 쌀, 누룩, 과일; Taste: 풍부한, 감미로운, 고소한; Finish: 깊은, 은은한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('일엽편주 소주 38', 38.0, 98000, '과일 타르트', 'Aroma: 쌀, 누룩, 과일; Taste: 풍부한, 감미로운, 고소한; Finish: 깊은, 은은한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('요카이치 무기', '25', 38000, '베이컨', 'Aroma: 보리, 구수한; Taste: 보리, 향긋한, 깔끔한; Finish: 깨끗한, 담백한', DEFAULT, DEFAULT);
+VALUES ('요카이치 무기', 25.0, 38000, '베이컨', 'Aroma: 보리, 구수한; Taste: 보리, 향긋한, 깔끔한; Finish: 깨끗한, 담백한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('킨타로', '24', 59000, '과일 타르트', 'Aroma: 피트, 위스키, 누룽지; Taste: 스모키, 보리; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('킨타로', 24.0, 59000, '과일 타르트', 'Aroma: 피트, 위스키, 누룽지; Taste: 스모키, 보리; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('화심소주 군쌀 40', '40', 39000, '버거', 'Aroma: 누룽지, 고소한, 곡물; Taste: 쌀 고유의 단맛, 배, 녹차; Finish: 스모키, 과일, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('화심소주 군쌀 40', 40.0, 39000, '버거', 'Aroma: 누룽지, 고소한, 곡물; Taste: 쌀 고유의 단맛, 배, 녹차; Finish: 스모키, 과일, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('운암 오크 32', '32', 12900, '다크 초콜릿', 'Aroma: 오크, 곡물, 누룩; Taste: 산뜻한, 쌀 고유의 단맛, 누룩; Finish: 부드러운, 깔끔한, 알코올감', DEFAULT, DEFAULT);
+VALUES ('운암 오크 32', 32.0, 12900, '다크 초콜릿', 'Aroma: 오크, 곡물, 누룩; Taste: 산뜻한, 쌀 고유의 단맛, 누룩; Finish: 부드러운, 깔끔한, 알코올감', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('안동 진맥 소주 40 500ml', '40', 47000, '다크 초콜릿', 'Aroma: 비스킷, 빵, 고소한; Taste: 밀, 참깨, 깔끔한; Finish: 온화한, 은은한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('안동 진맥 소주 40 500ml', 40.0, 47000, '다크 초콜릿', 'Aroma: 비스킷, 빵, 고소한; Taste: 밀, 참깨, 깔끔한; Finish: 온화한, 은은한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('고쿠', '25', 43800, '과일 타르트', 'Aroma: 바닐라, 고구마, 가벼운 오크; Taste: 달콤한, 오크, 몰트; Finish: 부드러운, 진한 여운, 고소한', DEFAULT, DEFAULT);
+VALUES ('고쿠', 25.0, 43800, '과일 타르트', 'Aroma: 바닐라, 고구마, 가벼운 오크; Taste: 달콤한, 오크, 몰트; Finish: 부드러운, 진한 여운, 고소한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('콘노 1.8L', '25', 73400, '피자', 'Aroma: 화사한, 달콤한, 고구마; Taste: 부드러운, 구수한, 달콤한; Finish: 은은한, 매끄러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('콘노 1.8L', 25.0, 73400, '피자', 'Aroma: 화사한, 달콤한, 고구마; Taste: 부드러운, 구수한, 달콤한; Finish: 은은한, 매끄러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('사츠마 시라나미 1.8L', '0', 55800, '다크 초콜릿', '0', DEFAULT, DEFAULT);
+VALUES ('사츠마 시라나미 1.8L', 0, 55800, '다크 초콜릿', '0', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아까 기리시마', '25', 65300, '마카롱', 'Aroma: 향기로운, 군고구마, 은은한; Taste: 달콤한, 부드러운, 깔끔한; Finish: 섬세한, 긴 여운, 풍부한', DEFAULT, DEFAULT);
+VALUES ('아까 기리시마', 25.0, 65300, '마카롱', 'Aroma: 향기로운, 군고구마, 은은한; Taste: 달콤한, 부드러운, 깔끔한; Finish: 섬세한, 긴 여운, 풍부한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글로우 EP05', '25', 53000, '소시지', 'Aroma: 머스캣, 바나나, 향긋한; Taste: 화려한, 프루티, 매끄러운; Finish: 체리, 리치, 자몽', DEFAULT, DEFAULT);
+VALUES ('글로우 EP05', 25.0, 53000, '소시지', 'Aroma: 머스캣, 바나나, 향긋한; Taste: 화려한, 프루티, 매끄러운; Finish: 체리, 리치, 자몽', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('비잔 클리어', '25', 23900, '마카롱', 'Aroma: 쌀, 부드러운, 스파이시; Taste: 쌀, 은은한, 부드러운, 누룽지; Finish: 깔끔한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('비잔 클리어', 25.0, 23900, '마카롱', 'Aroma: 쌀, 부드러운, 스파이시; Taste: 쌀, 은은한, 부드러운, 누룽지; Finish: 깔끔한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('텟칸 이모 25', '25', 54700, '스모크 치즈', 'Aroma: 고구마, 부드러운, 달콤한; Taste: 진한, 풍부한, 누룩; Finish: 긴 여운, 은은한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('텟칸 이모 25', 25.0, 54700, '스모크 치즈', 'Aroma: 고구마, 부드러운, 달콤한; Taste: 진한, 풍부한, 누룩; Finish: 긴 여운, 은은한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('요카이치 이모', '25', 38000, '스모크 치즈', 'Aroma: 고구마, 달콤한, 향기로운; Taste: 감칠맛, 깊은, 복합적인; Finish: 달콤한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('요카이치 이모', 25.0, 38000, '스모크 치즈', 'Aroma: 고구마, 달콤한, 향기로운; Taste: 감칠맛, 깊은, 복합적인; Finish: 달콤한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('세키토바 1.8L', '25', 149000, '초콜릿 디저트', 'Aroma: 깨끗한, 상쾌한, 과일; Taste: 담백한, 부드러운, 고소한; Finish: 섬세한, 은은한, 고구마', DEFAULT, DEFAULT);
+VALUES ('세키토바 1.8L', 25.0, 149000, '초콜릿 디저트', 'Aroma: 깨끗한, 상쾌한, 과일; Taste: 담백한, 부드러운, 고소한; Finish: 섬세한, 은은한, 고구마', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하쿠타케 쿠마몬 900ml', '25', 35000, '피자', 'Aroma: 은은한, 쌀, 고소한; Taste: 깨끗한, 선명한, 가벼운; Finish: 산뜻한, 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('하쿠타케 쿠마몬 900ml', 25.0, 35000, '피자', 'Aroma: 은은한, 쌀, 고소한; Taste: 깨끗한, 선명한, 가벼운; Finish: 산뜻한, 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('잔파 화이트 아와모리', '25', 45900, '소시지', 'Aroma: 신선한, 청사과; Taste: 시트러스, 상쾌한; Finish: 산미, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('잔파 화이트 아와모리', 25.0, 45900, '소시지', 'Aroma: 신선한, 청사과; Taste: 시트러스, 상쾌한; Finish: 산미, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('독산 53', '53', 35000, '치즈 플래터', 'Aroma: 쌀, 곡물, 고소한, 향긋한; Taste: 깔끔한, 풍부한, 담백한; Finish: 부드러운, 섬세한, 은은한', DEFAULT, DEFAULT);
+VALUES ('독산 53', 53.0, 35000, '치즈 플래터', 'Aroma: 쌀, 곡물, 고소한, 향긋한; Taste: 깔끔한, 풍부한, 담백한; Finish: 부드러운, 섬세한, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('키위 술', '40', 39300, '그릴드 양갈비', 'Aroma: 키위, 과일, 새콤한; Taste: 상큼한, 산미, 달콤한; Finish: 부드러운, 깔끔한, 향긋한', DEFAULT, DEFAULT);
+VALUES ('키위 술', 40.0, 39300, '그릴드 양갈비', 'Aroma: 키위, 과일, 새콤한; Taste: 상큼한, 산미, 달콤한; Finish: 부드러운, 깔끔한, 향긋한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('명인 박재서 안동소주 호리병 800ml', '45', 38000, '치킨 윙', 'Aroma: 쌀, 은은한; Taste: 부드러운, 은은한, 감칠맛, 쌀 고유의 단맛; Finish: 깨끗한', DEFAULT, DEFAULT);
+VALUES ('명인 박재서 안동소주 호리병 800ml', 45.0, 38000, '치킨 윙', 'Aroma: 쌀, 은은한; Taste: 부드러운, 은은한, 감칠맛, 쌀 고유의 단맛; Finish: 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('문배술 호리병 400ml', '40', 29200, '감자튀김', 'Aroma: 과일, 문배, 구수한; Taste: 달콤한, 향기로운, 풍부한; Finish: 깔끔한, 시원한, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('문배술 호리병 400ml', 40.0, 29200, '감자튀김', 'Aroma: 과일, 문배, 구수한; Taste: 달콤한, 향기로운, 풍부한; Finish: 깔끔한, 시원한, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('느린 마을 소주 21', '21', 13500, '그릴드 치킨', 'Aroma: 쌀, 은은한, 향긋한; Taste: 곡물, 쌀 고유의 단맛, 누룩; Finish: 부드러운, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('느린 마을 소주 21', 21.0, 13500, '그릴드 치킨', 'Aroma: 쌀, 은은한, 향긋한; Taste: 곡물, 쌀 고유의 단맛, 누룩; Finish: 부드러운, 쌉쌀한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('진로 1924 헤리티지', '30', 125000, '샤퀴테리', 'Aroma: 쌀, 풍부한; Taste: 달콤한, 부드러운; Finish: 깔끔한', DEFAULT, DEFAULT);
+VALUES ('진로 1924 헤리티지', 30.0, 125000, '샤퀴테리', 'Aroma: 쌀, 풍부한; Taste: 달콤한, 부드러운; Finish: 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('토끼소주 블랙 750ml', '40', 63000, '소시지', 'Aroma: 바나나, 배, 바닐라; Taste: 계피, 무화과, 메이플 시럽, 오크; Finish: 강렬한, 스파이시, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('토끼소주 블랙 750ml', 40.0, 63000, '소시지', 'Aroma: 바나나, 배, 바닐라; Taste: 계피, 무화과, 메이플 시럽, 오크; Finish: 강렬한, 스파이시, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('한라산 1950', '25', 15000, '마카롱', 'Aroma: 가벼운 오크, 쌀, 은은한; Taste: 쌀 고유의 단맛, 깊은, 깨끗한; Finish: 부드러운, 풍부한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('한라산 1950', 25.0, 15000, '마카롱', 'Aroma: 가벼운 오크, 쌀, 은은한; Taste: 쌀 고유의 단맛, 깊은, 깨끗한; Finish: 부드러운, 풍부한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('동해 소주 22', '22', 10500, '과일 타르트', 'Aroma: 쌀, 향기로운, 은은한; Taste: 청량감, 미네랄리티, 쌀 고유의 단맛; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('동해 소주 22', 22.0, 10500, '과일 타르트', 'Aroma: 쌀, 향기로운, 은은한; Taste: 청량감, 미네랄리티, 쌀 고유의 단맛; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('쿠보타 준마이 다이긴죠', '15', 42900, '크림 디저트', 'Aroma: 배, 사과, 멜론, 화려한; Taste: 꽃, 달콤한, 산뜻한, 균형 잡힌; Finish: 은은한, 서양 배, 부드러운', DEFAULT, DEFAULT);
+VALUES ('쿠보타 준마이 다이긴죠', 15.0, 42900, '크림 디저트', 'Aroma: 배, 사과, 멜론, 화려한; Taste: 꽃, 달콤한, 산뜻한, 균형 잡힌; Finish: 은은한, 서양 배, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('고래 사케 720ml', '15', 8500, '샤퀴테리', 'Aroma: 곡물, 산뜻한, 은은한; Taste: 쌀, 쌀 고유의 단맛, 부드러운; Finish: 깔끔한, 신선한, 온화한', DEFAULT, DEFAULT);
+VALUES ('고래 사케 720ml', 15.0, 8500, '샤퀴테리', 'Aroma: 곡물, 산뜻한, 은은한; Taste: 쌀, 쌀 고유의 단맛, 부드러운; Finish: 깔끔한, 신선한, 온화한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('준마이 북극곰의 눈물', '14.5', 19900, '크림 디저트', 'Aroma: 쌀, 은은한, 순수한; Taste: 산뜻한, 쌀 고유의 단맛, 담백한; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('준마이 북극곰의 눈물', 14.5, 19900, '크림 디저트', 'Aroma: 쌀, 은은한, 순수한; Taste: 산뜻한, 쌀 고유의 단맛, 담백한; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('닷사이 준마이 다이긴죠 39', '15 ', 61000, '리조또', 'Aroma: 꽃, 과일, 은은한; Taste: 풍부한, 과일, 부드러운; Finish: 깔끔한, 풍성한', DEFAULT, DEFAULT);
+VALUES ('닷사이 준마이 다이긴죠 39', 15.5, 61000, '리조또', 'Aroma: 꽃, 과일, 은은한; Taste: 풍부한, 과일, 부드러운; Finish: 깔끔한, 풍성한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하나 기자쿠라 준마이 긴죠', '12', 17600, '시트러스 샐러드', 'Aroma: 꽃, 과일; Taste: 과일, 달콤한; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('하나 기자쿠라 준마이 긴죠', 12.0, 17600, '시트러스 샐러드', 'Aroma: 꽃, 과일; Taste: 과일, 달콤한; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('츠루우메 유즈', '7', 52000, '초콜릿 디저트', 'Aroma: 유자, 향긋한, 산뜻한; Taste: 달콤한, 상큼한, 시트러스; Finish: 감칠맛, 부드러운, 싱그러운', DEFAULT, DEFAULT);
+VALUES ('츠루우메 유즈', 7.0, 52000, '초콜릿 디저트', 'Aroma: 유자, 향긋한, 산뜻한; Taste: 달콤한, 상큼한, 시트러스; Finish: 감칠맛, 부드러운, 싱그러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('닷사이 준마이 다이긴죠 39', '15 ', 59000, '과일 샐러드', 'Aroma: 꽃, 과일, 은은한; Taste: 풍부한, 과일, 부드러운; Finish: 깔끔한, 풍성한', DEFAULT, DEFAULT);
+VALUES ('닷사이 준마이 다이긴죠 39', 15.5, 59000, '과일 샐러드', 'Aroma: 꽃, 과일, 은은한; Taste: 풍부한, 과일, 부드러운; Finish: 깔끔한, 풍성한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('닷사이 준마이 다이긴죠 45', '15 ', 46200, '구운 아스파라거스', 'Aroma: 복숭아, 은은한, 상큼한; Taste: 꿀, 섬세한, 화려한; Finish: 깨끗한, 달콤한, 시트러스', DEFAULT, DEFAULT);
+VALUES ('닷사이 준마이 다이긴죠 45', 15.5, 46200, '구운 아스파라거스', 'Aroma: 복숭아, 은은한, 상큼한; Taste: 꿀, 섬세한, 화려한; Finish: 깨끗한, 달콤한, 시트러스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('닷사이 준마이 다이긴죠 23', '15 ', 158000, '크림소스 생선요리', 'Aroma: 온화한, 꽃, 꿀, 은은한; Taste: 경쾌한, 감칠맛, 섬세한; Finish: 부드러운, 시원한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('닷사이 준마이 다이긴죠 23', 15.5, 158000, '크림소스 생선요리', 'Aroma: 온화한, 꽃, 꿀, 은은한; Taste: 경쾌한, 감칠맛, 섬세한; Finish: 부드러운, 시원한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('닷사이 준마이 다이긴죠 45', '15 ', 45000, '치킨 윙', 'Aroma: 복숭아, 은은한, 상큼한; Taste: 꿀, 섬세한, 화려한; Finish: 깨끗한, 달콤한, 시트러스', DEFAULT, DEFAULT);
+VALUES ('닷사이 준마이 다이긴죠 45', 15.5, 45000, '치킨 윙', 'Aroma: 복숭아, 은은한, 상큼한; Taste: 꿀, 섬세한, 화려한; Finish: 깨끗한, 달콤한, 시트러스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('월계관 준마이 750', '15.6', 16200, '크림소스 생선요리', 'Aroma: 향긋한, 쌀, 순수한; Taste: 쌀 고유의 단맛, 과일; Finish: 깨끗한, 깔끔한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('월계관 준마이 750', 15.6, 16200, '크림소스 생선요리', 'Aroma: 향긋한, 쌀, 순수한; Taste: 쌀 고유의 단맛, 과일; Finish: 깨끗한, 깔끔한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('쿠보타 준마이 다이긴죠', '15', 48700, '바비큐 립', 'Aroma: 배, 사과, 멜론, 화려한; Taste: 꽃, 달콤한, 산뜻한, 균형 잡힌; Finish: 은은한, 서양 배, 부드러운', DEFAULT, DEFAULT);
+VALUES ('쿠보타 준마이 다이긴죠', 15.0, 48700, '바비큐 립', 'Aroma: 배, 사과, 멜론, 화려한; Taste: 꽃, 달콤한, 산뜻한, 균형 잡힌; Finish: 은은한, 서양 배, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('준마이 북극곰의 눈물', '14.5', 20000, '과일 타르트', 'Aroma: 쌀, 은은한, 순수한; Taste: 산뜻한, 쌀 고유의 단맛, 담백한; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('준마이 북극곰의 눈물', 14.5, 20000, '과일 타르트', 'Aroma: 쌀, 은은한, 순수한; Taste: 산뜻한, 쌀 고유의 단맛, 담백한; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라쿠엔 유즈슈 900ml', '8.5', 19500, '과일 타르트', 'Aroma: 향긋한, 유자, 신선한; Taste: 달콤한, 시트러스, 산뜻한; Finish: 가벼운, 상쾌한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('라쿠엔 유즈슈 900ml', 8.5, 19500, '과일 타르트', 'Aroma: 향긋한, 유자, 신선한; Taste: 달콤한, 시트러스, 산뜻한; Finish: 가벼운, 상쾌한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카오리 하나야구 준마이', '15.5', 17000, '다크 초콜릿', 'Aroma: 향긋한, 과일; Taste: 산미, 달콤한; Finish: 균형 잡힌, 묵직한', DEFAULT, DEFAULT);
+VALUES ('카오리 하나야구 준마이', 15.5, 17000, '다크 초콜릿', 'Aroma: 향긋한, 과일; Taste: 산미, 달콤한; Finish: 균형 잡힌, 묵직한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스바루 나마죠조', '14.5', 16500, '해산물 파스타', 'Aroma: 신선한, 화사한, 향긋한; Taste: 과일, 화려한, 부드러운, 곡물; Finish: 깔끔한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('스바루 나마죠조', 14.5, 16500, '해산물 파스타', 'Aroma: 신선한, 화사한, 향긋한; Taste: 과일, 화려한, 부드러운, 곡물; Finish: 깔끔한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('월계관 준마이 다이긴죠', '16.5 ', 39500, '스테이크', 'Aroma: 산뜻한, 시트러스; Taste: 감칠맛, 달콤한, 부드러운; Finish: 쌀 고유의 단맛, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('월계관 준마이 다이긴죠', 16.8, 39500, '스테이크', 'Aroma: 산뜻한, 시트러스; Taste: 감칠맛, 달콤한, 부드러운; Finish: 쌀 고유의 단맛, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('송죽매 클래식 준마이 1.5L', '15', 23600, '버거', 'Aroma: 은은한, 풋사과, 과일, 멜론; Taste: 감칠맛, 곡물; Finish: 부드러운, 은은한', DEFAULT, DEFAULT);
+VALUES ('송죽매 클래식 준마이 1.5L', 15.0, 23600, '버거', 'Aroma: 은은한, 풋사과, 과일, 멜론; Taste: 감칠맛, 곡물; Finish: 부드러운, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('간바레 오또상 팩', '14.5', 18500, '소시지', 'Aroma: 사과; Taste: 달콤한, 새콤한; Finish: 깔끔한', DEFAULT, DEFAULT);
+VALUES ('간바레 오또상 팩', 14.5, 18500, '소시지', 'Aroma: 사과; Taste: 달콤한, 새콤한; Finish: 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하쿠시카 준마이 긴죠 팩', '14.5', 14900, '과일 타르트', 'Aroma: 산뜻한; Taste: 달콤한; Finish: 깔끔한', DEFAULT, DEFAULT);
+VALUES ('하쿠시카 준마이 긴죠 팩', 14.5, 14900, '과일 타르트', 'Aroma: 산뜻한; Taste: 달콤한; Finish: 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('송죽매 준마이 750', '15', 12500, '버거', 'Aroma: 풋사과, 멜론, 은은한, 과일; Taste: 감칠맛, 곡물; Finish: 상쾌한', DEFAULT, DEFAULT);
+VALUES ('송죽매 준마이 750', 15.0, 12500, '버거', 'Aroma: 풋사과, 멜론, 은은한, 과일; Taste: 감칠맛, 곡물; Finish: 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('다이야메 900ml 25', '25', 47800, '과일 타르트', 'Aroma: 화려한, 리치, 장미, 사과, 배; Taste: 부드러운, 달콤한, 과일; Finish: 라임, 오렌지 껍질, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('다이야메 900ml 25', 25.0, 47800, '과일 타르트', 'Aroma: 화려한, 리치, 장미, 사과, 배; Taste: 부드러운, 달콤한, 과일; Finish: 라임, 오렌지 껍질, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('월계관 준마이 750', '15.6', 18900, '스테이크', 'Aroma: 향긋한, 쌀, 순수한; Taste: 쌀 고유의 단맛, 과일; Finish: 깨끗한, 깔끔한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('월계관 준마이 750', 15.6, 18900, '스테이크', 'Aroma: 향긋한, 쌀, 순수한; Taste: 쌀 고유의 단맛, 과일; Finish: 깨끗한, 깔끔한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('쿠보타 만쥬', '15 ', 112000, '다크 초콜릿', 'Aroma: 과일, 부드러운, 복합적인, 멜론; Taste: 복숭아, 꿀, 토피, 후추, 견과류; Finish: 균형 잡힌, 부드러운, 실키', DEFAULT, DEFAULT);
+VALUES ('쿠보타 만쥬', 15.2, 112000, '다크 초콜릿', 'Aroma: 과일, 부드러운, 복합적인, 멜론; Taste: 복숭아, 꿀, 토피, 후추, 견과류; Finish: 균형 잡힌, 부드러운, 실키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('월계관 준마이 750', '15.6', 15900, '크림 디저트', 'Aroma: 향긋한, 쌀, 순수한; Taste: 쌀 고유의 단맛, 과일; Finish: 깨끗한, 깔끔한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('월계관 준마이 750', 15.6, 15900, '크림 디저트', 'Aroma: 향긋한, 쌀, 순수한; Taste: 쌀 고유의 단맛, 과일; Finish: 깨끗한, 깔끔한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('신세이 다이긴죠', '15 ', 29500, '과일 샐러드', 'Aroma: 배, 사과, 멜론, 꽃; Taste: 감칠맛, 새콤한, 달콤한; Finish: 은은한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('신세이 다이긴죠', 15.5, 29500, '과일 샐러드', 'Aroma: 배, 사과, 멜론, 꽃; Taste: 감칠맛, 새콤한, 달콤한; Finish: 은은한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('준마이 북극곰의 눈물 벚꽃 에디션', '14.5', 22000, '베이컨', 'Aroma: 쌀, 은은한, 순수한; Taste: 산뜻한, 쌀 고유의 단맛; Finish: 깔끔한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('준마이 북극곰의 눈물 벚꽃 에디션', 14.5, 22000, '베이컨', 'Aroma: 쌀, 은은한, 순수한; Taste: 산뜻한, 쌀 고유의 단맛; Finish: 깔끔한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('킷도 준마이 다이긴죠', '15', 41900, '과일 타르트', 'Aroma: 화사한, 열대 과일, 산뜻한; Taste: 부드러운, 달콤한, 산미; Finish: 경쾌한, 가벼운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('킷도 준마이 다이긴죠', 15.0, 41900, '과일 타르트', 'Aroma: 화사한, 열대 과일, 산뜻한; Taste: 부드러운, 달콤한, 산미; Finish: 경쾌한, 가벼운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라쿠엔 유즈슈 900ml', '8.5', 19700, '다크 초콜릿', 'Aroma: 향긋한, 유자, 신선한; Taste: 달콤한, 시트러스, 산뜻한; Finish: 가벼운, 상쾌한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('라쿠엔 유즈슈 900ml', 8.5, 19700, '다크 초콜릿', 'Aroma: 향긋한, 유자, 신선한; Taste: 달콤한, 시트러스, 산뜻한; Finish: 가벼운, 상쾌한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('신세이 다이긴죠', '15 ', 29000, '베이컨', 'Aroma: 배, 사과, 멜론, 꽃; Taste: 감칠맛, 새콤한, 달콤한; Finish: 은은한, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('신세이 다이긴죠', 15.5, 29000, '베이컨', 'Aroma: 배, 사과, 멜론, 꽃; Taste: 감칠맛, 새콤한, 달콤한; Finish: 은은한, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하쿠시카 혼죠조 팩', '15.3', 13900, '해산물 파스타', 'Aroma: 산뜻한, 향긋한, 부드러운; Taste: 미디엄 드라이, 상쾌한, 감칠맛; Finish: 가벼운, 깔끔한, 은은한', DEFAULT, DEFAULT);
+VALUES ('하쿠시카 혼죠조 팩', 15.3, 13900, '해산물 파스타', 'Aroma: 산뜻한, 향긋한, 부드러운; Taste: 미디엄 드라이, 상쾌한, 감칠맛; Finish: 가벼운, 깔끔한, 은은한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('오카네(금사케)', '13.5', 16200, '다크 초콜릿', 'Aroma: 핵과류, 화사한, 쌀; Taste: 쌀 고유의 단맛, 산미; Finish: 달콤한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('오카네(금사케)', 13.5, 16200, '다크 초콜릿', 'Aroma: 핵과류, 화사한, 쌀; Taste: 쌀 고유의 단맛, 산미; Finish: 달콤한, 부드러운, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('핫카이산 토쿠베츠 준마이', '15.5', 29100, '치킨 윙', 'Aroma: 쌀, 흰 꽃; Taste: 부드러운, 깔끔한, 달콤한; Finish: 긴 여운', DEFAULT, DEFAULT);
+VALUES ('핫카이산 토쿠베츠 준마이', 15.5, 29100, '치킨 윙', 'Aroma: 쌀, 흰 꽃; Taste: 부드러운, 깔끔한, 달콤한; Finish: 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라쿠 준마이 골드', '13.5', 25600, '과일 타르트', 'Aroma: 누룩, 달콤한, 열대 과일; Taste: 고소한, 스모키, 멜론; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
+VALUES ('라쿠 준마이 골드', 13.5, 25600, '과일 타르트', 'Aroma: 누룩, 달콤한, 열대 과일; Taste: 고소한, 스모키, 멜론; Finish: 깔끔한, 부드러운, 깨끗한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하나 기자쿠라 준마이 긴죠', '12', 34500, '그릴드 양갈비', 'Aroma: 꽃, 과일; Taste: 과일, 달콤한; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('하나 기자쿠라 준마이 긴죠', 12.0, 34500, '그릴드 양갈비', 'Aroma: 꽃, 과일; Taste: 과일, 달콤한; Finish: 부드러운, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('요카이치 이모', '25', 37700, '초콜릿 디저트', 'Aroma: 고구마, 달콤한, 향기로운; Taste: 감칠맛, 깊은, 복합적인; Finish: 달콤한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('요카이치 이모', 25.0, 37700, '초콜릿 디저트', 'Aroma: 고구마, 달콤한, 향기로운; Taste: 감칠맛, 깊은, 복합적인; Finish: 달콤한, 풍부한, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('쿠보타 만쥬', '15 ', 109000, '피자', 'Aroma: 과일, 부드러운, 복합적인, 멜론; Taste: 복숭아, 꿀, 토피, 후추, 견과류; Finish: 균형 잡힌, 부드러운, 실키', DEFAULT, DEFAULT);
+VALUES ('쿠보타 만쥬', 15.2, 109000, '피자', 'Aroma: 과일, 부드러운, 복합적인, 멜론; Taste: 복숭아, 꿀, 토피, 후추, 견과류; Finish: 균형 잡힌, 부드러운, 실키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 디스틸러리 셀렉트', '40', 110000, '샤퀴테리', 'Aroma: 열대 과일, 토피, 오크, 바닐라; Taste: 열대 과일, 달콤한, 토피, 부드러운; Finish: 산뜻한, 바닐라', DEFAULT, DEFAULT);
+VALUES ('카발란 디스틸러리 셀렉트', 40.0, 110000, '샤퀴테리', 'Aroma: 열대 과일, 토피, 오크, 바닐라; Taste: 열대 과일, 달콤한, 토피, 부드러운; Finish: 산뜻한, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 올로로쏘 셰리 캐스크 CS', '50 ', 363000, '소시지', 'Aroma: 마지팬, 견과류, 바닐라; Taste: 달콤한, 말린 과일, 풍부한; Finish: 복합적인, 견과류, 향신료', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 올로로쏘 셰리 캐스크 CS', 54.8, 363000, '소시지', 'Aroma: 마지팬, 견과류, 바닐라; Taste: 달콤한, 말린 과일, 풍부한; Finish: 복합적인, 견과류, 향신료', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 클래식 싱글몰트', '40', 206000, '스모크 치즈', 'Aroma: 꽃, 열대 과일, 배, 바닐라, 우아한; Taste: 망고, 코코넛, 초콜릿, 달콤한; Finish: 시트러스, 감귤, 스파이시, 복합적인, 따뜻한', DEFAULT, DEFAULT);
+VALUES ('카발란 클래식 싱글몰트', 40.0, 206000, '스모크 치즈', 'Aroma: 꽃, 열대 과일, 배, 바닐라, 우아한; Taste: 망고, 코코넛, 초콜릿, 달콤한; Finish: 시트러스, 감귤, 스파이시, 복합적인, 따뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 포트 CS', '54 ', 332000, '과일 타르트', 'Aroma: 과일, 견과류, 시트러스; Taste: 과일, 초콜릿; Finish: 레몬, 패션프루트', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 포트 CS', 57.0, 332000, '과일 타르트', 'Aroma: 과일, 견과류, 시트러스; Taste: 과일, 초콜릿; Finish: 레몬, 패션프루트', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 비노 바리끄 싱글 캐스크 CS', '54 ', 370000, '버거', 'Aroma: 키위, 멜론, 망고, 달콤한, 셰리; Taste: 열대 과일, 감귤, 시트러스, 후추; Finish: 복합적인, 부드러운, 풍부한, 섬세한', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 비노 바리끄 싱글 캐스크 CS', 56.5, 370000, '버거', 'Aroma: 키위, 멜론, 망고, 달콤한, 셰리; Taste: 열대 과일, 감귤, 시트러스, 후추; Finish: 복합적인, 부드러운, 풍부한, 섬세한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 브랜디 CS', '50 ', 299000, '버거', 'Aroma: 복숭아, 패션프루트, 딸기, 망고; Taste: 바닐라, 토피, 향신료, 꿀, 오일리; Finish: 긴 여운, 복합적인, 달콤한, 리치', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 브랜디 CS', 55.0, 299000, '버거', 'Aroma: 복숭아, 패션프루트, 딸기, 망고; Taste: 바닐라, 토피, 향신료, 꿀, 오일리; Finish: 긴 여운, 복합적인, 달콤한, 리치', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 포트 CS', '54 ', 360000, '피자', 'Aroma: 과일, 견과류, 시트러스; Taste: 과일, 초콜릿; Finish: 레몬, 패션프루트', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 포트 CS', 57.0, 360000, '피자', 'Aroma: 과일, 견과류, 시트러스; Taste: 과일, 초콜릿; Finish: 레몬, 패션프루트', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 올로로쏘 셰리 캐스크 CS', '50 ', 346700, '과일 타르트', 'Aroma: 마지팬, 견과류, 바닐라; Taste: 달콤한, 말린 과일, 풍부한; Finish: 복합적인, 견과류, 향신료', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 올로로쏘 셰리 캐스크 CS', 54.8, 346700, '과일 타르트', 'Aroma: 마지팬, 견과류, 바닐라; Taste: 달콤한, 말린 과일, 풍부한; Finish: 복합적인, 견과류, 향신료', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 트리플 셰리 캐스크', '40', 209500, '피자', 'Aroma: 포도, 초콜릿, 토피, 베리; Taste: 셰리, 캐러멜, 꿀, 말린 과일; Finish: 로즈마리, 스파이시, 열대 과일', DEFAULT, DEFAULT);
+VALUES ('카발란 트리플 셰리 캐스크', 40.0, 209500, '피자', 'Aroma: 포도, 초콜릿, 토피, 베리; Taste: 셰리, 캐러멜, 꿀, 말린 과일; Finish: 로즈마리, 스파이시, 열대 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 피노 셰리 CS 1L', '50 ', 580000, '그릴드 치킨', 'Aroma: 파인애플, 계피, 사과 파이, 짭짤한, 홍차, 꿀; Taste: 살구, 건포도, 자두, 당근, 모카, 팝콘; Finish: 오렌지 껍질, 체리, 달콤한', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 피노 셰리 CS 1L', 55.0, 580000, '그릴드 치킨', 'Aroma: 파인애플, 계피, 사과 파이, 짭짤한, 홍차, 꿀; Taste: 살구, 건포도, 자두, 당근, 모카, 팝콘; Finish: 오렌지 껍질, 체리, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 솔리스트 올로로쏘 셰리 캐스크 CS 1L', '50 ', 369000, '샤퀴테리', 'Aroma: 마지팬, 견과류, 바닐라; Taste: 달콤한, 말린 과일, 풍부한; Finish: 복합적인, 견과류, 향신료', DEFAULT, DEFAULT);
+VALUES ('카발란 솔리스트 올로로쏘 셰리 캐스크 CS 1L', 54.8, 369000, '샤퀴테리', 'Aroma: 마지팬, 견과류, 바닐라; Taste: 달콤한, 말린 과일, 풍부한; Finish: 복합적인, 견과류, 향신료', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('카발란 포디움', '46', 209000, '바비큐 립', 'Aroma: 우아한, 플로럴, 열대 과일, 바닐라, 코코넛; Taste: 망고, 청사과, 꿀, 체리, 포도, 화이트 페퍼; Finish: 긴 여운, 복합적인, 부드러운, 벨벳', DEFAULT, DEFAULT);
+VALUES ('카발란 포디움', 46.0, 209000, '바비큐 립', 'Aroma: 우아한, 플로럴, 열대 과일, 바닐라, 코코넛; Taste: 망고, 청사과, 꿀, 체리, 포도, 화이트 페퍼; Finish: 긴 여운, 복합적인, 부드러운, 벨벳', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('탈리스커 10년', '45.8', 76800, '바비큐 립', 'Aroma: 강한 피트, 바다 내음, 굴, 감귤; Taste: 과일, 스모키, 몰트, 후추; Finish: 긴 여운, 달콤한, 스파이시', DEFAULT, DEFAULT);
+VALUES ('탈리스커 10년', 45.8, 76800, '바비큐 립', 'Aroma: 강한 피트, 바다 내음, 굴, 감귤; Taste: 과일, 스모키, 몰트, 후추; Finish: 긴 여운, 달콤한, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('탈리스커 8년 SR 2024', '58.7', 129800, '초콜릿 디저트', 'Aroma: 바다 내음, 굴, 이끼, 젖은 흙, 과일, 바닐라; Taste: 후추, 향신료, 사과, 배, 소금; Finish: 긴 여운, 스파이시, 상쾌한', DEFAULT, DEFAULT);
+VALUES ('탈리스커 8년 SR 2024', 58.7, 129800, '초콜릿 디저트', 'Aroma: 바다 내음, 굴, 이끼, 젖은 흙, 과일, 바닐라; Taste: 후추, 향신료, 사과, 배, 소금; Finish: 긴 여운, 스파이시, 상쾌한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('탈리스커 다크스톰', '45.8', 165000, '그릴드 치킨', 'Aroma: 피트, 스모키, 바다 내음, 짭짤한, 사과 조림; Taste: 신선한, 감초; Finish: 스모키, 강렬한', DEFAULT, DEFAULT);
+VALUES ('탈리스커 다크스톰', 45.8, 165000, '그릴드 치킨', 'Aroma: 피트, 스모키, 바다 내음, 짭짤한, 사과 조림; Taste: 신선한, 감초; Finish: 스모키, 강렬한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('탈리스커 더 디스틸러스 에디션 2022', '45.8', 177000, '구운 아스파라거스', 'Aroma: 깔끔한, 피트, 시트러스, 열대 과일; Taste: 과일, 달콤한, 피트, 후추, 깊은; Finish: 긴 여운, 달콤한, 코코아, 바닐라, 흙내음, 토탄', DEFAULT, DEFAULT);
+VALUES ('탈리스커 더 디스틸러스 에디션 2022', 45.8, 177000, '구운 아스파라거스', 'Aroma: 깔끔한, 피트, 시트러스, 열대 과일; Taste: 과일, 달콤한, 피트, 후추, 깊은; Finish: 긴 여운, 달콤한, 코코아, 바닐라, 흙내음, 토탄', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('탈리스커 18년', '45.8', 438000, '그릴드 치킨', 'Aroma: 스모키, 신선한, 오크, 풋사과, 피트; Taste: 생강, 오크, 커피, 향신료, 후추; Finish: 긴 여운, 스파이시, 오크, 피트, 후추', DEFAULT, DEFAULT);
+VALUES ('탈리스커 18년', 45.8, 438000, '그릴드 치킨', 'Aroma: 스모키, 신선한, 오크, 풋사과, 피트; Taste: 생강, 오크, 커피, 향신료, 후추; Finish: 긴 여운, 스파이시, 오크, 피트, 후추', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아드벡 10년', '46', 92000, '그릴드 치킨', 'Aroma: 스모키, 다크 초콜릿, 레몬, 라임, 흑후추; Taste: 피트, 구운 파인애플, 배, 아몬드, 토피; Finish: 허브, 배, 소나무, 바닐라, 계피, 헤이즐넛', DEFAULT, DEFAULT);
+VALUES ('아드벡 10년', 46.0, 92000, '그릴드 치킨', 'Aroma: 스모키, 다크 초콜릿, 레몬, 라임, 흑후추; Taste: 피트, 구운 파인애플, 배, 아몬드, 토피; Finish: 허브, 배, 소나무, 바닐라, 계피, 헤이즐넛', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아드벡 우거다일', '54.2', 150000, '크림소스 생선요리', 'Aroma: 호두 기름, 당밀, 토피, 초콜릿, 건포도, 모카 에스프레소; Taste: 스모키, 스파이스; Finish: 모카, 스모키, 진한, 긴 여운, 건포도', DEFAULT, DEFAULT);
+VALUES ('아드벡 우거다일', 54.2, 150000, '크림소스 생선요리', 'Aroma: 호두 기름, 당밀, 토피, 초콜릿, 건포도, 모카 에스프레소; Taste: 스모키, 스파이스; Finish: 모카, 스모키, 진한, 긴 여운, 건포도', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('빅 피트', '46', 60000, '과일 타르트', 'Aroma: 몰트, 짭짤한, 달콤한; Taste: 피트, 달콤한, 스모키; Finish: 짭짤한, 스모키, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('빅 피트', 46.0, 60000, '과일 타르트', 'Aroma: 몰트, 짭짤한, 달콤한; Taste: 피트, 달콤한, 스모키; Finish: 짭짤한, 스모키, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 라피트 로칠드 2017', '13 ', 1590000, '베이컨', 'Aroma: 오크, 담배, 가죽, 스모키; Taste: 블랙베리, 후추, 라벤더; Finish: 풍부한, 부드러운, 강렬한', DEFAULT, DEFAULT);
+VALUES ('샤또 라피트 로칠드 2017', 13.5, 1590000, '베이컨', 'Aroma: 오크, 담배, 가죽, 스모키; Taste: 블랙베리, 후추, 라벤더; Finish: 풍부한, 부드러운, 강렬한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 데스클랑, 위스퍼링 엔젤', '12 ', 27400, '초콜릿 디저트', 'Aroma: 체리, 자스민, 살구; Taste: 복숭아, 체리, 미네랄리티, 멜론; Finish: 긴 여운, 상쾌한, 산딸기', DEFAULT, DEFAULT);
+VALUES ('샤또 데스클랑, 위스퍼링 엔젤', 12.5, 27400, '초콜릿 디저트', 'Aroma: 체리, 자스민, 살구; Taste: 복숭아, 체리, 미네랄리티, 멜론; Finish: 긴 여운, 상쾌한, 산딸기', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 몽페라 화이트', '12.5', 27500, '과일 샐러드', 'Aroma: 청사과, 파인애플, 자몽, 흰 꽃, 상쾌한; Taste: 구운 아몬드, 견과류, 고소한, 균형 잡힌; Finish: 우아한, 신선한', DEFAULT, DEFAULT);
+VALUES ('샤또 몽페라 화이트', 12.5, 27500, '과일 샐러드', 'Aroma: 청사과, 파인애플, 자몽, 흰 꽃, 상쾌한; Taste: 구운 아몬드, 견과류, 고소한, 균형 잡힌; Finish: 우아한, 신선한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 딸보 2021', '13 ', 123800, '과일 샐러드', 'Aroma: 오크, 향신료, 타바코, 감초, 민트; Taste: 산딸기, 블랙커런트, 블랙베리, 가죽; Finish: 균형 잡힌, 묵직한, 타닌, 스모키', DEFAULT, DEFAULT);
+VALUES ('샤또 딸보 2021', 13.6, 123800, '과일 샐러드', 'Aroma: 오크, 향신료, 타바코, 감초, 민트; Taste: 산딸기, 블랙커런트, 블랙베리, 가죽; Finish: 균형 잡힌, 묵직한, 타닌, 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 생 미셸, 콜럼비아 밸리 리슬링', '11 ', 27000, '바비큐 립', 'Aroma: 사과, 미네랄리티, 배; Taste: 상쾌한; Finish: 균형 잡힌, 달콤한, 마시기 쉬운', DEFAULT, DEFAULT);
+VALUES ('샤또 생 미셸, 콜럼비아 밸리 리슬링', 11.5, 27000, '바비큐 립', 'Aroma: 사과, 미네랄리티, 배; Taste: 상쾌한; Finish: 균형 잡힌, 달콤한, 마시기 쉬운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('벡스 리슬링', '11.5', 12800, '베이컨', 'Aroma: 오렌지 꽃, 라임, 시트러스; Taste: 복숭아, 청사과, 살구; Finish: 깔끔한, 감귤, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('벡스 리슬링', 11.5, 12800, '베이컨', 'Aroma: 오렌지 꽃, 라임, 시트러스; Taste: 복숭아, 청사과, 살구; Finish: 깔끔한, 감귤, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파이크, 트레디셔날 리슬링', '11 ', 38000, '시트러스 샐러드', 'Aroma: 시트러스, 청사과, 꿀; Taste: 레몬, 라임, 미네랄리티; Finish: 복숭아, 살구, 젖은 돌', DEFAULT, DEFAULT);
+VALUES ('파이크, 트레디셔날 리슬링', 11.5, 38000, '시트러스 샐러드', 'Aroma: 시트러스, 청사과, 꿀; Taste: 레몬, 라임, 미네랄리티; Finish: 복숭아, 살구, 젖은 돌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('릴랙스 리슬링', '9', 26000, '과일 타르트', 'Aroma: 사과, 서양 배, 복숭아; Taste: 시트러스, 레몬, 포도; Finish: 꿀, 미네랄리티, 젖은 돌', DEFAULT, DEFAULT);
+VALUES ('릴랙스 리슬링', 9.0, 26000, '과일 타르트', 'Aroma: 사과, 서양 배, 복숭아; Taste: 시트러스, 레몬, 포도; Finish: 꿀, 미네랄리티, 젖은 돌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('미스티힐 비달 아이스 와인', '11', 27000, '해산물 파스타', 'Aroma: 열대 과일, 멜론; Taste: 꿀, 복숭아, 살구; Finish: 부드러운, 무화과, 커피, 바닐라', DEFAULT, DEFAULT);
+VALUES ('미스티힐 비달 아이스 와인', 11.0, 27000, '해산물 파스타', 'Aroma: 열대 과일, 멜론; Taste: 꿀, 복숭아, 살구; Finish: 부드러운, 무화과, 커피, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('트웬티 비스 비달 아이스 와인', '10 ', 29900, '바비큐 립', 'Aroma: 복숭아, 벌꿀, 신선한, 살구; Taste: 진한, 달콤한, 생동감, 산미; Finish: 긴 여운, 우아한, 시트러스', DEFAULT, DEFAULT);
+VALUES ('트웬티 비스 비달 아이스 와인', 11.0, 29900, '바비큐 립', 'Aroma: 복숭아, 벌꿀, 신선한, 살구; Taste: 진한, 달콤한, 생동감, 산미; Finish: 긴 여운, 우아한, 시트러스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('필리터리 프로즌 툰드라 비달 아이스 와인', '10 ', 38000, '과일 타르트', 'Aroma: 꿀, 배, 살구, 오렌지 껍질, 자몽; Taste: 복숭아, 말린 과일, 파인애플; Finish: 긴 여운, 달콤한, 열대 과일', DEFAULT, DEFAULT);
+VALUES ('필리터리 프로즌 툰드라 비달 아이스 와인', 11.0, 38000, '과일 타르트', 'Aroma: 꿀, 배, 살구, 오렌지 껍질, 자몽; Taste: 복숭아, 말린 과일, 파인애플; Finish: 긴 여운, 달콤한, 열대 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스위트 듀 까베르네 프랑 아이스와인', '11', 22900, '샤퀴테리', 'Aroma: 시트러스, 감귤류, 포도; Taste: 열대 과일, 망고, 포도; Finish: 꿀, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('스위트 듀 까베르네 프랑 아이스와인', 11.0, 22900, '샤퀴테리', 'Aroma: 시트러스, 감귤류, 포도; Taste: 열대 과일, 망고, 포도; Finish: 꿀, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스위트 듀 비달 아이스와인', '10 ', 22900, '샤퀴테리', 'Aroma: 열대 과일, 블랙베리, 시트러스; Taste: 말린 과일, 부드러운, 달콤한; Finish: 꿀, 파인애플, 자두', DEFAULT, DEFAULT);
+VALUES ('스위트 듀 비달 아이스와인', 11.0, 22900, '샤퀴테리', 'Aroma: 열대 과일, 블랙베리, 시트러스; Taste: 말린 과일, 부드러운, 달콤한; Finish: 꿀, 파인애플, 자두', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스위트 듀 까베르네 프랑 아이스와인', '11', 25000, '소시지', 'Aroma: 시트러스, 감귤류, 포도; Taste: 열대 과일, 망고, 포도; Finish: 꿀, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('스위트 듀 까베르네 프랑 아이스와인', 11.0, 25000, '소시지', 'Aroma: 시트러스, 감귤류, 포도; Taste: 열대 과일, 망고, 포도; Finish: 꿀, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('도미니오 데 라 베가, 디 엔드 아이스 와인', '13 ', 37800, '크림소스 생선요리', 'Aroma: 산뜻한, 파인애플, 시트러스, 패션프루트; Taste: 흰 꽃, 부드러운, 달콤한, 신선한, 산미; Finish: 견과류, 가벼운, 시트러스, 열대 과일', DEFAULT, DEFAULT);
+VALUES ('도미니오 데 라 베가, 디 엔드 아이스 와인', 13.5, 37800, '크림소스 생선요리', 'Aroma: 산뜻한, 파인애플, 시트러스, 패션프루트; Taste: 흰 꽃, 부드러운, 달콤한, 신선한, 산미; Finish: 견과류, 가벼운, 시트러스, 열대 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('시즌스 비달 아이스 와인', '11.5', 39000, '스모크 치즈', 'Aroma: 복숭아, 살구; Taste: 감귤, 시트러스, 열대 과일; Finish: 꿀, 리치, 복숭아', DEFAULT, DEFAULT);
+VALUES ('시즌스 비달 아이스 와인', 11.5, 39000, '스모크 치즈', 'Aroma: 복숭아, 살구; Taste: 감귤, 시트러스, 열대 과일; Finish: 꿀, 리치, 복숭아', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아스코니 리슬링 아이스와인', '9.8', 34000, '그릴드 치킨', 'Aroma: 복숭아, 감귤류, 레몬 제스트, 살구, 흰 꽃; Taste: 과일, 달콤한; Finish: 달콤한', DEFAULT, DEFAULT);
+VALUES ('아스코니 리슬링 아이스와인', 9.8, 34000, '그릴드 치킨', 'Aroma: 복숭아, 감귤류, 레몬 제스트, 살구, 흰 꽃; Taste: 과일, 달콤한; Finish: 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('매그노타, 까베르네 프랑 아이스 와인', '9.5', 90000, '치즈 플래터', 'Aroma: 딸기, 라즈베리, 달콤한; Taste: 과일 잼, 블랙베리, 베리류; Finish: 꿀, 발사믹, 진한', DEFAULT, DEFAULT);
+VALUES ('매그노타, 까베르네 프랑 아이스 와인', 9.5, 90000, '치즈 플래터', 'Aroma: 딸기, 라즈베리, 달콤한; Taste: 과일 잼, 블랙베리, 베리류; Finish: 꿀, 발사믹, 진한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('라다치니 아이스 와인', '11 ', 42000, '그릴드 양갈비', 'Aroma: 열대 과일, 살구, 복숭아, 멜론, 모과 잼; Taste: 농축된, 꿀, 균형 잡힌; Finish: 신선한, 산미, 달콤한', DEFAULT, DEFAULT);
+VALUES ('라다치니 아이스 와인', 12.0, 42000, '그릴드 양갈비', 'Aroma: 열대 과일, 살구, 복숭아, 멜론, 모과 잼; Taste: 농축된, 꿀, 균형 잡힌; Finish: 신선한, 산미, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('필리터리 아티장 비달 아이스와인', '11 ', 37000, '크림소스 생선요리', 'Aroma: 복숭아, 꽃, 살구, 오렌지; Taste: 꿀, 리치, 복숭아, 파인애플; Finish: 사과, 배, 아카시아', DEFAULT, DEFAULT);
+VALUES ('필리터리 아티장 비달 아이스와인', 11.5, 37000, '크림소스 생선요리', 'Aroma: 복숭아, 꽃, 살구, 오렌지; Taste: 꿀, 리치, 복숭아, 파인애플; Finish: 사과, 배, 아카시아', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아스코니 무스캇 아이스 와인 레드 라벨', '10 ', 36000, '과일 타르트', 'Aroma: 복숭아, 시트러스; Taste: 열대 과일, 망고, 살구 잼; Finish: 미네랄리티, 달콤한, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('아스코니 무스캇 아이스 와인 레드 라벨', 10.5, 36000, '과일 타르트', 'Aroma: 복숭아, 시트러스; Taste: 열대 과일, 망고, 살구 잼; Finish: 미네랄리티, 달콤한, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아스코니 무스캇 아이스 와인 레드 라벨', '10 ', 36000, '다크 초콜릿', 'Aroma: 복숭아, 시트러스; Taste: 열대 과일, 망고, 살구 잼; Finish: 미네랄리티, 달콤한, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('아스코니 무스캇 아이스 와인 레드 라벨', 10.5, 36000, '다크 초콜릿', 'Aroma: 복숭아, 시트러스; Taste: 열대 과일, 망고, 살구 잼; Finish: 미네랄리티, 달콤한, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('스위트 듀 비달 아이스와인', '10 ', 30000, '크림소스 생선요리', 'Aroma: 열대 과일, 블랙베리, 시트러스; Taste: 말린 과일, 부드러운, 달콤한; Finish: 꿀, 파인애플, 자두', DEFAULT, DEFAULT);
+VALUES ('스위트 듀 비달 아이스와인', 11.0, 30000, '크림소스 생선요리', 'Aroma: 열대 과일, 블랙베리, 시트러스; Taste: 말린 과일, 부드러운, 달콤한; Finish: 꿀, 파인애플, 자두', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('누보몽드 비달 아이스 와인', '11', 36000, '소시지', 'Aroma: 레몬, 배, 사과; Taste: 달콤한, 꿀, 모과, 무화과, 토피, 사과; Finish: 오렌지 껍질, 파인애플', DEFAULT, DEFAULT);
+VALUES ('누보몽드 비달 아이스 와인', 11.0, 36000, '소시지', 'Aroma: 레몬, 배, 사과; Taste: 달콤한, 꿀, 모과, 무화과, 토피, 사과; Finish: 오렌지 껍질, 파인애플', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('더 글렌그란트 60년', '52.8', 38000000, '바비큐 립', 'Aroma: 오렌지, 풍부한, 과일, 견과류, 시가; Taste: 풍부한, 과일, 다크 초콜릿, 토피; Finish: 무화과, 대추, 감초, 긴 여운, 스모키', DEFAULT, DEFAULT);
+VALUES ('더 글렌그란트 60년', 52.8, 38000000, '바비큐 립', 'Aroma: 오렌지, 풍부한, 과일, 견과류, 시가; Taste: 풍부한, 과일, 다크 초콜릿, 토피; Finish: 무화과, 대추, 감초, 긴 여운, 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('노주노교 교령 60년', '52', 150000, '베이컨', 'Aroma: 스파이시, 향신료, 허브; Taste: 곡물, 달콤한, 허브; Finish: 긴 여운, 복합적인, 부드러운', DEFAULT, DEFAULT);
+VALUES ('노주노교 교령 60년', 52.0, 150000, '베이컨', 'Aroma: 스파이시, 향신료, 허브; Taste: 곡물, 달콤한, 허브; Finish: 긴 여운, 복합적인, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('달위니 15년', '43', 95000, '과일 샐러드', 'Aroma: 부드러운, 바닐라, 꽃; Taste: 헤더 꿀, 감미로운, 보리빵; Finish: 긴 여운, 감귤류, 달콤한', DEFAULT, DEFAULT);
+VALUES ('달위니 15년', 43.0, 95000, '과일 샐러드', 'Aroma: 부드러운, 바닐라, 꽃; Taste: 헤더 꿀, 감미로운, 보리빵; Finish: 긴 여운, 감귤류, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('달위니 30년 2019', '54.7', 1500000, '소시지', 'Aroma: 꽃, 나무, 담배, 달콤한; Taste: 스파이시, 후추, 허브, 가죽; Finish: 긴 여운, 스파이시, 달콤한', DEFAULT, DEFAULT);
+VALUES ('달위니 30년 2019', 54.7, 1500000, '소시지', 'Aroma: 꽃, 나무, 담배, 달콤한; Taste: 스파이시, 후추, 허브, 가죽; Finish: 긴 여운, 스파이시, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 포트우드 21년', '40', 599000, '스테이크', 'Aroma: 과일, 건포도, 견과류; Taste: 과일, 벌꿀, 스파이스; Finish: 긴 여운, 고소한', DEFAULT, DEFAULT);
+VALUES ('발베니 포트우드 21년', 40.0, 599000, '스테이크', 'Aroma: 과일, 건포도, 견과류; Taste: 과일, 벌꿀, 스파이스; Finish: 긴 여운, 고소한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 싱글배럴 21년', '47.8', 945000, '다크 초콜릿', 'Aroma: 바닐라, 시나몬, 꿀, 메이플 시럽, 브리오슈, 플로럴; Taste: 오크, 호두, 메이플 시럽, 당밀, 토피; Finish: 오크, 꿀, 풍부한, 바닐라', DEFAULT, DEFAULT);
+VALUES ('발베니 싱글배럴 21년', 47.8, 945000, '다크 초콜릿', 'Aroma: 바닐라, 시나몬, 꿀, 메이플 시럽, 브리오슈, 플로럴; Taste: 오크, 호두, 메이플 시럽, 당밀, 토피; Finish: 오크, 꿀, 풍부한, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 30년 레어 메리지', '44.2', 4999000, '마카롱', 'Aroma: 꿀, 오크, 오렌지 껍질; Taste: 다크 초콜릿, 자두, 설탕에 절인 배; Finish: 스파이스, 달콤한', DEFAULT, DEFAULT);
+VALUES ('발베니 30년 레어 메리지', 44.2, 4999000, '마카롱', 'Aroma: 꿀, 오크, 오렌지 껍질; Taste: 다크 초콜릿, 자두, 설탕에 절인 배; Finish: 스파이스, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 25년 레어 메리지', '48', 1245900, '과일 타르트', 'Aroma: 오크, 꽃, 꿀, 구운 마시멜로; Taste: 서양 배, 바닐라, 시트러스, 감귤; Finish: 생강, 향신료, 시나몬, 사과 파이', DEFAULT, DEFAULT);
+VALUES ('발베니 25년 레어 메리지', 48.0, 1245900, '과일 타르트', 'Aroma: 오크, 꽃, 꿀, 구운 마시멜로; Taste: 서양 배, 바닐라, 시트러스, 감귤; Finish: 생강, 향신료, 시나몬, 사과 파이', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('발베니 더블우드 25년', '43', 2500000, '치즈 플래터', 'Aroma: 가죽, 스파이시, 달콤한; Taste: 향신료, 달콤한, 설탕에 절인 오렌지, 꿀, 말린 과일; Finish: 스파이스, 프루티', DEFAULT, DEFAULT);
+VALUES ('발베니 더블우드 25년', 43.0, 2500000, '치즈 플래터', 'Aroma: 가죽, 스파이시, 달콤한; Taste: 향신료, 달콤한, 설탕에 절인 오렌지, 꿀, 말린 과일; Finish: 스파이스, 프루티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('탈리스커 25년', '45.8', 589000, '그릴드 치킨', 'Aroma: 바나나, 사과, 스파이시, 오크, 짭짤한; Taste: 강렬한, 달콤한, 스모키, 짭짤한, 후추; Finish: 긴 여운, 따뜻한, 복숭아, 장미, 캐러멜, 피트', DEFAULT, DEFAULT);
+VALUES ('탈리스커 25년', 45.8, 589000, '그릴드 치킨', 'Aroma: 바나나, 사과, 스파이시, 오크, 짭짤한; Taste: 강렬한, 달콤한, 스모키, 짭짤한, 후추; Finish: 긴 여운, 따뜻한, 복숭아, 장미, 캐러멜, 피트', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파논 토카이 아수 5 푸토뇨스', '10', 56900, '피자', 'Aroma: 꿀, 꽃, 라임, 오크, 견과류; Taste: 배, 살구, 오렌지, 사과, 멜론; Finish: 달콤한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('파논 토카이 아수 5 푸토뇨스', 10.0, 56900, '피자', 'Aroma: 꿀, 꽃, 라임, 오크, 견과류; Taste: 배, 살구, 오렌지, 사과, 멜론; Finish: 달콤한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파논 토카이 아수 6 푸토뇨스', '9 ', 79300, '피자', 'Aroma: 무화과, 대추, 설탕에 절인 오렌지, 아몬드; Taste: 복숭아, 살구, 청사과, 건포도, 오렌지, 꿀; Finish: 산뜻한, 긴 여운, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('파논 토카이 아수 6 푸토뇨스', 9.5, 79300, '피자', 'Aroma: 무화과, 대추, 설탕에 절인 오렌지, 아몬드; Taste: 복숭아, 살구, 청사과, 건포도, 오렌지, 꿀; Finish: 산뜻한, 긴 여운, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('패트리셔스 카틴카 레이트 하베스트 토카이', '12 ', 45000, '샤퀴테리', 'Aroma: 벌꿀, 살구, 사과; Taste: 복숭아, 진저, 서양 배, 시트러스; Finish: 긴 여운, 스타프루트, 부드러운', DEFAULT, DEFAULT);
+VALUES ('패트리셔스 카틴카 레이트 하베스트 토카이', 12.5, 45000, '샤퀴테리', 'Aroma: 벌꿀, 살구, 사과; Taste: 복숭아, 진저, 서양 배, 시트러스; Finish: 긴 여운, 스타프루트, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 데레즐라 토카이 푸르민트 드라이', '11', 19900, '시트러스 샐러드', 'Aroma: 풋사과, 시트러스, 감귤; Taste: 미네랄리티, 사과, 살구; Finish: 산뜻한, 라임', DEFAULT, DEFAULT);
+VALUES ('샤또 데레즐라 토카이 푸르민트 드라이', 11.0, 19900, '시트러스 샐러드', 'Aroma: 풋사과, 시트러스, 감귤; Taste: 미네랄리티, 사과, 살구; Finish: 산뜻한, 라임', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그랜드 토카이 이수 5 푸토뇨스', '9 ', 105000, '베이컨', 'Aroma: 꿀, 살구, 마멀레이드; Taste: 시트러스, 복숭아, 서양 배, 오렌지 마멀레이드; Finish: 스모키, 마멀레이드, 프루티', DEFAULT, DEFAULT);
+VALUES ('그랜드 토카이 이수 5 푸토뇨스', 10.0, 105000, '베이컨', 'Aroma: 꿀, 살구, 마멀레이드; Taste: 시트러스, 복숭아, 서양 배, 오렌지 마멀레이드; Finish: 스모키, 마멀레이드, 프루티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파논 토카이 사모로드니', '10', 33500, '치즈 플래터', 'Aroma: 헤이즐넛, 열대 과일, 리치, 망고; Taste: 배, 아몬드, 말린 살구, 청사과; Finish: 달콤한, 산뜻한, 오렌지', DEFAULT, DEFAULT);
+VALUES ('파논 토카이 사모로드니', 10.0, 33500, '치즈 플래터', 'Aroma: 헤이즐넛, 열대 과일, 리치, 망고; Taste: 배, 아몬드, 말린 살구, 청사과; Finish: 달콤한, 산뜻한, 오렌지', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 데레즐라 토카이 아수 5 푸토뇨스', '12.5', 62000, '시트러스 샐러드', 'Aroma: 오렌지, 꽃, 꿀, 시트러스, 감귤; Taste: 달콤한, 신선한, 꿀, 라임; Finish: 살구, 파인애플, 꿀, 복숭아, 멜론', DEFAULT, DEFAULT);
+VALUES ('샤또 데레즐라 토카이 아수 5 푸토뇨스', 12.5, 62000, '시트러스 샐러드', 'Aroma: 오렌지, 꽃, 꿀, 시트러스, 감귤; Taste: 달콤한, 신선한, 꿀, 라임; Finish: 살구, 파인애플, 꿀, 복숭아, 멜론', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('패트리셔스, 토카이 푸르민트', '11 ', 31900, '스테이크', 'Aroma: 복숭아, 아몬드, 레몬 껍질; Taste: 꿀, 산미, 가벼운; Finish: 균형 잡힌, 산미, 부드러운', DEFAULT, DEFAULT);
+VALUES ('패트리셔스, 토카이 푸르민트', 12.0, 31900, '스테이크', 'Aroma: 복숭아, 아몬드, 레몬 껍질; Taste: 꿀, 산미, 가벼운; Finish: 균형 잡힌, 산미, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('클래식 토카이 푸르민트 미디움 스위트', '11 ', 28000, '시트러스 샐러드', 'Aroma: 배, 시트러스, 말린 복숭아; Taste: 프루티, 허브, 산미, 복숭아; Finish: 가벼운, 미네랄리티, 꿀', DEFAULT, DEFAULT);
+VALUES ('클래식 토카이 푸르민트 미디움 스위트', 12.0, 28000, '시트러스 샐러드', 'Aroma: 배, 시트러스, 말린 복숭아; Taste: 프루티, 허브, 산미, 복숭아; Finish: 가벼운, 미네랄리티, 꿀', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 데레즐라 토카이 아수 에센시아', '9.5', 165000, '그릴드 양갈비', 'Aroma: 꿀, 복숭아, 말린 살구, 열대 과일, 오렌지 껍질, 스모키; Taste: 긴 여운, 꿀, 달콤한, 산뜻한, 진한, 미네랄리티; Finish: 긴 여운, 달콤한', DEFAULT, DEFAULT);
+VALUES ('샤또 데레즐라 토카이 아수 에센시아', 9.5, 165000, '그릴드 양갈비', 'Aroma: 꿀, 복숭아, 말린 살구, 열대 과일, 오렌지 껍질, 스모키; Taste: 긴 여운, 꿀, 달콤한, 산뜻한, 진한, 미네랄리티; Finish: 긴 여운, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그랜드 토카이, 클래식 토카이 하르쉬레벨루', '12', 35000, '크림소스 생선요리', 'Aroma: 백도, 꿀, 꽃; Taste: 시트러스, 살구, 레몬; Finish: 향신료, 생강, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('그랜드 토카이, 클래식 토카이 하르쉬레벨루', 12.0, 35000, '크림소스 생선요리', 'Aroma: 백도, 꿀, 꽃; Taste: 시트러스, 살구, 레몬; Finish: 향신료, 생강, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로얄 토카이 레이트 하비스트', '10 ', 50000, '리조또', 'Aroma: 모과, 배, 진저 브레드, 민트; Taste: 풍성한, 우아한, 산미; Finish: 긴 여운, 균형 잡힌, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('로얄 토카이 레이트 하비스트', 11.0, 50000, '리조또', 'Aroma: 모과, 배, 진저 브레드, 민트; Taste: 풍성한, 우아한, 산미; Finish: 긴 여운, 균형 잡힌, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그랜드 토카이, 클래식 토카이 아라니푸르트 뀌베', '10', 24000, '그릴드 치킨', 'Aroma: 감귤, 민트, 꿀; Taste: 시트러스, 파인애플, 자몽; Finish: 서양 배, 사과, 장미꽃', DEFAULT, DEFAULT);
+VALUES ('그랜드 토카이, 클래식 토카이 아라니푸르트 뀌베', 10.0, 24000, '그릴드 치킨', 'Aroma: 감귤, 민트, 꿀; Taste: 시트러스, 파인애플, 자몽; Finish: 서양 배, 사과, 장미꽃', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('폴레츠키 빈 크리스마스 토카이', '12', 40000, '크림 디저트', 'Aroma: 복숭아, 살구, 향긋한; Taste: 달콤한, 설탕에 절인 오렌지, 벌꿀; Finish: 긴 여운, 시트러스, 농밀한', DEFAULT, DEFAULT);
+VALUES ('폴레츠키 빈 크리스마스 토카이', 12.0, 40000, '크림 디저트', 'Aroma: 복숭아, 살구, 향긋한; Taste: 달콤한, 설탕에 절인 오렌지, 벌꿀; Finish: 긴 여운, 시트러스, 농밀한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('바라 토카이 아수 5 푸토뇨스', '13', 59000, '과일 타르트', 'Aroma: 복숭아, 오렌지 꽃, 말린 살구; Taste: 벌꿀, 모과, 살구, 라임, 밀랍; Finish: 달콤한, 파인애플, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('바라 토카이 아수 5 푸토뇨스', 13.0, 59000, '과일 타르트', 'Aroma: 복숭아, 오렌지 꽃, 말린 살구; Taste: 벌꿀, 모과, 살구, 라임, 밀랍; Finish: 달콤한, 파인애플, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('가무치 낫포세일 토카이 캐스크 스웨이드 파우치 패키지', '59.4', 97000, '소시지', 'Aroma: 살구, 머스캣, 꿀, 리치, 마카다미아, 헤이즐넛; Taste: 복숭아 조림, 밀크 초콜릿, 리치, 산미, 바닐라; Finish: 허브, 오크, 구운 견과류, 산뜻한, 과일', DEFAULT, DEFAULT);
+VALUES ('가무치 낫포세일 토카이 캐스크 스웨이드 파우치 패키지', 59.4, 97000, '소시지', 'Aroma: 살구, 머스캣, 꿀, 리치, 마카다미아, 헤이즐넛; Taste: 복숭아 조림, 밀크 초콜릿, 리치, 산미, 바닐라; Finish: 허브, 오크, 구운 견과류, 산뜻한, 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('부다니 토카이 아수 5 푸토뇨스', '11 ', 59000, '초콜릿 디저트', 'Aroma: 캐러멜, 건포도, 살구; Taste: 꿀, 호두, 아몬드, 담뱃잎; Finish: 긴 여운, 달콤한, 산미, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('부다니 토카이 아수 5 푸토뇨스', 11.5, 59000, '초콜릿 디저트', 'Aroma: 캐러멜, 건포도, 살구; Taste: 꿀, 호두, 아몬드, 담뱃잎; Finish: 긴 여운, 달콤한, 산미, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('바라 토카이 아수 6 푸토뇨스', '10', 63000, '크림 디저트', 'Aroma: 구운 사과, 열대 과일, 미묘한 향신료; Taste: 설탕에 절인 살구, 복숭아 잼, 감귤; Finish: 민트, 은은한, 벌꿀, 레몬', DEFAULT, DEFAULT);
+VALUES ('바라 토카이 아수 6 푸토뇨스', 10.0, 63000, '크림 디저트', 'Aroma: 구운 사과, 열대 과일, 미묘한 향신료; Taste: 설탕에 절인 살구, 복숭아 잼, 감귤; Finish: 민트, 은은한, 벌꿀, 레몬', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디즈노코 토카이 아수 5 푸토뇨스', '11 ', 99000, '피자', 'Aroma: 살구, 시트러스, 꿀; Taste: 달콤한, 건포도, 아몬드, 진한; Finish: 달콤한, 긴 여운, 복합적인', DEFAULT, DEFAULT);
+VALUES ('디즈노코 토카이 아수 5 푸토뇨스', 12.0, 99000, '피자', 'Aroma: 살구, 시트러스, 꿀; Taste: 달콤한, 건포도, 아몬드, 진한; Finish: 달콤한, 긴 여운, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('메종 오 포아 사모로드니', '11', 54000, '스모크 치즈', 'Aroma: 오크, 살구, 미네랄리티, 버터; Taste: 꿀, 달콤한, 살구, 라임, 산미; Finish: 긴 여운, 균형 잡힌, 화이트 초콜릿', DEFAULT, DEFAULT);
+VALUES ('메종 오 포아 사모로드니', 11.0, 54000, '스모크 치즈', 'Aroma: 오크, 살구, 미네랄리티, 버터; Taste: 꿀, 달콤한, 살구, 라임, 산미; Finish: 긴 여운, 균형 잡힌, 화이트 초콜릿', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('메종 오 포아 게쇠이 쉬렛(레이트 하비스트)', '12', 42000, '샤퀴테리', 'Aroma: 배, 바나나, 꿀, 흰 꽃, 청포도; Taste: 우아한, 달콤한, 균형 잡힌, 산미; Finish: 미네랄리티, 꽃, 긴 여운, 생동감', DEFAULT, DEFAULT);
+VALUES ('메종 오 포아 게쇠이 쉬렛(레이트 하비스트)', 12.0, 42000, '샤퀴테리', 'Aroma: 배, 바나나, 꿀, 흰 꽃, 청포도; Taste: 우아한, 달콤한, 균형 잡힌, 산미; Finish: 미네랄리티, 꽃, 긴 여운, 생동감', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로얄 토카이 아수 6 푸토뇨스 골드 라벨 500ml', '10.5', 189000, '리조또', 'Aroma: 꿀, 생강, 버섯; Taste: 살구, 복숭아, 사과; Finish: 오렌지, 마멀레이드, 시트러스', DEFAULT, DEFAULT);
+VALUES ('로얄 토카이 아수 6 푸토뇨스 골드 라벨 500ml', 10.5, 189000, '리조또', 'Aroma: 꿀, 생강, 버섯; Taste: 살구, 복숭아, 사과; Finish: 오렌지, 마멀레이드, 시트러스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파논 토카이 아수 6 푸토뇨스', '9 ', 79000, '샤퀴테리', 'Aroma: 무화과, 대추, 설탕에 절인 오렌지, 아몬드; Taste: 복숭아, 살구, 청사과, 건포도, 오렌지, 꿀; Finish: 산뜻한, 긴 여운, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('파논 토카이 아수 6 푸토뇨스', 9.5, 79000, '샤퀴테리', 'Aroma: 무화과, 대추, 설탕에 절인 오렌지, 아몬드; Taste: 복숭아, 살구, 청사과, 건포도, 오렌지, 꿀; Finish: 산뜻한, 긴 여운, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파논 토카이 아수 5 푸토뇨스', '10', 55000, '베이컨', 'Aroma: 꿀, 꽃, 라임, 오크, 견과류; Taste: 배, 살구, 오렌지, 사과, 멜론; Finish: 달콤한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('파논 토카이 아수 5 푸토뇨스', 10.0, 55000, '베이컨', 'Aroma: 꿀, 꽃, 라임, 오크, 견과류; Taste: 배, 살구, 오렌지, 사과, 멜론; Finish: 달콤한, 부드러운, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로얄 토카이 아수 5 푸토뇨스 블루 라벨', '11', 50000, '버거', 'Aroma: 살구, 향신료, 복합적인; Taste: 열대 과일, 라임, 자몽; Finish: 신선한, 복합적인, 잘 익은 과일', DEFAULT, DEFAULT);
+VALUES ('로얄 토카이 아수 5 푸토뇨스 블루 라벨', 11.0, 50000, '버거', 'Aroma: 살구, 향신료, 복합적인; Taste: 열대 과일, 라임, 자몽; Finish: 신선한, 복합적인, 잘 익은 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('페넬로페 토카이 캐스크 피니시 라이 배치 1', '53.5', 310000, '과일 타르트', 'Aroma: 잘 익은 포도, 꿀, 오크, 갈색 설탕, 건포도; Taste: 산딸기, 휘핑크림, 스파이스; Finish: 꿀, 오크, 가죽, 페퍼콘, 견과류, 시트러스, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('페넬로페 토카이 캐스크 피니시 라이 배치 1', 53.5, 310000, '과일 타르트', 'Aroma: 잘 익은 포도, 꿀, 오크, 갈색 설탕, 건포도; Taste: 산딸기, 휘핑크림, 스파이스; Finish: 꿀, 오크, 가죽, 페퍼콘, 견과류, 시트러스, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로얄 토카이 레이트 하비스트', '10 ', 29300, '소시지', 'Aroma: 모과, 배, 진저 브레드, 민트; Taste: 풍성한, 우아한, 산미; Finish: 긴 여운, 균형 잡힌, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('로얄 토카이 레이트 하비스트', 11.0, 29300, '소시지', 'Aroma: 모과, 배, 진저 브레드, 민트; Taste: 풍성한, 우아한, 산미; Finish: 긴 여운, 균형 잡힌, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('토카이 머스캣 루넬 드라이', '11 ', 25000, '베이컨', 'Aroma: 풍부한, 캐모마일, 아카시아; Taste: 복숭아, 그린 애플, 리치; Finish: 미네랄리티, 짭짤한, 신선한', DEFAULT, DEFAULT);
+VALUES ('토카이 머스캣 루넬 드라이', 11.5, 25000, '베이컨', 'Aroma: 풍부한, 캐모마일, 아카시아; Taste: 복숭아, 그린 애플, 리치; Finish: 미네랄리티, 짭짤한, 신선한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('바라 토카이 아수 6 푸토뇨스', '10', 52000, '과일 타르트', 'Aroma: 구운 사과, 열대 과일, 미묘한 향신료; Taste: 설탕에 절인 살구, 복숭아 잼, 감귤; Finish: 민트, 은은한, 벌꿀, 레몬', DEFAULT, DEFAULT);
+VALUES ('바라 토카이 아수 6 푸토뇨스', 10.0, 52000, '과일 타르트', 'Aroma: 구운 사과, 열대 과일, 미묘한 향신료; Taste: 설탕에 절인 살구, 복숭아 잼, 감귤; Finish: 민트, 은은한, 벌꿀, 레몬', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('바라 토카이 아수 5 푸토뇨스', '13', 42000, '해산물 파스타', 'Aroma: 복숭아, 오렌지 꽃, 말린 살구; Taste: 벌꿀, 모과, 살구, 라임, 밀랍; Finish: 달콤한, 파인애플, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('바라 토카이 아수 5 푸토뇨스', 13.0, 42000, '해산물 파스타', 'Aroma: 복숭아, 오렌지 꽃, 말린 살구; Taste: 벌꿀, 모과, 살구, 라임, 밀랍; Finish: 달콤한, 파인애플, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그랜드 토카이, 토카이 에센시아', '2', 990000, '베이컨', 'Aroma: 꽃, 꿀, 미네랄리티; Taste: 시트러스, 감귤, 자몽; Finish: 복숭아, 살구, 건포도', DEFAULT, DEFAULT);
+VALUES ('그랜드 토카이, 토카이 에센시아', 2.0, 990000, '베이컨', 'Aroma: 꽃, 꿀, 미네랄리티; Taste: 시트러스, 감귤, 자몽; Finish: 복숭아, 살구, 건포도', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그랜드 토카이, 클래식 토카이 살가무쉬코타이', '11', 25000, '베이컨', 'Aroma: 복숭아, 감귤, 서양 배; Taste: 시트러스, 레몬, 라임; Finish: 꿀, 젖은 돌, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('그랜드 토카이, 클래식 토카이 살가무쉬코타이', 11.0, 25000, '베이컨', 'Aroma: 복숭아, 감귤, 서양 배; Taste: 시트러스, 레몬, 라임; Finish: 꿀, 젖은 돌, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('그랜드 토카이, 토카이 아수 6 푸토뇨스', '9', 143000, '버거', 'Aroma: 오렌지, 과일 잼, 꿀; Taste: 말린 살구, 건자두, 사과; Finish: 젖은 돌, 생강, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('그랜드 토카이, 토카이 아수 6 푸토뇨스', 9.0, 143000, '버거', 'Aroma: 오렌지, 과일 잼, 꿀; Taste: 말린 살구, 건자두, 사과; Finish: 젖은 돌, 생강, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 데레즐라 토카이 아수 6 푸토뇨스', '10.5 ', 113500, '피자', 'Aroma: 꿀, 꽃, 레몬, 살구, 복숭아; Taste: 말린 살구, 아몬드, 배, 사과, 버터; Finish: 긴 여운, 오렌지, 마멀레이드, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('샤또 데레즐라 토카이 아수 6 푸토뇨스', 11.0, 113500, '피자', 'Aroma: 꿀, 꽃, 레몬, 살구, 복숭아; Taste: 말린 살구, 아몬드, 배, 사과, 버터; Finish: 긴 여운, 오렌지, 마멀레이드, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('헤네시 VSOP', '40', 88200, '치킨 윙', 'Aroma: 살구, 오크, 바닐라, 균형 잡힌; Taste: 풍부한, 과일, 정향, 시나몬; Finish: 긴 여운, 크리미, 플로럴', DEFAULT, DEFAULT);
+VALUES ('헤네시 VSOP', 40.0, 88200, '치킨 윙', 'Aroma: 살구, 오크, 바닐라, 균형 잡힌; Taste: 풍부한, 과일, 정향, 시나몬; Finish: 긴 여운, 크리미, 플로럴', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('헤네시 XO', '40', 328900, '치킨 윙', 'Aroma: 잼, 설탕에 절인 과일, 오크; Taste: 스파이시, 다크 초콜릿, 후추; Finish: 바닐라, 복합적인, 따뜻한, 초콜릿', DEFAULT, DEFAULT);
+VALUES ('헤네시 XO', 40.0, 328900, '치킨 윙', 'Aroma: 잼, 설탕에 절인 과일, 오크; Taste: 스파이시, 다크 초콜릿, 후추; Finish: 바닐라, 복합적인, 따뜻한, 초콜릿', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('헨리 무니에 VSOP', '40', 59900, '치즈 플래터', 'Aroma: 말린 과일, 자두, 살구, 꽃; Taste: 견과류, 과일, 복숭아, 건포도; Finish: 부드러운, 달콤한, 오크', DEFAULT, DEFAULT);
+VALUES ('헨리 무니에 VSOP', 40.0, 59900, '치즈 플래터', 'Aroma: 말린 과일, 자두, 살구, 꽃; Taste: 견과류, 과일, 복숭아, 건포도; Finish: 부드러운, 달콤한, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('레미 마틴 VSOP', '40', 88000, '베이컨', 'Aroma: 바닐라, 오크, 꽃, 감초; Taste: 구운 사과, 복숭아, 달콤한; Finish: 부드러운, 살구, 복합적인', DEFAULT, DEFAULT);
+VALUES ('레미 마틴 VSOP', 40.0, 88000, '베이컨', 'Aroma: 바닐라, 오크, 꽃, 감초; Taste: 구운 사과, 복숭아, 달콤한; Finish: 부드러운, 살구, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('생 레미 XO', '40', 51000, '치킨 윙', 'Aroma: 바닐라, 나무, 과일 잼, 진한 꿀, 잘 익은 과일; Taste: 진저 브레드, 설탕에 절인 살구, 무화과, 견과류; Finish: 우아한, 섬세한, 향긋한, 부드러운, 우디', DEFAULT, DEFAULT);
+VALUES ('생 레미 XO', 40.0, 51000, '치킨 윙', 'Aroma: 바닐라, 나무, 과일 잼, 진한 꿀, 잘 익은 과일; Taste: 진저 브레드, 설탕에 절인 살구, 무화과, 견과류; Finish: 우아한, 섬세한, 향긋한, 부드러운, 우디', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('쿠론니에 나폴레옹 VSOP', '40', 19000, '다크 초콜릿', 'Aroma: 달콤한, 포도, 블랙베리; Taste: 농밀한, 농익은 포도, 검은 과일; Finish: 부드러운, 진한 여운, 진득한', DEFAULT, DEFAULT);
+VALUES ('쿠론니에 나폴레옹 VSOP', 40.0, 19000, '다크 초콜릿', 'Aroma: 달콤한, 포도, 블랙베리; Taste: 농밀한, 농익은 포도, 검은 과일; Finish: 부드러운, 진한 여운, 진득한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('미스터 보스턴 피치 슈냅스 1L', '15', 15000, '치즈 플래터', 'Aroma: 복숭아, 시트러스, 향긋한; Taste: 달콤한, 부드러운, 시트러스; Finish: 깨끗한, 복숭아, 상큼한', DEFAULT, DEFAULT);
+VALUES ('미스터 보스턴 피치 슈냅스 1L', 15.0, 15000, '치즈 플래터', 'Aroma: 복숭아, 시트러스, 향긋한; Taste: 달콤한, 부드러운, 시트러스; Finish: 깨끗한, 복숭아, 상큼한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('딕타도르 헤라키아 버번 1990 럼', '44', 750900, '다크 초콜릿', 'Aroma: 오크, 오렌지 껍질, 시가, 바닐라, 정향; Taste: 다크 초콜릿, 생강, 오렌지 꽃, 자스민, 키위; Finish: 홍차, 핵과류, 블루베리, 가죽, 라벤더', DEFAULT, DEFAULT);
+VALUES ('딕타도르 헤라키아 버번 1990 럼', 44.0, 750900, '다크 초콜릿', 'Aroma: 오크, 오렌지 껍질, 시가, 바닐라, 정향; Taste: 다크 초콜릿, 생강, 오렌지 꽃, 자스민, 키위; Finish: 홍차, 핵과류, 블루베리, 가죽, 라벤더', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('리카 파스티스', '45', 35000, '감자튀김', 'Aroma: 허브, 팔각, 회향; Taste: 아니스, 허브, 감초; Finish: 쌉쌀한, 허브', DEFAULT, DEFAULT);
+VALUES ('리카 파스티스', 45.0, 35000, '감자튀김', 'Aroma: 허브, 팔각, 회향; Taste: 아니스, 허브, 감초; Finish: 쌉쌀한, 허브', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('로랑 퐁소 뫼르소 프리미에 크뤼 블라니 뀌베 뒤 미오조티스 2019', '14', 449000, '다크 초콜릿', 'Aroma: 레몬, 라임, 잘 익은 과일; Taste: 풍부한, 버터, 둥근; Finish: 긴 여운, 섬세한, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('로랑 퐁소 뫼르소 프리미에 크뤼 블라니 뀌베 뒤 미오조티스 2019', 14.0, 449000, '다크 초콜릿', 'Aroma: 레몬, 라임, 잘 익은 과일; Taste: 풍부한, 버터, 둥근; Finish: 긴 여운, 섬세한, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('까베르네 당주 샴 오죠', '10 ', 25900, '초콜릿 디저트', 'Aroma: 강렬한, 라즈베리, 레드커런트; Taste: 신선한, 풍부한, 과일; Finish: 상쾌한, 산미, 깔끔한', DEFAULT, DEFAULT);
+VALUES ('까베르네 당주 샴 오죠', 11.0, 25900, '초콜릿 디저트', 'Aroma: 강렬한, 라즈베리, 레드커런트; Taste: 신선한, 풍부한, 과일; Finish: 상쾌한, 산미, 깔끔한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아라스 블랑 드 블랑', '12 ', 49000, '과일 타르트', 'Aroma: 허니 서클, 복숭아, 굴; Taste: 시트러스, 미네랄리티, 깨끗한; Finish: 복합적인, 균형 잡힌, 향기로운', DEFAULT, DEFAULT);
+VALUES ('아라스 블랑 드 블랑', 13.0, 49000, '과일 타르트', 'Aroma: 허니 서클, 복숭아, 굴; Taste: 시트러스, 미네랄리티, 깨끗한; Finish: 복합적인, 균형 잡힌, 향기로운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('웨스트콕 칼바도스 캐스크 피니시', '43', 56000, '시트러스 샐러드', 'Aroma: 배, 아몬드, 신선한, 사과; Taste: 말린 과일, 바닐라; Finish: 사과, 배, 아몬드, 복합적인', DEFAULT, DEFAULT);
+VALUES ('웨스트콕 칼바도스 캐스크 피니시', 43.0, 56000, '시트러스 샐러드', 'Aroma: 배, 아몬드, 신선한, 사과; Taste: 말린 과일, 바닐라; Finish: 사과, 배, 아몬드, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('크리스찬 드루앵 25년', '42', 509000, '바비큐 립', 'Aroma: 달콤한, 사과, 미묘한; Taste: 토피, 꽃, 스모키; Finish: 사과, 달콤한, 과일, 균형 잡힌', DEFAULT, DEFAULT);
+VALUES ('크리스찬 드루앵 25년', 42.0, 509000, '바비큐 립', 'Aroma: 달콤한, 사과, 미묘한; Taste: 토피, 꽃, 스모키; Finish: 사과, 달콤한, 과일, 균형 잡힌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('불라 깔바도스 VSOP', '40', 82000, '버거', 'Aroma: 과일, 헤이즐넛, 토스트, 브리오슈; Taste: 균형 잡힌, 바닐라, 오크, 원숙한; Finish: 잘 익은 사과, 긴 여운, 부드러운', DEFAULT, DEFAULT);
+VALUES ('불라 깔바도스 VSOP', 40.0, 82000, '버거', 'Aroma: 과일, 헤이즐넛, 토스트, 브리오슈; Taste: 균형 잡힌, 바닐라, 오크, 원숙한; Finish: 잘 익은 사과, 긴 여운, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('깔바도스 페르 마그루아 파인 VS', '40', 51800, '과일 타르트', 'Aroma: 신선한, 사과, 달콤한; Taste: 사과 주스, 바닐라, 설탕에 절인 사과; Finish: 산뜻한, 싱그러운, 우아한', DEFAULT, DEFAULT);
+VALUES ('깔바도스 페르 마그루아 파인 VS', 40.0, 51800, '과일 타르트', 'Aroma: 신선한, 사과, 달콤한; Taste: 사과 주스, 바닐라, 설탕에 절인 사과; Finish: 산뜻한, 싱그러운, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파코리 3년', '42', 59000, '버거', 'Aroma: 바닐라, 열대 과일, 캐러멜; Taste: 프루티, 우디, 파인애플; Finish: 달콤한, 말린 과일', DEFAULT, DEFAULT);
+VALUES ('파코리 3년', 42.0, 59000, '버거', 'Aroma: 바닐라, 열대 과일, 캐러멜; Taste: 프루티, 우디, 파인애플; Finish: 달콤한, 말린 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('깔바도스 페르 마그루아 VSOP', '40', 65000, '감자튀김', 'Aroma: 플로럴, 자스민, 살구; Taste: 꿀, 버터스카치, 헤이즐넛; Finish: 설탕에 절인 사과, 시나몬, 바닐라', DEFAULT, DEFAULT);
+VALUES ('깔바도스 페르 마그루아 VSOP', 40.0, 65000, '감자튀김', 'Aroma: 플로럴, 자스민, 살구; Taste: 꿀, 버터스카치, 헤이즐넛; Finish: 설탕에 절인 사과, 시나몬, 바닐라', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샤또 드 브뤼이 핀 깔바도스 VSOP', '40', 65000, '베이컨', 'Aroma: 사과, 아몬드, 오렌지; Taste: 라임, 모과, 아몬드; Finish: 부드러운, 잘 익은 과일', DEFAULT, DEFAULT);
+VALUES ('샤또 드 브뤼이 핀 깔바도스 VSOP', 40.0, 65000, '베이컨', 'Aroma: 사과, 아몬드, 오렌지; Taste: 라임, 모과, 아몬드; Finish: 부드러운, 잘 익은 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('불라 깔바도스 오구스트', '40', 335000, '감자튀김', 'Aroma: 풋사과, 바닐라, 사과 잼, 사과 파이, 꿀; Taste: 과일 잼, 말린 과일, 아몬드, 계피, 우아한, 부드러운; Finish: 섬세한, 균형 잡힌, 긴 여운, 오크', DEFAULT, DEFAULT);
+VALUES ('불라 깔바도스 오구스트', 40.0, 335000, '감자튀김', 'Aroma: 풋사과, 바닐라, 사과 잼, 사과 파이, 꿀; Taste: 과일 잼, 말린 과일, 아몬드, 계피, 우아한, 부드러운; Finish: 섬세한, 균형 잡힌, 긴 여운, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파코리 16년', '41', 154000, '다크 초콜릿', 'Aroma: 배, 소나무, 후추, 사과, 파워풀; Taste: 강렬한, 신선한, 풍부한; Finish: 우디, 긴 여운, 사과', DEFAULT, DEFAULT);
+VALUES ('파코리 16년', 41.0, 154000, '다크 초콜릿', 'Aroma: 배, 소나무, 후추, 사과, 파워풀; Taste: 강렬한, 신선한, 풍부한; Finish: 우디, 긴 여운, 사과', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파코리 30년', '41', 257000, '그릴드 치킨', 'Aroma: 강렬한, 배, 장미, 커피; Taste: 눅진한, 리치, 배, 잼, 패션프루트, 사과; Finish: 산미, 생동감, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('파코리 30년', 41.0, 257000, '그릴드 치킨', 'Aroma: 강렬한, 배, 장미, 커피; Taste: 눅진한, 리치, 배, 잼, 패션프루트, 사과; Finish: 산미, 생동감, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('글렌모렌지 깔바도스 캐스크 피니시 12년', '46', 164000, '초콜릿 디저트', 'Aroma: 구운 사과, 헤더 꿀, 플로럴, 자스민, 아몬드, 배, 바닐라; Taste: 사과, 프랄린 초콜릿, 토피, 유칼립투스, 마지팬, 구운 배; Finish: 풍부한, 오일리, 스파이시, 부드러운, 달콤한, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('글렌모렌지 깔바도스 캐스크 피니시 12년', 46.0, 164000, '초콜릿 디저트', 'Aroma: 구운 사과, 헤더 꿀, 플로럴, 자스민, 아몬드, 배, 바닐라; Taste: 사과, 프랄린 초콜릿, 토피, 유칼립투스, 마지팬, 구운 배; Finish: 풍부한, 오일리, 스파이시, 부드러운, 달콤한, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('깔바도스 페르 마그루아 XO', '40', 136700, '버거', 'Aroma: 설탕에 절인 오렌지, 시나몬, 블랙 페퍼; Taste: 사과 조림, 오렌지 꿀, 코코아; Finish: 구운 향신료, 사과 파이, 복합적인', DEFAULT, DEFAULT);
+VALUES ('깔바도스 페르 마그루아 XO', 40.0, 136700, '버거', 'Aroma: 설탕에 절인 오렌지, 시나몬, 블랙 페퍼; Taste: 사과 조림, 오렌지 꿀, 코코아; Finish: 구운 향신료, 사과 파이, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('깔바도스 미셸 유아 2018', '46', 118800, '버거', 'Aroma: 신선한, 청사과, 서양 배, 가벼운, 꽃, 시트러스; Taste: 사과, 미묘한, 향신료, 달콤한, 과일, 생동감; Finish: 상쾌한, 맑은, 바닐라, 우디', DEFAULT, DEFAULT);
+VALUES ('깔바도스 미셸 유아 2018', 46.0, 118800, '버거', 'Aroma: 신선한, 청사과, 서양 배, 가벼운, 꽃, 시트러스; Taste: 사과, 미묘한, 향신료, 달콤한, 과일, 생동감; Finish: 상쾌한, 맑은, 바닐라, 우디', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('듀퐁 깔바도스 30년 노 리덕션(CS)', '50', 700000, '치킨 윙', 'Aroma: 향신료, 구운 설탕, 사과; Taste: 쌉쌀한, 구운 사과, 달콤한; Finish: 젖은 흙, 오크, 미네랄리티', DEFAULT, DEFAULT);
+VALUES ('듀퐁 깔바도스 30년 노 리덕션(CS)', 50.0, 700000, '치킨 윙', 'Aroma: 향신료, 구운 설탕, 사과; Taste: 쌉쌀한, 구운 사과, 달콤한; Finish: 젖은 흙, 오크, 미네랄리티', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('론디아즈 151 럼 750ml', '75.5', 23600, '해산물 파스타', 'Aroma: 달콤한, 체리, 오렌지; Taste: 바닐라, 럼, 복합적인; Finish: 강렬한, 긴 여운, 스파이시', DEFAULT, DEFAULT);
+VALUES ('론디아즈 151 럼 750ml', 75.5, 23600, '해산물 파스타', 'Aroma: 달콤한, 체리, 오렌지; Taste: 바닐라, 럼, 복합적인; Finish: 강렬한, 긴 여운, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('말리부 오리지널 200ml', '21', 10200, '그릴드 양갈비', 'Aroma: 코코넛, 열대 과일; Taste: 바닐라, 코코넛; Finish: 달콤한', DEFAULT, DEFAULT);
+VALUES ('말리부 오리지널 200ml', 21.0, 10200, '그릴드 양갈비', 'Aroma: 코코넛, 열대 과일; Taste: 바닐라, 코코넛; Finish: 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('바카디 카르타블랑카', '40', 28000, '샤퀴테리', 'Aroma: 바닐라, 아몬드; Taste: 우드, 스모키; Finish: 부드러운', DEFAULT, DEFAULT);
+VALUES ('바카디 카르타블랑카', 40.0, 28000, '샤퀴테리', 'Aroma: 바닐라, 아몬드; Taste: 우드, 스모키; Finish: 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디플로마티코 리제르바 익스클루시바', '40', 73900, '초콜릿 디저트', 'Aroma: 토피, 오렌지 껍질, 감초; Taste: 오크, 바닐라, 코코아; Finish: 커피, 균형 잡힌, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('디플로마티코 리제르바 익스클루시바', 40.0, 73900, '초콜릿 디저트', 'Aroma: 토피, 오렌지 껍질, 감초; Taste: 오크, 바닐라, 코코아; Finish: 커피, 균형 잡힌, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('말리부 오리지널 750ml', '21', 26900, '크림 디저트', 'Aroma: 코코넛, 열대 과일; Taste: 바닐라, 코코넛; Finish: 달콤한', DEFAULT, DEFAULT);
+VALUES ('말리부 오리지널 750ml', 21.0, 26900, '크림 디저트', 'Aroma: 코코넛, 열대 과일; Taste: 바닐라, 코코넛; Finish: 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('군트럼 리슬링 루이스 콘스탄틴', '9 ', 22000, '해산물 파스타', 'Aroma: 청사과, 파인애플, 멜론; Taste: 가벼운, 시트러스, 달콤한; Finish: 산미, 열대 과일, 우아한', DEFAULT, DEFAULT);
+VALUES ('군트럼 리슬링 루이스 콘스탄틴', 10.0, 22000, '해산물 파스타', 'Aroma: 청사과, 파인애플, 멜론; Taste: 가벼운, 시트러스, 달콤한; Finish: 산미, 열대 과일, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('론디아즈 151 럼 750ml', '75.5', 23500, '과일 타르트', 'Aroma: 달콤한, 체리, 오렌지; Taste: 바닐라, 럼, 복합적인; Finish: 강렬한, 긴 여운, 스파이시', DEFAULT, DEFAULT);
+VALUES ('론디아즈 151 럼 750ml', 75.5, 23500, '과일 타르트', 'Aroma: 달콤한, 체리, 오렌지; Taste: 바닐라, 럼, 복합적인; Finish: 강렬한, 긴 여운, 스파이시', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('하바나 클럽 3년 700ml', '37 ', 34000, '그릴드 양갈비', 'Aroma: 과일, 사탕수수, 신선한; Taste: 가벼운, 달콤한, 바나나, 부드러운; Finish: 과일, 깔끔한, 오크', DEFAULT, DEFAULT);
+VALUES ('하바나 클럽 3년 700ml', 38.5, 34000, '그릴드 양갈비', 'Aroma: 과일, 사탕수수, 신선한; Taste: 가벼운, 달콤한, 바나나, 부드러운; Finish: 과일, 깔끔한, 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('플랜테이션 O.F.T.D', '69', 48000, '시트러스 샐러드', 'Aroma: 오렌지, 바닐라, 커피, 초콜릿, 잘 익은 바나나, 크리스마스 향신료; Taste: 열대 과일, 자두, 블랙커런트, 당밀, 오크, 넛맥, 시나몬, 후추; Finish: 정향, 흑후추, 시나몬', DEFAULT, DEFAULT);
+VALUES ('플랜테이션 O.F.T.D', 69.0, 48000, '시트러스 샐러드', 'Aroma: 오렌지, 바닐라, 커피, 초콜릿, 잘 익은 바나나, 크리스마스 향신료; Taste: 열대 과일, 자두, 블랙커런트, 당밀, 오크, 넛맥, 시나몬, 후추; Finish: 정향, 흑후추, 시나몬', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('드럼브이', '40', 52000, '스모크 치즈', 'Aroma: 꿀, 꽃, 몰트; Taste: 스파이시, 달콤한, 꿀; Finish: 긴 여운', DEFAULT, DEFAULT);
+VALUES ('드럼브이', 40.0, 52000, '스모크 치즈', 'Aroma: 꿀, 꽃, 몰트; Taste: 스파이시, 달콤한, 꿀; Finish: 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('플랜테이션 파인애플 럼', '40', 64000, '초콜릿 디저트', 'Aroma: 열대 과일, 파인애플, 감귤, 정향, 시트러스, 스모키; Taste: 잘 익은 바나나, 파인애플, 달콤한; Finish: 스파이시, 스모키', DEFAULT, DEFAULT);
+VALUES ('플랜테이션 파인애플 럼', 40.0, 64000, '초콜릿 디저트', 'Aroma: 열대 과일, 파인애플, 감귤, 정향, 시트러스, 스모키; Taste: 잘 익은 바나나, 파인애플, 달콤한; Finish: 스파이시, 스모키', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('산토리 우메슈 플럼 야마자키', '20', 215000, '과일 샐러드', 'Aroma: 핵과류, 견과류, 말린 과일; Taste: 달콤한, 매실, 아몬드, 말린 살구; Finish: 우아한, 깊은, 구운 오크', DEFAULT, DEFAULT);
+VALUES ('산토리 우메슈 플럼 야마자키', 20.0, 215000, '과일 샐러드', 'Aroma: 핵과류, 견과류, 말린 과일; Taste: 달콤한, 매실, 아몬드, 말린 살구; Finish: 우아한, 깊은, 구운 오크', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('잭 다니엘스 애플', '35', 39900, '리조또', 'Aroma: 청사과, 달콤한, 바닐라, 가벼운, 오크; Taste: 꿀, 커스터드, 잘 익은 배, 오렌지 껍질; Finish: 졸인 사과, 가벼운 스모키, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('잭 다니엘스 애플', 35.0, 39900, '리조또', 'Aroma: 청사과, 달콤한, 바닐라, 가벼운, 오크; Taste: 꿀, 커스터드, 잘 익은 배, 오렌지 껍질; Finish: 졸인 사과, 가벼운 스모키, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디사론노', '28', 42000, '크림소스 생선요리', 'Aroma: 꽃, 아몬드, 체리; Taste: 아몬드, 살구, 달콤한, 쌉쌀한; Finish: 부드러운, 긴 여운', DEFAULT, DEFAULT);
+VALUES ('디사론노', 28.0, 42000, '크림소스 생선요리', 'Aroma: 꽃, 아몬드, 체리; Taste: 아몬드, 살구, 달콤한, 쌉쌀한; Finish: 부드러운, 긴 여운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디카이퍼 피치트리', '20', 22900, '해산물 파스타', 'Aroma: 복숭아, 상큼한, 농익은; Taste: 달콤한, 핵과류, 과일 잼; Finish: 부드러운, 산뜻한, 농밀한', DEFAULT, DEFAULT);
+VALUES ('디카이퍼 피치트리', 20.0, 22900, '해산물 파스타', 'Aroma: 복숭아, 상큼한, 농익은; Taste: 달콤한, 핵과류, 과일 잼; Finish: 부드러운, 산뜻한, 농밀한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('코앵트로', '40', 29900, '마카롱', 'Aroma: 신선한, 감귤, 시트러스, 오렌지; Taste: 쌉쌀한, 과일, 허브, 달콤한, 바닐라; Finish: 균형 잡힌, 복합적인, 우아한', DEFAULT, DEFAULT);
+VALUES ('코앵트로', 40.0, 29900, '마카롱', 'Aroma: 신선한, 감귤, 시트러스, 오렌지; Taste: 쌉쌀한, 과일, 허브, 달콤한, 바닐라; Finish: 균형 잡힌, 복합적인, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파마 석류 리큐르', '17', 39800, '다크 초콜릿', 'Aroma: 상큼한, 신선한, 석류; Taste: 달콤한, 부드러운, 석류; Finish: 시트러스, 베리류, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('파마 석류 리큐르', 17.0, 39800, '다크 초콜릿', 'Aroma: 상큼한, 신선한, 석류; Taste: 달콤한, 부드러운, 석류; Finish: 시트러스, 베리류, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('깔루아 1L', '16 ', 29800, '스테이크', 'Aroma: 바닐라, 초콜릿, 커피; Taste: 다크 초콜릿, 바닐라, 달콤한, 커피, 스모키; Finish: 모카 에스프레소, 화이트 초콜릿', DEFAULT, DEFAULT);
+VALUES ('깔루아 1L', NULL, 29800, '스테이크', 'Aroma: 바닐라, 초콜릿, 커피; Taste: 다크 초콜릿, 바닐라, 달콤한, 커피, 스모키; Finish: 모카 에스프레소, 화이트 초콜릿', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('파마 석류 리큐르', '17', 39800, '크림소스 생선요리', 'Aroma: 상큼한, 신선한, 석류; Taste: 달콤한, 부드러운, 석류; Finish: 시트러스, 베리류, 산뜻한', DEFAULT, DEFAULT);
+VALUES ('파마 석류 리큐르', 17.0, 39800, '크림소스 생선요리', 'Aroma: 상큼한, 신선한, 석류; Taste: 달콤한, 부드러운, 석류; Finish: 시트러스, 베리류, 산뜻한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('베일리스', '17', 40000, '감자튀김', 'Aroma: 초콜릿, 이국적인, 바닐라; Taste: 초콜릿, 크림, 바닐라, 부드러운; Finish: 복합적인, 은은한, 크림, 달콤한', DEFAULT, DEFAULT);
+VALUES ('베일리스', 17.0, 40000, '감자튀김', 'Aroma: 초콜릿, 이국적인, 바닐라; Taste: 초콜릿, 크림, 바닐라, 부드러운; Finish: 복합적인, 은은한, 크림, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('마리브리자드 블루큐라소', '23', 18900, '버거', 'Aroma: 시트러스, 오렌지, 감귤; Taste: 오렌지, 달콤한, 상큼한; Finish: 은은한, 달콤한, 시트러스', DEFAULT, DEFAULT);
+VALUES ('마리브리자드 블루큐라소', 23.0, 18900, '버거', 'Aroma: 시트러스, 오렌지, 감귤; Taste: 오렌지, 달콤한, 상큼한; Finish: 은은한, 달콤한, 시트러스', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디카이퍼 트리플 섹', '40', 18000, '바비큐 립', 'Aroma: 시트러스, 감귤, 오렌지; Taste: 오렌지; Finish: 달콤한', DEFAULT, DEFAULT);
+VALUES ('디카이퍼 트리플 섹', 40.0, 18000, '바비큐 립', 'Aroma: 시트러스, 감귤, 오렌지; Taste: 오렌지; Finish: 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('엑스레이티드', '17', 39000, '다크 초콜릿', 'Aroma: 자몽, 시트러스, 향긋한; Taste: 망고, 오렌지, 패션프루트; Finish: 긴 여운, 달콤한, 상큼한', DEFAULT, DEFAULT);
+VALUES ('엑스레이티드', 17.0, 39000, '다크 초콜릿', 'Aroma: 자몽, 시트러스, 향긋한; Taste: 망고, 오렌지, 패션프루트; Finish: 긴 여운, 달콤한, 상큼한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디카이퍼 카시스', '15', 18000, '소시지', 'Aroma: 블랙커런트; Taste: 베리, 달콤한, 새콤한; Finish: 부드러운', DEFAULT, DEFAULT);
+VALUES ('디카이퍼 카시스', 15.0, 18000, '소시지', 'Aroma: 블랙커런트; Taste: 베리, 달콤한, 새콤한; Finish: 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('볼스 트리플 섹', '38', 17000, '샤퀴테리', 'Aroma: 오렌지, 시트러스, 감귤; Taste: 달콤한, 쌉쌀한; Finish: 오렌지 껍질', DEFAULT, DEFAULT);
+VALUES ('볼스 트리플 섹', 38.0, 17000, '샤퀴테리', 'Aroma: 오렌지, 시트러스, 감귤; Taste: 달콤한, 쌉쌀한; Finish: 오렌지 껍질', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('볼스 카시스', '17', 14000, '치킨 윙', 'Aroma: 와인, 체리, 블랙커런트; Taste: 블랙커런트, 새콤한, 달콤한; Finish: 달콤한, 묵직한, 와인', DEFAULT, DEFAULT);
+VALUES ('볼스 카시스', 17.0, 14000, '치킨 윙', 'Aroma: 와인, 체리, 블랙커런트; Taste: 블랙커런트, 새콤한, 달콤한; Finish: 달콤한, 묵직한, 와인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('마리브리자드 아마레또', '23', 17500, '그릴드 양갈비', 'Aroma: 아몬드, 고소한, 강렬한; Taste: 아몬드, 달콤한, 체리; Finish: 부드러운, 달콤한, 쌉쌀한', DEFAULT, DEFAULT);
+VALUES ('마리브리자드 아마레또', 23.0, 17500, '그릴드 양갈비', 'Aroma: 아몬드, 고소한, 강렬한; Taste: 아몬드, 달콤한, 체리; Finish: 부드러운, 달콤한, 쌉쌀한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('미도리 750ml', '20', 39000, '스모크 치즈', 'Aroma: 꿀, 멜론, 신선한, 향긋한; Taste: 멜론, 시트러스, 달콤한; Finish: 부드러운, 멜론, 새콤한', DEFAULT, DEFAULT);
+VALUES ('미도리 750ml', 20.0, 39000, '스모크 치즈', 'Aroma: 꿀, 멜론, 신선한, 향긋한; Taste: 멜론, 시트러스, 달콤한; Finish: 부드러운, 멜론, 새콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('르제 크렘 드 카시스', '16', 36300, '구운 아스파라거스', 'Aroma: 꽃, 과일 잼, 체리, 다크 초콜릿; Taste: 블랙커런트, 산뜻한, 검은 과일; Finish: 균형 잡힌, 긴 여운, 우아한', DEFAULT, DEFAULT);
+VALUES ('르제 크렘 드 카시스', 16.0, 36300, '구운 아스파라거스', 'Aroma: 꽃, 과일 잼, 체리, 다크 초콜릿; Taste: 블랙커런트, 산뜻한, 검은 과일; Finish: 균형 잡힌, 긴 여운, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('볼스 블루 큐라소', '21', 17000, '다크 초콜릿', 'Aroma: 감귤, 시트러스, 오렌지; Taste: 달콤한, 쌉쌀한, 상큼한; Finish: 부드러운, 깔끔한, 오렌지', DEFAULT, DEFAULT);
+VALUES ('볼스 블루 큐라소', 21.0, 17000, '다크 초콜릿', 'Aroma: 감귤, 시트러스, 오렌지; Taste: 달콤한, 쌉쌀한, 상큼한; Finish: 부드러운, 깔끔한, 오렌지', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('말리부 오리지널', '21', 28000, '과일 타르트', 'Aroma: 열대 과일, 코코넛; Taste: 달콤한, 코코넛, 버터, 바닐라; Finish: 달콤한, 코코넛, 부드러운', DEFAULT, DEFAULT);
+VALUES ('말리부 오리지널', 21.0, 28000, '과일 타르트', 'Aroma: 열대 과일, 코코넛; Taste: 달콤한, 코코넛, 버터, 바닐라; Finish: 달콤한, 코코넛, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아페롤', '11', 30000, '구운 아스파라거스', 'Aroma: 오렌지 껍질, 바닐라, 허브; Taste: 달콤한, 쌉쌀한, 오렌지, 허브; Finish: 부드러운, 긴 여운, 향긋한', DEFAULT, DEFAULT);
+VALUES ('아페롤', 11.0, 30000, '구운 아스파라거스', 'Aroma: 오렌지 껍질, 바닐라, 허브; Taste: 달콤한, 쌉쌀한, 오렌지, 허브; Finish: 부드러운, 긴 여운, 향긋한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('힙노틱 700ml', '17', 55000, '리조또', 'Aroma: 망고, 배, 파인애플; Taste: 오렌지, 꼬냑, 패션프루트; Finish: 달콤한, 부드러운, 열대 과일', DEFAULT, DEFAULT);
+VALUES ('힙노틱 700ml', 17.0, 55000, '리조또', 'Aroma: 망고, 배, 파인애플; Taste: 오렌지, 꼬냑, 패션프루트; Finish: 달콤한, 부드러운, 열대 과일', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('잭 다니엘스 허니', '35', 38000, '치즈 플래터', 'Aroma: 꿀, 바닐라, 셰리, 캐러멜; Taste: 바닐라, 오크, 버번, 벌꿀; Finish: 풍부한, 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('잭 다니엘스 허니', 35.0, 38000, '치즈 플래터', 'Aroma: 꿀, 바닐라, 셰리, 캐러멜; Taste: 바닐라, 오크, 버번, 벌꿀; Finish: 풍부한, 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디카이퍼 애플 퍼커', '15', 24500, '크림소스 생선요리', 'Aroma: 사과, 산뜻한; Taste: 신선한, 달콤한; Finish: 사과, 새콤한', DEFAULT, DEFAULT);
+VALUES ('디카이퍼 애플 퍼커', 15.0, 24500, '크림소스 생선요리', 'Aroma: 사과, 산뜻한; Taste: 신선한, 달콤한; Finish: 사과, 새콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('볼스 바나나', '17 ', 14000, '소시지', 'Aroma: 과일, 달콤한, 바나나; Taste: 잘 익은 바나나, 바닐라; Finish: 부드러운, 섬세한, 아몬드', DEFAULT, DEFAULT);
+VALUES ('볼스 바나나', 20.5, 14000, '소시지', 'Aroma: 과일, 달콤한, 바나나; Taste: 잘 익은 바나나, 바닐라; Finish: 부드러운, 섬세한, 아몬드', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('생 제르맹', '20', 71000, '크림 디저트', 'Aroma: 엘더플라워, 열대 과일; Taste: 복숭아, 배, 시트러스, 감귤, 달콤한; Finish: 부드러운, 긴 여운, 달콤한', DEFAULT, DEFAULT);
+VALUES ('생 제르맹', 20.0, 71000, '크림 디저트', 'Aroma: 엘더플라워, 열대 과일; Taste: 복숭아, 배, 시트러스, 감귤, 달콤한; Finish: 부드러운, 긴 여운, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('베네딕틴 돔 750ml', '40', 61900, '리조또', 'Aroma: 허브', DEFAULT, DEFAULT);
+VALUES ('베네딕틴 돔 750ml', 40.0, 61900, '리조또', 'Aroma: 허브', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('샴보드 700ml', '16.5', 38000, '감자튀김', 'Aroma: 라즈베리, 블랙베리, 블랙커런트; Taste: 라즈베리, 시트러스, 감귤; Finish: 우아한, 꼬냑, 달콤한', DEFAULT, DEFAULT);
+VALUES ('샴보드 700ml', 16.5, 38000, '감자튀김', 'Aroma: 라즈베리, 블랙베리, 블랙커런트; Taste: 라즈베리, 시트러스, 감귤; Finish: 우아한, 꼬냑, 달콤한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('진로 토닉워터 300ml', '0', 1000, '과일 샐러드', '0', DEFAULT, DEFAULT);
+VALUES ('진로 토닉워터 300ml', 0, 1000, '과일 샐러드', '0', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('진로이즈백 병 360ml', '16.5', 1600, '치킨 윙', 'Aroma: 알코올; Taste: 깔끔한; Finish: 알코올', DEFAULT, DEFAULT);
+VALUES ('진로이즈백 병 360ml', 16.5, 1600, '치킨 윙', 'Aroma: 알코올; Taste: 깔끔한; Finish: 알코올', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('진로 레드 와인', '14', 25000, '스테이크', 'Aroma: 체리, 자두, 석류; Taste: 건자두, 과일, 풍부한, 말린 꽃; Finish: 진한, 과일, 긴 여운, 부드러운 타닌', DEFAULT, DEFAULT);
+VALUES ('진로 레드 와인', 14.0, 25000, '스테이크', 'Aroma: 체리, 자두, 석류; Taste: 건자두, 과일, 풍부한, 말린 꽃; Finish: 진한, 과일, 긴 여운, 부드러운 타닌', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('디스틸러리 드 파리 진 토닉', '43', 75000, '초콜릿 디저트', 'Aroma: 발사믹, 시트러스, 오렌지 껍질; Taste: 선명한, 부드러운, 쌉쌀한; Finish: 신선한, 둥근, 우아한', DEFAULT, DEFAULT);
+VALUES ('디스틸러리 드 파리 진 토닉', 43.0, 75000, '초콜릿 디저트', 'Aroma: 발사믹, 시트러스, 오렌지 껍질; Taste: 선명한, 부드러운, 쌉쌀한; Finish: 신선한, 둥근, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('봄베이 사파이어', '47', 36000, '소시지', 'Aroma: 주니퍼 베리, 레몬, 후추; Taste: 섬세한, 레몬, 향신료, 허브; Finish: 라벤더, 고수, 복합적인', DEFAULT, DEFAULT);
+VALUES ('봄베이 사파이어', 47.0, 36000, '소시지', 'Aroma: 주니퍼 베리, 레몬, 후추; Taste: 섬세한, 레몬, 향신료, 허브; Finish: 라벤더, 고수, 복합적인', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('참이슬 병 360ml', '16.5', 1500, '리조또', 'Aroma: 알코올; Taste: 깨끗한; Finish: 알코올', DEFAULT, DEFAULT);
+VALUES ('참이슬 병 360ml', 16.5, 1500, '리조또', 'Aroma: 알코올; Taste: 깨끗한; Finish: 알코올', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아녹 18년', '46', 280000, '초콜릿 디저트', 'Aroma: 초콜릿, 오렌지, 가죽, 레몬, 파인애플; Taste: 말린 과일, 초콜릿, 오렌지, 바닐라, 캐러멜; Finish: 달콤한, 부드러운', DEFAULT, DEFAULT);
+VALUES ('아녹 18년', 46.0, 280000, '초콜릿 디저트', 'Aroma: 초콜릿, 오렌지, 가죽, 레몬, 파인애플; Taste: 말린 과일, 초콜릿, 오렌지, 바닐라, 캐러멜; Finish: 달콤한, 부드러운', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아녹 12년', '40', 98000, '바비큐 립', 'Aroma: 꽃, 레몬, 산뜻한, 벌꿀, 달콤한; Taste: 짭짤한, 몰트, 고소한, 과일, 달콤한; Finish: 풍부한, 우아한', DEFAULT, DEFAULT);
+VALUES ('아녹 12년', 40.0, 98000, '바비큐 립', 'Aroma: 꽃, 레몬, 산뜻한, 벌꿀, 달콤한; Taste: 짭짤한, 몰트, 고소한, 과일, 달콤한; Finish: 풍부한, 우아한', DEFAULT, DEFAULT);
 
 INSERT INTO drink (name, alcohol_content, price, pairing_food, description, avg_rating, view_count)
-VALUES ('아녹 24년', '46', 468000, '스모크 치즈', 'Aroma: 크리스마스 케이크, 바닐라, 토피, 레몬 주스; Taste: 설탕에 절인 오렌지, 꿀, 가죽; Finish: 오크, 오렌지 껍질, 둥근, 스파이시', DEFAULT, DEFAULT);
+VALUES ('아녹 24년', 46.0, 468000, '스모크 치즈', 'Aroma: 크리스마스 케이크, 바닐라, 토피, 레몬 주스; Taste: 설탕에 절인 오렌지, 꿀, 가죽; Finish: 오크, 오렌지 껍질, 둥근, 스파이시', DEFAULT, DEFAULT);
+
+
+
 
 
 
@@ -1780,42 +1781,6 @@ INSERT INTO faq ( question, answer) VALUES
 
 INSERT INTO faq ( question, answer) VALUES 
 ( '추천된 술은 구매할 수 있나요?', '현재는 정보 제공만 가능하며, 구매 기능은 연계된 주류몰 링크를 통해 이용하실 수 있습니다.');
-
-
--- CREATE TABLE: health_condition
-CREATE TABLE health_condition (
-    condition_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    condition_name VARCHAR2(500) NOT NULL,
-    description VARCHAR2(4000)
-);
-
-COMMENT ON COLUMN health_condition.condition_id IS '건강 상태 고유 ID (자동 생성)';
-COMMENT ON COLUMN health_condition.condition_name IS '건강 상태명 (예: 당뇨, 고혈압 등)';
-COMMENT ON COLUMN health_condition.description IS '건강 상태에 대한 상세 설명';
-
-INSERT INTO health_condition (condition_name, description) VALUES 
-('당뇨', '당분 섭취에 주의가 필요한 상태');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('고혈압', '나트륨 섭취를 줄여야 하는 고혈압 환자에게 적합');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('통풍', '체내 요산 수치 조절이 필요한 상태');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('고지혈증', '지방 섭취 제한이 필요한 상태');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('글루텐 민감증', '글루텐에 민감하거나 알레르기가 있는 경우');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('비건', NULL);
-INSERT INTO health_condition (condition_name, description) VALUES 
-('신장 질환', '동물성 단백질 제한이 필요한 식단');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('암 치료 중', '면역력 강화를 위한 식단 관리 대상');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('식품 알레르기', '알러지 유발 식품 피해야 함');
-INSERT INTO health_condition (condition_name, description) VALUES 
-('위장 질환', '위산 과다 및 위장 장애에 민감한 상태');
-
-
-
 
 -- CREATE TABLE: likes
 CREATE TABLE likes (
@@ -1951,7 +1916,7 @@ INSERT INTO NOTICE  (created_by, created_at, title, content, readcount) VALUES (
 지금 가장 뜨고 있는 곳, 꼭 한 번 가봐야 할 맛집들을 한자리에 모았어요.
  2025년 3월 핫플 맛집 TOP 5
 1. [비프스탁] – 미디엄레어의 정석, 수제 스테이크 전문점 (서울 연남동)
-2. [초코홀릭카페] – 디저트 덕후들의 성지, 수제 초콜릿 "&" 핫초코 (부산 해운대)
+2. [초코홀릭카페] – 디저트 덕후들의 성지, 수제 초콜릿 "and" 핫초코 (부산 해운대)
 3. [월화쌈밥] – 한 상 가득 봄 제철 나물 쌈밥 (광주 남구)
 4. [라멘하치도] – 정통 일본 라멘의 깊은 맛 (대전 둔산동)
 5. [크루아상연구소] – 매일 아침 갓 구운 수제 크루아상 (대구 동성로)
@@ -2115,200 +2080,129 @@ COMMENT ON COLUMN recipe.view_count IS '조회수';
 COMMENT ON COLUMN recipe.ingredient_name IS '재료명';
 
 
-
-
 -- Recipe: 새우 두부 계란찜
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('새우 두부 계란찜', '반찬', '나트륨의 배출을 도와주는 것으로 알려진 칼륨이 풍부한 시금치와 소금, 간장 등의 양념 대신 새우에 들어있는 간으로 맛을 내요.', 'ADMIN', SYSDATE, '1. 손질된 새우를 끓는 물에 데쳐 건진다.a 2. 연두부, 달걀, 생크림, 설탕에 녹인 무염버터를 믹서에 넣고 간 뒤 새우(1)를 함께 섞어 그릇에 담는다.b 3. 시금치를 잘게 다져 혼합물 그릇(2)에 뿌리고 찜기에 넣고 중간 불에서 10분 정도 찐다.c', DEFAULT, DEFAULT, '새우두부계란찜
-연두부 75g(3/4모), 칵테일새우 20g(5마리), 달걀 30g(1/2개), 생크림 13g(1큰술), 설탕 5g(1작은술), 무염버터 5g(1작은술)
-고명
-시금치 10g(3줄기)');
+    VALUES ('새우 두부 계란찜', '반찬', '나트륨의 배출을 도와주는 것으로 알려진 칼륨이 풍부한 시금치와 소금, 간장 등의 양념 대신 새우에 들어있는 간으로 맛을 내요.', 'ADMIN', SYSDATE, '1. 손질된 새우를 끓는 물에 데쳐 건진다.\n2. 연두부, 달걀, 생크림, 설탕에 녹인 무염버터를 믹서에 넣고 간 뒤 새우를 함께 섞어 그릇에 담는다.\n3. 시금치를 잘게 다져 혼합물 그릇에 뿌리고 찜기에 넣고 중간 불에서 10분 정도 찐다.', DEFAULT, DEFAULT, '새우두부계란찜\n연두부 75g(3/4모), 칵테일새우 20g(5마리), 달걀 30g(1/2개), 생크림 13g(1큰술), 설탕 5g(1작은술), 무염버터 5g(1작은술)\n고명\n시금치 10g(3줄기)');
 
 -- Recipe: 부추 콩가루 찜
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('부추 콩가루 찜', '반찬', '콩가루로 버무려 감칠맛과 고소한 맛으로 나트륨 사용량을 줄여보세요. 부추는 피를 맑게 하고 허약 체질을 개선하여 성인병을 예방하는데 효과가 있지만, 알레르기 체질이나 위장이 약한 사람은 부작용이 생길 수 있으니 주의하세요.', 'ADMIN', SYSDATE, '1. 부추는 깨끗이 씻어 물기를 제거하고, 5cm 길이로 썰고 부추에 날콩가루를 넣고 고루 섞이도록 버무린다. 2. 찜기에 면보를 깔고 부추를 넣은 후 김이 오르게 쪄서 파랗게 익힌다. 3. 저염간장에 다진 대파, 다진 마늘, 고춧가루, 요리당 , 참기름, 참깨를 섞어 양념장을 만들고 찐 부추는 그릇에 담아낸다.', DEFAULT, DEFAULT, '[1인분]조선부추 50g, 날콩가루 7g(1⅓작은술)
-·양념장 : 저염간장 3g(2/3작은술), 다진 대파 5g(1작은술), 다진 마늘 2g(1/2쪽), 고춧가루 2g(1/3작은술), 요리당 2g(1/3작은술), 참기름 2g(1/3작은술), 참깨 약간');
+    VALUES ('부추 콩가루 찜', '반찬', '콩가루로 버무려 감칠맛과 고소한 맛으로 나트륨 사용량을 줄여보세요. 부추는 피를 맑게 하고 허약 체질을 개선하여 성인병을 예방하는데 효과가 있지만, 알레르기 체질이나 위장이 약한 사람은 부작용이 생길 수 있으니 주의하세요.', 'ADMIN', SYSDATE, '1. 부추는 깨끗이 씻어 물기를 제거하고, 5cm 길이로 썰고 부추에 날콩가루를 넣고 고루 섞이도록 버무린다.\n2. 찜기에 면보를 깔고 부추를 넣은 후 김이 오르게 쪄서 파랗게 익힌다.\n3. 저염간장에 다진 대파, 다진 마늘, 고춧가루, 요리당, 참기름, 참깨를 섞어 양념장을 만들고 찐 부추는 그릇에 담아낸다.', DEFAULT, DEFAULT, '[1인분]조선부추 50g, 날콩가루 7g(1⅓작은술)\n·양념장 : 저염간장 3g(2/3작은술), 다진 대파 5g(1작은술), 다진 마늘 2g(1/2쪽), 고춧가루 2g(1/3작은술), 요리당 2g(1/3작은술), 참기름 2g(1/3작은술), 참깨 약간');
 
 -- Recipe: 방울토마토 소박이
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('방울토마토 소박이', '반찬', '소금에 절이는 오이 대신 방울토마토를 사용하여 나트륨 섭취를 줄였어요. 토마토에는 과일에 대체로 없는 글루탐산이 풍부하여 감칠맛을 내주며, 겉절이 양념과 잘 어우러져 상큼함과 감칠맛을 내주어요.', 'ADMIN', SYSDATE, '1. 물기를 빼고 2cm 정도의 크기로 썰은 부추와 양파를 양념장에 섞어 양념속을 만든다. 2. 깨끗이 씻은 방울토마토는 꼭지를 떼고 윗부분에 칼로 십자모양으로 칼집을 낸다. 3. 칼집을 낸 방울토마토에 양념속을 사이사이에 넣어 버무린다.', DEFAULT, DEFAULT, '●방울토마토 소박이 : 
-방울토마토 150g(5개), 양파 10g(3×1cm), 부추 10g(5줄기)
-●양념장 : 
-고춧가루 4g(1작은술), 멸치액젓 3g(2/3작은술), 다진 마늘 2.5g(1/2쪽), 매실액 2g(1/3작은술), 설탕 2g(1/3작은술), 물 2ml(1/3작은술), 통깨 약간');
+    VALUES ('방울토마토 소박이', '반찬', '소금에 절이는 오이 대신 방울토마토를 사용하여 나트륨 섭취를 줄였어요. 토마토에는 과일에 대체로 없는 글루탐산이 풍부하여 감칠맛을 내주며, 겉절이 양념과 잘 어우러져 상큼함과 감칠맛을 내주어요.', 'ADMIN', SYSDATE, '1. 물기를 빼고 2cm 정도의 크기로 썰은 부추와 양파를 양념장에 섞어 양념속을 만든다.\n2. 깨끗이 씻은 방울토마토는 꼭지를 떼고 윗부분에 칼로 십자모양으로 칼집을 낸다.\n3. 칼집을 낸 방울토마토에 양념속을 사이사이에 넣어 버무린다.', DEFAULT, DEFAULT, '●방울토마토 소박이 : \n방울토마토 150g(5개), 양파 10g(3×1cm), 부추 10g(5줄기)\n●양념장 : \n고춧가루 4g(1작은술), 멸치액젓 3g(2/3작은술), 다진 마늘 2.5g(1/2쪽), 매실액 2g(1/3작은술), 설탕 2g(1/3작은술), 물 2ml(1/3작은술), 통깨 약간');
 
 -- Recipe: 순두부 사과 소스 오이무침
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('순두부 사과 소스 오이무침', '반찬', '사과에는 팩틴이 풍부하여 체내 나쁜 콜레스테롤을 감소시키고 나트륨 배출을 촉진시켜줘요. 순두부와 사과를 갈아 만든 소스는 맵고 짠 자극적인 간이 아닌 재료 그대로의 새콤달콤한 맛과 깔끔한 맛을 내요.', 'ADMIN', SYSDATE, '1. 사과, 순두부를 믹서에 넣고 곱게 갈아 소스를 만든다. 2. 오이는 소금으로 문질러 씻어 반을 갈라 씨를 제거하고 어슷썰기를 한다. 3. 썰어 놓은 오이에 순두부사과 소스를 넣고 버무린 후 다진 땅콩을 뿌려 마무리 한다.', DEFAULT, DEFAULT, '●오이무침 :
-오이 70g(1/3개), 다진 땅콩 10g(1큰술)
-●순두부사과 소스 : 
-순두부 40g(1/8봉지), 사과 50g(1/3개)');
+    VALUES ('순두부 사과 소스 오이무침', '반찬', '사과에는 팩틴이 풍부하여 체내 나쁜 콜레스테롤을 감소시키고 나트륨 배출을 촉진시켜줘요. 순두부와 사과를 갈自主작성된 소스는 맵고 짠 자극적인 간이 아닌 재료 그대로의 새콤달콤한 맛과 깔끔한 맛을 내요.', 'ADMIN', SYSDATE, '1. 사과, 순두부를 믹서에 넣고 곱게 갈아 소스를 만든다.\n2. 오이는 소금으로 문질러 씻어 반을 갈라 씨를 제거하고 어슷썰기를 한다.\n3. 썰어 놓은 오이에 순두부사과 소스를 넣고 버무린 후 다진 땅콩을 뿌려 마무리 한다.', DEFAULT, DEFAULT, '●오이무침 :\n오이 70g(1/3개), 다진 땅콩 10g(1큰술)\n●순두부사과 소스 : \n순두부 40g(1/8봉지), 사과 50g(1/3개)');
 
 -- Recipe: 사과 새우 북엇국
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('사과 새우 북엇국', '국', '소금과 간장 대신 북어채와 새우의 짠맛으로 간을 한 담백한 맛의 북엇국을 만들었어요. 홍합이나 바지락을 넣으면 시원한 국물을 연출 할 수 있어요.', 'ADMIN', SYSDATE, '5. 그릇에 담아낸다. 2. 북어채를 잘게 손으로 찢어 찬물에 헹구어 준비한 후 양파, 표고버섯, 사과는 채 썰고 새우는 등쪽의 두세 마디에 꼬챙이를 넣어 내장을 뺀 후 헹군다. 3. 찬물에 북어채, 새우, 표고버섯, 양파를 넣고 20분 정도 끓인 후 사과를 넣어 북어의 씁쓸한 맛을 없앤다.', DEFAULT, DEFAULT, '북엇국
-북어채 25g(15개), 새우 10g(3마리), 사과 30g(1/5개), 양파 40g(1/4개),
-표고버섯 20g(2장), 물 300ml(1½컵)');
+    VALUES ('사과 새우 북엇국', '국', '소금과 간장 대신 북어채와 새우의 짠맛으로 간을 한 담백한 맛의 북엇국을 만들었어요. 홍합이나 바지락을 넣으면 시원한 국물을 연출 할 수 있어요.', 'ADMIN', SYSDATE, '1. 북어채를 잘게 손으로 찢어 찬물에 헹구어 준비한 후 양파, 표고버섯, 사과는 채 썰고 새우는 등쪽의 두세 마디에 꼬챙이를 넣어 내장을 뺀 후 헹군다.\n2. 찬물에 북어채, 새우, 표고버섯, 양파를 넣고 20분 정도 끓인 후 사과를 넣어 북어의 씁쓸한 맛을 없앤다.\n3. 그릇에 담아낸다.', DEFAULT, DEFAULT, '북엇국\n북어채 25g(15개), 새우 10g(3마리), 사과 30g(1/5개), 양파 40g(1/4개),\n표고버섯 20g(2장), 물 300ml(1½컵)');
 
 -- Recipe: 저염 된장으로 맛을 낸 황태해장국
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('저염 된장으로 맛을 낸 황태해장국', '국', '황태해장국을 조리할 때 소금 대신 저염된장을 사용하면 덜 짜고 감칠맛 나는 황태해장국을 맛 볼 수 있어요.
-황태는 빛이 누렇고 살이 연한 것이 좋은 상품이며, 황태는 냉동실에 보관하거나 잘 밀봉하여 건조하고 서늘한 곳에 보관하는 것이 좋아요.', 'ADMIN', SYSDATE, '4. 냄비에 물을 붓고 황태와 무를 넣고 끓인 후 육수에서 물을 건져내고 저염 된장을 푼다. 5. 콩나물, 다진 마늘, 청양고추를 넣고 뚜껑을 덮어 김이 나게 끓
-여준다. 3. 황태는 손질하여 물에 헹궈 건져 놓고 콩나물은 다듬어 씻고 청양고추는 어슷썰기 한다.', DEFAULT, DEFAULT, '황태해장국
-황태(채) 15g(10개), 콩나물 30g(1/6봉지), 무 30g(5×3×2cm), 저염된장 10g(2작은술), 물 300ml(1½컵), 청양고추 5g(1/2개), 다진 마늘 2g(1/3작은술)');
+    VALUES ('저염 된장으로 맛을 낸 황태해장국', '국', '황태해장국을 조리할 때 소금 대신 저염된장을 사용하면 덜 짜고 감칠맛 나는 황태해장국을 맛 볼 수 있어요.\n황태는 빛이 누렇고 살이 연한 것이 좋은 상품이며, 황태는 냉동실에 보관하거나 잘 밀봉하여 건조하고 서늘한 곳에 보관하는 것이 좋아요.', 'ADMIN', SYSDATE, '1. 황태는 손질하여 물에 헹궈 건져 놓고 콩나물은 다듬어 씻고 청양고추는 어슷썰기 한다.\n2. 냄비에 물을 붓고 황태와 무를 넣고 끓인 후 육수에서 물을 건져내고 저염 된장을 푼다.\n3. 콩나물, 다진 마늘, 청양고추를 넣고 뚜껑을 덮어 김이 나게 끓여준다.', DEFAULT, DEFAULT, '황태해장국\n황태(채) 15g(10개), 콩나물 30g(1/6봉지), 무 30g(5×3×2cm), 저염된장 10g(2작은술), 물 300ml(1½컵), 청양고추 5g(1/2개), 다진 마늘 2g(1/3작은술)');
 
 -- Recipe: 된장국
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('된장국', '국', '된장국의 된장 사용량을 줄이기 위해 두부와 감자 등의 재료를 갈아 넣으면 담백한 된장국을 맛볼 수 있어요.
-된장의 양을 적게 사용함으로 나트륨 섭취를 줄일 수 있어요.', 'ADMIN', SYSDATE, '1. 감자, 양파는 얇게 썰고 애느타리 버섯은 썰어 달궈진 팬에 굽는다. 2. 냄비에 물을 붓고 된장을 푼 뒤 감자, 양파, 두부를 넣어 재료가 투명해지게 끓인 후 된장국의 재료를 건져서 믹서에 넣어 갈고 된장국에 넣어 한번 더 끓인다. 3. 구운 애느타리버섯과 대파를 국에 넣어 끓인 후 그릇에 담는다.', DEFAULT, DEFAULT, '된장국
-두부 20g(2×2×2cm), 애느타리버섯 20g(4가닥), 감자 10g(4×3×1cm), 양파 10g(2×1cm), 대파 10g(5cm), 된장 5g(1작은술), 물 300ml(1½컵)');
+    VALUES ('된장국', '국', '된장국의 된장 사용량을 줄이기 위해 두부와 감자 등의 재료를 갈아 넣으면 담백한 된장국을 맛볼 수 있어요.\n된장의 양을 적게 사용함으로 나트륨 섭취를 줄일 수 있어요.', 'ADMIN', SYSDATE, '1. 감자, 양파는 얇게 썰고 애느타리 버섯은 썰어 달궈진 팬에 굽는다.\n2. 냄비에 물을 붓고 된장을 푼 뒤 감자, 양파, 두부를 넣어 재료가 투명해지게 끓인 후 된장국의 재료를 건져서 믹서에 넣어 갈고 된장국에 넣어 한번 더 끓인다.\n3. 구운 애느타리버섯과 대파를 국에 넣어 끓인 후 그릇에 담는다.', DEFAULT, DEFAULT, '된장국\n두부 20g(2×2×2cm), 애느타리버섯 20g(4가닥), 감자 10g(4×3×1cm), 양파 10g(2×1cm), 대파 10g(5cm), 된장 5g(1작은술), 물 300ml(1½컵)');
 
 -- Recipe: 표고버섯 청경채국
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('표고버섯 청경채국', '국', '표고버섯 밑둥을 육수에 넣어 감칠맛을 더하고, 멸치와 다시마는 다량의 소금 없이도 국물 맛을 깊게 만들어 주는 역할을 해요. 건표고버섯은 햇볕에 말리는 과정에서 만들어진 비타민 D가 풍부해 칼슘 흡수를 도와 골다공증 예방에 좋은 식품이예요. 생표고버섯에는 비타민 D가 거의 들어있지 않아요.', 'ADMIN', SYSDATE, '1. 찬물에 표고버섯,머리와 내장을 제거한 멸치,
-다시마, 양파를 넣어 중간 불에서 10분 정도
-끓여 멸치육수를 만든다. 2. 육수의 표고버섯 기둥, 멸치, 다시마, 양파를 건진 후 표고버섯은 편으로 썰고 청경채는 4cm 크기로 썬다. 3. 끓는 육수에 준비한 표고버섯과 청경채를 넣고 국간장으로 간을 한 후 마늘을 넣어 한소끔 끓인다.', DEFAULT, DEFAULT, '●멸치육수 : 국물용 멸치 5g(3마리), 다시마 1장(5×1cm), 양파 10g(2×1cm), 표고버섯 기둥, 국간장 5g(1작은술), 물 300ml(1½컵)
-●채소준비 : 청경채 20g(1개), 표고버섯 20g(2장), 다진 마늘 2g(1/3작은술)');
+    VALUES ('표고버섯 청경채국', '국', '표고버섯 밑둥을 육수에 넣어 감칠맛을 더하고, 멸치와 다시마는 다량의 소금 없이도 국물 맛을 깊게 만들어 주는 역할을 해요. 건표고버섯은 햇볕에 말리는 과정에서 만들어진 비타민 D가 풍부해 칼슘 흡수를 도와 골다공증 예방에 좋은 식품이예요. 생표고버섯에는 비타민 D가 거의 들어있지 않아요.', 'ADMIN', SYSDATE, '1. 찬물에 표고버섯, 머리와 내장을 제거한 멸치, 다시마, 양파를 넣어 중간 불에서 10분 정도 끓여 멸치육수를 만든다.\n2. 육수의 표고버섯 기둥, 멸치, 다시마, 양파를 건진 후 표고버섯은 편으로 썰고 청경채는 4cm 크기로 썬다.\n3. 끓는 육수에 준비한 표고버섯과 청경채를 넣고 국간장으로 간을 한 후 마늘을 넣어 한소끔 끓인다.', DEFAULT, DEFAULT, '●멸치육수 : 국물용 멸치 5g(3마리), 다시마 1장(5×1cm), 양파 10g(2×1cm), 표고버섯 기둥, 국간장 5g(1작은술), 물 300ml(1½컵)\n●채소준비 : 청경채 20g(1개), 표고버섯 20g(2장), 다진 마늘 2g(1/3작은술)');
 
 -- Recipe: 치커리샐러드와 올리브 마늘 소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('치커리샐러드와 올리브 마늘 소스', '반찬', '치커리를 육류와 함께 섭취하면 치커리의 산뜻한 맛으로 입맛을 돋우고 섬유소의 섭취를 늘릴 수 있으며 동맥경화를 예방하는데 도움이 된답니다. 치커리에는 칼륨이 많아 육류나 고나트륨 식사시 함께 섭취하면 체내나트륨 배출에 효과적이에요.', 'ADMIN', SYSDATE, '1. 올리브유, 식초, 설탕, 다진 마늘을 섞어 거품기로 충분히 저어주어 올리브마늘 드레싱을 만든다. 2. 치커리는 싱싱하게 찬물에 담갔다가 물기를 뺀 후 한입 크기로 자르고, 적양배추, 양파, 당근은 곱게채를 썬다. 3. 접시에 준비한 치커리, 적양배추, 양파, 당근을 담고 올리브마늘 드레싱을 뿌린다.', DEFAULT, DEFAULT, '●치커리 샐러드 : 치커리 30g(10줄기), 적양배추 15g(5×3cm), 양파 10g(2×1cm), 당근 5g(3×1×1cm)
-●올리브마늘 드레싱 : 올리브유 10g(2작은술), 식초 5g(1작은술), 설탕 5g(1작은술), 마늘 5g(1쪽)');
+    VALUES ('치커리샐러드와 올리브 마늘 소스', '반찬', '치커리를 육류와 함께 섭취하면 치커리의 산뜻한 맛으로 입맛을 돋우고 섬유소의 섭취를 늘릴 수 있으며 동맥경화를 예방하는데 도움이 된답니다. 치커리에는 칼륨이 많아 육류나 고나트륨 식사시 함께 섭취하면 체내나트륨 배출에 효과적이에요.', 'ADMIN', SYSDATE, '1. 올리브유, 식초, 설탕, 다진 마늘을 섞어 거품기로 충분히 저어주어 올리브마늘 드레싱을 만든다.\n2. 치커리는 싱싱하게 찬물에 담갔다가 물기를 뺀 후 한입 크기로 자르고, 적양배추, 양파, 당근은 곱게채를 썬다.\n3. 접시에 준비한 치커리, 적양배추, 양파, 당근을 담고 올리브마늘 드레싱을 뿌린다.', DEFAULT, DEFAULT, '●치커리 샐러드 : 치커리 30g(10줄기), 적양배추 15g(5×3cm), 양파 10g(2×1cm), 당근 5g(3×1×1cm)\n●올리브마늘 드레싱 : 올리브유 10g(2작은술), 식초 5g(1작은술), 설탕 5g(1작은술), 마늘 5g(1쪽)');
 
 -- Recipe: 스트로베리 샐러드
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('스트로베리 샐러드', '반찬', '딸기는 칼륨이 풍부하여 나트륨 배출에 뛰어나지만 칼슘이 부족한 과일이예요. 그렇기 때문에 칼슘이 풍부한 요거트나 기타 유제품과 함께 섭취하면 좋아요.', 'ADMIN', SYSDATE, '1. 찬물이 담긴 냄비에 식초, 소금을 넣고 메추리알을 삶는다. 물이 끓어오르면 5분 정도 더 삶아 찬물에 헹군 후 껍질을 벗기고 반으로 자른다. 2. 딸기를 흐르는 물에 가볍게 씻어 꼭지를 제거한 후 물기를 빼고 반으로 자른다. 3. 양상추는 찬물에 담갔다가 물기를 빼고 한입 크기로 찢은 후 접시에 양상추, 딸기, 블루베리, 메추리알을 담고 플레인요거트를 끼얹는다.', DEFAULT, DEFAULT, '스트로베리 샐러드
-딸기 70g(7개), 플레인요거트 85g(1개), 양상추 70g(2장), 메추리알 30g(3개), 블루베리 15g(1큰술), 식초 약간, 소금 약간');
+    VALUES ('스트로베리 샐러드', '반찬', '딸기는 칼륨이 풍부하여 나트륨 배출에 뛰어나지만 칼슘이 부족한 과일이예요. 그렇기 때문에 칼슘이 풍부한 요거트나 기타 유제품과 함께 섭취하면 좋아요.', 'ADMIN', SYSDATE, '1. 찬물이 담긴 냄비에 식초, 소금을 넣고 메추리알을 삶는다. 물이 끓어오르면 5분 정도 더 삶아 찬물에 헹군 후 껍질을 벗기고 반으로 자른다.\n2. 딸기를 흐르는 물에 가볍게 씻어 꼭지를 제거한 후 물기를 빼고 반으로 자른다.\n3. 양상추는 찬물에 담갔다가 물기를 빼고 한입 크기로 찢은 후 접시에 양상추, 딸기, 블루베리, 메추리알을 담고 플레인요거트를 끼얹는다.', DEFAULT, DEFAULT, '스트로베리 샐러드\n딸기 70g(7개), 플레인요거트 85g(1개), 양상추 70g(2장), 메추리알 30g(3개), 블루베리 15g(1큰술), 식초 약간, 소금 약간');
 
 -- Recipe: 시금치 우유 소스와 그린매쉬드포테이토
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('시금치 우유 소스와 그린매쉬드포테이토', '반찬', '시금치에 풍부한 칼륨과 우유의 칼슘은 나트륨 배출을 도와줘요. 감자도 칼륨이 풍부한 채소이지만 감자에 부족한 칼슘을 유제품과 함께 섭취하면 칼슘을 보충 받을 수 있어요.', 'ADMIN', SYSDATE, '1. 시금치는 끓는 소금물에 데쳐 찬물에 헹구어 물기를 짜고 우유를 넣고 블렌더에 곱게 갈아 체에 거른다. 2. 껍질 벗긴 감자는 찜기에 넣어 20분 정도 삶고 꺼내서 으깨고, 아몬드는 잘게 다지며, 치커리는 곱게 다진다. 3. 으깬 감자, 다진 치커리, 시금치 우유소스, 설탕을 넣고 섞어 접시에 담고 아몬드, 크랜베리를 올리고 시금치우유 소스를 곁들인다.', DEFAULT, DEFAULT, '●그린매쉬드포테이토 : 감자 80g(1/2개), 시금치우유 소스 5g(1작은술), 아몬드 2g(1알), 설탕 2g(1/3작은술), 크랜베리 3g, 치커리 약간
-●시금치우유 소스 : 시금치 10g, 우유 10g(2작은술)');
+    VALUES ('시금치 우유 소스와 그린매쉬드포테이토', '반찬', '시금치에 풍부한 칼륨과 우유의 칼슘은 나트륨 배출을 도와줘요. 감자도 칼륨이 풍부한 채소이지만 감자에 부족한 칼슘을 유제품과 함께 섭취하면 칼슘을 보충 받을 수 있어요.', 'ADMIN', SYSDATE, '1. 시금치는 끓는 소금물에 데쳐 찬물에 헹구어 물기를 짜고 우유를 넣고 블렌더에 곱게 갈아 체에 거른다.\n2. 껍질 벗긴 감자는 찜기에 넣어 20분 정도 삶고 꺼내서 으깨고, 아몬드는 잘게 다지며, 치커리는 곱게 다진다.\n3. 으깬 감자, 다진 치커리, 시금치 우유소스, 설탕을 넣고 섞어 접시에 담고 아몬드, 크랜베리를 올리고 시금치우유 소스를 곁들인다.', DEFAULT, DEFAULT, '●그린매쉬드포테이토 : 감자 80g(1/2개), 시금치우유 소스 5g(1작은술), 아몬드 2g(1알), 설탕 2g(1/3작은술), 크랜베리 3g, 치커리 약간\n●시금치우유 소스 : 시금치 10g, 우유 10g(2작은술)');
 
 -- Recipe: 버섯구이와 두부타르타르 소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('버섯구이와 두부타르타르 소스', '반찬', '새송이 버섯은 칼륨 함량이 높아 육류와 함께 섭취하면 혈중 콜레스테롤 수치를 낮추는데 효과가 있어요.
-나트륨이 많은 간장이나 소금 대신 겨자, 레몬 등을 이용한 소스로 나트륨 함량을 줄여보세요.', 'ADMIN', SYSDATE, '1. 곱게 다진 양파와 오이피클은 물기를 짠다. 2. 연두부에 다진 양파, 다진 오이피클, 올리브유, 머스터드, 후추, 꿀, 식초, 레몬즙을 넣어 두부타르타르 소스를 만든다. 3. 새송이버섯은 0.5cm 두께로 썰고 프라이팬에 노릇하게 구워준 후 접시에 새송이버섯과 치커리를 담고 소스를 곁들인다.', DEFAULT, DEFAULT, '●버섯구이 : 새송이버섯 70g(7개), 올리브유 10g(2작은술)
-●곁들임 : 치커리 10g(3줄기)
-●두부타르타르 소스 : 연두부 30g(1/4모), 다진 양파 10g(2작은술), 다진 오이피클 10g(2작은술), 올리브유 2g(1/3작은술), 식초 5g(1작은술), 레몬즙 3g(2/3작은술), 머스터드 3g(2/3작은술), 꿀 2g(1/3작은술), 흰 후추 약간');
+    VALUES ('버섯구이와 두부타르타르 소스', '반찬', '새송이 버섯은 칼륨 함량이 높아 육류와 함께 섭취하면 혈중 콜레스테롤 수치를 낮추는데 효과가 있어요.\n나트륨이 많은 간장이나 소금 대신 겨자, 레몬 등을 이용한 소스로 나트륨 함량을 줄여보세요.', 'ADMIN', SYSDATE, '1. 곱게 다진 양파와 오이피클은 물기를 짠다.\n2. 연두부에 다진 양파, 다진 오이피클, 올리브유, 머스터드, 후추, 꿀, 식초, 레몬즙을 넣어 두부타르타르 소스를 만든다.\n3. 새송이버섯은 0.5cm 두께로 썰고 프라이팬에 노릇하게 구워준 후 접시에 새송이버섯과 치커리를 담고 소스를 곁들인다.', DEFAULT, DEFAULT, '●버섯구이 : 새송이버섯 70g(7개), 올리브유 10g(2작은술)\n●곁들임 : 치커리 10g(3줄기)\n●두부타르타르 소스 : 연두부 30g(1/4모), 다진 양파 10g(2작은술), 다진 오이피클 10g(2작은술), 올리브유 2g(1/3작은술), 식초 5g(1작은술), 레몬즙 3g(2/3작은술), 머스터드 3g(2/3작은술), 꿀 2g(1/3작은술), 흰 후추 약간');
 
 -- Recipe: 구운채소와 간장레몬 소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('구운채소와 간장레몬 소스', '반찬', '채소와 버섯류에는 대부분 나트륨 배출에 효과적인 칼륨이 함유되어 있어 채소를 많이 섭취하는 것이 저나트륨 식단의 기본이에요. 레몬즙은 음식의 짠맛을 감추고 간장과 함께 사용하면 간장의 감칠맛을 상승시키는 효
-과도 있어요.', 'ADMIN', SYSDATE, '1. 저염간장, 식초, 레몬즙, 설탕을 혼합하여 간장레몬 소스를 만든다. 2. 호박, 가지, 새송이버섯은 3cm 길이로 자른 후 얇은 편으로 채 썰고, 양파, 파프리카, 피망은 호박 길이로 썬다. 3. 가지, 호박, 새송이버섯, 양파, 파프리카, 피망에 올리브유를 바르고 달궈진 그릴 팬에 구운 후 접시에 담고 발사믹 크레타를 뿌리고 간장레몬 소스를 곁들인다.', DEFAULT, DEFAULT, '●구운채소 : 가지 20g(3cm), 호박 50g(1/3개), 새송이버섯 15g(3개), 양파 15g(1/8개), 발사믹크레마 15g(1큰술), 빨강 파프리카 3g(3×1cm), 노랑 파프리카 3g(3×1cm), 청피망 3g(3×1cm), 올리브유 약간
-●간장 레몬 소스 : 저염간장 5g(1작은술), 식초 15g(1큰술), 설탕 10g(1큰술), 레몬즙 5g(1작은술)');
+    VALUES ('구운채소와 간장레몬 소스', '반찬', '채소와 버섯류에는 대부분 나트륨 배출에 효과적인 칼륨이 함유되어 있어 채소를 많이 섭취하는 것이 저나트륨 식단의 기본이에요. 레몬즙은 음식의 짠맛을 감추고 간장과 함께 사용하면 간장의 감칠맛을 상승시키는 효과도 있어요.', 'ADMIN', SYSDATE, '1. 저염간장, 식초, 레몬즙, 설탕을 혼합하여 간장레몬 소스를 만든다.\n2. 호박, 가지, 새송이버섯은 3cm 길이로 자른 후 얇은 편으로 채 썰고, 양파, 파프리카, 피망은 호박 길이로 썬다.\n3. 가지, 호박, 새송이버섯, 양파, 파프리카, 피망에 올리브유를 바르고 달궈진 그릴 팬에 구운 후 접시에 담고 발사믹 크레타를 뿌리고 간장레몬 소스를 곁들인다.', DEFAULT, DEFAULT, '●구운채소 : 가지 20g(3cm), 호박 50g(1/3개), 새송이버섯 15g(3개), 양파 15g(1/8개), 발사믹크레마 15g(1큰술), 빨강 파프리카 3g(3×1cm), 노랑 파프리카 3g(3×1cm), 청피망 3g(3×1cm), 올리브유 약간\n●간장 레몬 소스 : 저염간장 5g(1작은술), 식초 15g(1큰술), 설탕 10g(1큰술), 레몬즙 5g(1작은술)');
 
 -- Recipe: 브로콜리 컬리플라워 샐러드와 두유 요거트 소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('브로콜리 컬리플라워 샐러드와 두유 요거트 소스', '반찬', '브로콜리와 컬리플라워를 데치는 과정에서만 소금을 넣어 맛과 색은 살려주고 소금 사용은 줄였어요, 또한 마요네즈 대신 두유를 사용하면 맛은 고소해지고 나트륨 배설은 증가 시킬 수 있어요.', 'ADMIN', SYSDATE, '1. 두유에 플레인요거트와 레몬즙, 설탕을 넣고 잘 섞어 두유요거트 소스를 만든다. 2. 강낭콩은 물에 불린 후 콩과 물을 1:2.5로 넣고 20~25분 삶아 건지고 브로콜리와 컬리플라워는 한입 크기로 썰어 끓는 소금물에 살짝 데쳐 찬물에 헹궈 물기를 뺀다. 3. 접시에 데친 브로콜리와 컬리플라워, 삶은 강낭콩, 채썬 적양파, 다진 호두, 건포도를 담고 두유요거트 소스를 곁들여 낸다.', DEFAULT, DEFAULT, '●브로콜리컬리플라워 샐러드 : 브로콜리 40g(1/5송이), 컬리플라워 40g(1/3송이), 적양파 10g(2×1cm), 강낭콩 5g(1작은술), 건포도 5알, 호두 1/2알, 소금 약간
-●두유요거트 소스 : 두유 50g(3⅓큰술), 플레인요거트 20g(1⅓큰술), 레몬즙 5g(1작은술), 설탕 약간');
+    VALUES ('브로콜리 컬리플라워 샐러드와 두유 요거트 소스', '반찬', '브로콜리와 컬리플라워를 데치는 과정에서만 소금을 넣어 맛과 색은 살려주고 소금 사용은 줄였어요, 또한 마요네즈 대신 두유를 사용하면 맛은 고소해지고 나트륨 배설은 증가 시킬 수 있어요.', 'ADMIN', SYSDATE, '1. 두유에 플레인요거트와 레몬즙, 설탕을 넣고 잘 섞어 두유요거트 소스를 만든다.\n2. 강낭콩은 물에 불린 후 콩과 물을 1:2.5로 넣고 20~25분 삶아 건지고 브로콜리와 컬리플라워는 한입 크기로 썰어 끓는 소금물에 살짝 데쳐 찬물에 헹궈 물기를 뺀다.\n3. 접시에 데친 브로콜리와 컬리플라워, 삶은 강낭콩, 채썬 적양파, 다진 호두, 건포도를 담고 두유요거트 소스를 곁들여 낸다.', DEFAULT, DEFAULT, '●브로콜리컬리플라워 샐러드 : 브로콜리 40g(1/5송이), 컬리플라워 40g(1/3송이), 적양파 10g(2×1cm), 강낭콩 5g(1작은술), 건포도 5알, 호두 1/2알, 소금 약간\n●두유요거트 소스 : 두유 50g(3⅓큰술), 플레인요거트 20g(1⅓큰술), 레몬즙 5g(1작은술), 설탕 약간');
 
 -- Recipe: 오렌지와 당근 만남주스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('오렌지와 당근 만남주스', '후식', '시판되는 대부분의 주스는 가공되고 농축되는 과정에서 나트륨이 첨가되는 경우가 있어 과일, 채소를 직접 갈아 마시면 나트륨 섭취를 줄일 수 있어요.', 'ADMIN', SYSDATE, '1. 오렌지는 깨끗이 씻어 껍질을 벗긴다. 6. 컵에 담아 마무리한다. 4. 믹서에 갈아낸 주스는 고운 체로 거른다. 5. 주스를 살얼음이 생길 만큼 시원하게 냉동한다. 2. 당근은 깨끗이 씻어 작은 토막으로 썬다. 3. 당근, 오렌지, 물(50ml)을 믹서에 곱게 간다.', DEFAULT, DEFAULT, '오렌지 당근펀치
-당근 100g(1/2개), 오렌지 100g(1/2개)');
+    VALUES ('오렌지와 당근 만남주스', '후식', '시판되는 대부분의 주스는 가공되고 농축되는 과정에서 나트륨이 첨가되는 경우가 있어 과일, 채소를 직접 갈아 마시면 나트륨 섭취를 줄일 수 있어요.', 'ADMIN', SYSDATE, '1. 오렌지는 깨끗이 씻어 껍질을 벗긴다.\n2. 당근은 깨끗이 씻어 작은 토막으로 썬다.\n3. 당근, 오렌지, 물(50ml)을 믹서에 곱게 간다.\n4. 믹서에 갈아낸 주스는 고운 체로 거른다.\n5. 주스를 살얼음이 생길 만큼 시원하게 냉동한다.\n6. 컵에 담아 마무리한다.', DEFAULT, DEFAULT, '오렌지 당근펀치\n당근 100g(1/2개), 오렌지 100g(1/2개)');
 
 -- Recipe: 칠곡석류국수
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('칠곡석류국수', '일품', '견과류에는 불포화 지방산이 풍부하게 함유되어 있어, 고지혈증 등 혈류개선에 효과가 있어 성인병 예방에 좋다. 짠맛을 대신하여 석류의 새콤달콤한 맛을 활용하고, 볶은 견과류로 고소한 맛과 풍미를 더하였다.', 'ADMIN', SYSDATE, '1. 잣, 아몬드, 해바라기씨, 호두, 호박씨는 다진다. 2. 끓는 물에 저염소금과 식초를 넣은 후 소면을 삶은 후 체에 건져 물기를
-뺀다. 3. 석류는 물 600g와 함께 믹서에 갈고 체에 걸러 즙을 낸다. 그릇에 면을 담고 차갑게 식힌 석류즙을 붓고 견과류, 채 썬 오이를 고명으로 올린다.', DEFAULT, DEFAULT, '●주재료 : 소면 160g, 저염소금 4g(1작은술), 식초 8g(1/2작은술)
-●소스 : 석류 200g(1/2개)
-●장식 : 잣 4g(1작은술), 아몬드 4g(1작은술), 해바라기씨 4g(1작은술), 호두 4g(1작은술), 호박씨 4g(1작은술), 오이 20g(1/4개)');
+    VALUES ('칠곡석류국수', '일품', '견과류에는 불포화 지방산이 풍부하게 함유되어 있어, 고지혈증 등 혈류개선에 효과가 있어 성인병 예방에 좋다. 짠맛을 대신하여 석류의 새콤달콤한 맛을 활용하고, 볶은 견과류로 고소한 맛과 풍미를 더하였다.', 'ADMIN', SYSDATE, '1. 잣, 아몬드, 해바라기씨, 호두, 호박씨는 다진다.\n2. 끓는 물에 저염소금과 식초를 넣은 후 소면을 삶은 후 체에 건져 물기를 뺀다.\n3. 석류는 물 600g와 함께 믹서에 갈고 체에 걸러 즙을 낸다. 그릇에 면을 담고 차갑게 식힌 석류즙을 붓고 견과류, 채 썬 오이를 고명으로 올린다.', DEFAULT, DEFAULT, '●주재료 : 소면 160g, 저염소금 4g(1작은술), 식초 8g(1/2작은술)\n●소스 : 석류 200g(1/2개)\n●장식 : 잣 4g(1작은술), 아몬드 4g(1작은술), 해바라기씨 4g(1작은술), 호두 4g(1작은술), 호박씨 4g(1작은술), 오이 20g(1/4개)');
 
 -- Recipe: 블랙빈 곤약국수
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('블랙빈 곤약국수', '일품', '검은콩은 안토시아닌 색소를 많이 함유하고 있어 시력회복과 항암작용에 좋다. 나트륨 함량이 높은 소면을 대신하여 실곤약으로 면을 대체함으로써 나트륨과 칼로리의 섭취량을 줄이고, 콩국물에 흑임자와 호두를 넣어 짠맛 대신 고소한 맛과 향을 강조한다.', 'ADMIN', SYSDATE, '1. 검은콩을 1시간 찬물에 담가 불린 후 삶아 익힌 후 불순물을 제거하고 흑임자, 생수, 삶은 콩, 호두를 믹서에 갈아 살엄음이 생기도록 냉동실에 넣는다. 2. 오이는 돌려 깎아 채 썰고, 토마토는 1/8크기로 썰고, 달걀은 삶아 반으로 자른다. 3. 실곤약은 끓는 물에 데치고 찬물에 헹궈 그릇에 담은 후 콩물을 담고 오이, 토마토, 달걀을 고명으로 올려 완성한다.', DEFAULT, DEFAULT, '●주재료
-실곤약 440g, 검은콩 70g, 볶은 흑임자 6g(1작은술), 호두 6g(1알)
-●장식
-오이 20g(1/8개), 토마토 50g(1/2개), 달걀 50g(1개)');
+    VALUES ('블랙빈 곤약국수', '일품', '검은콩은 안토시아닌 색소를 많이 함유하고 있어 시력회복과 항암작용에 좋다. 나트륨 함량이 높은 소면을 대신하여 실곤약으로 면을 대체함으로써 나트륨과 칼로리의 섭취량을 줄이고, 콩국물에 흑임자와 호두를 넣어 짠맛 대신 고소한 맛과 향을 강조한다.', 'ADMIN', SYSDATE, '1. 검은콩을 1시간 찬물에 담가 불린 후 삶아 익힌 후 불순물을 제거하고 흑임자, 생수, 삶은 콩, 호두를 믹서에 갈아 살얼음이 생기도록 냉동실에 넣는다.\n2. 오이는 돌려 깎아 채 썰고, 토마토는 1/8크기로 썰고, 달걀은 삶아 반으로 자른다.\n3. 실곤약은 끓는 물에 데치고 찬물에 헹궈 그릇에 담은 후 콩물을 담고 오이, 토마토, 달걀을 고명으로 올려 완성한다.', DEFAULT, DEFAULT, '●주재료\n실곤약 440g, 검은콩 70g, 볶은 흑임자 6g(1작은술), 호두 6g(1알)\n●장식\n오이 20g(1/8개), 토마토 50g(1/2개), 달걀 50g(1개)');
 
 -- Recipe: 닭가슴살 브로콜리 만두
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('닭가슴살 브로콜리 만두', '일품', '칼륨 함량이 높은 브로콜리를 사용하여 나트륨 배출을 돕는다. 만두소는 저염간장으로 양념하고 별도로 초간장을 곁들이지 않아 나트륨섭취를 줄인다.', 'ADMIN', SYSDATE, '1. 브로콜리, 숙주, 표고버섯, 닭 가슴살은 다지고 다진 닭 가슴살은 소금과 후추로 밑간 한다. 2. 다진 채소와 닭가슴살, 참기름, 저염간장을 섞어 만두소를 만든다. 3. 준비한 만두피에 만두소를 넣은 후 만두 모양으로 빚고 만두를 찜통에 넣어 찌고 그릇에 담는다.', DEFAULT, DEFAULT, '주재료
-만두피 4g(2장), 브로콜리 100g(1/4개), 숙주 100g, 표고버섯 20g(2개), 닭 가슴살 100g, 참기름 2g(1/2작은술), 저염간장 4g(1작은술), 소금 0.5g, 후춧가루 0.1g');
+    VALUES ('닭가슴살 브로콜리 만두', '일품', '칼륨 함량이 높은 브로콜리를 사용하여 나트륨 배출을 돕는다. 만두소는 저염간장으로 양념하고 별도로 초간장을 곁들이지 않아 나트륨섭취를 줄인다.', 'ADMIN', SYSDATE, '1. 브로콜리, 숙주, 표고버섯, 닭 가슴살은 다지고 다진 닭 가슴살은 소금과 후추로 밑간 한다.\n2. 다진 채소와 닭가슴살, 참기름, 저염간장을 섞어 만두소를 만든다.\n3. 준비한 만두피에 만두소를 넣은 후 만두 모양으로 빚고 만두를 찜통에 넣어 찌고 그릇에 담는다.', DEFAULT, DEFAULT, '주재료\n만두피 4g(2장), 브로콜리 100g(1/4개), 숙주 100g, 표고버섯 20g(2개), 닭 가슴살 100g, 참기름 2g(1/2작은술), 저염간장 4g(1작은술), 소금 0.5g, 후춧가루 0.1g');
 
 -- Recipe: 함초 냉이 국수
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('함초 냉이 국수', '일품', '냉이에 함유된 비타민A와 비타민C는 소화작용을 용이하게 한다. 소금을 대체하여 함초를 사용하고, 멸치와 모시조개, 다시마 등을 사용하여 감칠맛을 더한다.', 'ADMIN', SYSDATE, '1. 함초, 노루궁뎅이버섯, 다시마, 파, 양파, 무를 물에 넣어 10분 끓이고 향이 강한 모시조개와 냉이를 넣고 30분  끓인 후 간장으로 색을 낸다. 2. 소면은 따로 삶는다. 3. 그릇에 삶은 소면을 담은 후 육수를 붓고 지단, 슬라이스한 청고추, 실고추를 올려 완성한다.', DEFAULT, DEFAULT, '●주재료 : 소면 50g
-●육수 : 함초 3g(1/2작은술), 노루궁뎅이버섯 25g(1/2개), 다시마 17g(15cm), 파 140g(1/2개), 양파 150g(1/2개), 무 250g(1/3개), 모시조개 150g(3/4컵), 냉이 35g, 간장 30g(2큰술)
-●장식 : 달걀 50g(1개), 청고추 20g(1개), 실고추 2g');
+    VALUES ('함초 냉이 국수', '일품', '냉이에 함유된 비타민A와 비타민C는 소화작용을 용이하게 한다. 소금을 대체하여 함초를 사용하고, 멸치와 모시조개, 다시마 등을 사용하여 감칠맛을 더한다.', 'ADMIN', SYSDATE, '1. 함초, 노루궁뎅이버섯, 다시마, 파, 양파, 무를 물에 넣어 10분 끓이고 향이 강한 모시조개와 냉이를 넣고 30분 끓인 후 간장으로 색을 낸다.\n2. 소면은 따로 삶는다.\n3. 그릇에 삶은 소면을 담은 후 육수를 붓고 지단, 슬라이스한 청고추, 실고추를 올려 완성한다.', DEFAULT, DEFAULT, '●주재료 : 소면 50g\n●육수 : 함초 3g(1/2작은술), 노루궁뎅이버섯 25g(1/2개), 다시마 17g(15cm), 파 140g(1/2개), 양파 150g(1/2개), 무 250g(1/3개), 모시조개 150g(3/4컵), 냉이 35g, 간장 30g(2큰술)\n●장식 : 달걀 50g(1개), 청고추 20g(1개), 실고추 2g');
 
 -- Recipe: 된장 두부찌개
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('된장 두부찌개', '찌개', '김치는 물에 헹구어 염분을 제거하고 고추를 넣어 매운 맛과 향을 더한다. 두부는 콩 단백질이 풍부한 식품으로 두뇌발달에 좋다.', 'ADMIN', SYSDATE, '1. 두부에 쌀뜨물을 넣고 갈아준다. 2. 돼지고기는 썰고 김치는 물에 씻어 양념을 제거하고 3×3cm로 썬다. 3. 냄비에 돼지고기와 김치를 함께 볶은 후, 망에 거른 된장과 1의 두부, 고춧가루, 청양고추, 홍고추를 넣어 끓이다가 대파를 넣어 완성한다.', DEFAULT, DEFAULT, '두부 320g(1모), 쌀뜨물 300g(1½컵), 돼지고기 100g, 김치 140g, 된장 20g(1½큰술), 청양고추 10g(1/2개), 홍고추 5g(1/4개),
-대파 10g(2cm), 고춧가루 5g(1작은술)');
+    VALUES ('된장 두부찌개', '찌개', '김치는 물에 헹구어 염분을 제거하고 고추를 넣어 매운 맛과 향을 더한다. 두부는 콩 단백질이 풍부한 식품으로 두뇌발달에 좋다.', 'ADMIN', SYSDATE, '1. 두부에 쌀뜨물을 넣고 갈아준다.\n2. 돼지고기는 썰고 김치는 물에 씻어 양념을 제거하고 3×3cm로 썬다.\n3. 냄비에 돼지고기와 김치를 함께 볶은 후, 망에 거른 된장과 두부, 고춧가루, 청양고추, 홍고추를 넣어 끓이다가 대파를 넣어 완성한다.', DEFAULT, DEFAULT, '두부 320g(1모), 쌀뜨물 300g(1½컵), 돼지고기 100g, 김치 140g, 된장 20g(1½큰술), 청양고추 10g(1/2개), 홍고추 5g(1/4개),\n대파 10g(2cm), 고춧가루 5g(1작은술)');
 
 -- Recipe: 부대된장찌개
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('부대된장찌개', '찌개', '저염된장과 저염햄을 사용하고 김치는 물에 헹구어 염도를 낮추어 준다.', 'ADMIN', SYSDATE, '1. 김치, 베이컨, 스팸, 소시지, 양파, 두부, 무는 두께 0.5cm로 썬다. 2. 다시마와 물을 끓여 다시마물을 만든다. 3. 냄비에 소시지, 베이컨, 두부, 스팸, 무, 우민찌, 김치, 다시마물 300g을 넣어 끓인 후 저염된장, 양파, 대파, 다진 마늘, 떡국 떡을 넣고 재료가 다 익으면 홍고추와 청양고추를 넣어 완성한다.', DEFAULT, DEFAULT, '다시마 1g, 두부 10g, 떡국 떡 10g, 스팸(마일드) 10g, 다진 마늘 5g, 무 20g, 김치 15g, 소시지 10g(1/2개), 우민찌 5g(1작은술), 양파 5g, 저염된장 15g(1큰술), 베이컨 5g, 대파 5g, 청양고추 5g, 홍고추 1g');
+    VALUES ('부대된장찌개', '찌개', '저염된장과 저염햄을 사용하고 김치는 물에 헹구어 염도를 낮추어 준다.', 'ADMIN', SYSDATE, '1. 김치, 베이컨, 스팸, 소시지, 양파, 두부, 무는 두께 0.5cm로 썬다.\n2. 다시마와 물을 끓여 다시마물을 만든다.\n3. 냄비에 소시지, 베이컨, 두부, 스팸, 무, 우민찌, 김치, 다시마물 300g을 넣어 끓인 후 저염된장, 양파, 대파, 다진 마늘, 떡국 떡을 넣고 재료가 다 익으면 홍고추와 청양고추를 넣어 완성한다.', DEFAULT, DEFAULT, '다시마 1g, 두부 10g, 떡국 떡 10g, 스팸(마일드) 10g, 다진 마늘 5g, 무 20g, 김치 15g, 소시지 10g(1/2개), 우민찌 5g(1작은술), 양파 5g, 저염된장 15g(1큰술), 베이컨 5g, 대파 5g, 청양고추 5g, 홍고추 1g');
 
 -- Recipe: 양배추감자전
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('양배추감자전', '반찬', '감자와 양배추에는 칼륨이 풍부하게 들어있어 나트륨 배출에 도움을 준다. 양념간장 대신 과일즙을 활용한 폰즈소스를 곁들여 나트륨 섭취량을 줄였다.', 'ADMIN', SYSDATE, '1. 감자는 믹서에 갈고 양배추는 채 썰고 고기, 당근, 청양고추, 두부는 다진다. 2. 준비해둔 재료를 모두 섞고 부침가루와 계란을 넣어 반죽한다. 3. 가열된 팬에 기름을 두르고 반죽을 부어 굽고 소스를 함께 곁들인다.', DEFAULT, DEFAULT, '●주재료 : 감자 100g(1개), 양배추 150g(1/2개), 당근 15g(1/10개), 두부 20g(1/20모), 돼지고기 30g, 청양고추 5g(1개), 부침가루 45g(3큰술), 달걀 60g(1개), 식용유 15g(1큰술)
-●소스 : 오렌지즙 15g(1큰술), 간장 2g(1/2작은술), 식초 10g(2작은술)');
+    VALUES ('양배추감자전', '반찬', '감자와 양배추에는 칼륨이 풍부하게 들어있어 나트륨 배출에 도움을 준다. 양념간장 대신 과일즙을 활용한 폰즈소스를 곁들여 나트륨 섭취량을 줄였다.', 'ADMIN', SYSDATE, '1. 감자는 믹서에 갈고 양배추는 채 썰고 고기, 당근, 청양고추, 두부는 다진다.\n2. 준비해둔 재료를 모두 섞고 부침가루와 계란을 넣어 반죽한다.\n3. 가열된 팬에 기름을 두르고 반죽을 부어 굽고 소스를 함께 곁들인다.', DEFAULT, DEFAULT, '●주재료 : 감자 100g(1개), 양배추 150g(1/2개), 당근 15g(1/10개), 두부 20g(1/20모), 돼지고기 30g, 청양고추 5g(1개), 부침가루 45g(3큰술), 달걀 60g(1개), 식용유 15g(1큰술)\n●소스 : 오렌지즙 15g(1큰술), 간장 2g(1/2작은술), 식초 10g(2작은술)');
 
 -- Recipe: 돌나물 샐러드
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('돌나물 샐러드', '반찬', '샐러드드레싱에 짠맛을 줄이기 위해 마요네즈 사용량을 줄이고 레몬즙과 청양고추를 혼합하여 드레싱을 만들면 짠맛을 줄이는 효과를 낼 수 있어요. 마요네즈 사용이 지나치면 나트륨과 콜레스테롤의 섭취가 높아지므로 주의하세요.', 'ADMIN', SYSDATE, '1. 청양고추와 홍고추를 다져서 참기름에 살짝 볶은 후 볶은 고추에 마요네즈와 레몬즙을 넣어 소스를 만든다. 2. 돌나물은 손질하여 찬물에 담구고 새송이버섯은 달군 프라이팬에 참기름을 두르고 노릇
-하게 굽는다. 3. 돌나물은 물기를 빼고 구운 새송이버섯과 레몬마요네즈 소스를 넣고
-버무려 접시에 담는다.', DEFAULT, DEFAULT, '●돌나물 샐러드 : 돌나물 90g, 미니새송이버섯 60g(7개), 참기름 약간
-●레몬마요네즈 소스 : 마요네즈 10g(2작은술), 레몬즙 20g(1⅓큰술), 청양고추 5g(1/2개), 홍고추 5g(1/2개), 참기름 약간');
+    VALUES ('돌나물 샐러드', '반찬', '샐러드드레싱에 짠맛을 줄이기 위해 마요네즈 사용량을 줄이고 레몬즙과 청양고추를 혼합하여 드레싱을 만들면 짠맛을 줄이는 효과를 낼 수 있어요. 마요네즈 사용이 지나치면 나트륨과 콜레스테롤의 섭취가 높아지므로 주의하세요.', 'ADMIN', SYSDATE, '1. 청양고추와 홍고추를 다져서 참기름에 살짝 볶은 후 볶은 고추에 마요네즈와 레몬즙을 넣어 소스를 만든다.\n2. 돌나물은 손질하여 찬물에 담구고 새송이버섯은 달군 프라이팬에 참기름을 두르고 노릇하게 굽는다.\n3. 돌나물은 물기를 빼고 구운 새송이버섯과 레몬마요네즈 소스를 넣고 버무려 접시에 담는다.', DEFAULT, DEFAULT, '●돌나물 샐러드 : 돌나물 90g, 미니새송이버섯 60g(7개), 참기름 약간\n●레몬마요네즈 소스 : 마요네즈 10g(2작은술), 레몬즙 20g(1⅓큰술), 청양고추 5g(1/2개), 홍고추 5g(1/2개), 참기름 약간');
 
 -- Recipe: 석류 보쌈김치
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('석류 보쌈김치', '반찬', '배추는 최소한의 소금으로 절이고 석류 즙으로 새콤한 맛과 향을 더한다. 미네랄, 칼슘, 무기질이 풍부한 석류는 여성질환에 도움을 준다.', 'ADMIN', SYSDATE, '1. 배추를 소금물에 하루 동안 절인 후 물기를 빼고 석류는 즙을 낸다. 2. 무는 채 썰고, 쪽파와 미나리는 4cm로 자른다. 3. 무채, 미나리, 쪽파, 다진 마늘, 다진 생강, 새우젓국을 넣고 섞어 소를 만들고 절인 배추에 소를 넣고 오므려 싼다. 석류즙에 소를 채운 배추를 담가 완성한다.', DEFAULT, DEFAULT, '●주재료 : 배추 70g(1/10개), 석류즙 10g(2작은술), 소금 5g(1/2작은술)
-●양념 : 무 10g(3cm), 미나리 10g, 쪽파 10g(1개), 다진 마늘 5g(1작은술), 다진 생강 5g(1작은술), 새우젓국 15g(1큰술)');
+    VALUES ('석류 보쌈김치', '반찬', '배추는 최소한의 소금으로 절이고 석류 즙으로 새콤한 맛과 향을 더한다. 미네랄, 칼슘, 무기질이 풍부한 석류는 여성질환에 도움을 준다.', 'ADMIN', SYSDATE, '1. 배추를 소금물에 하루 동안 절인 후 물기를 빼고 석류는 즙을 낸다.\n2. 무는 채 썰고, 쪽파와 미나리는 4cm로 자른다.\n3. 무채, 미나리, 쪽파, 다진 마늘, 다진 생강, 새우젓국을 넣고 섞어 소를 만들고 절인 배추에 소를 넣고 오므려 싼다. 석류즙에 소를 채운 배추를 담가 완성한다.', DEFAULT, DEFAULT, '●주재료 : 배추 70g(1/10개), 석류즙 10g(2작은술), 소금 5g(1/2작은술)\n●양념 : 무 10g(3cm), 미나리 10g, 쪽파 10g(1개), 다진 마늘 5g(1작은술), 다진 생강 5g(1작은술), 새우젓국 15g(1큰술)');
 
 -- Recipe: 유자 대구조림
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('유자 대구조림', '반찬', '소스에 유자청으로 향을 더하고 발사믹식초로 상큼함을 더한다. 찜은 재료 본연의 맛을 느낄 수 있는 조리법이며 소스를 찍어먹을 수 있도록 곁들여 내면 나트륨 섭취량을 줄일 수 있다.', 'ADMIN', SYSDATE, '1. 발사믹 식초, 화이트와인, 다진 유자청 건더기를 넣고 졸여 소스를 만들고 대구를 손질하여 포를 뜬다. 2. 대파, 청파프리카, 홍파프리카, 황파프리카를 채 썬다. 3. 대구포에 밀가루를 묻혀 청파프리카, 홍파프리카, 황파프리카, 황금팽이버섯을 넣고 말아 미나리로 묶어 찐 후 소스를 뿌리고 썬 대파를 올려 완성한다.', DEFAULT, DEFAULT, '●주재료 : 대구살 120g, 홍파프리카 10g(1/10개), 황파프리카 10g(1/10개),청파프리카 10g(1/10개), 황금팽이버섯 10g, 미나리 20g, 밀가루 25g(2큰술)
-●소스 : 유자청 20g(1⅓큰술), 발사믹식초 10g(2작은술), 화이트와인 10g(2작은술)
-●장식 : 대파 30g(1개)');
+    VALUES ('유자 대구조림', '반찬', '소스에 유자청으로 향을 더하고 발사믹식초로 상큼함을 더한다. 찜은 재료 본연의 맛을 느낄 수 있는 조리법이며 소스를 찍어먹을 수 있도록 곁들여 내면 나트륨 섭취량을 줄일 수 있다.', 'ADMIN', SYSDATE, '1. 발사믹 식초, 화이트와인, 다진 유자청 건더기를 넣고 졸여 소스를 만들고 대구를 손질하여 포를 뜬다.\n2. 대파, 청파프리카, 홍파프리카, 황파프리카를 채 썬다.\n3. 대구포에 밀가루를 묻혀 청파프리카, 홍파프리카, 황파프리카, 황금팽이버섯을 넣고 말아 미나리로 묶어 찐 후 소스를 뿌리고 썬 대파를 올려 완성한다.', DEFAULT, DEFAULT, '●주재료 : 대구살 120g, 홍파프리카 10g(1/10개), 황파프리카 10g(1/10개),청파프리카 10g(1/10개), 황금팽이버섯 10g, 미나리 20g, 밀가루 25g(2큰술)\n●소스 : 유자청 20g(1⅓큰술), 발사믹식초 10g(2작은술), 화이트와인 10g(2작은술)\n●장식 : 대파 30g(1개)');
 
 -- Recipe: 파프리카 물김치
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('파프리카 물김치', '반찬', '김치를 절인 후 찬물에 세 번 씻어 소금기를 빼고 기호에 따라 청고추를 넣어 매콤한 맛을 준다.', 'ADMIN', SYSDATE, '1. 황파프리카를 갈아 체에 내리고 멥쌀로 쌀풀을 만들어 황파프리카 즙을 섞고 물엿을 첨가하여 양념을 만든다. 2. 배추를 소금물에 절이고 절인 배추를 찬물로 씻어 소금기를 뺀다. 3. 소금기를 뺀 배추에 채썬 자색고구마, 무, 쪽파, 부추, 사과, 배를 놓고 양념을 부은 후 3일 동안 숙성시켜 완성한다.', DEFAULT, DEFAULT, '●주재료 : 자색고구마 10g(3cm), 무 10g(2cm), 배 80g(1/4개), 배추 200g(1/3개), 부추 10g, 사과 80g(1/3개), 쪽파 10g(10cm), 소금 20g(1⅓큰술)
-●양념 : 멥쌀 10g(2작은술), 물엿 50g(1/4컵), 황파프리카 140g(1½개)');
+    VALUES ('파프리카 물김치', '반찬', '김치를 절인 후 찬물에 세 번 씻어 소금기를 빼고 기호에 따라 청고추를 넣어 매콤한 맛을 준다.', 'ADMIN', SYSDATE, '1. 황파프리카를 갈아 체에 내리고 멥쌀로 쌀풀을 만들어 황파프리카 즙을 섞고 물엿을 첨가하여 양념을 만든다.\n2. 배추를 소금물에 절이고 절인 배추를 찬물로 씻어 소금기를 뺀다.\n3. 소금기를 뺀 배추에 채썬 자색고구마, 무, 쪽파, 부추, 사과, 배를 놓고 양념을 부은 후 3일 동안 숙성시켜 완성한다.', DEFAULT, DEFAULT, '●주재료 : 자색고구마 10g(3cm), 무 10g(2cm), 배 80g(1/4개), 배추 200g(1/3개), 부추 10g, 사과 80g(1/3개), 쪽파 10g(10cm), 소금 20g(1⅓큰술)\n●양념 : 멥쌀 10g(2작은술), 물엿 50g(1/4컵), 황파프리카 140g(1½개)');
 
 -- Recipe: 고추장 라따뚜이
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('고추장 라따뚜이', '반찬', '칼륨이 풍부한 토마토를 사용하여 나트륨 배출에 도움을 주며, 살라미는 끓는 물에 데쳐 염분을 제거한 후 사용한다.', 'ADMIN', SYSDATE, '1. 양파와 마늘은 다져서 볶다가 토마토 과육과 설탕, 바질을 넣고 고추장을 섞어 토마토 소스를 만든다. 2. 가지, 양송이버섯, 애호박, 사과는 썰고 살라미는 데친다. 3. 오븐용 팬에 토마토 소스를 넓게 펴준 뒤 애호박, 가지, 양송이버섯, 살라미를 겹치게 넣고 180℃로 예열한 오븐에 넣고 30분 구워 완성한다', DEFAULT, DEFAULT, '●주재료 : 애호박 70g(1½개), 양송이버섯 60g(3개), 가지 70g(1/2개), 저염살라미 25g, 사과 60g(1/3개)
-●소스 :양파 40g(1/5개), 마늘 10g(2개), 토마토 600g(3개), 설탕 10g(2작은술), 바질 50g, 고추장 15g(1큰술)');
+    VALUES ('고추장 라따뚜이', '반찬', '칼륨이 풍부한 토마토를 사용하여 나트륨 배출에 도움을 주며, 살라미는 끓는 물에 데쳐 염분을 제거한 후 사용한다.', 'ADMIN', SYSDATE, '1. 양파와 마늘은 다져서 볶다가 토마토 과육과 설탕, 바질을 넣고 고추장을 섞어 토마토 소스를 만든다.\n2. 가지, 양송이버섯, 애호박, 사과는 썰고 살라미는 데친다.\n3. 오븐용 팬에 토마토 소스를 넓게 펴준 뒤 애호박, 가지, 양송이버섯, 살라미를 겹치게 넣고 180℃로 예열한 오븐에 넣고 30분 구워 완성한다.', DEFAULT, DEFAULT, '●주재료 : 애호박 70g(1½개), 양송이버섯 60g(3개), 가지 70g(1/2개), 저염살라미 25g, 사과 60g(1/3개)\n●소스 :양파 40g(1/5개), 마늘 10g(2개), 토마토 600g(3개), 설탕 10g(2작은술), 바질 50g, 고추장 15g(1큰술)');
 
 -- Recipe: 민들레 샐러드
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('민들레 샐러드', '반찬', '간장에 생수를 희석하여 염도를 낮추고 레몬의 상큼함을 강조한다.', 'ADMIN', SYSDATE, '1. 간장, 레몬즙, 설탕, 다진 홍고추를 섞어 드레싱을 만든다. 2. 민들레 잎은 4×4cm로 썰고, 비트는 채 썰고 물에 담가 색을 뺀다. 3. 오렌지는 씻어 껍질만 발라 채 썰고 민들레 잎, 비트, 오렌지 껍질을 섞어 접시에 담고 드레싱을 곁들인다.', DEFAULT, DEFAULT, '●주재료 : 민들레 잎 40g, 비트 5g(1작은술), 오렌지(껍질) 40g(1/5개)
-●드레싱 : 간장 20g(1⅓큰술), 다진 홍고추 10g(1개), 레몬즙 60g(4큰술), 설탕 6g(1작은술)');
+    VALUES ('민들레 샐러드', '반찬', '간장에 생수를 희석하여 염도를 낮추고 레몬의 상큼함을 강조한다.', 'ADMIN', SYSDATE, '1. 간장, 레몬즙, 설탕, 다진 홍고추를 섞어 드레싱을 만든다.\n2. 민들레 잎은 4×4cm로 썰고, 비트는 채 썰고 물에 담가 색을 뺀다.\n3. 오렌지는 씻어 껍질만 발라 채 썰고 민들레 잎, 비트, 오렌지 껍질을 섞어 접시에 담고 드레싱을 곁들인다.', DEFAULT, DEFAULT, '●주재료 : 민들레 잎 40g, 비트 5g(1작은술), 오렌지(껍질) 40g(1/5개)\n●드레싱 : 간장 20g(1⅓큰술), 다진 홍고추 10g(1개), 레몬즙 60g(4큰술), 설탕 6g(1작은술)');
 
 -- Recipe: 토마토 가지 카프레제
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('토마토 가지 카프레제', '후식', '칼륨 함량이 높은 토마토와 가지 사용하여 나트륨의 배출을 돕고, 가지와 토마토의 영양성분 중 베타카로틴은 시력보호와 피부노화에 효과가 있다.', 'ADMIN', SYSDATE, '1. 올리브오일, 발사믹식초, 후춧가루를 섞어 차게 식혀 드레싱을 만든다. 2. 가지와 토마토는 5mm두께로 썰고 120도 오븐에 20분 구운 후 구운 가지는 물기를 제거한다. 3. 팬에 올리브오일을 두르고 약불에서 채 썬 마늘을 볶다가, 가지를 넣고 구운 후 접시에 토마토, 가지를 번갈아 담고 무순으로 장식하고 드레싱을 곁들인다.', DEFAULT, DEFAULT, '●주재료 : 가지 100g(1개), 토마토 200g(1½개), 무순 20g, 마늘 10g(2개), 올리브오일 5g(1작은술)
-●드레싱 : 올리브오일 25g(2큰술), 발사믹식초 60g(4큰술), 후춧가루 2g(1/2작은술)');
+    VALUES ('토마토 가지 카프레제', '후식', '칼륨 함량이 높은 토마토와 가지 사용하여 나트륨의 배출을 돕고, 가지와 토마토의 영양성분 중 베타카로틴은 시력보호와 피부노화에 효과가 있다.', 'ADMIN', SYSDATE, '1. 올리브오일, 발사믹식초, 후춧가루를 섞어 차게 식혀 드레싱을 만든다.\n2. 가지와 토마토는 5mm두께로 썰고 120도 오븐에 20분 구운 후 구운 가지는 물기를 제거한다.\n3. 팬에 올리브오일을 두르고 약불에서 채 썬 마늘을 볶다가, 가지를 넣고 구운 후 접시에 토마토, 가지를 번갈아 담고 무순으로 장식하고 드레싱을 곁들인다.', DEFAULT, DEFAULT, '●주재료 : 가지 100g(1개), 토마토 200g(1½개), 무순 20g, 마늘 10g(2개), 올리브오일 5g(1작은술)\n●드레싱 : 올리브오일 25g(2큰술), 발사믹식초 60g(4큰술), 후춧가루 2g(1/2작은술)');
 
 -- Recipe: 우렁된장소스 배추롤
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('우렁된장소스 배추롤', '일품', '된장에 양파, 당근, 호박, 표고버섯을 많이 섞어 나트륨 함량을 감소시키고, 야채맛이 가득한 된장소스를 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 끓는 물에 배춧잎을 데친다. 6. 찜통에 김이 오르면 ?번을 넣고 약 5분
-정도 찐다. 4. 데친 배춧잎에 지어놓은 밥을 올려
-돌돌만다. 5. 말아 놓은 배춧잎을 부추로 묶는다. 2. 당근, 호박, 표고버섯, 양파는
-입자있게 다진다. 3. 돼지고기를 썰어 불린 쌀, 다진 야채와
-함께 밥을 짓는다.', DEFAULT, DEFAULT, '돼지고기(50g), 배춧잎(5장), 부추(30g), 쌀(100g), 당근(20g),
-표고버섯(2개), 양파(50g), 애호박(1/2개), 우렁이(100g),
-된장(30g)');
+    VALUES ('우렁된장소스 배추롤', '일품', '된장에 양파, 당근, 호박, 표고버섯을 많이 섞어 나트륨 함량을 감소시키고, 야채맛이 가득한 된장소스를 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 끓는 물에 배춧잎을 데친다.\n2. 당근, 호박, 표고버섯, 양파는 입자있게 다진다.\n3. 돼지고기를 썰어 불린 쌀, 다진 야채와 함께 밥을 짓는다.\n4. 데친 배춧잎에 지어놓은 밥을 올려 돌돌만다.\n5. 말아 놓은 배춧잎을 부추로 묶는다.\n6. 찜통에 김이 오르면 배추롤을 넣고 약 5분 정도 찐다.', DEFAULT, DEFAULT, '돼지고기(50g), 배춧잎(5장), 부추(30g), 쌀(100g), 당근(20g),\n표고버섯(2개), 양파(50g), 애호박(1/2개), 우렁이(100g),\n된장(30g)');
 
 -- Recipe: 인삼떡갈비
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('인삼떡갈비', '반찬', '대추의 단맛 때문에 간장을 적게 쓸 수 있어 나트륨을 줄일 수 있어요', 'ADMIN', SYSDATE, '1. 대추는 돌려 깍아 씨를 제거 하고 곱게
-다진다. 6. 떡갈비를 팬에 굽고, 접시에 배춧잎을
-깔고 익힌 양송이를 올리고 떡갈비를
-담는다. 4. 양송이는 편으로 썰어 팬에 익히고,
-인삼을 뇌두를 자르고 깨끗이 씻어
-팬에 볶아 잘게 썰어 ?에 넣는다. 5. 재료가 골고루 섞인 떡갈비를 갈비
-모양으로 만든다. 2. 다진 소고기와 돼지고기에 대추와 소금
-후춧가루를 넣고 치댄다. 3. 애호박과 단호박, 파프리카는
-입자있게 썰어 ?에 넣고 잘 치댄다.', DEFAULT, DEFAULT, '소고기(100g), 돼지고기(100g), 대추(3알), 양파(30g),
-마늘(20g), 배(1/4개), 애호박(1/2개), 단호박(1/4개),
-파프리카(50g), 인삼(1뿌리), 양송이(5개), 배추잎(5장),
-저염간장(20g), 설탕(20g), 소금(0.2g), 후춧가루(0.01g)
-두부(50g)');
+    VALUES ('인삼떡갈비', '반찬', '대추의 단맛 때문에 간장을 적게 쓸 수 있어 나트륨을 줄일 수 있어요', 'ADMIN', SYSDATE, '1. 대추는 돌려 깎아 씨를 제거하고 곱게 다진다.\n2. 다진 소고기와 돼지고기에 대추와 소금, 후춧가루를 넣고 치댄다.\n3. 애호박과 단호박, 파프리카는 입자있게 썰어 고기 반죽에 넣고 잘 치댄다.\n4. 양송이는 편으로 썰어 팬에 익히고, 인삼을 뇌두를 자르고 깨끗이 씻어 팬에 볶아 잘게 썰어 고기 반죽에 넣는다.\n5. 재료가 골고루 섞인 떡갈비를 갈비 모양으로 만든다.\n6. 떡갈비를 팬에 굽고, 접시에 배춧잎을 깔고 익힌 양송이를 올리고 떡갈비를 담는다.', DEFAULT, DEFAULT, '소고기(100g), 돼지고기(100g), 대추(3알), 양파(30g),\n마늘(20g), 배(1/4개), 애호박(1/2개), 단호박(30g), 파프리카(30g),\n양송이버섯(20g), 인삼(10g), 소금(0.5g), 후춧가루(0.2g)');
 
 -- Recipe: 초계탕과 사색곤약
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -7716,7 +7610,7 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 
 -- Recipe: 수박즙돼지목심구이
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('수박즙돼지목심구이', '반찬', '수박즙돼지목심구이', 'ADMIN', SYSDATE, '1. 키친타월을 이용해 돼지고기의 핏물을 뺀다. 6. 재워 놓은 고기에 소스를 끼얹어 팬에 굽는다. 4. 수박의 씨를 빼고 살만 발라 믹서에 간다. 5. 소스 재료를 모두 섞어 약불에서 살짝 졸여 식힌다. 2. 돼지고기에 칼집을 내준다. 3. 칼집 낸 돼지고기에 올리브유, 후추를 뿌려 재워둔다.', DEFAULT, DEFAULT, '- 주재료 : 돼지고기 목심 70g, 올리브유 2g, 후추 0.25g - 소스 : 수박 15g, 간장 3g, 설탕 2g, 물엿 3g, 다진 마늘 2g, 후추 0.25g');
+    VALUES ('수박즙돼지목심구이', '반찬', '?', 'ADMIN', SYSDATE, '1. 키친타월을 이용해 돼지고기의 핏물을 뺀다. 6. 재워 놓은 고기에 소스를 끼얹어 팬에 굽는다. 4. 수박의 씨를 빼고 살만 발라 믹서에 간다. 5. 소스 재료를 모두 섞어 약불에서 살짝 졸여 식힌다. 2. 돼지고기에 칼집을 내준다. 3. 칼집 낸 돼지고기에 올리브유, 후추를 뿌려 재워둔다.', DEFAULT, DEFAULT, '- 주재료 : 돼지고기 목심 70g, 올리브유 2g, 후추 0.25g - 소스 : 수박 15g, 간장 3g, 설탕 2g, 물엿 3g, 다진 마늘 2g, 후추 0.25g');
 
 -- Recipe: 별미병어조림
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -9414,9 +9308,9 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
     VALUES ('새우 카레 빠에야', '밥', '•카레가루는 이국적인 향을 내고, 식품 본연의 풍미를 증가시켜 소금의 사용량을 줄일 수 있어요.
 •황태 머리, 다시마가 들어간 육수로 자극적이지 않은 감칠맛을 냈어요.', 'ADMIN', SYSDATE, '1. 양파는 얇게 채 썰고, 토마토는 윗부분을 약간 자른 뒤 속을 파내고, 새우는 머리와 껍질을 제거한다. 6. 파슬리가루와 후춧가루를 뿌려 마무리한다. 4. 토마토 속을 넣어 3분간 더 볶고, 쌀과 육수(2컵)를 넣어 끓으면 약한 불로 줄인 뒤 뚜껑을 덮어 15분간 더 끓인다. 5. 뚜껑을 열어 새우를 올리고, 뚜껑을 다시 덮어 5분간 더 끓이고, 불을 꺼 5분간 뜸을 들인다. 2. 냄비에 물(3컵)과 육수 재료를 넣어 중간 불에 15분간 끓여 육수를 만든다. 3. 중간 불로 달군 팬에 식용유를 두르고, 양파와 다진 마늘을 넣어 양파가 갈색이 될 때까지 볶는다.', DEFAULT, DEFAULT, '[ 2인분 ] 양파(½개), 토마토(2개), 새우(8마리), 쌀(1½컵), 카레가루(1Ts), 황태 머리(1개), 다시마(5×5cm, 1장), 다진 마늘(1Ts), 파슬리가루(0.3Ts), 후춧가루(0.3Ts)');
 
--- Recipe: 오징어 가라아게and 칠리소스
+-- Recipe: 오징어 가라아게 and 칠리소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('오징어 가라아게and 칠리소스', '반찬', '•케첩 대신 토마토를 사용하여 나트륨을 줄였어요.', 'ADMIN', SYSDATE, '1. 오징어는 채 썰고, 마늘과 대파는 곱게 다진다. 6. 오징어 가라아게에 칠리소스를 곁들여 마무리한다. 4. 토마토는 껍질을 제거한 뒤 잘게 다진다. 5. 냄비에 다진 토마토, 식초, 설탕, 물(50g), 고춧가루, 전분을 넣고 끓여 칠리소스를 만든다. 2. 오징어, 대파, 마늘, 달걀노른자, 밀가루, 물(10g)을 섞어 반죽한 뒤 동그랗게 빚는다. 3. 가라아게를 180℃ 온도의 기름에서 튀긴다.', DEFAULT, DEFAULT, '•필수 재료 : 오징어(80g), 대파(20g), 마늘(10g), 달걀노른자(25g), 밀가루(20g), 식용유(3g)
+    VALUES ('오징어 가라아게 and 칠리소스', '반찬', '•케첩 대신 토마토를 사용하여 나트륨을 줄였어요.', 'ADMIN', SYSDATE, '1. 오징어는 채 썰고, 마늘과 대파는 곱게 다진다. 6. 오징어 가라아게에 칠리소스를 곁들여 마무리한다. 4. 토마토는 껍질을 제거한 뒤 잘게 다진다. 5. 냄비에 다진 토마토, 식초, 설탕, 물(50g), 고춧가루, 전분을 넣고 끓여 칠리소스를 만든다. 2. 오징어, 대파, 마늘, 달걀노른자, 밀가루, 물(10g)을 섞어 반죽한 뒤 동그랗게 빚는다. 3. 가라아게를 180℃ 온도의 기름에서 튀긴다.', DEFAULT, DEFAULT, '•필수 재료 : 오징어(80g), 대파(20g), 마늘(10g), 달걀노른자(25g), 밀가루(20g), 식용유(3g)
 •양념 : 토마토(20g), 고춧가루(15g), 식초(50g), 설탕(15g), 전분(10g)');
 
 -- Recipe: 토마토 채소 가지롤
@@ -9477,9 +9371,9 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
     VALUES ('묵은지 밀푀유나베', '국', '•묵은지를 물에 담가 나트륨 함량을 줄였어요.
 •콩나물과 북어채를 사용하여 재료 본연의 감칠맛을 살렸어요.', 'ADMIN', SYSDATE, '1. 묵은지는 흐르는 물에 헹군 뒤 찬물에 30분간 담가둔다. 6. 중간 불로 10분간 끓여 마무리한다. 4. 냄비에 재료를 둘러 담고, 가운데에 콩나물과 북어채를 담는다. 5. 물(3컵)을 넣는다. 2. 배추, 깻잎, 소고기, 묵은지 순으로 층층이 쌓는다. 3. 쌓은 재료를 3~4cm 크기로 자른다.', DEFAULT, DEFAULT, '[ 2인분 ] 묵은지(¼포기), 배추(6장), 깻잎(10장), 소고기(샤브샤브용, 150g), 콩나물(1줌=20g), 북어채(1줌=10g)');
 
--- Recipe: 생선까스and 타르타르소스
+-- Recipe: 생선까스 and 타르타르소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('생선까스and 타르타르소스', '반찬', '•타르타르소스에 피클 대신 홍고추와 청양고추를 넣어 매콤한 맛을 첨가해 나트륨을 낮췄어요.
+    VALUES ('생선까스 and 타르타르소스', '반찬', '•타르타르소스에 피클 대신 홍고추와 청양고추를 넣어 매콤한 맛을 첨가해 나트륨을 낮췄어요.
 •소금 대신 레몬즙을 사용하여 나트륨을 낮췄어요.', 'ADMIN', SYSDATE, '1. 명태포는 키친타월에 올려 물기를 제거한다. 6. 생선까스에 타르타르소스를 곁들여 담는다. 4. 명태포에 튀김옷을 입힌 뒤 170℃ 기름에서 두 번 튀긴다. 5. 삶은 달걀, 홍고추, 청양고추, 양파를 다져 볼에 섞은 뒤 마요네즈와 레몬즙, 후춧가루를 섞어 소스를 만든다 2. 후춧가루와 레몬즙을 뿌려 비린내를 제거한다. 3. 볼에 튀김가루와 달걀, 식용유, 물을 섞어 튀김옷을 만든다', DEFAULT, DEFAULT, '•필수재료 : 명태포(40g), 튀김가루(20g), 달걀(1/4개), 식용유(5g), 물(30g)
 •밑간 : 후춧가루(1g), 레몬즙(3g)
 •타르타르 소스 : 삶은 달걀(1/2개), 마요네즈(5g), 홍고추(1g), 청양고추(1g), 양파(3g), 후추(2g), 레몬즙(10g)');
@@ -9852,9 +9746,9 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
     VALUES ('소고기 들깨 알토란탕', '국', '들깻가루를 이용해 소금을 사용하지 않고 깊은 맛을 낼 수 있어요.', 'ADMIN', SYSDATE, '1. 양지를 찬물에 담가 핏물을 제거한다. 6. 고춧가루와 들깨가루를 넣고 끓인다. 4. 각종 채소를 손질하고 건져낸 양지를 찢는다. 5. 육수에 손질한 야채와 양지를 넣고 끓인다. 2. 양지와 무를 냄비에 끓인 뒤 양지를 건진다. 3. 알토란은 쌀뜨물에 1시간 정도 담근 뒤 소금물에 삶아 아린 맛을 제거한다.', DEFAULT, DEFAULT, '소고기(양지) 3g, 무 20g, 알토란 30g, 대파 15g, 느타리버섯 10g, 고사리 10g, 콩나물 10g, 고춧가루 10g, 깻잎순 3g, 들깨가루 15g, 소금 3g, 간장 3g');
 
--- Recipe: 과일삼겹살조림and 파채무침
+-- Recipe: 과일삼겹살조림 and 파채무침
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('과일삼겹살조림and 파채무침', '반찬', '과일을 이용하여 간장과 설탕의 사용을 줄였어요.', 'ADMIN', SYSDATE, '1. 삼겹살은 덩어리로 준비하여 삶아낸다. 6. 한입 크기로 썬 삼겹살과 ⑤를 곁들여 낸다. 4. 대파는 가늘게 채 썰고, 새싹채소는 깨끗하게 씻는다. 5. 레몬즙, 식초, 설탕, 국간장, 고춧가루를 넣어 만든 소스를 야채에 버무린다. 2. 배, 사과, 파인애플, 양파, 깐마늘, 깐생강은 갈아서 체에 거르고 간장과 함께 끓인다. 3. ②에 삶아낸 삼겹살을 넣어 윤기 나게 조린다.', DEFAULT, DEFAULT, '돼지고기(삼겹살) 70.8g, 새싹채소 2.8g, 깐대파 3.5g, 파인애플 1.5g, 배 1.5g, 사과 1.5g, 깐양파 2g, 진간장 1.2g, 깐마늘 1.2g, 깐생강 0.3g, 고춧가루 0.17g, 레몬 1g, 식초 0.4g, 설탕 0.1g, 국간장 0.1g,');
+    VALUES ('과일삼겹살조림 and 파채무침', '반찬', '과일을 이용하여 간장과 설탕의 사용을 줄였어요.', 'ADMIN', SYSDATE, '1. 삼겹살은 덩어리로 준비하여 삶아낸다. 6. 한입 크기로 썬 삼겹살과 ⑤를 곁들여 낸다. 4. 대파는 가늘게 채 썰고, 새싹채소는 깨끗하게 씻는다. 5. 레몬즙, 식초, 설탕, 국간장, 고춧가루를 넣어 만든 소스를 야채에 버무린다. 2. 배, 사과, 파인애플, 양파, 깐마늘, 깐생강은 갈아서 체에 거르고 간장과 함께 끓인다. 3. ②에 삶아낸 삼겹살을 넣어 윤기 나게 조린다.', DEFAULT, DEFAULT, '돼지고기(삼겹살) 70.8g, 새싹채소 2.8g, 깐대파 3.5g, 파인애플 1.5g, 배 1.5g, 사과 1.5g, 깐양파 2g, 진간장 1.2g, 깐마늘 1.2g, 깐생강 0.3g, 고춧가루 0.17g, 레몬 1g, 식초 0.4g, 설탕 0.1g, 국간장 0.1g,');
 
 -- Recipe: 곤약백김치말이
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -9938,9 +9832,9 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
     VALUES ('고구마 김치', '반찬', '젓갈을 양념에 넣지 않고 고구마를 절이는데 쓰면 사용량을 줄일 수 있어요.', 'ADMIN', SYSDATE, '1. 고구마를 먹기 좋은 크기로 썬다. 6. 참깨를 뿌려 마무리한다. 4. 양념 재료를 모두 섞는다. 5. 절인 고구마와 썰어둔 미나리, 홍고추, 양념을 섞어 무친다. 2. 고구마를 젓갈에 절인다. 3. 미나리, 홍고추를 먹기 좋은 크기로 썬다.', DEFAULT, DEFAULT, '고구마 35g, 미나리 3g, 홍고추 1g, 고춧가루 0.8g, 올리고당 0.5g, 마늘 1g, 젓갈 0.5g, 참깨 0.5g');
 
--- Recipe: 담양식떡갈비and 야채쌈
+-- Recipe: 담양식떡갈비 and 야채쌈
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('담양식떡갈비and 야채쌈', '반찬', '쌈장에 두부와 해바라기씨를 섞어 염분을 낮췄어요.', 'ADMIN', SYSDATE, '1. 분쇄 우육과 돈육은 해동 후 핏물을 제거한다. 6. 떡갈비와 양념장, 야채쌈을 함께 제공한다. 4. 점성이 생긴 고기를 동그랗게 성형한 후 팬에 구워낸다. 5. 쌈장에 으깬 두부(15g)와 해바라기 씨를 넣어 섞는다. 2. 두부는 끓는 물에 데쳐낸 후 으깬다. 3. 우육, 돈육, 다진양파, 다진대파, 으깬 두부(15g)에 간장과 설탕으로 간을 한 후 여러번 치댄다.', DEFAULT, DEFAULT, '우육(분쇄육) 60g, 돈육(분쇄육) 30g, 두부 30g, 양파 5g, 대파 5g, 상추 30g, 깻잎 10g, 해바라기씨 2g, 간장 0.5g, 설탕 5g, 쌈장 5g');
+    VALUES ('담양식떡갈비 and 야채쌈', '반찬', '쌈장에 두부와 해바라기씨를 섞어 염분을 낮췄어요.', 'ADMIN', SYSDATE, '1. 분쇄 우육과 돈육은 해동 후 핏물을 제거한다. 6. 떡갈비와 양념장, 야채쌈을 함께 제공한다. 4. 점성이 생긴 고기를 동그랗게 성형한 후 팬에 구워낸다. 5. 쌈장에 으깬 두부(15g)와 해바라기 씨를 넣어 섞는다. 2. 두부는 끓는 물에 데쳐낸 후 으깬다. 3. 우육, 돈육, 다진양파, 다진대파, 으깬 두부(15g)에 간장과 설탕으로 간을 한 후 여러번 치댄다.', DEFAULT, DEFAULT, '우육(분쇄육) 60g, 돈육(분쇄육) 30g, 두부 30g, 양파 5g, 대파 5g, 상추 30g, 깻잎 10g, 해바라기씨 2g, 간장 0.5g, 설탕 5g, 쌈장 5g');
 
 -- Recipe: 단감피클
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -10122,17 +10016,17 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 •육수재료 : 닭뼈(200g), 다시마(3g), 대파(5g), 마늘(2g), 물(600g)
 •양념 : 후추(5g)');
 
--- Recipe: 미나리버섯고기말이and 산채소스
+-- Recipe: 미나리버섯고기말이 and 산채소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('미나리버섯고기말이and 산채소스', '반찬', '산채소스에 소금 대신 파마산치즈로 간을 했어요.', 'ADMIN', SYSDATE, '1. 돈등심은 널찍하게 성형한다. 6. 구워진 고기에 소스를 곁들여 낸다. 4. 참나물, 취나물, 올리브오일, 땅콩, 마늘, 후추를 믹서에 갈아 소스를 만든다. 5. 소스에 파마산 치즈를 섞어준다. 2. 새송이 버섯은 길게 채썰고, 미나리도 비슷한 사이즈로 썰어 준다. 3. 고기에 미나리, 새송이를 감싸 말아 찹쌀가루를 묻혀 굽는다.', DEFAULT, DEFAULT, '돈등심 80g, 새송이버섯 24g, 미나리 18g, 후추 0.3g, 찹쌀가루 15g, 참나물 5g, 취나물 5g, 올리브오일 10g, 땅콩 2g, 파마산치즈 1g, 마늘 1g');
+    VALUES ('미나리버섯고기말이 and 산채소스', '반찬', '산채소스에 소금 대신 파마산치즈로 간을 했어요.', 'ADMIN', SYSDATE, '1. 돈등심은 널찍하게 성형한다. 6. 구워진 고기에 소스를 곁들여 낸다. 4. 참나물, 취나물, 올리브오일, 땅콩, 마늘, 후추를 믹서에 갈아 소스를 만든다. 5. 소스에 파마산 치즈를 섞어준다. 2. 새송이 버섯은 길게 채썰고, 미나리도 비슷한 사이즈로 썰어 준다. 3. 고기에 미나리, 새송이를 감싸 말아 찹쌀가루를 묻혀 굽는다.', DEFAULT, DEFAULT, '돈등심 80g, 새송이버섯 24g, 미나리 18g, 후추 0.3g, 찹쌀가루 15g, 참나물 5g, 취나물 5g, 올리브오일 10g, 땅콩 2g, 파마산치즈 1g, 마늘 1g');
 
 -- Recipe: 오이파프리카새콤무침
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
     VALUES ('오이파프리카새콤무침', '반찬', '절이는 과정이 없는 생채류로 염분 섭취를 줄일 수 있어요.', 'ADMIN', SYSDATE, '1. 오이는 굵은 소금으로 문질러 깨끗이 씻는다. 6. 단촛물에 오이, 파프리카를 버무린다. 4. 파프리카를 적당한 크기로 썬다. 5. 식초, 설탕, 물을 섞어 단촛물을 만든다. 2. 오이를 적당한 두께로 썰고 4등분 한다. 3. 파프리카는 깨끗이 씻은 후 씨를 제거한다.', DEFAULT, DEFAULT, '오이 10g, 파프리카(빨강/노랑) 각 5g, 식초 2g, 설탕 2g');
 
--- Recipe: 양상추샐러드 and  과일드레싱
+-- Recipe: 양상추샐러드  and  과일드레싱
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('양상추샐러드 and  과일드레싱', '반찬', '•나트륨 함량이 높은 시판 드레싱 대신 수제 드레싱을 곁들였어요.', 'ADMIN', SYSDATE, '1. 양상추는 깨끗이 씻어 먹기 좋은 크기로 썬다. 6. 양상추와 당근, 적양배추를 접시에 깔고 드레싱을 곁들여 마무리한다. 4. 파인애플은 껍질과 심을 제거한 뒤 한입 크기로 썬다. 5. 손질한 과일과 레몬즙을 믹서에 넣어 곱게 갈아 드레싱을 만든다. 2. 당근과 적양배추는 곱게 채 썰고, 치커리는 잘게 썬다. 3. 사과는 껍질과 심을 제거한 뒤 한입 크기로 썬다.', DEFAULT, DEFAULT, '•필수 재료 : 양상추(60g), 당근(10g), 적양배추(10g), 치커리(5g)
+    VALUES ('양상추샐러드  and  과일드레싱', '반찬', '•나트륨 함량이 높은 시판 드레싱 대신 수제 드레싱을 곁들였어요.', 'ADMIN', SYSDATE, '1. 양상추는 깨끗이 씻어 먹기 좋은 크기로 썬다. 6. 양상추와 당근, 적양배추를 접시에 깔고 드레싱을 곁들여 마무리한다. 4. 파인애플은 껍질과 심을 제거한 뒤 한입 크기로 썬다. 5. 손질한 과일과 레몬즙을 믹서에 넣어 곱게 갈아 드레싱을 만든다. 2. 당근과 적양배추는 곱게 채 썰고, 치커리는 잘게 썬다. 3. 사과는 껍질과 심을 제거한 뒤 한입 크기로 썬다.', DEFAULT, DEFAULT, '•필수 재료 : 양상추(60g), 당근(10g), 적양배추(10g), 치커리(5g)
 •소스 : 사과(20g), 파인애플(15g), 레몬즙(1g)');
 
 -- Recipe: 시금치들깨무침
@@ -10204,13 +10098,13 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
     VALUES ('시래기닭조림', '반찬', '•고추를 활용해 매콤한 맛을 첨가하여 나트륨 함량을 낮췄어요.', 'ADMIN', SYSDATE, '1. 닭고기는 부위별로 토막 내어 끓는 물에 살짝 데친다. 6. 홍고추와 청고추를 올려 마무리한다. 4. 무청시래기는 끓는 물에 한 번 더 살짝 데치고, 6cm 길이로 썬다. 5. 냄비에 물(30g)과 닭고기, 시래기를 넣고, 청홍고추를 제외한 손질한 채소를 넣어 조린다. 2. 데친 닭고기에 양념 재료를 섞어 30분 이상 재운다. 3. 무, 당근, 양파는 사각 썰고, 고추는 송송 썬다.', DEFAULT, DEFAULT, '•필수재료 : 닭고기(120g), 무(30g), 당근(20g), 양파(10g), 홍고추(1g), 청고추(1g), 무청시래기(삶은 것, 80g)
 •양념 : 다진마늘(2g), 후추(1g), 저염간장(5g), 설탕(3g), 물엿(5g)');
 
--- Recipe: 두부튀김and 무소스
+-- Recipe: 두부튀김 and 무소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('두부튀김and 무소스', '반찬', '가쓰오부시 국물을 이용하여 간장 사용을 줄였어요.', 'ADMIN', SYSDATE, '1. 두부는 2cm의 정사각형으로 썰어 전분과 계란물을 무쳐 기름에 튀긴다. 6. 접시에 두부와 깻잎을 담고, 소스를 곁들여 낸다. 4. 무와 가쓰오부시 국물에 설탕, 미향, 레몬즙, 식초, 저염간장을 넣고 섞어준다. 5. 깻잎은 곱게 채를 쳐준다. 2. 무는 믹서기나 강판에 갈아준다. 3. 끓는 물에 가쓰오부시를 살짝 넣었다 빼내어 국물을 우려낸다.', DEFAULT, DEFAULT, '두부 70g, 계란 20g, 깻잎 2.5g, 옥수수전분 10g, 식용유 10g, 혼다랑어가쓰오부시 1g, 무 10g, 레몬쥬스 2g, 2배 양조식초 1.5g, 저염간장 3g, 미향 6g, 설탕 1g');
+    VALUES ('두부튀김 and 무소스', '반찬', '가쓰오부시 국물을 이용하여 간장 사용을 줄였어요.', 'ADMIN', SYSDATE, '1. 두부는 2cm의 정사각형으로 썰어 전분과 계란물을 무쳐 기름에 튀긴다. 6. 접시에 두부와 깻잎을 담고, 소스를 곁들여 낸다. 4. 무와 가쓰오부시 국물에 설탕, 미향, 레몬즙, 식초, 저염간장을 넣고 섞어준다. 5. 깻잎은 곱게 채를 쳐준다. 2. 무는 믹서기나 강판에 갈아준다. 3. 끓는 물에 가쓰오부시를 살짝 넣었다 빼내어 국물을 우려낸다.', DEFAULT, DEFAULT, '두부 70g, 계란 20g, 깻잎 2.5g, 옥수수전분 10g, 식용유 10g, 혼다랑어가쓰오부시 1g, 무 10g, 레몬쥬스 2g, 2배 양조식초 1.5g, 저염간장 3g, 미향 6g, 설탕 1g');
 
--- Recipe: 오징어튀김and 딸기쨈
+-- Recipe: 오징어튀김 and 딸기쨈
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('오징어튀김and 딸기쨈', '반찬', '초간장 대신 딸기잼으로 소스를 대체했어요.', 'ADMIN', SYSDATE, '1. 오징어를 먹기 좋은 크기로 썬다. 6. 딸기잼과 같이 곁들여 낸다. 4. 오징어에 튀김 반죽을 묻혀 식용유에 튀긴다. 5. 키친타올에 올려 기름을 제거한다. 2. 오징어를 살짝 데친 후 물기를 제거한다. 3. 밀가루에 물, 계란, 후추를 넣어 튀김반죽을 만든다.', DEFAULT, DEFAULT, '오징어 35g, 밀가루 70g, 물 50g, 계란 32.5g 후추 0.1g, 식용유 500g, 딸기쨈 5g');
+    VALUES ('오징어튀김 and 딸기쨈', '반찬', '초간장 대신 딸기잼으로 소스를 대체했어요.', 'ADMIN', SYSDATE, '1. 오징어를 먹기 좋은 크기로 썬다. 6. 딸기잼과 같이 곁들여 낸다. 4. 오징어에 튀김 반죽을 묻혀 식용유에 튀긴다. 5. 키친타올에 올려 기름을 제거한다. 2. 오징어를 살짝 데친 후 물기를 제거한다. 3. 밀가루에 물, 계란, 후추를 넣어 튀김반죽을 만든다.', DEFAULT, DEFAULT, '오징어 35g, 밀가루 70g, 물 50g, 계란 32.5g 후추 0.1g, 식용유 500g, 딸기쨈 5g');
 
 -- Recipe: 감귤콩샐러드
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -10299,9 +10193,9 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
     VALUES ('닭가슴살호두크로켓', '반찬', '두부와 두유로 마요네즈를 만들어 나트륨 사용을 줄였어요.', 'ADMIN', SYSDATE, '1. 양파, 대파, 호두, 닭가슴살은 잘게 다진다. 6. 두부 마요네즈에 ⑤의 재료와 설탕, 레몬, 식초, 땅콩버터, 후추, 홀그레인, 파슬리가루를 넣어 타르소스를 만든다. 4. 믹서에 두부, 두유를 넣고 갈아 두부 마요네즈를 만든다. 5. 순무와 양파는 다지고, 계란은 삶아 다져 준비한다. 2. ①에 물기를 제거한 두부와 생강, 마늘, 후추를 섞어 반죽한다. 3. 반죽을 쌀가루, 계란물, 빵가루 순으로 묻히고 튀겨 크로켓을 만든다.', DEFAULT, DEFAULT, '닭가슴살 80g, 두부 20g, 양파 12.5g, 대파 5g, 호두 5g, 땅콩 2.5g, 마늘 2g, 생강 0.5g, 후추 0.3g, 설탕 3.8g, 식초 2.5g, 계란 65g(1.5개), 쌀가루 7g, 빵가루 25g, 순무 24g, 두유 45ml, 홀그레인 2.5g, 땅콩버터 5g, 레몬 7g, 파슬리 0.5g');
 
--- Recipe: 누룽지상추샐러드and 유자드레싱
+-- Recipe: 누룽지상추샐러드 and 유자드레싱
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('누룽지상추샐러드and 유자드레싱', '반찬', '과일의 상큼한 맛과 튀긴 누룽지의 고소한 맛으로 싱거운 맛을 보완했어요.', 'ADMIN', SYSDATE, '1. 로메인 상추를 한 입 크기로 썬다. 6. 드레싱을 얹어 낸다. 4. 유자청, 레몬즙, 올리브유, 식초, 후추를 섞어 드레싱을 만든다. 5. 로메인 상추 위에 파프리카와 튀긴 누룽지를 고명으로 올린다. 2. 파프리카는 사방 0.3cm 크기로 썬다. 3. 누룽지를 튀긴 후 으깬다.', DEFAULT, DEFAULT, '누룽지 5g, 로메인상추 7.5g, 파프리카(빨간색/노란색) 12.5g, 유자청 7.5g, 식용유 500g, 올리브유 3.5g, 레몬즙 1g, 식초 1g, 후추 0.1g');
+    VALUES ('누룽지상추샐러드 and 유자드레싱', '반찬', '과일의 상큼한 맛과 튀긴 누룽지의 고소한 맛으로 싱거운 맛을 보완했어요.', 'ADMIN', SYSDATE, '1. 로메인 상추를 한 입 크기로 썬다. 6. 드레싱을 얹어 낸다. 4. 유자청, 레몬즙, 올리브유, 식초, 후추를 섞어 드레싱을 만든다. 5. 로메인 상추 위에 파프리카와 튀긴 누룽지를 고명으로 올린다. 2. 파프리카는 사방 0.3cm 크기로 썬다. 3. 누룽지를 튀긴 후 으깬다.', DEFAULT, DEFAULT, '누룽지 5g, 로메인상추 7.5g, 파프리카(빨간색/노란색) 12.5g, 유자청 7.5g, 식용유 500g, 올리브유 3.5g, 레몬즙 1g, 식초 1g, 후추 0.1g');
 
 -- Recipe: 견과류 미숫가루 빵
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -10519,7 +10413,7 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 
 -- Recipe: 멍게비빔밥
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('멍게비빔밥', '밥', '멍게살을 다져서 냉동실에 넣어 살짝 얼렸다가 넣어도 맛있다. and #8226; 멍게 향이 강할 때는 쑥갓을 넣어 비비면 강한 향이 줄어든다.', 'ADMIN', SYSDATE, '1. 멍게는 꼭지를 따고 껍질을 벗겨 한입 크기로 썬다. 6. 그릇에 밥을 담고 부추, 무순, 멍게, 김, 통깨를 올리고 양념장을 넣어 비벼 먹는다. 4. 양념장 재료를 모두 섞어 양념장을 만든다. 5. 손질한 멍게에 참기름을 넣어 가볍게 버무린다. 2. 부추는 2cm 길이로 썬다. 3. 김도 부추와 같은 길이로 가늘게 채 썬다.', DEFAULT, DEFAULT, '비빔밥: 쌀밥 210, 멍게살 50, 부추 10, 무순 5, 김 0.5, 참기름 4, 통깨 1.5 양념장: 고추장 5, 설탕 1, 레몬즙 3, 간 양파 3, 매실액 3');
+    VALUES ('멍게비빔밥', '밥', '멍게살을 다져서 냉동실에 넣어 살짝 얼렸다가 넣어도 맛있다. 멍게 향이 강할 때는 쑥갓을 넣어 비비면 강한 향이 줄어든다.', 'ADMIN', SYSDATE, '1. 멍게는 꼭지를 따고 껍질을 벗겨 한입 크기로 썬다. 6. 그릇에 밥을 담고 부추, 무순, 멍게, 김, 통깨를 올리고 양념장을 넣어 비벼 먹는다. 4. 양념장 재료를 모두 섞어 양념장을 만든다. 5. 손질한 멍게에 참기름을 넣어 가볍게 버무린다. 2. 부추는 2cm 길이로 썬다. 3. 김도 부추와 같은 길이로 가늘게 채 썬다.', DEFAULT, DEFAULT, '비빔밥: 쌀밥 210, 멍게살 50, 부추 10, 무순 5, 김 0.5, 참기름 4, 통깨 1.5 양념장: 고추장 5, 설탕 1, 레몬즙 3, 간 양파 3, 매실액 3');
 
 -- Recipe: 키조개샤브샤브
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
@@ -10781,9 +10675,9 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 참기름(5g), 소금(1g), 후춧가루(0.2g),
 올리고당(3.5g)');
 
--- Recipe: 양배추롤and 참치두부쌈장
+-- Recipe: 양배추롤 and 참치두부쌈장
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('양배추롤and 참치두부쌈장', '일품', '참치와 두부의 고소한 맛과 양파의 단맛으로 설탕을 넣지 않아도 맛있는 쌈장을 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 양배추는 손질하여 찜통에 10분간
+    VALUES ('양배추롤 and 참치두부쌈장', '일품', '참치와 두부의 고소한 맛과 양파의 단맛으로 설탕을 넣지 않아도 맛있는 쌈장을 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 양배추는 손질하여 찜통에 10분간
 찐 후 식힌다. 6. 양배추롤을 적당한 크기로 썰고
 참치두부쌈장을 올린다. 4. 팬에 된장, 고추장, 매실청, 다진 
 양파, 파, 마늘, 물을 넣고 섞어
@@ -10851,178 +10745,51 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 
 -- Recipe: 파인애플떡갈비
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('파인애플떡갈비', '반찬', '떡갈비에 파인애플을 넣으면 육질도 부드럽게 하고 천연 감미료로 사용할 수 있어요.', 'ADMIN', SYSDATE, '1. 파인애플은 7cm로 자르고
-남은 자투리와 파, 마늘, 양파,
-표고버섯은 곱게 다진다. 6. 팬 또는 오븐(180℃, 15분)에
-노릇하게 굽는다. 4. 전분 일부와 갈빗살, 다진
-파인애플, 양파, 표고버섯을 섞고
-치댄다. 5. 잘라둔 파인애플에 남은 전분을
-묻힌 뒤 고기반죽으로 감싼다. 2. 갈빗살은 곱게 다져 간장,
-설탕, 파, 마늘, 참기름, 추후로
-양념한다. 3. 다진 파인애플, 양파, 표고버섯은
-볶아 수분을 제거한다.', DEFAULT, DEFAULT, '소고기(갈빗살, 60g), 파인애플(45g),
-양파(8g), 표고버섯(7g), 전분(10g),
-파(5g), 마늘(2g), 진간장(3g), 설탕(1g),
-참기름(1.5g), 후춧가루(0.2g)');
+    VALUES ('파인애플떡갈비', '반찬', '떡갈비에 파인애플을 넣으면 육질도 부드럽게 하고 천연 감미료로 사용할 수 있어요.', 'ADMIN', SYSDATE, '1. 파인애플은 7cm로 자르고 남은 자투리와 파, 마늘, 양파, 표고버섯은 곱게 다진다.\n2. 갈빗살은 곱게 다져 간장, 설탕, 파, 마늘, 참기름, 후추로 양념한다.\n3. 다진 파인애플, 양파, 표고버섯은 볶아 수분을 제거한다.\n4. 전분 일부와 갈빗살, 다진 파인애플, 양파, 표고버섯을 섞고 치댄다.\n5. 잘라둔 파인애플에 남은 전분을 묻힌 뒤 고기반죽으로 감싼다.\n6. 팬 또는 오븐(180℃, 15분)에 노릇하게 굽는다.', DEFAULT, DEFAULT, '소고기(갈빗살, 60g), 파인애플(45g),\n양파(8g), 표고버섯(7g), 전분(10g),\n파(5g), 마늘(2g), 진간장(3g), 설탕(1g),\n참기름(1.5g), 후춧가루(0.2g)');
 
 -- Recipe: 건강가지말이+참깨마요소스
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('건강가지말이+참깨마요소스', '반찬', '가지말이 안에 단호박을 바르고, 참깨마요소스의 꿀이 설탕을 대신해줘요.', 'ADMIN', SYSDATE, '1. 가지는 길이대로 얇게
-슬라이스한 뒤 살짝 굽는다. 6. 참깨마요소스를 올린다. 4. 참깨에 마요네즈, 꿀, 간 배를
-넣고 섞어 참깨마요소스를
-만든다. 5. 구운 가지에 단호박을 얇게 
-바르고 야채들을 넣고 돌돌 만다. 2. 파프리카, 당근, 사과는 얇게
-채썬다. 3. 단호박은 속을 파내고 쪄서
-으깬다.', DEFAULT, DEFAULT, '가지(200g), 단호박(30g),
-삼색파프리카(30g), 당근(30g), 사과(30g),
-배(30g), 무순(10g), 청양고추(20g),
-마요네즈(30g), 참깨(40g), 꿀(20g)');
+    VALUES ('건강가지말이+참깨마요소스', '반찬', '가지말이 안에 단호박을 바르고, 참깨마요소스의 꿀이 설탕을 대신해줘요.', 'ADMIN', SYSDATE, '1. 가지는 길이대로 얇게 슬라이스한 뒤 살짝 굽는다.\n2. 파프리카, 당근, 사과는 얇게 채썬다.\n3. 단호박은 속을 파내고 쪄서 으깬다.\n4. 참깨에 마요네즈, 꿀, 간 배를 넣고 섞어 참깨마요소스를 만든다.\n5. 구운 가지에 단호박을 얇게 바르고 야채들을 넣고 돌돌 만다.\n6. 참깨마요소스를 올린다.', DEFAULT, DEFAULT, '가지(200g), 단호박(30g),\n삼색파프리카(30g), 당근(30g), 사과(30g),\n배(30g), 무순(10g), 청양고추(20g),\n마요네즈(30g), 참깨(40g), 꿀(20g)');
 
 -- Recipe: 순창 고추장 두부강정
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('순창 고추장 두부강정', '반찬', '올리고당과 케첩이 들어가면 강정 소스의 농도를 살리면서 맛있는 단맛을 내요.', 'ADMIN', SYSDATE, '1. 당근, 새송이버섯, 소고기, 양파는
-가늘게 채 썰어 간장, 꿀, 생강가루,
-다진 마늘로 양념한 뒤 볶는다. 6. 고추장, 케첩, 올리고당을 섞고
-냄비에 졸여 소스를 만들고 튀긴
-두부를 지진다. 4. 볶은 야채와 고기를 두부 사이에
-넣는다. 5. 튀김가루, 전분, 차가운 맥주를
-섞어 튀김 반죽을 만든 뒤 두부에
-입혀 170℃기름에 튀긴다. 2. 두부는 반으로 잘라 속에 칼집을 
-낸 뒤 소금을 뿌려 수분을
-제거한다. 3. 두부에 전분을 골고루 묻힌다.', DEFAULT, DEFAULT, '소고기(불고기용, 60g), 두부(400g),
-새송이버섯(40g), 당근(30g), 양파(10g),
-마늘(15g), 생강가루(5g), 고추장(50g),
-튀김가루(200g), 전분(20g), 맥주(200ml),
-소금(1g), 간장(15g), 꿀(15g), 케첩(45g),
-올리고당(15g)');
+    VALUES ('순창 고추장 두부강정', '반찬', '올리고당과 케첩이 들어가면 강정 소스의 농도를 살리면서 맛있는 단맛을 내요.', 'ADMIN', SYSDATE, '1. 당근, 새송이버섯, 소고기, 양파는 가늘게 채 썰어 간장, 꿀, 생강가루, 다진 마늘로 양념한 뒤 볶는다.\n2. 두부는 반으로 잘라 속에 칼집을 낸 뒤 소금을 뿌려 수분을 제거한다.\n3. 두부에 전분을 골고루 묻힌다.\n4. 볶은 야채와 고기를 두부 사이에 넣는다.\n5. 튀김가루, 전분, 차가운 맥주를 섞어 튀김 반죽을 만든 뒤 두부에 입혀 170℃기름에 튀긴다.\n6. 고추장, 케첩, 올리고당을 섞고 냄비에 졸여 소스를 만들고 튀긴 두부를 지진다.', DEFAULT, DEFAULT, '소고기(불고기용, 60g), 두부(400g),\n새송이버섯(40g), 당근(30g), 양파(10g),\n마늘(15g), 생강가루(5g), 고추장(50g),\n튀김가루(200g), 전분(20g), 맥주(200ml),\n소금(1g), 간장(15g), 꿀(15g), 케첩(45g),\n올리고당(15g)');
 
 -- Recipe: 곤약 백김치 말이
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('곤약 백김치 말이', '반찬', '파프리카를 넣으면 설탕을 넣지 않아도 단맛을 낼 수 있어요.', 'ADMIN', SYSDATE, '1. 곤약은 얇게 편으로 썰어 데친 뒤
-백김치 국물에 절인다. 6. 아랫부분을 정리하고 접시에
-담는다. 4. 곤약을 깔고 백김치, 오징어,
-파프리카를 얹어 말아준다. 5. 부추로 풀어지지 않게 단단히
-매듭을 짓는다. 2. 물에 월계수잎, 통후추, 청주를
-넣고 오징어를 질기지 않게 살짝
-삶는다. 3. 파프리카는 채썰고 백김치는
-물기를 제거한다.', DEFAULT, DEFAULT, '오징어(30g), 곤약(100g), 백김치(50g),
-삼색파프리카(20g), 부추(10g), 청주(15g),
-통후추(5알), 월계수잎(1장)');
+    VALUES ('곤약 백김치 말이', '반찬', '파프리카를 넣으면 설탕을 넣지 않아도 단맛을 낼 수 있어요.', 'ADMIN', SYSDATE, '1. 곤약은 얇게 편으로 썰어 데친 뒤 백김치 국물에 절인다.\n2. 물에 월계수잎, 통후추, 청주를 넣고 오징어를 질기지 않게 살짝 삶는다.\n3. 파프리카는 채썰고 백김치는 물기를 제거한다.\n4. 곤약을 깔고 백김치, 오징어, 파프리카를 얹어 말아준다.\n5. 부추로 풀어지지 않게 단단히 매듭을 짓는다.\n6. 아랫부분을 정리하고 접시에 담는다.', DEFAULT, DEFAULT, '오징어(30g), 곤약(100g), 백김치(50g),\n삼색파프리카(20g), 부추(10g), 청주(15g),\n통후추(5알), 월계수잎(1장)');
 
 -- Recipe: 묵은지비프롤
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('묵은지비프롤', '반찬', '고기양념에 설탕 대신 매실액을 사용하면 설탕 사용도 줄이고 음식의 풍미도 높일 수 있어요.', 'ADMIN', SYSDATE, '1. 소고기는 올리브오일, 매실액,
-레몬즙, 소금, 후춧가루로
-밑간한다. 6. 200℃로 예열한 오븐에 넣고
-15분간 굽는다. 4. 빨강, 노랑, 주황 파프리카는
-막대모양으로 썬다. 5. 묵은지 위에 달걀 흰자를 바르고
-소고기를 펼치고 전분을 묻힌 뒤
-야채를 넣고 돌돌 만다. 2. 묵은지는 흐르는 물에 헹궈
-양념을 제거한다. 3. 팽이버섯은 굵은 가닥으로
-분리하고 아스파라거스는
-밑기둥을 제거한다.', DEFAULT, DEFAULT, '소고기(불고기용, 100g), 묵은지(100g),
-팽이버섯(20g), 아스파라거스(10g),
-삼색파프리카(20g), 참나물(10g),
-달걀(1개), 전분(20g), 올리브오일(50g),
-매실액(30g), 레몬즙(30g), 소금(1g),
-후춧가루(0.5g)');
+    VALUES ('묵은지비프롤', '반찬', '고기양념에 설탕 대신 매실액을 사용하면 설탕 사용도 줄이고 음식의 풍미도 높일 수 있어요.', 'ADMIN', SYSDATE, '1. 소고기는 올리브오일, 매실액, 레몬즙, 소금, 후춧가루로 밑간한다.\n2. 묵은지는 흐르는 물에 헹궈 양념을 제거한다.\n3. 팽이버섯은 굵은 가닥으로 분리하고 아스파라거스는 밑기둥을 제거한다.\n4. 빨강, 노랑, 주황 파프리카는 막대모양으로 썬다.\n5. 묵은지 위에 달걀 흰자를 바르고 소고기를 펼치고 전분을 묻힌 뒤 야채를 넣고 돌돌 만다.\n6. 200℃로 예열한 오븐에 넣고 15분간 굽는다.', DEFAULT, DEFAULT, '소고기(불고기용, 100g), 묵은지(100g),\n팽이버섯(20g), 아스파라거스(10g),\n삼색파프리카(20g), 참나물(10g),\n달걀(1개), 전분(20g), 올리브오일(50g),\n매실액(30g), 레몬즙(30g), 소금(1g),\n후춧가루(0.5g)');
 
 -- Recipe: 바나나를 감싼 일본식 달걀말이
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('바나나를 감싼 일본식 달걀말이', '반찬', '바나나를 넣으면 부드러우면서 달콤한 맛을 낼 수 있어요.', 'ADMIN', SYSDATE, '1. 달걀을 흰자와 노른자로
-분리한다. 6. 먹기 좋은 크기로 자른다. 4. 바나나를 넣고 말아준다. 5. 흰자를 부어 4번을 감싸 
-말아준다. 2. 흰자와 노른자를 각각 풀어
-전분과 소금을 넣는다. 3. 팬에 식용유를 두르고 노른자를
-부어 반정도 익힌다.', DEFAULT, DEFAULT, '달걀(3개), 바나나(1개), 전분(5g),
-소금(0.2g)');
+    VALUES ('바나나를 감싼 일본식 달걀말이', '반찬', '바나나를 넣으면 부드러우면서 달콤한 맛을 낼 수 있어요.', 'ADMIN', SYSDATE, '1. 달걀을 흰자와 노른자로 분리한다.\n2. 흰자와 노른자를 각각 풀어 전분과 소금을 넣는다.\n3. 팬에 식용유를 두르고 노른자를 부어 반정도 익힌다.\n4. 바나나를 넣고 말아준다.\n5. 흰자를 부어 노른자 말이를 감싸 말아준다.\n6. 먹기 좋은 크기로 자른다.', DEFAULT, DEFAULT, '달걀(3개), 바나나(1개), 전분(5g),\n소금(0.2g)');
 
 -- Recipe: 그린커리
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('그린커리', '반찬', '그린커리의 매운맛과 코코넛밀크의 부드럽고 달짝지근한 맛으로 설탕을 넣지 않고
-만들 수 있어요.', 'ADMIN', SYSDATE, '1. 마늘은 입자있게 다진다. 6. 코코넛밀크로 농도를 조절하여
-완성한다. 4. 그린커리 페이스트를 넣고
-볶는다. 5. 4번에 레몬그라스, 물 한 컵과
-코코넛밀크 2/3를 넣고 끓인다. 2. 닭가슴살, 당근, 가지, 양송이
-버섯은 먹기 좋은 크기로 자른다. 3. 팬에 기름을 두르고 마늘을
-볶다가 가지, 당근, 양송이버섯
-순으로 넣고 볶는다.', DEFAULT, DEFAULT, '닭고기(가슴살, 50g), 그린커리
-페이스트(50g), 코코넛밀크(40g),
-당근(30g), 가지(50g), 양송이버섯(20g),
-레몬그라스(10g), 마늘(5g)');
+    VALUES ('그린커리', '반찬', '그린커리의 매운맛과 코코넛밀크의 부드럽고 달짝지근한 맛으로 설탕을 넣지 않고 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 마늘은 입자있게 다진다.\n2. 닭가슴살, 당근, 가지, 양송이 버섯은 먹기 좋은 크기로 자른다.\n3. 팬에 기름을 두르고 마늘을 볶다가 가지, 당근, 양송이버섯 순으로 넣고 볶는다.\n4. 그린커리 페이스트를 넣고 볶는다.\n5. 레몬그라스, 물 한 컵과 코코넛밀크 2/3를 넣고 끓인다.\n6. 코코넛밀크로 농도를 조절하여 완성한다.', DEFAULT, DEFAULT, '닭고기(가슴살, 50g), 그린커리 페이스트(50g), 코코넛밀크(40g),\n당근(30g), 가지(50g), 양송이버섯(20g),\n레몬그라스(10g), 마늘(5g)');
 
 -- Recipe: 현미 고구마 아란치니
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('현미 고구마 아란치니', '일품', '고구마를 이용해 단맛을 내고, 당 함량이 적은 현미를 사용해 덜 달면서 건강한 한끼 식사용 아란치니를 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 고구마는 삶아서 식힌 후 으깬다. 6. 170~180℃ 기름에 튀긴다. 4. 볶은 현미밥은 속에 고구마를
-채우고 동그란 모양을 만든다. 5. 밀가루, 달걀물, 빵가루 순으로 
-묻힌다. 2. 새송이버섯, 양파, 당근은 다진
-후 후춧가루와 소금을 넣고 팬에
-볶는다. 3. 야채가 익으면 현미밥을 넣어
-볶은 후 식힌다.', DEFAULT, DEFAULT, '고구마(100g), 현미밥(210g),
-새송이버섯(25g), 당근(25g), 양파(25g),
-달걀(1개), 파슬리(3g), 빵가루(200g),
-밀가루(100g), 소금(2g), 후춧가루(1g),
-식용유(500g)');
+    VALUES ('현미 고구마 아란치니', '일품', '고구마를 이용해 단맛을 내고, 당 함량이 적은 현미를 사용해 덜 달면서 건강한 한끼 식사용 아란치니를 만들 수 있어요.', 'ADMIN', SYSDATE, '1. 고구마는 삶아서 식힌 후 으깬다.\n2. 새송이버섯, 양파, 당근은 다진 후 후춧가루와 소금을 넣고 팬에 볶는다.\n3. 야채가 익으면 현미밥을 넣어 볶은 후 식힌다.\n4. 볶은 현미밥은 속에 고구마를 채우고 동그란 모양을 만든다.\n5. 밀가루, 달걀물, 빵가루 순으로 묻힌다.\n6. 170~180℃ 기름에 튀긴다.', DEFAULT, DEFAULT, '고구마(100g), 현미밥(210g),\n새송이버섯(25g), 당근(25g), 양파(25g),\n달걀(1개), 파슬리(3g), 빵가루(200g),\n밀가루(100g), 소금(2g), 후춧가루(1g),\n식용유(500g)');
 
 -- Recipe: 유자 치킨 꿔바로우
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('유자 치킨 꿔바로우', '반찬', '유자청이 설탕을 대신하고 유자의 상큼한 향으로 부족한 단맛을 보완할 수 있어요.', 'ADMIN', SYSDATE, '1. 닭가슴살을 슬라이스하여 소금,
-후춧가루로 밑간을 하고 다진
-생강을 발라 잡냄새를 제거한다. 6. 튀긴 꿔바로우를 소스에 넣고
-버무린다. 4. 2번에 반죽을 골고루 묻혀 170℃
-기름에서 튀긴다. 5. 식초와 유자청을 넣고 끓인 후
-간장으로 간을 맞추고 전분을
-풀어 농도를 맞춘다. 2. 밑간한 닭가슴살에 찹쌀가루를
-묻힌다. 3. 녹말, 식용유, 물을 섞어 반죽을
-만든다.', DEFAULT, DEFAULT, '닭고기(가슴살,150g), 생강(5g),
-녹말(50g), 찹쌀가루(50g), 유자청(10g),
-전분(5g), 꿀(10g), 소금(1g),
-후춧가루(1g), 식초(45g), 식용유(10g),
-물(45g)');
+    VALUES ('유자 치킨 꿔바로우', '반찬', '유자청이 설탕을 대신하고 유자의 상큼한 향으로 부족한 단맛을 보완할 수 있어요.', 'ADMIN', SYSDATE, '1. 닭가슴살을 슬라이스하여 소금, 후춧가루로 밑간을 하고 다진 생강을 발라 잡냄새를 제거한다.\n2. 밑간한 닭가슴살에 찹쌀가루를 묻힌다.\n3. 녹말, 식용유, 물을 섞어 반죽을 만든다.\n4. 반죽을 골고루 묻혀 170℃ 기름에서 튀긴다.\n5. 식초와 유자청을 넣고 끓인 후 간장으로 간을 맞추고 전분을 풀어 농도를 맞춘다.\n6. 튀긴 꿔바로우를 소스에 넣고 버무린다.', DEFAULT, DEFAULT, '닭고기(가슴살,150g), 생강(5g),\n녹말(50g), 찹쌀가루(50g), 유자청(10g),\n전분(5g), 꿀(10g), 소금(1g),\n후춧가루(1g), 식초(45g), 식용유(10g),\n물(45g)');
 
 -- Recipe: 펌킨크로켓
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('펌킨크로켓', '반찬', '단호박의 단맛과 볶은 양파의 단맛이 설탕을 대신해요.', 'ADMIN', SYSDATE, '1. 참나물은 데친 뒤 잘게 다진다. 6.  170℃ 기름에 튀긴다. 4. 빵가루를 조금 넣고 섞어 되직한
-반죽을 만든다. 5. 반죽에 모짜렐라치즈를 넣고
-한입 크기로 빚은 뒤 달걀, 빵가루
-순으로 옷을 입힌다. 2. 양파와 당근은 잘게 다진 뒤
-볶는다. 3. 단호박을 찐 뒤 으깨고 다진
-참나물, 볶은 양파, 당근을 넣고
-소금, 후춧가루로 밑간한다.', DEFAULT, DEFAULT, '단호박(80g), 양파(20g),
-당근(10g), 참나물(10g), 달걀(1개),
-모짜렐라치즈(10g), 빵가루(500g),
-식용유(500g), 소금(1g), 후춧가루(0.5g)');
+    VALUES ('펌킨크로켓', '반찬', '단호박의 단맛과 볶은 양파의 단맛이 설탕을 대신해요.', 'ADMIN', SYSDATE, '1. 참나물은 데친 뒤 잘게 다진다.\n2. 양파와 당근은 잘게 다진 뒤 볶는다.\n3. 단호박을 찐 뒤 으깨고 다진 참나물, 볶은 양파, 당근을 넣고 소금, 후춧가루로 밑간한다.\n4. 빵가루를 조금 넣고 섞어 되직한 반죽을 만든다.\n5. 반죽에 모짜렐라치즈를 넣고 한입 크기로 빚은 뒤 달걀, 빵가루 순으로 옷을 입힌다.\n6. 170℃ 기름에 튀긴다.', DEFAULT, DEFAULT, '단호박(80g), 양파(20g),\n당근(10g), 참나물(10g), 달걀(1개),\n모짜렐라치즈(10g), 빵가루(500g),\n식용유(500g), 소금(1g), 후춧가루(0.5g)');
 
 -- Recipe: 이태리튀밥
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('이태리튀밥', '밥', '옥수수, 토마토를 사용하면 은은한 천연의 단맛을 낼 수 있어요', 'ADMIN', SYSDATE, '1. 냄비에 물 한 컵을 넣고 끓으면
-소금을 조금 넣고 쌀을 넣어
-끓인다. 6. 달걀물, 빵가루 순으로 묻혀
-170℃ 기름에서 튀긴다. 4. 모짜렐라치즈는 손으로 작게
-뜯어 반은 바질, 토마토와 섞어
-소금과 올리브오일로 간을 하고,
-나머지는 옥수수와 섞는다. 5. 식은 밥에 4번의 소를 각각 넣고
-동그랗게 빚는다. 2. 쌀이 물을 흡수하면 버터를 넣고
-골고루 섞은 뒤 파마산치즈가루를
-넣고 섞어 접시에 펼쳐 식힌다. 3. 방울토마토는 굵게 다진 뒤
-물기를 제거하고 바질은 얇게 채
-썬다.', DEFAULT, DEFAULT, '쌀(100g), 방울토마토(2개),
-바질(3g), 옥수수(20g), 달걀(1개),
-빵가루(30g), 파마산치즈가루(20g),
-생모짜렐라치즈(20g), 버터(4g),
-올리브오일(3g), 소금(2g)');
+    VALUES ('이태리튀밥', '밥', '옥수수, 토마토를 사용하면 은은한 천연의 단맛을 낼 수 있어요', 'ADMIN', SYSDATE, '1. 냄비에 물 한 컵을 넣고 끓으면 소금을 조금 넣고 쌀을 넣어 끓인다.\n2. 쌀이 물을 흡수하면 버터를 넣고 골고루 섞은 뒤 파마산치즈가루를 넣고 섞어 접시에 펼쳐 식힌다.\n3. 방울토마토는 굵게 다진 뒤 물기를 제거하고 바질은 얇게 채 썬다.\n4. 모짜렐라치즈는 손으로 작게 뜯어 반은 바질, 토마토와 섞어 소금과 올리브오일로 간을 하고, 나머지는 옥수수와 섞는다.\n5. 식은 밥에 소를 각각 넣고 동그랗게 빚는다.\n6. 달걀물, 빵가루 순으로 묻혀 170℃ 기름에서 튀긴다.', DEFAULT, DEFAULT, '쌀(100g), 방울토마토(2개),\n바질(3g), 옥수수(20g), 달걀(1개),\n빵가루(30g), 파마산치즈가루(20g),\n생모짜렐라치즈(20g), 버터(4g),\n올리브오일(3g), 소금(2g)');
 
 -- Recipe: 현미 입은 미트볼
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
-    VALUES ('현미 입은 미트볼', '반찬', '고기의 대추와 소스의 배, 대추, 양파가 설탕을 대신해요.', 'ADMIN', SYSDATE, '1. 양파 40g, 마늘 20g, 대추 2알, 배,
-생강, 간장, 물 70g을 넣고 졸여
-소스를 만든다. 6. 팬에 소스를 부어가며 졸인 뒤
-쪽파, 현미튀밥을 올린다. 4. 3번의 반죽을 동그란 모양으로
-빚는다. 5. 팬에 기름을 두르고 미트볼을
-굽는다. 2. 소고기, 돼지고기는 다진 뒤 소금,
-후추, 참기름, 깨, 간장 15g을
-넣어 밑간한다. 3. 양파, 마늘, 대추를 다진 뒤
-밀가루, 식용유와 함께 2번에
-넣고 치댄다.', DEFAULT, DEFAULT, '소고기(100g), 돼지고기(100g), 대추(4알),
+    VALUES ('현미 입은 미트볼', '반찬', '고기의 대추와 소스의 배, 대추, 양파가 설탕을 대신해요.', 'ADMIN', SYSDATE, '1. 양파 40g, 마늘 20g, 대추 2알, 배, 생강, 간장, 물 70g을 넣고 졸여 소스를 만든다.\n2. 소고기, 돼지고기는 다진 뒤 소금, 후추, 참기름, 깨, 간장 15g을 넣어 밑간한다.\n3. 양파, 마늘, 대추를 다진 뒤 밀가루, 식용유와 함께 밑간한 고기에 넣고 치댄다.\n4. 반죽을 동그란 모양으로 빚는다.\n5. 팬에 기름을 두르고 미트볼을 굽는다.\n6. 팬에 소스를 부어가며 졸인 뒤 쪽파, 현미튀밥을 올린다.',  DEFAULT, DEFAULT,  '소고기(100g), 돼지고기(100g), 대추(4알),
 배(1개), 현미튀밥(30g), 밀가루(20g),
 양파(60g), 마늘(30g), 쪽파(30g),
 생강(5g), 간장(30g), 소금(0.5g),
@@ -11163,6 +10930,670 @@ INSERT INTO recipe (name, recipe_category, description, created_by, created_at, 
 INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
     VALUES ('상추 겉절이', '반찬', '?', 'ADMIN', SYSDATE, '1. 상추를 깨끗하게 씻어 물기를 뺀 후 먹기 좋게 자른다. 6. 상추에 양념을 넣고 젓가락으로 섞어준다. 4. 모든 채소들을 차가운 물에 담갔다가 물기를 빼서 준비해둔다. 5. 간장에 물, 매실농축액, 고춧가루, 통깨, 식초를 넣어 겉절이 양념을 만든다. 2. 영양부추는 3cm 길이로 썰고, 양파는 3cm 길이로 얇게 채썬다. 3. 홍고추도 3cm 길이로 얄게 채썬다.', DEFAULT, DEFAULT, '상추 15g, 간장 2g, 물 2g, 매실농축액 5g, 고춧가루 1g, 통깨 0.4g, 식초 0.4g, 영양부추 10g, 양파 5g, 홍고추 3g');
 
+-- Recipe: 그리스 스타일 생선 구이: 신선하고 간단하며 맛있는 요리
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('그리스 스타일 생선 구이: 신선하고 간단하며 맛있는 요리', '그리스 요리', '그리스 스타일 생선 구이: 신선하고 간단하며 맛있는 요리는 지중해 요리 레시피로, 1인분에 약 343칼로리, 단백질 28g, 지방 12g을 포함합니다. 글루텐 프리, 페스카테리안 다이어트에 적합합니다.', 'ADMIN', SYSDATE, '1. 오븐을 450°F(232°C)로 예열하고, 생선이 겹치지 않도록 오븐용 내열 접시에 쿠킹 스프레이를 뿌린다.\n2. 생선 필레를 접시에 한 겹으로 놓고 소금, 후추로 간을 한 뒤, 붉은 양파와 피망을 얹는다.\n3. 말린 바질, 오레가노, 토마토, 페타 치즈를 뿌리고 화이트 와인과 올리브 오일을 뿌린다. 신선한 후추를 갈아 뿌린다.\n4. 뚜껑을 열고 12~15분간 굽거나, 포크로 생선이 쉽게 갈라질 때까지 굽는다. 레몬 조각을 짜서 즙을 뿌리고 신선한 바질 또는 오레가노로 장식한 뒤 뜨거운 밥과 함께 제공한다.', DEFAULT, DEFAULT, '쿠킹 스프레이, 생선 필레, 소금, 후추, 붉은 양파, 피망, 말린 바질, 오레가노, 토마토, 페타 치즈, 화이트 와인, 올리브 오일, 레몬 조각, 신선한 바질');
+
+-- Recipe: 클래식 그리스 무사카
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('클래식 그리스 무사카', '그리스 요리', '클래식 그리스 무사카는 지중해 메인 코스로, 1인분에 약 847칼로리, 단백질 42g, 지방 52g을 포함합니다. 4인분을 제공하며, 비싸지 않은 요리입니다.', 'ADMIN', SYSDATE, '1. 가지 슬라이스에 소금을 뿌리고 45분간 두었다가 과도한 소금을 제거하기 위해 철저히 씻는다. 올리브 오일로 얇게 바르고 예열된 그릴 팬에서 양면을 몇 분간 굽는다. 따로 보관한다. 모든 슬라이스가 구워질 때까지 반복한다. 육류 소스의 경우, 올리브 오일에 양파를 부드러워질 때까지 살짝 볶는다.\n2. 다진 소고기를 넣고 고기가 더 이상 분홍색이 아닐 때까지 자주 저으며 볶는다. 토마토, 마늘, 계피, 올스파이스, 소금, 후추를 넣고 약한 불에서 잠깐 끓인다.\n3. 토마토 페이스트와 소스가 너무 걸쭉하면 약간의 물을 넣는다.\n4. 베샤멜 소스의 경우, 녹인 버터에 밀가루를 계속 저으며 넣는다. 혼합물이 고르게 걸쭉해지면 따뜻한 우유를 점차 휘젓는다. 끓기 시작하면 불에서 내리고 후추, 육두구로 간한다.\n5. 달걀 노른자를 세게 휘저어 넣는다. 따로 보관한다. 적당한 오븐용 내열 접시에 올리브 오일을 얇게 바르고 바닥에 집에서 만든 빵가루를 뿌린다.\n6. 가지, 육류 소스, 페타 치즈를 층층이 쌓아 접시가 거의 찰 때까지 반복한다. 마지막으로 페타 치즈 층을 얹는다. 베샤멜 소스를 덮고 호일로 덮어 180°C에서 1시간 굽는다.\n7. 오븐에서 꺼내 상온에서 45분간 두었다가 제공한다.', DEFAULT, DEFAULT, '가지, 소금, 올리브 오일, 양파, 다진 소고기, 토마토, 마늘, 계피, 올스파이스, 후추, 토마토 페이스트, 물, 버터, 밀가루, 우유, 육두구, 달걀 노른자, 빵가루, 페타 치즈');
+
+-- Recipe: 가벼운 그리스 레몬 치킨 오르조 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('가벼운 그리스 레몬 치킨 오르조 수프', '그리스 요리', '가벼운 그리스 레몬 치킨 오르조 수프는 유제품 프리 메인 코스로, 1인분에 약 281칼로리, 단백질 27g, 지방 4g을 포함합니다. 가을철에 특히 좋은 요리입니다.', 'ADMIN', SYSDATE, '1. 큰 수프 냄비에 올리브 오일을 중강불로 가열한다.\n2. 당근과 셀러리를 넣고 중불에서 5분간 조리한다.\n3. 치킨 브로스를 넣는다.\n4. 갈은 타임, 소금, 후추를 넣는다.\n5. 조리된 다진 치킨 브레스트와 신선한 타임을 넣고 끓인다.\n6. 오르조를 넣고 파스타가 익을 때까지 7~10분간 조리한다.\n7. 큰 레몬 1개의 제스트와 즙을 넣는다.\n8. 레몬 조각과 함께 제공한다.', DEFAULT, DEFAULT, '올리브 오일, 당근, 셀러리, 치킨 브로스, 갈은 타임, 소금, 후추, 치킨 브레스트, 신선한 타임, 오르조, 레몬 제스트, 레몬');
+
+-- Recipe: 훌륭한 그리스 샐러드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('훌륭한 그리스 샐러드', '그리스 요리', '훌륭한 그리스 샐러드는 글루텐 프리 메인 코스로, 1인분에 약 290칼로리, 단백질 13g, 지방 18g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 샐러드 볼에 오이, 올리브, 로마 토마토, 선드라이 토마토, 선드라이 토마토 오일 2큰술, 붉은 양파, 식초, 시즈닝을 함께 버 린다.\n2. 제공하기 전까지 차갑게 보관한다.\n3. 제공 직전에 페타 치즈를 넣고 섞는다.', DEFAULT, DEFAULT, '오이, 올리브, 로마 토마토, 선드라이 토마토, 붉은 양파, 식초, 시즈닝, 페타 치즈');
+
+-- Recipe: 스파나코피타 컵
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('스파나코피타 컵', '그리스 요리', '스파나코피타 컵은 락토 오보 채식 전채로, 1인분에 약 167칼로리, 단백질 4g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 400°F(204°C)로 예열한다.\n2. 팬에 기름을 중불로 가열하고 파를 약 5분간 조리한다.\n3. 시금치의 물기를 짜내고 파, 딜, 달걀, 페타 치즈와 섞는다. 소금과 후추로 간한다.\n4. 필로 반죽 시트를 축축한 주방 타월로 덮는다.\n5. 필로 반죽 1장을 펼친다.\n6. 녹인 버터를 바르고 빵가루를 뿌린다.\n7. 첫 번째 시트 위에 두 번째 필로 반죽을 얹고 버터를 바르고 빵가루를 뿌리는 과정을 4장이 될 때까지 반복한다.\n8. 반죽을 미니 머핀 팬에 맞는 원으로 자른다.\n9. 필로 원을 팬 몰드에 넣고 시금치 혼합물을 채운다.\n10. 시금치 혼합물이 모두 사용될 때까지 반복한다.\n11. 스파나코피타 컵을 17분간 굽는다.', DEFAULT, DEFAULT, '파, 기름, 시금치, 딜, 달걀, 페타 치즈, 소금, 후추, 필로 반죽, 버터, 빵가루');
+
+-- Recipe: 그리스 요거트 치킨 샐러드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('그리스 요거트 치킨 샐러드', '그리스 요리', '그리스 요거트 치킨 샐러드는 글루텐 프리, 프라이멀 메인 코스로, 1인분에 약 334칼로리, 단백질 41g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 치킨 브로스나 스톡에서 치킨 브레스트를 삶는다. 브로스에서 삶으면 더 많은 풍미를 얻는다. 치킨 브로스가 끓으면 전체 치킨 브레스트를 넣고 핑크색이 없어질 때까지 조리한다. 치킨 크기에 따라 15~20분 걸릴 수 있다. 치킨이 삶아지는 동안 소스를 준비한다.\n2. 그리스 요거트, 디종 머스타드, 마늘 파우더를 잘 섞일 때까지 휘젓는다.\n3. 소금과 후추를 기호에 맞게 넣는다. 말린 크랜베리 또는 건포도와 캐슈를 섞는다. 캐슈가 너무 부드러워질까 봐 걱정된다면 제공 직전에 추가한다. 치킨이 삶아지면 5분간 쉬게 한다. 이는 주스가 치킨 안에 머물도록 한다. 치킨을 깍둑썰기하고 소스에 섞는다.', DEFAULT, DEFAULT, '치킨 브레스트, 치킨 브로스, 그리스 요거트, 디종 머스타드, 마늘 파우더, 소금, 후추, 말린 크랜베리, 캐슈');
+
+-- Recipe: 크랜베리 피칸 그리스 요거트 치킨 샐러드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('크랜베리 피칸 그리스 요거트 치킨 샐러드', '그리스 요리', '크랜베리 피칸 그리스 요거트 치킨 샐러드는 메인 코스로, 1인분에 약 494칼로리, 단백질 42g, 지방 13g을 포함합니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 결합하여 섞는다.', DEFAULT, DEFAULT, '그리스 요거트, 치킨, 크랜베리, 피칸');
+
+-- Recipe: 양고기 버거와 차지키 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('양고기 버거와 차지키 소스', '그리스 요리', '양고기 버거와 차지키 소스는 메인 코스로, 1인분에 약 617칼로리, 단백질 38g, 지방 37g을 포함합니다.', 'ADMIN', SYSDATE, '1. 양고기 버거의 경우, 다진 양고기 1파운드, 달걀 1개, 엑스트라 버진 올리브 오일 약간, 레몬 1개의 즙, 다진 플랫 리프 파슬리 1/4컵, 다진 마늘 6쪽을 섞는다. 소금과 후추로 간하고 1시간 동안 둔다. 버거를 원하는 정도로 굽는다. 차지키 소스의 경우, 그리스 요거트 1파인트, 다진 오이 1개, 레몬 1개의 즙, 엑스트라 버진 올리브 오일 1큰술, 마늘 6쪽(원하는 마늘 양에 따라 조절), 다진 신선한 딜 한 줌, 소금과 후추를 섞는다. 맛이 강해지도록 하룻밤 냉장 보관한다.\n2. 구운 버거를 토스트한 번에 올리고 소스를 얹어 제공한다.', DEFAULT, DEFAULT, '다진 양고기, 달걀, 엑스트라 버진 올리브 오일, 레몬, 플랫 리프 파슬리, 마늘, 소금, 후추, 그리스 요거트, 오이, 신선한 딜');
+
+-- Recipe: 그리스 쉬림프 오르조
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('그리스 쉬림프 오르조', '그리스 요리', '그리스 쉬림프 오르조는 페스카테리안 메인 코스로, 1인분에 약 410칼로리, 단백질 24g, 지방 14g을 포함합니다.', 'ADMIN', SYSDATE, '1. 레몬 즙과 올리브 오일 1/2컵을 섞는다. 큰 냄비에 소금물을 강한 불에서 끓인다.\n2. 오르조를 넣고 알 덴테로 익을 때까지 조리한다.\n3. 파스타를 체에 걸러 큰 서빙 볼에 넣고 즉시 레몬 즙/올리브 오일 혼합물을 넣는다. 잘 섞는다.\n4. 큰 프라이팬을 중강불로 가열하고 올리브 오일 1큰술을 넣는다.\n5. 새우, 소금, 후추를 넣고 새우가 익을 때까지 약 2분간 조리한다.\n6. 새우, 파, 파슬리, 페타 치즈를 오르조 혼합물에 넣는다. 잘 섞는다.\n7. 오르조를 1시간 동안 두거나, 미리 만들었다면 덮어 냉장 보관하고 제공 전에 상온으로 만든다. 제공 직전에 바질을 넣고 부드럽게 섞는다. 원한다면 시금치나 상추 위에 올려 제공한다.', DEFAULT, DEFAULT, '레몬 즙, 올리브 오일, 오르조, 새우, 소금, 후추, 파, 파슬리, 페타 치즈, 바질, 시금치, 상추');
+
+-- Recipe: 로스티드 야채와 그리스 올리브 파스타
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('로스티드 야채와 그리스 올리브 파스타', '그리스 요리', '로스티드 야채와 그리스 올리브 파스타는 메인 코스로, 1인분에 약 266칼로리, 단백질 23g, 지방 10g을 포함합니다.', 'ADMIN', SYSDATE, '1. 소스의 경우, 모든 재료를 섞어 끓인 뒤 약한 불에서 10분간 끓인다.\n2. 접시 바닥에 파스타를 깔고 소스를 얹는다. 고기를 소스 위에 올린다.\n3. 버섯, 치즈, 올리브를 층층이 쌓는다.\n4. 신선한 바질로 장식한다.', DEFAULT, DEFAULT, '파스타, 고기, 버섯, 치즈, 올리브, 신선한 바질');
+
+-- Recipe: 레몬 그리스 렌틸 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('레몬 그리스 렌틸 수프', '그리스 요리', '레몬 그리스 렌틸 수프는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 메인 코스로, 1인분에 약 368칼로리, 단백질 23g, 지방 4g을 포함합니다. 가을철에 완벽한 요리입니다.', 'ADMIN', SYSDATE, '1. 렌틸, 물, 당근, 말린 타임 1작은술을 8쿼트 냄비에 넣고 뚜껑을 덮어 중불로 가열한다.\n2. 15분 후 불을 낮추고 물이 부드럽게 끓도록 30분 정도 더 가열한다.\n3. 렌틸이 끓는점에 도달하면 불을 끄고 1시간 동안 두는다.\n4. 1시간 후 수프를 다시 부드럽게 끓이고 레몬 즙, 말린 바질, 신선한 타임, 오레가노, 후추, 소금을 넣고 1시간 더 끓인다.\n5. 양파와 마늘을 올리브 오일에 천천히 볶아 양파가 부드러워질 때까지 조리한다.\n6. 토마토를 거칠게 자르고 양파 혼합물과 함께 수프에 넣는다. 소금을 기호에 맞게 조절한다.\n7. 모든 것을 다시 끓는점으로 가져와 1시간 더 끓인다. 이후 불을 최저로 낮추고 뚜껑을 살짝 열어 몇 시간 동안 김이 나도록 둔다.\n8. 필요하면 물을 더 넣는다.\n9. 크러스티 브레드와 생 앙드레 또는 캄바졸라 같은 부드러운 치즈와 함께 제공한다.', DEFAULT, DEFAULT, '렌틸, 물, 당근, 말린 타임, 레몬 즙, 말린 바질, 신선한 타임, 오레가노, 후추, 소금, 양파, 마늘, 올리브 오일, 토마토, 크러스티 브레드, 부드러운 치즈');
+
+-- Recipe: 그리스 스타일 꿀과 피스타치오 케이크
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('그리스 스타일 꿀과 피스타치오 케이크', '그리스 요리', '그리스 스타일 꿀과 피스타치오 케이크는 락토 오보 채식 디저트로, 1인분에 약 525칼로리, 단백질 12g, 지방 27g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180°C(350°F)로 예열한다.\n2. 케이크 반죽 재료를 모두 섞어 부드러워질 때까지 섞는다. 반죽이 꽤 묽으므로 손으로 쉽게 섞을 수 있다. 베이킹 틴에 방수지를 깔고 반죽을 붓는다.\n3. 오븐에 넣고 최대 50분간 굽는다. 30분 후 확인한다.\n4. 칼이나 꼬챙이를 케이크 중앙에 찔러 깨끗이 나오면 구워진 것이다. 케이크를 완전히 식힌 후 시럽을 만든다. 피스타치오를 거칠게 부수거나 자른다.\n5. 붙지 않는 프라이팬을 스토브에 올리고 피스타치오를 몇 분간 볶는다. 꿀, 레몬, 오렌지 즙을 넣고 강한 불에서 몇 초간 섞는다. 케이크가 틴에 있는 상태에서 칼로 전체를 찔러 시럽을 붓는다. 액체가 스펀지에 스며들도록 둔다.', DEFAULT, DEFAULT, '세몰리나, 올리브 오일, 아몬드 가루, 피스타치오, 꿀, 레몬, 오렌지 즙');
+
+-- Recipe: 마리네이드 수블라키
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('마리네이드 수블라키', '그리스 요리', '마리네이드 수블라키는 글루텐 프리, 유제품 프리, 케토제닉 메인 코스로, 1인분에 약 553칼로리, 단백질 26g, 지방 46g을 포함합니다.', 'ADMIN', SYSDATE, '1. 고기를 작은 큐브로 자른다. 도자기 볼에 마리네이드 재료를 잘 섞고 고기를 넣어 다시 섞는다. 덮고 24~48시간 동안 마리네이드한다. 냉장 보관한다. 조리할 준비가 되면 고기를 18~24개의 꼬챙이에 꿴다. 포도나무 가지의 불씨 위에서 굽는다.\n2. 뜨겁게 제공한다.', DEFAULT, DEFAULT, '고기, 마리네이드 재료');
+
+-- Recipe: 요거트 그리스 마리네이드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('요거트 그리스 마리네이드', '그리스 요리', '요거트 그리스 마리네이드는 글루텐 프리, 락토 오보 채식, 프라이멀 마리네이드로, 1인분에 약 386칼로리, 단백질 8g, 지방 27g을 포함합니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 결합하여 섞는다.', DEFAULT, DEFAULT, '요거트, 로즈마리, 레몬 즙');
+
+-- Recipe: 그리스 봄 샐러드: 프라시니 살라타
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('그리스 봄 샐러드: 프라시니 살라타', '그리스 요리', '그리스 봄 샐러드: 프라시니 살라타는 글루텐 프리 전채로, 1인분에 약 178칼로리, 단백질 2g, 지방 14g을 포함합니다. 봄철에 특히 좋은 요리입니다.', 'ADMIN', SYSDATE, '1. 상추, 바다 소금, 꿀 및 기타 재료를 결합하여 섞는다.', DEFAULT, DEFAULT, '상추, 바다 소금, 꿀');
+
+
+-- Recipe: 양고기와 신선한 염소 치즈 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('양고기와 신선한 염소 치즈 롤', '독일 요리', '양고기와 신선한 염소 치즈 롤은 글루텐 프리 독일 요리입니다. 1인분에 약 373칼로리, 단백질 17g, 지방 33g을 포함하며, 비타민과 미네랄 요구량의 17%를 충족합니다.', 'ADMIN', SYSDATE, '1. 중불에서 팬에 올리브 오일 2큰술을 가열합니다.\n2. 마늘을 넣고 10초간 볶은 후 시금치를 넣고 시금치가 시들 때까지 볶습니다.\n3. 식힙니다.\n4. 양고기 허리를 펼쳐 6인치 너비의 평평한 조각을 만듭니다.\n5. 소금과 후추로 간합니다.\n6. 시금치의 물기를 짜내고 양고기 허리에 고르게 펴 바릅니다.\n7. 염소 치즈를 길이 방향으로 4등분하여 양고기 허리에 2조각씩 놓습니다.\n8. 롤을 말아 묶습니다.\n9. 오븐을 190도(375F)로 예열합니다.\n10. 큰 팬에 식용유를 중불로 가열하고 양고기 롤을 양면 3-4분씩 굽습니다.\n11. 오븐에서 10-12분간 굽고, 내부 온도가 120F에 도달하면 꺼냅니다.\n12. 10분간 식힌 후 실을 제거하고 메달리온으로 자릅니다.\n13. 2접시에 나누어 서빙합니다.', DEFAULT, DEFAULT, '올리브 오일, 마늘, 시금치, 양고기 허리, 소금, 후추, 염소 치즈, 식용유');
+
+-- Recipe: 데카던트 블랙 포레스트 케이크
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('데카던트 블랙 포레스트 케이크', '독일 요리', '데카던트 블랙 포레스트 케이크는 유럽 디저트입니다. 1인분에 약 298칼로리, 단백질 3g, 지방 14g을 포함합니다.', 'ADMIN', SYSDATE, '1. 케이크를 상자 지침에 따라 준비하고 15분간 식힌 후 팬에서 꺼내 냉각 랙에 올려 완전히 식힙니다.\n2. 작은 냄비에 설탕, 물, 체리 브랜디를 넣고 끓입니다. 3분간 끓인 후 불에서 내리고 식힙니다.\n3. 중간 크기 볼에 크림 치즈를 넣고 부드러워질 때까지 섞습니다.\n4. 휘핑 크림의 절반을 넣고 30초간 섞습니다.\n5. 설탕의 절반을 넣고 설탕이 섞일 때까지 섞습니다.\n6. 남은 휘핑 크림을 넣고 부드러워질 때까지 섞습니다.\n7. 남은 설탕을 넣고 2분간 섞습니다.\n8. 아몬드 추출물을 넣고 30초간 섞습니다.\n9. 믹서를 고속으로 돌려 2분간 섞어 가볍고 푹신해질 때까지 만듭니다.\n10. 케이크의 첫 번째 층을 케이크 스탠드에 놓고 톱니 칼로 윗부분을 평평하게 자릅니다.\n11. 패스트리 브러시로 심플 시럽을 고르게 바릅니다.\n12. 두 번째 케이크 층을 자르고 심플 시럽을 바릅니다.\n13. 5-10분간 시럽이 스며들도록 둡니다.\n14. 첫 번째 케이크 층에 1컵의 프로스팅을 바릅니다.\n15. 체리 파이 필링을 프로스팅 위에 바릅니다.\n16. 두 번째 케이크 층을 조심스럽게 올립니다.\n17. 케이크 측면에 얇은 프로스팅을 바릅니다.\n18. 케이크 윗부분에 얇은 프로스팅을 바릅니다.\n19. 1시간 냉장 보관합니다.\n20. 남은 프로스팅을 케이크 측면과 윗부분에 바릅니다.\n21. 케이크 윗부분에 체리 파이 필링을 올립니다.\n22. 서빙 전 냉장 보관합니다.', DEFAULT, DEFAULT, '케이크 믹스, 설탕, 물, 체리 브랜디, 크림 치즈, 휘핑 크림, 아몬드 추출물, 체리 파이 필링');
+
+-- Recipe: 독일 루바브 케이크와 메링게
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('독일 루바브 케이크와 메링게', '독일 요리', '독일 루바브 케이크와 메링게는 유제품 프리 및 락토 오보 채식 디저트입니다. 1인분에 약 201칼로리, 단백질 5g, 지방 4g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열하고, 26cm 스프링 팬을 기름칠합니다.\n2. 루바브를 씻고 껍질을 벗긴 후 작은 조각으로 자릅니다.\n3. 설탕 2큰술을 넣고 30분간 두었다가 물기를 제거합니다.\n4. 믹서에 버터, 설탕, 바닐라 추출물을 넣고 버터가 푹신해질 때까지 섞습니다.\n5. 달걀을 하나씩 넣고 잘 섞습니다.\n6. 밀가루, 아몬드 가루, 소금, 베이킹 파우더를 체에 걸러 넣고 섞습니다.\n7. 반죽을 팬에 붓고 루바브를 올립니다.\n8. 25분간 굽습니다.\n9. 달걀 흰자를 뻣뻣해질 때까지 섞고 설탕을 넣어 메링게를 만듭니다.\n10. 메링게를 케이크 위에 바르고 아몬드 슬라이스를 뿌립니다.\n11. 15분간 더 굽고, 5분 후 호일로 덮습니다.\n12. 완전히 식힌 후 팬에서 꺼냅니다.', DEFAULT, DEFAULT, '루바브, 설탕, 버터, 바닐라 추출물, 달걀, 밀가루, 아몬드 가루, 소금, 베이킹 파우더, 달걀 흰자, 아몬드 슬라이스');
+
+-- Recipe: 타라곤 크림 소스를 곁들인 돼지고기 슈니첼
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('타라곤 크림 소스를 곁들인 돼지고기 슈니첼', '독일 요리', '타라곤 크림 소스를 곁들인 돼지고기 슈니첼은 유럽 메인 요리입니다. 1인분에 약 1070칼로리, 단백질 56g, 지방 78g을 포함합니다.', 'ADMIN', SYSDATE, '1. 돼지고기를 0.5cm 두께로 두드립니다.\n2. 밀가루를 접시에 깔고 달걀을 볼에 풀어놓습니다.\n3. 빵가루와 파르메산 치즈를 섞어 접시에 깔아둡니다.\n4. 돼지고기를 밀가루, 달걀, 빵가루 순으로 코팅합니다.\n5. 20분간 냉장 보관합니다.\n6. 팬에 기름을 넣고 중불로 가열한 후 슈니첼을 양면 2-3분씩 굽습니다.\n7. 소스를 위해 와인과 타라곤을 작은 냄비에 넣고 끓입니다.\n8. 스톡을 넣고 3-4분간 끓인 후 크림을 넣고 2-3분간 끓입니다.\n9. 소금, 후추, 타라곤으로 간하고 슈니첼에 뿌려 서빙합니다.', DEFAULT, DEFAULT, '돼지고기, 밀가루, 달걀, 빵가루, 파르메산 치즈, 기름, 와인, 타라곤, 스톡, 크림, 소금, 후추');
+
+-- Recipe: 치킨/고구마 롤과 염소 치즈 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치킨/고구마 롤과 염소 치즈 소스', '독일 요리', '치킨/고구마 롤과 염소 치즈 소스는 글루텐 프리 및 프라이멀 유럽 메인 요리입니다. 1인분에 약 231칼로리, 단백질 20g, 지방 8g을 포함합니다.', 'ADMIN', SYSDATE, '1. 치킨 브로스를 넣고 고구마를 삶습니다.\n2. 치킨을 얇게 자르고 소금, 후추로 간합니다.\n3. 고구마를 으깨고 염소 치즈를 섞습니다.\n4. 치킨에 고구마 혼합물을 바르고 말아 묶습니다.\n5. 팬에 기름을 넣고 치킨 롤을 굽습니다.\n6. 소스를 위해 크림과 염소 치즈를 섞어 끓입니다.\n7. 치킨 롤에 소스를 뿌려 서빙합니다.', DEFAULT, DEFAULT, '치킨 브로스, 고구마, 치킨, 소금, 후추, 염소 치즈, 크림');
+
+-- Recipe: 호박 페타 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('호박 페타 롤', '독일 요리', '호박 페타 롤은 글루텐 프리 및 락토 오보 채식 유럽 요리입니다. 1인분에 약 250칼로리, 단백질 10g, 지방 15g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열합니다.\n2. 호박을 얇게 자르고 소금, 후추로 간합니다.\n3. 페타 치즈와 허브를 섞습니다.\n4. 호박에 치즈 혼합물을 바르고 말아 꼬치로 고정합니다.\n5. 20분간 굽습니다.\n6. 서빙합니다.', DEFAULT, DEFAULT, '호박, 소금, 후추, 페타 치즈, 허브');
+
+-- Recipe: 독일 화이트 초콜릿 케이크
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('독일 화이트 초콜릿 케이크', '독일 요리', '독일 화이트 초콜릿 케이크는 유럽 디저트입니다. 1인분에 약 584칼로리, 단백질 14g, 지방 46g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열하고, 8인치 케이크 팬 3개를 기름칠하고 밀가루를 뿌립니다.\n2. 케이크 밀가루와 베이킹 소다를 체에 걸러둡니다.\n3. 버터와 설탕을 믹서로 5분간 섞습니다.\n4. 달걀 노른자를 하나씩 넣고 섞습니다.\n5. 녹인 화이트 초콜릿과 바닐라를 넣습니다.\n6. 밀가루 혼합물과 버터밀크를 번갈아 넣습니다.\n7. 코코넛과 피칸을 넣습니다.\n8. 달걀 흰자를 뻣뻣해질 때까지 섞고 반죽에 넣습니다.\n9. 팬에 반죽을 넣고 35-40분간 굽습니다.\n10. 10분간 식힌 후 팬에서 꺼내 완전히 식힙니다.\n11. 프로스팅을 위해 증발 우유, 설탕, 버터, 달걀 노른자를 섞어 10분간 끓입니다.\n12. 바닐라, 피칸, 코코넛을 넣고 식힙니다.\n13. 케이크 층 사이와 위에 프로스팅을 바릅니다.', DEFAULT, DEFAULT, '케이크 밀가루, 베이킹 소다, 버터, 설탕, 달걀, 화이트 초콜릿, 바닐라, 버터밀크, 코코넛, 피칸, 증발 우유');
+
+-- Recipe: 독일 초콜릿 드링크
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('독일 초콜릿 드링크', '독일 요리', '독일 초콜릿 드링크는 유럽 음료입니다. 1인분에 약 132칼로리, 단백질 1g, 지방 1g을 포함합니다.', 'ADMIN', SYSDATE, '1. 록 글래스에 칼루아, 프란젤리코, 초콜릿 리큐어를 넣습니다.\n2. 오렌지 껍질과 초콜릿으로 장식합니다.', DEFAULT, DEFAULT, '칼루아, 프란젤리코, 초콜릿 리큐어, 오렌지 껍질, 초콜릿');
+
+-- Recipe: 독일 브레이즈드 레드 캐비지
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('독일 브레이즈드 레드 캐비지', '독일 요리', '독일 브레이즈드 레드 캐비지는 글루텐 프리 및 락토 오보 채식 유럽 사이드 디쉬입니다. 1인분에 약 230칼로리, 단백질 4g, 지방 3g을 포함합니다.', 'ADMIN', SYSDATE, '1. 레드 캐비지를 얇게 썰고 사과를 작은 큐브로 자릅니다.\n2. 큰 팬에 버터를 녹입니다.\n3. 설탕을 넣고 캐러멜화시킵니다.\n4. 레드 캐비지와 사과를 넣고 5분간 볶습니다.\n5. 향신료, 와인, 식초를 넣고 1시간 끓입니다.\n6. 소금, 후추, 설탕으로 간을 맞춥니다.', DEFAULT, DEFAULT, '레드 캐비지, 사과, 버터, 설탕, 향신료, 와인, 식초, 소금, 후추');
+
+-- Recipe: 시금치 염소 치즈 롤 메인 디쉬
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('시금치 염소 치즈 롤 메인 디쉬', '독일 요리', '시금치 염소 치즈 롤 메인 디쉬는 글루텐 프리, 락토 오보 채식, 프라이멀, 키토제닉 유럽 메인 요리입니다. 1인분에 약 363칼로리, 단백질 19g, 지방 31g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 200도(400F)로 예열합니다.\n2. 팬에 올리브 오일을 넣고 시금치를 볶습니다.\n3. 시금치에 소금, 후추, 육두구를 넣고 블렌더로 갈아줍니다.\n4. 버터와 달걀 노른자를 넣습니다.\n5. 달걀 흰자를 뻣뻣해질 때까지 섞습니다.\n6. 반죽을 팬에 붓고 10-12분간 굽습니다.\n7. 염소 치즈와 크림을 섞고 썬 챠이브를 넣습니다.\n8. 롤을 말아 서빙합니다.', DEFAULT, DEFAULT, '올리브 오일, 시금치, 소금, 후추, 육두구, 버터, 달걀, 염소 치즈, 크림, 챠이브');
+
+-- Recipe: 프리카델렌 독일 미트 패티
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('프리카델렌 독일 미트 패티', '독일 요리', '프리카델렌 독일 미트 패티는 유럽 전채 요리입니다. 1인분에 약 150칼로리, 단백질 9g, 지방 10g을 포함합니다.', 'ADMIN', SYSDATE, '1. 양파를 다져 기름에 볶습니다.\n2. 다진 고기에 양파, 빵가루, 우유, 달걀, 바질, 소금, 후추를 넣고 섞습니다.\n3. 손으로 패티를 만듭니다.\n4. 팬에 기름을 넣고 패티를 양면 굽습니다.\n5. 샐러드, 감자튀김, 차지키와 함께 서빙합니다.', DEFAULT, DEFAULT, '양파, 기름, 다진 고기, 빵가루, 우유, 달걀, 바질, 소금, 후추, 샐러드, 감자튀김, 차지키');
+
+-- Recipe: 돼지고기 슈니첼과 사과 샐러드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('돼지고기 슈니첼과 사과 샐러드', '독일 요리', '돼지고기 슈니첼과 사과 샐러드는 유제품 프리 유럽 메인 요리입니다. 1인분에 약 1119칼로리, 단백질 76g, 지방 74g을 포함합니다.', 'ADMIN', SYSDATE, '1. 돼지고기를 두드려 얇게 만듭니다.\n2. 밀가루, 달걀, 빵가루로 코팅합니다.\n3. 팬에 기름을 넣고 슈니첼을 굽습니다.\n4. 샐러드에 사과 슬라이스를 올리고 슈니첼을 얹어 서빙합니다.', DEFAULT, DEFAULT, '돼지고기, 밀가루, 달걀, 빵가루, 기름, 샐러드, 사과');
+
+
+-- Recipe: 치즈 치킨 엔칠라다 퀴노아 캐서롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치즈 치킨 엔칠라다 퀴노아 캐서롤', '멕시코 요리', '치즈 치킨 엔칠라다 퀴노아 캐서롤은 글루텐 프리 멕시코 메인 요리입니다. 1인분에 약 594칼로리, 단백질 34g, 지방 24g을 포함하며, 비타민과 미네랄 요구량의 38%를 충족합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열하고 8x8 베이킹 접시를 준비합니다.\n2. 퀴노아를 지침에 따라 요리합니다.\n3. 치킨 브레스트를 삶아 잘게 찢습니다.\n4. 중간 크기 볼에 실란트로 2큰술, 슈레드 치즈 1컵, 퀴노아, 칠리와 함께한 토마토, 검은콩, 스위트 콘 반 캔, 베르데 엔칠라다 소스, 커민, 칠리 파우더, 화이트 페퍼, 블랙 페퍼, 소금을 넣고 잘 섞습니다.\n5. 8x8 베이킹 접시에 붓고 치즈 1컵을 뿌립니다.\n6. 15분간 굽습니다.\n7. 오븐에서 꺼내 5분간 식힌 후 로마 토마토, 아보카도, 파, 실란트로를 뿌립니다.\n8. 즉시 서빙합니다.', DEFAULT, DEFAULT, '퀴노아, 치킨 브레스트, 실란트로, 슈레드 치즈, 토마토, 검은콩, 스위트 콘, 엔칠라다 소스, 커민, 칠리 파우더, 화이트 페퍼, 블랙 페퍼, 소금, 로마 토마토, 아보카도, 파');
+
+-- Recipe: 치킨 엔칠라다 캐서롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치킨 엔칠라다 캐서롤', '멕시코 요리', '치킨 엔칠라다 캐서롤은 멕시코 메인 요리입니다. 1인분에 약 325칼로리, 단백질 26g, 지방 12g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 190도(375F)로 예열합니다.\n2. 9x13 베이킹 접시에 토르티야를 깔습니다.\n3. 치킨과 슈레드 치즈 1/4컵을 올립니다.\n4. 토마토와 그린 칠리 반 캔, 베르데 엔칠라다 소스 1캔을 넣습니다.\n5. 리프라이드 빈스 반 캔을 넣습니다.\n6. 다시 토르티야를 깔고 반복합니다.\n7. 남은 슈레드 치즈를 뿌립니다.\n8. 호일로 덮고 30분간 굽습니다.\n9. 호일을 제거하고 파를 뿌린 후 5분간 더 굽습니다.\n10. 10-15분간 식힌 후 서빙합니다.', DEFAULT, DEFAULT, '토르티야, 치킨, 슈레드 치즈, 토마토, 그린 칠리, 엔칠라다 소스, 리프라이드 빈스, 파');
+
+-- Recipe: 슬로우 쿠커 치킨 타코 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('슬로우 쿠커 치킨 타코 수프', '멕시코 요리', '슬로우 쿠커 치킨 타코 수프는 글루텐 프리 및 유제품 프리 멕시코 메인 요리입니다. 1인분에 약 312칼로리, 단백질 24g, 지방 4g을 포함합니다.', 'ADMIN', SYSDATE, '1. 슬로우 쿠커에 치킨, 검은콩, 칠리 빈스, 토마토, 타코 시즈닝을 넣습니다.\n2. 저온에서 8시간 또는 고온에서 4시간 요리합니다.\n3. 서빙 직전에 토르티야 칩, 슈레드 치즈, 사워 크림을 뿌립니다.', DEFAULT, DEFAULT, '치킨, 검은콩, 칠리 빈스, 토마토, 타코 시즈닝, 토르티야 칩, 슈레드 치즈, 사워 크림');
+
+-- Recipe: 홈메이드 과카몰리
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('홈메이드 과카몰리', '멕시코 요리', '홈메이드 과카몰리는 글루텐 프리, 유제품 프리, 팔레오, 락토 오보 채식 멕시코 전채입니다. 1인분에 약 170칼로리, 단백질 2g, 지방 15g을 포함합니다.', 'ADMIN', SYSDATE, '1. 아보카도를 으깨고 라임 즙, 소금, 후추를 넣습니다.\n2. 다진 양파, 토마토, 실란트로를 넣고 섞습니다.\n3. 즉시 서빙합니다.', DEFAULT, DEFAULT, '아보카도, 라임 즙, 소금, 후추, 양파, 토마토, 실란트로');
+
+-- Recipe: 빠른 치킨 엔칠라다 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('빠른 치킨 엔칠라다 수프', '멕시코 요리', '빠른 치킨 엔칠라다 수프는 글루텐 프리 멕시코 메인 요리입니다. 1인분에 약 646칼로리, 단백질 34g, 지방 25g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 냄비에 옥수수, 콩, 토마토, 치킨, 엔칠라다 소스, 버섯 수프, 우유를 넣습니다.\n2. 중불에서 15분간 끓입니다.\n3. 토르티야 칩과 슈레드 치즈를 뿌려 서빙합니다.', DEFAULT, DEFAULT, '옥수수, 콩, 토마토, 치킨, 엔칠라다 소스, 버섯 수프, 우유, 토르티야 칩, 슈레드 치즈');
+
+-- Recipe: 정통 치킨 엔칠라다
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('정통 치킨 엔칠라다', '멕시코 요리', '정통 치킨 엔칠라다는 글루텐 프리 멕시코 메인 요리입니다. 1인분에 약 370칼로리, 단백질 24g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 치킨 브레스트를 소금, 후추로 간하고 팬에 올리브 오일로 익힙니다.\n2. 양파를 다져 팬에 볶습니다.\n3. 치킨을 잘게 찢고 양파, 마늘, 커민, 칠리 파우더, 할라페뇨, 그린 칠리, 치즈를 넣습니다.\n4. 옥수수 토르티야를 기름에 살짝 튀깁니다.\n5. 토르티야에 치킨 혼합물을 넣고 말아 베이킹 시트에 놓습니다.\n6. 200도(400F)에서 20분간 굽습니다.\n7. 엔칠라다 소스와 치즈를 뿌려 7분간 더 굽습니다.', DEFAULT, DEFAULT, '치킨 브레스트, 소금, 후추, 올리브 오일, 양파, 마늘, 커민, 칠리 파우더, 할라페뇨, 그린 칠리, 치즈, 옥수수 토르티야, 엔칠라다 소스');
+
+-- Recipe: 매운 시즈닝 로드 과카몰리
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('매운 시즈닝 로드 과카몰리', '멕시코 요리', '매운 시즈닝 로드 과카몰리는 글루텐 프리, 유제품 프리, 팔레오, 락토 오보 채식 멕시코 전채입니다. 1인분에 약 171칼로리, 단백질 2g, 지방 15g을 포함합니다.', 'ADMIN', SYSDATE, '1. 중간 크기 볼에 아보카도를 으깨고 라임 즙, 식초를 넣습니다.\n2. 소금, 후추, 커민, 마늘 파우더를 넣습니다.\n3. 다진 레드 양파, 세라노 페퍼, 실란트로, 토마토를 넣고 섞습니다.', DEFAULT, DEFAULT, '아보카도, 라임 즙, 식초, 소금, 후추, 커민, 마늘 파우더, 레드 양파, 세라노 페퍼, 실란트로, 토마토');
+
+-- Recipe: 옥수수 아보카도 살사
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('옥수수 아보카도 살사', '멕시코 요리', '옥수수 아보카도 살사는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 멕시코 전채입니다. 1인분에 약 237칼로리, 단백질 5g, 지방 16g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 190도(375F)로 예열합니다.\n2. 베이킹 시트에 옥수수를 깔고 올리브 오일 스프레이를 뿌립니다.\n3. 8-10분간 굽습니다.\n4. 아보카도, 토마토, 양파, 마늘, 실란트로, 라임 즙, 소금, 후추를 섞습니다.\n5. 굽은 옥수수를 넣고 섞습니다.', DEFAULT, DEFAULT, '옥수수, 올리브 오일, 아보카도, 토마토, 양파, 마늘, 실란트로, 라임 즙, 소금, 후추');
+
+-- Recipe: 로스티드 레드 페퍼 토마토 살사
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('로스티드 레드 페퍼 토마토 살사', '멕시코 요리', '로스티드 레드 페퍼 토마토 살사는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 멕시코 전채입니다. 1인분에 약 150칼로리, 단백질 3g, 지방 7g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 200도(400F)로 예열합니다.\n2. 토마토, 레드 페퍼, 마늘을 베이킹 시트에 놓고 올리브 오일, 소금, 후추를 뿌립니다.\n3. 15분간 굽습니다.\n4. 껍질을 벗기고 믹서에 넣습니다.\n5. 실란트로, 라임 즙을 넣고 섞습니다.\n6. 커민과 소금으로 간을 맞춥니다.\n7. 옥수수 칩과 함께 서빙합니다.', DEFAULT, DEFAULT, '토마토, 레드 페퍼, 마늘, 올리브 오일, 소금, 후추, 실란트로, 라임 즙, 커민, 옥수수 칩');
+
+-- Recipe: 나초 그란데
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('나초 그란데', '멕시코 요리', '나초 그란데는 글루텐 프리 및 락토 오보 채식 멕시코 전채입니다. 1인분에 약 642칼로리, 단백질 21g, 지방 34g을 포함합니다.', 'ADMIN', SYSDATE, '1. 팬에 기름을 넣고 양파, 그린 페퍼, 마늘을 볶습니다.\n2. 토마토와 칠리를 넣고 5분간 끓입니다.\n3. 칠리 파우더, 파프리카를 넣고 3분간 볶습니다.\n4. 리프라이드 빈스를 넣고 물을 넣어 8-10분간 끓입니다.\n5. 베이킹 접시에 빈스를 깔고 토르티야 칩을 둘러놓습니다.\n6. 커민과 치즈를 뿌립니다.\n7. 200도(400F)에서 15-20분간 굽습니다.\n8. 파프리카를 뿌려 서빙합니다.', DEFAULT, DEFAULT, '기름, 양파, 그린 페퍼, 마늘, 토마토, 칠리, 칠리 파우더, 파프리카, 리프라이드 빈스, 물, 토르티야 칩, 커민, 치즈');
+
+-- Recipe: 엔칠라다 스터프드 스파게티 스쿼시
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('엔칠라다 스터프드 스파게티 스쿼시', '멕시코 요리', '엔칠라다 스터프드 스파게티 스쿼시는 글루텐 프리 멕시코 메인 요리입니다. 1인분에 약 754칼로리, 단백질 54g, 지방 31g을 포함합니다.', 'ADMIN', SYSDATE, '1. 치킨을 익히고 잘게 찢습니다.\n2. 스파게티 스쿼시를 전자레인지 또는 오븐에서 익힙니다.\n3. 치킨, 엔칠라다 소스, 콩, 옥수수, 올리브, 실란트로, 치즈를 섞습니다.\n4. 스쿼시를 반으로 자르고 속을 파내어 엔칠라다 혼합물을 채웁니다.\n5. 치즈를 뿌리고 오븐에서 2-3분간 굽습니다.\n6. 실란트로와 아보카도를 올려 서빙합니다.', DEFAULT, DEFAULT, '치킨, 스파게티 스쿼시, 엔칠라다 소스, 콩, 옥수수, 올리브, 실란트로, 치즈, 아보카도');
+
+-- Recipe: 살사 베르데
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('살사 베르데', '멕시코 요리', '살사 베르데는 글루텐 프리, 유제품 프리, 팔레오, 락토 오보 채식 멕시코 전채입니다. 1인분에 약 147칼로리, 단백질 4g, 지방 4g을 포함합니다.', 'ADMIN', SYSDATE, '1. 토마틸로를 삶아 믹서에 넣습니다.\n2. 브로스, 커민, 고수, 라임 즙, 마늘, 칠리, 양파, 실란트로, 후추를 넣고 섞습니다.\n3. 소금으로 간을 맞춥니다.\n4. 냉장 보관합니다.', DEFAULT, DEFAULT, '토마틸로, 브로스, 커민, 고수, 라임 즙, 마늘, 칠리, 양파, 실란트로, 후추, 소금');
+
+-- Recipe: 스커트 스테이크 파히타
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('스커트 스테이크 파히타', '멕시코 요리', '스커트 스테이크 파히타는 멕시코 메인 요리입니다. 1인분에 약 700칼로리, 단백질 43g, 지방 34g을 포함합니다.', 'ADMIN', SYSDATE, '1. 마리네이드를 섞고 스테이크를 담가 3-10시간 둡니다.\n2. 야채에 마리네이드를 바릅니다.\n3. 그릴을 예열하고 스테이크를 굽습니다.\n4. 야채를 굽습니다.\n5. 토르티야를 살짝 굽습니다.\n6. 스테이크와 야채를 얇게 썰어 토르티야에 올립니다.\n7. 라임과 함께 서빙합니다.', DEFAULT, DEFAULT, '스테이크, 마리네이드, 야채, 토르티야, 라임');
+
+-- Recipe: 매운 치킨과 살사 베르데
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('매운 치킨과 살사 베르데', '멕시코 요리', '매운 치킨과 살사 베르데는 멕시코 사이드 디쉬입니다. 1인분에 약 398칼로리, 단백질 14g, 지방 23g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 예열하고 토르티야를 준비합니다.\n2. 치킨을 자르고 양파 소금, 칠리 파우더, 오레가노, 파프리카, 기름으로 마리네이드합니다.\n3. 살사 베르데를 만듭니다.\n4. 과카몰리를 만듭니다.\n5. 사워 크림에 후추를 뿌립니다.\n6. 치킨을 굽고 레드 페퍼를 굽습니다.\n7. 치킨, 살사 베르데, 과카몰리, 사워 크림을 서빙합니다.', DEFAULT, DEFAULT, '토르티야, 치킨, 양파 소금, 칠리 파우더, 오레가노, 파프리카, 기름, 살사 베르데, 과카몰리, 사워 크림, 후추, 레드 페퍼');
+
+
+-- Recipe: 슬로우 쿠커 매운 핫 윙
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('슬로우 쿠커 매운 핫 윙', '미국 요리', '슬로우 쿠커 매운 핫 윙은 글루텐 프리 및 유제품 프리 미국 전채입니다. 1인분에 약 384칼로리, 단백질 23g, 지방 20g을 포함합니다.', 'ADMIN', SYSDATE, '1. 브라운 슈가, 다진 마늘, 핫 소스, 카이엔 페퍼를 섞습니다.\n2. 슬로우 쿠커에 윙을 넣고 섞은 소스를 뿌립니다.\n3. 저온에서 4시간 요리합니다.\n4. 오븐에서 4-6분간 굽습니다.\n5. 블루 치즈 드레싱과 셀러리와 함께 서빙합니다.', DEFAULT, DEFAULT, '브라운 슈가, 마늘, 핫 소스, 카이엔 페퍼, 치킨 윙, 블루 치즈 드레싱, 셀러리');
+
+-- Recipe: 치즈가 많은 보우타이 맥 앤 치즈
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치즈가 많은 보우타이 맥 앤 치즈', '미국 요리', '치즈가 많은 보우타이 맥 앤 치즈는 락토 오보 채식 미국 메인 요리입니다. 1인분에 약 780칼로리, 단백질 28g, 지방 35g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열합니다.\n2. 파스타를 삶아 물기를 뺍니다.\n3. 치즈를 갈아줍니다.\n4. 파스타, 치즈, 사워 크림, 소금, 후추, 버터를 섞습니다.\n5. 9x13 캐서롤 접시에 넣고 치즈를 뿌립니다.\n6. 20분간 굽습니다.\n7. 오븐에서 꺼내 뜨겁게 서빙합니다.', DEFAULT, DEFAULT, '파스타, 치즈, 사워 크림, 소금, 후추, 버터');
+
+-- Recipe: 치킨 아보카도 버거 (홀 30, 팔레오, 심플 핏 포티)
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치킨 아보카도 버거 (홀 30, 팔레오, 심플 핏 포티)', '미국 요리', '치킨 아보카도 버거는 글루텐 프리, 유제품 프리, 팔레오, 프라이멀, 홀 30, 키토제닉 미국 메인 요리입니다. 1인분에 약 538칼로리, 단백질 34g, 지방 42g을 포함합니다.', 'ADMIN', SYSDATE, '1. 치킨, 아보카도, 계란, 아몬드 가루를 섞습니다.\n2. 버거 패티를 만듭니다.\n3. 팬에 기름을 두르고 패티를 굽습니다.\n4. 서빙합니다.', DEFAULT, DEFAULT, '치킨, 아보카도, 계란, 아몬드 가루');
+
+-- Recipe: 블랙 빈 브라우니
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('블랙 빈 브라우니', '미국 요리', '블랙 빈 브라우니는 미국 디저트입니다. 1인분에 약 233칼로리, 단백질 5g, 지방 12g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열합니다.\n2. 블랙 빈, 기름, 사과소스, 계란, 설탕, 코코아 파우더, 에스프레소 파우더를 섞습니다.\n3. 초콜릿과 버터를 녹여 섞습니다.\n4. 반죽에 바닐라, 소금, 밀가루를 넣습니다.\n5. 8x8 베이킹 팬에 붓고 25-30분간 굽습니다.\n6. 식힌 후 자릅니다.', DEFAULT, DEFAULT, '블랙 빈, 기름, 사과소스, 계란, 설탕, 코코아 파우더, 에스프레소 파우더, 초콜릿, 버터, 바닐라, 소금, 밀가루');
+
+-- Recipe: 퍼지 초콜릿 크림 치즈 브라우니 with 베일리스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('퍼지 초콜릿 크림 치즈 브라우니 with 베일리스', '미국 요리', '퍼지 초콜릿 크림 치즈 브라우니 with 베일리스는 미국 디저트입니다. 1인분에 약 586칼로리, 단백질 7g, 지방 34g을 포함합니다.', 'ADMIN', SYSDATE, '1. 초콜릿과 버터를 녹입니다.\n2. 설탕, 바닐라, 계란을 넣습니다.\n3. 밀가루를 넣습니다.\n4. 크림 치즈, 설탕, 계란, 베일리스를 섞습니다.\n5. 베이킹 팬에 초콜릿 반죽을 붓고 크림 치즈 반죽을 올립니다.\n6. 180도(350F)에서 35분간 굽습니다.\n7. 식힌 후 자릅니다.', DEFAULT, DEFAULT, '초콜릿, 버터, 설탕, 바닐라, 계란, 밀가루, 크림 치즈, 베일리스');
+
+-- Recipe: 데빌드 에그 with 크랩
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('데빌드 에그 with 크랩', '미국 요리', '데빌드 에그 with 크랩은 글루텐 프리, 페스카테리언, 키토제닉 미국 전채입니다. 1인분에 약 120칼로리, 단백질 10g, 지방 8g을 포함합니다.', 'ADMIN', SYSDATE, '1. 크랩미트, 셀러리, 사워 크림, 마요네즈, 디종 머스타드, 레몬 즙, 차이브를 섞습니다.\n2. 소금, 후추로 간을 맞춥니다.\n3. 삶은 계란을 반으로 자르고 속을 파냅니다.\n4. 크랩 혼합물을 채웁니다.\n5. 즉시 서빙하거나 냉장 보관합니다.', DEFAULT, DEFAULT, '크랩미트, 셀러리, 사워 크림, 마요네즈, 디종 머스타드, 레몬 즙, 차이브, 소금, 후추, 계란');
+
+-- Recipe: 최고의 베이크드 마카로니 앤 치즈
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('최고의 베이크드 마카로니 앤 치즈', '미국 요리', '최고의 베이크드 마카로니 앤 치즈는 미국 메인 요리입니다. 1인분에 약 579칼로리, 단백질 26g, 지방 33g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 190도(375F)로 예열합니다.\n2. 빵을 잘게 썰고 버터에 섞습니다.\n3. 마카로니를 삶습니다.\n4. 버터에 밀가루를 넣고 우유를 넣어 소스를 만듭니다.\n5. 치즈를 넣고 섞습니다.\n6. 마카로니와 소스를 섞고 캐서롤 접시에 넣습니다.\n7. 빵가루를 뿌리고 30분간 굽습니다.', DEFAULT, DEFAULT, '빵, 버터, 마카로니, 밀가루, 우유, 치즈');
+
+-- Recipe: 블루 치즈 버거
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('블루 치즈 버거', '미국 요리', '블루 치즈 버거는 미국 메인 요리입니다. 1인분에 약 659칼로리, 단백질 45g, 지방 37g을 포함합니다.', 'ADMIN', SYSDATE, '1. 척, 서로인, 빵가루, 스테이크 소스, 계란, 소금, 후추를 섞습니다.\n2. 패티를 만듭니다.\n3. 팬에 굽습니다.\n4. 번을 자르고 그릴에 굽습니다.\n5. 패티와 블루 치즈를 번에 넣습니다.\n6. 서빙합니다.', DEFAULT, DEFAULT, '척, 서로인, 빵가루, 스테이크 소스, 계란, 소금, 후추, 번, 블루 치즈');
+
+-- Recipe: 스모키 레인보우 칠리
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('스모키 레인보우 칠리', '미국 요리', '스모키 레인보우 칠리는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 미국 전채입니다. 1인분에 약 218칼로리, 단백질 9g, 지방 5g을 포함합니다.', 'ADMIN', SYSDATE, '1. 팬에 기름을 넣고 주키니, 레드 벨 페퍼, 오렌지 벨 페퍼, 할라페뇨, 마늘, 양파를 볶습니다.\n2. 토마토, 토마토 페이스트, 블랙 빈, 옥수수, 키드니 빈을 넣습니다.\n3. 스모크 파프리카, 칠리 파우더, 오레가노, 블랙 페퍼, 카이엔 페퍼를 넣습니다.\n4. 끓인 후 1시간 동안 끓입니다.', DEFAULT, DEFAULT, '기름, 주키니, 레드 벨 페퍼, 오렌지 벨 페퍼, 할라페뇨, 마늘, 양파, 토마토, 토마토 페이스트, 블랙 빈, 옥수수, 키드니 빈, 스모크 파프리카, 칠리 파우더, 오레가노, 블랙 페퍼, 카이엔 페퍼');
+
+-- Recipe: 버터드 플랜테인 프라이와 시즈닝 아보카도
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('버터드 플랜테인 프라이와 시즈닝 아보카도', '미국 요리', '버터드 플랜테인 프라이와 시즈닝 아보카도는 글루텐 프리 및 락토 오보 채식 미국 사이드 디쉬입니다. 1인분에 약 555칼로리, 단백질 3g, 지방 50g을 포함합니다.', 'ADMIN', SYSDATE, '1. 플랜테인을 얇게 썰어 팬에 버터와 기름을 넣고 굽습니다.\n2. 아보카도를 으깨고 소금, 후추, 마늘, 양파를 넣습니다.\n3. 서빙합니다.', DEFAULT, DEFAULT, '플랜테인, 버터, 기름, 아보카도, 소금, 후추, 마늘, 양파');
+
+-- Recipe: 치킨 랜치 버거
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치킨 랜치 버거', '미국 요리', '치킨 랜치 버거는 유제품 프리 미국 메인 요리입니다. 1인분에 약 365칼로리, 단백질 41g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 200도(400F)로 예열합니다.\n2. 치킨, 양파, 페퍼, 빵가루, 랜치 시즈닝을 섞습니다.\n3. 패티를 만듭니다.\n4. 팬에 패티를 굽습니다.\n5. 오븐에서 15분간 굽습니다.\n6. 서빙합니다.', DEFAULT, DEFAULT, '치킨, 양파, 페퍼, 빵가루, 랜치 시즈닝');
+
+-- Recipe: 풀드 포크 나초
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('풀드 포크 나초', '미국 요리', '풀드 포크 나초는 글루텐 프리 미국 전채입니다. 1인분에 약 352칼로리, 단백질 19g, 지방 16g을 포함합니다.', 'ADMIN', SYSDATE, '1. 포크를 깨끗이 씻고 포크 럽을 뿌립니다.\n2. 슬로우 쿠커에 넣고 저온에서 8-10시간 요리합니다.\n3. 포크를 찢고 나초 칩에 올립니다.\n4. 피코 데 가요, 슈레드 치즈, 사워 크림을 뿌립니다.', DEFAULT, DEFAULT, '포크, 포크 럽, 나초 칩, 피코 데 가요, 슈레드 치즈, 사워 크림');
+
+-- Recipe: 마디 그라 컵케이크
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('마디 그라 컵케이크', '미국 요리', '마디 그라 컵케이크는 미국 디저트입니다. 1인분에 약 511칼로리, 단백질 3g, 지방 29g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열합니다.\n2. 케이크 밀가루, 베이킹 파우더, 베이킹 소다, 소금을 섞습니다.\n3. 계란, 설탕, 바닐라, 럼, 기름을 섞습니다.\n4. 반죽을 노랑, 보라, 녹색으로 나눕니다.\n5. 컵케이크 틀에 붓고 12-14분간 굽습니다.\n6. 식힌 후 프로스팅을 합니다.', DEFAULT, DEFAULT, '케이크 밀가루, 베이킹 파우더, 베이킹 소다, 소금, 계란, 설탕, 바닐라, 럼, 기름, 프로스팅');
+
+
+-- Recipe: 베트남 팬케이크 채소, 허브, 향기로운 디핑 소스 (반 쎄오)
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('베트남 팬케이크 채소, 허브, 향기로운 디핑 소스 (반 쎄오)', '베트남 요리', '베트남 팬케이크 채소, 허브, 향기로운 디핑 소스 (반 쎄오)는 글루텐 프리, 유제품 프리, 락토 오보 채식 사이드 디쉬입니다. 1인분에 약 390칼로리, 단백질 8g, 지방 22g을 포함합니다.', 'ADMIN', SYSDATE, '1. 팬케이크 반죽을 준비합니다.\n2. 쌀가루, 계란, 바다 소금, 강황, 카이엔 페퍼, 녹색 고추를 섞습니다. 코코넛 밀크를 점차 넣어 부드럽고 약간 걸쭉한 반죽을 만듭니다.\n3. 필요 시 물을 조금 추가하고 덮어 둡니다.\n4. 소스를 위해 모든 재료를 섞어 준비합니다.\n5. 속 재료로 당근, 무, 파, 녹색 고추, 스노우 피스를 섞습니다.\n6. 허브와 새싹, 버섯을 준비합니다.\n7. 논스틱 팬에 기름을 두르고 반죽 1/2컵을 부어 6-8인치 팬케이크를 만듭니다. 6-8분간 구워 바삭해지면 뒤집어 몇 분 더 굽습니다.\n8. 팬케이크를 접시에 옮기고 150도 오븐에서 따뜻하게 유지합니다.\n9. 서빙 시 팬케이크 절반에 채소, 허브, 버섯을 올리고 소스를 뿌린 후 접습니다.', DEFAULT, DEFAULT, '쌀가루, 계란, 바다 소금, 강황, 카이엔 페퍼, 녹색 고추, 코코넛 밀크, 물, 당근, 무, 파, 스노우 피스, 허브, 새싹, 버섯, 기름');
+
+-- Recipe: 구운 치킨 반 미
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('구운 치킨 반 미', '베트남 요리', '구운 치킨 반 미는 유제품 프리 베트남 메인 요리입니다. 1인분에 약 448칼로리, 단백질 28g, 지방 14g을 포함합니다.', 'ADMIN', SYSDATE, '1. 처음 여섯 가지 재료를 베이킹 접시에 섞습니다.\n2. 치킨 브레스트를 접시에 넣고 덮어 최소 1시간 냉장 보관합니다.\n3. 뜨거운 수돗물과 설탕을 중간 크기 볼에 넣고 설탕이 녹을 때까지 섞습니다.\n4. 식초, 소금, 고추, 얇게 썬 당근, 무를 넣고 최소 30분 냉장 보관합니다.\n5. 그릴을 중불로 예열하고 치킨 브레스트를 양면 5분씩 굽습니다.\n6. 불에서 내려 호일로 덮어 5분간 둡니다.\n7. 샌드위치 롤을 열고 안쪽을 1-3분간 그릴에 굽습니다.\n8. 절인 채소를 물기를 빼고 치킨을 얇게 썬 후 준비합니다.\n9. 롤 안쪽에 마요네즈를 바릅니다.\n10. 오이, 치킨, 절인 채소, 고수 잎, 할라페뇨를 층층이 쌓습니다.\n11. 즉시 서빙합니다.', DEFAULT, DEFAULT, '치킨 브레스트, 설탕, 식초, 소금, 고추, 당근, 무, 오이, 고수, 할라페뇨, 마요네즈, 샌드위치 롤, 기름');
+
+-- Recipe: 쉽게 만드는 스프링 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('쉽게 만드는 스프링 롤', '베트남 요리', '쉽게 만드는 스프링 롤은 글루텐 프리, 유제품 프리, 페스카테리언 전채입니다. 1인분에 약 162칼로리, 단백질 13g, 지방 2g을 포함합니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 준비합니다.\n2. 큰 볼에 물을 채우고 쌀 포장지를 1-2초간 담가 부드럽게 합니다.\n3. 새우 반쪽 2개를 중앙에 놓고 바질, 민트, 고수, 상추를 올립니다.\n4. 양쪽을 접고 상추 끝부터 단단히 말아줍니다.\n5. 나머지 포장지와 재료로 반복합니다.\n6. 디핑 소스를 위해 모든 재료를 섞어 설탕이 녹을 때까지 저어줍니다.\n7. 실온에서 디핑 소스와 함께 서빙합니다.', DEFAULT, DEFAULT, '새우, 바질, 민트, 고수, 상추, 쌀 포장지, 물');
+
+-- Recipe: 글루텐 프리 채식 스프링 롤과 타이 스타일 땅콩 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('글루텐 프리 채식 스프링 롤과 타이 스타일 땅콩 소스', '베트남 요리', '글루텐 프리 채식 스프링 롤과 타이 스타일 땅콩 소스는 유제품 프리 전채입니다. 1인분에 약 91칼로리, 단백질 3g, 지방 6g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 냄비에 물을 끓입니다.\n2. 쌀국수를 넣고 10분간 두어 부드러워지면 찬물로 헹구고 물기를 뺍니다.\n3. 1인치 길이로 자르고 큰 볼에 넣습니다.\n4. 쌀 포장지와 소스를 제외한 나머지 재료를 국수에 넣고 섞습니다.\n5. 쌀 포장지를 담글 수 있는 따뜻한 물을 준비합니다.\n6. 쌀 포장지를 하나씩 8-10초간 담가 부드럽게 한 뒤 평평한 표면에 놓습니다.\n7. 포장지마다 속 재료 1/4컵을 놓고 아래쪽을 접은 후 양쪽을 중앙으로 접고 단단히 말아줍니다.\n8. 나머지 포장지로 반복하고 플라스틱으로 감싸 마르지 않게 보관합니다.\n9. 땅콩 디핑 소스를 위해 따뜻한 물과 설탕을 섞어 설탕이 녹을 때까지 저은 후 나머지 재료를 넣고 부드럽게 섞습니다.\n10. 실온에서 소스와 함께 서빙합니다.', DEFAULT, DEFAULT, '쌀국수, 물, 쌀 포장지, 설탕, 땅콩 소스 재료');
+
+-- Recipe: 베트남 반 미
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('베트남 반 미', '베트남 요리', '베트남 반 미는 유제품 프리 메인 요리입니다. 1인분에 약 477칼로리, 단백질 24g, 지방 21g을 포함합니다.', 'ADMIN', SYSDATE, '1. 돼지고기를 제외한 마리네이드 재료를 플라스틱 백에 섞습니다.\n2. 기름에 재료가 녹으면 돼지고기 조각을 넣습니다.\n3. 최소 1시간 동안 마리네이드합니다.\n4. 중불로 팬을 가열하고 돼지고기를 한 층씩 구워 양면을 익힙니다.\n5. 10분간 고기를 쉬게 한 후 조각으로 썹니다.\n6. 샌드위치에 돼지고기를 넣어 조립합니다.', DEFAULT, DEFAULT, '돼지고기, 마리네이드 재료, 기름');
+
+-- Recipe: 베트남 소고기 국수 수프와 아시아 채소
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('베트남 소고기 국수 수프와 아시아 채소', '베트남 요리', '베트남 소고기 국수 수프와 아시아 채소는 유제품 프리 메인 요리입니다. 1인분에 약 346칼로리, 단백질 22g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 소고기를 10분간 냉동한 후 1/8인치 두께로 썹니다.\n2. 국수를 포장지 지침에 따라 조리하고 찬물로 헹구어 물기를 뺍니다.\n3. 큰 냄비에 양파, 생강, 마늘, 스타 아니스, 정향을 넣고 중불로 5분간 볶습니다.\n4. 육수와 물 2컵을 넣고 끓인 후 체에 걸러 고형물을 버리고 육수를 냄비에 다시 넣습니다.\n5. 간장, 설탕, 피시 소스, 참기름을 넣고 끓입니다.\n6. 국수를 넣고 부드럽고 투명해질 때까지 10분간 조리합니다.\n7. 국수와 육수를 두 그릇에 나눠 담고 소고기 조각을 올려 즉시 서빙합니다.', DEFAULT, DEFAULT, '소고기, 국수, 양파, 생강, 마늘, 스타 아니스, 정향, 육수, 물, 간장, 설탕, 피시 소스, 참기름');
+
+-- Recipe: 주키니 국수로 만든 포
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('주키니 국수로 만든 포', '베트남 요리', '주키니 국수로 만든 포는 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 322칼로리, 단백질 49g, 지방 6g을 포함합니다.', 'ADMIN', SYSDATE, '1. 소고기 안심을 15분간 냉동하여 얇게 썰기 쉽게 합니다.\n2. 스파이럴라이저나 줄리엔 필러로 주키니 국수를 만들고 두 개의 큰 그릇에 나눠 담습니다.\n3. 중간 크기 냄비에 계피 스틱, 스타 아니스, 정향을 중불로 볶아 향이 날 때까지 가열합니다.\n4. 뼈 육수, 생강, 간장, 피시 소스를 넣고 끓인 후 10분간 약한 불에서 끓입니다.\n5. 냉동에서 꺼낸 소고기를 얇게 썰어 두 그릇의 주키니 국수 위에 나눠 올립니다.\n6. 육수가 완성되면 두 그릇에 나눠 붓습니다. 소고기는 즉시 익을 것입니다.\n7. 콩나물, 신선한 허브, 얇게 썬 할라페뇨, 파를 올리고 스리라차 또는 호이신 소스를 뿌린 후 라임즙을 짜서 서빙합니다.', DEFAULT, DEFAULT, '소고기 안심, 주키니, 계피 스틱, 스타 아니스, 정향, 뼈 육수, 생강, 간장, 피시 소스, 콩나물, 허브, 할라페뇨, 파, 스리라차, 호이신 소스, 라임즙');
+
+-- Recipe: 베트남 스프링 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('베트남 스프링 롤', '베트남 요리', '베트남 스프링 롤은 유제품 프리, 페스카테리언 전채입니다. 1인분에 약 220칼로리, 단백질 25g, 지방 2g을 포함합니다.', 'ADMIN', SYSDATE, '1. 쌀국수를 따뜻한 물에 담가 부드러워지면 물기를 뺍니다.\n2. 따뜻한 물이 담긴 볼에 쌀 포장지를 1-2초간 담가 부드럽게 합니다.\n3. 포장지를 마른 도마나 접시에 놓고 중앙에 새우 3마리, 쌀국수, 당근, 콩나물, 바질 잎을 올립니다.\n4. 양쪽을 접고 가까운 끝부터 단단히 말아줍니다.\n5. 나머지 재료로 반복합니다.\n6. 디핑 소스를 위해 재료를 섞고 설탕이 녹을 때까지 저은 후 다진 고수를 넣습니다.\n7. 디핑 소스와 함께 서빙합니다.', DEFAULT, DEFAULT, '쌀국수, 새우, 당근, 콩나물, 바질, 쌀 포장지, 물, 고수');
+
+-- Recipe: 두부와 베트남 국수 샐러드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('두부와 베트남 국수 샐러드', '베트남 요리', '두부와 베트남 국수 샐러드는 유제품 프리, 페스카테리언 메인 요리입니다. 1인분에 약 816칼로리, 단백질 27g, 지방 40g을 포함합니다.', 'ADMIN', SYSDATE, '1. 두부를 3/4cm 두께로 썰고 간장, 참기름, 얇게 썬 마늘로 최소 2시간 마리네이드합니다.\n2. 마리네이드 소스를 위해 고추, 생강, 마늘을 잘게 썰고 라임즙을 제외한 재료를 작은 냄비에 넣어 5-10분간 약한 불에서 끓인 후 식히고 라임즙으로 간을 맞춥니다.\n3. 큰 팬을 중불로 가열하고 마리네이드한 두부를 황금빛이 될 때까지 굽습니다.\n4. 브로콜리 꽃을 끓는 물에 넣고 5분간 둔 후 물기를 뺍니다.\n5. 국수를 포장지 지침에 따라 준비합니다.\n6. 파를 잘게 썰고 오이의 수분이 많은 부분을 제거한 후 당근, 오이, 고추, 아이스버그를 얇게 썰고 허브와 땅콩을 굵게 썬 후 큰 그릇 두 개에 아이스버그, 국수, 채소, 두부, 허브, 땅콩, 마리네이드를 차례로 담아 서빙합니다.', DEFAULT, DEFAULT, '두부, 간장, 참기름, 마늘, 고추, 생강, 라임즙, 브로콜리, 국수, 파, 오이, 당근, 고추, 아이스버그, 허브, 땅콩');
+
+-- Recipe: 치킨 스프링 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치킨 스프링 롤', '베트남 요리', '치킨 스프링 롤은 글루텐 프리, 유제품 프리 전채입니다. 1인분에 약 337칼로리, 단백질 28g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 닭고기를 간장, 마늘, 후추로 5분간 마리네이드합니다.\n2. 큰 팬에 식용유 1티스푼을 넣고 중불로 가열합니다.\n3. 다진 닭고기를 넣고 완전히 익힙니다.\n4. 스위트 칠리 소스와 브로콜리 슬로를 추가합니다.\n5. 채소에 간장을 넣고 섞어 단단하지만 따뜻해질 때까지 조리합니다.\n6. 9인치 파이 팬에 따뜻한 물(43C)을 반 채우고 종이 타월 2장을 물에 적셔 평평하게 펼칩니다.\n7. 쌀 포장지를 물에 10-12초간 담가 부드럽게 한 후 젖은 타월 위에 놓습니다.\n8. 포장지 중앙에 속 재료 1/4컵을 놓고 닭고기 위로 아래쪽을 접은 후 양쪽을 중앙으로 단단히 접고 위로 말아줍니다.\n9. 완성된 롤을 다른 젖은 타월로 덮어 마르지 않게 보관합니다.\n10. 나머지 재료를 작은 볼에 섞어 부드럽게 휘저어 소스를 만들고 서빙 그릇에 담아 따뜻하게 소스와 함께 서빙합니다.', DEFAULT, DEFAULT, '닭고기, 간장, 마늘, 후추, 식용유, 스위트 칠리 소스, 브로콜리 슬로, 쌀 포장지, 물');
+
+-- Recipe: 마늘 라임 소스를 곁들인 채식 스프링 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('마늘 라임 소스를 곁들인 채식 스프링 롤', '베트남 요리', '마늘 라임 소스를 곁들인 채식 스프링 롤은 글루텐 프리, 유제품 프리, 포드맵 친화적인 전채입니다. 1인분에 약 135칼로리, 단백질 3g, 지방 1g을 포함합니다.', 'ADMIN', SYSDATE, '1. 빨강과 노랑 피망, 당근, 치카마, 타이 바질을 1/8인치 두께와 2인치 길이로 채썰습니다.\n2. 따뜻한 물을 둥근 파이 팬이나 얕은 접시에 채우고 쌀 포장지를 양면이 젖도록 담갔다가 꺼냅니다.\n3. 포장지를 평평한 천 위에 놓고 10초간 부드러워지기를 기다립니다.\n4. 쌀 포장지를 천에서 떼어내고 버터 리프 상추 반 잎을 올리고 갈비뼈 부분은 제거합니다.\n5. 각 채소와 타이 바질을 얇게 올립니다.\n6. 한쪽 끝을 중앙으로 접고 반대쪽도 접은 후 90도 돌려 단단히 말아줍니다.\n7. 각 롤을 대각선으로 자르고 서빙 접시에 세워 놓습니다.\n8. 마늘 라임 호이신 소스를 위해 절구와 공이로 마늘과 생강을 으깨고 라임즙과 스리라차를 넣어 휘저은 후 호이신 소스를 넣고 섞습니다.', DEFAULT, DEFAULT, '빨강 피망, 노랑 피망, 당근, 치카마, 타이 바질, 쌀 포장지, 물, 버터 리프 상추, 마늘, 생강, 라임즙, 스리라차, 호이신 소스');
+
+-- Recipe: 가장 쉬운 소고기 포
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('가장 쉬운 소고기 포', '베트남 요리', '가장 쉬운 소고기 포는 유제품 프리 메인 요리입니다. 1인분에 약 656칼로리, 단백질 40g, 지방 22g을 포함합니다.', 'ADMIN', SYSDATE, '1. 생강과 마늘을 얇게 썰고 양파를 4등분하며 파를 썹니다.\n2. 소고기 안심을 종이처럼 얇게 썹니다.\n3. 큰 냄비에 중불로 뼈 육수, 생강, 양파, 계피, 스타 아니스, 마늘, 피시 소스를 넣고 끓인 후 약한 불에서 20분간 끓입니다.\n4. 육수를 체에 걸러 고형물을 버리고 맑은 육수를 냄비에 다시 넣습니다.\n5. 중불로 육수를 끓이고 국수를 넣어 부드럽고 투명해질 때까지 10분간 조리합니다.\n6. 국수와 육수를 두 그릇에 나눠 담고 소고기 조각을 올립니다. 소고기는 즉시 익습니다.\n7. 신선한 민트, 라임, 파로 장식하여 서빙합니다.', DEFAULT, DEFAULT, '생강, 마늘, 양파, 파, 소고기 안심, 뼈 육수, 계피, 스타 아니스, 피시 소스, 국수, 민트, 라임');
+
+
+-- Recipe: 간단한 치킨, 킬바사, 새우 빠에야
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('간단한 치킨, 킬바사, 새우 빠에야', '스페인 요리', '간단한 치킨, 킬바사, 새우 빠에야는 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 385칼로리, 단백질 33g, 지방 9g을 포함합니다.', 'ADMIN', SYSDATE, '1. 12인치 팬에 기름을 중불로 가열합니다.\n2. 쌀을 넣고 30초간 계속 저으며 볶습니다.\n3. 육수, 피칸테 소스, 강황을 팬에 넣고 끓입니다.\n4. 불을 약하게 줄이고 뚜껑을 덮어 15분간 조리합니다.\n5. 킬바사, 새우, 치킨을 팬에 넣고 뚜껑을 덮어 쌀이 부드러워질 때까지 5분간 더 조리합니다.', DEFAULT, DEFAULT, '기름, 쌀, 육수, 피칸테 소스, 강황, 킬바사, 새우, 치킨');
+
+-- Recipe: 스페인 미트볼 토마토 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('스페인 미트볼 토마토 소스', '스페인 요리', '스페인 미트볼 토마토 소스는 유제품 프리 전채입니다. 1인분에 약 137칼로리, 단백질 6g, 지방 9g을 포함합니다.', 'ADMIN', SYSDATE, '1. 토마토 소스를 위해 양파를 잘게 썰고 토마토 600g을 껍질 벗겨 작게 썬다.\n2. 소스 팬에 올리브 오일 2큰술을 넣고 양파를 볶는다.\n3. 스페인 훈제 달콤한 파프리카 1/4작은술을 추가한다.\n4. 잘게 썬 토마토와 신선한 월계수 잎 1개를 넣고 섞는다.\n5. 설탕 1작은술, 소금 1/2작은술, 후추 1/4작은술을 넣고 약한 불에서 소스 농도가 될 때까지 끓인다.\n6. 미트볼을 위해 양파 반 개와 마늘 2쪽을 푸드 프로세서로 잘게 썬다.\n7. 양파-마늘 혼합물을 올리브 오일에 볶는다.\n8. 다진 소고기 500g에 양파-마늘 혼합물, 흰빵 4조각(껍질 제거, 1cm 큐브로 자름), 다진 파슬리 2큰술, 계란 1개, 소금, 후추를 섞는다.\n9. 혼합물을 골프공보다 약간 큰 크기로 단단히 뭉쳐 미트볼을 만든다.\n10. 팬에 올리브 오일 3/4컵을 넣고 미트볼을 황금빛이 될 때까지 굴리며 튀긴다.\n11. 토마토 소스가 소스 농도가 되면 핸드 블렌더로 곱게 갈거나 그대로 둔다.\n12. 미트볼을 소스에 넣어 따뜻하게 데우고 다진 파슬리로 장식한다.', DEFAULT, DEFAULT, '양파, 토마토, 올리브 오일, 훈제 파프리카, 월계수 잎, 설탕, 소금, 후추, 소고기, 마늘, 흰빵, 파슬리, 계란');
+
+-- Recipe: 4인분 빠에야: 멋진 스페인 해산물 스튜
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('4인분 빠에야: 멋진 스페인 해산물 스튜', '스페인 요리', '4인분 빠에야는 글루텐 프리, 유제품 프리 사이드 디쉬입니다. 1인분에 약 444칼로리, 단백질 15g, 지방 20g을 포함합니다.', 'ADMIN', SYSDATE, '1. 12인치 스테인리스 팬을 준비한다.\n2. 향신료를 섞어 치킨에 바르고 1시간 냉장 보관한다.\n3. 조리 전 치킨을 30분간 실온에 둔다.\n4. 팬에 기름 반을 넣고 중불로 가열해 소시지를 갈색이 될 때까지 볶아 꺼낸다.\n5. 나머지 기름을 넣고 치킨을 양면 갈색이 될 때까지 볶아 꺼낸다.\n6. 중불로 줄이고 양파, 마늘, 파슬리를 넣어 소프리토를 2-3분간 만든다.\n7. 으깬 토마토를 넣고 3분간 볶는다.\n8. 쌀을 넣고 2분간 섞는다.\n9. 소시지와 치킨을 다시 넣는다.\n10. 뜨거운 물을 넣고 약한 불에서 5분간 저으며 끓인다.\n11. 조개를 원하는 위치에 놓고 더 이상 저지 않고 5분간 조리한다.\n12. 새우를 꼬리 위로 놓는다.\n13. 조개가 열리고 새우가 분홍색이 되며 쌀이 부드러워질 때까지 10분간 조리한다.\n14. 팬 바닥에 소카라트(바삭한 껍질)가 형성되었는지 확인하고, 없으면 30-45초간 강한 불로 가열한다.\n15. 즉시 서빙한다.', DEFAULT, DEFAULT, '기름, 치킨, 소시지, 양파, 마늘, 파슬리, 토마토, 쌀, 물, 조개, 새우');
+
+-- Recipe: 바닐라와 라임 플랜
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('바닐라와 라임 플랜', '스페인 요리', '바닐라와 라임 플랜은 글루텐 프리, 락토 오보 채식 디저트입니다. 1인분에 약 411칼로리, 단백질 12g, 지방 12g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(360F)로 예열한다.\n2. 캐러멜을 위해 물과 설탕을 중불에서 10분간 태우지 않도록 끓인다.\n3. 연유와 전유를 팬에 넣고 라임 제스트를 추가한다.\n4. 바닐라 포드를 반으로 갈라 씨를 긁어 우유 혼합물에 넣고 15분간 약한 불에서 끓인다.\n5. 캐러멜이 준비되면 케이크 팬에 부어 바닥을 고르게 코팅하고 식힌다.\n6. 볼에 계란을 깨고 섞은 후 따뜻한 우유, 바닐라, 라임 혼합물을 조금씩 부어 계란을 데운다.\n7. 나머지 우유를 모두 넣고 케이크 팬에 캐러멜 위에 붓는다.\n8. 케이크 팬을 물이 반쯤 찬 큰 팬에 넣어 물 목욕으로 45분에서 1시간 조리한다.\n9. 식힌 후 냉장고에서 하룻밤 보관하고 부드럽게 뒤집어 서빙한다.', DEFAULT, DEFAULT, '물, 설탕, 연유, 전유, 라임 제스트, 바닐라 포드, 계란');
+
+-- Recipe: 혼합 빠에야
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('혼합 빠에야', '스페인 요리', '혼합 빠에야는 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 394칼로리, 단백질 28g, 지방 10g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 논스틱 팬이나 빠에야 팬을 중불로 예열하고 기름 2작은술, 마늘, 고춧가루, 쌀을 넣는다.\n2. 약 3분간 볶는다.\n3. 사프란, 타임, 월계수 잎, 육수를 넣고 끓인다.\n4. 뚜껑을 덮고 약한 불에서 저지 않고 끓인다.\n5. 다른 논스틱 팬을 중불로 가열하고 치킨과 새우를 볶는다.\n6. 완성된 빠에야에 레몬과 완두콩을 올려 서빙한다.', DEFAULT, DEFAULT, '기름, 마늘, 고춧가루, 쌀, 사프란, 타임, 월계수 잎, 육수, 치킨, 새우, 레몬, 완두콩');
+
+-- Recipe: 바스크 스타일 플랜
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('바스크 스타일 플랜', '스페인 요리', '바스크 스타일 플랜은 글루텐 프리 디저트입니다. 1인분에 약 242칼로리, 단백질 9g, 지방 12g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 180도(350F)로 예열하고 8인치 베이킹 팬을 준비한다.\n2. 큰 볼에 계란, 설탕, 연유를 섞는다.\n3. 혼합물을 준비된 팬에 붓는다.\n4. 팬을 물이 반쯤 찬 얕은 베이킹 팬에 놓는다.\n5. 커스터드 위에 육두구를 뿌린다.\n6. 30분간 또는 커스터드가 굳을 때까지 굽는다.\n7. 물에서 팬을 꺼내 즉시 식힌다.\n8. 차갑게 서빙한다.', DEFAULT, DEFAULT, '계란, 설탕, 연유, 육두구, 물');
+
+-- Recipe: 옥수수 플랜 사이드 디쉬
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('옥수수 플랜 사이드 디쉬', '스페인 요리', '옥수수 플랜 사이드 디쉬는 글루텐 프리 요리입니다. 1인분에 약 199칼로리, 단백질 12g, 지방 10g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 165도(325F)로 예열하고 1컵 용량의 라메킨 4개를 기름칠한다.\n2. 블렌더나 푸드 프로세서에 옥수수 알갱이 1컵과 우유 1/2컵을 넣고 부드럽게 갈고 나머지 옥수수와 우유로 반복한다.\n3. 큰 믹싱 볼에 옥수수 퓨레, 리코타, 페코리노-로마노 치즈, 계란을 섞는다.\n4. 소금과 후추로 간하고 라메킨에 혼합물을 붓되 위로 1/2인치 공간을 남긴다.\n5. 라메킨을 라자냐 팬이나 로스팅 팬에 놓고 물을 라메킨의 반 높이까지 붓는다.\n6. 55분에서 1시간 동안 커스터드가 굳고 칼이 깨끗하게 나올 때까지 굽는다.\n7. 오븐에서 물이 튀지 않도록 조심히 꺼내 5-10분 식힌다.\n8. 따뜻하거나 실온에서 서빙한다.', DEFAULT, DEFAULT, '옥수수 알갱이, 우유, 리코타 치즈, 페코리노-로마노 치즈, 계란, 소금, 후추, 물');
+
+-- Recipe: 스페인 토르티야
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('스페인 토르티야', '스페인 요리', '스페인 토르티야는 글루텐 프리, 포드맵 친화적인 메인 요리입니다. 1인분에 약 260칼로리, 단백질 19g, 지방 12g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐의 브로일러를 예열한다.\n2. 소금물에 감자 큐브를 부드러워질 때까지 조리하고 물기를 뺀다.\n3. 큰 볼에 계란, 소금, 후추를 섞는다.\n4. 오븐용 팬에 중불로 버터를 녹이고 올리브 오일을 추가한다.\n5. 조리된 치킨 조각을 넣고 따뜻해질 때까지 볶는다.\n6. 감자를 넣고 치킨과 감자를 3분간 조리한다.\n7. 계란 혼합물과 다진 파슬리를 넣고 치킨과 감자 아래쪽과 팬 가장자리에서 계란이 익기 시작할 때까지 조리한다.\n8. 브로일러 아래에서 황금빛이 되고 계란이 더 이상 부드럽지 않을 때까지 6분간 굽는다.\n9. 쐐기 모양으로 잘라 녹색 샐러드와 함께 가볍게 서빙한다.', DEFAULT, DEFAULT, '감자, 소금, 물, 계란, 후추, 버터, 올리브 오일, 치킨, 파슬리');
+
+-- Recipe: 더치 오븐 빠에야
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('더치 오븐 빠에야', '스페인 요리', '더치 오븐 빠에야는 유제품 프리 메인 요리입니다. 1인분에 약 670칼로리, 단백질 43g, 지방 24g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐 랙을 아래쪽 중앙에 조정하고 175도(350F)로 예열한다.\n2. 중간 볼에 새우, 다진 마늘 1작은술, 올리브 오일 1큰술, 소금 1/4작은술, 후추 1/4작은술을 섞고 냉장 보관한다.\n3. 치킨 허벅지에 소금과 후추로 간한다.\n4. 더치 오븐에 기름 2작은술을 넣고 중불로 가열해 피망을 3-4분간 볶아 꺼낸다.\n5. 기름 1큰술을 추가하고 치킨 허벅지를 양면 3분씩 갈색이 될 때까지 볶아 볼에 꺼낸다.\n6. 중불로 줄이고 소시지를 4-5분간 볶아 치킨 볼에 넣는다.\n7. 기름을 2큰술로 맞추고 양파를 3분간 볶고 마늘을 1분, 토마토를 3분간 볶는다.\n8. 쌀을 넣고 2분간 섞는다.\n9. 육수, 와인, 사프란, 월계수 잎, 소금 1/2작은술을 넣고 치킨과 소시지를 추가한다.\n10. 중불로 끓이고 뚜껑을 덮어 오븐에서 15분간 굽는다.\n11. 오븐에서 꺼내 아티초크 하트를 쌀에 살짝 넣고 새우, 완두콩, 피망 조각을 뿌린다.\n12. 뚜껑을 덮고 오븐에서 새우가 불투명해질 때까지 10분간 굽는다.\n13. 스토브를 중불로 가열하고 팬을 5분간 조리해 소카라트를 만들며 중간에 180도 회전한다.\n14. 불에서 내려 뚜껑을 덮고 5분간 둔다.\n15. 다진 파슬리와 레몬 조각으로 장식한다.', DEFAULT, DEFAULT, '새우, 마늘, 올리브 오일, 소금, 후추, 치킨 허벅지, 피망, 소시지, 양파, 토마토, 쌀, 육수, 와인, 사프란, 월계수 잎, 아티초크 하트, 완두콩, 파슬리, 레몬');
+
+-- Recipe: 브라운 버터 시나몬 츄로 라이스 크리스피 트리트
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('브라운 버터 시나몬 츄로 라이스 크리스피 트리트', '스페인 요리', '브라운 버터 시나몬 츄로 라이스 크리스피 트리트는 유제품 프리 디저트입니다. 1인분에 약 89칼로리, 단백질 1g, 지방 1g을 포함합니다.', 'ADMIN', SYSDATE, '1. 8x8인치 베이킹 팬에 기름을 바른다.\n2. 팬에 버터를 넣고 중불로 갈색이 될 때까지 녹인다.\n3. 마시멜로를 넣고 녹을 때까지 저으며 섞는다.\n4. 시나몬과 소금을 추가한다.\n5. 라이스 크리스피 시리얼을 넣고 고르게 섞는다.\n6. 준비된 팬에 혼합물을 넣고 평평하게 누른다.\n7. 식힌 후 자른다.', DEFAULT, DEFAULT, '버터, 마시멜로, 시나몬, 소금, 라이스 크리스피 시리얼');
+
+-- Recipe: 스페인 정어리 파스타
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('스페인 정어리 파스타', '스페인 요리', '스페인 정어리 파스타는 페스카테리언 메인 요리입니다. 1인분에 약 920칼로리, 단백질 40g, 지방 42g을 포함합니다.', 'ADMIN', SYSDATE, '1. 페투치니 파스타를 평소처럼 조리하고 물기를 빼기 전 파스타 물 1/2컵을 덜어둔다.\n2. 파스타 조리 중 팬에 올리브 오일을 약한 불로 가열한다.\n3. 양파를 넣고 3분간 부드러워질 때까지 볶는다.\n4. 마늘을 추가하고 1분간 더 볶는다.\n5. 토마토, 올리브, 케이퍼, 레몬즙, 고춧가루, 정어리(기름 포함)를 넣고 포크로 정어리를 살짝 부수며 4분간 조리한다.\n6. 덜어둔 파스타 물과 후추를 넣고 2분간 더 조리한다.\n7. 조리된 페투치니를 팬에 넣고 소스에 버무려 서빙한다.\n8. 파르메산 치즈와 파슬리를 뿌리고 크러스티 브레드와 함께 서빙한다.', DEFAULT, DEFAULT, '페투치니, 올리브 오일, 양파, 마늘, 토마토, 올리브, 케이퍼, 레몬즙, 고춧가루, 정어리, 파스타 물, 후추, 파르메산 치즈, 파슬리, 크러스티 브레드');
+
+-- Recipe: 메티 로티
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('메티 로티', '인도 요리', '메티 로티는 약 45분 만에 완성되는 인도식 빵입니다. 1인분에 약 80칼로리, 단백질 4g, 지방 2g을 포함합니다. 락토 오보 채식에 적합하며, 10인분을 제공합니다.', 'ADMIN', SYSDATE, '1. 말린 메티 잎을 따뜻한 물에 5~10분간 불린다.\n2. 물기를 빼고 과도한 액체를 짜낸다. 체에 밀가루와 베이킹 소다를 걸러 중간 크기 그릇에 넣는다. 소금, 고춧가루, 카이엔 페퍼, 커민, 고수, 아지완 씨, 아사페티다, 요구르트, 메티 잎을 섞는다.\n3. 약 1/4컵의 물을 넣어 반경질 반죽을 만든다. 덮고 상온에서 1시간 둔다. 손에 밀가루를 묻히고 반죽을 10~12개의 작은 공으로 나눈다.\n4. 각 공을 약 3인치 크기의 원으로 민다.\n5. 논스틱 팬에 기 또는 오일을 살짝 바르고 중불로 가열한다. 뜨거워지면 반죽을 올려 밑면이 갈색이 될 때까지 4분간 굽는다.\n6. 오일을 살짝 뿌리고 뒤집어 2~3분 더 구워 양면이 갈색이 되도록 한다.\n7. 접시에 옮기고 150도 오븐에서 따뜻하게 유지하며 나머지 반죽을 반복한다.', DEFAULT, DEFAULT, '말린 메티 잎, 물, 밀가루, 베이킹 소다, 소금, 고춧가루, 카이엔 페퍼, 커민, 고수, 아지완 씨, 아사페티다, 요구르트');
+
+-- Recipe: 쉬운 치킨 티카 마살라
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('쉬운 치킨 티카 마살라', '인도 요리', '쉬운 치킨 티카 마살라는 글루텐 프리 메인 요리로, 1인분에 371칼로리, 단백질 38g, 지방 20g을 포함합니다. 4인분을 제공하며 약 45분 소요됩니다.', 'ADMIN', SYSDATE, '1. 작은 그릇에 모든 향신료와 생강을 섞는다.\n2. 큰 냄비에 오일을 가열한다.\n3. 양파를 넣고 황금빛이 될 때까지 볶는다.\n4. 마늘을 넣고 1분 더 볶는다.\n5. 향신료를 넣고 향이 날 때까지 섞는다.\n6. 토마토 페이스트를 섞는다.\n7. 다진 토마토와 물을 넣고 끓인다. 소금으로 간한다.\n8. 치킨 조각을 넣고 소스에 잘 버무려 12분간 끓여 치킨이 익고 소스가 걸쭉해질 때까지 조리한다.\n9. 요구르트를 넣고 5분 더 끓인다.\n10. 다진 고수를 뿌린다.\n11. 바스마티 쌀과 함께 제공한다.', DEFAULT, DEFAULT, '향신료, 생강, 오일, 양파, 마늘, 토마토 페이스트, 토마토, 물, 소금, 치킨, 요구르트, 고수, 바스마티 쌀');
+
+-- Recipe: 마늘 버터 난
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('마늘 버터 난', '인도 요리', '마늘 버터 난은 1인분에 462칼로리, 단백질 10g, 지방 22g을 포함하는 인도식 빵입니다. 락토 오보 채식에 적합하며 4인분을 제공합니다.', 'ADMIN', SYSDATE, '1. 작은 그릇에 물, 요구르트, 1/4컵 오일, 달걀 노른자를 섞는다. 푸드 프로세서에 밀가루, 설탕, 효모를 넣고 섞는다. 기계가 작동 중일 때 액체 재료를 천천히 넣는다.\n2. 혼합물을 10분간 둔다.\n3. 소금을 넣고 30~60초 더 처리한다. 끈적한 반죽이 되어야 한다.\n4. 밀가루를 뿌린 표면에 반죽을 꺼내 1분간 매끄러워질 때까지 반죽한다. 공 모양으로 만들어 기름칠한 그릇에 넣고 플라스틱 랩으로 덮어 16~24시간 냉장 보관한다.\n5. 반죽을 4등분하여 공 모양으로 만들고 플라스틱 랩으로 덮어 15~20분 둔다.\n6. 버터를 작은 냄비에 녹이고 마늘을 넣는다.\n7. 첫 번째 반죽을 9인치 원으로 민다. 포크로 20~25번 찌르고 윗면에 물을 살짝 뿌린다.\n8. 큰 논스틱 팬에 남은 오일을 가열하고 종이 타월로 닦는다. 반죽을 뿌린 면을 아래로 놓고 반대쪽에 물을 뿌린다. 팬을 덮고 밑면이 얼룩덜룩한 갈색이 될 때까지 2~4분 굽는다. 뒤집어 2~3분 더 굽는다. 다시 뒤집어 버터를 바르고 접시에 옮겨 호일로 덮는다. 나머지 난을 반복한다.', DEFAULT, DEFAULT, '물, 요구르트, 오일, 달걀 노른자, 밀가루, 설탕, 효모, 소금, 버터, 마늘');
+
+-- Recipe: 사프란 치킨 티카
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('사프란 치킨 티카', '인도 요리', '사프란 치킨 티카는 글루텐 프리 메인 요리로, 1인분에 160칼로리, 단백질 25g, 지방 4g을 포함합니다. 3인분을 제공하며 약 45분 소요됩니다.', 'ADMIN', SYSDATE, '1. 사프란을 따뜻한 우유에 15~20분간 불린다.\n2. 계피 스틱, 검은 카다멈 씨, 녹색 카다멈 씨, 후추, 정향을 드라이 로스팅하여 가루로 만든다.\n3. 절구에 녹색 고추를 소금과 함께 갈아 페이스트로 만든다.\n4. 모든 재료를 섞어 마리네이드를 만든다.\n5. 치킨 큐브를 말려 물기를 제거한다.\n6. 치킨을 그릇에 옮긴다.\n7. 마리네이드를 치킨에 넣고 잘 버무려 모든 조각이 코팅되도록 한다.\n8. 그릇을 랩으로 덮고 냉장고에 둔다.\n9. 치킨을 하룻밤 마리네이드한다.\n10. 논스틱 그릴 팬에 최소한의 오일을 사용해 굽는다.\n11. 꼬치를 물에 30분 이상 담근다.\n12. 치킨 조각을 꼬치에 끼워 약간의 공간을 두고 배열한다.\n13. 팬을 중불로 가열하고 오일을 뿌린다.\n14. 꼬치를 올려 중저온에서 한 면당 45초~1분 굽는다.\n15. 반대쪽도 같은 방식으로 굽는다.\n16. 뜨겁게 스타터 또는 바카르카니와 함께 메인 코스로 제공한다.', DEFAULT, DEFAULT, '사프란, 우유, 계피 스틱, 검은 카다멈 씨, 녹색 카다멈 씨, 후추, 정향, 녹색 고추, 소금, 치킨');
+
+-- Recipe: 매운 검은 눈콩 커리와 근대, 구운 가지
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('매운 검은 눈콩 커리와 근대, 구운 가지', '인도 요리', '매운 검은 눈콩 커리와 근대, 구운 가지는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 전채로, 1인분에 129칼로리, 단백질 7g, 지방 2g을 포함합니다. 6인분을 제공합니다.', 'ADMIN', SYSDATE, '1. 검은 눈콩을 헹구고 6시간 또는 하룻밤 물에 불린다.\n2. 물기를 빼고 헹군 뒤 큰 냄비에 물을 부어 끓인다. 중저온으로 줄이고 뚜껑을 덮어 40~60분간 부드러워질 때까지 끓인다.\n3. 가지의 줄기와 밑부분을 자르고 세로로 반을 나눈다. 살에 대각선으로 1인치 간격으로 칼집을 낸다.\n4. 소금을 뿌리고 40분 둔 뒤 헹구고 물기를 짠다.\n5. 가지에 오일을 바르고 로스팅 팬에 옮긴다.\n6. 400도 오븐에서 살이 무너지고 주름질 때까지 굽는다.\n7. 10분 식히고 소금을 뿌린 뒤 살을 꺼내 물기를 뺀다.', DEFAULT, DEFAULT, '검은 눈콩, 물, 가지, 소금, 오일');
+
+-- Recipe: 레드 커리 스튜와 채소 국수
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('레드 커리 스튜와 채소 국수', '인도 요리', '레드 커리 스튜와 채소 국수는 글루텐 프리, 유제품 프리, 페스카테리언 전채로, 1인분에 269칼로리, 단백질 11g, 지방 11g을 포함합니다. 4인분을 제공합니다.', 'ADMIN', SYSDATE, '1. 당근, 노란 호박, 주키니로 채소 국수를 만든다.\n2. 모든 국수를 중간 크기 그릇에 넣고 섞는다. 채소의 남은 부분을 스튜용으로 잘라둔다.\n3. 두부 포장의 물을 빼고 두부를 헹군 뒤 작은 큐브로 자른다.\n4. 중간 크기 냄비에 올리브 오일을 중고온으로 가열하고 다진 양파와 생강을 2분간 볶는다. 다진 마늘, 커리 페이스트, 다진 감자, 당근을 넣고 섞는다.\n5. 채소 스톡을 넣고 뚜껑을 덮는다. 끓으면 코코넛 밀크, 양배추, 여름 호박을 넣고 다시 끓인다. 피시 소스, 라임즙, 바다 소금으로 간한다. 감자가 익었는지 포크로 확인한다.\n6. 불을 끄고 다진 바질을 넣는다.\n7. 그릇에 채소 국수 1~1.5컵을 깔고 스튜를 부은다.\n8. 검은 참깨를 뿌려 장식한다.', DEFAULT, DEFAULT, '당근, 노란 호박, 주키니, 두부, 올리브 오일, 양파, 생강, 마늘, 커리 페이스트, 감자, 채소 스톡, 코코넛 밀크, 양배추, 여름 호박, 피시 소스, 라임즙, 바다 소금, 바질, 검은 참깨');
+
+-- Recipe: 생선 필레 크리미 코코넛 커리
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('생선 필레 크리미 코코넛 커리', '인도 요리', '생선 필레 크리미 코코넛 커리는 글루텐 프리, 유제품 프리, 홀30, 페스카테리언 메인 요리로, 1인분에 350칼로리, 단백질 24g, 지방 21g을 포함합니다. 4인분을 제공하며 약 30분 소요됩니다.', 'ADMIN', SYSDATE, '1. 오븐을 400도로 예열하고 호박을 굽는다.\n2. 황금빛이 되거나 꼬치로 익었는지 확인하고 꺼낸다.\n3. 식히고 껍질을 벗겨 조각으로 자른다.\n4. 향신료를 부드러운 페이스트로 만든다.\n5. 생선 필레를 큰 조각으로 자르고 소금, 후추로 간한 뒤 랩으로 덮어 냉장 보관한다.\n6. 깊은 팬에 오일을 가열하고 양파를 부드러워질 때까지 볶는다.\n7. 커리 잎, 커리 페이스트, 고수 1/2티스푼을 넣고 향이 나고 오일이 분리될 때까지 중불로 볶는다.\n8. 호박과 토마토를 넣고 10분간 섞는다.\n9. 커리 잎을 제거하고 타마린드 즙을 취향에 맞게 조금씩 넣는다. 혼합물을 부드럽게 갈아 팬에 다시 붓는다.\n10. 중불로 재가열하고 코코넛 밀크를 조금씩 넣으며 섞는다.\n11. 소스가 더 필요하면 코코넛 밀크를 추가한다.\n12. 코코넛 밀크를 끓이고 생선을 넣어 뚜껑을 덮고 5~6분간 중불로 끓인다. 생선을 조심히 뒤집어 익힌다.\n13. 파슬리 또는 고수를 뿌리고 바스마티 쌀과 함께 제공한다.', DEFAULT, DEFAULT, '호박, 향신료, 생선 필레, 소금, 후추, 오일, 양파, 커리 잎, 커리 페이스트, 고수, 토마토, 타마린드 즙, 코코넛 밀크, 파슬리, 고수, 바스마티 쌀');
+
+-- Recipe: 인도 스타일 달걀 토스트
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('인도 스타일 달걀 토스트', '인도 요리', '인도 스타일 달걀 토스트는 유제품 프리, 락토 오보 채식 메인 요리로, 1인분에 379칼로리, 단백질 21g, 지방 12g을 포함합니다. 2인분을 제공하며 약 45분 소요됩니다.', 'ADMIN', SYSDATE, '1. 빵을 마른 팬이나 그릴에서 양면을 토스트한다.\n2. 팬에 오일을 가열하고 양파를 캐러멜화될 때까지 볶는다.\n3. 토마토를 넣고 부드러워질 때까지 조리한다.\n4. 강황을 뿌리고 1분 더 조리한다.\n5. 달걀을 깨 넣고 원하는 익힘 정도로 조리한다. 고수와 소금, 후추로 간한다.\n6. 토스트 위에 달걀을 골고루 올리고 즉시 제공한다.', DEFAULT, DEFAULT, '빵, 오일, 양파, 토마토, 강황, 달걀, 고수, 소금, 후추');
+
+-- Recipe: 타이 코코넛 커리 렌틸 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('타이 코코넛 커리 렌틸 수프', '인도 요리', '타이 코코넛 커리 렌틸 수프는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 전채로, 1인분에 233칼로리, 단백질 10g, 지방 8g을 포함합니다. 5인분을 제공하며 약 45분 소요됩니다.', 'ADMIN', SYSDATE, '1. 중간 크기 냄비에 올리브 오일을 가열한다.\n2. 양파, 생강, 마늘을 넣고 부드러워질 때까지 3~4분간 중불로 조리한다. 타이 레드 커리 페이스트를 넣고 향이 날 때까지 몇 분 조리한다.\n3. 물, 렌틸, 고구마, 강황을 넣고 끓인다. 중저온으로 줄이고 뚜껑을 덮어 렌틸과 고구마가 부드러워질 때까지 20~25분 조리한다.\n4. 소금을 넣고 코코넛 밀크를 섞어 5분 더 조리한다.\n5. 신선한 고수로 장식한다.', DEFAULT, DEFAULT, '올리브 오일, 양파, 생강, 마늘, 타이 레드 커리 페이스트, 물, 렌틸, 고구마, 강황, 소금, 코코넛 밀크, 고수');
+
+-- Recipe: 코코넛 채소 커리와 퀴노아
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('코코넛 채소 커리와 퀴노아', '인도 요리', '코코넛 채소 커리와 퀴노아는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 전채로, 1인분에 459칼로리, 단백질 10g, 지방 21g을 포함합니다. 2인분을 제공하며 약 55분 소요됩니다.', 'ADMIN', SYSDATE, '1. 냄비에 코코넛 오일을 중불로 녹인다.\n2. 마늘, 생강, 파를 넣고 양파가 부드럽고 투명해질 때까지 5분간 조리한다.\n3. 뼈 육수, 주키니, 고구마를 양파와 함께 냄비에 넣고 채소가 부드러워질 때까지 25분간 가끔 저으며 조리한다.\n4. 작은 냄비에 코코넛 밀크, 가람 마살라, 소금, 후추를 넣고 향이 날 때까지 15분간 자주 저으며 저온으로 조리한다.\n5. 양념한 코코넛 밀크를 채소가 든 냄비에 넣는다.\n6. 파슬리를 넣고 섞는다.\n7. 뚜껑을 덮고 10분 더 저온으로 끓인다.\n8. 생강 조각을 제거한다.\n9. 접시에 퀴노아를 깔고 커리를 올린다.\n10. 파슬리나 고수로 장식한다.', DEFAULT, DEFAULT, '코코넛 오일, 마늘, 생강, 파, 뼈 육수, 주키니, 고구마, 코코넛 밀크, 가람 마살라, 소금, 후추, 파슬리, 퀴노아, 고수');
+
+-- Recipe: 인도 스타일 아스파라거스와 생강, 라임
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('인도 스타일 아스파라거스와 생강, 라임', '인도 요리', '인도 스타일 아스파라거스와 생강, 라임은 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 사이드 디쉬입니다. 1인분에 약 148칼로리, 단백질 3g, 지방 11g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 논스틱 팬에 기름을 가열하고 머스타드 씨를 넣어 즉시 지글거리며 떠오를 때까지 볶는다.\n2. 커민 씨를 넣고 3~4초 볶는다.\n3. 중불로 줄이고 양파, 생강을 넣고 양파가 연한 황금빛이 될 때까지 5분간 가끔 저으며 볶는다.\n4. 설탕, 라임즙, 고춧가루, 소금을 넣고 설탕이 녹을 때까지 섞는다.\n5. 아스파라거스를 팬에 넣고 물을 살짝 뿌려 찌도록 덮고 5~6분간 부드러워질 때까지 조리한다.\n6. 꼬치로 부드러움을 확인한다.', DEFAULT, DEFAULT, '기름, 머스타드 씨, 커민 씨, 양파, 생강, 설탕, 라임즙, 고춧가루, 소금, 아스파라거스, 물');
+
+
+-- Recipe: 집에서 만든 크리미 라멘 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('집에서 만든 크리미 라멘 수프', '일본 요리', '집에서 만든 크리미 라멘 수프는 유제품 프리 식단을 따르는 분들에게 좋은 호르되브르입니다. 1인분에 약 237칼로리, 단백질 3g, 지방 5g을 포함합니다. 가을 이벤트에 딱 맞는 요리입니다.', 'ADMIN', SYSDATE, '1. 푸드 프로세서에 양파, 당근, 마늘을 넣고 잘게 다진다. 조각은 매우 작아야 한다.\n2. 수프 냄비에 기름을 가열한다.\n3. 다진 야채를 넣고 부드러워질 때까지 7~10분간 가끔 저으며 볶는다.\n4. 밀가루, 가금류 양념, 강황, 바다 소금, 셀러리 씨를 넣고 약 30초간 계속 저으며 야채를 잘 코팅한다.\n5. 육수와 물을 붓는다.\n6. 다시마를 사용한다면 추가하고, 끓인 후 뚜껑을 덮고 30분간 약불에서 끓인다. 30분 후 비유제품 우유와 면을 넣는다.\n7. 면이 부드러워질 때까지 추가로 10분간 끓인다.\n8. 불에서 내려 즉시 서빙한다.', DEFAULT, DEFAULT, '양파, 당근, 마늘, 기름, 밀가루, 가금류 양념, 강황, 바다 소금, 셀러리 씨, 육수, 물, 다시마, 비유제품 우유, 면');
+
+-- Recipe: 소고기 데리야끼 볶음
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('소고기 데리야끼 볶음', '일본 요리', '소고기 데리야끼 볶음은 글루텐 프리, 유제품 프리 식단에 적합한 메인 요리입니다. 1인분에 약 414칼로리, 단백질 33g, 지방 21g을 포함합니다.', 'ADMIN', SYSDATE, '1. 작은 볼에 재료를 섞어 휘젓고 최소 30분간 냉장 보관한다.\n2. 큰 프라이팬에 기름을 중불로 가열한다.\n3. 소고기를 넣고 3~4분간 모든 면이 갈색이 될 때까지 볶는다.\n4. 팬에서 꺼내 따로 보관한다.\n5. 야채를 넣고 부드러워지기 시작할 때까지 5분간 볶는다. 데리야끼 소스를 넣고 혼합물이 끓기 시작하도록 둔다.\n6. 소고기와 팬에 고인 육즙을 다시 넣고 5분간 가끔 저으며 조리한다. 작은 볼에 옥수수 전분과 찬물 2티스푼을 섞어 녹인 후 소고기와 야채가 있는 팬에 넣는다. 2분간 끓여 소스가 걸쭉해지도록 하고, 야채와 소고기를 데리야끼 소스로 고르게 코팅한다.\n7. 서빙한다.', DEFAULT, DEFAULT, '기름, 소고기, 야채, 데리야끼 소스, 옥수수 전분, 물');
+
+-- Recipe: 일본 커리 퍼프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('일본 커리 퍼프', '일본 요리', '일본 커리 퍼프는 유제품 프리, 락토 오보 채식, 비건 호르되브르입니다. 1인분에 약 815칼로리, 단백질 12g, 지방 50g을 포함합니다.', 'ADMIN', SYSDATE, '1. 오븐을 350도로 예열한다.\n2. 중불/강불의 냄비에 기름과 양파를 넣고 2분간 조리한다.\n3. 감자와 당근을 넣고 5분간 조리한다.\n4. 물을 넣고 끓인 후 약불로 줄여 15분간 끓인다.\n5. 커리 믹스를 넣고 10분간 더 조리한다.\n6. 시트 팬에 퍼프 페이스트리를 정사각형으로 자르고(1장이 4개의 정사각형), 절반의 정사각형 중앙에 숟가락으로 속을 채운다.\n7. 20분간 또는 껍질이 황금빛이 될 때까지 굽고 서빙한다.', DEFAULT, DEFAULT, '기름, 양파, 감자, 당근, 물, 커리 믹스, 퍼프 페이스트리');
+
+-- Recipe: 팬에 구운 메인 다이버 가리비 크리미 아보카도 샴페인 포도 샐러드 데리야끼 카베르네 버터 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('팬에 구운 메인 다이버 가리비 크리미 아보카도 샴페인 포도 샐러드 데리야끼 카베르네 버터 소스', '일본 요리', '이 요리는 글루텐 프리, 프라이멀, 페스카타리안 식단에 적합한 호르되브르입니다. 1인분에 약 574칼로리, 단백질 9g, 지방 39g을 포함합니다. 새해 전야 이벤트에 적합합니다.', 'ADMIN', SYSDATE, '1. 소스 팬에 중불로 레드 와인을 1/2컵(거의 시럽 상태)까지 줄인다.\n2. 데리야끼 소스를 넣고 약불로 1분간 끓인 후 따뜻하게 유지한다.\n3. 아보카도를 깍둑썰기하고 샴페인 포도, 소금, 후추와 섞는다.\n4. 올리브 오일을 넣고 볶음 팬을 강불로 가열한다.\n5. 가리비에 소금과 후추를 뿌리고 양면을 각각 3분간 굽는다.\n6. 가리비가 든 팬을 450도 오븐에 3분간 넣는다.\n7. 데리야끼 와인 소스에 버터를 휘저어 부드럽게 만든다.\n8. 가리비를 아보카도 포도 샐러드와 함께 접시에 담는다.\n9. 숟가락으로 소스를 메인 요리 주위에 부드럽게 뿌린다.', DEFAULT, DEFAULT, '레드 와인, 데리야끼 소스, 아보카도, 샴페인 포도, 소금, 후추, 올리브 오일, 가리비, 버터');
+
+-- Recipe: 일본 마보 두부와 가지
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('일본 마보 두부와 가지', '일본 요리', '일본 마보 두부와 가지는 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 397칼로리, 단백질 20g, 지방 28g을 포함합니다.', 'ADMIN', SYSDATE, '1. 포장지 지침에 따라 쌀을 조리한다.\n2. 가지를 세로로 4등분한 후 가로로 4등분한다.\n3. 중불/강불의 팬에 기름 2테이블스푼, 마늘, 생강, 양파, 대파 반을 넣고 양파가 투명해질 때까지 3~4분간 조리한다.\n4. 다진 소고기를 넣고 약간의 소금과 후추로 간을 한 후, 토반장을 넣고 섞는다.\n5. 참기름과 가지를 넣고 조각이 부드러워질 때까지 5~7분간 조리한다.\n6. 두부를 넣고 섞으면서 부드럽게 부순다.\n7. 사케, 설탕, 물, 간장 4테이블스푼을 넣고 몇 분간 조리한다.\n8. 남은 간장 2테이블스푼과 대파를 넣고 섞은 후 불을 끈다.\n9. 쌀 위에 올려 서빙한다.', DEFAULT, DEFAULT, '쌀, 가지, 기름, 마늘, 생강, 양파, 대파, 소고기, 소금, 후추, 토반장, 참기름, 두부, 사케, 설탕, 물, 간장');
+
+-- Recipe: 너구리 (매운 해산물 라멘)
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('너구리 (매운 해산물 라멘)', '일본 요리', '너구리는 유제품 프리, 페스카타리안 메인 요리입니다. 1인분에 약 481칼로리, 단백질 21g, 지방 19g을 포함합니다.', 'ADMIN', SYSDATE, '1. 끓는 물에 홍합과 소스 패킷을 넣는다.\n2. 홍합과 함께 5분간 끓여 육수를 깊게 하고, 신선한 홍합을 사용한다면 열릴 때까지 기다리고 닫힌 홍합은 버린다.\n3. 면을 넣고 2~3분간 조리한다.\n4. 면을 저으면서 달걀을 풀어 넣어 고른 조각이 되도록 하거나, 포치드 에그를 원한다면 팬 옆에 조심스럽게 넣는다.\n5. 그동안 대파와 김을 얇게 자른다.\n6. 서빙 볼에 옮기고 대파와 김을 추가한다.', DEFAULT, DEFAULT, '홍합, 소스, 물, 면, 달걀, 대파, 김');
+
+-- Recipe: 소바 국수와 다시마 다시 및 데리야끼 연어
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('소바 국수와 다시마 다시 및 데리야끼 연어', '일본 요리', '소바 국수와 다시마 다시 및 데리야끼 연어는 유제품 프리, 페스카타리안 메인 요리입니다. 1인분에 약 363칼로리, 단백질 35g, 지방 18g을 포함합니다.', 'ADMIN', SYSDATE, '1. 연어 필레에 간장, 미림, 설탕으로 만든 데리야끼 소스를 바르고 30분간 재운다.\n2. 다시마와 물을 끓여 다시를 만들고 약불로 10분간 끓인다.\n3. 소바 국수를 포장지 지침에 따라 조리하고 찬물에 헹군다.\n4. 연어를 팬에 중불로 굽고 양면을 3~4분씩 조리한다.\n5. 소바 국수를 그릇에 담고 다시를 붓고 연어를 올린다.\n6. 고지베리와 대파로 장식한다.', DEFAULT, DEFAULT, '연어, 간장, 미림, 설탕, 다시마, 물, 소바 국수, 고지베리, 대파');
+
+-- Recipe: 코코넛 커리 라멘 국수
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('코코넛 커리 라멘 국수', '일본 요리', '코코넛 커리 라멘 국수는 유제품 프리, 락토 오보 채식, 비건 메인 요리입니다. 1인분에 약 630칼로리, 단백질 16g, 지방 32g을 포함합니다.', 'ADMIN', SYSDATE, '1. 버섯을 반으로 자르고 마리네이드 재료와 함께 큰 볼에 넣어 섞은 후, 덮고 냉장고에서 1시간 이상 또는 하룻밤 재운다.\n2. 재운 버섯을 꺼내 준비하고, 적양파를 잘게 다져 큰 냄비에 기름 1테이블스푼을 중불/강불로 가열한다. 양파를 2~3분간 부드러워질 때까지 볶고 커리 페이스트를 넣어 양파를 코팅한 후 1분간 더 볶는다.\n3. 야채 육수와 코코넛 밀크를 팬에 넣고 부드럽게 끓인다.\n4. 마리네이드에서 버섯을 빼내고 그릴 팬에 중불/강불로 익을 때까지 굽는다. 두부를 얇게 썰어 바삭해질 때까지 굽는다. 쌀국수를 조리하고 서빙 볼 바닥에 놓는다. 수프를 4등분하여 버섯과 두부를 얹는다.\n5. 참깨, 신선한 고수, 썬 대파를 뿌린다.', DEFAULT, DEFAULT, '버섯, 마리네이드, 적양파, 기름, 커리 페이스트, 야채 육수, 코코넛 밀크, 두부, 쌀국수, 참깨, 고수, 대파');
+
+-- Recipe: 돈까스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('돈까스', '일본 요리', '돈까스는 유제품 프리 메인 요리입니다. 1인분에 약 167칼로리, 단백질 16g, 지방 8g을 포함합니다.', 'ADMIN', SYSDATE, '1. 돼지고기에 소금과 후추를 뿌리고 밀가루를 살짝 묻힌다. 풀어놓은 달걀에 담갔다가 판코 빵가루에 굴린다.\n2. 320도 기름에서 몇 분간 튀긴 후 뒤집어 몇 분 더 튀긴다.\n3. 종이 타월에 올려 기름을 뺀다.', DEFAULT, DEFAULT, '돼지고기, 소금, 후추, 밀가루, 달걀, 판코 빵가루, 기름');
+
+-- Recipe: 일본 스테이크 샐러드
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('일본 스테이크 샐러드', '일본 요리', '일본 스테이크 샐러드는 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 148칼로리, 단백질 15g, 지방 4g을 포함합니다. 발렌타인 데이에 적합합니다.', 'ADMIN', SYSDATE, '1. 참깨 마리네이드와 드레싱을 준비한다.\n2. 비닐백에 소고기 등심 스테이크를 넣고 준비한 마리네이드를 넣어 코팅한 후, 단단히 밀봉하고 냉장고에서 2시간 동안 한 번 뒤집으며 재운다.\n3. 마리네이드에서 꺼내 브로일러 팬의 랙에 올려 고기 표면이 열원에서 3~4인치 떨어지도록 한다. 원하는 익힘 정도(레어에서 미디엄 레어)에 따라 14~16분간 한 번 뒤집으며 굽는다.\n4. 5분간 두고 얇게 썬다. 한편, 배추, 로메인, 당근, 무를 섞어 4개의 접시에 균등하게 나눈다. 각 접시의 샐러드 채소 위에 오이 조각을 원형으로 배열하고, 오이 원 중앙에 쌀 1/4컵을 올린다. 쌀 양쪽에 완두콩 꼬투리를 배치하고, 스테이크 조각을 샐러드 채소 위에 쌀에서 아래로 뻗어나가도록 부채꼴로 배열한다.\n5. 드레싱과 함께 샐러드를 서빙한다.', DEFAULT, DEFAULT, '참깨, 소고기 등심 스테이크, 마리네이드, 배추, 로메인, 당근, 무, 오이, 쌀, 완두콩 꼬투리, 드라이 셰리, 간장, 식초, 회상 소스, 생강, 물, 대파, 설탕, 기름');
+
+-- Recipe: 일본 샐러드 드레싱
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('일본 샐러드 드레싱', '일본 요리', '일본 샐러드 드레싱은 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 메인 요리입니다. 1인분에 약 859칼로리, 단백질 33g, 지방 19g을 포함합니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 섞어 냉장 보관한다.', DEFAULT, DEFAULT, '물, 미림');
+
+-- Recipe: 일본 치킨 덮밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('일본 치킨 덮밥', '일본 요리', '일본 치킨 덮밥은 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 626칼로리, 단백질 25g, 지방 19g을 포함합니다.', 'ADMIN', SYSDATE, '1. 10인치 또는 12인치 깊은 프라이팬에 강불로 기름, 양파, 생강을 넣고 양파가 살짝 갈색이 될 때까지 약 2분간 볶는다.\n2. 육수, 간장, 설탕을 넣는다.\n3. 닭고기를 팬에 넣고 끓인다.\n4. 시금치를 넣고 뚜껑을 덮어 시금치가 시들 때까지 약 1분간 조리한다. 한편, 작은 볼에 달걀을 풀어 섞는다. 약불로 줄이고 팬의 혼합물을 고르게 분산시킨 후 달걀을 붓는다. 주걱으로 야채를 살짝 밀어내어 달걀 혼합물이 소스 사이로 흐르도록 한다. 뚜껑을 덮고 달걀이 부드럽게 굳을 때까지 2~2.5분간 조리한다. 그동안 쌀을 그릇에 담는다. 달걀-시금치 혼합물을 육즙과 함께 쌀 위에 균등하게 올린다.\n5. 토마토를 뿌린다.', DEFAULT, DEFAULT, '기름, 양파, 생강, 육수, 간장, 설탕, 닭고기, 시금치, 달걀, 쌀, 토마토');
+
+-- Recipe: 일본 피클
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('일본 피클', '일본 요리', '일본 피클은 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 사이드 디쉬입니다. 1인분에 약 41칼로리, 단백질 1g, 지방 0g을 포함합니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 섞어 냉장 보관한다.\n2. 구운 음식이나 매운 음식, 또는 치킨이나 생선과 함께 서빙한다. 일본 피클 프레스에 보관한다.', DEFAULT, DEFAULT, '소금, 쌀 식초, 고수, 쌀 시럽');
+
+-- Recipe: 다진 돼지고기 라멘
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('다진 돼지고기 라멘', '일본 요리', '다진 돼지고기 라멘은 글루텐 프리, 유제품 프리 메인 요리입니다. 1인분에 약 548칼로리, 단백질 27g, 지방 34g을 포함합니다.', 'ADMIN', SYSDATE, '1. 야채를 자르고 다른 재료를 준비하는 동안 라멘 국수를 조리한다(양념 패킷은 사용하지 않음). 물을 버리기 전 약 1/2컵의 물을 덜어 소스로 사용할 준비를 한다.\n2. 국수를 물에 헹궈 조리를 멈추고 스프링 같은 식감을 유지한다.\n3. 볶음 팬에 식용유 1테이블스푼을 강불로 가열하고 다진 돼지고기를 갈색이 되도록 볶는다. 나무 숟가락으로 덩어리를 부순다. 소금과 후추로 간하지 않는다.\n4. 돼지고기를 약 8분간 갈색이 되거나 원한다면 바삭해질 때까지 조리한다.\n5. 돼지고기를 팬에서 꺼내고 같은 팬에 식용유 1테이블스푼을 더 넣어 셀러리 또는 다른 야채를 약 2분간 볶는다.\n6. 마늘을 30초간 추가로 볶는다.\n7. 팬에 남은 국수 물을 넣고 굴 소스와 간장을 각각 3테이블스푼씩 넣어 섞는다.\n8. 나무 숟가락으로 팬 바닥에 붙은 돼지고기 조각을 긁어낸다.\n9. 돼지고기를 팬에 다시 넣고 국수를 추가한다.\n10. 핫 소스, 고추 페이스트, 스리라차, 고춧가루 등으로 매운맛을 추가하고 잘 섞는다.\n11. 다진 고수로 뿌리고 라임 조각으로 장식해 서빙한다. 라임즙을 뿌리면 상큼한 맛이 더해진다.', DEFAULT, DEFAULT, '라멘 국수, 식용유, 다진 돼지고기, 셀러리, 마늘, 굴 소스, 간장, 핫 소스, 고수, 라임');
+
+
+-- Recipe: 꽃양배추, 현미, 야채 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('꽃양배추, 현미, 야채 볶음밥', '중국 요리', '꽃양배추, 현미, 야채 볶음밥은 약 30분 만에 준비되는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 옵션으로 중국 요리 애호가들에게 훌륭한 선택입니다. 이 레시피는 8인분을 제공하며, 1인분당 248칼로리, 단백질 7g, 지방 13g을 포함합니다.', 'ADMIN', SYSDATE, '1. 꽃양배추의 단단한 줄기를 제거하고 다른 용도로 보관한다. 푸드 프로세서를 사용해 꽃양배추 꽃봉오리를 쌀이나 쿠스쿠스처럼 될 때까지 갈아 약 4컵의 "꽃양배추 쌀"을 만든다.\n2. 큰 프라이팬에 버터 1큰술과 기름 1큰술을 중불로 가열한다.\n3. 마늘과 파의 흰색 및 연녹색 부분을 넣고 약 1분간 볶는다.\n4. 꽃양배추를 팬에 넣고 기름에 버무려 코팅한 뒤, 팬에 펴서 약간 갈색으로 캐러멜화되도록 2분간 그대로 둔다. 2분 후 저어 다시 펴서 둔다.\n5. 차가운 쌀(쉽게 분리되어 뭉치지 않음)과 추가로 포도씨유와 코코넛 오일 또는 버터를 넣는다. 중강불로 올리고 모든 재료를 섞어 팬 전체에 펴고 살짝 눌러준다.\n6. 약 2분간 두어 쌀이 살짝 구워지고 바삭해지도록 한다.\n7. 완두콩과 브로콜리를 넣고 다시 저어준다.\n8. 간장과 구운 참기름을 쌀 위에 뿌리고 1분 정도 더 조리한 뒤 불을 끈다.\n9. 잘게 썬 파의 윗부분을 넣고 버무린다. 마른 팬에 참깨를 구워 풍미와 바삭함을 더해 쌀 위에 뿌리고, 생 파도 추가로 뿌린다. 소금과 간장으로 간을 맞춘다. 짭짤한 요리(예: 데리야키 치킨)와 함께 제공할 경우 소금을 적게 넣는다.', DEFAULT, DEFAULT, '꽃양배추, 현미, 마늘, 파, 버터, 포도씨유, 코코넛 오일, 완두콩, 브로콜리, 간장, 참기름, 참깨, 소금');
+
+-- Recipe: 망고 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('망고 볶음밥', '중국 요리', '망고 볶음밥은 중국식 메인 코스로, 2인분을 제공하며 1인분당 486칼로리, 단백질 16g, 지방 4g을 포함합니다. 글루텐 프리와 유제품 프리 식단에 적합합니다.', 'ADMIN', SYSDATE, '1. 쌀을 씻어 중불에서 적은 물로 끓인다. 쌀이 약간 부드러워지고 물이 마르면 불을 줄이고 치킨 스톡을 부어 스톡이 모두 흡수될 때까지 조리한다. 치킨 스톡에 치킨 기름이 포함되어 있어 추가 기름이 필요 없다. 불을 높이고 잘게 썬 야채와 고추를 넣어 볶는다.\n2. 양념 큐브를 추가하고 잘게 썬 망고를 넣어 따뜻하게 제공한다. 원하는 단백질(예: 치킨)과 함께 제공한다.', DEFAULT, DEFAULT, '쌀, 치킨 스톡, 야채, 고추, 양념 큐브, 망고, 치킨');
+
+-- Recipe: 채식 중국 만두
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('채식 중국 만두', '중국 요리', '채식 중국 만두는 약 45분 만에 준비되는 유제품 프리 전채로, 24인분을 제공하며 1인분당 153칼로리, 단백질 1g, 지방 14g을 포함합니다.', 'ADMIN', SYSDATE, '1. 만두피를 제외한 모든 재료(버섯, 파, 마늘 등)를 푸드 프로세서에 넣고 버섯이 곱게 다질 때까지 갈아 잘 섞는다. 버섯을 미리 잘게 썰면 도움이 된다.\n2. 작업대에 만두피를 다이아몬드 모양으로 놓는다.\n3. 만두피 중앙에 1작은술 분량의 속을 놓는다.\n4. 손가락에 물을 묻혀 멀리 있는 두 가장자리를 적신다. 가까운 끝을 접어 속을 덮고 가장자리를 눌러 봉한다. 속 주위의 공기를 부드럽게 눌러 제거한다.\n5. 삼각형 모양의 만두를 세워 속이 작업대에 닿도록 한다. 위쪽 끝을 멀리 접고 누른다. 양쪽 가장자리에 주름 2개를 만들고 누른다.\n6. 큰 접시에 옥수수 전분을 뿌려 만두가 달라붙지 않도록 하고, 준비한 만두를 놓는다.\n7. 프라이팬을 중강불로 가열한다.\n8. 뜨거운 팬에 기름을 몇 방울 바르고 만두 12개를 세워 넣는다. 밑면이 갈색이 될 때까지 굽는다. 물 1/2컵을 조심히 넣고 바로 뚜껑을 덮어 3~4분간 물이 흡수될 때까지 찐다.\n9. 만두를 즉시 따뜻하게 유지할 접시에 옮기고 나머지 만두를 같은 방법으로 조리한다.\n10. 고기 옵션: 버섯 절반을 다진 치킨(또는 돼지고기) 4온스로 대체하고 푸드 프로세서를 사용하지 않는다.\n11. 다진 재료와 다진 치킨을 잘 섞어 만두피에 채운다.\n12. 팬에 물 1컵을 넣고 물이 증발할 때까지 5~6분간 찐다.', DEFAULT, DEFAULT, '버섯, 파, 마늘, 옥수수 전분, 기름, 물, 만두피, 치킨, 돼지고기');
+
+-- Recipe: 중국 만두
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('중국 만두', '중국 요리', '중국 만두는 약 45분 만에 준비되는 유제품 프리 전채로, 24인분을 제공하며 1인분당 135칼로리, 단백질 4g, 지방 5g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 믹싱볼에 다진 돼지고기 200g을 넣는다. 돼지고기는 다진 치킨으로 대체 가능하다.\n2. 바다소금 1작은술, 설탕 1작은술, 후추 가루 1/2작은술, 간장 2작은술, 참기름 2작은술, 샤오싱 화탸오 와인 1큰술을 추가한다.\n3. 통조림 밤 100g을 블렌더로 잘게 다진다.\n4. 다진 밤을 돼지고기 혼합물에 추가한다. 밤 대신 시금치나 양배추를 사용할 수 있다.\n5. 잘게 썬 파 2~3큰술을 돼지고기 혼합물에 추가한다.\n6. 모든 속 재료를 잘 섞는다.\n7. 만두피가 얼어있다면 해동하고, 사용할 때까지 잘 덮는다.\n8. 접시에 밀가루를 넉넉히 뿌려 완성된 만두를 놓는다.\n9. 테이블에 밀가루를 뿌리고 만두피를 분리해 놓는다. 각 만두피에 준비된 돼지고기 속을 1.5작은술씩 채운다.\n10. 물 한 그릇을 준비하고 손가락에 물을 묻혀 만두피 테두리를 적신다.\n11. 만두피의 반대쪽 끝을 맞춰 접고 속을 부드럽게 눌러 봉한다.\n12. 만두 중앙에서 한쪽에 주름을 잡아 반대쪽으로 접고 중앙을 향해 누른다.\n13. 같은 쪽에 2번째와 3번째 주름을 만들어 단단히 봉한다.\n14. 반대쪽 끝도 같은 방식으로 주름을 만든다.\n15. 준비된 만두를 밀가루 뿌린 접시에 서로 닿지 않게 놓는다. 이 단계에서 냉동 가능하다.\n16. 뜨거운 프라이팬에 식용유 2~3큰술을 넣고 만두를 2회차로 나눠 조리한다.\n17. 기름이 뜨거워지면 만두를 평평한 면이 아래로 가도록 넣고 밑면이 황금빛 갈색이 될 때까지 굽는다.\n18. 팬에 물 1/3컵을 넣고 바로 뚜껑을 덮어 4~5분간 찐다.\n19. 물이 증발하면 뚜껑을 열고 1분 더 바삭해지도록 둔다.\n20. 만두를 접시에 부드럽게 옮긴다.\n21. 즉시 제공한다.\n22. 발사믹 또는 중국 흑초와 얇게 썬 생강으로 만든 초간장 소스와 함께 제공한다. 간장, 고추기름, 참기름을 추가할 수 있다.', DEFAULT, DEFAULT, '돼지고기, 치킨, 바다소금, 설탕, 후추, 간장, 참기름, 샤오싱 와인, 밤, 시금치, 양배추, 파, 만두피, 밀가루, 식용유, 초간장, 생강');
+
+-- Recipe: 간단한 야채 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('간단한 야채 볶음밥', '중국 요리', '간단한 야채 볶음밥은 약 20분 만에 준비되는 글루텐 프리, 락토 오보 채식 전채로, 4인분을 제공하며 1인분당 236칼로리, 단백질 7g, 지방 10g을 포함합니다.', 'ADMIN', SYSDATE, '1. 생 녹색 야채를 끓는 물에 2분간 데친 후 물기를 뺀다. 냉동 야채는 포장지 지침을 따르되 3분 미만으로 조리해 뭉개지지 않도록 한다. 큰 팬 또는 웍에 참기름을 중불로 가열하고 마늘과 생강을 넣어 약 1분간 볶는다.', DEFAULT, DEFAULT, '녹색 야채, 참기름, 마늘, 생강, 당근, 간장');
+
+-- Recipe: 돼지고기 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('돼지고기 볶음밥', '중국 요리', '돼지고기 볶음밥은 약 20분 만에 준비되는 중국식 메인 코스로, 4인분을 제공하며 1인분당 258칼로리, 단백질 15g, 지방 10g을 포함합니다.', 'ADMIN', SYSDATE, '1. 돼지고기를 1/4인치 두께로 썰고 1/4인치 스트립으로 잘라 준비한다.\n2. 웍에 기름 반을 넣고 표면이 떨릴 때까지 가열한다.\n3. 달걀을 풀어 웍에 넣고 10초간 두었다가 접어 약 1분간 가볍게 스크램블한다. 달걀을 주걱으로 꺼내 종이 타월에 물기를 뺀다.\n4. 나머지 기름을 웍에 넣고 양파와 생강을 30초간 볶는다.\n5. 설탕을 넣고 30초 더 볶는다.\n6. 돼지고기를 넣고 30초 더 볶는다. 호이신 소스, 간장, 식초, 참기름을 넣고 1분간 섞는다. 쌀과 조리된 달걀을 넣고 주걱으로 달걀을 작게 부수며 1분간 볶는다. 파를 넣고 30초 더 볶아 쌀이 뜨거워지도록 한다.\n7. 쌀을 접시에 옮겨 제공한다.', DEFAULT, DEFAULT, '돼지고기, 기름, 달걀, 양파, 생강, 설탕, 호이신 소스, 간장, 식초, 참기름, 쌀, 파');
+
+-- Recipe: 쿵파오 치킨
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('쿵파오 치킨', '중국 요리', '쿵파오 치킨은 약 45분 만에 준비되는 글루텐 프리, 유제품 프리 전채로, 12인분을 제공하며 1인분당 87칼로리, 단백질 9g, 지방 5g을 포함합니다.', 'ADMIN', SYSDATE, '1. 부드러워질 때까지 섞는다.', DEFAULT, DEFAULT, '닭가슴살, 소금, 파, 땅콩');
+
+-- Recipe: 중국 파전
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('중국 파전', '중국 요리', '중국 파전은 약 1시간 만에 준비되는 유제품 프리, 락토 오보 채식, 비건 전채로, 2인분을 제공하며 1인분당 594칼로리, 단백질 11g, 지방 26g을 포함합니다.', 'ADMIN', SYSDATE, '1. 큰 그릇에 체친 밀가루와 소금을 섞는다.\n2. 물을 끓여 밀가루에 천천히 부으며 섞는다. 반죽이 끈적이지 않고 부드러운 공이 될 때까지 15분간 반죽한다.\n3. 반죽이 끈적이면 밀가루를, 너무 건조하면 물을 조금 추가한다.\n4. 반죽을 그릇에 넣고 젖은 천으로 덮어 30분 둔다.\n5. 파를 반죽에 넣고 잘 섞는다.\n6. 반죽을 4등분하고 밀대로 얇은 원반으로 민다.\n7. 기름(참기름 권장)을 바르고 원반을 긴 소시지 모양으로 말아 달팽이 모양으로 감은 뒤 다시 평평한 팬케이크로 민다.\n8. 프라이팬에 기름 6mm를 넣고 팬케이크를 1분간 얕게 튀긴 뒤 뒤집어 반대쪽도 조리한다. 필요하면 뒤집으며 주걱으로 눌러 고르게 익힌다.\n9. 조리된 팬케이크를 주방 타월에 올려 기름을 제거한다.\n10. 피자 모양으로 잘라 제공한다.', DEFAULT, DEFAULT, '밀가루, 소금, 물, 파, 참기름, 기름');
+
+-- Recipe: 새우 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('새우 볶음밥', '중국 요리', '새우 볶음밥은 글루텐 프리, 페스카테리언 메인 코스로, 4인분을 제공하며 1인분당 399칼로리, 단백질 20g, 지방 8g을 포함합니다.', 'ADMIN', SYSDATE, '1. 전날 쌀을 치킨 부용 큐브로 간을 해 부드럽게 삶아 냉장고에서 식힌다. (바로 사용할 수도 있음) 팬에 버터와 올리브 오일을 넣고 중불로 가열해 다진 마늘, 양파, 생강을 볶는다.\n2. 다진 새우를 넣고 볶는다. 치킨 양념 큐브로 간을 하고 2분간 볶는다.\n3. 다진 야채, 흰 후추, 검은 후추, 바질, 커리, 타임을 넣는다. 달걀을 팬에 넣고 볶아 간장 1큰술을 추가한다. 쌀을 한 숟가락씩 천천히 넣어 양념이 흡수되도록 한다.\n4. 간장 1큰술을 더 넣고 쌀이 양념을 모두 흡수할 때까지 볶는다. 소금을 확인하고 제공한다.', DEFAULT, DEFAULT, '쌀, 치킨 부용 큐브, 버터, 올리브 오일, 마늘, 양파, 생강, 새우, 치킨 양념 큐브, 야채, 후추, 바질, 커리, 타임, 달걀, 간장');
+
+-- Recipe: 연어 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('연어 볶음밥', '중국 요리', '연어 볶음밥은 글루텐 프리, 유제품 프리, 페스카테리언 메인 코스로, 4인분을 제공하며 1인분당 444칼로리, 단백질 26g, 지방 12g을 포함합니다.', 'ADMIN', SYSDATE, '1. 작은 그릇에 흑설탕을 간장에 녹인다.\n2. 큰 프라이팬 또는 웍에 올리브 오일을 중강불로 가열한다.\n3. 다진 적양파와 피망을 넣고 약 5분간 살짝 갈색이 될 때까지 볶는다. 중불로 줄이고 마늘과 간 생강을 넣어 1분 더 조리한다.\n4. 풀어놓은 달걀을 넣고 살짝 익을 때까지 저어준다.\n5. 조리된 쌀을 넣고 중강불로 올려 2분간 자주 저으며 조리한다.\n6. 완두콩, 연어, 파를 넣는다. (연어가 부서지지 않도록 주의) 간장 혼합물을 넣고 불에서 내린다.\n7. 고수로 장식해 즉시 제공한다.', DEFAULT, DEFAULT, '흑설탕, 간장, 올리브 오일, 적양파, 피망, 마늘, 생강, 달걀, 쌀, 완두콩, 연어, 파, 고수');
+
+-- Recipe: BBQ 고추장 꽃양배추 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('BBQ 고추장 꽃양배추 볶음밥', '중국 요리', 'BBQ 고추장 꽃양배추 볶음밥은 글루텐 프리, 유제품 프리, 락토 오보 채식 전채로, 1인분을 제공하며 179칼로리, 단백질 9g, 지방 13g을 포함합니다.', 'ADMIN', SYSDATE, '?', DEFAULT, DEFAULT, '꽃양배추 쌀, 파, 코코넛 오일, 고추장');
+
+-- Recipe: 태국식 고소한 현미 볶음밥
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('태국식 고소한 현미 볶음밥', '중국 요리', '태국식 고소한 현미 볶음밥은 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 메인 코스로, 4인분을 제공하며 1인분당 641칼로리, 단백질 14g, 지방 41g을 포함합니다.', 'ADMIN', SYSDATE, '1. 완벽한 현미 레시피를 따른다.\n2. 현미를 조리하는 동안 나머지 재료를 준비한다.\n3. 완벽한 현미: 현미 1컵, 올리브 오일 1작은술, 물 2컵, 바질 잎(선택).\n4. 현미를 올리브 오일 1작은술에 살짝 갈색이 될 때까지 볶는다.\n5. 쌀 위에 바질 잎 2개를 올리고 물 2컵을 한 번에 넣는다. 뚜껑을 빨리 덮고 끓인다. 물이 증발할 때까지 약 40분간 약불로 조리한다.\n6. 웍 또는 큰 프라이팬에 기름을 가열한다.\n7. 마늘을 넣고 중불에서 살짝 황금빛이 될 때까지 조리한다. 마늘이 타지 않도록 주의한다.\n8. 고추, 캐슈넛, 구운 코코넛을 추가한다.\n9. 스테비아, 나마 쇼유, 사과 식초를 섞어 중불에서 1분간 조리한다.\n10. 볶음 재료를 팬 한쪽으로 밀고 반대쪽에 아마씨 달걀을 넣어 1분간 조리한 뒤 섞는다.\n11. 녹두, 청경채, 현미를 넣고 중불에서 1분간 더 볶는다. 청경채는 살짝 시들고 녹두는 약간 바삭하다.\n12. 접시에 담고 라임 조각을 곁들여 쌀 위에 짜낸다.', DEFAULT, DEFAULT, '현미, 올리브 오일, 물, 바질, 마늘, 고추, 캐슈넛, 코코넛, 스테비아, 나마 쇼유, 사과 식초, 아마씨, 녹두, 청경채, 라임');
+
+-- Recipe: 땅콩버터 바나나 오트 브렉퍼스트 쿠키
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('땅콩버터 바나나 오트 브렉퍼스트 쿠키', '아침 식사', '땅콩버터 바나나 오트 브렉퍼스트 쿠키는 글루텐 프리, 유제품 프리한 아침 식사 레시피입니다. 1인분에 약 103칼로리, 단백질 4g, 지방 5g을 포함하며, 16인분을 만들 수 있습니다. 준비부터 완성까지 약 45분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 오븐을 175도(350°F)로 예열합니다. 큰 볼에 으깬 바나나와 땅콩버터를 완전히 섞은 후, 사과소스, 바닐라 단백질 파우더, 바닐라 추출물을 넣고 다시 완전히 섞습니다.\n2. 바나나 혼합물에 오트밀과 견과류를 넣고 섞습니다. (선택적으로 카랍/초콜릿 칩을 이 단계에서 넣어 섞을 수 있습니다.)\n3. 반죽을 10분간 둡니다. 양피지를 깐 쿠키 시트에 숟가락으로 반죽을 떨어뜨려 동그랗게 평평하게 만듭니다. (카랍/초콜릿 칩을 쿠키 위에만 올리고 싶다면 이 단계에서 추가합니다.)\n4. 쿠키를 약 20~30분간, 혹은 황금빛이 되고 익을 때까지 굽습니다. (취향에 따라 덜 익히거나 더 익힐 수 있습니다.)\n5. 오븐에서 꺼내 쿠키 시트에서 5분간 식힌 후, 냉각 랙으로 옮깁니다. (전통적인 포크 자국을 내고 싶다면, 따뜻할 때 피자 커터나 날카로운 칼로 쿠키 위를 살짝 그어줍니다.) 완전히 식으면 밀폐 용기에 보관합니다. 차와 함께 즐기세요!', DEFAULT, DEFAULT, '으깬 바나나, 땅콩버터, 사과소스, 바닐라 단백질 파우더, 바닐라 추출물, 오트밀, 견과류, 초콜릿 칩');
+
+-- Recipe: 오레오 칠면조 디저트
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('오레오 칠면조 디저트', '추수감사절', '오레오 칠면조 디저트는 추수감사절에 어울리는 재미있는 디저트입니다. 1인분에 약 835칼로리, 단백질 47g, 지방 45g을 포함하며, 48인분을 만들 수 있습니다. 준비부터 완성까지 약 40분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 오레오 쿠키 한 팩을 곱게 부숩니다.\n2. 부드러워진 크림치즈와 쿠키 부스러기를 잘 섞습니다.\n3. 1인치 크기의 쿠키 볼로 만든 후, 10분간 냉동합니다.\n4. 쿠키 볼을 녹인 초콜릿에 담갔다가 왁스 페이퍼를 깐 쿠키 시트에 올립니다.\n5. 장식하기 전 15분에서 1시간 동안 냉장 보관합니다.\n6. 쿠키 볼 뒷면에 캔디 콘 5개를 꼽아 꼬리 깃털로 만듭니다.\n7. 아이싱을 접착제로 사용해 캔디 눈을 붙입니다.\n8. 캔디 콘 하나를 잘라 흰색 끝부분을 코로, 주황색 부분을 반으로 잘라 발로 사용합니다.', DEFAULT, DEFAULT, '오레오 쿠키, 크림치즈, 초콜릿, 캔디 콘, 아이싱, 캔디 눈');
+
+-- Recipe: 소시지  and  페퍼로니 스트롬볼리
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('소시지  and  페퍼로니 스트롬볼리', '메인 요리', '소시지  and  페퍼로니 스트롬볼리는 1인분에 약 692칼로리, 단백질 32g, 지방 46g을 포함하며, 6인분을 만들 수 있습니다. 준비부터 완성까지 약 28분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 이탈리안 소시지를 중간 크기의 프라이팬에서 갈색이 될 때까지 익힙니다.\n2. 종이 타월에 올려 기름을 제거하고 작게 부숩니다.\n3. 오븐을 230도(450°F)로 예열합니다.\n4. 베이킹 팬에 양피지를 깔고 약간의 밀가루를 뿌립니다.\n5. 반죽을 큰 직사각형으로 밀대로 밀어 펴줍니다.\n6. 반죽 위에 피자 소스를 얇게 펴 바릅니다.\n7. 부순 소시지와 모짜렐라 치즈를 얹습니다.\n8. 페퍼로니 슬라이스와 파르메산 치즈 3/4컵을 뿌립니다. 반죽의 짧은 면을 살짝 접어 속을 밀봉하고, 긴 면을 따라 조심스럽게 말아 1/3 정도 접습니다. 양피지를 사용해 반죽을 반대쪽 끝까지 말아줍니다. 이음새가 아래로 가도록 놓습니다.\n9. 계란과 물 1큰술을 섞습니다.\n10. 스트롬볼리 위에 계란 혼합물을 바르고 남은 파르메산 치즈 1/4컵을 뿌립니다.\n11. 오븐에 넣고 즉시 온도를 175도(350°F)로 낮춥니다.\n12. 약 18분간 굽습니다.\n13. 오븐에서 꺼내 10분간 식힙니다. 가운데가 완전히 익지 않았다면 반으로 잘라 추가로 5~8분 굽습니다.\n14. 따뜻한 피자 소스와 함께 제공합니다.', DEFAULT, DEFAULT, '이탈리안 소시지, 피자 반죽, 피자 소스, 모짜렐라 치즈, 페퍼로니, 파르메산 치즈, 계란, 물, 밀가루');
+
+-- Recipe: 카놀리 아이스크림 피스타치오  and  다크 초콜릿
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('카놀리 아이스크림 피스타치오  and  다크 초콜릿', '디저트', '카놀리 아이스크림 피스타치오  and  다크 초콜릿은 글루텐 프리, 락토 오보 채식 디저트입니다. 1인분에 약 575칼로리, 단백질 21g, 지방 33g을 포함하며, 3인분을 만들 수 있습니다. 여름에 특히 어울리며, 준비부터 완성까지 약 45분이 소요됩니다.', 'ADMIN', SYSDATE, '상세한 조리법이 제공되지 않았습니다. 기본적으로 리코타, 우유, 바닐라, 소금, 피스타치오, 다크 초콜릿을 사용해 아이스크림을 만듭니다.', DEFAULT, DEFAULT, '리코타, 우유, 바닐라, 소금, 피스타치오, 다크 초콜릿');
+
+-- Recipe: 칠면조 팟파이
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('칠면조 팟파이', '메인 요리', '칠면조 팟파이는 1인분에 약 728칼로리, 단백질 23g, 지방 42g을 포함하며, 8인분을 만들 수 있습니다. 준비부터 완성까지 약 45분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 오븐을 220도(425°F)로 예열합니다. 중간 크기의 냄비에 버터를 녹이고 셀러리와 양파를 넣어 중불에서 약 8분간 볶습니다.\n2. 밀가루 2/3컵, 소금, 후추, 셀러리 씨, 양파 파우더, 마늘 파우더, 이탈리안 시즈닝을 넣습니다. 치킨 브로스와 우유를 천천히 휘저으며 넣고, 혼합물이 걸쭉해질 때까지 약한 불에서 끓입니다.\n3. 불에서 내려 물기를 뺀 채소와 칠면조를 섞습니다.\n4. 두 개의 파이 크러스트에 칠면조와 채소 혼합물을 채웁니다. 또 다른 파이 크러스트로 덮고 가장자리를 꼬집어 밀봉합니다.\n5. 파이 크러스트 위에 몇 개의 작은 구멍을 내어 증기가 빠지도록 합니다.\n6. 예열된 오븐에서 황금빛이 될 때까지 약 30분간 굽습니다. 너무 빨리 갈색이 되면 호일로 덮고 계속 굽습니다. 서빙 전 10분간 식힙니다.', DEFAULT, DEFAULT, '버터, 셀러리, 양파, 밀가루, 소금, 후추, 셀러리 씨, 양파 파우더, 마늘 파우더, 이탈리안 시즈닝, 치킨 브로스, 우유, 채소, 칠면조, 파이 크러스트');
+
+-- Recipe: 슬로우 쿠커 매운 핫 윙
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('슬로우 쿠커 매운 핫 윙', '애피타이저', '슬로우 쿠커 매운 핫 윙은 글루텐 프리, 유제품 프리한 미국식 애피타이저입니다. 1인분에 약 384칼로리, 단백질 23g, 지방 20g을 포함하며, 4인분을 만들 수 있습니다. 준비부터 완성까지 약 14분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 흑설탕, 으깬 마늘, 핫소스, 카이엔 페퍼를 중간 크기의 믹싱볼에 넣고 잘 섞습니다.\n2. 쿠킹 스프레이로 슬로우 쿠커 내부와 닭 날개를 뿌립니다. 날개를 믹싱볼에 넣고 양념과 버무려 고르게 코팅합니다.\n3. 슬로우 쿠커에 넣고 약한 불에서 4시간 조리합니다.\n4. 조리 후 조심스럽게 꺼내 준비된 쿠키 시트에 올립니다.\n5. 오븐의 브로일러 설정에서 4~6분간 구워 날개가 바삭해지도록 합니다.', DEFAULT, DEFAULT, '흑설탕, 마늘, 핫소스, 카이엔 페퍼, 닭 날개, 쿠킹 스프레이');
+
+-- Recipe: 딸기와 누텔라 코블러
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('딸기와 누텔라 코블러', '디저트', '딸기와 누텔라 코블러는 락토 오보 채식 디저트로, 어머니의 날에 특히 어울립니다. 1인분에 약 615칼로리, 단백질 7g, 지방 26g을 포함하며, 3인분을 만들 수 있습니다.', 'ADMIN', SYSDATE, '1. 오븐을 200도(400°F)로 예열합니다.\n2. 딸기, 누텔라, 옥수수 전분, 설탕, 바닐라를 믹싱볼에 넣고 딸기가 고르게 코팅될 때까지 섞습니다.\n3. 혼합물을 9인치 원형 파이 팬에 붓습니다. 또 다른 믹싱볼에 밀가루, 설탕, 베이킹 파우더, 소금을 넣고 섞습니다. 크림을 천천히 넣고 섞일 때까지 휘젓습니다.\n4. 논스틱 베이킹 매트에 반죽을 펴고 1~2번 반죽합니다. 반죽을 약 3큰술씩 떼어 공 모양으로 만든 후 살짝 평평하게 합니다.\n5. 딸기 혼합물 위에 비스킷을 살짝 겹치게 올립니다. 완벽할 필요는 없습니다.\n6. 남은 크림을 비스킷 위에 바르고 설탕을 약간 뿌립니다.\n7. 20~25분간, 또는 비스킷이 황금빛이고 딸기가 부글거릴 때까지 굽습니다.\n8. 딸기 즙이 굳을 수 있도록 최소 30분간 식힙니다.\n9. 휘핑크림이나 아이스크림과 함께 따뜻하게 제공합니다.', DEFAULT, DEFAULT, '딸기, 누텔라, 옥수수 전분, 설탕, 바닐라, 밀가루, 베이킹 파우더, 소금, 크림, 휘핑크림, 아이스크림');
+
+-- Recipe: 치즈가 듬뿍 든 보타이 맥앤치즈
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('치즈가 듬뿍 든 보타이 맥앤치즈', '메인 요리', '치즈가 듬뿍 든 보타이 맥앤치즈는 락토 오보 채식 미국식 메인 요리입니다. 1인분에 약 780칼로리, 단백질 28g, 지방 35g을 포함하며, 4인분을 만들 수 있습니다. 준비부터 완성까지 약 35분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 오븐을 175도(350°F)로 예열하고, 포장 지침에 따라 파스타를 삶습니다.\n2. 물기를 뺍니다.\n3. 치즈를 갈아줍니다.\n4. 삶은 파스타, 치즈, 사워 크림, 소금, 후추, 버터를 중간 크기의 믹싱볼에 넣고 섞습니다.\n5. 9x13인치 캐서롤 접시에 넣고, 원한다면 추가 치즈를 뿌립니다. 20분간 굽습니다.\n6. 오븐에서 꺼내 뜨겁게 제공합니다.', DEFAULT, DEFAULT, '파스타, 치즈, 사워 크림, 소금, 후추, 버터');
+
+-- Recipe: 바비큐 치킨 꽃양배추 쿠스쿠스 볼
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('바비큐 치킨 꽃양배추 쿠스쿠스 볼', '메인 요리', '바비큐 치킨 꽃양배추 쿠스쿠스 볼은 글루텐 프리한 바비큐 스타일 메인 요리로, 아버지의 날에 특히 어울립니다. 1인분에 약 381칼로리, 단백질 20g, 지방 22g을 포함하며, 4인분을 만들 수 있습니다. 준비부터 완성까지 약 45분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 얕은 접시에 바비큐 소스, 오렌지 주스, 간장을 섞습니다.\n2. 닭 가슴살을 넣고 완전히 코팅되도록 버무려 마리네이드합니다.\n3. 푸드 프로세서에 꽃양배추 꽃을 넣고 5~6번 펄스하여 쿠스쿠스 질감이 되도록 합니다.\n4. 큰 소테 팬에 버터를 중불로 녹입니다.\n5. 양파를 넣고 부드러워질 때까지 5~6분간 조리합니다.\n6. 꽃양배추, 마늘 파우더, 소금, 후추를 넣고 5분간 더 조리합니다.\n7. 불에서 내려 치즈와 고수를 섞고, 서빙할 때까지 덮어둡니다. 그릴이나 그릴 팬을 중불에서 예열하고 기름을 바릅니다.  Chicken을 넣고 마리네이드를 발라가며 10~12분간, 중간에 뒤집어 익힙니다.\n8. 불에서 내려 근대 준비 동안 식힙니다.\n9. 소테 팬에 올리브 오일을 중불로 가열합니다.\n10. 마늘을 넣고 향이 날 때까지 1분간 조리합니다.\n11. 근대를 넣고 자주 저으며 부드럽고 따뜻해질 때까지 조리합니다. 소금과 후추로 간합니다. 꽃양배추 쿠스쿠스 위에 슬라이스한 닭 가슴살과 근대를 올려 볼을 만듭니다.\n12. 아몬드를 뿌리고 즉시 즐깁니다!', DEFAULT, DEFAULT, '바비큐 소스, 오렌지 주스, 간장, 닭 가슴살, 꽃양배추, 버터, 양파, 마늘 파우더, 소금, 후추, 치즈, 고수, 올리브 오일, 마늘, 근대, 아몬드');
+
+-- Recipe: 그리스 스타일 구운 생선
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('그리스 스타일 구운 생선', '메인 요리', '그리스 스타일 구운 생선은 글루텐 프리, 페스카테리안 메디터레이니언 메인 요리입니다. 1인분에 약 343칼로리, 단백질 28g, 지방 12g을 포함하며, 4인분을 만들 수 있습니다. 준비부터 완성까지 약 30분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 오븐을 230도(450°F)로 예열합니다. 생선이 겹치지 않도록 오븐용 베이킹 접시에 쿠킹 스프레이를 뿌립니다.\n2. 생선 필레를 베이킹 팬에 한 층으로 놓고 소금, 후추로 간한 후, 붉은 양파와 피망을 얹습니다.\n3. 말린 바질, 오레가노, 토마토, 페타 치즈를 뿌리고 화이트 와인과 올리브 오일을 뿌립니다. 신선한 후추를 갈아줍니다.\n4. 뚜껑 없이 약 12~15분간, 또는 생선이 포크로 쉽게 갈라질 때까지 굽습니다. 조리된 생선 위에 레몬 웨지를 짜고 신선한 바질이나 오레가노로 장식해 뜨거운 밥과 함께 제공합니다.', DEFAULT, DEFAULT, '생선 필레, 소금, 후추, 붉은 양파, 피망, 말린 바질, 오레가노, 토마토, 페타 치즈, 화이트 와인, 올리브 오일, 레몬 웨지, 신선한 바질, 밥');
+
+-- Recipe: 슬로우 쿠커 붉은 콩과 쌀
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('슬로우 쿠커 붉은 콩과 쌀', '메인 요리', '슬로우 쿠커 붉은 콩과 쌀은 글루텐 프리한 메인 요리입니다. 1인분에 약 639칼로리, 단백질 29g, 지방 31g을 포함하며, 5인분을 만들 수 있습니다. 준비부터 완성까지 약 45분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 슬로우 쿠커에 넣고 잘 섞습니다. 쌀과 함께라면 약한 불에서 6시간, 쌀 없이라면 더 오래 조리합니다.\n2. 콘브레드와 함께 제공합니다.', DEFAULT, DEFAULT, '붉은 콩, 쌀, 물, 통조림 토마토');
+
+-- Recipe: 빵가루 입힌 새우와 매운 마요 애피타이저
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('빵가루 입힌 새우와 매운 마요 애피타이저', '메인 요리', '빵가루 입힌 새우와 매운 마요 애피타이저는 유제품 프리, 페스카테리안 메인 요리입니다. 1인분에 약 258칼로리, 단백질 13g, 지방 8g을 포함하며, 4인분을 만들 수 있습니다. 준비부터 완성까지 약 20분이 소요됩니다.', 'ADMIN', SYSDATE, '1. 새우를 껍질을 벗기고 내장을 제거합니다. 꼬리는 남겨도 됩니다. 수야 페퍼 스파이스로 간해 준비합니다.\n2. 계란을 휘젓고 준비합니다. 밀가루 볼에 양파 파우더, 마늘 파우더, 소금, 고춧가루를 섞습니다. 간한 새우를 밀가루에 묻히고, 계란 혼합물에 담갔다가 빵가루로 코팅합니다.\n3. 튀김용 기름을 가열하고 새우를 양면이 황금빛이 될 때까지 튀깁니다.\n4. 매운 마요를 위해 마요네즈 2큰술과 스리라차 소스 1큰술을 잘 섞습니다.\n5. 빵가루 입힌 새우와 함께 제공합니다.', DEFAULT, DEFAULT, '새우, 수야 페퍼 스파이스, 계란, 밀가루, 양파 파우더, 마늘 파우더, 소금, 고춧가루, 빵가루, 기름, 마요네즈, 스리라차 소스');
+
+
+-- Recipe: 딸기 치즈케이크 초콜릿 크레페
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('딸기 치즈케이크 초콜릿 크레페', '프랑스 요리', '딸기 치즈케이크 초콜릿 크레페는 락토 오보 채식 아침 식사로 훌륭합니다. 1인분에 약 618칼로리, 단백질 16g, 지방 38g을 포함하며, 1인분 가격은 약 1.68달러입니다. 이 지중해 스타일 요리는 1928명의 팬을 보유하고 있으며, 어머니의 날에 특히 좋습니다.', 'ADMIN', SYSDATE, '1. 크림 치즈, 딸기, 바닐라 추출물, 레몬 주스, 설탕을 중간 크기의 믹싱 볼에 넣는다.\n2. 핸드 믹서, 나무 숟가락 또는 주걱으로 재료를 섞는다.\n3. 부드러워질 때까지 섞는다.\n4. 따로 보관한다.\n5. 밀가루, 설탕, 코코아 파우더, 소금, 계란을 푸드 프로세서 또는 블렌더에 넣는다.\n6. 푸드 프로세서를 사용하는 경우, 작동 중에 우유와 물을 추가하고 잘 섞일 때까지 펄스한다.\n7. 녹인 버터와 바닐라 추출물을 넣는다.\n8. 볼을 따로 보관한다.\n9. 크레페 팬 또는 8~10인치 오믈렛 팬을 중불로 가열한다.\n10. 반죽 1/4컵을 팬 중앙에 붓고 팬을 돌려 바닥을 덮는다.\n11. 크레페를 2~3분간 조리하거나 바닥이 연한 갈색이 되고 가장자리가 완전히 굳을 때까지 조리한다.\n12. 크레페를 뒤집어 추가로 1분간 조리한다.\n13. 서빙 접시에 옮기고 나머지 반죽으로 반복한다.', DEFAULT, DEFAULT, '딸기, 치즈, 설탕, 바닐라 추출물, 크림 치즈, 레몬 주스, 코코아 파우더, 밀가루, 계란, 소금, 우유, 물, 버터, 초콜릿, 크레페');
+
+-- Recipe: 간단한 통밀 크레페
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('간단한 통밀 크레페', '프랑스 요리', '간단한 통밀 크레페는 락토 오보 채식 아침 식사로 적합합니다. 1인분에 약 272칼로리, 단백질 10g, 지방 14g을 포함하며, 1인분 가격은 약 0.54달러입니다. 109명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 블렌더에 넣고 부드러워질 때까지 섞는다. 반죽은 묽어야 한다.\n2. 최소 30분 또는 하룻밤 동안 반죽을 숙성시킨다.\n3. 크레페 팬 또는 전기 크레페 메이커를 사용해 조리한다.', DEFAULT, DEFAULT, '우유, 계란, 밀가루, 크레페');
+
+-- Recipe: 버섯 크레페와 채식 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('버섯 크레페와 채식 소스', '프랑스 요리', '버섯 크레페와 채식 소스는 락토 오보 채식 아침 식사입니다. 1인분에 약 184칼로리, 단백질 7g, 지방 6g을 포함하며, 1인분 가격은 약 1.03달러입니다. 64명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 계란을 휘젓는다.\n2. 물을 넣고 잘 섞는다 (핸드 믹서를 사용할 수도 있다).\n3. 밀가루를 뿌리며 계속 휘저어 적절한 농도가 될 때까지 섞는다.\n4. 프라이팬에 기름을 중불로 가열하고 팬 전체에 기름을 바른 뒤 기름을 컵에 따라둔다.\n5. 반죽을 1/4컵씩 팬에 붓고 원형으로 팬을 기울여 반죽이 고르게 퍼지도록 한다.\n6. 크레페를 약 2분간 조리해 바닥이 연한 갈색이 될 때까지 굽는다.\n7. 주걱으로 크레페를 뒤집어 반대쪽을 굽는다.\n8. 모든 반죽을 사용할 때까지 반복해 약 8개의 크레페를 만든다.\n9. 버섯과 와인을 푸드 프로세서에 넣고 걸쭉한 페이스트가 될 때까지 섞는다.\n10. 큰 냄비에 기름 1큰술을 가열한다.\n11. 다진 양파를 넣고 황금빛이 될 때까지 볶는다.\n12. 버섯 페이스트와 옥수수를 넣는다.\n13. 향신료를 추가한다.\n14. 15분간 조리한 뒤 다진 딜과 파슬리를 넣고 5분 더 조리한다.\n15. 최소 10분간 식힌 후 크레페를 조립한다.\n16. 마지막 네 가지 재료를 섞어 소스를 만들고 채식 버섯 크레페 위에 부은다.', DEFAULT, DEFAULT, '계란, 물, 밀가루, 기름, 버섯, 와인, 양파, 옥수수, 향신료, 딜, 파슬리, 소금, 크레페, 소스');
+
+-- Recipe: 브리 치즈를 곁들인 라타투이
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('브리 치즈를 곁들인 라타투이', '프랑스 요리', '브리 치즈를 곁들인 라타투이는 글루텐 프리, 락토 오보 채식, 프라이멀 메인 요리입니다. 1인분에 약 490칼로리, 단백질 14g, 지방 45g을 포함하며, 1인분 가격은 약 1.97달러입니다. 63명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 가지 껍질을 벗기고 1인치 조각으로 자른다.\n2. 무거운 프라이팬에 올리브 오일을 1~2온스 가열한다.\n3. 다진 가지를 2~3분간 볶은 뒤 타월에 올려 물기를 뺀다.\n4. 물기를 뺀 가지를 작은 타원형 캐서롤 접시에 넣는다.\n5. 오븐을 375°F로 예열한다.\n6. 주키니, 노란 호박, 토마토를 약 1인치 두께로 균일하게 자른다.\n7. 브리 치즈를 1인치 두께로 자른다 (치즈 와이어를 사용하면 간단하다).\n8. 노란 호박, 주키니, 브리 치즈, 토마토를 캐서롤 중앙에서 바깥쪽으로 비늘 모양으로 배열한다.\n9. 모든 채소와 치즈를 배치한 뒤 남은 올리브 오일과 다진 타임을 뿌린다.\n10. 소금과 후추로 간을 하고 오븐에서 10~15분간 거품이 날 때까지 굽는다.', DEFAULT, DEFAULT, '가지, 올리브 오일, 주키니, 노란 호박, 토마토, 치즈, 브리 치즈, 타임, 소금, 후추, 채소');
+
+-- Recipe: 누텔라 크레페와 아이스크림
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('누텔라 크레페와 아이스크림', '프랑스 요리', '누텔라 크레페와 아이스크림은 여름 이벤트에 어울리는 디저트입니다. 1인분에 약 633칼로리, 단백질 11g, 지방 25g을 포함하며, 1인분 가격은 약 1.09달러입니다. 59명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 건조하고 깨끗한 볼에 밀가루, 설탕, 계피를 섞는다.\n2. 다른 볼에서 계란을 깨고 잘 휘젓는다.\n3. 우유, 버터 (또는 기름), 바닐라 추출물을 넣고 잘 휘젓는다.\n4. 젖은 재료를 건조 재료에 넣고 덩어리가 없도록 휘젓는다 (블렌더를 사용하면 덩어리를 방지할 수 있다. 덩어리가 있으면 체에 걸러낸다).\n5. 크레페 팬 또는 큰 프라이팬에 기름 또는 버터를 바른다.\n6. 중불에서 저온으로 설정한다.\n7. 반죽을 팬 중앙에 붓고 팬을 돌려 반죽이 팬 전체를 얇게 덮도록 한다.\n8. 크레페의 각 면을 3~4분간 굽는다.\n9. 누텔라를 볼에 넣고 전자레인지에서 45초간 부드럽게 녹인다.\n10. 바나나 또는 딸기를 자른다.\n11. 크레페의 한쪽 절반에 누텔라를 바르고 딸기/바나나를 올린 뒤 접는다.', DEFAULT, DEFAULT, '밀가루, 설탕, 계피, 계란, 우유, 버터, 기름, 바닐라 추출물, 누텔라, 딸기, 바나나, 크레페, 아이스크림');
+
+-- Recipe: 크레페 쉬제트
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('크레페 쉬제트', '프랑스 요리', '크레페 쉬제트는 락토 오보 채식 아침 식사입니다. 1인분에 약 619칼로리, 단백질 11g, 지방 40g을 포함하며, 1인분 가격은 약 0.88달러입니다. 45명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 모든 액체 재료를 블렌더에 넣는다.\n2. 건조 재료와 녹인 버터 1/4컵을 넣고 고속으로 섞는다.\n3. 반죽을 30분간 숙성시킨다.\n4. 10인치 논스틱 프라이팬을 중불로 가열한다.\n5. 팬 바닥과 옆면에 녹인 버터를 살짝 바른다.\n6. 반죽 1/2컵을 프라이팬에 넣고 팬을 돌려 바닥을 고르게 덮는다.\n7. 약 1~2분간 연한 갈색이 될 때까지 굽는다.\n8. 주걱이나 손가락으로 크레페를 뒤집어 반대쪽을 30초~1분간 연한 갈색이 될 때까지 굽는다.\n9. 크레페를 접시에 옮긴다.\n10. 크레페 사이에 양피지를 끼워 쌓는다.\n11. 필요하면 팬에 버터를 더 바르고 나머지 반죽으로 반복한다.\n12. 소스: 프라이팬에 버터 1/4컵을 약한 불에서 녹인다.', DEFAULT, DEFAULT, '버터, 설탕, 우유, 크레페, 소스');
+
+-- Recipe: 신선한 토마토, 시금치, 바질, 염소 치즈로 만든 채소 키쉬
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('신선한 토마토, 시금치, 바질, 염소 치즈로 만든 채소 키쉬', '프랑스 요리', '신선한 토마토, 시금치, 바질, 염소 치즈로 만든 채소 키쉬는 아침 식사 또는 전채로 적합합니다. 1인분에 약 280칼로리, 단백질 14g, 지방 17g을 포함하며, 1인분 가격은 약 1.65달러입니다. 1명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 오븐을 450°F로 예열하고 파이 크러스트를 준비한다.\n2. 9인치 파이 접시에 페이스트리를 깔고 알루미늄 호일로 크러스트 위아래를 덮은 뒤 8분간 굽는다.\n3. 호일을 제거하고 4분 더 굽는다.\n4. 크러스트를 굽는 동안 우유, 소금, 후추, 육두구, 밀가루, 계란을 볼에 넣고 휘젓는다.\n5. 토마토, 시금치 또는 케일, 양파, 바질, 염소 치즈를 추가한다.\n6. 오븐에서 크러스트를 꺼내 가장자리가 연한 갈색이 되어야 한다.\n7. 오븐 온도를 325°F로 낮춘다.\n8. 우유, 채소, 치즈 혼합물을 조리된 크러스트에 넣는다.\n9. 파이 크러스트 가장자리를 호일로 덮는다.\n10. 키쉬 중앙이 굳을 때까지 오븐에서 50~60분간 굽는다.\n11. 10분간 식힌다.', DEFAULT, DEFAULT, '파이 크러스트, 우유, 소금, 후추, 육두구, 밀가루, 계란, 토마토, 시금치, 케일, 양파, 바질, 염소 치즈, 치즈, 채소');
+
+-- Recipe: 버섯 크레페
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('버섯 크레페', '프랑스 요리', '버섯 크레페는 유제품 프리, 락토 오보 채식, 비건 아침 식사입니다. 1인분에 약 186칼로리, 단백질 7g, 지방 1g을 포함하며, 1인분 가격은 약 4.23달러입니다. 1명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 크레페를 준비한다.\n2. 표고버섯을 볼에 넣고 물을 부어 최소 1시간 담근다.\n3. 줄기를 버리고 버섯을 잘게 다진다.\n4. 프라이팬에 기름을 가열한다.\n5. 양파, 마늘, 월계수 잎을 넣는다.\n6. 양파가 투명해질 때까지 약한 불에서 볶는다.\n7. 표고버섯, 신선한 버섯, 타라곤을 넣고 버섯이 익을 때까지 조리한다.\n8. 밀가루를 넣고 잘 섞는다.\n9. 와인을 넣고 계속 저으며 조리한다.\n10. 혼합물이 걸쭉해질 때까지 조리한다.\n11. 타마리와 카이엔을 취향에 맞게 넣는다.\n12. 소스: 애로루트 또는 쿠즈를 물에 녹인다.\n13. 와인을 넣고 작은 냄비에서 강불로 저으며 소스가 걸쭉해질 때까지 조리한다.\n14. 타마리를 취향에 맞게 넣고 잘 섞는다.\n15. 필링이 식었으면 프라이팬을 중불로 다시 가열해 뜨겁게 만든다.\n16. 크레페 중앙에 필링 약 1/4컵을 넣고 크레페를 말는다.\n17. 크레페를 개별 접시에 놓는다.\n18. 각 크레페 위에 소스를 뿌려 서빙한다.', DEFAULT, DEFAULT, '표고버섯, 물, 기름, 양파, 마늘, 월계수 잎, 신선한 버섯, 타라곤, 밀가루, 와인, 타마리, 카이엔, 애로루트, 크레페, 소스');
+
+-- Recipe: 샤브리 시금치 키쉬
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('샤브리 시금치 키쉬', '프랑스 요리', '샤브리 시금치 키쉬는 프랑스 스타일 전채입니다. 1인분에 약 260칼로리, 단백질 10g, 지방 18g을 포함하며, 1인분 가격은 약 1.69달러입니다. 1명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 샤브리 치즈와 계란을 섞어 잘 혼합한다.\n2. 크림과 하프앤하프를 넣어 커스터드를 만들고 소금, 후추, 카이엔, 육두구로 간한다.\n3. 미리 구운 파이크러스트 바닥에 시금치를 고르게 뿌린다.\n4. 커스터드를 크러스트에 붓고 포크로 저어 시금치를 고르게 분포시킨다.\n5. 350°F에서 45분간 굽고 칼날을 삽입했을 때 깨끗하게 나올 때까지 조리한다.\n6. 식힌 뒤 따뜻하게 서빙한다.\n7. 변형: 시금치를 12온스 신선한 아스파라거스로 대체 가능.', DEFAULT, DEFAULT, '계란, 하프앤하프, 카이엔, 육두구, 소금, 후추, 크림, 파이크러스트, 시금치, 아스파라거스, 커스터드');
+
+-- Recipe: 주키니 키쉬와 아몬드 아마씨 크러스트
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('주키니 키쉬와 아몬드 아마씨 크러스트', '프랑스 요리', '주키니 키쉬와 아몬드 아마씨 크러스트는 메인 요리입니다. 1인분에 약 388칼로리, 단백질 13g, 지방 30g을 포함하며, 1인분 가격은 약 1.22달러입니다. 1명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 오븐을 375°F로 예열하고 8인치 파이 접시에 올리브 오일 또는 쿠킹 스프레이를 바른다.\n2. 중간 크기의 볼에서 크러스트 재료를 모두 섞어 부서진 반죽이 형성될 때까지 혼합한다.\n3. 반죽을 파이 접시에 붓는다.\n4. 반죽을 파이 접시 바닥과 옆면에 펴고 평평하게 만든다.\n5. 주키니의 끝을 자르고 스파이럴라이저로 주키니 면을 만든다.\n6. 주키니 면을 여러 번 자르고 스파이럴라이저로 처리되지 않은 부분은 작게 다진다.\n7. 모든 채소와 치즈를 섞어 파이 접시에 넣는다.\n8. 휘저은 계란, 우유, 타임, 소금을 작은 볼에 섞는다.\n9. 계란 혼합물을 파이 접시에 채운다.\n10. 키쉬를 30~40분간 굽거나 계란이 완전히 익고 키쉬가 갈색이 되고 단단해질 때까지 조리한다.\n11. 서빙 전 약 10분간 식힌다.\n12. 남은 음식은 밀폐 용기에 넣어 냉장 보관한다.', DEFAULT, DEFAULT, '올리브 오일, 쿠킹 스프레이, 주키니, 채소, 치즈, 계란, 우유, 타임, 소금, 크러스트');
+
+-- Recipe: 크리미 라타투이 위 펜네
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('크리미 라타투이 위 펜네', '프랑스 요리', '크리미 라타투이 위 펜네는 락토 오보 채식 전채입니다. 1인분에 약 308칼로리, 단백질 9g, 지방 12g을 포함하며, 1인분 가격은 약 1.46달러입니다. 1명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 큰 프라이팬에 올리브 오일을 중불로 가열한다.\n2. 양파, 피망, 주키니를 넣고 약 7분간 가끔 저으며 부드러워질 때까지 볶는다.\n3. 가지를 넣고 3분간 자주 저으며 계속 볶는다.\n4. 채소가 부드러워지면 마늘을 넣고 향이 날 때까지 약 1분간 조리한다.\n5. 건조 향신료, 소금, 후추, 토마토 소스, 물을 넣는다.\n6. 혼합물이 끓어오르면 5분간 약간 걸쭉해질 때까지 조리한다.\n7. 마스카포네 치즈를 넣고 바로 서빙한다.', DEFAULT, DEFAULT, '올리브 오일, 양파, 피망, 주키니, 가지, 마늘, 향신료, 소금, 후추, 토마토 소스, 물, 마스카포네 치즈');
+
+-- Recipe: 알래스카 훈제 연어 니수아즈 샐러드와 알루에트 크럼블드 페타
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('알래스카 훈제 연어 니수아즈 샐러드와 알루에트 크럼블드 페타', '프랑스 요리', '알래스카 훈제 연어 니수아즈 샐러드와 알루에트 크럼블드 페타는 글루텐 프리, 프라이멀, 페스카테리안 전채입니다. 1인분에 약 132칼로리, 단백질 7g, 지방 7g을 포함하며, 1인분 가격은 약 1.63달러입니다. 1명이 이 레시피를 좋아했습니다.', 'ADMIN', SYSDATE, '1. 올리브 오일, 다진 바질, 마늘, 소금, 후추, 식초로 드레싱을 준비하고 냉장 보관한다.\n2. 토마토를 4등분한다.\n3. 계란을 얇게 자른다.\n4. 오이를 반으로 자르고 얇게 자른다.\n5. 양파를 얇은 고리 모양으로 자른다.\n6. 재료를 섞는 대신 샐러드 접시에 색감과 모양을 위해 배열한다.\n7. 치즈를 위에 뿌리고 드레싱을 뿌려 서빙한다.', DEFAULT, DEFAULT, '올리브 오일, 바질, 마늘, 소금, 후추, 식초, 토마토, 계란, 오이, 양파, 치즈');
+
+
+-- Recipe: 구운 크랜베리, 리코타  and  꿀 크로스티니
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('구운 크랜베리, 리코타  and  꿀 크로스티니', '이탈리아 요리', '구운 크랜베리, 리코타  and  꿀 크로스티니는 지중해 스타일의 전채 요리입니다. 1인분에 약 290칼로리, 단백질 9g, 지방 8g을 포함합니다. 크리스마스에 어울리는 저렴한 전채로, 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 농부 빵을 얇게 썰어 올리브 오일을 바르고 오븐에서 375°F(190°C)로 5-7분간 구워 바삭하게 만듭니다.\n2. 구운 크랜베리 소스를 준비합니다(크랜베리, 설탕, 물을 중불에서 10분간 끓여 농도를 맞춤).\n3. 구운 빵 위에 리코타 치즈를 바르고 구운 크랜베리 소스를 얹습니다.\n4. 꿀을 살짝 뿌리고 신선한 허브(선택 사항)로 장식해 즉시 서빙합니다.', DEFAULT, DEFAULT, '농부 빵, 리코타 치즈, 구운 크랜베리 소스, 꿀, 올리브 오일');
+
+-- Recipe: 간단한 스킬렛 라자냐
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('간단한 스킬렛 라자냐', '이탈리아 요리', '간단한 스킬렛 라자냐는 지중해 스타일의 메인 요리입니다. 1인분에 약 761칼로리, 단백질 31g, 지방 46g을 포함합니다. 35분 내에 준비 가능하며, 5인분을 제공합니다.', 'ADMIN', SYSDATE, '1. 큰 소테 팬에 기름을 두르고 강불에서 가열합니다.\n2. 소시지를 넣고 3-5분간 갈색이 될 때까지 볶습니다.\n3. 소시지를 따로 덜어내고 중약불로 줄인 후 양파, 마늘, 고춧가루를 넣고 양파가 부드러워질 때까지 8분간 볶습니다.\n4. 오레가노, 토마토(손으로 으깨거나 믹서로 갈아 즙과 함께 추가), 바질 가지, 볶은 소시지를 넣습니다.\n5. 소금과 후추로 간을 맞추고 5분간 끓입니다.\n6. 라자냐 면을 반으로 나누어 소시지 아래 고르게 분포시키고, 나머지 면은 숟가락으로 소스 속에 넣습니다.\n7. 리코타 치즈를 올리고 소스와 섞은 뒤 모짜렐라 치즈를 얹어 325°F(165°C) 오븐에서 15분간 굽습니다.\n8. 바질로 장식하고 식힌 후 서빙합니다.', DEFAULT, DEFAULT, '소시지, 양파, 마늘, 고춧가루, 오레가노, 토마토, 바질, 소금, 후추, 라자냐 면, 리코타 치즈, 모짜렐라 치즈');
+
+-- Recipe: 간편한 치즈 피자 캐서롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('간편한 치즈 피자 캐서롤', '이탈리아 요리', '간편한 치즈 피자 캐서롤은 지중해 스타일의 메인 요리입니다. 1인분에 약 902칼로리, 단백질 57g, 지방 55g을 포함합니다. 가을과 겨울에 어울리며, 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 스킬렛에서 다진 소고기를 볶아 기름을 제거합니다.\n2. 피자 소스와 고춧가루를 섞어 따로 둡니다.\n3. 리코타 치즈, 허브, 파르메산 치즈를 별도의 그릇에 섞습니다.\n4. 비스킷 반죽의 건조 재료를 섞고 우유를 넣어 반죽합니다.\n5. 오븐을 375°F(190°C)로 예열하고 13x9인치 팬에 논스틱 스프레이를 뿌립니다.\n6. 비스킷 반죽을 작은 조각으로 떼어 팬 바닥에 고르게 놓습니다.\n7. 소고기 혼합물과 리코타 치즈 혼합물을 얹습니다.\n8. 20분간 굽고, 모짜렐라, 프로볼로네 치즈, 페퍼로니를 올린 후 오븐 온도를 425°F(220°C)로 올려 10분 더 굽습니다.\n9. 오븐에서 꺼내 5분간 식힌 후 파르메산 치즈를 뿌려 서빙합니다.', DEFAULT, DEFAULT, '다진 소고기, 피자 소스, 고춧가루, 리코타 치즈, 허브, 파르메산 치즈, 비스킷 반죽, 우유, 모짜렐라 치즈, 프로볼로네 치즈, 페퍼로니');
+
+-- Recipe: 플랜테인 피자
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('플랜테인 피자', '이탈리아 요리', '플랜테인 피자는 지중해 스타일의 메인 요리로, 유제품 프리입니다. 1인분에 약 657칼로리, 단백질 27g, 지방 23g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 따뜻한 물에 이스트를 녹여 5분간 둡니다.\n2. 기름, 밀가루, 소금, 설탕, 으깬 플랜테인을 섞고 녹인 이스트를 넣어 반죽합니다. 15-20분간 손으로, 또는 믹서로 10분간 반죽해 탄력이 생기도록 합니다.\n3. 기름칠한 그릇에 반죽을 넣고 플라스틱 랩으로 덮어 1.5-2시간 발효시킵니다.\n4. 발효 중에 소스용 기름을 가열하고 갈은 토마토와 고추를 볶은 뒤 소고기를 넣어 양념하며 볶습니다.\n5. 발효된 반죽을 두 개로 나누고 밀가루 뿌린 평평한 표면에서 롤링 핀으로 얇게 밀어 원하는 모양으로 자릅니다.\n6. 반죽에 기름을 바르고 소스와 토핑을 올립니다.\n7. 오븐을 350°F(175°C)로 예열하고 기름칠한 호일 팬에 피자 반죽을 올려 12-15분 굽습니다.\n8. 따뜻하게 서빙합니다.', DEFAULT, DEFAULT, '이스트, 물, 기름, 밀가루, 소금, 설탕, 플랜테인, 토마토, 고추, 소고기');
+
+-- Recipe: 브로콜리니 퀴노아 필라프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('브로콜리니 퀴노아 필라프', '이탈리아 요리', '브로콜리니 퀴노아 필라프는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 메인 요리입니다. 1인분에 약 625칼로리, 단백질 20g, 지방 31g을 포함합니다. 30분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 뚜껑이 있는 큰 팬에 올리브 오일을 중강불로 가열합니다.\n2. 양파를 넣고 1분간 볶습니다.\n3. 마늘을 넣고 양파가 투명해지고 마늘이 향을 낼 때까지 볶습니다.\n4. 퀴노아를 팬에 넣고 섞은 뒤 채소 육수를 천천히 부어 끓입니다.\n5. 뚜껑을 덮고 약불로 15분간 조리하며, 마지막 2-3분에 브로콜리니를 퀴노아 위에 올리고 뚜껑을 덮습니다.\n6. 뚜껑을 열고 브로콜리니와 퀴노아를 섞은 뒤 소금과 후추로 간을 맞춥니다.\n7. 호두를 추가하고 따뜻하게 서빙합니다.', DEFAULT, DEFAULT, '올리브 오일, 양파, 마늘, 퀴노아, 채소 육수, 브로콜리니, 소금, 후추, 호두');
+
+-- Recipe: 버터넛 스쿼시 뇨키 위스키 크림 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('버터넛 스쿼시 뇨키 위스키 크림 소스', '이탈리아 요리', '버터넛 스쿼시 뇨키 위스키 크림 소스는 지중해 스타일의 메인 요리입니다. 1인분에 약 539칼로리, 단백질 14g, 지방 23g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 오븐을 450°F(230°C)로 예열합니다.\n2. 버터넛 스쿼시를 반으로 자르고 씨를 제거한 뒤 기름칠한 베이킹 시트에 올려 30-40분간 부드러워질 때까지 굽습니다.\n3. 스쿼시 속을 푼 뒤 푸드 프로세서에서 완전히 부드럽게 갈아줍니다.\n4. 갈은 스쿼시에 파르메산 치즈, 육두구, 소금, 후추, 달걀을 섞고 밀가루를 넣어 끈적한 반죽을 만듭니다.\n5. 밀가루 뿌린 작업대와 종이에 반죽을 손으로 꺼내 1인치 두께의 긴 띠로 만듭니다.\n6. 띠를 1인치 조각으로 자르고 포크로 눌러 무늬를 만듭니다.\n7. 큰 냄비에 물을 끓이고 뇨키를 반씩 나눠 5분간 떠오를 때까지 삶습니다.\n8. 다른 팬에 버터와 밀가루를 섞어 부드럽게 만든 뒤 샬롯과 마늘을 3분간 볶습니다.\n9. 버번과 치킨 스톡을 넣고 끓인 뒤 크림을 추가해 소스를 완성합니다.\n10. 뇨키를 소스에 버무려 서빙합니다.', DEFAULT, DEFAULT, '버터넛 스쿼시, 파르메산 치즈, 육두구, 소금, 후추, 달걀, 밀가루, 버터, 샬롯, 마늘, 버번, 치킨 스톡, 크림');
+
+-- Recipe: 링귀니 알라 카르보나라
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('링귀니 알라 카르보나라', '이탈리아 요리', '링귀니 알라 카르보나라는 지중해 스타일의 메인 요리입니다. 1인분에 약 614칼로리, 단백질 26g, 지방 34g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 달걀, 치즈, 파슬리, 소금, 후추를 그릇에 섞습니다.\n2. 큰 팬에 베이컨을 중불로 10분간 천천히 볶아 바삭해지고 기름이 나오도록 합니다.\n3. 베이컨을 종이 타월에 올리고 팬에 베이컨 기름 1큰술을 남깁니다.\n4. 샬롯을 베이컨 기름에 넣고 투명해질 때까지 볶고, 마늘을 추가해 2분 더 볶습니다.\n5. 고춧가루를 넣고 1분 더 볶은 뒤 샬롯/마늘 혼합물을 그릇에 덜어냅니다.\n6. 끓인 링귀니를 체에 걸러 달걀/치즈 혼합물에 넣고 소스가 걸쭉해질 때까지 섞습니다.\n7. 베이컨과 샬롯/마늘 혼합물을 넣고 섞은 뒤 소금과 후추로 간을 맞춥니다.\n8. 치즈, 파슬리, 남은 베이컨을 뿌려 즉시 서빙합니다.', DEFAULT, DEFAULT, '달걀, 치즈, 파슬리, 소금, 후추, 베이컨, 샬롯, 마늘, 고춧가루, 링귀니');
+
+-- Recipe: 구운 라비올리  and  고기 소스
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('구운 라비올리  and  고기 소스', '이탈리아 요리', '구운 라비올리  and  고기 소스는 지중해 스타일의 메인 요리입니다. 1인분에 약 631칼로리, 단백질 32g, 지방 34g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 큰 소스 팬에 올리브 오일을 두르고 소고기, 고추, 양파, 마늘을 볶습니다.\n2. 갈색이 되면 토마토 페이스트, 이탈리아 허브, 설탕, 소금, 후추, 월계수 잎을 넣습니다.\n3. 토마토 페이스트가 따뜻해질 때까지 몇 분간 조리합니다.\n4. 으깬 토마토와 토마토 페이스트 캔의 반만큼 물을 넣고 25-30분간 끓입니다.\n5. 소스가 끓는 동안 라비올리를 물에 넣고 떠오를 때까지 살짝 삶습니다.\n6. 라비올리를 체에 걸러 버터나 올리브 오일 1큰술과 버무려줍니다.\n7. 오븐을 400°F(200°C)로 예열하고 월계수 잎을 소스에서 제거합니다.\n8. 라비올리에 소스를 넉넉히 버무려 9x13인치 캐서롤 팬에 넣습니다.\n9. 모짜렐라 치즈를 뿌리고 25분간 또는 거품이 생길 때까지 굽습니다.\n10. 신선한 파르메산, 마늘 빵, 추가 소스, 샐러드와 함께 서빙합니다.', DEFAULT, DEFAULT, '소고기, 고추, 양파, 마늘, 올리브 오일, 토마토 페이스트, 이탈리아 허브, 설탕, 소금, 후추, 월계수 잎, 으깬 토마토, 라비올리, 버터, 모짜렐라 치즈, 파르메산 치즈');
+
+-- Recipe: 채소 라자냐 롤  and  페퍼리 페코리노 마리나라
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('채소 라자냐 롤  and  페퍼리 페코리노 마리나라', '이탈리아 요리', '채소 라자냐 롤  and  페퍼리 페코리노 마리나라는 지중해 스타일의 메인 요리입니다. 1인분에 약 508칼로리, 단백질 25g, 지방 22g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 오븐을 425°F(220°C)로 예열합니다.\n2. 라자냐 면을 포장지 지침대로 삶아 찬물에 헹구고 물기를 뺍니다.\n3. 리코타 치즈, 시금치, 육두구, 소금, 후추를 섞어 필링을 준비합니다.\n4. 소테 팬에 마늘과 올리브 오일을 넣고 마늘이 갈색이 될 때까지 볶습니다.\n5. 통조림 토마토를 넣고 1-2분간 조리해 토마토 주스가 캐러멜화되도록 합니다.\n6. 숟가락으로 토마토를 으깨고 말린 바질, 오레가노, 세이지를 넣어 20분간 중불로 끓여 소스를 걸쭉하게 만듭니다.\n7. 페코리노 치즈를 넣고 1분 더 섞습니다.\n8. 라자냐 면을 펴고 리코타 필링, 시금치, 바질 잎, 버섯, 주키니를 올려 말아줍니다.\n9. 접시에 마리나라 소스를 약간 깔고 라자냐 롤을 올려 15분간 굽습니다.\n10. 마리나라 소스와 얇게 썬 페코리노 치즈를 뿌려 따뜻하게 서빙합니다.', DEFAULT, DEFAULT, '라자냐 면, 리코타 치즈, 시금치, 육두구, 소금, 후추, 마늘, 올리브 오일, 통조림 토마토, 말린 바질, 오레가노, 세이지, 페코리노 치즈, 버섯, 주키니');
+
+-- Recipe: 빠른 이탈리아 새우 롤
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('빠른 이탈리아 새우 롤', '이탈리아 요리', '빠른 이탈리아 새우 롤은 지중해 스타일의 전채로, 페스카테리안 다이어트에 적합합니다. 1인분에 약 381칼로리, 단백질 37g, 지방 8g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 브로일러를 예열합니다.\n2. 새우와 스파게티 소스를 섞어 전자레인지에서 1.5-2분간 데웁니다.\n3. 호기 롤에 파르메산 치즈를 뿌리고 브로일러에서 치즈가 녹을 때까지 굽습니다.\n4. 각 롤에 새우 혼합물과 시금치 잎을 얹어 서빙합니다.', DEFAULT, DEFAULT, '새우, 스파게티 소스, 파르메산 치즈, 호기 롤, 시금치');
+
+-- Recipe: 레몬 파스타 알프레도 (비건)
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('레몬 파스타 알프레도 (비건)', '이탈리아 요리', '레몬 파스타 알프레도 (비건)는 지중해 스타일의 메인 요리입니다. 1인분에 약 942칼로리, 단백질 22g, 지방 52g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 물을 끓여 파스타를 8-10분간 삶고, 1컵의 파스타 물을 따로 보관한 뒤 물기를 뺍니다.\n2. 소스 팬에 올리브 오일을 가열하고 마늘을 갈색이 될 때까지 볶습니다.\n3. 냉동 완두콩과 레몬 주스를 넣고 완두콩이 부드러워질 때까지 볶습니다.\n4. 캐슈 크림, 치즈, 레몬 제스트, 양파 가루, 오레가노, 타임, 고춧가루를 넣고 끓인 뒤 10분간 약불로 끓입니다.\n5. 소스가 걸쭉해지면 팬을 불에서 내리고 보관한 파스타 물 1컵을 넣어 소스를 묽게 만듭니다.\n6. 소금과 후추로 간을 맞추고 파스타를 소스에 넣어 잘 버무려 서빙합니다.', DEFAULT, DEFAULT, '파스타, 올리브 오일, 마늘, 냉동 완두콩, 레몬 주스, 캐슈 크림, 치즈, 레몬 제스트, 양파 가루, 오레가노, 타임, 고춧가루, 소금, 후추');
+
+-- Recipe: 비건 완두콩과 민트 페스토 브루스케타
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('비건 완두콩과 민트 페스토 브루스케타', '이탈리아 요리', '비건 완두콩과 민트 페스토 브루스케타는 유제품 프리 전채입니다. 1인분에 약 137칼로리, 단백질 2g, 지방 12g을 포함합니다. 45분 내에 준비 가능합니다.', 'ADMIN', SYSDATE, '1. 오븐을 375°F(190°C)로 예열합니다.\n2. 빵을 썰어 올리브 오일을 바르고 베이킹 시트에 올려 5-7분간 살짝 갈색이 될 때까지 굽습니다.\n3. 완두콩, 민트 잎, 올리브 오일, 소금을 푸드 프로세서에서 부드럽게 갈아 페스토를 만듭니다.\n4. 구운 빵이 식으면 각 조각에 페스토를 바르고 무 몇 조각을 올립니다.\n5. 완두콩 순으로 장식해 서빙합니다.', DEFAULT, DEFAULT, '빵, 올리브 오일, 완두콩, 민트 잎, 소금, 무, 완두콩 순');
+
+
+-- Recipe: 한국식 유자차 치즈케이크
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('한국식 유자차 치즈케이크', '한국 디저트', '한국식 유자차 치즈케이크는 약 45분 만에 완성되는 디저트입니다. 1인분에 약 454칼로리, 단백질 6g, 지방 27g을 포함합니다. 이 레시피는 8인분이며, 한국 요리의 특징을 잘 보여줍니다.', 'ADMIN', SYSDATE, '1. 23cm 원형 팬(바닥 분리형)을 준비하고 안을 깔아둔다.\n2. 다진 다이제스티브 비스킷과 녹인 버터를 섞어 팬 바닥에 눌러 넣고 냉장고에 보관한다. 물에 젤라틴을 뿌려 불린 후, 뜨거운 물 위에서 녹여 실온으로 식힌다.\n3. 비유제품 휘핑크림을 뻣뻣하지 않게 거품기로 쳐서 준비한다. 다른 볼에 크림치즈와 설탕을 부드럽게 섞고, 우유를 점차 추가한다.\n4. 레몬즙, 유자차 페이스트를 넣고 섞은 후, 젤라틴 용액을 추가해 잘 섞는다. 휘핑크림을 손거품기로 섞는다.\n5. 크림치즈 혼합물을 팬에 붓고 최소 4시간 냉장 보관한다. 토핑을 위해 젤라틴을 녹이고 유자차 페이스트를 섞어 식힌다.\n6. 유자차 페이스트를 치즈케이크 위에 얇고 고르게 바르고, 서빙할 때까지 냉장 보관한다.', DEFAULT, DEFAULT, '다이제스티브 비스킷, 버터, 젤라틴, 물, 비유제품 휘핑크림, 크림치즈, 설탕, 우유, 레몬즙, 유자차 페이스트');
+
+-- Recipe: 잡채 (한국식 볶음 당면)
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('잡채 (한국식 볶음 당면)', '한국 사이드 디쉬', '잡채는 유제품 프리, 락토 오보 채식, 비건 사이드 디쉬로, 4인분에 397칼로리, 단백질 5g, 지방 15g을 포함합니다. 약 45분 소요됩니다.', 'ADMIN', SYSDATE, '1. 포장지 지침에 따라 당면을 삶는다.\n2. 큰 팬이나 웍에 중불로 올리브 오일과 참기름 1큰술을 가열한다.\n3. 양파 슬라이스와 마늘을 넣고 약 1분간 볶는다.\n4. 나머지 채소를 추가하고 4~5분간 반쯤 익고 아삭하게 볶는다.\n5. 불을 낮추고 삶은 당면, 간장, 설탕, 나머지 참기름을 넣는다.\n6. 섞어서 2분 더 조리한다.\n7. 필요 시 소금이나 간장을 추가하고, 더 달게 하고 싶다면 설탕을 조금 더 넣는다.\n8. 참깨를 사용한다면 마지막에 뿌린다.', DEFAULT, DEFAULT, '당면, 올리브 오일, 참기름, 양파, 마늘, 채소, 간장, 설탕, 소금, 참깨');
+
+-- Recipe: 한국식 깻잎 페스토
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('한국식 깻잎 페스토', '한국 소스', '한국식 깻잎 페스토는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 소스입니다. 1인분에 96칼로리, 단백질 1g, 지방 10g을 포함하며, 8인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 모든 재료를 푸드 프로세서에 넣고 부드러운 페이스트가 될 때까지 갈는다.\n2. 갓 조리한 파스타와 함께 볼에 넣어 버무려 서빙하고, 남은 잣으로 장식한다.', DEFAULT, DEFAULT, '깻잎, 잣, 마늘, 엑스트라 버진 올리브 오일, 후추');
+
+-- Recipe: 김치
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('김치', '한국 사이드 디쉬', '김치는 글루텐 프리, 유제품 프리, 락토 오보 채식, 비건 사이드 디쉬입니다. 1인분에 119칼로리, 단백질 7g, 지방 2g을 포함하며, 6인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 배추를 2인치 스트립으로 썬다.\n2. 소금 반을 섞는다.\n3. 30분간 두었다가 물로 헹구고 물기를 뺀다.\n4. 파, 마늘, 생강, 고추, 배추, 나머지 소금을 섞는다. 항아리나 유리병에 채운다.\n5. 서늘한 곳에서 3~4일 보관한 후 냉장고에 저장한다.', DEFAULT, DEFAULT, '배추, 소금, 파, 마늘, 생강, 고추');
+
+-- Recipe: 겨울 김치
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('겨울 김치', '한국 사이드 디쉬', '겨울 김치는 글루텐 프리, 유제품 프리, 페스카테리언 사이드 디쉬로, 1인분에 365칼로리, 단백질 23g, 지방 3g을 포함합니다.', 'ADMIN', SYSDATE, '1. 4등분한 배추를 소금물에 4시간 담가 무거운 접시로 눌러둔다.\n2. 꺼내 물기를 뺀다.\n3. 마늘, 쌀, 발효 새우, 피쉬 소스, 설탕, 고추 페이스트, 고추 플레이크를 푸드 프로세서로 갈아 부드러운 페이스트로 만든다. 파를 섞는다.\n4. 배추 잎 사이사이에 페이스트를 발라 모든 부분을 코팅한다.\n5. 김치를 밀폐 용기에 넣고 실온에서 하루, 냉장고에서 최소 일주일 발효시킨다.', DEFAULT, DEFAULT, '배추, 소금물, 마늘, 쌀, 발효 새우, 피쉬 소스, 설탕, 고추 페이스트, 고추 플레이크, 파');
+
+-- Recipe: 매운 한국식 바비큐 돼지고기
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('매운 한국식 바비큐 돼지고기', '한국 메인 요리', '매운 한국식 바비큐 돼지고기는 글루텐 프리, 유제품 프리 메인 요리로, 1인분에 157칼로리, 단백질 21g, 지방 5g을 포함하며, 10인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 마리네이드 재료(황설탕, 간장, 생강, 참기름, 고추 마늘 소스)를 섞는다.\n2. 얇게 썬 돼지고기에 마리네이드를 붓고 최소 4시간, 가능하면 하룻밤 재운다.\n3. 그릴을 고온으로 예열하고 돼지고기를 양면 3분씩 또는 완전히 익을 때까지 굽는다.\n4. 남은 마리네이드를 소스팬에서 끓여 걸쭉해지면 쌀 식초를 넣어 단맛을 조절하고 고기에 뿌린다.', DEFAULT, DEFAULT, '황설탕, 간장, 생강, 참기름, 고추 마늘 소스, 돼지고기, 쌀 식초');
+
+-- Recipe: 한국식 소고기 밥그릇
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('한국식 소고기 밥그릇', '한국 메인 요리', '한국식 소고기 밥그릇은 유제품 프리 메인 요리로, 1인분에 669칼로리, 단백질 32g, 지방 25g을 포함하며, 4인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 소고기를 헹구고 물기를 닦아 1/8인치 두께로 3인치 길이로 썬다. 작은 볼에 소고기와 한국식 마리네이드 1/4컵을 섞는다.\n2. 콩의 줄기와 껍질을 제거하고 3인치 길이로 비스듬히 썬다.\n3. 당근을 3인치 길이의 성냥개비 모양으로 썬다.\n4. 14인치 웍 또는 12인치 팬에 물 1/2컵, 콩, 당근을 넣고 고온에서 덮어 3분간 부드러워질 때까지 가끔 저으며 조리한다.\n5. 물기를 빼고 차가운 물에 담갔다가 식으면 물기를 뺀다. 볼에 식초, 참기름, 설탕, 소금을 섞는다.\n6. 웍을 고온으로 예열하고 샐러드 오일을 넣는다.\n7. 소고기와 볼의 액체를 넣고 고기가 더 이상 분홍색이 아닐 때까지 2분간 볶는다.\n8. 나머지 마리네이드와 육수를 팬에 넣고 끓을 때까지 저어준다.\n9. 밥을 그릇에 담고 소고기, 소스, 채소, 조미료를 얹는다.', DEFAULT, DEFAULT, '소고기, 한국식 마리네이드, 콩, 당근, 물, 식초, 참기름, 설탕, 소금, 샐러드 오일, 육수, 밥');
+
+-- Recipe: 한국식 햄버그 스테이크 토마토 그레이비
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('한국식 햄버그 스테이크 토마토 그레이비', '한국 메인 요리', '한국식 햄버그 스테이크 토마토 그레이비는 1인분에 436칼로리, 단백질 23g, 지방 28g을 포함하며, 8인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 큰 볼에 다진 마늘, 다진 양파, 간장, 참기름, 설탕, 후추, 다진 돼지고기를 섞는다.\n2. 손으로 잘 섞어 둥근 패티로 만든다. 하룻밤 마리네이드는 선택 사항이다.\n3. 프라이팬이나 주철 프라이팬에 올리브 오일이나 버터를 얇게 바르고 중고온에서 패티를 양면 4분씩 조리한다. 패티 조리 후 계란을 취향대로 조리한다.\n4. 고기 찌꺼기에 다진 마늘과 반으로 자른 방울토마토를 넣고 몇 분간 갈색이 될 때까지 볶는다. 고기 조각을 긁어낸다.\n5. 나머지 소스 재료를 넣고 약 5분간 졸인다. 토마토 껍질은 벗겨내어 필요 시 버린다.\n6. 소스를 걸쭉하게 하기 위해 밀가루를 넣고 맛을 조정한다.', DEFAULT, DEFAULT, '다진 마늘, 다진 양파, 간장, 참기름, 설탕, 후추, 다진 돼지고기, 올리브 오일, 버터, 계란, 방울토마토, 밀가루');
+
+-- Recipe: 고구마 김치 해시 브런치
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('고구마 김치 해시 브런치', '한국 애피타이저', '고구마 김치 해시 브런치는 글루텐 프리, 유제품 프리, 락토 오보 채식 요리로, 1인분에 280칼로리, 단백질 9g, 지방 11g을 포함하며, 6인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 큰 프라이팬을 중고온으로 설정한다.\n2. 뜨거워지면 코코넛 오일을 넣는다.\n3. 양파를 넣고 1~2분간 갈색이 될 때까지 두었다가 가끔 저어준다.\n4. 양파가 투명해지면 마늘을 넣고 1분간 섞는다.\n5. 강판에 간 고구마를 넣고 2분간 두어 캐러멜화시킨 후 저어준다.\n6. 코셔 소금과 후추로 간한다.\n7. 코코넛 넥타를 넣고 자주 저어준다.\n8. 약 5분간 조리한다.\n9. 팬 바닥에 약간 탄 부분이 보이지만 괜찮다.\n10. 셰리 식초를 넣고 팬 바닥의 탄 부분을 긁어 디글레이징한다.\n11. 다진 김치를 넣고 1분간 잘 섞는다.\n12. 불을 끈다.\n13. 남은 골파로 장식한다.\n[계란 옵션]\n14. 작은 볼에 계란을 깨 넣는다.\n15. 계란의 상태를 확인하고 흰자가 퍼지지 않도록 한다.\n16. 평평한 논스틱 팬을 중고온으로 설정하고 코코넛 오일을 넣는다.\n17. 계란이 지글거리면 넣는다.\n18. 필요한 만큼 계란을 반복 조리한다.\n19. 각 접시에 루콜라를 깔고 해시를 약 한 컵 얹는다.\n20. 튀긴 계란을 올리고 말돈 소금과 골파를 뿌린다.\n[비건 옵션]\n21. 각 접시에 루콜라를 깔고 해시를 약 한 컵 얹는다.\n22. 얇게 썬 아보카도를 올린다.\n23. 레몬을 살짝 짜고 말돈 소금을 뿌린다.', DEFAULT, DEFAULT, '코코넛 오일, 양파, 마늘, 고구마, 코셔 소금, 후추, 코코넛 넥타, 셰리 식초, 김치, 골파, 계란, 루콜라, 말돈 소금, 아보카도, 레몬');
+
+-- Recipe: 매운 김치 배추 수프
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('매운 김치 배추 수프', '한국 메인 요리', '매운 김치 배추 수프는 글루텐 프리, 유제품 프리 메인 요리로, 1인분에 346칼로리, 단백질 14g, 지방 20g을 포함하며, 4인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 큰 냄비에 중불로 코코넛 오일을 녹인다.\n2. 양파를 넣고 4~6분간 투명해질 때까지 조리한다.\n3. 다진 돼지고기를 넣고 숟가락으로 부수며 8~10분간 갈색이 될 때까지 조리한다.\n4. 마늘과 생강을 넣고 1분 더 조리한다.\n5. 배추를 넣고 간장, 피쉬 소스, 참기름, 김치, 김치 즙을 섞는다.\n6. 뼈 육수를 넣고 끓인다. 불을 줄여 덮고 배추가 완전히 부드러워질 때까지 15~20분간 조리한다.\n7. 불에서 내려 파로 장식한다.', DEFAULT, DEFAULT, '코코넛 오일, 양파, 다진 돼지고기, 마늘, 생강, 배추, 간장, 피쉬 소스, 참기름, 김치, 김치 즙, 뼈 육수, 파');
+
+-- Recipe: 쉬운 한국식 소고기
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('쉬운 한국식 소고기', '한국 메인 요리', '쉬운 한국식 소고기는 글루텐 프리, 유제품 프리 메인 요리로, 1인분에 396칼로리, 단백질 33g, 지방 12g을 포함하며, 3인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 큰 프라이팬에 중불로 다진 소고기를 마늘과 참기름으로 갈색이 될 때까지 볶는다.\n2. 대부분의 기름을 빼고 황설탕, 간장, 생강, 소금, 후추, 고추를 넣는다. 맛이 어우러지도록 몇 분간 끓인다.\n3. 찐 쌀 위에 올리고 파로 장식하여 서빙한다.', DEFAULT, DEFAULT, '다진 소고기, 마늘, 참기름, 황설탕, 간장, 생강, 소금, 후추, 고추, 찐 쌀, 파');
+
+-- Recipe: 한국식 닭죽
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('한국식 닭죽', '한국 메인 요리', '한국식 닭죽은 글루텐 프리, 유제품 프리, 케토제닉 메인 요리로, 1인분에 273칼로리, 단백질 21g, 지방 19g을 포함하며, 4인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 찹쌀을 최소 1시간 물에 담가둔다.\n2. 큰 냄비에 물 8컵을 끓이고 닭 가슴살, 마늘, 소금 1큰술을 넣어 중고온에서 20분간 끓인다.\n3. 닭을 꺼내 찬물로 헹구고 손으로 찢거나 얇게 썬다.\n4. 닭 육수를 체에 걸러 마늘을 제거하고 3~4컵을 냄비에 다시 넣는다.\n5. 찹쌀의 물기를 빼고 닭, 다진 채소와 함께 냄비에 넣는다. 중불에서 20분간 자주 저으며 걸쭉해질 때까지 조리한다.\n6. 필요 시 닭 육수나 물을 추가한다.\n7. 그릇에 담고 참기름, 간장, 파를 취향껏 뿌려 즐긴다.', DEFAULT, DEFAULT, '찹쌀, 물, 닭 가슴살, 마늘, 소금, 채소, 닭 육수, 참기름, 간장, 파');
+
+-- Recipe: 닭 불고기 - 한국식 바비큐 치킨
+INSERT INTO recipe (name, recipe_category, description, created_by, created_at, instructions, avg_rating, view_count, ingredient_name)
+    VALUES ('닭 불고기 - 한국식 바비큐 치킨', '한국 메인 요리', '닭 불고기는 글루텐 프리, 유제품 프리 메인 요리로, 1인분에 557칼로리, 단백질 40g, 지방 39g을 포함하며, 4인분을 만듭니다.', 'ADMIN', SYSDATE, '1. 닭 허벅지 껍질을 벗기고 지방을 제거한다.\n2. 뼈를 중심으로 한 장의 스테이크 모양으로 자르고 작은 조각도 조리용으로 보관한다. 큰 볼에 넣는다. 마리네이드 재료를 푸드 프로세서로 갈아 부드럽게 만든다.\n3. 닭에 마리네이드를 코팅하고 냉장고에서 하룻밤 또는 최소 6~12시간 재운다. 꼬챙이나 이쑤시개로 찔러 마리네이드 흡수를 돕는다.\n4. 프라이팬이나 논스틱 팬을 중불로 예열하고 닭 허벅지를 15~20분간 또는 완전히 익을 때까지 조리한다. 고기 온도계로 165~170°F를 확인한다.\n5. 접시에 옮겨 파로 장식하고 상추 잎과 함께 서빙한다.', DEFAULT, DEFAULT, '닭 허벅지, 마리네이드, 파, 상추 잎');
+
+
+
 
 
 
@@ -11183,10 +11614,9 @@ COMMENT ON COLUMN recipe_ingredient.ingredient_id IS '고유 ID';
 
 
 
-INSERT INTO recipe_ingredient ( ingredient_name, allergy_id) VALUES ( '새우 ', NULL);
+
 INSERT INTO recipe_ingredient ( ingredient_name, allergy_id) VALUES ( '달걀', 3);        -- 계란
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '생크림', 2);       -- 우유
-
 INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '무염버터', 2);     -- 우유
 
 -- CREATE TABLE: report_post
@@ -11380,7 +11810,6 @@ COMMENT ON COLUMN image.target_type IS '이미지가 첨부된 대상 유형 (�
 COMMENT ON COLUMN image.image_url IS '이미지 URL 또는 경로';
 COMMENT ON COLUMN image.description IS '이미지에 대한 설명';
 COMMENT ON COLUMN image.description IS '이미지에   데이터';
-
 
 
 
@@ -14442,13 +14871,13 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (21, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/ace27998-9410-4cdc-983b-786000cb1eca.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (22, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F7ed444d4-e982-4f15-9c40-4e2ff76d360a.jpg&w=96&q=85');
+VALUES (22, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F7ed444d4-e982-4f15-9c40-4e2ff76d360a.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (23, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/9c5f66d6-7486-4759-8dcd-22696c944524.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (24, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F25d5619e-733b-4599-b6a4-d4209959e3b3.jpg&w=96&q=85');
+VALUES (24, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F25d5619e-733b-4599-b6a4-d4209959e3b3.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (25, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/731d4c1b-8fb8-4414-abed-69ed417036f7.webp');
@@ -14568,7 +14997,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (63, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/5e1fcc5d-e7b3-43ad-a75f-7b0d3e9fec22.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (64, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F2172c37e-6191-4b7d-83ea-aaf4a7208e8a.jpg&w=96&q=85');
+VALUES (64, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F2172c37e-6191-4b7d-83ea-aaf4a7208e8a.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (65, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/59b95847-209d-491b-8523-8ab6e404f812.webp');
@@ -14583,7 +15012,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (68, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/4409fe5f-aca9-439b-87a6-7a792d63249b.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (69, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Freviews%2F0a56f7d6-2749-4381-ad1a-3b0aa7aa5703.jpg&w=96&q=85');
+VALUES (69, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Freviews%2F0a56f7d6-2749-4381-ad1a-3b0aa7aa5703.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (70, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/4b7a629f-ff33-4d56-b96b-f62bda0b5a8f.webp');
@@ -14595,7 +15024,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (72, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/c63a33eb-ee47-44cb-8960-1cef0cf60924.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (73, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F791d05f5-f199-47e3-ad4c-8e87e555d8f9.jpg&w=96&q=85');
+VALUES (73, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F791d05f5-f199-47e3-ad4c-8e87e555d8f9.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (74, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/2b0f95cf-5f40-41db-ba3f-6955dba41a36.webp');
@@ -14610,7 +15039,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (77, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/cfd267b1-a6d9-4da5-ac8c-464de7038db7.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (78, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Freviews%2F318f41eb-6385-4688-8398-4e0cbcf5d09e.jpg&w=96&q=85');
+VALUES (78, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Freviews%2F318f41eb-6385-4688-8398-4e0cbcf5d09e.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (79, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/7ef09e2c-35f0-41a9-bed9-c81dbf70e0fe.webp');
@@ -14649,7 +15078,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (90, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/2cff1e1f-d700-417a-ade2-bd152f1a3ef9.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (91, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2Fbabdb6ef-195c-4c7c-8ce0-bb014de850df.jpg&w=96&q=85');
+VALUES (91, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2Fbabdb6ef-195c-4c7c-8ce0-bb014de850df.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (92, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/0b46b79e-678f-4f0f-8eac-b3d11cf443cb.webp');
@@ -14763,7 +15192,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (128, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/78447427-779a-4e94-81a1-5226004422a5.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (129, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F69fafefc-ae12-417a-a667-448f9bb77ef7.jpg&w=96&q=85');
+VALUES (129, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F69fafefc-ae12-417a-a667-448f9bb77ef7.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (130, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/c6ae5ecd-9efc-49e7-ab17-2acce35bcd29.webp');
@@ -14796,7 +15225,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (139, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/40b4a794-2536-4a47-b9a8-bd0b7b3a50ef.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (140, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F69fafefc-ae12-417a-a667-448f9bb77ef7.jpg&w=96&q=85');
+VALUES (140, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F69fafefc-ae12-417a-a667-448f9bb77ef7.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (141, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/9aa2a0c8-ef2b-4b4c-8477-7e2ca6b81f82.webp');
@@ -15198,13 +15627,13 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (273, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/2c7733e0-05ff-4e4b-b662-c51d4eb45009.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (274, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2Fae83886a-faaa-4748-a2f9-82aba1e75992.jpg&w=96&q=85');
+VALUES (274, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2Fae83886a-faaa-4748-a2f9-82aba1e75992.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (275, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/2d4b5650-b5c3-405c-8fc9-f100ac7cae7c.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (276, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Freviews%2F854dafec-b8bb-48d7-99bc-ce782251ae34.jpg&w=96&q=85');
+VALUES (276, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Freviews%2F854dafec-b8bb-48d7-99bc-ce782251ae34.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (277, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/fe1a8532-9255-47c9-8164-f7d860ddb4eb.webp');
@@ -15249,7 +15678,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (290, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/a8d18e40-bd18-4269-800c-3627ccaf9a30.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (291, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F7ed444d4-e982-4f15-9c40-4e2ff76d360a.jpg&w=96&q=85');
+VALUES (291, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F7ed444d4-e982-4f15-9c40-4e2ff76d360a.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (292, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/7a580de4-69b4-4ef7-afed-f05a09ca36ab.webp');
@@ -15468,7 +15897,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (363, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/8dbfc1b1-fceb-4705-b9b2-e8730c27d08a.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (364, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F3ac785d2-46b6-4e6e-b0a7-d149d8ead8aa.jpg&w=96&q=85');
+VALUES (364, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Freviews%2F3ac785d2-46b6-4e6e-b0a7-d149d8ead8aa.jpgandw=96andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (365, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/9d831232-28d5-4ae3-828e-52aae531ee0b.webp');
@@ -15636,7 +16065,7 @@ INSERT INTO image (target_id, target_type, image_url)
 VALUES (419, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/dd5023c6-51c6-4707-9e44-125553efa478.webp');
 
 INSERT INTO image (target_id, target_type, image_url)
-VALUES (420, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Fproduct%2Fthumbnail%2Faa4bedb7-fe7d-4c36-b4b8-ef42ee40aae5.webp&w=384&q=85');
+VALUES (420, 'drink', 'https://dailyshot.co/m/_next/image?url=https%3A%2F%2Fd1e2y5wc27crnp.cloudfront.net%2Fmedia%2Fsmartorder_reservation%2Fproduct%2Fthumbnail%2Faa4bedb7-fe7d-4c36-b4b8-ef42ee40aae5.webpandw=384andq=85');
 
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (421, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/d9039ef3-929a-4539-ab2e-b726cb2b7fc0.webp');
@@ -15683,38 +16112,428 @@ VALUES (434, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_re
 INSERT INTO image (target_id, target_type, image_url)
 VALUES (435, 'drink', 'https://d1e2y5wc27crnp.cloudfront.net/media/smartorder_reservation/product/thumbnail/577571ad-9d13-4b42-89b5-27fad3e76e81.webp');
 
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (999, 'recipe', 'https://img.spoonacular.com/recipes/716408-312x231.jpg');
 
--- CREATE TABLE: health_recommend
-CREATE TABLE health_recommend (
-    recommend_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    reason VARCHAR2(300),
-    recipe_id NUMBER NOT NULL,
-    condition_id NUMBER NOT NULL,
-    CONSTRAINT fk_health_recommend_recipe FOREIGN KEY (recipe_id) REFERENCES recipe(recipe_id),
-    CONSTRAINT fk_health_recommend_condition FOREIGN KEY (condition_id) REFERENCES health_condition(condition_id)
-);
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1000, 'recipe', 'https://img.spoonacular.com/recipes/639606-312x231.jpg');
 
-COMMENT ON COLUMN health_recommend.recommend_id IS '추천 고유 ID (자동 생성)';
-COMMENT ON COLUMN health_recommend.reason IS '추천 사유 또는 설명';
-COMMENT ON COLUMN health_recommend.recipe_id IS '추천 레시피 ID (recipe 테이블 참조)';
-COMMENT ON COLUMN health_recommend.condition_id IS '건강 상태 ID (health_condition 테이블 참조)';
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1001, 'recipe', 'https://img.spoonacular.com/recipes/1098350-312x231.jpg');
 
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1002, 'recipe', 'https://img.spoonacular.com/recipes/645265-312x231.jpg');
 
-INSERT INTO health_recommend (reason, recipe_id, condition_id) VALUES
-('당뇨 환자에게 적합한 저당 레시피', 1, 1);
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1003, 'recipe', 'https://img.spoonacular.com/recipes/660842-312x231.jpg');
 
-INSERT INTO health_recommend (reason, recipe_id, condition_id) VALUES
-('나트륨 섭취를 줄여 고혈압에 좋은 레시피', 2, 2);
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1004, 'recipe', 'https://img.spoonacular.com/recipes/645384-312x231.jpg');
 
-INSERT INTO health_recommend (reason, recipe_id, condition_id) VALUES
-('요산 수치 조절에 도움이 되는 레시피', 3, 3);
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1005, 'recipe', 'https://img.spoonacular.com/recipes/879449-312x231.png');
 
-INSERT INTO health_recommend (reason, recipe_id, condition_id) VALUES
-('지방 섭취 제한을 고려한 저지방 레시피', 4, 4);
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1006, 'recipe', 'https://img.spoonacular.com/recipes/649195-312x231.jpg');
 
-INSERT INTO health_recommend (reason, recipe_id, condition_id) VALUES
-('글루텐 민감증 환자도 안심하고 먹을 수 있는 레시피', 4, 5);
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1007, 'recipe', 'https://img.spoonacular.com/recipes/645354-312x231.jpg');
 
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1008, 'recipe', 'https://img.spoonacular.com/recipes/654939-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1009, 'recipe', 'https://img.spoonacular.com/recipes/649886-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1010, 'recipe', 'https://img.spoonacular.com/recipes/645365-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1011, 'recipe', 'https://img.spoonacular.com/recipes/651076-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1012, 'recipe', 'https://img.spoonacular.com/recipes/799304-312x231.png');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1013, 'recipe', 'https://img.spoonacular.com/recipes/679535-312x231.png');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1014, 'recipe', 'https://img.spoonacular.com/recipes/649183-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1015, 'recipe', 'https://img.spoonacular.com/recipes/641308-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1016, 'recipe', 'https://img.spoonacular.com/recipes/644488-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1017, 'recipe', 'https://img.spoonacular.com/recipes/656819-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1018, 'recipe', 'https://img.spoonacular.com/recipes/638493-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1019, 'recipe', 'https://img.spoonacular.com/recipes/1096205-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1020, 'recipe', 'https://img.spoonacular.com/recipes/644504-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1021, 'recipe', 'https://img.spoonacular.com/recipes/644462-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1022, 'recipe', 'https://img.spoonacular.com/recipes/1095834-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1023, 'recipe', 'https://img.spoonacular.com/recipes/1096208-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1024, 'recipe', 'https://img.spoonacular.com/recipes/643851-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1025, 'recipe', 'https://img.spoonacular.com/recipes/656817-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1026, 'recipe', 'https://img.spoonacular.com/recipes/715421-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1027, 'recipe', 'https://img.spoonacular.com/recipes/715394-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1028, 'recipe', 'https://img.spoonacular.com/recipes/715391-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1029, 'recipe', 'https://img.spoonacular.com/recipes/715543-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1030, 'recipe', 'https://img.spoonacular.com/recipes/657579-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1031, 'recipe', 'https://img.spoonacular.com/recipes/633072-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1032, 'recipe', 'https://img.spoonacular.com/recipes/661188-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1033, 'recipe', 'https://img.spoonacular.com/recipes/640062-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1034, 'recipe', 'https://img.spoonacular.com/recipes/658644-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1035, 'recipe', 'https://img.spoonacular.com/recipes/652919-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1036, 'recipe', 'https://img.spoonacular.com/recipes/642395-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1037, 'recipe', 'https://img.spoonacular.com/recipes/659174-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1038, 'recipe', 'https://img.spoonacular.com/recipes/660234-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1039, 'recipe', 'https://img.spoonacular.com/recipes/661059-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1040, 'recipe', 'https://img.spoonacular.com/recipes/715419-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1041, 'recipe', 'https://img.spoonacular.com/recipes/715595-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1042, 'recipe', 'https://img.spoonacular.com/recipes/780000-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1043, 'recipe', 'https://img.spoonacular.com/recipes/635063-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1044, 'recipe', 'https://img.spoonacular.com/recipes/644081-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1045, 'recipe', 'https://img.spoonacular.com/recipes/641461-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1046, 'recipe', 'https://img.spoonacular.com/recipes/634873-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1047, 'recipe', 'https://img.spoonacular.com/recipes/635350-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1048, 'recipe', 'https://img.spoonacular.com/recipes/660395-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1049, 'recipe', 'https://img.spoonacular.com/recipes/800754-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1050, 'recipe', 'https://img.spoonacular.com/recipes/991010-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1051, 'recipe', 'https://img.spoonacular.com/recipes/1039293-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1052, 'recipe', 'https://img.spoonacular.com/recipes/650965-312x231.png');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1053, 'recipe', 'https://img.spoonacular.com/recipes/716217-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1054, 'recipe', 'https://img.spoonacular.com/recipes/645634-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1055, 'recipe', 'https://img.spoonacular.com/recipes/642129-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1056, 'recipe', 'https://img.spoonacular.com/recipes/644859-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1057, 'recipe', 'https://img.spoonacular.com/recipes/664828-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1058, 'recipe', 'https://img.spoonacular.com/recipes/664830-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1059, 'recipe', 'https://img.spoonacular.com/recipes/1096250-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1060, 'recipe', 'https://img.spoonacular.com/recipes/664847-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1061, 'recipe', 'https://img.spoonacular.com/recipes/664835-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1062, 'recipe', 'https://img.spoonacular.com/recipes/918033-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1063, 'recipe', 'https://img.spoonacular.com/recipes/664708-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1064, 'recipe', 'https://img.spoonacular.com/recipes/1096211-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1065, 'recipe', 'https://img.spoonacular.com/recipes/641911-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1066, 'recipe', 'https://img.spoonacular.com/recipes/660868-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1067, 'recipe', 'https://img.spoonacular.com/recipes/654327-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1068, 'recipe', 'https://img.spoonacular.com/recipes/664284-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1069, 'recipe', 'https://img.spoonacular.com/recipes/652134-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1070, 'recipe', 'https://img.spoonacular.com/recipes/633576-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1071, 'recipe', 'https://img.spoonacular.com/recipes/640085-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1072, 'recipe', 'https://img.spoonacular.com/recipes/1095794-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1073, 'recipe', 'https://img.spoonacular.com/recipes/631747-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1074, 'recipe', 'https://img.spoonacular.com/recipes/826556-312x231.png');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1075, 'recipe', 'https://img.spoonacular.com/recipes/1697577-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1076, 'recipe', 'https://img.spoonacular.com/recipes/716202-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1077, 'recipe', 'https://img.spoonacular.com/recipes/641908-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1078, 'recipe', 'https://img.spoonacular.com/recipes/644376-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1079, 'recipe', 'https://img.spoonacular.com/recipes/658967-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1080, 'recipe', 'https://img.spoonacular.com/recipes/798400-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1081, 'recipe', 'https://img.spoonacular.com/recipes/658058-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1082, 'recipe', 'https://img.spoonacular.com/recipes/642941-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1083, 'recipe', 'https://img.spoonacular.com/recipes/647876-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1084, 'recipe', 'https://img.spoonacular.com/recipes/663090-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1085, 'recipe', 'https://img.spoonacular.com/recipes/1096225-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1086, 'recipe', 'https://img.spoonacular.com/recipes/647795-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1087, 'recipe', 'https://img.spoonacular.com/recipes/646974-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1088, 'recipe', 'https://img.spoonacular.com/recipes/634710-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1089, 'recipe', 'https://img.spoonacular.com/recipes/648470-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1090, 'recipe', 'https://img.spoonacular.com/recipes/654430-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1091, 'recipe', 'https://img.spoonacular.com/recipes/648479-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1092, 'recipe', 'https://img.spoonacular.com/recipes/653008-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1093, 'recipe', 'https://img.spoonacular.com/recipes/660493-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1094, 'recipe', 'https://img.spoonacular.com/recipes/1095743-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1095, 'recipe', 'https://img.spoonacular.com/recipes/663669-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1096, 'recipe', 'https://img.spoonacular.com/recipes/648500-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1097, 'recipe', 'https://img.spoonacular.com/recipes/37513-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1098, 'recipe', 'https://img.spoonacular.com/recipes/648460-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1099, 'recipe', 'https://img.spoonacular.com/recipes/648487-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1100, 'recipe', 'https://img.spoonacular.com/recipes/1697543-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1101, 'recipe', 'https://img.spoonacular.com/recipes/716426-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1102, 'recipe', 'https://img.spoonacular.com/recipes/716311-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1103, 'recipe', 'https://img.spoonacular.com/recipes/664650-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1104, 'recipe', 'https://img.spoonacular.com/recipes/638693-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1105, 'recipe', 'https://img.spoonacular.com/recipes/642138-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1106, 'recipe', 'https://img.spoonacular.com/recipes/656777-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1107, 'recipe', 'https://img.spoonacular.com/recipes/649129-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1108, 'recipe', 'https://img.spoonacular.com/recipes/1095843-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1109, 'recipe', 'https://img.spoonacular.com/recipes/682619-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1110, 'recipe', 'https://img.spoonacular.com/recipes/667701-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1111, 'recipe', 'https://img.spoonacular.com/recipes/984198-312x231.png');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1112, 'recipe', 'https://img.spoonacular.com/recipes/663150-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1113, 'recipe', 'https://img.spoonacular.com/recipes/945221-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1114, 'recipe', 'https://img.spoonacular.com/recipes/715449-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1115, 'recipe', 'https://img.spoonacular.com/recipes/776505-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1116, 'recipe', 'https://img.spoonacular.com/recipes/716410-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1117, 'recipe', 'https://img.spoonacular.com/recipes/715467-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1118, 'recipe', 'https://img.spoonacular.com/recipes/715419-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1119, 'recipe', 'https://img.spoonacular.com/recipes/715378-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1120, 'recipe', 'https://img.spoonacular.com/recipes/715595-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1121, 'recipe', 'https://img.spoonacular.com/recipes/715420-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1122, 'recipe', 'https://img.spoonacular.com/recipes/716408-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1123, 'recipe', 'https://img.spoonacular.com/recipes/715493-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1124, 'recipe', 'https://img.spoonacular.com/recipes/716297-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1125, 'recipe', 'https://img.spoonacular.com/recipes/715569-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1126, 'recipe', 'https://img.spoonacular.com/recipes/716407-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1127, 'recipe', 'https://img.spoonacular.com/recipes/652651-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1128, 'recipe', 'https://img.spoonacular.com/recipes/657939-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1129, 'recipe', 'https://img.spoonacular.com/recipes/716272-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1130, 'recipe', 'https://img.spoonacular.com/recipes/640767-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1131, 'recipe', 'https://img.spoonacular.com/recipes/664585-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1132, 'recipe', 'https://img.spoonacular.com/recipes/652652-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1133, 'recipe', 'https://img.spoonacular.com/recipes/637478-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1134, 'recipe', 'https://img.spoonacular.com/recipes/665776-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1135, 'recipe', 'https://img.spoonacular.com/recipes/640693-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1136, 'recipe', 'https://img.spoonacular.com/recipes/632046-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1137, 'recipe', 'https://img.spoonacular.com/recipes/716412-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1138, 'recipe', 'https://img.spoonacular.com/recipes/715573-312x231.jpg');
+
+INSERT INTO image (target_id, target_type, image_url)
+    VALUES (1139, 'recipe', 'https://img.spoonacular.com/recipes/641893-312x231.jpg');
 
 
 
@@ -15727,10 +16546,15 @@ CREATE TABLE RATING (
     TARGET_TYPE VARCHAR2(20 BYTE)
     );
 
+
+
+
 -- ADD INDEXES
 CREATE INDEX idx_recipe_name ON recipe(name);
 CREATE INDEX idx_search_log_keyword ON search_log(keyword);
 CREATE INDEX idx_board_writer ON board(writer);
+
+
 
 
 -- 전화번호 컬럼 추가
@@ -15744,3 +16568,1597 @@ ADD (AGE NUMBER(3));
 -- 성별 컬럼 추가
 ALTER TABLE USERS
 ADD (GENDER VARCHAR2(10));
+
+-- 제공된 모든 식재료 목록과 업데이트된 알레르기 ID를 기반으로 생성된 INSERT 구문 (중복 쌍 제거)
+
+-- 땅콩 (ID 1)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '땅콩잼', 1);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 1); -- 복합 재료 (일부 제품에 땅콩 성분 포함 가능)
+
+-- 트리넛 (ID 2)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '견과류', 2);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밤', 2);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해바라기씨', 2);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '호박씨', 2);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '아몬드', 2);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '코코넛밀크', 2); -- 코코넛은 트리넛으로 분류되기도 함
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 2); -- 복합 재료 (일부 제품에 견과류 성분 포함 가능)
+
+-- 갑각류 (ID 3)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 3); -- 복합 재료 (새우 등 포함 가능)
+
+-- 연체동물 (ID 4)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '모시조개', 4);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '우렁이', 4);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '조개', 4); -- 일반적인 조개
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '바지락', 4);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '백합', 4);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 4); -- 복합 재료 (오징어, 조개류 등 포함 가능)
+
+-- 생선 (ID 5)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '간편어간장', 5); -- 어간장
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '어간장', 5); -- 어간장
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '광어', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '대구살', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '동태포', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '멸치', 30); -- 멸치 ID 30에 매핑 (생선 ID 5에도 해당되지만 특정 ID 사용)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '국멸치', 30); -- 멸치 ID 30에 매핑
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '민어', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '조기', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '코다리', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '황태포', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '삼치', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 5); -- 복합 재료 (생선 포함 가능)
+
+-- 깨 (ID 6)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '참기름', 6);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '볶은 흑임자', 6);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '참깨', 6);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통깨', 6);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '흑임자', 6);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '들깻가루', 6);
+
+-- 겨자 (ID 7)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '디종머스터드', 7);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '연겨자', 7);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '적겨자', 7);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '겨자가루', 7);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '르네디종 홀그레인머스터', 7);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '머스터드', 7);
+
+-- 루핀 (ID 8) - 제공된 목록에 해당 식재료 없음
+
+-- 우유 (ID 9)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '리코타치즈', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '무염버터', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '생크림', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '시금치우유 소스', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '버터', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '우유', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염버터', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염치즈', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '치즈', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '파르메산 치즈가루', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '플레인 요구르트', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '플레인요거트', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '휘핑크림', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '치즈가루', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '모짜렐라치즈', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '연유', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 9); -- 복합 재료 (일부 제품에 유제품 성분 포함 가능)
+
+-- 달걀 (ID 10)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '계란', 10);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '달걀', 10);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '마요네즈', 10); -- 대부분 달걀 포함
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '달걀노른자', 10);
+
+-- 밀 (ID 11)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '라면', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '만두피', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밀가루', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '빵가루', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '소면', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '스파게티', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '우동면', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '허브크러스트', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통조림 햄', 11); -- 가공 시 포함 가능성
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '먹물파스타', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 11); -- 복합 재료 (일부 제품에 밀가루 성분 포함 가능)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '백년초국수', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '뽕잎국수', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '치자국수', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '펜네', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '또띠아', 11);
+
+-- 콩 (ID 12)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '두부', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '콩나물', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '콩가루', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '고추장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '순두부', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '국간장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '콩(백태)', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염된장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '된장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '맛간장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '하얀된장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염간장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염 된장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쌈장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '식용유', 12); -- 대두유가 흔함
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '마요네즈', 12); -- 콩기름 포함 가능
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '으깬 두부', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '일본 된장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '청국장', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '콩고기', 12);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 12); -- 복합 재료 (일부 제품에 콩 성분 포함 가능)
+
+-- 셀러리 (ID 13)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '샐러리', 13);
+
+-- 아황산염 (ID 14)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '화이트와인', 14); -- 포함 가능성 높음
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '와인', 14); -- 포함 가능성 높음
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '발사믹소스', 14); -- 포함 가능성
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '정종', 14); -- 포함 가능성
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '식초', 14); -- 포함 가능성
+
+-- 옻 (ID 15) - 제공된 목록에 해당 식재료 없음
+
+-- 호두 (ID 16)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '호두', 16);
+
+-- 쌀 (ID 17)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '조랭이떡', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '떡', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쌀겨', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '찹쌀가루', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밥', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '찬밥', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '오곡', 17); -- 쌀 포함
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '현미', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '멥쌀', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '라이스페이퍼', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쌀파스타면', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '볶은 현미', 17);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '누룽지', 17);
+
+-- 게 (ID 18) - 제공된 목록에 해당 식재료 없음
+
+-- 새우 (ID 19)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '건새우', 19);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우', 19);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우(대하)', 19);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우가루', 19);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '칵테일새우', 19);
+
+-- 잣 (ID 20)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '잣', 20);
+
+-- 메밀 (ID 21)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '메밀면', 21);
+
+-- 녹두 (ID 22)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '숙주', 22); -- 녹두 숙주
+
+-- 팥 (ID 23) - 제공된 목록에 해당 식재료 없음
+-- 강낭콩 (ID 24) - 제공된 목록에 해당 식재료 없음
+-- 렌틸콩 (ID 25) - 제공된 목록에 해당 식재료 없음
+-- 유청 (ID 26) - 우유(9)에 포함
+-- 유당 (ID 27) - 우유(9)에 포함
+
+-- 고등어 (ID 28) - 제공된 목록에 해당 식재료 없음
+-- 정어리 (ID 29) - 제공된 목록에 해당 식재료 없음
+-- 멸치 (ID 30)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '멸치', 30);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '국멸치', 30);
+
+-- 연어 (ID 31)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '연어', 31);
+
+-- 참치 (ID 32) - 제공된 목록에 해당 식재료 없음
+
+-- 소고기 (ID 33)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '소고기', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '다진소고기', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '얇게 썬 쇠고기(부채살)', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기등심', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '소고기 우둔살', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '사골육수', 33); -- 소뼈
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통조림 햄', 33); -- 일부 포함 가능
+
+-- 돼지고기 (ID 34)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지고기', 34);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '다진 돼지고기', 34);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통조림 햄', 34);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '베이컨', 34);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통삼겹살', 34);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지고기(안심)', 34);
+
+-- 닭고기 (ID 35)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭고기', 35);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭가슴살', 35);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭고기살', 35);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭다리살', 35);
+
+-- 양고기 (ID 36) - 제공된 목록에 해당 식재료 없음
+
+-- 오징어 (ID 37)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '오징어', 37);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통오징어', 37);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '먹물파스타', 37); -- 먹물 원료
+
+-- 문어 (ID 38)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '먹물파스타', 38); -- 먹물 원료
+
+-- 쭈꾸미 (ID 39)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '주꾸미', 39);
+
+-- 홍합 (ID 40)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '홍합', 40);
+
+-- 굴 (ID 41)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '굴', 41);
+
+-- 가리비 (ID 42) - 제공된 목록에 해당 식재료 없음
+-- 전복 (ID 43)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '전복', 43);
+
+-- 소라 (ID 44) - 제공된 목록에 해당 식재료 없음
+-- 키위 (ID 45) - 제공된 목록에 해당 식재료 없음
+-- 복숭아 (ID 46) - 제공된 목록에 해당 식재료 없음
+-- 토마토 (ID 47)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '토마토', 47);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '방울토마토', 47);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '홀토마토', 47);
+
+-- 포유류 육류 (ID 48)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지고기', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '다진소고기', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '다진 돼지고기', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '얇게 썬 쇠고기(부채살)', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기등심', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '소고기 우둔살', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '사골육수', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통조림 햄', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '베이컨', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '통삼겹살', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지고기(안심)', 48);
+
+-- 젤라틴 (ID 49) - 제공된 목록에 해당 식재료 없음
+-- 바나나 (ID 50)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '바나나', 50);
+
+-- 감자 (ID 51)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '감자', 51);
+
+-- 사과 (ID 52)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '사과', 52);
+
+-- 당근 (ID 53)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '당근', 53);
+
+-- 복합 재료 또는 일반명에서 특정 알레르기 ID로 매핑된 경우
+-- 카레가루는 여러 알레르기 유발 성분 포함 가능성이 높으므로, 해당 ID들을 모두 매핑합니다.
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 1);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 2);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 9);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 11);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 12);
+-- 해물육수는 갑각류, 연체동물, 생선 포함 가능성이 있으므로, 해당 ID들을 모두 매핑합니다.
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 3);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 4);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 5);
+
+
+
+
+-- 제공된 식재료 목록과 알레르기 ID를 기반으로 생성된 INSERT 구문 (allergy_id = NULL 제외)
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '민어', 5);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기 양지', 33);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기 양지', 48);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '참기름', 6);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '국간장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '간장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '버터', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭다리살', 35); -- 닭고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭다리살', 48); -- 포유류 육류 (닭은 조류이나, 목록 ID 48에 포함시키는 경우 고려)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭가슴살', 35); -- 닭고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭가슴살', 48); -- 포유류 육류 (닭은 조류이나, 목록 ID 48에 포함시키는 경우 고려)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '아몬드', 2); -- 트리넛
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밀가루', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '우유', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '들깻가루', 6); -- 깨
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭뼈', 35); -- 닭고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭뼈', 48); -- 포유류 육류 (닭은 조류이나, 목록 ID 48에 포함시키는 경우 고려)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '현미', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '멥쌀', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우가루', 19); -- 새우
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '얇게 썬 쇠고기(부채살)', 33); -- 소고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '얇게 썬 쇠고기(부채살)', 48); -- 포유류 육류
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염베이컨', 34); -- 돼지고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염베이컨', 48); -- 포유류 육류
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '동태포', 5); -- 생선
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염버터', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '생크림', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '콩고기', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '바나나', 50); -- 바나나
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '방울토마토', 47); -- 토마토
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '만두피', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염간장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '식초', 14); -- 아황산염
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '토마토', 47); -- 토마토
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '감자', 51); -- 감자
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '리코타치즈', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '플레인 요구르트', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '휘핑크림', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '저염치즈', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '스파게티면', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '적겨자', 7); -- 겨자
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쌀파스타면', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '된장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '청국장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '으깬 두부', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '들기름', 6); -- 깨
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '멸치', 30); -- 멸치
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '황태포', 5); -- 생선
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '달걀', 10); -- 달걀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '계란', 10); -- 달걀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '라면', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 1); -- 땅콩 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 2); -- 트리넛 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 9); -- 우유 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 11); -- 밀 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '카레가루', 12); -- 콩 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '고추장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '채 썬 돼지고기', 34); -- 돼지고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '채 썬 돼지고기', 48); -- 포유류 육류
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '두반장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우', 19); -- 새우
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '조개', 4); -- 연체동물
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '홍합', 40); -- 홍합
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '파르메산 치즈가루', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기(우둔살)', 33); -- 소고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '쇠고기(우둔살)', 48); -- 포유류 육류
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '레드와인', 14); -- 아황산염
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '라이스페이퍼', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '빵가루', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지고기(삼겹살)', 34); -- 돼지고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지고기(삼겹살)', 48); -- 포유류 육류
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '가다랑어포', 5); -- 생선
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '주꾸미', 39); -- 쭈꾸미
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '조기', 5); -- 생선
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '허브크러스트', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '화이트와인', 14); -- 아황산염
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '전분', 11); -- 밀 (밀 전분 가능성 고려)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지머리', 34); -- 돼지고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '돼지머리', 48); -- 포유류 육류
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '우동면', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '일본 된장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 3); -- 갑각류 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 4); -- 연체동물 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '해물육수', 5); -- 생선 (포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '맛간장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밥', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '칵테일새우', 19); -- 새우
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밤', 2); -- 트리넛
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '잣', 20); -- 잣
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '코다리', 5); -- 생선
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '콩나물', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '연겨자', 7); -- 겨자
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '마요네즈', 10); -- 달걀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '마요네즈', 12); -- 콩 (콩기름 포함 가능성)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '땅콩잼', 1); -- 땅콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '풋사과', 52); -- 사과
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '전복', 43); -- 전복
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '거피한 들깨가루', 6); -- 깨
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '말린 토마토', 47); -- 토마토
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '정종', 14); -- 아황산염
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '논우렁', 4); -- 연체동물
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '연두부', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭고기살', 35); -- 닭고기
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '닭고기살', 48); -- 포유류 육류 (닭은 조류이나, 목록 ID 48에 포함시키는 경우 고려)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '요거트', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '연유', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '튀김가루', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '누룽지', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '사과', 52); -- 사과
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '밀전병', 11); -- 밀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '생선살', 5); -- 생선
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '와사비', 7); -- 겨자
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '토마토소스', 47); -- 토마토
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '달걀흰자', 10); -- 달걀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '화이트크림', 9); -- 우유
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '날치알', 5); -- 생선
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '크림치즈', 9); -- 우유
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '찹쌀', 17); -- 쌀
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '대하', 19); -- 새우
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '생청국장', 12); -- 콩
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '볶음밥 쌀', 17); -- 쌀
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '주꾸미', 39); -- 쭈꾸미
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '미나리볶음고추장', 12); -- 콩 (고추장 베이스)
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '토마토페이스트', 47); -- 토마토
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '찹쌀현미밥', 17); -- 쌀
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '부순 참깨', 6); 
+
+drop table drink_store;
+
+-- 테이블 생성
+CREATE TABLE drink_store (
+    store_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    drink_name VARCHAR2(100), -- 드링크 이름
+    store_name VARCHAR2(100), -- 매장 이름
+    store_address VARCHAR2(2000) -- 매장 주소
+);
+
+-- 데이터 삽입
+INSERT INTO drink_store (drink_name, store_name, store_address) 
+VALUES ('조니워커 블루 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+
+-- 05/07 수정 : 좋아요 중복 방지 유니크 제약조건 설정
+alter table likes
+add constraint unique_login_target
+unique (login_id, target_id);
+
+
+
+-- 05.07 주류 주소 데이터 
+
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('더 글렌리', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('와일드 터키 레어브리드 1L', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('에반 윌리엄스 블랙', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('와일드 터키 12년 700ml', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('맥캘란 12년 셰리 오크', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('히비키 하모니', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('포 로지스 스트레이트 버번 1L', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('발렌타인 21년', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('커티 삭 프로히비션', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('미스터 보스턴 아이리시 1L', '바틀드', '서울 강남구 테헤란로8길 11 1층 2호 바틀드 Bottled');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('로얄살루트 21년 700ml', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('산토리 가쿠빈', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('포 로지스 싱글배럴', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('짐빔 화이트 750ml', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('조니워커 블랙 700ml', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('글렌피딕 15년', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('듀어스 12년', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('와일드 터키 레어브리드', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('글렌드로낙 12년(구형)', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('하이랜드 퀸 셰리 캐스크 피니시', '압구정화로구이 위례점', '경기도 성남시 수정구 위례광장로 70, (창곡동, 위례 아트리버 푸르지오 1단지)1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아드벡 10년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('네이키드 몰트', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('잭 다니엘스', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발렌타인 30년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌피딕 12년 셰리 캐스크 피니시', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로크로몬드 12년 700ml', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌라씨', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라가불린 16년', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌파클라스 15년', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아란 10년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('미스터 보스턴 캐나디안 1L', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('달모어 12년', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('맥캘란 18년 더블 캐스크', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('러셀 리저브 15년', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌알라키 15년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('시바스 리갈 18년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('더 글렌그란트 10년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('기원 유니콘', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('더 글렌리벳 15년', '29펍 UK Classic', '서울 강남구 테헤란로1길 26');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌피딕 14년 버번 배럴 리저브', '비하우스 강남', '서울 강남구 테헤란로4길 46 B105호 비하우스');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌피딕 18년 500ml', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발렌타인 17년 750ml', '와인픽스 성수점', '서울 성동구 상원1길 21 한양현대아파트 상가');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('보모어 18년 Deep and Complex', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌 기어리 12년', '사당마트', '서울 동작구 동작대로7길 58, 지하 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('조니워커 골드 750ml', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES ('잭 다니엘스 맥라렌 에디션', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌파클라스 105 CS', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오켄토션 아메리칸 오크', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌피딕 21년', '위스키랩', '서울 강남구 강남대로126길 19 1층 위스키랩 (논현동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('조니워커 더블 블랙 700ml', '압구정화로구이 위례점', '경기도 성남시 수정구 위례광장로 70, (창곡동, 위례 아트리버 푸르지오 1단지)1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('더 글렌드로낙 12년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 더블우드 12년', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 캐리비안 캐스크 14년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 15년 마데이라 캐스크', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 16년 프렌치 오크', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 더블우드 17년', '레드 바틀 와인샵', '서울 서초구 반포대로 291 지1층 비151호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 25년 레어 메리지', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('맥캘란 12년 셰리 오크', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('맥캘란 18년 셰리 오크 2024', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('벡스 리슬링', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스톤 베이 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('유 원 프리미티보 디 만두리아', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('무초 마스 레드', '와인앤모어 역삼센터필드점', '서울 강남구 테헤란로 231 더샵스앳 지하1층 (역삼동, 센터필드)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('킨즈마라울리 마라니 킨즈마라울리 레드 세미 스위트', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('보시오 트로피칼 모스카토 망고', '압구정화로구이 잠실본점', '서울 송파구 올림픽로8길 29 1층 (잠실동, 정준빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그라함 20년 토니 포트 와인', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('칸티 모스카토 다스티 DOCG', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('프로메사 모스카토', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오트 쿠튀르 프렌치 버블스', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('싸베 씨 말보로 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('투 리버즈 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('레이크 찰리스 네스트 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('테일러 파인 토니 포트 와인', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('투 리버즈 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('루이 페드리에 브뤼', '와인앤모어 뱅뱅사거리점', '서울 서초구 강남대로 283 1층 와인앤모어 뱅뱅사거리점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아리온, 러스치케토 로쏘', '압구정화로구이 잠실본점', '서울 송파구 올림픽로8길 29 1층 (잠실동, 정준빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('마스카 델 타코 수수마니엘로', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('텍스트북 나파 까베르네 소비뇽', '바틀드', '서울 강남구 테헤란로8길 11 1층 2호 바틀드 Bottled');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('칸티 모스카토 다스티 DOCG', '와인앤모어 논현점', '서울 강남구 강남대로 512 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('루이 에슈너 골드 22K 스파클링', '리커테이션', '서울 강남구 압구정로10길 13, 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('유 원 프리미티보 디 만두리아', '에이와인 압구정점', '서울 강남구 압구정로28길 11 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로쉐 마제, 까베르네 소비뇽', '와인파크 역삼점', '서울 강남구 테헤란로 152 GFC 지하 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('배비치 블랙 라벨 말보로 소비뇽 블랑', '비하우스 강남', '서울 강남구 테헤란로4길 46 B105호 비하우스');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('마츠 엘 비에호', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('레 부흐가헬 피노 누아', '포도상회', '서울 강남구 논현로 736 파티오세븐 1층 포도상회');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('브레드 앤 버터 피노 누아', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('구에리에로 델라 테라', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('싸베 씨 말보로 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('루이 페드리에 브뤼', '와인앤모어 뱅뱅사거리점', '서울 서초구 강남대로 283 1층 와인앤모어 뱅뱅사거리점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('무초 마스 레드 매그넘 1.5L', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라파우라 스프링스 소비뇽 블랑', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('바이올렛 7', '압구정화로구이 위례점', '경기도 성남시 수정구 위례광장로 70, (창곡동, 위례 아트리버 푸르지오 1단지)1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('루이 페드리에 브뤼', '뷔엘뷔', '경남 진주시 진주성로24번길 8 1층 일부');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('베서니 블루 쿼리 쉬라즈', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아마란타 몬테풀치아노 다브루쪼', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('롱반 샤르도네', '대농마트 한티점', '서울 강남구 선릉로63길 9');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('서브미션 샤르도네', '대농마트 한티점', '서울 강남구 선릉로63길 9');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('캔달 잭슨 빈트너스 리저브 샤르도네', '바틀드', '서울 강남구 테헤란로8길 11 1층 2호 바틀드 Bottled');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('델링퀀트 스크리밍 베티', '국밥 참 맛있는 집 문경모전점', '경북 문경시 당교6길 13 (모전동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오스틴 호프, 까베르네 소비뇽 2021', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('유 원 프리미티보 디 만두리아', '에이와인 압구정점', '서울 강남구 압구정로28길 11 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('브레드 앤 버터 피노 누아', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('구에리에로 델라 테라', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('안동맥주 경화수월 만취 에디션', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('듀체스 드 부르고뉴 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('홉스플래쉬 IPA 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('트리펠 까르멜리엇 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아사히 슈퍼 드라이 생맥주 캔 340ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('기린 이치방 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오리지널비어컴퍼니 불락 스타우트', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아잉거 우르바이스', '오형제맥주 삼전역점', '서울 송파구 백제고분로22길 4 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오드 괴즈 분', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라 트라페 쿼드루펠', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('기네스 드래프트 캔 440ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('태평양조 토마 호프', '인생건어물맥주 롸버트치킨 아산테크노밸리점', '충남 아산시 둔포면 아산밸리중앙로 85 2층 202호, 203호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('고양이가 우주를 구한다 선생', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아사히 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('대만 망고 맥주', '오형제맥주 삼전역점', '서울 송파구 백제고분로22길 4 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로덴바흐 그랑 크뤼', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('노을 수제 에일 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('델리리움 트레멘스 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카스 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스트라프 헨드릭 트리펠 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('프로젝트 해피 호빵이', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('호가든 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('이네딧 담 750ml', '고래맥주창고 위시티점', '경기 고양시 일산동구 위시티4로 45 상가동 1층 108호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아잉거 브로바이스', '오형제맥주 삼전역점', '서울 송파구 백제고분로22길 4 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('세인트 버나두스 앱 12', '온유정', '강원 춘천시 수변공원길 25 1층 (삼천동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파우웰 콱 750ml', '온유정', '강원 춘천시 수변공원길 25 1층 (삼천동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('에비스 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아잉거 알트 바이리쉬 둔켈', '오형제맥주 삼전역점', '서울 송파구 백제고분로22길 4 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('슈무커 헤페바이젠', '오형제맥주 삼전역점', '서울 송파구 백제고분로22길 4 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오리지널비어컴퍼니 코스모스 에일', '와인파크 역삼점', '서울 강남구 테헤란로 152 GFC 지하 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('듀체스 드 부르고뉴 750ml', '바틀드', '서울 강남구 테헤란로8길 11 1층 2호 바틀드 Bottled');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('크로넨버그 1664 블랑 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('듀퐁 본 뵈', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스텔라 아르투아 캔 740ml', 'CU 오벨리스크점', '서울특별시 서초구 서초대로74길 27, 한화오벨리스크상가 (서초동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스트라프 헨드릭 쿼드루펠 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('세인트 버나두스 앱 12', '오렌지보틀 독립문역점', '서울 종로구 송월길 155 경희궁자이4단지 상가 1층 4111호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('고양이가 우주를 구한다 타이 얌이', '달밤', '충북 청주시 청원구 오창읍 주성1길 9, 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('세종 듀퐁', '소문난 고기꾼', '충북 음성군 대소면 오태로99번길 8');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아트몬스터 사랑범벅', '오렌지보틀 을지로점', '서울 중구 을지로 지하 88, 지하 1층 을특1-2호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('사이공 스페셜 캔 330ml', '고래맥주창고 가좌점', '서울 서대문구 가재울미래로 2 2단지 221동 102호 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('슈무커 헤페바이젠', '오형제맥주 삼전역점', '서울 송파구 백제고분로22길 4 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('슈렝케를라 메르첸', '당근슈퍼', '서울 강서구 화곡로 176-22 NS파크APT');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('슈렝케를라 메르첸', '당근슈퍼', '서울 강서구 화곡로 176-22 NS파크APT');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하이네켄 캔 500ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('크릭 분', '소문난 고기꾼', '충북 음성군 대소면 오태로99번길 8');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오리지널비어컴퍼니 월롱 블랑', '와인파크 역삼점', '서울 강남구 테헤란로 152 GFC 지하 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('안동맥주 석복', '60계치킨 천안직산점', '충남 천안시 서북구 직산읍 봉주로 62 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('코젤 다크 캔 500ml', 'CU 오벨리스크점', '서울특별시 서초구 서초대로74길 27, 한화오벨리스크상가 (서초동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('혁명소주 42 500ml', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('토끼소주 블랙 750ml', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('일품진로 오크 25', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 X.P 500ml', '소문난 고기꾼', '충북 음성군 대소면 오태로99번길 8');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 53 청사 에디션 750ml', '세노야 방배1호점', '서울 서초구 방배로 136 화인빌딩1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 41 500ml', '고래맥주창고 강남도곡점', '서울 강남구 남부순환로363길 12-10 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('일품진로 오크 43', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 X.P 500ml', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 25 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 41 나혼렙 에디션', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('사락 33', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 17 375ml', '포도상회', '서울 강남구 논현로 736 파티오세븐 1층 포도상회');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 25 375ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('일품진로', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('한라산 1950', 'CU 서초도씨에빛점', '서울특별시 서초구 강남대로 359, 대우도씨에빛 2(서초동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('한라산 1950', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('일품진로 오크 43', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 25 750ml', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('다이야메 900ml 25', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 53 750ml', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('삼해 소주', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('명인 안동소주 35', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('명인 안동소주 22', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 53 750ml', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 17 750ml', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 41 375ml', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('안동소주 양반탈 800ml', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('비잔 클리어', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 25 나혼렙 에디션', '압구정화로구이 위례점', '경기도 성남시 수정구 위례광장로 70, (창곡동, 위례 아트리버 푸르지오 1단지)1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('가무치 소주 43', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('동해 소주 22', 'CU 서초유앤아이점', '서울특별시 서초구 사평대로56길 7, (서초동, 서초한일유앤아이) 1층 116호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('명인 박재서 안동소주 호리병 800ml', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 53 500ml', '알코홀릭 드링크 서울이수점', '서울 동작구 동작대로29길 11-1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('고소리술 40', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('허벅술', '하나마트', '서울 강서구 방화대로6다길 17');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('요카이치 이모', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('가무치 소주 25', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 53 청사 에디션 750ml', '소문난 고기꾼', '충북 음성군 대소면 오태로99번길 8');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 41 750ml', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('코즈루 쿠로', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('토끼소주 골드 750ml', '인생건어물맥주 롸버트치킨 아산테크노밸리점', '충남 아산시 둔포면 아산밸리중앙로 85 2층 202호, 203호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('려 고구마 증류 소주 25', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('구로 기리시마 900ml', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('사락 33', '꽈알라 보틀숍', '서울 강남구 개포로 264 상가 2동 103호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('키 소주 38', '보르도와인샵', '서울 강남구 도산대로 318 어넥스 에이동 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('이이치코 실루엣', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('잔파 블랙 아와모리', '알코홀릭 드링크 서울이수점', '서울 동작구 동작대로29길 11-1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('담솔 500ml', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화요 X.P 750ml', '가자주류백화점 잠실점', '서울 송파구 올림픽로 80 영원빌딩');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('일품진로 오크 25', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('세키토바 720ml', '대신상회', '서울 영등포구 영등포로37길 4 16,17호(동남상가)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('려 고구마 증류 소주 40', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('황금보리 17', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('한주 35 360ml', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('백년의 고독', '가자주류 포스코점', '서울 강남구 테헤란로 440 포스코센터 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('삼해 소주', '딸꾹 전통주 바틀샵', '서울 송파구 올림픽로12길 45 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('가무치 소주 43', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('민속주 안동소주 600ml', '딸꾹 전통주 바틀샵', '서울 송파구 올림픽로12길 45 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('일엽편주 소주 38', '꽈알라 보틀숍', '서울 강남구 개포로 264 상가 2동 103호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('요카이치 무기', '뷔엘뷔', '경남 진주시 진주성로24번길 8 1층 일부');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('킨타로', '버니주류', '서울 금천구 벚꽃로 286 지하1층 B120-2호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('화심소주 군쌀 40', '딸꾹 전통주 바틀샵', '서울 송파구 올림픽로12길 45 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('운암 오크 32', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('안동 진맥 소주 40 500ml', '마깨주 전통주', 'N/A');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('고쿠', '60계치킨 천안직산점', '충남 천안시 서북구 직산읍 봉주로 62 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('콘노 1.8L', '뷔엘뷔', '경남 진주시 진주성로24번길 8 1층 일부');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('사츠마 시라나미 1.8L', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아까 기리시마', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글로우 EP05', '위스키파크 목동점', '서울 양천구 목동로25길 23 1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('비잔 클리어', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('텟칸 이모 25', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('요카이치 이모', '와인갤러리 신림점', '서울 관악구 남부순환로 1592 1층 와인갤러리 신림점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('세키토바 1.8L', '오렌지보틀 을지로점', '서울 중구 을지로 지하 88, 지하 1층 을특1-2호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하쿠타케 쿠마몬 900ml', '굿배럴 울산점', '울산 북구 호계매곡1로 91 101호 굿배럴 (호계동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('잔파 화이트 아와모리', '알코홀릭 드링크 서울이수점', '서울 동작구 동작대로29길 11-1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('독산 53', '딸꾹 전통주 바틀샵', '서울 송파구 올림픽로12길 45 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('키위 술', '딸꾹 전통주 바틀샵', '서울 송파구 올림픽로12길 45 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('명인 박재서 안동소주 호리병 800ml', '돌고래보틀 양재점', '서울 서초구 강남대로30길 21-3 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('문배술 호리병 400ml', '딸꾹 전통주 바틀샵', '서울 송파구 올림픽로12길 45 2층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('느린 마을 소주 21', '한국술보틀숍 홍대본점', '서울 마포구 와우산로29바길 5 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('진로 1924 헤리티지', '스타보틀 신림점', '서울 관악구 난곡로 343 1층, 2층 스타보틀 신림점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('토끼소주 블랙 750ml', '키오스크이피 서초점', '서울 서초구 강남대로49길 10 1층 키오스크이피 서초');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('한라산 1950', '한국술보틀숍 홍대본점', '서울 마포구 와우산로29바길 5 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('동해 소주 22', '민석상회', '경기 부천시 은성로 36 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('쿠보타 준마이 다이긴죠', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('고래 사케 720ml', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('준마이 북극곰의 눈물', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('닷사이 준마이 다이긴죠 39', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하나 기자쿠라 준마이 긴죠', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('츠루우메 유즈', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('닷사이 준마이 다이긴죠 39', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('닷사이 준마이 다이긴죠 45', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('닷사이 준마이 다이긴죠 23', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('닷사이 준마이 다이긴죠 45', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('월계관 준마이 750', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('쿠보타 준마이 다이긴죠', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('준마이 북극곰의 눈물', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라쿠엔 유즈슈 900ml', 'CU 오벨리스크점', '서울특별시 서초구 서초대로74길 27, 한화오벨리스크상가 (서초동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카오리 하나야구 준마이', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스바루 나마죠조', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('월계관 준마이 다이긴죠', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('송죽매 클래식 준마이 1.5L', '압구정화로구이 잠실본점', '서울 송파구 올림픽로8길 29 1층 (잠실동, 정준빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('간바레 오또상 팩', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하쿠시카 준마이 긴죠 팩', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('송죽매 준마이 750', 'CU 뉴서초역점', '서울특별시 서초구 반포대로30길');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('다이야메 900ml 25', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('월계관 준마이 750', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('쿠보타 만쥬', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('월계관 준마이 750', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('신세이 다이긴죠', '압구정화로구이 잠실본점', '서울 송파구 올림픽로8길 29 1층 (잠실동, 정준빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('준마이 북극곰의 눈물 벚꽃 에디션', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('킷도 준마이 다이긴죠', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라쿠엔 유즈슈 900ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('신세이 다이긴죠', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하쿠시카 혼죠조 팩', 'CU 서초동아타워점', '서울특별시 서초구 서운로 138 (서초동, 서초동아타워) 서초동아타워');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('오카네(금사케)', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('핫카이산 토쿠베츠 준마이', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라쿠 준마이 골드', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하나 기자쿠라 준마이 긴죠', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('요카이치 이모', '고래맥주창고 구미점', '경북 구미시 인동28길 20 고래맥주창고');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('쿠보타 만쥬', '60계치킨 천안직산점', '충남 천안시 서북구 직산읍 봉주로 62 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 디스틸러리 셀렉트', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 올로로쏘 셰리 캐스크 CS', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 클래식 싱글몰트', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 포트 CS', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 비노 바리끄 싱글 캐스크 CS', '위스키랩', '서울 강남구 강남대로126길 19 1층 위스키랩 (논현동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 브랜디 CS', '와인천국 가나주류백화점 동대문할인점', '서울 동대문구 천호대로 9 명일빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 포트 CS', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 올로로쏘 셰리 캐스크 CS', '뷔엘뷔', '경남 진주시 진주성로24번길 8 1층 일부');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 트리플 셰리 캐스크', '뷔엘뷔', '경남 진주시 진주성로24번길 8 1층 일부');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 피노 셰리 CS 1L', '바틀리어', '서울 성동구 왕십리로 410 센트라스 G동 상가 1층 105-1호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 솔리스트 올로로쏘 셰리 캐스크 CS 1L', '40도 마곡', '서울 강서구 공항대로 124 1101동 1층 101호 (마곡엠밸리11단지)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('카발란 포디움', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('탈리스커 10년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('탈리스커 8년 SR 2024', '보틀벙커 서울역점', '서울 중구 한강대로 405 롯데마트 제타플렉스 서울역점 3층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('탈리스커 다크스톰', '세노야 방배1호점', '서울 서초구 방배로 136 화인빌딩1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('탈리스커 더 디스틸러스 에디션 2022', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('탈리스커 18년', 'The 술', '서울 송파구 올림픽로12길 41-2 (잠실동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아드벡 10년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아드벡 우거다일', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('빅 피트', '압구정화로구이 위례점', '경기도 성남시 수정구 위례광장로 70, (창곡동, 위례 아트리버 푸르지오 1단지)1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 라피트 로칠드 2017', '옐로우보틀', '서울 강남구 압구정로20길 21 1층 옐로우보틀 (신사동, 정빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 데스클랑, 위스퍼링 엔젤', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 몽페라 화이트', '돌고래보틀 양재점', '서울 서초구 강남대로30길 21-3 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 딸보 2021', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 생 미셸, 콜럼비아 밸리 리슬링', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('벡스 리슬링', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파이크, 트레디셔날 리슬링', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('릴랙스 리슬링', '청주 칠링칠링', '충북 청주시 흥덕구 진재로 81 1층 104호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('미스티힐 비달 아이스 와인', '와인픽스 성수점', '서울 성동구 상원1길 21 한양현대아파트 상가');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('트웬티 비스 비달 아이스 와인', '더초이스', '경기 김포시 고촌읍 인향로 222 가동');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('필리터리 프로즌 툰드라 비달 아이스 와인', '와고 와인하우스 도곡', '서울 강남구 논현로 213 역삼럭키아파트상가 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스위트 듀 까베르네 프랑 아이스와인', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스위트 듀 비달 아이스와인', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스위트 듀 까베르네 프랑 아이스와인', '와인갤러리 시흥', '경기 시흥시 장현능곡로 155 지하 1층 웰빙푸드마켓 주류코너');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('도미니오 데 라 베가, 디 엔드 아이스 와인', '문프룻', '경기 가평군 가평읍 경춘로 1847 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('시즌스 비달 아이스 와인', '와인스탑 3호점', '서울 관악구 신림동 1460-3 그랜드힐 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아스코니 리슬링 아이스와인', '헬로우 와인샵 BAR', '광주 북구 북문대로 17 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('매그노타, 까베르네 프랑 아이스 와인', '가자주류 목동점', '서울 양천구 목동로 181');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('라다치니 아이스 와인', '탭샵바 동대문두타점', '서울 중구 장충단로 275 두타몰 B2 탭샵바');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('필리터리 아티장 비달 아이스와인', '바틀드', '서울 강남구 테헤란로8길 11 1층 2호 바틀드 Bottled');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아스코니 무스캇 아이스 와인 레드 라벨', '와인스탑 1호점', '서울 관악구 남부순환로246길 19 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아스코니 무스캇 아이스 와인 레드 라벨', '와인스탑 1호점', '서울 관악구 남부순환로246길 19 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('스위트 듀 비달 아이스와인', '세계주류 서울대입구', '서울 관악구 관악로 168 대우디오슈페리움2단지 (C동) 108-2호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('누보몽드 비달 아이스 와인', '세계주류 종각점', '서울 종로구 우정국로 29');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('더 글렌그란트 60년', '위스키앤조이', '서울 송파구 송파대로 345 헬리오시티상가 1A동 지하1층 B78, B79호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('노주노교 교령 60년', 'The 술', '서울 송파구 올림픽로12길 41-2 (잠실동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('달위니 15년', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('달위니 30년 2019', '제일세계주류', '서울 중구 삼일대로 363 지하1층 77호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 포트우드 21년', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 싱글배럴 21년', '가나주류 군자역점', '서울 광진구 능동로 261 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 30년 레어 메리지', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 25년 레어 메리지', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('발베니 더블우드 25년', '가나주류 군자역점', '서울 광진구 능동로 261 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('탈리스커 25년', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파논 토카이 아수 5 푸토뇨스', '국밥 참 맛있는 집 문경모전점', '경북 문경시 당교6길 13 (모전동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파논 토카이 아수 6 푸토뇨스', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('패트리셔스 카틴카 레이트 하베스트 토카이', '와인파크 역삼점', '서울 강남구 테헤란로 152 GFC 지하 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 데레즐라 토카이 푸르민트 드라이', '돌고래보틀 양재점', '서울 서초구 강남대로30길 21-3 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그랜드 토카이 이수 5 푸토뇨스', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파논 토카이 사모로드니', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 데레즐라 토카이 아수 5 푸토뇨스', '돌고래보틀 양재점', '서울 서초구 강남대로30길 21-3 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('패트리셔스, 토카이 푸르민트', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('클래식 토카이 푸르민트 미디움 스위트', '가자주류 목동파리공원점', '서울 양천구 목동서로 67 1층 111호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 데레즐라 토카이 아수 에센시아', '돌고래보틀 양재점', '서울 서초구 강남대로30길 21-3 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그랜드 토카이, 클래식 토카이 하르쉬레벨루', '가자주류 원주기업도시점', '강원 원주시 지정면 신지정로 212 1층 105호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로얄 토카이 레이트 하비스트', '샵크로스비', '서울 서초구 논현로27길 58 1층 102호 샵크로스비');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그랜드 토카이, 클래식 토카이 아라니푸르트 뀌베', '사천세계주류', '경남 사천시 용현면 대밭담로 5-9 102호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('폴레츠키 빈 크리스마스 토카이', '국밥쟁이_오렌지보틀 강남역점', '서울 서초구 서초대로77길 9 지하1층 국밥쟁이 내 오렌지보틀 (서초동, 강남 누드죤빌딩)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('바라 토카이 아수 5 푸토뇨스', '세계주류백화점 양재역점', '서울 강남구 강남대로 240 지하1층 (도곡동, 양재SK허브프리모)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('가무치 낫포세일 토카이 캐스크 스웨이드 파우치 패키지', '신계족', '충북 충주시 계명대로 157 1층 신계족');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('부다니 토카이 아수 5 푸토뇨스', '대전와인', '대전 서구 도솔로296번길 46 대전와인');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('바라 토카이 아수 6 푸토뇨스', '돌고래보틀 양재점', '서울 서초구 강남대로30길 21-3 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디즈노코 토카이 아수 5 푸토뇨스', '라빈리커스토어', '경기 고양시 덕양구 행주로17번길 42-4');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('메종 오 포아 사모로드니', '포도상회', '서울 강남구 논현로 736 파티오세븐 1층 포도상회');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('메종 오 포아 게쇠이 쉬렛(레이트 하비스트)', '포도상회', '서울 강남구 논현로 736 파티오세븐 1층 포도상회');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로얄 토카이 아수 6 푸토뇨스 골드 라벨 500ml', '로랜드 주류상회', '경기 김포시 양촌읍 양곡1로56번길 3, 201호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파논 토카이 아수 6 푸토뇨스', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파논 토카이 아수 5 푸토뇨스', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로얄 토카이 아수 5 푸토뇨스 블루 라벨', '위스키앤조이', '서울 송파구 송파대로 345 헬리오시티상가 1A동 지하1층 B78, B79호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('페넬로페 토카이 캐스크 피니시 라이 배치 1', '가자주류 인천논현점', '인천 남동구 소래역로46번길 31');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로얄 토카이 레이트 하비스트', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('토카이 머스캣 루넬 드라이', '에이엘9119', '대전 유성구 농대로 31 1층 (궁동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('바라 토카이 아수 6 푸토뇨스', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('바라 토카이 아수 5 푸토뇨스', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그랜드 토카이, 토카이 에센시아', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그랜드 토카이, 클래식 토카이 살가무쉬코타이', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('그랜드 토카이, 토카이 아수 6 푸토뇨스', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 데레즐라 토카이 아수 6 푸토뇨스', '바다는김녕', '제주 제주시 구좌읍 김녕로21길 25 가동');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('헤네시 VSOP', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('헤네시 XO', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('헨리 무니에 VSOP', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('레미 마틴 VSOP', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('생 레미 XO', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('쿠론니에 나폴레옹 VSOP', '주류상회Be 금정점', '경기 군포시 엘에스로 143 에이케이플라자 금정 1층 114호 (금정동, 힐스테이트 금정역)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('미스터 보스턴 피치 슈냅스 1L', '당근슈퍼 2호점', '경기 평택시 통복시장로22번길 7, 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('딕타도르 헤라키아 버번 1990 럼', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('리카 파스티스', '세계주류 서울대입구', '서울 관악구 관악로 168 대우디오슈페리움2단지 (C동) 108-2호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('로랑 퐁소 뫼르소 프리미에 크뤼 블라니 뀌베 뒤 미오조티스 2019', '에이와인 압구정점', '서울 강남구 압구정로28길 11 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('까베르네 당주 샴 오죠', '부즈타임', '경기 남양주시 다산지금로 124-9 102호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아라스 블랑 드 블랑', '바틀드', '서울 강남구 테헤란로8길 11 1층 2호 바틀드 Bottled');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('웨스트콕 칼바도스 캐스크 피니시', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('크리스찬 드루앵 25년', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('불라 깔바도스 VSOP', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('깔바도스 페르 마그루아 파인 VS', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파코리 3년', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('깔바도스 페르 마그루아 VSOP', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샤또 드 브뤼이 핀 깔바도스 VSOP', '슬로우보틀', '서울 관악구 신림로 109 1층 슬로우보틀');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('불라 깔바도스 오구스트', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파코리 16년', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파코리 30년', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('글렌모렌지 깔바도스 캐스크 피니시 12년', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('깔바도스 페르 마그루아 XO', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('깔바도스 미셸 유아 2018', '용답마트', '서울 성동구 용답중앙15길 3, 102호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('듀퐁 깔바도스 30년 노 리덕션(CS)', '분당두부', '경기 성남시 분당구 성남대로 168 116호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('론디아즈 151 럼 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('말리부 오리지널 200ml', 'CU 오벨리스크점', '서울특별시 서초구 서초대로74길 27, 한화오벨리스크상가 (서초동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('바카디 카르타블랑카', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디플로마티코 리제르바 익스클루시바', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('말리부 오리지널 750ml', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('군트럼 리슬링 루이스 콘스탄틴', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('론디아즈 151 럼 750ml', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('하바나 클럽 3년 700ml', '세계주류백화점 양재역점', '서울 강남구 강남대로 240 지하1층 (도곡동, 양재SK허브프리모)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('플랜테이션 O.F.T.D', '위스키파크 강동점', '서울 강동구 풍성로39길 33 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('드럼브이', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('플랜테이션 파인애플 럼', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('산토리 우메슈 플럼 야마자키', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('잭 다니엘스 애플', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디사론노', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디카이퍼 피치트리', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('코앵트로', '사유의서재 강남', '서울 강남구 강남대로98길 11 5층 사유의서재');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파마 석류 리큐르', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('깔루아 1L', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('파마 석류 리큐르', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('베일리스', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('마리브리자드 블루큐라소', '고래맥주창고 강남도곡점', '서울 강남구 남부순환로363길 12-10 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디카이퍼 트리플 섹', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('엑스레이티드', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디카이퍼 카시스', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('볼스 트리플 섹', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('볼스 카시스', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('마리브리자드 아마레또', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('미도리 750ml', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('르제 크렘 드 카시스', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('볼스 블루 큐라소', '더가자 양재점', '서울 강남구 강남대로 256 대우양재디오빌 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('말리부 오리지널', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아페롤', '와인에비뉴 강남점', '서울 강남구 강남대로 396 신분당선 지하상가 27호 6번 출구 바로 아래');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('힙노틱 700ml', '가자주류 포스코점', '서울 강남구 테헤란로 440 포스코센터 지하1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('잭 다니엘스 허니', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디카이퍼 애플 퍼커', '보틀즈', '서울 강남구 학동로4길 50, 우영빌딩 1층');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('볼스 바나나', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('생 제르맹', '위스키파크 강남점', '서울 강남구 언주로98길 8 1층 위스키파크 강남점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('베네딕틴 돔 750ml', 'CU 강남푸르지오점', '서울특별시 강남구 테헤란로4길 6, 강남역센트럴푸르지오시티 (역삼동) B1층 110호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('샴보드 700ml', '위스키오크통', '서울 서초구 강남대로83길 68 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('진로 토닉워터 300ml', '와인곳간 제주삼화점', '제주 제주시 화삼로 7 티엠빌딩 1층 101호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('진로이즈백 병 360ml', '칠성중국마트', '경기 부천시 원미구 신흥로92번길 76 1층 칠성중국마트');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('진로 레드 와인', '스타보틀 신림점', '서울 관악구 난곡로 343 1층, 2층 스타보틀 신림점');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('디스틸러리 드 파리 진 토닉', '알코홀릭 드링크', '인천 부평구 주부토로 236 3층 A330호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('봄베이 사파이어', '리쿼하우스', '서울 강남구 테헤란로 101, 지하 A-20호(강남역 지하쇼핑센터)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('참이슬 병 360ml', '밀키트앤바틀샵', '서울 강동구 천호옛길 47 1층 102호');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아녹 18년', 'The 술', '서울 송파구 올림픽로12길 41-2 (잠실동)');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아녹 12년', '더 몰트샵 역삼점', '서울 강남구 선릉로 565 한국빌딩 B1');
+INSERT INTO drink_store (drink_name, store_name, store_address)  VALUES('아녹 24년', '주류상회Be', '경기 수원시 팔달구 세지로 430 103호');
+
+-- 05/07 수정 : 좋아요 중복 방지 유니크 제약조건 설정
+alter table likes
+add constraint unique_login_target
+unique (login_id, target_id);
+
+
+--수정------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- CREATE TABLE: health_condition
+CREATE TABLE health_condition (
+    condition_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    condition_name VARCHAR2(500) NOT NULL,
+    description VARCHAR2(4000)
+);
+
+COMMENT ON COLUMN health_condition.condition_id IS '건강 상태 고유 ID (자동 생성)';
+COMMENT ON COLUMN health_condition.condition_name IS '건강 상태명 (예: 당뇨, 고혈압 등)';
+COMMENT ON COLUMN health_condition.description IS '건강 상태에 대한 상세 설명';
+
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('고혈압', '혈압이 높은 상태로, 나트륨 섭취를 줄이고 칼륨이 풍부한 식단이 권장됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('고지혈증', '혈중 콜레스테롤 수치가 높은 상태로, 포화지방 대신 불포화지방을 섭취하는 것이 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('당뇨병', '혈당 조절이 어려운 상태로, 저당질 식품과 섬유질이 풍부한 식단이 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('빈혈', '혈액 내 헤모글로빈 수치가 낮은 상태로, 철분과 비타민C를 함께 섭취하면 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('위염', '위 점막이 손상된 상태로, 자극적이지 않은 식단이 권장됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('변비', '장운동이 원활하지 않은 상태로, 식이섬유가 풍부한 식단이 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('골다공증', '뼈의 밀도가 낮아져 쉽게 부러질 수 있는 상태로, 칼슘과 비타민D 섭취가 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('심장질환', '심장의 기능이 약화된 상태로, 염분과 지방 섭취를 줄이고 항산화 식품이 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('간 건강', '간 기능이 저하된 상태로, 해독 작용이 있는 식품 위주의 섭취가 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('면역력 저하', '체내 방어 능력이 약해진 상태로, 항산화 물질과 유익균 식품 섭취가 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('감기', '바이러스 감염으로 인한 증상으로, 비타민 C와 따뜻한 수분 섭취가 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('장염', '장에 염증이 생긴 상태로, 자극적인 음식은 피하고 수분과 전해질 보충이 필요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('소화불량', '소화 기능이 저하된 상태로, 기름지지 않고 부드러운 음식을 섭취하는 것이 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('불면증', '잠들기 어렵거나 자주 깨는 증상으로, 트립토판이 풍부한 음식이나 허브티가 도움이 됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('피부 트러블', '여드름, 건조함 등 피부에 생기는 문제로, 항산화 식품과 수분 섭취가 중요합니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('과민성 대장증후군', '복통이나 설사, 변비 등이 반복되는 장 질환으로, 저FODMAP 식단이 권장됩니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('스트레스성 질환', '스트레스로 인해 생기는 신체·정신적 증상으로, 마그네슘과 오메가3 섭취가 좋습니다.');
+INSERT INTO HEALTH_CONDITION (CONDITION_NAME, DESCRIPTION) VALUES ('탈모', '두피와 모근 약화로 인한 머리카락 빠짐으로, 단백질, 철분, 비오틴이 풍부한 식단이 도움이 됩니다.');
+
+
+
+--레시피 재료 데이터 추가
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '바나나', null);      
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '고구마', null);     
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ( '새우', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('망고', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('블루베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크랜베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치즈볼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마늘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양파', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('생강', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레몬', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라임', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('오렌지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('무', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('깻잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('단호박', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('참나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('취나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('열무', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쪽파', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('생표고버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('새송이버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('느타리버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('팽이버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양송이버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('청경채', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브로콜리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양배추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('콜리플라워', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파프리카', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('애호박', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('청양고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('건고추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피망', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('당근', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레드비트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('연근', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('우엉', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('도라지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('생강청', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유자청', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('모과청', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍시', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('곶감', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('밤단호박', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('계피', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타임', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('로즈마리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바질', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('건표고버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('토란', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고사리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('미역', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('다시마', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('김', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('톳', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('매생이', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가쓰오부시', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치킨스톡', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('베이킹파우더', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('베이킹소다', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소다수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('탄산수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('계피가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('강황가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('흑설탕', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('황설탕', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('설탕', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('천일염', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('맛소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('깨소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('후춧가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('화이트페퍼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레드페퍼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바닐라익스트랙', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('우스타소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('스리라차소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('케첩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('굴소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('칠리소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마라소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('두반장', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라유', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('참치캔', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('옥수수캔', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버섯스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('야채스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('우유크림스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('잡채당면', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쫄면사리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라이스누들', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파래김', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양상추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('로메인', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('루꼴라', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('케일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비타민채소', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('겨자잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('무순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비트잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브로콜리순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('적양배추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('구운마늘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('흑임자 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('트러플오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('대추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바질', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('렌틸콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('넛맥', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('보리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('황기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('커민', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아사이베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('귀리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파프리카 가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍삼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타르타르 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비건버터', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마늘종', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('햄프씨드', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('율무', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('팔각', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('검정깨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('당귀', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('흑마늘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('케이퍼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마카다미아', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('페타치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('산딸기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('블랙커런트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('렌즈콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('병아리콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('알로에', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유부', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('방풍나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('곤약', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('두릅', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('취청오이', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가자미살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쭈꾸미젓갈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피스타치오', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('검은콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('차조', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('보리순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('클로렐라', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('스피루리나', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('토란대', NULL);
+commit;
+
+
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아보카도 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마리네이드 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('말린 바질', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('샬롯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비유제품 휘핑크림', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유자차 페이스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('완두콩 순', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캐슈 크림', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레몬 제스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양파 가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('세이지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('페코리노 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('링귀니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버터넛 스쿼시', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버번', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브로콜리니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('샐러드 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('통조림 토마토', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('월계수잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('베이컨 비트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('농부빵', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('구운 크랜베리 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('냉동 완두콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캐슈넛', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('플랜테인', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('비스킷 반죽', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('프로볼로네 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크러스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('하프앤하프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('파이크러스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아스파라거스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타라곤', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('애로루트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크레페', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('염소 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('누텔라', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('브리 치즈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('옥수수', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('딜', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('타마리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('초콜릿', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('수야 페퍼 스파이스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양파 파우더', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피쉬 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('김치 즙', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('코코넛 넥타', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('셰리 식초', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('골파', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('밀전병', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('한국식 마리네이드', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('쌀 식초', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고추 페이스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('고추 플레이크', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('엑스트라 버진 올리브 오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('완두콩', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('민트 잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('냉동 야채믹스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('스테비아', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('나마 쇼유', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아마씨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('녹두', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라면 스프', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('골든 시럽', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('코셔 소금', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('시나몬', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('바닐라 포드', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('전유', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('드라이 셰리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('샴페인 포도', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('정향', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('카다멈 씨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아사페티다', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아지완 씨', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아티초크 하트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피칸테 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('킬바사', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('나무젓가락', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('오일 스프레이', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('애호박잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('페투치니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('오레가노 가루', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('푸룬', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라임 제스트', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피자 반죽', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아이싱', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캔디 콘', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('캔디 눈', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('단백질 파우더', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치즈스틱', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('핫 소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('감자전분', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가지', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('아보카도', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('올리브오일', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('시금치', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버섯', NULL);
+commit;
+
+
+
+
+
+-- 수정 05/07 수정-------------------------------------------------------------
+-- CREATE TABLE: health_recommend
+CREATE TABLE health_recommend (
+    recommend_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    reason VARCHAR2(300),
+   ingredient_id NUMBER NOT NULL,
+    condition_id NUMBER NOT NULL,
+    CONSTRAINT fk_health_recommend_ingredient FOREIGN KEY (ingredient_id) REFERENCES recipe_ingredient(ingredient_id),
+    CONSTRAINT fk_health_recommend_condition FOREIGN KEY (condition_id) REFERENCES health_condition(condition_id)
+);
+
+COMMENT ON COLUMN health_recommend.recommend_id IS '추천 고유 ID';
+COMMENT ON COLUMN health_recommend.reason IS '추천 사유 또는 설명';
+COMMENT ON COLUMN health_recommend.ingredient_id IS '추천 레시피 ID (RECIPE_INGREDIENT 테이블 참조)';
+COMMENT ON COLUMN health_recommend.condition_id IS '건강 상태 ID (health_condition 테이블 참조)';
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는(은) 고혈압에 좋은 재료로 알려져 있다.', 558, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 고혈압에 좋은 재료로 알려져 있다.', 82, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나은(는) 고혈압에 좋은 재료로 알려져 있다.', 313, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마은(는) 고혈압에 좋은 재료로 알려져 있다.', 314, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부은(는) 고혈압에 좋은 재료로 알려져 있다.', 82, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 고혈압에 좋은 재료로 알려져 있다.', 117, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어은(는) 고혈압에 좋은 재료로 알려져 있다.', 133, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토은(는) 고혈압에 좋은 재료로 알려져 있다.', 160, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 고혈압에 좋은 재료로 알려져 있다.', 178, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리은(는) 고혈압에 좋은 재료로 알려져 있다.', 339, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(는) 고혈압에 좋은 재료로 알려져 있다.', 320, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파은(는) 고혈압에 좋은 재료로 알려져 있다.', 321, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('케일은(는) 고혈압에 좋은 재료로 알려져 있다.', 412, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리은(는) 고혈압에 좋은 재료로 알려져 있다.', 430, 1);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('가지은(는) 고혈압에 좋은 재료로 알려져 있다.', 555, 1);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아보카도는(은) 고지혈증에 좋은 재료로 알려져 있다.', 556, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('올리브유는(은) 고지혈증에 좋은 재료로 알려져 있다.', 557, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는(은) 고지혈증에 좋은 재료로 알려져 있다.', 10, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는 고지혈증에 좋은 재료로 알려져 있다.', 430, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는 고지혈증에 좋은 재료로 알려져 있다.', 339, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는 고지혈증에 좋은 재료로 알려져 있다.', 321, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은 고지혈증에 좋은 재료로 알려져 있다.', 320, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는 고지혈증에 좋은 재료로 알려져 있다.', 133, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는 고지혈증에 좋은 재료로 알려져 있다.', 109, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('엑스트라 버진올리브오일은 고지혈증에 좋은 재료로 알려져 있다.', 517, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미는 고지혈증에 좋은 재료로 알려져 있다.', 117, 2);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는 고지혈증에 좋은 재료로 알려져 있다.', 82, 2);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('귀리는 당뇨병에 좋은 재료로 알려져 있다.', 430, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('현미는 당뇨병에 좋은 재료로 알려져 있다.', 120, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('브로콜리는 당뇨병에 좋은 재료로 알려져 있다.', 345, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('양파는 당뇨병에 좋은 재료로 알려져 있다.', 327, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('마늘은 당뇨병에 좋은 재료로 알려져 있다.', 326, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('두부는 당뇨병에 좋은 재료로 알려져 있다.', 85, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('아보카도 오일은 당뇨병에 좋은 재료로 알려져 있다.', 464, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('블루베리는 당뇨병에 좋은 재료로 알려져 있다.', 317, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('산딸기는 당뇨병에 좋은 재료로 알려져 있다.', 445, 3);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID)VALUES ('병아리콩은 당뇨병에 좋은 재료로 알려져 있다.', 448, 3);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('쇠고기는(은) 빈혈에 좋은 재료로 알려져 있다.', 135, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('조개는(은) 빈혈에 좋은 재료로 알려져 있다.', 248, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('달걀노른자는(은) 빈혈에 좋은 재료로 알려져 있다.', 65, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는(은) 빈혈에 좋은 재료로 알려져 있다.', 82, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('콩(백태)는(은) 빈혈에 좋은 재료로 알려져 있다.', 88, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('오렌지는(은) 철분 흡수를 도와 빈혈에 좋은 재료로 알려져 있다.', 325, 4);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(은) 철분 흡수에 도움을 주는 비타민 A가 풍부해 빈혈에 좋다.', 349, 4);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 변비에 좋은 재료로 알려져 있다.', 313, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 변비에 좋은 재료로 알려져 있다.', 314, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('사과는(은) 변비에 좋은 재료로 알려져 있다.', 177, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근는(은) 변비에 좋은 재료로 알려져 있다.', 349, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미는(은) 변비에 좋은 재료로 알려져 있다.', 120, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 변비에 좋은 재료로 알려져 있다.', 291, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는(은) 변비에 좋은 재료로 알려져 있다.', 321, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 변비에 좋은 재료로 알려져 있다.', 345, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양배추는(은) 변비에 좋은 재료로 알려져 있다.', 340, 5);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('우엉는(은) 변비에 좋은 재료로 알려져 있다.', 352, 5);
+
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리은(는) 골다공증에 좋은 재료로 알려져 있다.', 345, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파은(는) 골다공증에 좋은 재료로 알려져 있다.', 321, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 골다공증에 좋은 재료로 알려져 있다.', 120, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 골다공증에 좋은 재료로 알려져 있다.', 349, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(는) 골다공증에 좋은 재료로 알려져 있다.', 320, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('우유은(는) 골다공증에 좋은 재료로 알려져 있다.', 200, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부은(는) 골다공증에 좋은 재료로 알려져 있다.', 82, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리은(는) 골다공증에 좋은 재료로 알려져 있다.', 430, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('완두콩은(는) 골다공증에 좋은 재료로 알려져 있다.', 518, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('알로에은(는) 골다공증에 좋은 재료로 알려져 있다.', 449, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 골다공증에 좋은 재료로 알려져 있다.', 120, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트은(는) 골다공증에 좋은 재료로 알려져 있다.', 291, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('플레인 요구르트은(는) 골다공증에 좋은 재료로 알려져 있다.', 55, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연유은(는) 골다공증에 좋은 재료로 알려져 있다.', 60, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('저염치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 225, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 53, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('파르메산 치즈가루은(는) 골다공증에 좋은 재료로 알려져 있다.', 250, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('페타치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 444, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('크림치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 303, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('염소 치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 498, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('모짜렐라치즈은(는) 골다공증에 좋은 재료로 알려져 있다.', 59, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('멸치는(은) 칼슘이 풍부해 골다공증에 좋은 재료로 알려져 있다.', 131, 6);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 비타민 D가 풍부해 칼슘 흡수를 도와 골다공증 예방에 좋다.', 133, 6);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어은(는) 심장질환에 좋은 재료로 알려져 있다.', 133, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리은(는) 심장질환에 좋은 재료로 알려져 있다.', 345, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파은(는) 심장질환에 좋은 재료로 알려져 있다.', 321, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은(는) 심장질환에 좋은 재료로 알려져 있다.', 320, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나은(는) 심장질환에 좋은 재료로 알려져 있다.', 313, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 심장질환에 좋은 재료로 알려져 있다.', 349, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('현미은(는) 심장질환에 좋은 재료로 알려져 있다.', 120, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부은(는) 심장질환에 좋은 재료로 알려져 있다.', 82, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('토마토은(는) 심장질환에 좋은 재료로 알려져 있다.', 160, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은(는) 심장질환에 좋은 재료로 알려져 있다.', 349, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('병아리콩은(는) 심장질환에 좋은 재료로 알려져 있다.', 448, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('렌즈콩은(는) 심장질환에 좋은 재료로 알려져 있다.', 447, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양송이버섯은(는) 심장질환에 좋은 재료로 알려져 있다.', 337, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('잣은(는) 심장질환에 좋은 재료로 알려져 있다.', 128, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('엑스트라 버진 올리브 오일은 심장질환 예방에 좋은 건강한 지방입니다.', 517, 7);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는 오메가-3 지방산이 풍부해 심장 건강에 도움이 됩니다.', 133, 7);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는 간 해독 효소를 활성화시켜 간 건강에 좋습니다.', 345, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는 항산화 물질이 풍부해 간의 독소 제거에 도움이 됩니다.', 321, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은 간 효소를 자극해 해독 기능을 높여줍니다.', 320, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('녹두는 해독 작용이 뛰어나 간 기능 강화에 효과적입니다.', 524, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('도라지는 염증 억제 작용으로 간 건강에 도움이 됩니다.', 353, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는 간의 염증을 줄이고 해독을 돕는 항산화 성분이 풍부합니다.', 558, 8);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('강황은 간의 해독 효소 활동을 촉진하여 간 건강에 좋습니다.', 380, 8);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘은 항바이러스 및 항균 작용으로 면역력 강화에 효과적입니다.', 320, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는 퀘르세틴 등의 항산화 성분으로 면역력을 높이는 데 도움이 됩니다.', 321, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는 비타민 A와 C가 풍부하여 면역 세포 기능을 도와줍니다.', 558, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는 면역세포를 보호하는 항산화 물질이 많습니다.', 345, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근은 베타카로틴이 풍부해 면역 기능을 강화합니다.', 349, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('버섯류는 면역세포 활성화에 효과적인 베타글루칸을 함유하고 있습니다.', 559, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('홍삼은 면역력 향상과 피로 회복에 효과적입니다.', 432, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는 장 건강을 도와 면역력 증가에 기여합니다.', 291, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귤류 과일인 오렌지는 비타민 C가 풍부해 면역력 강화에 도움이 됩니다.', 325, 9);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는 강력한 항산화 성분으로 면역력을 향상시킵니다.', 317, 9);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('마늘는(은) 감기에 좋은 재료로 알려져 있다.', 320, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 감기에 좋은 재료로 알려져 있다.', 322, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('유자청는(은) 감기에 좋은 재료로 알려져 있다.', 355, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('레몬는(은) 감기에 좋은 재료로 알려져 있다.', 323, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('홍삼은(는) 감기에 좋은 재료로 알려져 있다.', 432, 10);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양파는(은) 감기에 좋은 재료로 알려져 있다.', 321, 10);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 장염에 좋은 재료로 알려져 있다.', 313, 11);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('고구마는(은) 장염에 좋은 재료로 알려져 있다.', 314, 11);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 장염에 좋은 재료로 알려져 있다.', 322, 11);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('사과는(은) 장염에 좋은 재료로 알려져 있다.', 177, 11);
+
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('생강는(은) 소화불량에 좋은 재료로 알려져 있다.', 322, 12);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('민트는(은) 소화불량에 좋은 재료로 알려져 있다.', 519, 12);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 소화불량에 좋은 재료로 알려져 있다.', 291, 12);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('양배추는(은) 소화불량에 좋은 재료로 알려져 있다.', 340, 12);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('우유는(은) 불면증에 좋은 재료로 알려져 있다.', 50, 13);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는(은) 불면증에 좋은 재료로 알려져 있다.', 109, 13);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 불면증에 좋은 재료로 알려져 있다.', 313, 13);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 317, 14);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('브로콜리는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 345, 14);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('당근는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 349, 14);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 피부 트러블에 좋은 재료로 알려져 있다.', 133, 14);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('요거트는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 291, 15);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 430, 15);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 313, 15);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('감자는(은) 과민성 대장증후군에 좋은 재료로 알려져 있다.', 176, 15);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 198, 16);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 133, 16);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('바나나는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 313, 16);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('초콜릿는(은) 스트레스성 질환에 좋은 재료로 알려져 있다.', 504, 16);
+
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('달걀은 단백질과 비오틴이 풍부하여 모발 성장에 도움이 됩니다.', 1, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('연어는 오메가3 지방산이 풍부하여 두피 건강에 도움이 됩니다.', 133, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('두부는 식물성 단백질이 풍부하여 탈모 예방에 좋습니다.', 82, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('아몬드는 비타민 E가 풍부해 두피 순환과 모발 건강에 좋습니다.', 10, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('호두는 오메가3와 셀레늄이 포함되어 탈모 방지에 효과적입니다.', 109, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('시금치는 철분과 엽산이 풍부해 모낭에 산소 공급을 도와줍니다.', 558, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('달걀노른자는 비오틴을 다량 함유하고 있어 탈모 예방에 좋습니다.', 65, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('블루베리는 항산화 성분이 풍부하여 두피 세포를 보호합니다.', 317, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('해바라기씨는 아연과 비타민 B가 풍부하여 탈모 방지에 도움을 줍니다.', 8, 17);
+INSERT INTO HEALTH_RECOMMEND (REASON, INGREDIENT_ID, CONDITION_ID) VALUES ('귀리는 철분과 섬유질이 풍부하여 두피 건강에 도움을 줍니다.', 430, 17);
+
+-- 질병에 대한 비추천 재료 테이블 추가
+CREATE TABLE HEALTH_EXCLUDED_INGREDIENTS (
+   EXCLUDED_ID     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    CONDITION_ID    NUMBER NOT NULL,
+    INGREDIENT_NAME VARCHAR2(100 BYTE) NOT NULL,
+    CONSTRAINT FK_PROHIBIT_CONDITION
+      FOREIGN KEY (CONDITION_ID)
+      REFERENCES HEALTH_CONDITION(CONDITION_ID)
+      ON DELETE CASCADE
+);
+
+-- 코멘트 추가
+COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.EXCLUDED_ID IS '고유 금기 식재료 ID';
+COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.CONDITION_ID IS '관련 질병의 ID';
+COMMENT ON COLUMN HEALTH_EXCLUDED_INGREDIENTS.INGREDIENT_NAME IS '질병에 금기인 음식 재료 이름';
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '간편어간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '감자전분');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '국간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '굴소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '깨소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '된장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '들기름');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '라면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '레드와인');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '리코타치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '마요네즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '맛소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '모짜렐라치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '무염버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '버섯스프');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이컨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이킹소다');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '베이킹파우더');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '사골육수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '생청국장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '생크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '식용유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '쌈장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '어간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '연유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '옥수수캔');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '우스타소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '우유크림스프');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염간장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염베이컨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '저염치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '전분');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '정종');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '참기름');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '참치캔');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '청국장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치즈볼');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '치킨스톡');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '카레가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '케첩');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '크림치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '통조림 햄');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '파르메산 치즈가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '핫 소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '해물육수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '화이트와인');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (1, '휘핑크림');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '휘핑크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '생크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '마요네즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '달걀노른자');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '베이컨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '통삼겹살');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '소고기');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '돼지고기');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '닭껍질');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '사골육수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '양념치킨');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '라면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '튀김가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '햄');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (2, '통조림 햄');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '설탕');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '흑설탕');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '황설탕');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '연유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '초콜릿');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '케첩');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '휘핑크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '감자');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '고구마');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '바나나');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '옥수수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '흰쌀밥');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '밀가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '떡');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '라면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '우동면');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '쫄면사리');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '카레가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '달걀노른자');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (3, '라면 스프');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '우유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '휘핑크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '저염치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '플레인 요구르트');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (4, '리코타치즈');
+
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '청양고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '홍고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '건고추');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '마늘');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '양파');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '생강');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '카레가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '후춧가루');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '고추장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '된장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '청국장');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '김치 즙');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '피쉬 소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '탄산수');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '천일염');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '맛소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '깨소금');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '초콜릿');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '식초');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '마라소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '스리라차소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '케첩');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '굴소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '우스타소스');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '바나나');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '우유');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '치즈');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '버터');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '생크림');
+INSERT INTO HEALTH_EXCLUDED_INGREDIENTS (CONDITION_ID, INGREDIENT_NAME) VALUES (5, '휘핑크림');
+
+
+commit;
+
+
+
+-- recipe_ingredient 데이터 추가 05/08 -------------------------
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('버섯', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마늘쫑', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('돌나물', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('치커리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('레몬밤', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양배추잎', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('청상추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('알배추', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('라즈베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('블랙베리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('산딸기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('패션후르츠', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('용과', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('무화과', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홍시퓨레', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('배', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양지머리', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('도가니', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('염통', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('사태', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('돼지껍데기', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가브리살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('항정살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('게맛살', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('연어알', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('가리비', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('보리새우', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('피조개', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('멍게', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('해삼', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('마요네즈소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('유자소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('된장소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('머스타드소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('홀그레인소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('크림소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('불고기양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('닭갈비양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('갈비양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('소불고기양념', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('카레소스', NULL);
+INSERT INTO recipe_ingredient (ingredient_name, allergy_id) VALUES ('양념치킨소스', NULL);
+
+-- 뷰로그 테이블 생성
+CREATE TABLE view_log (
+    log_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, -- 자동 증가 기본 키
+    user_id VARCHAR2(255),                            -- 사용자 ID
+    post_id NUMBER,                                   -- 접속한 게시글의 ID
+    post_type VARCHAR2(50),                           -- 게시글 타입
+    visit_time DATE DEFAULT SYSDATE                   -- 방문 시각 (기본값 SYSDATE)
+    
+);

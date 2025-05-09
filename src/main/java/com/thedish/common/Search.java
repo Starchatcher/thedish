@@ -10,7 +10,16 @@ public class Search {
 	private Date end;       //등록날짜 검색의 끝날짜
 	private int age;		 //회원관리에서 연령대별 검색의 나이
 	private String boardCategory;
+	private String sortType;
 	
+	public String getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
+
 	public String getBoardCategory() {
 		return boardCategory;
 	}
