@@ -8,6 +8,7 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,17 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class NaverLoginController {
 
-    private final String clientId = "SvnTCc5JqokMdbkIAKMl";
-    private final String clientSecret = "74zSZizOE5";
-    private final String redirectUri = "http://localhost:8080/thedish/oauth/naver.do";
+	// 보안 강화를 위해 application.properties에서 naver clientId 및 clientSecret, redirectUri를 불러옵니다.
+	@Value("${naver.clientId}")
+	private String clientId;
+	
+	@Value("${naver.clientSecret}")
+	private String clientSecret;
+	
 
+	@Value("${naver.redirectUri}")
+	private String redirectUri;
+	
     @Autowired
     private UsersService usersService;
 

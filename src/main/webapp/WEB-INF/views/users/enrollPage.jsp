@@ -72,8 +72,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="tel
 	color: #555;
 }
 
-#dupCheckBtn, #nicknameCheckBtn {
-	margin-top: 16px; /* 기존 12px에서 16px로 늘려서 간격 조정 */
+#dupCheckBtn, #nickNameCheckBtn {
+	margin-top: 12px;
 	width: 100%;
 	background-color: #f29abf;
 	color: white;
@@ -85,13 +85,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="tel
 	transition: background-color 0.3s;
 }
 
-<<<<<<< HEAD
-#dupCheckBtn:hover, #nicknameCheckBtn:hover {
-	background-color: #e77ca7;
-=======
 #dupCheckBtn:hover, #nickNameCheckBtn:hover {
-  background-color: #e77ca7;
->>>>>>> main
+	background-color: #e77ca7;
 }
 
 .button-group {
@@ -219,18 +214,11 @@ function validate() {
 					name="userPwd2" id="userPwd2" required>
 			</div>
 
-<<<<<<< HEAD
 			<div class="form-group">
 				<label for="userName">이름</label> <input type="text" name="userName"
 					id="userName" required>
 			</div>
-=======
-        <div class="form-group">
-            <label for="nickName">닉네임</label>
-            <input type="text" name="nickName" id="nickName" required>
-            <button type="button" id="nickNameCheckBtn" onclick="dupnickNameCheck();">닉네임 중복검사</button>
-        </div>
->>>>>>> main
+
 
 			<div class="form-group">
 				<label for="nickName">닉네임</label> <input type="text" name="nickName"

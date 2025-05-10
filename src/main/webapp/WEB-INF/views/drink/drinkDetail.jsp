@@ -554,8 +554,9 @@ form button:hover {
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 
-<script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7724415b4929d53594c486d4493f37fb&libraries=services&autoload=false"></script>
+<!-- Kakao 지도 API 로딩 (appkey는 백엔드에서 안전하게 전달됨) -->
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&libraries=services&autoload=false"></script>
+
 <!-- 2. initMap 함수를 정의하는 스크립트 -->
   <script type="text/javascript">
   
