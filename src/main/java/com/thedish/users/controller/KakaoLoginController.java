@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,12 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class KakaoLoginController {
 
-    // 카카오 REST API 키와 리다이렉트 URI (환경에 맞게 수정 필요)
-	private final String clientId = "f658a389331286bdf55a803fc040f507";
-	private final String redirectUri = "http://localhost:8080/thedish/oauth/kakao.do";
+	// 보안 강화를 위해 application.properties에서 Kakao clientId 및 redirectUri를 불러옵니다.
+	@Value("${kakao.clientId}")
+	private String clientId;
+
+	@Value("${kakao.redirectUri}")
+	private String redirectUri;
 
     @Autowired
     private UsersService usersService; // 사용자 정보를 DB에서 관리하는 서비스 (가정)
@@ -34,13 +38,20 @@ public class KakaoLoginController {
     // 1. 카카오 로그인 요청 URL로 리다이렉트
     @RequestMapping("kakaoLogin.do")
     public String redirectToKakao(@RequestParam(value = "mode", required = false) String mode) throws UnsupportedEncodingException {
+        System.out.println("[로그] kakaoLogin.do 요청 들어옴");
+        System.out.println("clientId = " + clientId);
+        System.out.println("redirectUri = " + redirectUri);
+        System.out.println("mode = " + mode);
+
         String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" +
                 "client_id=" + clientId +
                 "&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8") +
                 "&response_type=code";
         if (mode != null) {
-            kakaoUrl += "&state=" + mode; // mode를 state로 전달
+            kakaoUrl += "&state=" + mode;
         }
+
+        System.out.println("최종 kakaoUrl = " + kakaoUrl);
         return "redirect:" + kakaoUrl;
     }
 
@@ -49,6 +60,8 @@ public class KakaoLoginController {
     public String kakaoCallback(@RequestParam("code") String code,
                                 @RequestParam(value = "state", required = false) String mode,
                                 HttpSession session, Model model) throws Exception {
+        System.out.println("[콜백] 카카오 인가 코드 수신: " + code);
+        System.out.println("[콜백] 모드: " + mode);
 
         // 1단계: 액세스 토큰 요청
         String tokenRequestUrl = "https://kauth.kakao.com/oauth/token";

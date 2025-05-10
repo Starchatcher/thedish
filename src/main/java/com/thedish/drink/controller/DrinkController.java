@@ -10,6 +10,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,10 +39,15 @@ import com.thedish.users.model.vo.Users;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+
 @Controller
 public class DrinkController {
-
 	
+	
+
+	// 클래스 내 변수로 선언
+	@Value("${kakao.map.key}")
+	private String kakaoMapKey;
 	
 	private static final Logger logger = LoggerFactory.getLogger(DrinkController.class);
 
@@ -116,6 +122,9 @@ public class DrinkController {
 			                 drinkService.updateAddReadCount(drinkId); // 조회수 증가 로직
 
 			                 mv.addObject("drink", drink); // 술 상세 정보 모델에 추가
+			                 
+			                 // 카카오 지도 API 키 JSP에 전달
+			                 mv.addObject("kakaoMapKey", kakaoMapKey);
 
 			                 String userId = null;
 			                 // 세션에서 로그인된 사용자 정보를 가져오는 로직 (예시)

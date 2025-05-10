@@ -8,6 +8,7 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,16 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class GoogleLoginController {
 
-    // Google 클라이언트 ID와 리다이렉트 URI
-    private final String clientId = "680129226717-isfuq75n1ndolqg08d39qdgif0319hi6.apps.googleusercontent.com";
-    private final String clientSecret = "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";
-    private final String redirectUri = "http://localhost:8080/thedish/oauth/google.do";
+	// 보안 강화를 위해 application.properties에서 google clientId 및 clientSecret, redirectUri를 불러옵니다.
+	@Value("${google.clientId}")
+	private String clientId;
+	
+	@Value("${google.clientSecret}")
+	private String clientSecret;
+	
+
+	@Value("${google.redirectUri}")
+	private String redirectUri;
 
     @Autowired
     private UsersService usersService;
