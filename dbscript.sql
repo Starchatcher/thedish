@@ -18162,3 +18162,15 @@ CREATE TABLE view_log (
     visit_time DATE DEFAULT SYSDATE                   -- 방문 시각 (기본값 SYSDATE)
     
 );
+
+
+-- qna 테이블에 첨부파일 활용 위한 컬럼 추가
+ALTER TABLE qna
+ADD (
+    original_filename VARCHAR2(255),
+    rename_filename   VARCHAR2(255)
+);
+
+COMMENT ON COLUMN qna.original_filename is '첨부파일원본이름';
+COMMENT ON COLUMN qna.rename_filename is '저장된파일이름';
+
