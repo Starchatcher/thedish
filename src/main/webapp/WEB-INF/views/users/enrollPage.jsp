@@ -15,7 +15,7 @@ body {
 	padding: 0;
 	font-family: 'Arial', sans-serif;
 	background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
