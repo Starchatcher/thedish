@@ -14,6 +14,7 @@
             <c:if test="${not empty category}">
                 <c:set var="queryParams" value="${queryParams}&category=${category}" />
             </c:if>
+             <c:set var="queryParams" value="${queryParams}&sortType=${param.sortType}&sortDirection=${param.sortDirection}" />
         </c:otherwise>
     </c:choose>
 </c:if>

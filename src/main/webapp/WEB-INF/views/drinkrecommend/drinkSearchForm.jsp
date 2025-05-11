@@ -10,93 +10,179 @@
 
 <style>
     body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Arial', sans-serif;
-        /* 두 번째 페이지의 배경 그라디언트 적용 */
-        background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
-        /* 전체 페이지 중앙 정렬 스타일은 menubar, sidebar와 함께 사용하기 어려워 제외 */
-        /* height: 100vh; display: flex; align-items: center; justify-content: center; */
-    }
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    /* 흑백 모던 스타일 배경: 밝은 회색 계열 */
+    background: #f0f0f0; /* 밝은 회색 배경 */
+    /* 전체 페이지 중앙 정렬 스타일은 menubar, sidebar와 함께 사용하기 어려워 제외 - 유지 */
+    /* height: 100vh; display: flex; align-items: center; justify-content: center; */
+    color: #333; /* 기본 글자색: 어두운 회색 */
+}
 
-    /* 검색 컨테이너 스타일 적용 (로그인 컨테이너 스타일 참고) */
-    .search-container {
-        background-color: rgba(255, 255, 255, 0.8); /* 투명한 배경 */
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-        max-width: 700px; /* 너비 조정 (슬라이더를 고려하여 조금 더 넓게 설정) */
-        margin: 50px auto; /* 페이지 중앙에 배치 및 상하 마진 추가 */
-        text-align: left; /* 내용 정렬을 왼쪽으로 변경 */
-    }
+/* 검색 컨테이너 스타일 적용 (로그인 컨테이너 스타일 참고) */
+.search-container {
+    /* 흑백 모던 스타일 배경: 흰색 또는 약간의 투명도 있는 흰색 */
+    background-color: #ffffff; /* 흰색 배경 */
+    /* background-color: rgba(255, 255, 255, 0.9); /* 약간 투명한 흰색 (선택 사항) */
+    padding: 40px;
+    border-radius: 10px; /* 둥근 모서리 (너무 둥글지 않게) */
+    /* 그림자 효과: 부드럽고 은은한 회색 그림자 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 700px; /* 너비 조정 유지 */
+    margin: 50px auto; /* 페이지 중앙에 배치 및 상하 마진 추가 유지 */
+    text-align: left; /* 내용 정렬을 왼쪽으로 변경 유지 */
+    border: 1px solid #ddd; /* 얇은 경계선 추가 (선택 사항) */
+}
 
-    /* 컨테이너 내 제목 및 설명 중앙 정렬 */
-    .search-container h2,
-    .search-container p {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+/* 컨테이너 내 제목 및 설명 스타일 */
+.search-container h2,
+.search-container p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #222; /* 글자색: 더 진한 회색 */
+}
 
-    /* 검색 입력 그룹 (input과 button) 스타일 */
-    .search-container .input-group {
-        display: flex; /* 가로로 배치 */
-        margin-bottom: 20px;
-        align-items: center; /* 세로 중앙 정렬 */
-    }
+/* 검색 입력 그룹 (input과 button) 스타일 */
+.search-container .input-group {
+    display: flex; /* 가로로 배치 유지 */
+    margin-bottom: 20px;
+    align-items: center; /* 세로 가운데 정렬 유지 */
+}
 
-    .search-container .input-group input[type="text"] {
-        flex-grow: 1; /* 남은 공간 채우기 */
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: 10px;
-        font-size: 1rem; /* 폰트 크기 조정 */
-    }
+.search-container .input-group input[type="text"] {
+    flex-grow: 1; /* 남은 공간 채우기 유지 */
+    padding: 10px;
+    border: 1px solid #ccc; /* 경계선 색상 변경 */
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 1rem;
+    color: #333; /* 입력 글자색 */
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
+}
 
-    .search-container .input-group button {
-        padding: 10px 20px;
-        background-color: #f29abf; /* 두 번째 페이지에서 사용된 색상 계열 */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease; /* 호버 효과 */
-        font-size: 1rem; /* 폰트 크기 조정 */
-    }
+.search-container .input-group input[type="text"]:focus {
+    border-color: #888; /* 포커스 시 경계선 색상 변경 */
+    outline: none;
+    box-shadow: 0 0 5px rgba(136, 136, 136, 0.3);
+}
 
-    .search-container .input-group button:hover {
-        background-color: #e089a8; /* 호버 시 색상 변경 */
-    }
 
-    /* 슬라이더 컨테이너 스타일 */
-    .slider-container {
-        margin: 20px 0;
-        padding: 0 10px; /* 슬라이더 영역 내부 패딩 */
-    }
+.search-container .input-group button {
+    padding: 10px 20px;
+    /* 흑백 모던 스타일 버튼 배경색 */
+    background-color: #555; /* 중간 회색 */
+    color: white; /* 글자색 흰색 유지 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
 
-    .slider-container label {
-        display: block; /* 라벨을 별도 줄로 */
-        margin-bottom: 8px; /* 라벨과 슬라이더 간 간격 */
-        font-weight: bold;
-    }
+.search-container .input-group button:hover {
+    /* 호버 시 배경색 더 어둡게 */
+    background-color: #333;
+}
 
-    .slider-container input[type="range"] {
-        width: calc(100% - 80px); /* 값 표시 영역 확보 */
-        vertical-align: middle; /* 라벨/값과 세로 정렬 */
-        margin-right: 10px;
-    }
+/* 슬라이더 컨테이너 스타일 */
+.slider-container {
+    margin: 20px 0;
+    padding: 0 10px; /* 슬라이더 영역 내부 패딩 유지 */
+    color: #333; /* 슬라이더 라벨 및 값 글자색 */
+}
 
-    .slider-container span {
-        display: inline-block;
-        width: 70px; /* 값 표시 영역 너비 */
-        text-align: right;
-        vertical-align: middle; /* 라벨/슬라이더와 세로 정렬 */
-    }
+.slider-container label {
+    display: block; /* 라벨을 별도 줄로 */
+    margin-bottom: 8px; /* 라벨과 슬라이더 간 간격 */
+    font-weight: bold; /* 글자 굵게 */
+    color: #555; /* 라벨 글자색 */
+}
 
-    /* 추가적인 스타일 조정 (필요에 따라 추가) */
-    /* 예: menubar, sidebar와 search-container 간의 간격 조정 등 */
+.slider-container input[type="range"] {
+    width: calc(100% - 80px); /* 값 표시 영역 확보 */
+    vertical-align: middle; /* 라벨/값과 세로 정렬 */
+    margin-right: 10px;
+
+    -webkit-appearance: none; /* 기본 스타일 제거 */
+    appearance: none; /* 기본 스타일 제거 */
+    background: transparent; /* 기본 배경 투명 */
+    cursor: pointer; /* 마우스 커서 모양 */
+    /* CSS 변수 선언 - JavaScript에서 이 값을 업데이트함 */
+    --fill-percentage: 0%; /* 초기값 */
+}
+
+/* 슬라이더 트랙 스타일 */
+.slider-container input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px; /* 트랙 높이 */
+    background: linear-gradient(to right, #333 var(--fill-percentage), #ddd var(--fill-percentage)); /* 채워지는 색상 */
+    border-radius: 5px; /* 둥근 모서리 */
+}
+
+.slider-container input[type="range"]::-moz-range-track {
+    height: 8px; /* 트랙 높이 */
+    background: linear-gradient(to right, #333 var(--fill-percentage), #ddd var(--fill-percentage)); /* 채워지는 색상 */
+    border-radius: 5px; /* 둥근 모서리 */
+}
+
+.slider-container input[type="range"]::-ms-track {
+    height: 8px; /* 트랙 높이 */
+    background: transparent; /* 기본 배경 투명 */
+}
+
+/* 슬라이더 핸들 (thumb) 스타일 */
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* 기본 스타일 제거 */
+    appearance: none; /* 기본 스타일 제거 */
+    margin-top: -5px; /* 트랙 중앙 정렬 */
+    background-color: #555; /* 핸들 색상: 중간 회색 */
+    border: 1px solid #333; /* 핸들 테두리 */
+    border-radius: 50%; /* 원형 */
+    height: 18px; /* 핸들 크기 */
+    width: 18px; /* 핸들 크기 */
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+    background-color: #555; /* 핸들 색상: 중간 회색 */
+    border: 1px solid #333; /* 핸들 테두리 */
+    border-radius: 50%; /* 원형 */
+    height: 18px; /* 핸들 크기 */
+    width: 18px; /* 핸들 크기 */
+}
+
+.slider-container input[type="range"]::-ms-thumb {
+    background-color: #555; /* 핸들 색상: 중간 회색 */
+    border: 1px solid #333; /* 핸들 테두리 */
+    border-radius: 50%; /* 원형 */
+    height: 18px; /* 핸들 크기 */
+    width: 18px; /* 핸들 크기 */
+}
+
+/* 슬라이더 핸들 호버 스타일 */
+.slider-container input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: #333; /* 호버 시 더 어두운 회색 */
+}
+
+.slider-container input[type="range"]:hover::-moz-range-thumb {
+    background-color: #333; /* 호버 시 더 어두운 회색 */
+}
+
+.slider-container input[type="range"]:hover::-ms-thumb {
+    background-color: #333; /* 호버 시 더 어두운 회색 */
+}
+
+/* 슬라이더 값 표시 스타일 */
+.slider-container span {
+    display: inline-block; /* 값 표시 영역을 인라인 블록으로 유지 */
+    width: 70px; /* 값 표시 영역 너비 유지 */
+    text-align: right; /* 텍스트 오른쪽 정렬 유지 */
+    vertical-align: middle; /* 라벨/슬라이더와 세로 정렬 유지 */
+    font-weight: bold; /* 값 표시 글자 굵게 */
+    color: #333; /* 어두운 회색 */
+}
 
 </style>
+
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />

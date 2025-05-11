@@ -291,47 +291,49 @@ public class DrinkController {
 			            ModelAndView mv,
 			            @RequestParam("action") String action,
 			            @RequestParam("keyword") String keyword,
-			            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 타입을 int로 변경하고 기본값 설정
-			            @RequestParam(name = "limit", required = false, defaultValue = "12") int limit, // limit 파라미터 타입을 int로 변경하고 기본값 설정
-			            @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType) { // @RequestParam에 sortType 추가
+			            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage,
+			            @RequestParam(name = "limit", required = false, defaultValue = "12") int limit,
+			            @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType,
+			            @RequestParam(name = "sortDirection", required = false, defaultValue = "DESC") String sortDirection) { // *** 추가: sortDirection 파라미터 받기 ***
 
-			        // logger.info("drinkSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}", keyword, currentPage, limit, sortType); // 로그 출력 예시
+			        // logger.info("drinkSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}, sortDirection: {}", keyword, currentPage, limit, sortType, sortDirection); // 로그 출력 예시 (sortDirection 추가)
 
 			        // 검색결과가 적용된 총 목록 갯수 조회 (정렬 기준과 무관)
 			        int listCount = drinkService.selectSearchTitleCount(keyword);
 
 			        // 페이지 관련 항목 계산
-			        Paging paging = new Paging(listCount, limit, currentPage, "drinkSearch.do"); // URL 이름 확인
+			        Paging paging = new Paging(listCount, limit, currentPage, "drinkSearch.do");
 			        paging.calculate();
 
 			        // 검색, 페이징, 정렬 정보를 담을 객체
-			        Search search = new Search(); // Search 객체 사용
+			        Search search = new Search();
 			        search.setKeyword(keyword);
 			        search.setStartRow(paging.getStartRow());
 			        search.setEndRow(paging.getEndRow());
-			        search.setSortType(sortType); // *** Search 객체에 sortType 설정 ***
+			        search.setSortType(sortType);
+			        search.setSortDirection(sortDirection); // *** 추가: Search 객체에 sortDirection 설정 ***
 
 			        // 서비스 모델로 페이징 적용된 목록 조회 요청하고 결과받기
 			        // DrinkService의 메소드가 Search 객체를 받도록 수정해야 합니다.
 			        ArrayList<Drink> list = drinkService.selectSearchTitle(search);
 
-			        if (list != null && !list.isEmpty()) { // 조회 성공시 (목록이 비어있지 않으면)
-			            // ModelAndView에 결과 및 페이징 정보 담기
-			            mv.addObject("list", list); // 음료 목록 (타입 확인)
+			        if (list != null && !list.isEmpty()) {
+			            mv.addObject("list", list);
 			            mv.addObject("paging", paging);
 			            mv.addObject("action", action);
 			            mv.addObject("keyword", keyword);
-			            mv.addObject("sortType", sortType); // *** 현재 정렬 기준 값을 JSP로 다시 전달 ***
+			            mv.addObject("sortType", sortType);
+			            mv.addObject("sortDirection", sortDirection); // *** 추가: 현재 정렬 방향 값을 JSP로 다시 전달 ***
 
-			            mv.setViewName("drink/drinkList"); // 결과 페이지 경로 확인
-			        } else { // 조회 결과 없음
-			             // 검색 결과가 없을 때도 페이지는 표시하되 목록만 비어있도록 처리
-			             mv.addObject("list", list); // 빈 목록 전달
+			            mv.setViewName("drink/drinkList");
+			        } else {
+			             mv.addObject("list", list);
 			             mv.addObject("paging", paging);
 			             mv.addObject("action", action);
 			             mv.addObject("keyword", keyword);
-			             mv.addObject("sortType", sortType); // 정렬 기준 유지
-			             mv.setViewName("drink/drinkList"); // 목록 페이지로 이동
+			             mv.addObject("sortType", sortType);
+			             mv.addObject("sortDirection", sortDirection); // *** 추가: 정렬 방향 유지 ***
+			             mv.setViewName("drink/drinkList");
 			        }
 
 			        return mv;

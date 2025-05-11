@@ -11,7 +11,16 @@ public class Search {
 	private int age;		 //회원관리에서 연령대별 검색의 나이
 	private String boardCategory;
 	private String sortType;
+	private String sortDirection; 
 	
+	public String getSortDirection() {
+		return sortDirection;
+	}
+
+	public void setSortDirection(String sortDirection) {
+		this.sortDirection = sortDirection;
+	}
+
 	public String getSortType() {
 		return sortType;
 	}
@@ -37,7 +46,10 @@ public class Search {
 		return keyword;
 	}
 
-	public Search(String keyword, int startRow, int endRow, Date begin, Date end, int age, String boardCategory) {
+	
+
+	public Search(String keyword, int startRow, int endRow, Date begin, Date end, int age, String boardCategory,
+			String sortType, String sortDirection) {
 		super();
 		this.keyword = keyword;
 		this.startRow = startRow;
@@ -46,6 +58,8 @@ public class Search {
 		this.end = end;
 		this.age = age;
 		this.boardCategory = boardCategory;
+		this.sortType = sortType;
+		this.sortDirection = sortDirection;
 	}
 
 	public void setKeyword(String keyword) {
