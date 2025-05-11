@@ -174,14 +174,14 @@ form button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #555; 
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 form button:hover {
-    background-color: #0056b3;
+    background-color: #333; 
 }
 
     
@@ -320,6 +320,53 @@ form button:hover {
         /* text-decoration: underline; /* 호버 시 밑줄 다시 표시 예시 */
     }
     
+.modify-button,
+.register-store-button,
+.delete-button {
+    display: inline-block; /* 인라인 블록 요소로 설정 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    background-color: #555; /* 모든 버튼의 배경색을 중간 회색으로 통일 */
+    color: white; /* 글자색: 흰색 */
+    border: none; /* 테두리 없음 */
+    border-radius: 4px; /* 둥근 모서리 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 0.9rem; /* 글자 크기 */
+    cursor: pointer; /* 마우스 오버 시 커서 모양 */
+    transition: background-color 0.3s ease; /* 배경색 변경 시 부드러운 전환 */
+    margin-right: 5px; /* 버튼 간 간격 */
+    height: 40px; /* 버튼 높이 통일 */
+    line-height: 20px; /* 텍스트 세로 정렬을 위한 라인 높이 */
+}
+
+/* 버튼 호버 스타일 */
+.modify-button:hover,
+.register-store-button:hover,
+.delete-button:hover {
+    background-color: #333; /* 마우스 오버 시 배경색 더 어둡게 */
+}
+
+/* 버튼 클릭 시 스타일 */
+.modify-button:active,
+.register-store-button:active,
+.delete-button:active {
+    background-color: #444; /* 클릭 중일 때 배경색 더 어둡게 */
+}
+
+/* 부모 요소 스타일 */
+.admin-buttons {
+    display: flex; /* 버튼들을 가로로 나열 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-top: 10px; /* 필요에 따라 위쪽 여백 추가 */
+}
+
+/* 폼 스타일 초기화 */
+form {
+    display: inline; /* 인라인으로 설정하여 버튼과 나란히 배치 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    height: 60px; /* 콘텐츠에 따라 높이 자동 조정 */
+}
+    
     </style>
 
 <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
@@ -333,13 +380,16 @@ form button:hover {
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 <c:if test="${  loginUser.role eq 'ADMIN' }">
-<a href="moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">수정</a>
- <a href="drinkStoreInsert.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}">판매처 등록</a>
-<form action="deleteDrink.do" method="post" style="display:inline;">
-    <input type="hidden" name="drinkId" value="${drink.drinkId}" />
-    <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
-    <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
-</form>
+    <div class="admin-buttons"> <!-- 버튼을 감싸는 부모 요소 -->
+        <button onclick="location.href='moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}'" class="modify-button">수정</button>
+        <button onclick="location.href='drinkStoreInsert.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}'" class="register-store-button">판매처 등록</button>
+        
+        <form action="deleteDrink.do" method="post" style="display: inline;">
+            <input type="hidden" name="drinkId" value="${drink.drinkId}" />
+            <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
+            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');" class="delete-button">삭제</button>
+        </form>
+    </div>
 </c:if>
 
 <div class="container">

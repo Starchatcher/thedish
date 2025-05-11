@@ -174,6 +174,56 @@ form button:hover {
 	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
 }
 
+form {
+    display: inline; /* 인라인으로 설정하여 버튼과 나란히 배치 */
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    height: 60px; /* 높이 자동 조정 */
+}
+
+/* 버튼 스타일 공통 */
+.modify-button,
+.delete-button {
+    display: inline-block; /* 인라인 블록 요소로 설정 */
+    padding: 10px 20px; /* 버튼 내부 여백 */
+    background-color: #555; /* 배경색: 중간 회색 */
+    color: white; /* 글자색: 흰색 */
+    border: none; /* 테두리 없음 */
+    border-radius: 4px; /* 둥근 모서리 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    font-size: 0.9rem; /* 글자 크기 */
+    cursor: pointer; /* 마우스 오버 시 커서 모양 */
+    transition: background-color 0.3s ease; /* 배경색 변경 시 부드러운 전환 */
+    margin-right: 5px; /* 버튼 간 간격 */
+    height: 40px; /* 버튼 높이 통일 */
+    line-height: 20px; /* 텍스트 세로 정렬을 위한 라인 높이 */
+}
+
+/* 수정 버튼 호버 스타일 */
+.modify-button:hover {
+    background-color: #333; /* 마우스 오버 시 배경색 더 어둡게 */
+}
+
+
+
+/* 삭제 버튼 호버 스타일 */
+.delete-button:hover {
+    background-color: #0056b3; /* 마우스 오버 시 배경색 더 어둡게 */
+}
+
+/* 버튼 클릭 시 스타일 */
+.modify-button:active,
+.delete-button:active {
+    background-color: #444; /* 클릭 중일 때 배경색 더 어둡게 */
+}
+
+/* 부모 요소 스타일 */
+.button-container {
+    display: flex; /* 플렉스 박스 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: flex-start; /* 수평 정렬 (왼쪽 정렬) */
+}
+
 .starpoint_wrap{display:inline-block;}
 .starpoint_box{position:relative;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 0 no-repeat;font-size:0;}
 .starpoint_box .starpoint_bg{display:block;position:absolute;top:0;left:0;height:18px;background:url(https://ido-archive.github.io/svc/etc/element/img/sp_star.png) 0 -20px no-repeat;pointer-events:none;}
@@ -218,18 +268,16 @@ form button:hover {
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 <c:if test="${  loginUser.role eq 'ADMIN' }">
-	<a
-		href="moveUpdateRecipePage.do?recipeId=${recipe.recipeId}&page=${currentPage != null ? currentPage : 1}">수정</a>
+    <div class="button-container"> <!-- 버튼을 감싸는 부모 요소 -->
+        <button onclick="location.href='moveUpdateRecipePage.do?recipeId=${recipe.recipeId}&page=${currentPage != null ? currentPage : 1}'" class="modify-button">수정</button>
 
-
-	<form action="deleteRecipe.do" method="post" style="display: inline;">
-		<input type="hidden" name="recipeId" value="${recipe.recipeId}" /> <input
-			type="hidden" name="page"
-			value="${currentPage != null ? currentPage : 1}" />
-		<button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
-	</form>
+        <form action="deleteRecipe.do" method="post" style="display: inline;">
+            <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
+            <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
+            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');" class="delete-button">삭제</button>
+        </form>
+    </div>
 </c:if>
-
 
 	<div class="container">
 		<h2>${recipe.name}</h2>

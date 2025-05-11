@@ -246,63 +246,58 @@ public class RecipeController {
 
 
 
-		// 레시피 검색 기능
+				 // 레시피 검색 기능
 				 @RequestMapping("recipeSearch.do")
-				    public ModelAndView recipeSearchTitleMethod(
-				            ModelAndView mv,
-				            @RequestParam("action") String action,
-				            @RequestParam("keyword") String keyword,
-				            @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, // page 파라미터 타입을 int로 변경하고 기본값 설정
-				            @RequestParam(name = "limit", required = false, defaultValue = "12") int limit, // limit 파라미터 타입을 int로 변경하고 기본값 설정
-				            @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType) { // @RequestParam에 sortType 추가
+				 public ModelAndView recipeSearchTitleMethod(
+				         ModelAndView mv,
+				         @RequestParam("action") String action,
+				         @RequestParam("keyword") String keyword,
+				         @RequestParam(name = "page", required = false, defaultValue = "1") int currentPage,
+				         @RequestParam(name = "limit", required = false, defaultValue = "12") int limit,
+				         @RequestParam(name = "sortType", required = false, defaultValue = "latest") String sortType,
+				         @RequestParam(name = "sortDirection", required = false, defaultValue = "DESC") String sortDirection) { // *** 추가: sortDirection 파라미터 받기 ***
 
-				        // @RequestParam의 defaultValue와 required=false 속성을 사용하여
-				        // 파라미터가 없을 경우 기본값이 적용되도록 처리했습니다.
-				        // 따라서 page, limit, sortType에 대한 null 체크 로직이 간소화됩니다.
+				     // logger.info("recipeSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}, sortDirection: {}", keyword, currentPage, limit, sortType, sortDirection); // 로그 출력 예시 (sortDirection 추가)
 
-				        // logger.info("recipeSearch.do 요청 받음 - keyword: {}, page: {}, limit: {}, sortType: {}", keyword, currentPage, limit, sortType); // 로그 출력 예시
+				     // 검색결과가 적용된 총 목록 갯수 조회 (정렬 기준과 무관)
+				     int listCount = recipeService.selectSearchTitleCount(keyword);
 
-				        // 검색결과가 적용된 총 목록 갯수 조회 (정렬 기준과 무관)
-				        int listCount = recipeService.selectSearchTitleCount(keyword);
+				     // 페이지 관련 항목 계산
+				     Paging paging = new Paging(listCount, limit, currentPage, "recipeSearch.do");
+				     paging.calculate();
 
-				        // 페이지 관련 항목 계산
-				        Paging paging = new Paging(listCount, limit, currentPage, "recipeSearch.do");
-				        paging.calculate();
+				     // 검색, 페이징, 정렬 정보를 담을 객체
+				     Search search = new Search();
+				     search.setKeyword(keyword);
+				     search.setStartRow(paging.getStartRow());
+				     search.setEndRow(paging.getEndRow());
+				     search.setSortType(sortType);
+				     search.setSortDirection(sortDirection); // *** 추가: Search 객체에 sortDirection 설정 ***
 
-				        // 검색, 페이징, 정렬 정보를 담을 객체
-				        Search search = new Search();
-				        search.setKeyword(keyword);
-				        search.setStartRow(paging.getStartRow());
-				        search.setEndRow(paging.getEndRow());
-				        search.setSortType(sortType); // *** Search 객체에 sortType 설정 ***
+				     // 서비스 메소드 호출 (Search 객체 전달)
+				     ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
 
-				        // 서비스 메소드 호출 (Search 객체 전달)
-				        ArrayList<Recipe> list = recipeService.selectSearchTitle(search);
+				     if (list != null && !list.isEmpty()) {
+				         mv.addObject("list", list);
+				         mv.addObject("paging", paging);
+				         mv.addObject("action", action);
+				         mv.addObject("keyword", keyword);
+				         mv.addObject("sortType", sortType);
+				         mv.addObject("sortDirection", sortDirection); // *** 추가: 현재 정렬 방향 값을 JSP로 다시 전달 ***
 
-				        if (list != null && !list.isEmpty()) { // 조회 성공시 (목록이 비어있지 않으면)
-				            // ModelAndView에 결과 및 페이징 정보 담기
-				            mv.addObject("list", list);
-				            mv.addObject("paging", paging);
-				            mv.addObject("action", action);
-				            mv.addObject("keyword", keyword);
-				            mv.addObject("sortType", sortType); // *** 현재 정렬 기준 값을 JSP로 다시 전달 ***
+				         mv.setViewName("recipe/recipeList");
+				     } else {
+				          mv.addObject("list", list);
+				          mv.addObject("paging", paging);
+				          mv.addObject("action", action);
+				          mv.addObject("keyword", keyword);
+				          mv.addObject("sortType", sortType);
+				          mv.addObject("sortDirection", sortDirection); // *** 추가: 정렬 방향 유지 ***
+				          mv.setViewName("recipe/recipeList");
+				     }
 
-				            mv.setViewName("recipe/recipeList"); // 결과 페이지 경로 확인
-				        } else { // 조회 결과 없음
-				            // mv.addObject("message", "'" + keyword + "'에 대한 검색 결과가 존재하지 않습니다.");
-				            // mv.setViewName("common/error"); // 또는 검색 결과 없음 페이지로 이동
-				            // 검색 결과가 없을 때도 페이지는 표시하되 목록만 비어있도록 처리하는 경우가 많습니다.
-				            // 이 경우 list와 paging 객체를 그대로 add해도 JSP에서 목록 크기를 체크하여 처리할 수 있습니다.
-				             mv.addObject("list", list); // 빈 목록 전달
-				             mv.addObject("paging", paging);
-				             mv.addObject("action", action);
-				             mv.addObject("keyword", keyword);
-				             mv.addObject("sortType", sortType); // 정렬 기준 유지
-				             mv.setViewName("recipe/recipeList"); // 목록 페이지로 이동
-				        }
-
-				        return mv;
-				    }
+				     return mv;
+				 }
 
 		
 		
@@ -318,9 +313,25 @@ public class RecipeController {
 		public String insertRecipe(
 		        Recipe recipe,
 		        @RequestParam(name = "imageFile", required = false) MultipartFile imageFile,
-		        Model model) {
-
-		    // 1. 레시피 저장 (자동 생성된 ID를 recipe.id에 세팅)
+		        Model model, HttpSession session) {
+			 Users loggedInUser = (Users) session.getAttribute("loginUser");
+		   
+			 if (loggedInUser != null) {
+			        // Recipe 객체에 로그인한 사용자의 ID 설정
+			        // Users 객체에 사용자 ID 필드가 'userId'라고 가정합니다.
+			        // 실제 필드 이름에 맞게 수정해주세요 (예: loggedInUser.getId(), loggedInUser.getLoginId() 등)
+			        recipe.setCreateBy(loggedInUser.getLoginId()); // <- 여기서 사용자의 ID를 설정
+			    } else {
+			        // 로그인되지 않은 상태라면 어떻게 처리할지 결정해야 합니다.
+			        // 예: 로그인 페이지로 리다이렉트하거나, 에러 메시지를 보여주거나.
+			        model.addAttribute("msg", "로그인이 필요합니다.");
+			        return "redirect:/loginPage.do"; // 예시: 로그인 페이지로 리다이렉트
+			        // 또는 에러 페이지로 이동하거나 다른 처리를 할 수 있습니다.
+			        // model.addAttribute("msg", "로그인 정보가 없습니다.");
+			        // return "errorPage";
+			    }
+			 
+			 // 1. 레시피 저장 (자동 생성된 ID를 recipe.id에 세팅)
 		    recipeService.insertRecipe(recipe);
 
 		    // 2. 이미지 파일이 있을 경우 이미지 저장
