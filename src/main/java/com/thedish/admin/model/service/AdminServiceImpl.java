@@ -48,4 +48,10 @@ public class AdminServiceImpl implements AdminService {
     public List<Map<String, Object>> selectDailySummary() {
         return adminDao.selectDailySummary();
     }
+    
+    @Override
+    public List<Map<String, Object>> selectDailyPostAndView() {
+        return adminDao.selectDailyPostAndView();
+    }
+
 }
