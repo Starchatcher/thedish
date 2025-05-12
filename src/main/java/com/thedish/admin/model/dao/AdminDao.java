@@ -11,7 +11,5 @@ public interface AdminDao {
     int countTodayInquiries();
     int countTotalUsers(); 
     List<Map<String, Object>> selectDailySummary();
-    
+    List<Map<String, Object>> selectDailyPostAndView();
 }
-
-

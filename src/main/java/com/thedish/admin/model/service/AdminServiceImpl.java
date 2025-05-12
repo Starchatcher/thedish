@@ -6,46 +6,46 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thedish.admin.model.dao.AdminDao;
+import com.thedish.admin.model.dao.AdminUserDao;
+import com.thedish.users.model.vo.Users;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminUserServiceImpl implements AdminUserService {
 
     @Autowired
-    private AdminDao adminDao;
+    private AdminUserDao adminUserDao;
 
     @Override
-    public int countTodayJoin() {
-        return adminDao.countTodayJoin();
+    public Users selectUserById(String userId) {
+        return adminUserDao.selectUserById(userId);
+    }
+
+    @Override
+    public int updateUser(Users user) {
+        return adminUserDao.updateUser(user);
     }
     
     @Override
+    public List<Users> selectAllUsers() {
+        return adminUserDao.selectAllUsers();
+    }
+    @Override
     public int countTotalUsers() {
-        return adminDao.countTotalUsers();
+        return adminUserDao.countTotalUsers();
     }
 
     @Override
-    public int countTodayWithdraw() {
-        return adminDao.countTodayWithdraw();
+    public int countActiveUsers() {
+        return adminUserDao.countActiveUsers();
     }
 
     @Override
-    public int countTodayReports() {
-        return adminDao.countTodayReports();
+    public int countWithdrawnUsers() {
+        return adminUserDao.countWithdrawnUsers();
     }
-
+    
     @Override
-    public int countTodayReviews() {
-        return adminDao.countTodayReviews();
-    }
-
-    @Override
-    public int countTodayInquiries() {
-        return adminDao.countTodayInquiries();
-    }
-
-    @Override
-    public List<Map<String, Object>> selectDailySummary() {
-        return adminDao.selectDailySummary();
+    public List<Users> searchUsers(Map<String, String> paramMap) {
+        return adminUserDao.searchUsers(paramMap);
     }
 }

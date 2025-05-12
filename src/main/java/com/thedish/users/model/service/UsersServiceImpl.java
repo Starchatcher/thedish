@@ -1,11 +1,13 @@
 package com.thedish.users.model.service;
 
 import java.util.ArrayList;
-import org.slf4j.Logger;  // 추가
-import org.slf4j.LoggerFactory;  // 추가
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import jakarta.servlet.http.HttpSession;
 
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
@@ -15,106 +17,122 @@ import com.thedish.users.model.vo.Users;
 @Service("usersService")
 public class UsersServiceImpl implements UsersService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);  // logger 초기화
+    private static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
 
     @Autowired
     private UsersDao usersDao;
 
-    // 세션을 처리하기 위한 의존성 주입
     @Autowired
-    private HttpSession session;
+    private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+    // 🔐 로그인
     @Override
     public Users selectLogin(Users users) {
         return usersDao.selectLogin(users);
     }
 
+    // 👤 내 정보 조회
     @Override
     public Users selectUsers(String loginId) {
         return usersDao.selectUsers(loginId);
     }
 
+    // 📝 회원가입
     @Override
     public int insertUser(Users user) {
         return usersDao.insertUser(user);
     }
 
+    // 🔁 회원 정보 수정
     @Override
-    public int selectChecknickName(String nickName) {
-        return usersDao.selectChecknickName(nickName);  
+    public int updateUser(Users user) {
+        return usersDao.updateUser(user);
     }
 
+    // 🔑 비밀번호 변경
+    @Override
+    public int updatePassword(Users user) {
+        return usersDao.updatePassword(user);
+    }
+    
+    @Override
+    public int deleteUsers(String userId) {
+        return usersDao.deactivateUser(userId); // 또는 내부 로직에 맞게 수정
+    }
+
+    // 🔑 비밀번호 초기화 (인증 후)
+    @Override
+    public int resetPassword(String loginId, String newPassword) {
+        String encPwd = bcryptPasswordEncoder.encode(newPassword);
+        return usersDao.updatePassword(loginId, encPwd);
+    }
+
+    // 🚫 회원 탈퇴 (논리 삭제)
+    @Override
+    public int deactivateUser(String loginId) {
+        return usersDao.deactivateUser(loginId);
+    }
+
+    // ✅ 아이디 중복 체크
     @Override
     public int selectCheckId(String userId) {
         return usersDao.selectCheckId(userId);
     }
 
-    // 회원 정보 수정
+    // ✅ 닉네임 중복 체크
     @Override
-    public int updateUser(Users user) {
-        return usersDao.updateUser(user); // updateUser 메서드를 호출
+    public int selectChecknickName(String nickName) {
+        return usersDao.selectChecknickName(nickName);
     }
 
-    // 회원 탈퇴
-    @Override
-    public int deleteUsers(String userId) {
-        logger.info("Attempting to delete user with loginId: " + userId); // 로그 추가
-
-        int result = usersDao.deleteUsers(userId);
-
-        if (result > 0) {
-            logger.info("User successfully deleted: " + userId); // 성공 로그 추가
-            session.invalidate();
-        } else {
-            logger.error("Failed to delete user: " + userId); // 실패 로그 추가
-        }
-
-        return result;
-    }
-
-    // 검색 관련 메서드 구현
+    // 👨‍💼 관리자: 전체 회원 수
     @Override
     public int selectListCount() {
-        return usersDao.selectListCount();  // 전체 회원 수 조회
+        return usersDao.selectListCount();
     }
 
+    // 👨‍💼 관리자: 전체 회원 리스트
     @Override
     public ArrayList<Users> selectList(Paging paging) {
-        return usersDao.selectList(paging); // 페이징 처리된 회원 리스트 조회
+        return usersDao.selectList(paging);
     }
 
+    // 👨‍💼 관리자: 회원 상태 변경
     @Override
     public int updateStatus(Users users) {
-        return usersDao.updateLoginOk(users); // 사용자 상태 업데이트
+        return usersDao.updateLoginOk(users);
     }
 
+    // 🔍 검색 카운트
     @Override
     public int selectSearchUserIdCount(String keyword) {
-        return usersDao.selectSearchUserIdCount(keyword);  // 사용자 아이디로 검색된 갯수
-    }
-
-    @Override
-    public int selectSearchCreatedAtCount(Search search) {
-        return usersDao.selectSearchCreatedAtCount(search);  // 생성일자로 검색된 갯수
+        return usersDao.selectSearchUserIdCount(keyword);
     }
 
     @Override
     public int selectSearchStatusCount(String keyword) {
-        return usersDao.selectSearchStatusCount(keyword);  // 사용자 상태로 검색된 갯수
+        return usersDao.selectSearchStatusCount(keyword);
     }
 
+    // 🔍 검색 리스트
     @Override
     public ArrayList<Users> selectSearchUserId(Search search) {
-        return usersDao.selectSearchUserId(search); // 사용자 아이디로 검색된 리스트
+        return usersDao.selectSearchUserId(search);
     }
 
     @Override
     public ArrayList<Users> selectSearchCreatedAt(Search search) {
-        return usersDao.selectSearchCreatedAt(search); // 생성일자로 검색된 리스트
+        return usersDao.selectSearchCreatedAt(search);
     }
 
     @Override
     public ArrayList<Users> selectSearchStatus(Search search) {
-        return usersDao.selectSearchStatus(search); // 상태로 검색된 리스트
+        return usersDao.selectSearchStatus(search);
+    }
+
+    // 🔐 이메일 기반 사용자 검색
+    @Override
+    public Users findByLoginIdAndEmail(String loginId, String email) {
+        return usersDao.findByLoginIdAndEmail(loginId, email);
     }
 }

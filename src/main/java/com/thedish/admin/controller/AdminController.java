@@ -29,27 +29,33 @@ public class AdminController {
         int todayInquiry = adminService.countTodayInquiries();
         int totalUsers = adminService.countTotalUsers();
 
-        // 2. 최근 7일 요약 데이터 조회
+        // 2. 최근 7일 요약 데이터 조회 (게시글 수 + 조회수 + 방문자 수 → 전부 dailySummary 사용)
         List<Map<String, Object>> dailySummary = adminService.selectDailySummary();
 
-        // 3. 방문자 차트용 데이터 리스트 생성
-        List<String> visitLabels = new ArrayList<>();
-        List<Integer> visitData = new ArrayList<>();
+        // 그래프 데이터 준비
+        List<String> labels = new ArrayList<>();
+        List<Integer> postData = new ArrayList<>();
+        List<Integer> viewData = new ArrayList<>();
         for (Map<String, Object> row : dailySummary) {
-            visitLabels.add((String) row.get("DAY"));
-            visitData.add(((Number) row.get("VISIT_COUNT")).intValue());
+            labels.add((String) row.get("DAY"));
+            postData.add(((Number) row.get("POST_COUNT")).intValue());
+            viewData.add(((Number) row.get("VIEW_COUNT")).intValue());
         }
 
-        // 4. 데이터 JSP로 전달
+        // 3. 데이터 JSP로 전달
         mv.addObject("todayJoin", todayJoin);
         mv.addObject("todayWithdraw", todayWithdraw);
         mv.addObject("todayReport", todayReport);
         mv.addObject("todayReview", todayReview);
         mv.addObject("todayInquiry", todayInquiry);
-        mv.addObject("dailySummary", dailySummary);
-        mv.addObject("visitLabels", visitLabels);
-        mv.addObject("visitData", visitData);
         mv.addObject("totalUsers", totalUsers);
+
+        mv.addObject("dailySummary", dailySummary);
+
+        // 그래프용 데이터
+        mv.addObject("postViewLabels", labels);
+        mv.addObject("postData", postData);
+        mv.addObject("viewData", viewData);
 
         mv.setViewName("admin/adminDashboard");
         return mv;
@@ -61,5 +67,4 @@ public class AdminController {
         mv.setViewName("admin/noticeList"); // /WEB-INF/views/admin/noticeList.jsp
         return mv;
     }
-
 }
