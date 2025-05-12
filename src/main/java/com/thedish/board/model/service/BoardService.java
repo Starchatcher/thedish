@@ -21,6 +21,7 @@ public interface BoardService {
 	int insertBoard(Board board);
 	int updateBoard(Board board);
 	int deleteBoard(Board board);
+	int deleteBoardReports (Board board);
 	
 	int selectSearchTitleCount(Search search);
 	int selectSearchWriterCount(Search search);
@@ -39,6 +40,7 @@ public interface BoardService {
 	
 	int selectBoardCommentCount (int targetId);
 	List<Comment> selectBoardComment (Map<String, Object> param);
+	List<Comment> selectRepliesByBoardId (int boardId);
 	int insertBoardComment(Comment comment);
 	
 	int updateBoardComment(Comment comment);
