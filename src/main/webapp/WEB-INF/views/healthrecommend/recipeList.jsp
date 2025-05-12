@@ -14,22 +14,22 @@
         body {
             margin: 0;
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #FFF8F0;
-            color: #444;
+            background-color: #f8f9fa;
+            color: #333;
         }
 
         .main-container {
             max-width: 1100px;
             margin: 60px auto;
             padding: 40px;
-            background-color: #fff5ec;
+            background-color: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
         }
 
         h2 {
             font-size: 28px;
-            color: #FF6F00;
+            color: #2c3e50;
             margin-bottom: 30px;
             text-align: center;
         }
@@ -41,8 +41,8 @@
         }
 
         .recipe-card {
-            background-color: #fffaf3;
-            border: 1px solid #ffcaa6;
+            background-color: #f9fbfd;
+            border: 1px solid #b0bec5;
             border-radius: 16px;
             padding: 20px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -50,18 +50,18 @@
 
         .recipe-card:hover {
             transform: scale(1.015);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         }
 
         .recipe-card h3 {
             font-size: 20px;
             margin-bottom: 12px;
-            color: #FF6F00;
+            color: #2c3e50;
         }
 
         .recipe-card h3 a {
             text-decoration: none;
-            color: #FF6F00;
+            color: #2c3e50;
         }
 
         .recipe-card h3 a:hover {
@@ -76,19 +76,19 @@
 
         .no-result {
             text-align: center;
-            color: #888;
+            color: #999;
             font-size: 16px;
             margin-top: 30px;
         }
-        
 
-        /* paging 스타일은 pagingView.jsp에 정의되어 있음 */
+        strong {
+            color: #37474f;
+        }
     </style>
 </head>
 <body>
 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-
 
 <div class="main-container">
     <h2>🥕 "${condition}" 건강 맞춤형 레시피 목록</h2>
