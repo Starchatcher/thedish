@@ -9,10 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.thedish.common.mail.MailService;
 import com.thedish.users.model.service.UsersService;
 import com.thedish.users.model.vo.Users;
 
@@ -29,12 +34,13 @@ public class UsersController {
     @Autowired
     private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-
+    @Autowired
+    private MailService mailService;
     
-       // ✅ 로그인 기록 저장 (loginId → {ip, sessionId})
+    // 로그인 기록 저장 (loginId → {ip, sessionId})
     private static final Map<String, LoginInfo> activeUsers = new ConcurrentHashMap<>();
 
-    // ✅ 로그인 정보 저장용 내부 클래스
+    // 로그인 정보 저장용 내부 클래스
     private static class LoginInfo {
         private final String ip;
         private final String sessionId;
@@ -59,7 +65,7 @@ public class UsersController {
     }
 
 
-    // ✅ 로그인 처리 (중복 로그인 방지 포함)
+    // 로그인 처리 (중복 로그인 방지 포함)
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     public String loginMethod(Users users, HttpServletRequest request, HttpSession session, SessionStatus status, Model model) {
         logger.info("로그인 시도: " + users.getLoginId());
@@ -109,7 +115,7 @@ public class UsersController {
         return "redirect:main.do";
     }
 
-    // ✅ 로그아웃 시 로그인 기록 삭제
+    // 로그아웃 시 로그인 기록 삭제
     @RequestMapping("logout.do")
     public String logoutMethod(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
@@ -264,7 +270,65 @@ public class UsersController {
             return "common/error";
         }
     }
+    
+    // ✅ 2. UsersController.java - 비밀번호 찾기 흐름 추가
+    @RequestMapping("/findPassword.do")
+    public String showFindPasswordPage() {
+        return "users/findPassword";
+    }
 
+    @PostMapping("/sendCode.do")
+    public ModelAndView sendVerificationCode(
+        @RequestParam("loginId") String loginId,
+        @RequestParam("email") String email,
+        HttpSession session,
+        ModelAndView mv) {
+
+        Users user = usersService.findByLoginIdAndEmail(loginId, email);
+        if (user != null) {
+            String code = String.valueOf((int)(Math.random() * 900000) + 100000); // 6자리
+            session.setAttribute("verifyCode", code);
+            session.setAttribute("loginIdForReset", loginId);
+            mailService.sendVerificationCode(email, code);
+            mv.setViewName("users/verifyCode");
+        } else {
+            mv.addObject("msg", "아이디와 이메일이 일치하지 않습니다.");
+            mv.setViewName("users/findPassword");
+        }
+        return mv;
+    }
+
+
+    @PostMapping("/verifyCode.do")
+    public ModelAndView verifyCode(@RequestParam("code") String code, HttpSession session, ModelAndView mv) {
+        String sessionCode = (String) session.getAttribute("verifyCode");
+        
+        if (code.equals(sessionCode)) {
+            mv.setViewName("users/resetPassword");
+        } else {
+            mv.addObject("msg", "인증번호가 올바르지 않습니다.");
+            mv.setViewName("users/verifyCode");
+        }
+        return mv;
+    }
+
+
+    @PostMapping("/resetPassword.do")
+    public ModelAndView resetPassword(@RequestParam("newPassword") String newPassword, HttpSession session, ModelAndView mv) {
+        String loginId = (String) session.getAttribute("loginIdForReset");
+        int result = usersService.resetPassword(loginId, newPassword);
+        if (result > 0) {
+            mv.addObject("msg", "비밀번호가 성공적으로 변경되었습니다.");
+            mv.setViewName("users/loginPage");
+        } else {
+            mv.addObject("msg", "비밀번호 변경 실패. 다시 시도해주세요.");
+            mv.setViewName("users/resetPassword");
+        }
+        return mv;
+    }
+
+    
+    
     @ResponseBody
     @RequestMapping(value = "idchk.do", method = RequestMethod.POST)
     public String checkUserId(@RequestParam("userId") String userId) {

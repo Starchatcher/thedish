@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<fmt:setTimeZone value="Asia/Seoul" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -396,7 +399,7 @@ textarea:focus {
             <div class="comment-box">
                 <div class="comment-meta">
                     <strong>${c.nickName}</strong> |
-                    <fmt:formatDate value="${c.createdAt}" pattern="MM.dd HH:mm" />
+                    <fmt:formatDate value="${c.createdAt}" pattern="MM.dd HH:mm" timeZone="Asia/Seoul" />
                 </div>
 
                 <div class="comment-content">
@@ -484,7 +487,7 @@ textarea:focus {
                     <div class="comment-box reply">
                         <div class="comment-meta">
                             <strong>${r.nickName}</strong> |
-                            <fmt:formatDate value="${r.createdAt}" pattern="MM.dd HH:mm" />
+                            <fmt:formatDate value="${r.createdAt}" pattern="MM.dd HH:mm" timeZone="Asia/Seoul" />
                         </div>
 
                         <!-- 대댓글 수정 or 보기 -->

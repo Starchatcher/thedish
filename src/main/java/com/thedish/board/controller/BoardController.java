@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,10 @@ import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.annotation.PostConstruct;
+
+
+
 
 @Controller
 public class BoardController {
@@ -45,6 +50,11 @@ public class BoardController {
 	@Autowired
 	private ReportPostService reportPostService;
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
+	
+	@PostConstruct
+    public void initTimeZoneCheck() {
+        System.out.println("✅ 현재 JVM 시간대(TimeZone.getDefault()): " + TimeZone.getDefault().getID());
+    }
 
 	// 게시글 작성 페이지 내보내기
 	@RequestMapping("boardWritePage.do")
@@ -403,6 +413,8 @@ public class BoardController {
 	    comment.setLoginId(loginUser.getLoginId());
 	    comment.setTargetType("board");
 	    comment.setParentId(null);
+	    
+	    comment.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 	    int result = boardService.insertBoardComment(comment);
 
@@ -446,6 +458,8 @@ public class BoardController {
 	    comment.setLoginId(loginUser.getLoginId());
 	    comment.setTargetType("board");
 	    comment.setParentId(parentId);
+	    
+	    comment.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 	    int result = boardService.insertBoardComment(comment);
 	    if (result > 0) {

@@ -25,7 +25,7 @@ public interface UsersService {
     // 회원 탈퇴
     int deleteUsers(String userId);
     
- // 닉네임 중복 체크
+    // 닉네임 중복 체크
     int selectChecknickName(String nickName);
 
     // 관리자 기능
@@ -41,4 +41,9 @@ public interface UsersService {
     ArrayList<Users> selectSearchUserId(Search search);
     ArrayList<Users> selectSearchCreatedAt(Search search);
     ArrayList<Users> selectSearchStatus(Search search);
+    
+    
+    Users findByLoginIdAndEmail(String loginId, String email);
+    int resetPassword(String loginId, String newPassword);
+    
 }
