@@ -30,9 +30,26 @@ public class NoticeDao {
 		return sqlSessionTemplate.selectOne("noticeMapper.selectNotice", noticeId);
 	}
 	
+	//dml ----------------------------------------------
+	
 	public void updateAddReadDount(int noticeId) {
 		sqlSessionTemplate.update("noticeMapper.updateAddReadCount", noticeId);
 	}
+	
+	public int insertNotice(Notice notice) {
+		return sqlSessionTemplate.insert("noticeMapper.insertNotice", notice);
+	}
+	
+	public int deleteNotice(int noticeId) {
+		return sqlSessionTemplate.delete("noticeMapper.deleteNotice", noticeId);
+	}
+	
+	public int updateNotice(Notice notice) {
+		return sqlSessionTemplate.update("noticeMapper.updateNotice", notice);
+	}
+	
+	
+	// 공지사항 검색 ----------------------------
 	
 	public int selectSearchTitleCount(String keyword) {
 		return sqlSessionTemplate.selectOne("noticeMapper.selectSearchTitleCount", keyword);
