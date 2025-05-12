@@ -128,7 +128,7 @@ input[type="submit"]:hover {
 
 			<div class="options">
 				<label><input type="checkbox" name="remember"> 기억하기</label>
-				<a href="#">Forgot Password?</a>
+				<a href="findPassword.do" style="float: right; color: #d291bc;">Forgot Password?</a>
 			</div>
 
 			<input type="submit" value="LOGIN">

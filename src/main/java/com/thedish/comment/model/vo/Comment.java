@@ -1,6 +1,7 @@
 package com.thedish.comment.model.vo;
 
 import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Comment implements java.io.Serializable {
 
@@ -11,7 +12,9 @@ public class Comment implements java.io.Serializable {
     private String loginId;       // LOGIN_ID
     private int targetId;         // TARGET_ID
     private String content;       // CONTENT
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private java.sql.Date createdAt;       // CREATED_AT
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private java.sql.Date updatedAt;       // UPDATED_AT
     private Integer parentId;     // PARENT_ID (null 가능)
     private String targetType;    // TARGET_TYPE
@@ -77,6 +80,6 @@ public class Comment implements java.io.Serializable {
 	public Comment() {
 		super();
 	}
-    
+
     
 }

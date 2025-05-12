@@ -1,6 +1,8 @@
 package com.thedish.users.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,4 +93,22 @@ public class UsersDao {
     public ArrayList<Users> selectSearchStatus(Search search) {
         return (ArrayList) sqlSessionTemplate.selectList("usersMapper.selectSearchStatus", search);
     }
+    
+    public Users findByLoginIdAndEmail(String loginId, String email) {
+        Users param = new Users();
+        param.setLoginId(loginId);
+        param.setEmail(email);
+        return sqlSessionTemplate.selectOne("usersMapper.findByLoginIdAndEmail", param);
+    }
+    
+
+    /** 비밀번호 찾기: 암호화된 새 비밀번호로 업데이트 */
+    public int updatePassword(String loginId, String encPwd) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("loginId", loginId);
+        param.put("encPwd", encPwd);
+        return sqlSessionTemplate.update("usersMapper.updatePassword", param);
+    }
+
+    
 }
