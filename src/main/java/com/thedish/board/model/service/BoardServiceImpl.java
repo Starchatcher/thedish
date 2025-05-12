@@ -155,6 +155,16 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.deleteCommentsByBoardId(param);
 	}
 
+	@Override
+	public int deleteBoardReports(Board board) {
+		return boardDao.deleteBoardReports(board);
+	}
+
+	@Override
+	public List<Comment> selectRepliesByBoardId(int boardId) {
+		return boardDao.selectRepliesByBoardId(boardId);
+	}
+
 
 
 

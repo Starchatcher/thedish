@@ -184,13 +184,15 @@ public class BoardController {
 			commentParam.put("startRow", commentPaging.getStartRow()); // 페이징 시작행
 			commentParam.put("endRow", commentPaging.getEndRow()); // 페이징 끝행
 
-			List<Comment> commentList = boardService.selectBoardComment(commentParam);
+			List<Comment> commentList = boardService.selectBoardComment(commentParam); // 댓글 리스트 조회
+			List<Comment> replyList = boardService.selectRepliesByBoardId(boardId);	// 대댓글 리스트 조회
 
 			if (editCommentId != null) {
 				mv.addObject("editCommentId", editCommentId);
 			}
 			mv.addObject("commentCount", commentCount); // 댓글의 총 개수
 			mv.addObject("commentList", commentList); // 댓글 리스트
+			mv.addObject("replyList", replyList);	// 대댓글 리스트
 			mv.addObject("board", board); // 게시글 객체
 			mv.addObject("currentPage", currentPage); // 게시글 페이지 정보
 			mv.addObject("category", category); // 게시글 카테고리
@@ -366,6 +368,8 @@ public class BoardController {
 		
 		Board board = boardService.selectBoard(boardId); // 게시글 정보 조회
 
+		boardService.deleteBoardReports(board);
+		
 		if (boardService.deleteBoard(board) > 0) {
 			// 첨부파일 삭제
 			if (board.getOriginalFileName() != null && board.getRenameFileName().length() > 0) {
@@ -441,7 +445,7 @@ public class BoardController {
 	public ModelAndView insertReply(ModelAndView mv, HttpSession session,
 	        @RequestParam("boardId") int boardId,
 	        @RequestParam("content") String content,
-	        @RequestParam("parentId") int parentId,
+	        @RequestParam("parentId") Integer parentId,
 	        @RequestParam("category") String category,
 	        @RequestParam("page") int page,
 	        @RequestParam("cpage") int cpage) {
@@ -458,7 +462,7 @@ public class BoardController {
 	    comment.setLoginId(loginUser.getLoginId());
 	    comment.setTargetType("board");
 	    comment.setParentId(parentId);
-	    
+
 	    comment.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 	    int result = boardService.insertBoardComment(comment);
