@@ -99,7 +99,6 @@ public class UsersDao {
         return (ArrayList) sqlSessionTemplate.selectList("usersMapper.selectSearchStatus", search);
     }
 
-    // 이메일 + 아이디 기반 사용자 찾기 (비밀번호 재설정용)
     public Users findByLoginIdAndEmail(String loginId, String email) {
         Users param = new Users();
         param.setLoginId(loginId);
@@ -107,11 +106,11 @@ public class UsersDao {
         return sqlSessionTemplate.selectOne("usersMapper.findByLoginIdAndEmail", param);
     }
 
-    // 비밀번호 찾기 후 비밀번호 재설정
     public int updatePassword(String loginId, String encPwd) {
         Map<String, Object> param = new HashMap<>();
         param.put("loginId", loginId);
         param.put("encPwd", encPwd);
         return sqlSessionTemplate.update("usersMapper.updatePassword", param);
     }
+
 }
