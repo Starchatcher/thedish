@@ -22,9 +22,7 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersDao usersDao;
 
-    @Autowired
-    private BCryptPasswordEncoder bcryptPasswordEncoder;
-
+ 
     // 🔐 로그인
     @Override
     public Users selectLogin(Users users) {
@@ -60,12 +58,7 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.deleteUsers(userId); // 또는 내부 로직에 맞게 수정
     }
 
-    // 🔑 비밀번호 초기화 (인증 후)
-    @Override
-    public int resetPassword(String loginId, String newPassword) {
-        String encPwd = bcryptPasswordEncoder.encode(newPassword);
-        return usersDao.updatePassword(loginId, encPwd);
-    }
+ 
 
     // 🚫 회원 탈퇴 (논리 삭제)
     @Override
@@ -102,6 +95,7 @@ public class UsersServiceImpl implements UsersService {
     public int updateStatus(Users users) {
         return usersDao.updateLoginOk(users);
     }
+
 
     // 🔍 검색 카운트
     @Override

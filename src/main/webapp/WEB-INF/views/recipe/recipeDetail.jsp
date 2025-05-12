@@ -436,11 +436,6 @@ form {
     </div>
 </div>
 
-
-	
-
-
-
 	<div class="stats">
 		<span>조회수: ${recipe.viewCount}</span> <span>평균 평점:
 			${recipe.avgRating}</span>
