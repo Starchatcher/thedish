@@ -34,8 +34,7 @@ public interface UsersService {
 
     // ✅ 닉네임 중복 체크
 
-    // 회원 탈퇴
-    int deleteUsers(String userId);
+
     
     // 닉네임 중복 체크
 
@@ -63,6 +62,6 @@ public interface UsersService {
 
     // 🔐 아이디 + 이메일로 사용자 찾기 (비밀번호 초기화용) 
     Users findByLoginIdAndEmail(String loginId, String email);
-    int resetPassword(String loginId, String newPassword);
+
 
 }

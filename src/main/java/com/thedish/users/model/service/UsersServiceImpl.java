@@ -28,9 +28,7 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersDao usersDao;
 
-    @Autowired
-    private BCryptPasswordEncoder bcryptPasswordEncoder;
-
+ 
     // 🔐 로그인
     @Override
     public Users selectLogin(Users users) {
@@ -61,12 +59,7 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.updatePassword(user);
     }
 
-    // 🔑 비밀번호 초기화 (인증 후)
-    @Override
-    public int resetPassword(String loginId, String newPassword) {
-        String encPwd = bcryptPasswordEncoder.encode(newPassword);
-        return usersDao.updatePassword(loginId, encPwd);
-    }
+ 
 
     // 🚫 회원 탈퇴 (논리 삭제)
     @Override
@@ -104,10 +97,7 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.updateLoginOk(users);
     }
     
-    @Override
-    public Users findByLoginIdAndEmail(String loginId, String email) {
-        return usersDao.findByLoginIdAndEmail(loginId, email);
-    }
+ 
     
     // 3. UsersServiceImpl.java - 비밀번호 변경 로직
     @Override

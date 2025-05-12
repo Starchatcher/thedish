@@ -159,7 +159,7 @@
                     </c:choose>
                 </td>
                 <td class="board-title">
-                    <a href="restaurantDetail.do?no=${recommend.recommendId}">
+                    <a href="restaurantRecommendDetail.do?no=${recommend.recommendId}">
                         <c:out value="${recommend.name}"/>
                     </a>
                 </td>
