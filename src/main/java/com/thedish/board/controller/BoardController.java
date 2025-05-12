@@ -247,7 +247,6 @@ public class BoardController {
 
 		// 현재 시간 자동 설정
 		board.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
-		board.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 		// 파일 저장 로직
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
@@ -332,8 +331,11 @@ public class BoardController {
 			board.setOriginalFileName(fileName);
 			board.setRenameFileName(renameFileName);
 		}
+		
+		board.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 		if (boardService.updateBoard(board) > 0) {
+			mv.addObject("updatedAt", board.getUpdatedAt());
 			mv.addObject("boardId", board.getBoardId());
 			mv.setViewName("redirect:boardDetail.do?boardId=" + board.getBoardId() + "&page=" + currentPage
 					+ "&category=" + board.getBoardCategory());
@@ -499,10 +501,12 @@ public class BoardController {
 		Comment comment = new Comment();
 		comment.setCommentId(commentId);
 		comment.setContent(content);
+		comment.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
 		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인 용도
 
 		int result = boardService.updateBoardComment(comment);
 		if (result > 0) {
+			mv.addObject("updatedAt", comment.getUpdatedAt());
 			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&page=" + page + "&cpage=" + cpage);
 		} else {
 			mv.addObject("message", "댓글 수정에 실패하였습니다. 다시 시도해주세요.");
