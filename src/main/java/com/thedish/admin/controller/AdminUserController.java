@@ -21,6 +21,7 @@ public class AdminUserController {
     @Autowired
     private AdminUserService adminUserService;
     
+    // 사용자 상세 조회
     @RequestMapping("/userDetail.do")
     public ModelAndView userDetail(@RequestParam("userId") String userId, ModelAndView mv) {
         Users user = adminUserService.selectUserById(userId);
@@ -38,20 +39,36 @@ public class AdminUserController {
         return mv;
     }
 
-    // 사용자 목록 + 통계
+    // 사용자 목록 조회 + 검색 + 통계 포함
     @RequestMapping("/userList.do")
-    public ModelAndView showUserList(ModelAndView mv) {
-        List<Users> userList = adminUserService.selectAllUsers();
+    public ModelAndView showUserList(
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "status", required = false) String status) {
 
-        int totalUsers = adminUserService.countTotalUsers();          // 전체 가입자 수
-        int todayJoin = adminUserService.countActiveUsers();          // 현재 활성 회원 수
-        int todayWithdraw = adminUserService.countWithdrawnUsers();   // 탈퇴한 수
+        ModelAndView mv = new ModelAndView();
 
+        // 검색 조건 구성
+        Map<String, String> paramMap = new HashMap<>();
+        if (keyword != null && !keyword.isBlank()) {
+            paramMap.put("keyword", keyword);
+        }
+        if (status != null && !status.isBlank()) {
+            paramMap.put("status", status);
+        }
+
+        // 사용자 목록 + 통계 정보
+        List<Users> userList = adminUserService.searchUsers(paramMap);
+        int totalUsers = adminUserService.countTotalUsers();           // 전체 회원 수
+        int todayJoin = adminUserService.countActiveUsers();           // 활성 회원 수
+        int todayWithdraw = adminUserService.countWithdrawnUsers();    // 탈퇴 회원 수
+
+        // View에 전달
         mv.addObject("userList", userList);
         mv.addObject("totalUsers", totalUsers);
         mv.addObject("todayJoin", todayJoin);
         mv.addObject("todayWithdraw", todayWithdraw);
         mv.setViewName("admin/userList");
+
         return mv;
     }
 
@@ -61,35 +78,4 @@ public class AdminUserController {
         adminUserService.updateUser(user);
         return "redirect:/admin/userList.do";
     }
-    
-    @RequestMapping("/user/list.do")
-    public ModelAndView showUserList(
-            @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "status", required = false) String status,
-            ModelAndView mv) {
-
-        // 검색 조건 Map 구성
-        Map<String, String> paramMap = new HashMap<>();
-        if (keyword != null && !keyword.isBlank()) {
-            paramMap.put("keyword", keyword);
-        }
-        if (status != null && !status.isBlank()) {
-            paramMap.put("status", status);
-        }
-
-        List<Users> userList = adminUserService.searchUsers(paramMap);
-
-        int totalUsers = adminUserService.countTotalUsers();
-        int todayJoin = adminUserService.countActiveUsers();
-        int todayWithdraw = adminUserService.countWithdrawnUsers();
-
-        mv.addObject("userList", userList);
-        mv.addObject("totalUsers", totalUsers);
-        mv.addObject("todayJoin", todayJoin);
-        mv.addObject("todayWithdraw", todayWithdraw);
-
-        mv.setViewName("admin/userList");
-        return mv;
-    }
-
 }

@@ -22,7 +22,7 @@ h1 {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 8px;
@@ -31,7 +31,8 @@ h1 {
 }
 
 .map-container {
-    margin-top: 40px;
+     max-width: 850px;
+    margin: 0 auto;
     height: 400px; /* 지도 높이 설정 */
     border: 1px solid #ddd; /* 지도 테두리 */
     border-radius: 8px; /* 테두리 둥글게 */
@@ -153,35 +154,52 @@ form {
     margin-top: 20px;
 }
 
-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
+.comments-container {
+    width: 900px; /* 컨테이너의 너비를 850px로 설정 */
+    margin: 20px auto; /* 위쪽 여백은 20px, 좌우 여백은 자동으로 설정하여 가운데 정렬 */
+    background-color: #fff; /* 배경색 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    padding: 20px; /* 내부 여백 */
 }
 
-form input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 10px;
+.comments-section {
+    margin-bottom: 20px; /* 댓글 출력 섹션과 등록 폼 간의 간격 */
+    padding: 20px; /* 내부 여백 추가 */
+    border: 1px solid #ddd; /* 테두리 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
 }
 
-form button {
-    margin-top: 10px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #555; 
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.textarea-button-container {
+    display: flex; /* Flexbox를 사용하여 가로로 정렬 */
+    align-items: flex-start; /* 세로 정렬을 상단으로 설정 */
+    margin-top: 10px; /* 상단 여백 추가 */
 }
 
-form button:hover {
-    background-color: #333; 
+.textarea-button-container textarea {
+    width: 100%; /* 부모(.textarea-button-container)의 너비에 맞게 100%로 설정 */
+    box-sizing: border-box; /* 패딩과 보더가 width에 포함되도록 설정 */
+   
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    resize: vertical; /* 세로 크기 조정 가능 */
+    margin-right: 10px; /* 버튼과의 간격을 위해 오른쪽 여백 추가 */
+}
+
+.textarea-button-container button {
+    padding: 10px 15px; /* 버튼 내부 여백 */
+  	height: 56px;
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #007bff; /* 배경색 */
+    color: white; /* 글자색 */
+    cursor: pointer; /* 커서 모양 */
+    transition: background-color 0.3s; /* 배경색 변경 시 부드러운 전환 */
+}
+
+.textarea-button-container button:hover {
+    background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
 }
 
     
@@ -226,7 +244,8 @@ form button:hover {
 }
     
   .drink-pairing-section {
-        margin-top: 30px; /* 상단 여백 */
+         width: 900px; 
+        margin: 30px auto; /* 상단 여백 */
         margin-bottom: 30px; /* 하단 여백 */
         padding: 20px; /* 내부 여백 */
         background-color: #ffffff; /* 섹션 배경색 */
@@ -364,7 +383,7 @@ form {
     display: inline; /* 인라인으로 설정하여 버튼과 나란히 배치 */
     margin: 0; /* 기본 마진 제거 */
     padding: 0; /* 기본 패딩 제거 */
-    height: 60px; /* 콘텐츠에 따라 높이 자동 조정 */
+    height: auto; /* 콘텐츠에 따라 높이 자동 조정 */
 }
     
     </style>
@@ -506,7 +525,7 @@ form {
   </div>
 </div>
 
-                <button type="submit">평점 제출</button>
+                <button type="submit" class="delete-button">평점 제출</button>
             </form>
            
         </div>
@@ -530,75 +549,69 @@ form {
 
 
 <!-- 댓글 리스트 -->
-<div class="comments-section">
-    <h3>댓글</h3>
+<div class="comments-container"> <!-- 댓글 출력 및 작성 컨테이너 -->
+    <div class="comments-section">
+        <h3>댓글</h3>
 
-    <c:if test="${not empty comments}">
-        <ul>
-            <c:forEach var="comment" items="${comments}">
-                <li>
-                   <strong>${comment.nickName}</strong> <span>(${comment.createdAt})</span>
-                    <span>(${comment.createdAt})</span>
-                    <p>${comment.content}</p>
+        <c:if test="${not empty comments}">
+            <ul>
+                <c:forEach var="comment" items="${comments}">
+                    <li>
+                        <strong>${comment.nickName}</strong> <span>(${comment.createdAt})</span>
+                        <p>${comment.content}</p>
 
-                    
-                    <!-- 삭제 버튼 추가 -->
-                    <c:if test="${ loginUser.loginId eq comment.loginId or loginUser.role eq 'ADMIN' }">
-                    <form action="deleteDrinkComment.do" method="post" style="display:inline;">
-                        <input type="hidden" name="commentId" value="${comment.commentId}" />
-                        <input type="hidden" name="drinkId" value="${drink.drinkId}" />
-                        <input type="hidden" name="targetType" value="drink" />
-                        <input type="hidden" name="page" value="${page}" />
-                        <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</button>
-                    </form>
-                    </c:if>
-                </li>
+                        <!-- 삭제 버튼 추가 -->
+                        <c:if test="${loginUser.loginId eq comment.loginId or loginUser.role eq 'ADMIN'}">
+                            <form action="deleteDrinkComment.do" method="post" style="display:inline;">
+                                <input type="hidden" name="commentId" value="${comment.commentId}" />
+                                <input type="hidden" name="drinkId" value="${drink.drinkId}" />
+                                <input type="hidden" name="targetType" value="drink" />
+                                <input type="hidden" name="page" value="${page}" />
+                                <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?');" class="delete-button">삭제</button>
+                            </form>
+                        </c:if>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:if>
+        <c:if test="${empty comments}">
+            <p>댓글이 없습니다.</p>
+        </c:if>
+
+        <!-- 페이지 네비게이션 -->
+        <div class="pagination">
+            <c:if test="${page > 1}">
+                <a href="drinkDetail.do?no=${drink.drinkId}&page=${page - 1}">이전</a>
+            </c:if>
+
+            <c:forEach begin="1" end="${totalPages}" var="i">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <span>${i}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="drinkDetail.do?no=${drink.drinkId}&page=${i}">${i}</a>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
-        </ul>
-    </c:if>
-    <c:if test="${empty comments}">
-        <p>댓글이 없습니다.</p>
-    </c:if>
 
-    <!-- 페이지 네비게이션 -->
-    <div class="pagination">
-        <c:if test="${page > 1}">
-            <a href="drinkDetail.do?no=${drink.drinkId}&page=${page - 1}">이전</a>
-        </c:if>
-
-        <c:forEach begin="1" end="${totalPages}" var="i">
-            <c:choose>
-                <c:when test="${i == page}">
-                    <span>${i}</span>
-                </c:when>
-                <c:otherwise>
-                    <a href="drinkDetail.do?no=${drink.drinkId}&page=${i}">${i}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-
-        <c:if test="${page < totalPages}">
-            <a href="drinkDetail.do?no=${drink.drinkId}&page=${page + 1}">다음</a>
-        </c:if>
+            <c:if test="${page < totalPages}">
+                <a href="drinkDetail.do?no=${drink.drinkId}&page=${page + 1}">다음</a>
+            </c:if>
+        </div>
     </div>
+
+    <!-- 댓글 작성 폼 -->
+    <form action="insertDrinkComment.do" method="post" class="comment-form">
+        <input type="hidden" name="drinkId" value="${drink.drinkId}" />
+        <div class="textarea-button-container">
+            <textarea name="content" rows="2" placeholder="<c:if test='${loginUser == null}'>로그인 후 댓글을 작성하세요</c:if><c:if test='${loginUser != null}'>댓글을 입력하세요</c:if>" required></textarea>
+            <button type="submit" class="modify-button">등록</button>
+        </div>
+    </form>
+    
 </div>
 
-<!-- 댓글 작성 폼 -->
-<c:if test="${loginUser != null}">
-    <!-- 댓글 작성 폼 -->
-    <form action="insertDrinkComment.do" method="post">
-        <input type="hidden" name="drinkId" value="${drink.drinkId}" />
-        
-
-        <textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요" required></textarea><br/>
-
-        <button type="submit">댓글 작성</button>
-    </form>
-</c:if>
-<!-- 로그인하지 않은 사용자에게는 댓글 작성 폼이 보이지 않음 -->
-<c:if test="${loginUser == null}">
-    <p>댓글을 작성하려면 <a href="loginPage.do">로그인</a>해주세요.</p> 
-</c:if>
 
  
 <c:import url="/WEB-INF/views/common/sidebar.jsp" />

@@ -11,4 +11,5 @@ public interface AdminService {
     int countTodayInquiries();
     public int countTotalUsers();
     List<Map<String, Object>> selectDailySummary(); // 이미 구현된 경우 제외
+    List<Map<String, Object>> selectDailyPostAndView();
 }
