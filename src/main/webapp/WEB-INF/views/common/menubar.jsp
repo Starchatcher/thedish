@@ -197,6 +197,8 @@ body {
 								게시판</a> <a
 								href="${ pageContext.servletContext.contextPath }/boardList.do?category=tip">팁공유
 								게시판</a> <a
+								href="${ pageContext.servletContext.contextPath }/restaurantRecommendList.do">맛집 추천
+								게시판</a> <a
 								href="${ pageContext.servletContext.contextPath }/noticeList.do">공지사항</a>
 						</div>
 					</div></li>

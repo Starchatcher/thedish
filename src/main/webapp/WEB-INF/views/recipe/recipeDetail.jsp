@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-	max-width: 800px;
+	max-width: 850px;
 	margin: auto;
 	background: #fff;
 	border-radius: 8px;
@@ -46,7 +46,8 @@ h2 {
 }
 
 .comments-section {
-	margin-top: 20px;
+	width: 850px; /* 댓글 섹션 전체 너비 */
+	margin: 10px auto; /* 가운데 정렬 */
 	padding: 20px;
 	background-color: #fff;
 	border: 1px solid #ddd;
@@ -116,41 +117,68 @@ h2 {
 	background-color: #e9ecef;
 }
 
+/* 일반 form 스타일 (다른 곳에서 사용되는 부분) */
 form {
 	margin-top: 20px;
+    /* 다른 form에 영향을 줄 수 있는 width, margin:auto 등은 여기에 추가하지 않음 */
 }
 
-form textarea {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	resize: vertical;
+/* 댓글 작성 폼에만 적용되는 스타일 (.comment-form 클래스를 사용) */
+.comments-container {
+    width: 900px; /* 컨테이너의 너비를 850px로 설정 */
+    margin: 20px auto; /* 위쪽 여백은 20px, 좌우 여백은 자동으로 설정하여 가운데 정렬 */
+    background-color: #fff; /* 배경색 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    padding: 20px; /* 내부 여백 */
 }
 
-form input[type="text"] {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	margin-top: 10px;
+.comments-section {
+    margin-bottom: 20px; /* 댓글 출력 섹션과 등록 폼 간의 간격 */
+    padding: 20px; /* 내부 여백 추가 */
+    border: 1px solid #ddd; /* 테두리 추가 */
+    border-radius: 8px; /* 모서리 둥글게 */
 }
 
-form button {
-	margin-top: 10px;
-	padding: 10px 15px;
-	border: none;
-	border-radius: 5px;
-	background-color: #007bff;
-	color: white;
-	cursor: pointer;
-	transition: background-color 0.3s;
+.textarea-button-container {
+    display: flex; /* Flexbox를 사용하여 가로로 정렬 */
+    align-items: flex-start; /* 세로 정렬을 상단으로 설정 */
+    margin-top: 10px; /* 상단 여백 추가 */
 }
 
-form button:hover {
-	background-color: #0056b3;
+.textarea-button-container textarea {
+    width: 100%; /* 부모(.textarea-button-container)의 너비에 맞게 100%로 설정 */
+    box-sizing: border-box; /* 패딩과 보더가 width에 포함되도록 설정 */
+   
+    padding: 10px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    resize: vertical; /* 세로 크기 조정 가능 */
+    margin-right: 10px; /* 버튼과의 간격을 위해 오른쪽 여백 추가 */
 }
 
+.textarea-button-container button {
+    padding: 10px 15px; /* 버튼 내부 여백 */
+  	
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    background-color: #007bff; /* 배경색 */
+    color: white; /* 글자색 */
+    cursor: pointer; /* 커서 모양 */
+    transition: background-color 0.3s; /* 배경색 변경 시 부드러운 전환 */
+}
+
+.textarea-button-container button:hover {
+    background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+}
+
+
+
+
+
+
+
+/* 추천 버튼 스타일 */
 #recommendBtn {
 	margin-left: 10px;
 	padding: 5px 12px;
@@ -166,22 +194,20 @@ form button:hover {
 	background-color: green;
 }
 
-.map-container {
-	margin-top: 40px;
-	height: 400px; /* 지도 높이 설정 */
-	border: 1px solid #ddd; /* 지도 테두리 */
-	border-radius: 8px; /* 테두리 둥글게 */
-	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
-}
-
+/* 다른 form 스타일 (inline으로 설정되어 있을 수 있는 부분) */
+/* 이 부분은 댓글 작성 폼이 아닌 다른 곳의 form에 적용될 가능성이 높습니다. */
+/* .comment-form 스타일이 더 구체적이므로 댓글 작성 폼에는 이 스타일이 적용되지 않습니다. */
 form {
 	display: inline; /* 인라인으로 설정하여 버튼과 나란히 배치 */
 	margin: 0; /* 기본 마진 제거 */
 	padding: 0; /* 기본 패딩 제거 */
-	height: 60px; /* 높이 자동 조정 */
+	height: auto; /* 높이 자동 조정 */
+    /* 중복되는 button 스타일은 제거했습니다. */
 }
 
-/* 버튼 스타일 공통 */
+
+/* 버튼 스타일 공통 (.modify-button, .delete-button 등) */
+/* 이 부분은 댓글 작성 폼 버튼이 아닌 다른 버튼에 적용될 가능성이 높습니다. */
 .modify-button, .delete-button {
 	display: inline-block; /* 인라인 블록 요소로 설정 */
 	padding: 10px 20px; /* 버튼 내부 여백 */
@@ -205,13 +231,15 @@ form {
 
 /* 삭제 버튼 호버 스타일 */
 .delete-button:hover {
-	background-color: #0056b3; /* 마우스 오버 시 배경색 더 어둡게 */
+	background-color: #333; /* 마우스 오버 시 배경색 더 어둡게 */
 }
 
 /* 버튼 클릭 시 스타일 */
 .modify-button:active, .delete-button:active {
-	background-color: #444; /* 클릭 중일 때 배경색 더 어둡게 */
+	background-color: #444; /* 클릭 중일 때 배경색 */
+    
 }
+
 
 /* 부모 요소 스타일 */
 .button-container {
@@ -316,6 +344,13 @@ form {
 	height: 1px;
 	overflow: hidden;
 }
+  .content {
+        display: flex;
+        align-items: flex-start; /* 이미지와 알러지 정보를 상단 정렬 */
+    }
+    .image-container {
+        margin-right: 20px; /* 이미지와 알러지 정보 사이의 간격 */
+    }
 </style>
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
@@ -355,48 +390,54 @@ form {
     String formattedInstructions = recipeObj.getInstructions().replace("\\n", "<br>");
 %>
 
-	<div class="container">
-		<h2>${recipe.name}</h2>
-
-		<span class="label">재료:</span>
-		<p class="info"><%= formattedIngredient %></p>
-
-		<span class="label">설명:</span>
-		<p class="info"><%= formattedDescription %></p>
-
-		<span class="label">조리법:</span>
-		<p class="info"><%= formattedInstructions %></p>
-
-		<c:choose>
-			<c:when test="${not empty recipe.imageUrl}">
-				<img src="${recipe.imageUrl}" alt="${recipe.recipeId} 이미지"
-					width="300" />
-			</c:when>
-			<c:when test="${not empty recipe.imageId and recipe.imageId != 0}">
-				<img
-					src="${pageContext.request.contextPath}/image/view.do?imageId=${recipe.imageId}"
-					alt="${recipe.recipeId} 이미지" width="300" />
-			</c:when>
-			<c:otherwise>
-				<p>이미지가 없습니다.</p>
-			</c:otherwise>
-		</c:choose>
-	</div>
+	
 
 
-	<c:if test="${not empty allergyList}">
-		<div class="allergy-info">
-			<h3>알러지 정보</h3>
-			<ul>
-				<c:forEach var="allergy" items="${allergyList}">
-					<li><strong>${allergy.name}</strong>: ${allergy.description}</li>
-				</c:forEach>
-			</ul>
-		</div>
-	</c:if>
-	<c:if test="${empty allergyList}">
-		<p>알러지 정보가 없습니다.</p>
-	</c:if>
+<div class="container">
+    <h2>${recipe.name}</h2>
+
+    <span class="label">재료:</span>
+    <p class="info"><%= formattedIngredient %></p>
+
+    <span class="label">설명:</span>
+    <p class="info"><%= formattedDescription %></p>
+
+    <span class="label">조리법:</span>
+    <p class="info"><%= formattedInstructions %></p>
+
+    <div class="content">
+        <div class="image-container">
+            <c:choose>
+                <c:when test="${not empty recipe.imageUrl}">
+                    <img src="${recipe.imageUrl}" alt="${recipe.recipeId} 이미지" width="300" />
+                </c:when>
+                <c:when test="${not empty recipe.imageId and recipe.imageId != 0}">
+                    <img src="${pageContext.request.contextPath}/image/view.do?imageId=${recipe.imageId}" alt="${recipe.recipeId} 이미지" width="300" />
+                </c:when>
+                <c:otherwise>
+                    <p>이미지가 없습니다.</p>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+        <div class="allergy-info">
+            <c:if test="${not empty allergyList}">
+                <h3>알러지 정보</h3>
+                <ul>
+                    <c:forEach var="allergy" items="${allergyList}">
+                        <li><strong>${allergy.name}</strong>: ${allergy.description}</li>
+                    </c:forEach>
+                </ul>
+            </c:if>
+            <c:if test="${empty allergyList}">
+                <p>알러지 정보가 없습니다.</p>
+            </c:if>
+        </div>
+    </div>
+</div>
+
+
+	
 
 
 
@@ -448,7 +489,7 @@ form {
 						</div>
 					</div>
 
-					<button type="submit">평점 제출</button>
+					<button type="submit"  class="modify-button">평점 제출</button>
 				</form>
 
 			</div>
@@ -467,82 +508,76 @@ form {
 	</div>
 
 	<!-- 댓글 리스트 -->
-	<div class="comments-section">
-		<h3>댓글</h3>
+<div class="comments-container"> <!-- 댓글 출력 및 작성 컨테이너 -->
+    <div class="comments-section">
+        <h3>댓글</h3>
 
-		<c:if test="${not empty comments}">
-			<ul>
-				<c:forEach var="comment" items="${comments}">
-					<p>현재 사용자 ID: ${loginUser.loginId}, 게시글 작성자: ${comment.loginId}</p>
-					<li><strong>${comment.nickName}</strong> <span>(${comment.createdAt})</span>
-						<p>${comment.content}</p> <!-- 삭제 버튼 추가 --> <c:if
-							test="${ loginUser.loginId eq comment.loginId or loginUser.role eq 'ADMIN' }">
-							<form action="deleteComment.do" method="post"
-								style="display: inline;">
-								<input type="hidden" name="commentId"
-									value="${comment.commentId}" /> <input type="hidden"
-									name="recipeId" value="${recipe.recipeId}" /> <input
-									type="hidden" name="targetType" value="recipe" /> <input
-									type="hidden" name="page" value="${page}" />
-								<button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</button>
-							</form>
-						</c:if></li>
-				</c:forEach>
-			</ul>
-		</c:if>
-		<c:if test="${empty comments}">
-			<p>댓글이 없습니다.</p>
-		</c:if>
+        <c:if test="${not empty comments}">
+            <ul>
+                <c:forEach var="comment" items="${comments}">
+                    <li>
+                        <strong>${comment.nickName}</strong> <span>(${comment.createdAt})</span>
+                        <p>${comment.content}</p>
+                        <c:if test="${loginUser.loginId eq comment.loginId or loginUser.role eq 'ADMIN'}">
+                            <form action="deleteComment.do" method="post" style="display: inline;">
+                                <input type="hidden" name="commentId" value="${comment.commentId}" />
+                                <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
+                                <input type="hidden" name="targetType" value="recipe" />
+                                <input type="hidden" name="page" value="${page}" />
+                                <button type="submit" onclick="return confirm('댓글을 삭제하시겠습니까?');" class="modify-button">삭제</button>
+                            </form>
+                        </c:if>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:if>
+        <c:if test="${empty comments}">
+            <p>댓글이 없습니다.</p>
+        </c:if>
 
-		<!-- 페이지 네비게이션 -->
-		<div class="pagination">
-			<c:if test="${page > 1}">
-				<a href="recipeDetail.do?no=${recipe.recipeId}&page=${page - 1}">이전</a>
-			</c:if>
+        <!-- 페이지 네비게이션 -->
+        <div class="pagination">
+            <c:if test="${page > 1}">
+                <a href="recipeDetail.do?no=${recipe.recipeId}&page=${page - 1}">이전</a>
+            </c:if>
 
-			<c:forEach begin="1" end="${totalPages}" var="i">
-				<c:choose>
-					<c:when test="${i == page}">
-						<span>${i}</span>
-					</c:when>
-					<c:otherwise>
-						<a href="recipeDetail.do?no=${recipe.recipeId}&page=${i}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
+            <c:forEach begin="1" end="${totalPages}" var="i">
+                <c:choose>
+                    <c:when test="${i == page}">
+                        <span>${i}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="recipeDetail.do?no=${recipe.recipeId}&page=${i}">${i}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
 
-			<c:if test="${page < totalPages}">
-				<a href="recipeDetail.do?no=${recipe.recipeId}&page=${page + 1}">다음</a>
-			</c:if>
-		</div>
-	</div>
+            <c:if test="${page < totalPages}">
+                <a href="recipeDetail.do?no=${recipe.recipeId}&page=${page + 1}">다음</a>
+            </c:if>
+        </div>
+    </div>
 
-
-	<!-- 댓글 작성 폼 -->
-	<%-- 필요한 경우 JSTL 태그 라이브러리 선언 --%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-	<%-- 로그인한 사용자에게만 댓글 작성 폼을 표시 --%>
-	<c:if test="${loginUser != null}">
-		<!-- 댓글 작성 폼 -->
-		<form action="insertComment.do" method="post">
-			<input type="hidden" name="recipeId" value="${recipe.recipeId}" />
-			<textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요"
-				required></textarea>
-			<br />
+    <!-- 댓글 작성 폼 -->
+    <form action="insertComment.do" method="post" class="comment-form">
+        <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
+        <div class="textarea-button-container">
+            <textarea name="content" rows="2" 
+                placeholder="<c:if test='${loginUser == null}'>로그인 후 댓글을 작성하세요</c:if><c:if test='${loginUser != null}'>댓글을 입력하세요</c:if>" 
+                required></textarea>
+            <button type="submit" >등록</button>
+        </div>
+    </form>  
+</div>
 
 
 
-			<button type="submit">댓글 작성</button>
-		</form>
-	</c:if>
-	<%-- 로그인하지 않은 사용자에게는 댓글 작성 폼이 보이지 않음 --%>
-	<c:if test="${loginUser == null}">
-		<p>
-			댓글을 작성하려면 <a href="loginPage.do">로그인</a>해주세요.
-		</p>
-		<%-- 예시: 로그인 페이지 URL. 실제 사용하시는 URL로 변경하세요. --%>
-	</c:if>
+
+
+
+
+
+
 
 	</div>
 	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
