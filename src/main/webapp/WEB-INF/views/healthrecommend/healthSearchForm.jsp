@@ -10,7 +10,7 @@
     body {
       margin: 0;
       font-family: 'Noto Sans KR', sans-serif;
-      background-color: #fff9f0;
+      background-color: #f8f9fa;
     }
 
     .main-container {
@@ -31,11 +31,12 @@
       text-align: center;
       max-width: 520px;
       width: 100%;
+      position: relative;
     }
 
     .search-box h2 {
       font-size: 24px;
-      color: #d84315;
+      color: #2c3e50;
       margin-bottom: 20px;
       line-height: 1.6;
     }
@@ -50,7 +51,7 @@
     input[type="text"] {
       padding: 14px 18px;
       width: 100%;
-      border: 2px solid #ffab91;
+      border: 2px solid #90a4ae;
       border-radius: 8px;
       font-size: 16px;
       box-sizing: border-box;
@@ -62,7 +63,7 @@
 
     button[type="submit"] {
       padding: 12px 24px;
-      background-color: #ff7043;
+      background-color: #2c3e50;
       color: white;
       font-size: 16px;
       border: none;
@@ -72,7 +73,7 @@
     }
 
     button[type="submit"]:hover {
-      background-color: #bf360c;
+      background-color: #1a2c38;
     }
 
     ul#suggestions {
@@ -98,7 +99,7 @@
 
     ul#suggestions li:hover,
     ul#suggestions li.highlight {
-      background-color: #ffe0b2;
+      background-color: #e3f2fd;
       font-weight: bold;
     }
 
@@ -114,32 +115,31 @@
         padding: 30px 20px;
       }
     }
+
     .chef-hat {
-  position: absolute;
-  top: -80px;        /* 더 아래로 내려서 씌운 느낌 */
-  left: -65px;       /* 왼쪽 모서리에 딱 맞게 */
-  width: 150px;      /* 확실하게 크고 눈에 띄게 */
-  transform: rotate(-29deg) scaleX(1.6);
-  z-index: 10;
-  pointer-events: none;
-  filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.15));
-}
-
-
+      position: absolute;
+      top: -80px;
+      left: -65px;
+      width: 150px;
+      transform: rotate(-29deg) scaleX(1.6);
+      z-index: 10;
+      pointer-events: none;
+      filter: drop-shadow(3px 3px 4px rgba(0, 0, 0, 0.15));
+    }
   </style>
 </head>
 <body>
 
 <!-- ✅ 공통 메뉴바 -->
-<c:import url="/WEB-INF/views/common/recommendMenubar.jsp" />
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+<c:import url="/WEB-INF/views/common/menubar.jsp" />
+
 <!-- ✅ 메인 영역 -->
 <div class="main-container">
   <div class="search-box">
-  <img src="${pageContext.request.contextPath}/resources/images/chef-hat.png" class="chef-hat" alt="요리사 모자" />
-    <h2>🍽 어떤 질병이든,<br/>맛있게 이겨낼 수 있어요!</h2>
+    <img src="${pageContext.request.contextPath}/resources/images/chef-hat.png" class="chef-hat" alt="요리사 모자" />
+    <h2>🍽 당신의 증상에 딱 맞는<br/>건강한 식재료를 찾아드릴게요</h2>
     <form action="recommendIngredients.do" method="get" onsubmit="return validateSearch();">
-      <input type="text" name="condition" id="conditionInput" placeholder="예: 감기, 고혈압, 당뇨병" autocomplete="off" />
+      <input type="text" name="condition" id="conditionInput" placeholder="질병을 입력하세요. ex) 감기, 고혈압, 당뇨병" autocomplete="off" />
       <ul id="suggestions"></ul>
       <button type="submit">🥗 맞춤 재료 추천 받기</button>
     </form>
@@ -243,6 +243,7 @@ function validateSearch() {
 </script>
 
 <!-- ✅ 공통 푸터 -->
-<c:import url="/WEB-INF/views/common/recommendFooter.jsp" />
+<c:import url="/WEB-INF/views/common/footer.jsp" />
+
 </body>
 </html>

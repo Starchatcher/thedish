@@ -61,5 +61,20 @@ public class NoticeServiceImpl implements NoticeService {
 	public ArrayList<Notice> selectTop10() {
 	    return noticeDao.selectTop10();
 	}
+
+	@Override
+	public int insertNotice(Notice notice) {
+		return noticeDao.insertNotice(notice);
+	}
+
+	@Override
+	public int deleteNotice(int noticeId) {
+		return noticeDao.deleteNotice(noticeId);
+	}
+
+	@Override
+	public int updateNotice(Notice notice) {
+		return noticeDao.updateNotice(notice);
+	}
  
 }
