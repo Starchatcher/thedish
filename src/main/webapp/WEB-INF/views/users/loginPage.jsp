@@ -87,16 +87,20 @@
       font-size: 0.95em;
     }
 
-    .signup-link button {
-      background-color: #2364aa;
-      color: white;
-      border: none;
-      padding: 9px 16px;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+.signup-link button {
+  background-color: #2364aa;
+  color: white;
+  border: none;
+  padding: 7px 0;
+  width: 90px;             /* ✅ 너비만 줄임 */
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
     .signup-link button:hover {
       background-color: #1e5799;
@@ -163,9 +167,11 @@
       </div>
     </div>
 
-    <div class="signup-link">
-      <button onclick="location.href='${pageContext.request.contextPath}/enrollPage.do'">회원가입</button>
-    </div>
+<div class="signup-link" style="display: flex; justify-content: center; gap: 10px;">
+  <button onclick="location.href='${pageContext.request.contextPath}/enrollPage.do'">회원가입</button>
+  <button onclick="location.href='${pageContext.request.contextPath}/'">홈으로</button>
+</div>
+
   </div>
 
 

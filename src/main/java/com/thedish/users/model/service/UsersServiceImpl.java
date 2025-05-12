@@ -2,7 +2,6 @@ package com.thedish.users.model.service;
 
 import java.util.ArrayList;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,16 +14,11 @@ import com.thedish.common.Search;
 import com.thedish.users.model.dao.UsersDao;
 import com.thedish.users.model.vo.Users;
 
-import jakarta.servlet.http.HttpSession;
-
 @Service("usersService")
 public class UsersServiceImpl implements UsersService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsersServiceImpl.class);
 
-    @Autowired
-    private BCryptPasswordEncoder bcryptPasswordEncoder;
-    
     @Autowired
     private UsersDao usersDao;
 
@@ -59,6 +53,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public int updatePassword(Users user) {
         return usersDao.updatePassword(user);
+    }
+    
+    @Override
+    public int deleteUsers(String userId) {
+        return usersDao.deleteUsers(userId); // 또는 내부 로직에 맞게 수정
     }
 
     // 🔑 비밀번호 초기화 (인증 후)
@@ -103,19 +102,6 @@ public class UsersServiceImpl implements UsersService {
     public int updateStatus(Users users) {
         return usersDao.updateLoginOk(users);
     }
-    
-    @Override
-    public Users findByLoginIdAndEmail(String loginId, String email) {
-        return usersDao.findByLoginIdAndEmail(loginId, email);
-    }
-    
-    // 3. UsersServiceImpl.java - 비밀번호 변경 로직
-    @Override
-    public int resetPassword(String loginId, String newPassword) {
-        String encPwd = bcryptPasswordEncoder.encode(newPassword);
-        return usersDao.updatePassword(loginId, encPwd);
-    }
-    
 
     // 🔍 검색 카운트
     @Override
