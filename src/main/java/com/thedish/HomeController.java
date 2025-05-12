@@ -84,4 +84,15 @@ public class HomeController {
 		return "common/main"; // → /WEB-INF/views/common/main.jsp
 	}
 }
+	
+	@RequestMapping("/terms.do")
+	public String showTerms() {
+	    return "common/terms";
+	}
+
+	@RequestMapping("/privacy.do")
+	public String showPrivacy() {
+	    return "common/privacy";
+	}
+	
 }

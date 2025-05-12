@@ -53,7 +53,7 @@
     .answer {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+        transition: max-height 0.8s ease, padding 0.8s ease;
         padding: 0 20px;
         color: #555;
     }
@@ -147,16 +147,22 @@
 <c:import url="/WEB-INF/views/common/footer.jsp"/>
 
 <script>
-    function toggleFAQ(element) {
-        const item = element.closest('.faq-item');
-        item.classList.toggle('active');
-    }
+function toggleFAQ(element) {
+  const item = element.closest('.faq-item');
+  const answer = item.querySelector('.answer');
 
-    function deleteFAQ(id) {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            location.href = "faqdelete.do?Id=" + id;
-        }
-    }
+  if (item.classList.contains('active')) {
+    // 접기
+    answer.style.maxHeight = '0px';
+    answer.style.padding = '0 20px';
+    item.classList.remove('active');
+  } else {
+    // 펼치기
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    answer.style.padding = '15px 20px';
+    item.classList.add('active');
+  }
+}
 </script>
 
 </body>
