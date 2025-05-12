@@ -25,16 +25,16 @@ public class Notice	implements java.io.Serializable {
 
 
 	
-	public Notice(int noticeId, String title, String content, String createdBy, Date createdAt, String originalfilename,
-			String renamefilename, int readCount) {
+	public Notice(int noticeId, String title, String content, String createdBy, Date createdAt, String originalFileName,
+			String renameFileName, int readCount) {
 		super();
 		this.noticeId = noticeId;
 		this.title = title;
 		this.content = content;
 		this.createdBy = createdBy;
 		this.createdAt = createdAt;
-		this.originalFileName = originalfilename;
-		this.renameFileName = renamefilename;
+		this.originalFileName = originalFileName;
+		this.renameFileName = renameFileName;
 		this.readCount = readCount;
 	}
 
@@ -100,26 +100,26 @@ public class Notice	implements java.io.Serializable {
 
 
 
-	public String getOriginalfilename() {
+	public String getOriginalFileName() {
 		return originalFileName;
 	}
 
 
 
-	public void setOriginalfilename(String originalfilename) {
-		this.originalFileName = originalfilename;
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
 	}
 
 
 
-	public String getRenamefilename() {
+	public String getRenameFileName() {
 		return renameFileName;
 	}
 
 
 
-	public void setRenamefilename(String renamefilename) {
-		this.renameFileName = renamefilename;
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
 	}
 
 
@@ -145,7 +145,7 @@ public class Notice	implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Notice [noticeId=" + noticeId + ", title=" + title + ", content=" + content + ", createdBy=" + createdBy
-				+ ", createdAt=" + createdAt + ", originalfilename=" + originalFileName + ", renamefilename="
+				+ ", createdAt=" + createdAt + ", originalFileName=" + originalFileName + ", renameFileName="
 				+ renameFileName + ", readCount=" + readCount + "]";
 	}
 

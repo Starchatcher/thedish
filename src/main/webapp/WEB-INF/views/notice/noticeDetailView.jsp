@@ -82,17 +82,78 @@
         .btn-group button:hover {
             background-color: gray;
         }
+        
+       .attachment-wrapper {
+    margin: 30px 0;
+}
+
+.attachment-toggle {
+    cursor: pointer;
+    display: inline-block;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: background 0.2s ease;
+    user-select: none;
+}
+.attachment-toggle:hover {
+    background-color: #1e2e3c;
+}
+
+.attachment-list {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: #f4f4f4;
+    border-left: 4px solid #2c3e50;
+    border-radius: 6px;
+}
+
+.attachment-link {
+    display: inline-block;
+    font-size: 15px;
+    color: #1a0dab;
+    text-decoration: none;
+}
+.attachment-link:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
     </style>
 </head>
+
 <body>
 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
+<script>
+    function toggleAttachment() {
+        const list = document.getElementById('attachment-list');
+        list.classList.toggle('hidden');
+    }
+</script>
+
 <div class="container">
-    <div class="section-title">📌 공지사항</div>
+    <div class="section-title">📢 공지사항</div>
 
     <div class="notice-title">${ requestScope.notice.title }</div>
-    
+
+<c:if test="${not empty notice.originalFileName}">
+    <div class="attachment-wrapper">
+        <div class="attachment-toggle" onclick="toggleAttachment()">
+            <i class="fas fa-download"></i> 첨부파일
+        </div>
+        <div id="attachment-list" class="attachment-list hidden">
+            <a href="nfdown.do?ofile=${notice.originalFileName}&rfile=${notice.renameFileName}" class="attachment-link">
+                <i class="fas fa-paperclip"></i> ${notice.originalFileName}
+            </a>
+        </div>
+    </div>
+</c:if>
     <div class="meta-info">
         <span><i class="fas fa-user"></i>${ requestScope.notice.createdBy }</span>
         <span><i class="fas fa-calendar-alt"></i>${ requestScope.notice.createdAt }</span>
