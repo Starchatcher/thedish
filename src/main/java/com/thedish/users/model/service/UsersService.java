@@ -23,9 +23,6 @@ public interface UsersService {
     // 🔑 비밀번호 변경
     int updatePassword(Users user);
 
-    // 🔑 비밀번호 초기화 (인증 후)
-    int resetPassword(String loginId, String newPassword);
-
     // 🚫 회원 탈퇴 (논리 삭제: status = 'INACTIVE')
     int deactivateUser(String loginId);
 
@@ -36,7 +33,7 @@ public interface UsersService {
 
     // 회원 탈퇴
     int deleteUsers(String userId);
-    
+
     // 닉네임 중복 체크
 
     int selectChecknickName(String nickName);
