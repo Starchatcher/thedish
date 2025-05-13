@@ -181,7 +181,7 @@ function previewImage(event) {
 
     <button type="submit">수정 완료</button>
 </form>
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

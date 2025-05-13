@@ -87,6 +87,14 @@ public class CommentServiceImpl implements CommentService{
 
 
 
+	@Override
+	public int deleteRestaurantComment(int commentId, String targetType) {
+		
+		return commentDao.deleteRestaurantComment(commentId, targetType);
+	}
+
+
+
 	
 
 	

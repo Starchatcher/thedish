@@ -75,4 +75,11 @@ public class CommentDao {
 	public int insertRestaurantComment(Comment comment) {
 		return sqlSessionTemplate.insert("commentMapper.insertComment", comment);
 	}
+	
+	public int deleteRestaurantComment(int commentId, String targetType) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("commentId", commentId);
+	    params.put("targetType", targetType);
+	    return sqlSessionTemplate.delete("commentMapper.deleteComment", params);
+	}
 }

@@ -1,14 +1,19 @@
 package com.thedish.restaurantrecommend.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.thedish.common.Paging;
+import com.thedish.common.Search;
+import com.thedish.drink.model.vo.Drink;
 import com.thedish.restaurantrecommend.model.vo.RestaurantRecommend;
 
 @Repository("restaurantRecommendDao")
@@ -18,6 +23,7 @@ public class RestaurantRecommendDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	private static final Logger logger = LoggerFactory.getLogger(RestaurantRecommendDao.class);
 	 
 	public int selectRecommendationCount() {
         return sqlSessionTemplate.selectOne("restaurantRecommendMapper.selectRecommendationCount"); // 전체 개수 조회 SQL 호출
@@ -33,8 +39,9 @@ public class RestaurantRecommendDao {
 	}
 	
 	
-	public void updateAddReadCount(int recommendId) {
-		sqlSessionTemplate.update("restaurantRecommendMapper.updateAddReadCount", recommendId);
+	public int updateAddReadCount(int recommendId) {
+		   
+		     return sqlSessionTemplate.update("restaurantRecommendMapper.updateAddReadCount",recommendId );
 	}
 	
 	 public int insertRecommendationLike(int recommendId, String loginId) {
@@ -44,7 +51,12 @@ public class RestaurantRecommendDao {
 	        return sqlSessionTemplate.insert("restaurantRecommendMapper.insertRecommendationLike", params);
 	    }
 	 public int updateAddLikeCount(int recommendId) {
-	        return sqlSessionTemplate.update("restaurantRecommendMapper.updateAddLikeCount", recommendId);
+		 logger.info("Dao.updateAddLikeCount 호출: recommendId={}", recommendId); // ★ 로그 추가 ★
+		    // sqlSessionTemplate 호출 전후 로그 추가
+		    logger.info("sqlSessionTemplate.update 호출 전");
+		    int result = sqlSessionTemplate.update("restaurantRecommendMapper.updateAddLikeCount", recommendId);
+		    logger.info("sqlSessionTemplate.update 호출 후, 반환 값: {}", result); // ★ 이 로그 값 확인 ★
+		    return result;
 	    }
 	 public int deleteRecommendationLike(int recommendId, String loginId) {
          Map<String, Object> params = new HashMap<>();
@@ -64,5 +76,24 @@ public class RestaurantRecommendDao {
 	
 	}
 	 
-	 
+	public int insertRestaurantRecommend(RestaurantRecommend recommend) {
+		return sqlSessionTemplate.insert("restaurantRecommendMapper.insertRestaurantRecommend",recommend );
+	}
+	
+	public int deleteRestotantRecommend(int recommendId) {
+	    return sqlSessionTemplate.delete("restaurantRecommendMapper.deleteRestotantRecommend", recommendId);
+	}
+	public int updateRestaurantRecommend(RestaurantRecommend recommend) {
+		return sqlSessionTemplate.update("restaurantRecommendMapper.updateRestaurantRecommend",recommend );
+	}
+	
+	
+	public int selectSearchCount(String keyword) {
+		return sqlSessionTemplate.selectOne("restaurantRecommendMapper.selectSearchCount", keyword);
+	}
+	
+	public ArrayList<RestaurantRecommend> selectSearchList(Search search){
+		List<RestaurantRecommend> list = sqlSessionTemplate.selectList("restaurantRecommendMapper.selectSearchList", search);
+		return (ArrayList<RestaurantRecommend>)list;
+	}
 }
