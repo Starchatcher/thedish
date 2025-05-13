@@ -503,28 +503,28 @@
           <strong>건강 맞춤형 추천</strong>
           <span>건강과 맛 동시에 챙기고 싶나요?</span>
         </div>
-        <button class="feature-btn">지금 시작하기</button>
+        <button class="feature-btn" onclick="location.href='healthSearchForm.do'">지금 시작하기</button>
       </div>
       <div class="feature-row">
         <div class="feature-text">
           <strong>술 페어링 추천</strong>
           <span>술에 어울리는 음식을 원하시나요?</span>
         </div>
-        <button class="feature-btn">지금 시작하기</button>
+        <button class="feature-btn" onclick="location.href='drinkSearchForm.do'">지금 시작하기</button>
       </div>
       <div class="feature-row">
         <div class="feature-text">
           <strong>커뮤니티</strong>
           <span>여러분들만의 시간이 필요하신가요?</span>
         </div>
-        <button class="feature-btn">지금 시작하기</button>
+        <button class="feature-btn" onclick="location.href='boardList.do'">지금 시작하기</button>
       </div>
       <div class="feature-row">
         <div class="feature-text">
           <strong>FAQ</strong>
           <span>사이트에 질문사항이 생기셨나요?</span>
         </div>
-        <button class="feature-btn">자세히 보기</button>
+        <button class="feature-btn"onclick="location.href='FAQList.do'">자세히 보기</button>
       </div>
     </div>
   </div>
