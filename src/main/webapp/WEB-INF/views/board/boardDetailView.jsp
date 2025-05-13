@@ -279,6 +279,7 @@ textarea:focus {
   max-width: 800px;         /* 본문 영역과 폭 통일 */
   margin: 20px auto 0 auto; /* 가운데 정렬 */
   text-align: right;        /* 내부 버튼 우측 정렬 */
+  margin-bottom: 30px;
 }
 
 .go-list-btn {
@@ -361,7 +362,7 @@ textarea:focus {
 
 </head>
 <body>
-	<c:import url="/WEB-INF/views/common/menubar.jsp" />
+<c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 
 	<div class="container">
@@ -401,7 +402,7 @@ textarea:focus {
 		        <form action="boardUpdatePage.do" method="get" style="display:inline;">
 		            <input type="hidden" name="boardId" value="${board.boardId}" />
 		            <input type="hidden" name="page" value="${currentPage}" />
-		            <button type="submit" class="report-btn">수정됨 수정</button>
+		            <button type="submit" class="report-btn">✏️ 수정</button>
 		        </form>
 		
 		        <form action="boardDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
@@ -459,9 +460,7 @@ textarea:focus {
               <textarea name="content" required style="width:100%; height:80px;">${c.content}</textarea>
               <div class="edit-buttons" style="margin-top:8px;">
                 <button type="submit">저장</button>
-                <a href="boardDetail.do?boardId=${board.boardId}&category=${param.category}">
-                  <button type="button">취소</button>
-                </a>
+                <button type="button" onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}'">취소</button>
               </div>
             </form>
           </c:when>
@@ -671,13 +670,24 @@ textarea:focus {
     }
 
     // 목록
-    window.goList = function() {
-        if (!category || category === 'all' || category === 'indefined') {
-            location.href = ctx + `/boardList.do?page=1`;
-        } else {
-            location.href = ctx + `/boardList.do?category=${category}&page=1`;
-        }
-    }
+   window.goList = function() {
+	    const source = '${source}'.trim();
+	    const page = '${page}';
+	    const category = '${category}';
+		
+	    console.log('source : ' + '${source}')
+	    
+	    if (source === 'my') {
+	        location.href = ctx + `/myBoardList.do?page=${page}`;
+	        return;
+	    }
+	    
+	    if (!category || category.trim() === '') {
+	        location.href = ctx + `/boardList.do?page=${page}`;
+	    } else {
+	        location.href = ctx + `/boardList.do?category=${category}&page=${page}`;
+	    }
+	}
     
     $(document).ready(function () {
         // JSP 변수 commentCount를 JavaScript로 전달
