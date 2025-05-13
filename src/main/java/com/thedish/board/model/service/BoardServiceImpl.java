@@ -165,6 +165,16 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectRepliesByBoardId(boardId);
 	}
 
+	@Override
+	public int selectMyBoardListCount(String loginId) {
+		return boardDao.selectMyBoardListCount(loginId);
+	}
+
+	@Override
+	public List<Board> selectMyBoardList(Map<String, Object> param) {
+		return boardDao.selectMyBoardList(param);
+	}
+
 
 
 

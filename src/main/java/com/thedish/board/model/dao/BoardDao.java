@@ -29,7 +29,17 @@ public class BoardDao {
 	public int selectBoardCategoryCount(String category) {
 	    return sqlSessionTemplate.selectOne("boardMapper.selectBoardCategoryCount", category);
 	}
+	
+	// 내가 쓴 게시글 총 갯수 조회용 쿼리
+	public int selectMyBoardListCount(String loginId) {
+		return sqlSessionTemplate.selectOne("boardMapper.selectMyBoardListCount", loginId);
+	}
+	
 	// 게시판 목록 리스트 조회용 쿼리 --------------------------------------------------
+	public List<Board> selectMyBoardList (Map<String, Object> param) {
+		return sqlSessionTemplate.selectList("boardMapper.selectMyBoardList", param);
+	}
+	
 	public List<Board> selectBoardCategoryList(Map<String, Object> param) {
 	    return sqlSessionTemplate.selectList("boardMapper.selectBoardCategoryList", param);
 	}
