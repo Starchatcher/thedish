@@ -614,7 +614,7 @@ form {
 
 
  
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 
 <!-- Kakao 지도 API 로딩 (appkey는 백엔드에서 안전하게 전달됨) -->

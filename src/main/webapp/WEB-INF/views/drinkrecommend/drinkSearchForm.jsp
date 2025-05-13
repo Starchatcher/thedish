@@ -186,7 +186,7 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 
 <div class="search-container">
     <h2>검색 키워드</h2>

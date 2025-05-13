@@ -188,7 +188,7 @@ legend {
 </script>
         <button type="submit" class="submit-btn">등록하기</button>
     </form>
-    <c:import url="/WEB-INF/views/common/sidebar.jsp" />
+    
     <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
