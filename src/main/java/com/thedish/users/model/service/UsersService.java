@@ -62,6 +62,7 @@ public interface UsersService {
 
     // 🔐 아이디 + 이메일로 사용자 찾기 (비밀번호 초기화용) 
     Users findByLoginIdAndEmail(String loginId, String email);
-
+    
+    Users selectUserByLoginId(String loginId);
 
 }

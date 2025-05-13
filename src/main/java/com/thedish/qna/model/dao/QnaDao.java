@@ -1,7 +1,7 @@
 package com.thedish.qna.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +39,23 @@ public class QnaDao {
 	public int deleteQna (int qnaId) {
 		return sqlSessionTemplate.delete("qnaMapper.deleteQna", qnaId);
 	}
+	
+	// 문의 답변
+	public int answerQna(Qna qna) {
+	    return sqlSessionTemplate.update("qnaMapper.answerQna", qna);
+	}
+	
+	// 모든 qna 목록 조회(관리자)
+	public List<Qna> selectAllQna() {
+		return sqlSessionTemplate.selectList("qnaMapper.selectAllQna");
+	}
+	
+	public int getListCount(String userId) {
+	    return sqlSessionTemplate.selectOne("qnaMapper.getListCount", userId);
+	}
+
+	public List<Qna> selectPageList(Map<String, Object> map) {
+	    return sqlSessionTemplate.selectList("qnaMapper.selectPageList", map);
+	}
+
 }

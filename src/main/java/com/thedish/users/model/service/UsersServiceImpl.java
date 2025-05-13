@@ -134,4 +134,9 @@ public class UsersServiceImpl implements UsersService {
     public Users findByLoginIdAndEmail(String loginId, String email) {
         return usersDao.findByLoginIdAndEmail(loginId, email);
     }
+    
+    @Override
+    public Users selectUserByLoginId(String loginId) {
+        return usersDao.selectUserByLoginId(loginId);
+    }
 }
