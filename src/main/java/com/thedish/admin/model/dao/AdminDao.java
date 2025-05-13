@@ -13,3 +13,5 @@ public interface AdminDao {
     List<Map<String, Object>> selectDailySummary();
     List<Map<String, Object>> selectDailyPostAndView();
 }
+
+

@@ -22,19 +22,22 @@ public interface UsersService {
 
     // 🔑 비밀번호 변경
     int updatePassword(Users user);
-    
-    int deleteUsers(String userId); // ✅ 추가됨
-
-    // 🔑 비밀번호 초기화 (인증 후)
-    int resetPassword(String loginId, String newPassword);
 
     // 🚫 회원 탈퇴 (논리 삭제: status = 'INACTIVE')
     int deactivateUser(String loginId);
 
     // ✅ 아이디 중복 체크
     int selectCheckId(String userId);
-    
+
+    // ✅ 닉네임 중복 체크
+
+
+    // 회원 탈퇴
+    int deleteUsers(String userId);
+
+
     // 닉네임 중복 체크
+
     int selectChecknickName(String nickName);
 
     // 👨‍💼 관리자: 전체 회원 수 조회
@@ -59,6 +62,7 @@ public interface UsersService {
 
     // 🔐 아이디 + 이메일로 사용자 찾기 (비밀번호 초기화용) 
     Users findByLoginIdAndEmail(String loginId, String email);
-    int resetPassword(String loginId, String newPassword);
+    
+    Users selectUserByLoginId(String loginId);
 
 }

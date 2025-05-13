@@ -6,46 +6,52 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.thedish.admin.model.dao.AdminUserDao;
-import com.thedish.users.model.vo.Users;
+import com.thedish.admin.model.dao.AdminDao;
 
 @Service
-public class AdminUserServiceImpl implements AdminUserService {
+public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    private AdminUserDao adminUserDao;
+    private AdminDao adminDao;
 
     @Override
-    public Users selectUserById(String userId) {
-        return adminUserDao.selectUserById(userId);
-    }
-
-    @Override
-    public int updateUser(Users user) {
-        return adminUserDao.updateUser(user);
+    public int countTodayJoin() {
+        return adminDao.countTodayJoin();
     }
     
-    @Override
-    public List<Users> selectAllUsers() {
-        return adminUserDao.selectAllUsers();
-    }
     @Override
     public int countTotalUsers() {
-        return adminUserDao.countTotalUsers();
+        return adminDao.countTotalUsers();
     }
 
     @Override
-    public int countActiveUsers() {
-        return adminUserDao.countActiveUsers();
+    public int countTodayWithdraw() {
+        return adminDao.countTodayWithdraw();
     }
 
     @Override
-    public int countWithdrawnUsers() {
-        return adminUserDao.countWithdrawnUsers();
+    public int countTodayReports() {
+        return adminDao.countTodayReports();
+    }
+
+    @Override
+    public int countTodayReviews() {
+        return adminDao.countTodayReviews();
+    }
+
+    @Override
+    public int countTodayInquiries() {
+        return adminDao.countTodayInquiries();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectDailySummary() {
+        return adminDao.selectDailySummary();
     }
     
     @Override
-    public List<Users> searchUsers(Map<String, String> paramMap) {
-        return adminUserDao.searchUsers(paramMap);
+    public List<Map<String, Object>> selectDailyPostAndView() {
+        return adminDao.selectDailyPostAndView();
     }
+
 }

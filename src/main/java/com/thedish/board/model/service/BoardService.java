@@ -13,6 +13,9 @@ public interface BoardService {
 
 	int selectBoardCategoryCount(String category);
 	int selectBoardListCount();
+	int selectMyBoardListCount(String loginId);
+	
+	List<Board> selectMyBoardList (Map<String, Object> param);
 	ArrayList<Board> selectBoardList(Paging paging);
 	List<Board> selectBoardCategoryList(Map<String, Object> param);
 	Board selectBoard(int boardId);
@@ -21,6 +24,7 @@ public interface BoardService {
 	int insertBoard(Board board);
 	int updateBoard(Board board);
 	int deleteBoard(Board board);
+	int deleteBoardReports (Board board);
 	
 	int selectSearchTitleCount(Search search);
 	int selectSearchWriterCount(Search search);
@@ -39,6 +43,7 @@ public interface BoardService {
 	
 	int selectBoardCommentCount (int targetId);
 	List<Comment> selectBoardComment (Map<String, Object> param);
+	List<Comment> selectRepliesByBoardId (int boardId);
 	int insertBoardComment(Comment comment);
 	
 	int updateBoardComment(Comment comment);

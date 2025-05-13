@@ -105,6 +105,10 @@ public class UsersDao {
         param.setEmail(email);
         return sqlSessionTemplate.selectOne("usersMapper.findByLoginIdAndEmail", param);
     }
+    
+    public int deleteUsers(String userId) {
+        return sqlSessionTemplate.update("usersMapper.deleteUsers", userId);
+    }
 
     public int updatePassword(String loginId, String encPwd) {
         Map<String, Object> param = new HashMap<>();
@@ -112,5 +116,8 @@ public class UsersDao {
         param.put("encPwd", encPwd);
         return sqlSessionTemplate.update("usersMapper.updatePassword", param);
     }
-
+    
+    public Users selectUserByLoginId(String loginId) {
+        return sqlSessionTemplate.selectOne("usersMapper.selectUserByLoginId", loginId);
+    }
 }

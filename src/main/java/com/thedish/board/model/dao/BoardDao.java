@@ -29,7 +29,17 @@ public class BoardDao {
 	public int selectBoardCategoryCount(String category) {
 	    return sqlSessionTemplate.selectOne("boardMapper.selectBoardCategoryCount", category);
 	}
+	
+	// 내가 쓴 게시글 총 갯수 조회용 쿼리
+	public int selectMyBoardListCount(String loginId) {
+		return sqlSessionTemplate.selectOne("boardMapper.selectMyBoardListCount", loginId);
+	}
+	
 	// 게시판 목록 리스트 조회용 쿼리 --------------------------------------------------
+	public List<Board> selectMyBoardList (Map<String, Object> param) {
+		return sqlSessionTemplate.selectList("boardMapper.selectMyBoardList", param);
+	}
+	
 	public List<Board> selectBoardCategoryList(Map<String, Object> param) {
 	    return sqlSessionTemplate.selectList("boardMapper.selectBoardCategoryList", param);
 	}
@@ -60,6 +70,10 @@ public class BoardDao {
 
 	public int deleteBoard(Board board) {
 		return sqlSessionTemplate.delete("boardMapper.deleteBoard", board);
+	}
+	
+	public int deleteBoardReports (Board board) {
+		return sqlSessionTemplate.delete("boardMapper.deleteBoardReports", board);
 	}
 	
 	// 검색 관련 --------------------------------------------------------------------
@@ -124,6 +138,11 @@ public class BoardDao {
 	
 	public List<Comment> selectBoardComment (Map<String, Object> param){
 		return sqlSessionTemplate.selectList("commentMapper.selectBoardComment", param);
+	}
+	
+	// 대댓글 조회용 쿼리
+	public List<Comment> selectRepliesByBoardId (int boardId){
+		return sqlSessionTemplate.selectList("commentMapper.selectRepliesByBoardId", boardId);
 	}
 	
 	// 댓글 작성용 쿼리

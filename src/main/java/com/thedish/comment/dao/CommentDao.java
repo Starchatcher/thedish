@@ -63,4 +63,16 @@ public class CommentDao {
 	    params.put("targetType", targetType);
 	    return sqlSessionTemplate.delete("commentMapper.deleteDrinkComment", params);
 	}
+	public List<Comment> selectRestaurantComments(int targetId, int offset, int limit) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("targetId", targetId);
+	    params.put("targetType", "restaurant"); // ★ 맛집 추천 타입을 여기서 고정
+	    params.put("offset", offset);
+	    params.put("limit", limit);
+	    // 매퍼 XML에서는 여전히 범용적인 selectComments 쿼리를 사용
+	    return sqlSessionTemplate.selectList("commentMapper.selectComments", params);
+	}
+	public int insertRestaurantComment(Comment comment) {
+		return sqlSessionTemplate.insert("commentMapper.insertComment", comment);
+	}
 }

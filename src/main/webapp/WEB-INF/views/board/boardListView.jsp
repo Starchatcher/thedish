@@ -216,12 +216,11 @@ window.onload = updateAction;
 			<a href="${ bd }">${ board.title } <span style="color: crimson;">[${ board.commentCount }]</span></a>
 		</td>
 		<td>${ board.nickname }</td>
-		<td><fmt:formatDate value="${ board.createdAt }" pattern="yyyy-MM-dd" /></td>
+		<td><fmt:formatDate value="${ board.createdAt }" pattern="yyyy-MM-dd HH:mm" /></td>
 		<td>${ board.likeCount }</td>
 	</tr>
 	</c:forEach>
 </table>
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
 <c:import url="/WEB-INF/views/common/pagingView.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>

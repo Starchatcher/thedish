@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.thedish.board.model.vo.Board;
 import com.thedish.common.FileNameChange;
+import com.thedish.common.Paging;
 import com.thedish.qna.model.service.QnaService;
 import com.thedish.qna.model.vo.Qna;
+import com.thedish.users.model.service.UsersService;
 import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,9 @@ public class QnaController {
 	
 	@Autowired
 	private QnaService qnaService;
+	
+	@Autowired
+	private UsersService usersService;
 	
 	// qna 작성 폼 내보내기용 메소드
 	@RequestMapping("qnaWriteForm.do")
@@ -56,24 +60,44 @@ public class QnaController {
 		return mv;
 	}
 	
-	// 내 문의 목록 출력 처리용 메소드
+	// 모든 문의 목록 출력 처리용 메소드
 	@RequestMapping("qnaList.do")
-	public ModelAndView selectListQnaMethod(ModelAndView mv,
-			HttpSession session) {
-	Users loginUser = (Users) session.getAttribute("loginUser");
-	
-	if(loginUser == null) {
-		mv.setViewName("redirect:loginPage.do");	// 비회원은 로그인 페이지로 이동
-		return mv;
-	}
-	String userId = loginUser.getLoginId();
-	List<Qna> qnaList = qnaService.selectQnaList(userId);
-	
-	mv.addObject("qnaList", qnaList);
-	mv.setViewName("qna/qnaListView");
-	
-	return mv;
-	
+	public ModelAndView qnaListMethod(ModelAndView mv,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit,
+	        HttpSession session) {
+
+	    // 로그인 유저 확인
+	    Users loginUser = (Users) session.getAttribute("loginUser");
+	    if (loginUser == null) {
+	        mv.setViewName("redirect:loginPage.do");
+	        return mv;
+	    }
+
+	    // 현재 페이지와 limit 기본값 처리
+	    int currentPage = (page != null) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    // 총 목록 개수 조회
+	    int listCount = "ADMIN".equals(loginUser.getRole())
+	        ? qnaService.getListCount(null)  // 관리자: 전체
+	        : qnaService.getListCount(loginUser.getLoginId()); // 유저: 본인만
+
+	    // 페이징 계산
+	    Paging paging = new Paging(listCount, limit, currentPage, "qnaList.do");
+	    paging.calculate();
+
+	    // 페이징된 목록 조회
+	    List<Qna> qnaList = "ADMIN".equals(loginUser.getRole())
+	        ? qnaService.selectList(paging, null)
+	        : qnaService.selectList(paging, loginUser.getLoginId());
+
+	    // 결과 전달
+	    mv.addObject("qnaList", qnaList);
+	    mv.addObject("paging", paging);
+	    mv.setViewName("qna/qnaListView");
+
+	    return mv;
 	}
 	
 	// 파일 다운로드 메소드
@@ -194,16 +218,20 @@ public class QnaController {
 		return mv;
 	}
 	
-	// 내 문의 상세보기
 	@RequestMapping("qnaDetail.do")
 	public ModelAndView qnaDetailView(ModelAndView mv,
-			@RequestParam("qnaId") int qnaId) {
-		
-		Qna qna = qnaService.selectQnaById(qnaId);
-		mv.addObject("qna", qna);
-		mv.setViewName("qna/qnaDetailView");
-		
-		return mv;
+	        @RequestParam("qnaId") int qnaId) {
+
+	    Qna qna = qnaService.selectQnaById(qnaId);
+	    
+	    // ✨ 작성자 정보 따로 가져오기
+	    Users writer = usersService.selectUserByLoginId(qna.getUserId());
+
+	    mv.addObject("qna", qna);
+	    mv.addObject("writer", writer); // ✅ 이거 반드시 있어야 함
+	    mv.setViewName("qna/qnaDetailView");
+
+	    return mv;
 	}
 	
 	// 문의 삭제
@@ -230,5 +258,39 @@ public class QnaController {
 		
 		return mv;
 	}
+	
+	//관리자 기능 추가 (답변 달기) 
+	@RequestMapping(value = "qnaAnswer.do", method = RequestMethod.POST)
+	public ModelAndView qnaAnswerMethod(ModelAndView mv,
+	        @RequestParam("qnaId") int qnaId,
+	        @RequestParam("answer") String answer,
+	        HttpSession session) {
+
+	    Users loginUser = (Users) session.getAttribute("loginUser");
+
+	    if (loginUser == null || !"ADMIN".equals(loginUser.getRole())) {
+	        mv.setViewName("common/error");
+	        mv.addObject("message", "관리자만 답변할 수 있습니다.");
+	        return mv;
+	    }
+
+	    Qna qna = new Qna();
+	    qna.setQnaId(qnaId);
+	    qna.setAnswer(answer);
+	    qna.setCreatedBy(loginUser.getLoginId());
+
+	    int result = qnaService.answerQna(qna);; // service → dao → mapper 호출
+
+	    if (result > 0) {
+	        mv.setViewName("redirect:qnaDetail.do?qnaId=" + qnaId);
+	    } else {
+	        mv.addObject("message", "답변 등록 실패");
+	        mv.setViewName("common/error");
+	    }
+
+	    return mv;
+	}
+	
+	
 	
 }
