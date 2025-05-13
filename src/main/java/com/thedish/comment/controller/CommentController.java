@@ -227,7 +227,7 @@ public class CommentController {
 
 		@RequestMapping(value = "insertRestaurantComment.do", method = RequestMethod.POST)
 		public String insertRestaurantComment(
-		        @RequestParam("targetId") int recommendId, // ★ 파라미터 이름을 "targetId"로 수정합니다.
+		        @RequestParam("recommendId") int recommendId, // ★ 파라미터 이름을 "targetId"로 수정합니다.
 		        @RequestParam("content") String content,
 		        @RequestParam("targetType") String targetType, // 폼에서 targetType을 받도록 추가했으므로 함께 받습니다.
 		        @RequestParam("page") int page, // 댓글 현재 페이지를 받습니다.
@@ -297,5 +297,26 @@ public class CommentController {
 	        // 리다이렉트 시 page=1 파라미터는 필요시 유지하거나 삭제, 또는 조정하세요.
 	        return "redirect:/restaurantRecommendDetail.do?no=" + recommendId; // 댓글 등록 후 해당 음료 상세 페이지로 이동 (page 파라미터는 필요시 추가)
 	    }
+		
+		@RequestMapping(value = "/deleteRestaurantComment.do", method = RequestMethod.POST)
+		public String deleteRestaurantComment(@RequestParam("commentId") int commentId,
+		                            @RequestParam("recommendId") int recommendId,
+		                            @RequestParam("targetType") String targetType,
+		                            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+		                            RedirectAttributes redirectAttributes) {
+
+			
+			
+		    boolean isDeleted = commentService.deleteComment(commentId, targetType);
+		   
+		    
+		    if (isDeleted) {
+		        redirectAttributes.addFlashAttribute("message", "댓글이 삭제되었습니다.");
+		    } else {
+		        redirectAttributes.addFlashAttribute("message", "댓글 삭제에 실패했습니다.");
+		    }
+
+		    return "redirect:/restaurantRecommendDetail.do?no=" + recommendId + "&page=" + page;
+		}
 		
 }
