@@ -41,7 +41,8 @@ public class NaverLoginController {
         String naverUrl = "https://nid.naver.com/oauth2.0/authorize?" +
                 "client_id=" + clientId +
                 "&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8") +
-                "&response_type=code";
+                "&response_type=code" +
+                "&prompt=login";;
         if (mode != null) {
             naverUrl += "&state=" + mode;
         }
