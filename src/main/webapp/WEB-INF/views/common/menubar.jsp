@@ -192,8 +192,14 @@
                   <a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">건강 맞춤형 추천</a>
                 </c:otherwise>
               </c:choose>
-
+			  <c:choose>
+                <c:when test="${empty sessionScope.loginUser}">
+                 <a href="#" onclick="requireLogin(); return false;">술 페어링 추천</a>
+                </c:when>
+                <c:otherwise>
               <a href="${ pageContext.servletContext.contextPath }/drinkSearchForm.do">술 페어링 추천</a>
+              </c:otherwise>
+              </c:choose>
             </div>
           </div>
         </li>

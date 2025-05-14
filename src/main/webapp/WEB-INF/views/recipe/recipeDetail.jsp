@@ -77,7 +77,7 @@ h2 {
 .comments-section li strong {
 	display: block;
 	font-size: 16px;
-	color: #007bff;
+	color: #444;
 }
 
 .comments-section li span {
@@ -142,34 +142,38 @@ form {
 
 .textarea-button-container {
   display: flex;
-  justify-content: space-between; /* 또는 flex-start 로 왼쪽 정렬 */
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: stretch; /* ✅ stretch로 버튼과 높이 맞춤 */
 }
 
 .textarea-button-container textarea {
-    width: 100%; /* 부모(.textarea-button-container)의 너비에 맞게 100%로 설정 */
-    box-sizing: border-box; /* 패딩과 보더가 width에 포함되도록 설정 */
-   
-    padding: 10px; /* 내부 여백 */
-    border: 1px solid #ccc; /* 테두리 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    resize: vertical; /* 세로 크기 조정 가능 */
-    margin-right: 10px; /* 버튼과의 간격을 위해 오른쪽 여백 추가 */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  margin-right: 10px;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 40px;
 }
 
 .textarea-button-container button {
   padding: 10px 20px;
-  background-color: #444; /* 중간 회색 → 더 눈에 띄게 */
+  background-color: #444;
   color: white;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 40px; /* ✅ textarea와 높이 일치 */
+  white-space: nowrap;
 }
-
 .textarea-button-container button:hover {
-  background-color: #222; /* hover 시 더 진하게 */
+  background-color: #222;
 }
 
 
@@ -364,7 +368,6 @@ form {
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<div class="container">
   <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h2>${recipe.name}</h2>
 
     <c:if test="${  loginUser.role eq 'ADMIN' }">
       <div class="button-container">
@@ -555,15 +558,15 @@ form {
     </div>
 
     <!-- 댓글 작성 폼 -->
-    <form action="insertComment.do" method="post" class="comment-form">
-        <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
-        <div class="textarea-button-container">
-            <textarea name="content" rows="2" 
-                placeholder="<c:if test='${loginUser == null}'>로그인 후 댓글을 작성하세요</c:if><c:if test='${loginUser != null}'>댓글을 입력하세요</c:if>" 
-                required></textarea>
-            <button type="submit" >등록</button>
-        </div>
-    </form>  
+<form action="insertComment.do" method="post" class="comment-form">
+  <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
+  <div class="textarea-button-container">
+    <textarea name="content" rows="2" 
+      placeholder="${loginUser == null ? '로그인 후 댓글을 작성하세요' : '댓글을 입력하세요'}" 
+      required></textarea>
+    <button type="submit">등록</button>
+  </div>
+</form> 
 </div>
 
 

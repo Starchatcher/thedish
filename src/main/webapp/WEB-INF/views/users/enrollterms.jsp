@@ -10,7 +10,6 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
       height: 100vh;
       display: flex;
       align-items: center;
@@ -54,7 +53,7 @@
     }
 
     .buttons button {
-      background-color: #2364aa;
+      background-color: #444;
       color: white;
       border: none;
       padding: 10px 25px;
@@ -66,7 +65,7 @@
     }
 
     .buttons button:hover {
-      background-color: #1e5799;
+      background-color: #777;
     }
   </style>
 </head>
