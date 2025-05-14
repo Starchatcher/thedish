@@ -126,8 +126,8 @@ public class RestaurantRecommendController {
 	               mv.setViewName("restaurantrecommend/restaurantRecommendList"); // 뷰 이름 설정 (WEB-INF/views/restaurantRecommendList.jsp)
 	           } else { // 조회 실패시 (예: DB 연결 문제 등)
 	                // 실제 애플리케이션에서는 에러 처리가 더 상세해야 함
-	                mv.addObject("message", "맛집 추천 목록 조회 중 오류가 발생했습니다.");
-	                mv.setViewName("common/error"); // 에러 페이지로 이동
+	                mv.addObject("msg", "맛집 추천 목록 조회 중 오류가 발생했습니다.");
+	                mv.setViewName("common/alertMessage"); // 에러 페이지로 이동
 	           }
 
 	           return mv;
@@ -223,15 +223,15 @@ public class RestaurantRecommendController {
 	            } else {
 	                // 맛집 추천 정보가 존재하지 않을 경우
 	                logger.warn("{}번 맛집 추천 정보가 존재하지 않습니다.", recommendId);
-	                mv.addObject("message", recommendId + "번 맛집 추천 정보가 존재하지 않습니다.");
-	                mv.setViewName("common/error"); // 에러 페이지로 이동
+	                mv.addObject("msg", recommendId + "번 맛집 추천 정보가 존재하지 않습니다.");
+	                mv.setViewName("common/alertMessage"); // 에러 페이지로 이동
 	            }
 
 	        } catch (Exception e) {
 	            // 오류 처리
 	            logger.error("맛집 추천 상세 정보 조회 중 오류 발생: recommendId={}", recommendId, e); // 예외 객체 로깅
-	            mv.addObject("message", "맛집 추천 상세 정보를 가져오는 중 오류가 발생했습니다.");
-	            mv.setViewName("common/error"); // 에러 페이지로 이동
+	            mv.addObject("msg", "맛집 추천 상세 정보를 가져오는 중 오류가 발생했습니다.");
+	            mv.setViewName("common/alertMessage"); // 에러 페이지로 이동
 	        }
 
 	        return mv;
@@ -415,7 +415,7 @@ public class RestaurantRecommendController {
 
 	               } catch (IOException e) {
 	                   model.addAttribute("msg", "이미지 업로드 중 오류가 발생했습니다.");
-	                   return "errorPage";
+	                   return  "common/alertMessage";
 	               }
 	            }
 
@@ -425,7 +425,7 @@ public class RestaurantRecommendController {
 
 	    } catch (Exception e) {
 	        model.addAttribute("msg", "맛집 추천 글 등록 중 예상치 못한 오류가 발생했습니다.");
-	        return "errorPage";
+	        return "common/alertMessage";
 	    }
 	    }
 	    
@@ -475,8 +475,8 @@ public class RestaurantRecommendController {
 				return "restaurantrecommend/restaurantRecommendUpdate";
 			} else {
 				// 메시지 내용 수정
-				model.addAttribute("message", recommendId + "번 맛집 추천 수정 페이지로 이동 실패! 해당 글이 존재하지 않습니다.");
-				return "common/error";
+				model.addAttribute("msg", recommendId + "번 맛집 추천 수정 페이지로 이동 실패! 해당 글이 존재하지 않습니다.");
+				return  "common/alertMessage";
 			}
 		}
 
@@ -523,12 +523,12 @@ public class RestaurantRecommendController {
 
 		    } catch (IOException e) {
 		        e.printStackTrace();
-		        model.addAttribute("message", "이미지 업로드 중 오류가 발생했습니다.");
-		        return "common/error";
+		        model.addAttribute("msg", "이미지 업로드 중 오류가 발생했습니다.");
+		        return "common/alertMessage";
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		        model.addAttribute("message", "레시피 수정 중 오류가 발생했습니다.");
-		        return "common/error";
+		        model.addAttribute("msg", "레시피 수정 중 오류가 발생했습니다.");
+		        return "common/alertMessage";
 		}
 				 }
 	    
