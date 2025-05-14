@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%
@@ -17,8 +18,6 @@
             background-color: #f0f2f5;
             margin: 0;
         }
-
-        /* ✅ sidebar 스타일 */
         .sidebar {
             width: 240px;
             height: 100vh;
@@ -31,13 +30,7 @@
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
         }
-
-        .sidebar h2 {
-            font-size: 18px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
+        .sidebar h2 { font-size: 18px; margin-bottom: 25px; text-align: center; }
         .sidebar a {
             color: #bdc3c7;
             text-decoration: none;
@@ -48,12 +41,7 @@
             font-size: 14px;
             transition: background 0.3s, color 0.3s;
         }
-
-        .sidebar a:hover {
-            background-color: #2980b9;
-            color: #fff;
-        }
-
+        .sidebar a:hover { background-color: #2980b9; color: #fff; }
         .calendar-box {
             margin-top: 20px;
             padding: 8px;
@@ -62,13 +50,10 @@
             text-align: center;
             font-size: 13px;
         }
-
-        /* ✅ 메인 컨텐츠 스타일 */
         .main-content {
             margin-left: 260px;
             padding: 80px 40px;
         }
-
         h1 {
             color: #2d3e50;
             font-size: 26px;
@@ -76,14 +61,12 @@
             text-align: center;
             margin-bottom: 25px;
         }
-
         .user-stats {
             display: flex;
             gap: 15px;
             justify-content: center;
             margin-bottom: 25px;
         }
-
         .stat-box {
             flex: 1;
             max-width: 240px;
@@ -96,11 +79,7 @@
             font-weight: 700;
             transition: transform 0.3s ease;
         }
-
-        .stat-box:hover {
-            transform: translateY(-4px);
-        }
-
+        .stat-box:hover { transform: translateY(-4px); }
         form.search-form {
             display: flex;
             justify-content: center;
@@ -108,9 +87,7 @@
             gap: 8px;
             margin-bottom: 25px;
         }
-
-        .search-form input[type="text"],
-        .search-form select {
+        .search-form input[type="text"], .search-form select {
             padding: 10px;
             font-size: 13px;
             border: 1px solid #ccc;
@@ -118,7 +95,6 @@
             background: #ffffff;
             box-shadow: 0 1px 4px rgba(0,0,0,0.03);
         }
-
         .search-form button {
             background-color: #2364aa;
             color: white;
@@ -131,17 +107,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             transition: background-color 0.3s ease;
         }
-
-        .search-form button:hover {
-            background-color: #3a7bc4;
-        }
-
+        .search-form button:hover { background-color: #3a7bc4; }
         .user-table {
             width: 100%;
+            table-layout: fixed;
             border-collapse: separate;
             border-spacing: 0 8px;
         }
-
         .user-table thead th {
             background-color: #2364aa;
             color: #ffffff;
@@ -151,39 +123,40 @@
             border-top-left-radius: 6px;
             border-top-right-radius: 6px;
         }
-
         .user-table tbody tr {
             background-color: #ffffff;
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             border-radius: 6px;
         }
-
         .user-table td {
             text-align: center;
             padding: 12px;
             font-size: 15px;
             font-weight: 500;
+            min-height: 40px;
         }
-
-        .user-table tbody tr:hover {
-            background-color: #f7f9fb;
-        }
-
+        .user-table tbody tr:hover { background-color: #f7f9fb; }
         .user-table a {
             color: #2364aa;
             text-decoration: none;
             font-weight: bold;
         }
-
-        .user-table a:hover {
-            text-decoration: underline;
+        .user-table a:hover { text-decoration: underline; }
+        .pagination {
+            text-align: center;
+            margin-top: 25px;
         }
-
+        .pagination a, .pagination strong {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #2364aa;
+            font-weight: bold;
+        }
+        .pagination strong { color: #000; }
         .back-button {
             text-align: center;
             margin-top: 25px;
         }
-
         .back-button button {
             padding: 10px 25px;
             font-size: 13px;
@@ -196,7 +169,6 @@
             box-shadow: 0 3px 8px rgba(0,0,0,0.08);
             transition: background-color 0.3s ease;
         }
-
         .back-button button:hover {
             background-color: #4a90e2;
             transform: translateY(-3px);
@@ -204,8 +176,6 @@
     </style>
 </head>
 <body>
-
-<!-- ✅ sidebar 영역 -->
 <div class="sidebar">
     <div class="sidebar-nav">
         <h2>관리자 메뉴</h2>
@@ -223,18 +193,14 @@
     </div>
 </div>
 
-<!-- ✅ 사용자 관리 메인 영역 -->
 <div class="main-content">
     <h1>사용자 관리</h1>
-
-    <!-- ✅ 통계 박스 -->
     <div class="user-stats">
         <div class="stat-box">총 가입자 수 : ${totalUsers}</div>
-        <div class="stat-box">현재 회원 수 : ${todayJoin}</div>
-        <div class="stat-box">현재 탈퇴한 수 : ${todayWithdraw}</div>
+        <div class="stat-box">현재 회원 수 : ${activeUsers}</div>
+        <div class="stat-box">현재 탈퇴한 수 : ${withdrawnUsers}</div>
     </div>
 
-    <!-- ✅ 검색 필터 -->
     <form class="search-form" method="get" action="${pageContext.request.contextPath}/admin/userList.do">
         <input type="text" name="keyword" placeholder="닉네임 또는 ID 검색" value="${param.keyword}" />
         <select name="status">
@@ -245,39 +211,49 @@
         <button type="submit">검색</button>
     </form>
 
-    <!-- ✅ 사용자 목록 테이블 -->
     <table class="user-table">
         <thead>
         <tr>
-            <th>회원ID</th>
-            <th>닉네임</th>
-            <th>이메일</th>
-            <th>상태</th>
-            <th>가입일</th>
-            <th>관리</th>
+    <th style="width: 18%;">회원ID</th>
+    <th style="width: 18%;">닉네임</th>
+    <th style="width: 24%;">이메일</th>
+    <th style="width: 12%;">상태</th>
+    <th style="width: 18%;">가입일</th>
+    <th style="width: 10%;">관리</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="user" items="${userList}">
-            <tr>
-                <td>${user.loginId}</td>
-                <td>${user.nickName}</td>
-                <td>${user.email}</td>
-                <td>${user.status}</td>
-                <td>${user.createdAt}</td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/admin/userDetail.do?userId=${user.userId}">보기</a>
-                </td>
-            </tr>
+            <c:if test="${not empty user.loginId}">
+                <tr>
+                    <td>${user.loginId}</td>
+                    <td>${user.nickName}</td>
+                    <td>${user.email}</td>
+                    <td>${user.status}</td>
+                    <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy-MM-dd"/></td>
+                    <td><a href="${pageContext.request.contextPath}/admin/userDetail.do?userId=${user.userId}">보기</a></td>
+                </tr>
+            </c:if>
         </c:forEach>
         </tbody>
     </table>
 
-    <!-- ✅ 이전 페이지 버튼 -->
+    <div class="pagination">
+        <c:forEach begin="1" end="${totalPages}" var="pageNum">
+            <c:choose>
+                <c:when test="${pageNum == currentPage}">
+                    <strong>${pageNum}</strong>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/admin/userList.do?page=${pageNum}&keyword=${param.keyword}&status=${param.status}">${pageNum}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </div>
+
     <div class="back-button">
         <button onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'">이전 페이지</button>
     </div>
 </div>
-
 </body>
 </html>

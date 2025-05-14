@@ -93,15 +93,18 @@ public class Users implements java.io.Serializable {
     public String getLoginId() { return loginId; }
     public void setLoginId(String loginId) { this.loginId = loginId; }
 
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
-
     public Date getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
+    
+    //
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public Date getWithdrawnAt() { return withdrawnAt; }
     public void setWithdrawnAt(Date withdrawnAt) { this.withdrawnAt = withdrawnAt; }
 
+    //
+    
     @Override
     public String toString() {
         return "Users [userId=" + userId + ", password=" + password + ", userPwd2=" + userPwd2 +
