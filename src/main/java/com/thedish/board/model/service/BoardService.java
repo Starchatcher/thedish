@@ -8,6 +8,7 @@ import com.thedish.board.model.vo.Board;
 import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.reportPost.model.vo.ReportPost;
 
 public interface BoardService {
 
@@ -49,4 +50,7 @@ public interface BoardService {
 	int updateBoardComment(Comment comment);
 	int deleteBoardComment(Map<String, Object> param);
 	int deleteCommentsByBoardId(Map<String, Object> param);
+	List<ReportPost> selectListReportedPost(Map<String, Object> param);
+	int selectReportedPostCount ();
+	int updateReportChecked (int report_id);
 }

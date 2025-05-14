@@ -916,6 +916,37 @@ public class BoardController {
 		return mv;
 	}
 	
+	// 신고된 게시글 목록 출력용 메소드
+	@RequestMapping("reportedBoardList.do")
+	public ModelAndView selectListReportedBoard(ModelAndView mv,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit) {
+
+	    int currentPage = (page != null && !page.isEmpty()) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    // 전체 신고 수 조회
+	    int listCount = boardService.selectReportedPostCount();
+
+	    // 페이징 계산
+	    Paging paging = new Paging(listCount, limit, currentPage, "reportedBoardList.do");
+	    paging.calculate();
+
+	    // 신고된 게시글 목록 조회
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("startRow", paging.getStartRow());
+	    param.put("endRow", paging.getEndRow());
+
+	    List<ReportPost> list = boardService.selectListReportedPost(param);
+
+	    // 뷰 전달
+	    mv.addObject("list", list);
+	    mv.addObject("paging", paging);
+	    mv.setViewName("admin/reportedBoardListView"); // JSP 경로에 맞게 조정
+
+	    return mv;
+	}
+	
 	// 게시글 신고 처리용 메소드
 	@RequestMapping(value = "boardReportInsert.do", method = RequestMethod.POST)
 	public ModelAndView insertBoardReport(ModelAndView mv, HttpSession session,
@@ -945,5 +976,23 @@ public class BoardController {
 
 	    return mv;
 	}
+	
+	// 신고 게시글 처리용 메소드
+	@RequestMapping("checkReport.do")
+	public ModelAndView checkReport(@RequestParam("reportId") int reportId,
+	                                @RequestParam("page") int page,
+	                                ModelAndView mv) {
+
+	    int result = boardService.updateReportChecked(reportId);
+
+	    if (result > 0) {
+	        mv.addObject("message", "신고가 처리되었습니다.");
+	    } else {
+	        mv.addObject("message", "신고 처리 실패");
+	    }
+	    mv.setViewName("redirect:reportedBoardList.do?page=" + page);
+	    return mv;
+	}
+	
 	
 }
