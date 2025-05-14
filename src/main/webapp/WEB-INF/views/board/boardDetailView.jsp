@@ -640,8 +640,11 @@ textarea:focus {
     </div>
 </c:if>
 
-<div class="go-list-btn-wrap">
-    <button type="button" class="go-list-btn" onclick="goList();">📋 목록</button>
+		<div class="go-list-btn-wrap">
+		    <button type="button" class="go-list-btn" onclick="goList();">📋 목록</button>
+		</div>
+	
+	</div>
 </div>
 
 <c:if test="${param.reportSuccess eq 'true'}">
