@@ -92,14 +92,88 @@ textarea.editor {
 }
 
 .button-row button.cancel {
-  background-color: #e2e8f0;
-  color: #333;
+  background-color: #333; /* 연한 회색 */
+  color: #fff;               /* 어두운 글자색 */
 }
 
 .button-row button.cancel:hover {
-  background-color: #cbd5e1;
+  background-color: #444;
 }
+
+.custom-file-button {
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.custom-file-button:hover {
+  background-color: #444;
+}
+
 </style>
+
+<script>
+function checkByteWithLimit(textarea, maxByte, counterId) {
+	const text = textarea.value;
+	let byteCount = 0;
+	let cutIndex = text.length;
+
+	for (let i = 0; i < text.length; i++) {
+		const char = text.charAt(i);
+		byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+		if (byteCount > maxByte) {
+			cutIndex = i;
+			break;
+		}
+	}
+
+	if (byteCount > maxByte) {
+		alert(maxByte + "byte를 초과할 수 없습니다.");
+		textarea.value = text.substring(0, cutIndex);
+		byteCount = 0;
+		for (let i = 0; i < cutIndex; i++) {
+			const char = textarea.value.charAt(i);
+			byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+		}
+	}
+
+	document.getElementById(counterId).innerText = byteCount;
+}
+
+function checkByteLimitOnly(input, maxByte) {
+	const text = input.value;
+	let byteCount = 0;
+	let cutIndex = text.length;
+
+	for (let i = 0; i < text.length; i++) {
+		const char = text.charAt(i);
+		byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+		if (byteCount > maxByte) {
+			cutIndex = i;
+			break;
+		}
+	}
+
+	if (byteCount > maxByte) {
+		alert(maxByte + "byte를 초과할 수 없습니다.");
+		input.value = text.substring(0, cutIndex);
+	}
+	
+	function updateFileName(input) {
+		  const fileNameDisplay = document.getElementById("fileNameDisplay");
+		  const fileName = input.files.length > 0 ? input.files[0].name : "선택된 파일 없음";
+		  fileNameDisplay.textContent = fileName;
+		}
+}
+</script>
 </head>
 <body>
 
@@ -109,14 +183,20 @@ textarea.editor {
   <h2>문의글 작성</h2>
 
   <form action="qnaInsert.do" method="post" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="제목을 입력해 주세요." required>
-
-    <textarea name="content" class="editor" placeholder="내용을 입력해 주세요." required></textarea>
+ 
+	<input type="text" name="title" placeholder="제목을 입력해 주세요." 
+		oninput="checkByteLimitOnly(this, 200)" required>
+	
+	
+	<textarea name="content" class="editor" placeholder="내용을 입력해 주세요." 
+		oninput="checkByteWithLimit(this, 4000, 'contentByteCount')" required></textarea>
+	<div><span id="contentByteCount">0</span> / 4000 byte</div>
 
     <div class="file-upload">
-      <label for="ofile">첨부 파일:</label><br>
-      <input type="file" name="ofile" id="ofile">
-    </div>
+	  <input type="file" name="ofile" id="ofile" style="display: none;" onchange="updateFileName(this)">
+	  <label for="ofile" class="custom-file-button">파일 선택</label>
+	  <span id="fileNameDisplay">선택된 파일 없음</span>
+	</div>
 
     <div class="button-row">
       <button type="submit">등록하기</button>

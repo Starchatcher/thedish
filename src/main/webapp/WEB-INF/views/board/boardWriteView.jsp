@@ -102,7 +102,56 @@ form {
   background-color: #555;
 }
 </style>
+<script>
+function checkByteLimit(textarea, maxByte, countDisplayId) {
+  let text = textarea.value;
+  let byteCount = 0;
+  let cutIndex = text.length;
 
+  for (let i = 0; i < text.length; i++) {
+    const char = text.charAt(i);
+    byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+
+    if (byteCount > maxByte) {
+      cutIndex = i;
+      break;
+    }
+  }
+
+  if (byteCount > maxByte) {
+    alert(maxByte + "byte까지만 입력할 수 있습니다.");
+    textarea.value = text.substring(0, cutIndex);
+    byteCount = 0;
+    for (let i = 0; i < cutIndex; i++) {
+      const char = textarea.value.charAt(i);
+      byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+    }
+  }
+
+  if (countDisplayId) {
+    document.getElementById(countDisplayId).innerText = byteCount;
+  }
+}
+function limitByte(input, maxByte) {
+	  let text = input.value;
+	  let byteCount = 0;
+	  let cutIndex = text.length;
+
+	  for (let i = 0; i < text.length; i++) {
+	    const char = text.charAt(i);
+	    byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+	    if (byteCount > maxByte) {
+	      cutIndex = i;
+	      break;
+	    }
+	  }
+
+	  if (byteCount > maxByte) {
+	    alert("제목은 최대 " + maxByte + "byte까지 입력할 수 있습니다.");
+	    input.value = text.substring(0, cutIndex);
+	  }
+	}
+</script>
 
 </head>
 <body>
@@ -115,7 +164,8 @@ form {
 		<!-- 게시판 선택 + 제목 입력 -->
 		<div class="title-row">
 			<input type="text" name="title" class="title-input"
-				placeholder="제목을 입력해 주세요." required>
+		       placeholder="제목을 입력해 주세요."
+		       oninput="limitByte(this, 100)" required>
 		
 		
 			<select name="boardType" required>
@@ -128,7 +178,8 @@ form {
 
 		<!-- 내용 입력 -->
 		<textarea name="content" class="editor" placeholder="내용을 입력해 주세요."
-			required></textarea>
+          oninput="checkByteLimit(this, 4000, 'boardByteCount')" required></textarea>
+		<div><span id="boardByteCount">0</span> / 4000 byte</div>
 
 		<!-- 파일 선택 -->
 		<div class="file-upload">

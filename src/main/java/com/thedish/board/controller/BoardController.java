@@ -1,15 +1,16 @@
 package com.thedish.board.controller;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -947,7 +948,7 @@ public class BoardController {
 	    return mv;
 	}
 	
-	// 게시글 신고 처리용 메소드
+	// 게시글 신고 등록용 메소드
 	@RequestMapping(value = "boardReportInsert.do", method = RequestMethod.POST)
 	public ModelAndView insertBoardReport(ModelAndView mv, HttpSession session,
 	                                      @RequestParam("targetId") int boardId,
@@ -965,15 +966,24 @@ public class BoardController {
 	    report.setReason(reason);
 	    report.setReporterId(loginUser.getLoginId());
 
-	    int result = reportPostService.insertBoardReport(report);
+	    try {
+	        int result = reportPostService.insertBoardReport(report);
 
-	    if (result > 0) {
-	    	mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
-	    } else {
-	        mv.addObject("message", "신고 등록 실패! 다시 시도해주세요.");
-	        mv.setViewName("common/error");
+	        if (result > 0) {
+	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
+	        } else {
+	            mv.addObject("alertMsg", "신고 등록 실패! 다시 시도해주세요.");
+	            mv.setViewName("board/boardReportForm");  // 신고 작성 폼 JSP
+	        }
+
+	    } catch (Exception e) {
+	        mv.addObject("alertMsg", "이미 신고한 게시글이거나 알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
+	        mv.setViewName("board/boardReportView");  // 다시 신고 폼 JSP
 	    }
 
+	    // 폼에 hidden으로 필요하기 때문에 다시 전달
+	    mv.addObject("targetId", boardId);
+	    mv.addObject("category", category);
 	    return mv;
 	}
 	
