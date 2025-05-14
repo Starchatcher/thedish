@@ -180,13 +180,13 @@
     <div class="sidebar-nav">
         <h2>관리자 메뉴</h2>
         <a href="${pageContext.request.contextPath}/main.do">메인 페이지</a>
-        <a href="${pageContext.request.contextPath}/ndetail.do?no=1&page=1">공지사항 관리</a>
-        <a href="${pageContext.request.contextPath}/board/boardList.do">자유게시판 관리</a>
+        <a href="${pageContext.request.contextPath}/noticeList.do">공지사항 관리</a>
+        <a href="${pageContext.request.contextPath}/boardList.do">게시판 관리</a>
         <a href="${pageContext.request.contextPath}/admin/userList.do">사용자 관리</a>
-        <a href="${pageContext.request.contextPath}/recipe/recipeList.do">레시피 데이터관리</a>
-        <a href="${pageContext.request.contextPath}/drink/drinkList.do">술 데이터관리</a>
-        <a href="${pageContext.request.contextPath}/admin/userList.do">FAQ</a>
-        <a href="${pageContext.request.contextPath}/admin/userList.do">1:1문의</a>
+        <a href="${pageContext.request.contextPath}/recipeList.do">레시피 데이터관리</a>
+        <a href="${pageContext.request.contextPath}/drinkList.do">술 데이터관리</a>
+        <a href="${pageContext.request.contextPath}/FAQList.do">FAQ</a>
+        <a href="${pageContext.request.contextPath}/qnaList.do">1:1문의</a>
     </div>
     <div class="calendar-box">
         오늘은 <%= todayKorean %>입니다

@@ -26,14 +26,14 @@
     }
 
     h1, h2 {
-        color: #0056b3; /* 브랜드 색상 또는 강조색 */
-        border-bottom: 2px solid #007bff; /* 제목 아래 구분선 */
+        color: #444; /* 브랜드 색상 또는 강조색 */
+        border-bottom: 2px solid #444; /* 제목 아래 구분선 */
         padding-bottom: 10px;
         margin-bottom: 20px;
     }
 
     h2 {
-        color: #007bff;
+        color: #444;
         border-bottom-color: #e9ecef; /* 덜 강조되는 구분선 */
     }
 
@@ -75,19 +75,19 @@
         display: block; /* 라벨을 블록 요소로 만들어 다음 요소와 분리 */
         margin-bottom: 5px;
         font-weight: bold;
-        color: #555;
+        color: #777;
     }
 
     form input[type="text"] {
         width: calc(100% - 20px); /* 너비 조정 (padding 고려) */
         padding: 10px;
-        border: 1px solid #ced4da;
+        border: 1px solid #444;
         border-radius: 4px;
         box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
     }
 
     form input[type="text"]:focus {
-        border-color: #007bff; /* 포커스 시 테두리 색상 변경 */
+        border-color: #777; /* 포커스 시 테두리 색상 변경 */
         outline: none; /* 기본 outline 제거 */
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* 포커스 시 그림자 */
     }
@@ -95,7 +95,7 @@
     button[type="submit"] {
         display: inline-block; /* 버튼을 인라인 블록으로 */
         padding: 10px 20px;
-        background-color: #28a745; /* 등록 버튼 색상 */
+        background-color: #444; /* 등록 버튼 색상 */
         color: white;
         border: none;
         border-radius: 4px;
@@ -105,7 +105,7 @@
     }
 
     button[type="submit"]:hover {
-        background-color: #218838;
+        background-color: #777;
     }
 
     /* 메시지 영역 스타일 */
@@ -154,7 +154,7 @@
     }
 
     tbody tr:hover {
-        background-color: #e2e6ea; /* 호버 시 배경색 변경 */
+        background-color: #777; /* 호버 시 배경색 변경 */
     }
 
     td button {
@@ -169,7 +169,7 @@
     }
 
     td button:hover {
-        background-color: #c82333;
+        background-color: #777;
     }
 
     /* 추가적인 관리자 페이지 느낌 요소 */

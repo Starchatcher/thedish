@@ -27,8 +27,8 @@ body {
 }
 
 h2 {
-    color: #0056b3; /* 제목 색상 */
-    border-bottom: 2px solid #007bff; /* 제목 아래 밑줄 */
+    color: #444; /* 제목 색상 */
+    border-bottom: 2px solid #999; /* 제목 아래 밑줄 */
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
@@ -96,23 +96,23 @@ h2 {
 
 .like-btn {
     background-color: #fff;
-    color: #e74c3c; /* 하트 색상에 맞춤 */
+    color: #444; /* 하트 색상에 맞춤 */
     border: 1px solid #e74c3c;
 }
 
 .like-btn:hover {
-    background-color: #f9e0df;
+    background-color: #777;
 }
 
 .report-btn, /* 수정/삭제 버튼 */
 .modify-button /* 댓글 삭제 버튼 */ {
-    background-color: #f39c12; /* 주황색 계열 */
+    background-color: #444; /* 주황색 계열 */
     color: white;
 }
 
 .report-btn:hover,
 .modify-button:hover {
-    background-color: #e67e22;
+    background-color: #777;
 }
 
 /* 댓글 목록 스타일 */
@@ -127,7 +127,7 @@ width: 900px;
 
 .comments-section h3 {
     margin-top: 0;
-    color: #3498db;
+    color: #444;
     border-bottom: 1px dashed #bdc3c7;
     padding-bottom: 10px;
     margin-bottom: 15px;
@@ -188,14 +188,14 @@ width: 900px;
 }
 
 .comment-form button {
-    background-color: #3498db; /* 파란색 계열 */
+    background-color: #444; /* 파란색 계열 */
     color: white;
     padding: 10px 20px;
     height: fit-content; /* 내용에 맞게 높이 조절 */
 }
 
 .comment-form button:hover {
-    background-color: #2980b9;
+    background-color: #777;
 }
 
 /* 페이지 네비게이션 스타일 */
@@ -245,7 +245,7 @@ width: 900px;
      /* 답글 더보기 버튼 스타일 */
     background: none;
     border: none;
-    color: #3498db;
+    color: #444;
     cursor: pointer;
     font-size: 0.9em;
     margin-top: 5px;
@@ -291,10 +291,8 @@ width: 900px;
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 	
-
-
-
 <div class="container" style="max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+	
     <h2 style="text-align: center; margin-bottom: 20px;">${recommend.name}</h2>
 
     <div class="info-row">

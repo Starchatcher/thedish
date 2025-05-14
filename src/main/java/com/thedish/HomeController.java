@@ -85,10 +85,10 @@ public class HomeController {
 	}
 }
 	
-	@RequestMapping("/terms.do")
-	public String showTerms() {
-	    return "common/terms";
-	}
+
+  @RequestMapping("/terms.do") public String showTerms() { return
+  "common/terms"; }
+ 
 
 	@RequestMapping("/privacy.do")
 	public String showPrivacy() {

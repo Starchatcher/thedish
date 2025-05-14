@@ -1,4 +1,4 @@
-
+# 1) 개별 AI/자동화 크롤러 전용 차단
 User-agent: GPTBot
 Disallow: /
 
@@ -20,7 +20,11 @@ Disallow: /
 User-agent: Meta-ExternalAgent
 Disallow: /
 
+# 2) 이름에 'bot'이 들어가는 모든 크롤러 차단 (와일드카드)
+User-agent: *bot
+Disallow: /
 
+# 3) 일반 크롤러(나머지 모든 봇)에 대한 경로 제한
 User-agent: *
 Disallow: /admin/
 Disallow: /mypage/

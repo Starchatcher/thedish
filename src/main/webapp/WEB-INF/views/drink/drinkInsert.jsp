@@ -66,7 +66,7 @@
         display: block;
         width: 100%; /* 버튼 너비 전체 */
         padding: 12px 20px;
-        background-color: #5cb85c; /* 버튼 배경색 (초록색 계열) */
+        background-color: #444; /* 버튼 배경색 (초록색 계열) */
         color: white; /* 버튼 글자색 */
         border: none; /* 테두리 없음 */
         border-radius: 4px; /* 모서리 둥글게 */
@@ -77,11 +77,11 @@
     }
 
     button[type="submit"]:hover {
-        background-color: #4cae4c; /* 마우스 오버 시 배경색 변경 */
+        background-color: #777; /* 마우스 오버 시 배경색 변경 */
     }
 
     button[type="submit"]:active {
-        background-color: #449d44; /* 클릭 시 배경색 변경 */
+        background-color: #777; /* 클릭 시 배경색 변경 */
     }
 
     /* 입력 필드 포커스 시 스타일 */

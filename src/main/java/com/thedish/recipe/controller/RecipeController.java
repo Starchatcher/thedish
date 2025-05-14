@@ -484,7 +484,6 @@ public class RecipeController {
 
 		 }
 		 
-		 
-		 
+
 
 }

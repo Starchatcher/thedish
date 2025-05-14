@@ -103,7 +103,7 @@
         button[type="submit"],
         button[type="button"] {
             display: inline-block; /* 버튼을 인라인 블록 요소로 */
-            background-color: #5a67d8; /* 배경색 */
+            background-color: #444; /* 배경색 */
             color: white; /* 글자색 */
             padding: 10px 20px;
             border: none;
@@ -115,7 +115,7 @@
 
          button[type="submit"]:hover,
         button[type="button"]:hover:not(:disabled) {
-            background-color: #434190; /* 호버 시 배경색 변경 */
+            background-color: #777; /* 호버 시 배경색 변경 */
         }
 
         button:disabled {

@@ -155,7 +155,7 @@ form {
 }
 
 .comments-container {
-    width: 900px; /* 컨테이너의 너비를 850px로 설정 */
+    width: 800px; /* 컨테이너의 너비를 850px로 설정 */
     margin: 20px auto; /* 위쪽 여백은 20px, 좌우 여백은 자동으로 설정하여 가운데 정렬 */
     background-color: #fff; /* 배경색 */
     border-radius: 8px; /* 모서리 둥글게 */
@@ -187,19 +187,20 @@ form {
     margin-right: 10px; /* 버튼과의 간격을 위해 오른쪽 여백 추가 */
 }
 
+/* 댓글 등록 버튼 (.textarea-button-container button) 수정 */
 .textarea-button-container button {
-    padding: 10px 15px; /* 버튼 내부 여백 */
-  	height: 56px;
-    border: none; /* 테두리 없음 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    background-color: #007bff; /* 배경색 */
-    color: white; /* 글자색 */
-    cursor: pointer; /* 커서 모양 */
-    transition: background-color 0.3s; /* 배경색 변경 시 부드러운 전환 */
+    padding: 10px 15px;
+    height: 56px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555; /* 중간 회색 */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .textarea-button-container button:hover {
-    background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+    background-color: #333; /* 더 어두운 회색 */
 }
 
     
@@ -244,7 +245,7 @@ form {
 }
     
   .drink-pairing-section {
-         width: 900px; 
+         width: 800px; 
         margin: 30px auto; /* 상단 여백 */
         margin-bottom: 30px; /* 하단 여백 */
         padding: 20px; /* 내부 여백 */
@@ -310,23 +311,21 @@ form {
      }
 
 
-    /* 페어링 등록 버튼 스타일 */
-    .drink-pairing-section button {
-        display: inline-block; /* 버튼을 인라인 블록 요소로 */
-        margin-top: 20px; /* 테이블 또는 메시지와의 간격 */
-        background-color: #5a67d8; /* 브랜드 주 색상 */
-        color: white; /* 글자색 */
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px; /* 모서리 둥글게 */
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.2s ease-in-out; /* 호버 시 전환 효과 */
-    }
+   /* 페어링 등록 버튼 (기존 .drink-pairing-section button) 수정 */
+.drink-pairing-section button {
+    background-color: #555; /* 중간 회색 */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out;
+}
 
-    .drink-pairing-section button:hover {
-        background-color: #434190; /* 호버 시 배경색 어둡게 */
-    }
+.drink-pairing-section button:hover {
+    background-color: #333; /* 더 어두운 회색 */
+}
     .drink-pairing-section table td a {
         text-decoration: none; /* 밑줄 제거 */
         color: inherit; /* 부모 요소(td)의 글자색 상속 */
@@ -398,20 +397,23 @@ form {
 
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
-<c:if test="${  loginUser.role eq 'ADMIN' }">
-    <div class="admin-buttons"> <!-- 버튼을 감싸는 부모 요소 -->
-        <button onclick="location.href='moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}'" class="modify-button">수정</button>
-        <button onclick="location.href='drinkStoreInsert.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}'" class="register-store-button">판매처 등록</button>
-        
-        <form action="deleteDrink.do" method="post" style="display: inline;">
-            <input type="hidden" name="drinkId" value="${drink.drinkId}" />
-            <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
-            <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');" class="delete-button">삭제</button>
-        </form>
-    </div>
-</c:if>
+<!-- 버튼 이동을 위해 제목과 버튼을 같은 flex 컨테이너로 감쌈 -->
 
 <div class="container">
+<div style="display: flex; justify-content: space-between; align-items: center;">
+
+    <c:if test="${loginUser.role eq 'ADMIN'}">
+      <div class="admin-buttons">
+        <button onclick="location.href='moveUpdateDrinkPage.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}'" class="modify-button">수정</button>
+        <button onclick="location.href='drinkStoreInsert.do?drinkId=${drink.drinkId}&page=${currentPage != null ? currentPage : 1}'" class="register-store-button">판매처 등록</button>
+        <form action="deleteDrink.do" method="post">
+          <input type="hidden" name="drinkId" value="${drink.drinkId}" />
+          <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
+          <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');" class="delete-button">삭제</button>
+        </form>
+      </div>
+    </c:if>
+  </div>
     <h2>${drink.name}</h2>
 
     <span class="label">페어링 음식:</span>
@@ -615,7 +617,7 @@ form {
 
  
 
-<c:import url="/WEB-INF/views/common/footer.jsp" />
+
 
 <!-- Kakao 지도 API 로딩 (appkey는 백엔드에서 안전하게 전달됨) -->
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&libraries=services&autoload=false"></script>
@@ -743,6 +745,6 @@ form {
         });
         
     </script> 
-   
+   <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

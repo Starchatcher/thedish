@@ -34,7 +34,7 @@ public class HealthCondition implements java.io.Serializable {
 	}
 	public void setConditionName(String conditionName) {
 		this.conditionName = conditionName;
-	}2
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
