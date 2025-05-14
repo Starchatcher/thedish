@@ -31,7 +31,6 @@ import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.annotation.PostConstruct;
 
 
 
@@ -51,10 +50,6 @@ public class BoardController {
 	private ReportPostService reportPostService;
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
 	
-	@PostConstruct
-    public void initTimeZoneCheck() {
-        System.out.println("✅ 현재 JVM 시간대(TimeZone.getDefault()): " + TimeZone.getDefault().getID());
-    }
 
 	// 게시글 작성 페이지 내보내기
 	@RequestMapping("boardWritePage.do")

@@ -6,102 +6,196 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 추천 글 작성</title>
-<%-- 필요한 CSS 또는 스타일 링크 --%>
 <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #333; }
-    form { margin-top: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; max-width: 600px; margin-left: auto; margin-right: auto; }
-    label { display: block; margin-bottom: 5px; font-weight: bold; }
-    input[type="text"], input[type="number"], textarea { width: calc(100% - 22px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-    textarea { resize: vertical; }
-    button { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px; }
-    button:hover { background-color: #45a049; }
-    #imagePreview { margin-top: 10px; border: 1px solid #ccc; width: 150px; height: 150px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
-    #previewImage { max-width: 100%; max-height: 100%; display: none; } /* 초기에는 숨김 */
-    .required::after { content: " *"; color: red; margin-left: 2px; }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    form {
+        max-width: 700px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    label {
+        display: block;
+        margin-top: 20px;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #444;
+    }
+
+    .required::after {
+        content: " *";
+        color: red;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+        background-color: #fafafa;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* 이미지 미리보기 박스 */
+    #imagePreview {
+        margin-top: 10px;
+        width: 150px;
+        height: 150px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    #previewImage {
+        max-width: 100%;
+        max-height: 100%;
+        display: none;
+    }
+
+    /* 파일 업로드 input 숨기고 커스텀 버튼 사용 */
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-label {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #444;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .custom-file-label:hover {
+        background-color: #666;
+    }
+
+    /* 버튼 스타일 */
+    .btn-group {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .btn-group button {
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 0 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-submit {
+        background-color: #444;
+        color: white;
+    }
+
+    .btn-submit:hover {
+        background-color: #777;
+    }
+
+    .btn-cancel {
+        background-color: #999;
+        color: white;
+    }
+
+    .btn-cancel:hover {
+        background-color: #777;
+    }
 </style>
 </head>
 <body>
 
+<c:import url="/WEB-INF/views/common/menubar.jsp" />
+
 <h1>맛집 추천 글 작성</h1>
 
-<%-- action URL과 method, enctype 설정 --%>
 <form action="${pageContext.request.contextPath}/restaurantRecommendInsert.do" method="post" enctype="multipart/form-data">
 
-    <%-- RESTAURANT_RECOMMEND 테이블 컬럼에 맞는 입력 필드 --%>
-    <%-- NAME (필수) --%>
     <label for="name" class="required">맛집 이름:</label>
     <input type="text" id="name" name="name" maxlength="100" required />
 
-    <%-- PHONE --%>
     <label for="phone">전화번호:</label>
     <input type="text" id="phone" name="phone" maxlength="20" />
 
-    <%-- ADDRESS --%>
     <label for="address">주소:</label>
     <input type="text" id="address" name="address" maxlength="200" />
 
-    <%-- OPENING_HOURS --%>
     <label for="openingHours">영업 시간:</label>
     <input type="text" id="openingHours" name="openingHours" maxlength="250" />
 
-    <%-- MENU --%>
     <label for="menu">대표 메뉴:</label>
     <input type="text" id="menu" name="menu" maxlength="500" />
 
-    <%-- REVIEW (CLOB) --%>
     <label for="review">리뷰:</label>
-    <textarea id="review" name="review" maxlength="4000" rows="8"></textarea> <%-- CLOB은 크지만, textarea UI 제한 --%>
+    <textarea id="review" name="review" maxlength="4000" rows="6"></textarea>
 
-    <%-- LOGIN_ID, VIEW_COUNT, LIKE_COUNT, CREATED_AT, UPDATED_AT은 서버에서 처리 --%>
-
-    <%-- 이미지 업로드 필드 (IMAGE 테이블 관련) --%>
     <label for="imageFile">이미지 업로드:</label>
+    <label for="imageFile" class="custom-file-label">파일 선택</label>
     <input type="file" id="imageFile" name="imageFile" accept="image/*" />
 
-    <%-- 이미지 미리보기 창 --%>
     <div id="imagePreview">
         <img id="previewImage" src="#" alt="이미지 미리보기" />
     </div>
 
-    <br/> <%-- 필드와 버튼 사이에 간격 추가 --%>
-
-    <%-- 폼 제출 버튼 --%>
-    <button type="submit">등록하기</button>
-    <%-- 취소 버튼 (예시: 이전 페이지로 이동) --%>
-    <button type="button" onclick="history.back()">취소</button>
-
+    <div class="btn-group">
+        <button type="submit" class="btn-submit">등록하기</button>
+        <button type="button" class="btn-cancel" onclick="history.back()">취소</button>
+    </div>
 </form>
 
-<%-- 이미지 미리보기 JavaScript 코드 --%>
 <script>
     const fileInput = document.getElementById('imageFile');
     const previewImage = document.getElementById('previewImage');
-    const imagePreviewDiv = document.getElementById('imagePreview'); // 미리보기 div 추가
 
     fileInput.addEventListener('change', function(e) {
-        const file = e.target.files[0]; // 선택된 파일 중 첫 번째 파일 가져오기
-
+        const file = e.target.files[0];
         if (file) {
-            
+            const label = document.querySelector('.custom-file-label');
+            label.textContent = '📁 ' + file.name;
 
-
-            const reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체 생성
-
+            const reader = new FileReader();
             reader.onload = function(event) {
-                // 파일 읽기가 완료되면 실행될 함수
-                previewImage.src = event.target.result; // 미리보기 이미지의 src를 읽어온 파일 데이터 URL로 설정
-                previewImage.style.display = 'block'; // 미리보기 이미지를 보이도록 설정
+                previewImage.src = event.target.result;
+                previewImage.style.display = 'block';
             }
-
-            reader.readAsDataURL(file); // 파일을 Data URL 형태로 읽어오기
+            reader.readAsDataURL(file);
         } else {
-            // 파일 선택이 취소된 경우
-            previewImage.src = '#'; // 이미지 src 초기화
-            previewImage.style.display = 'none'; // 미리보기 이미지를 숨김
+            previewImage.src = '#';
+            previewImage.style.display = 'none';
         }
     });
 </script>
 
+<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

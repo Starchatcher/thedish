@@ -87,7 +87,7 @@
     .drink-update-form-section button[type="submit"] {
         display: inline-block; /* 인라인 블록 요소 */
         margin-top: 10px; /* 위쪽 여백 */
-        background-color: #28a745; /* 수정 버튼 색상 (녹색 계열) */
+        background-color: #444; /* 수정 버튼 색상 (녹색 계열) */
         color: white; /* 글자색 */
         padding: 12px 25px;
         border: none;
@@ -98,11 +98,32 @@
     }
 
     .drink-update-form-section button[type="submit"]:hover {
-        background-color: #218838; /* 호버 시 배경색 변경 */
+        background-color: #777; /* 호버 시 배경색 변경 */
     }
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+}
 
-     /* 취소 버튼 스타일 (만약 추가한다면) */
-     /* .drink-update-form-section button[type="button"] { ... } */
+.file-upload-label {
+    display: inline-block;
+    background-color: #555 !important;
+    color: #ffffff !important; /* 명확하게 설정 */
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+
+.file-upload-input {
+    display: none;
+}
+
 
 </style>
 
@@ -155,10 +176,14 @@
                  alt="현재 이미지" class="current-image-preview" /> <%-- 이미지에 클래스 추가 --%>
         </div>
 
-        <div>
-            <label for="imageFile">이미지 변경:</label><br/>
-            <input type="file" id="imageFile" name="imageFile" accept="image/*" onchange="previewImage(event)" />
-        </div>
+    <div>
+    <label for="imageFile">이미지 변경:</label><br/>
+    <div class="file-upload-wrapper">
+        <label for="imageFile" class="file-upload-label">파일 선택</label>
+        <input type="file" id="imageFile" name="imageFile" accept="image/*"
+               onchange="previewImage(event)" class="file-upload-input" />
+    </div>
+</div>
 
         <div> <%-- 버튼도 div로 감싸서 여백 조절 --%>
             <button type="submit" class="submit-btn">수정하기</button>

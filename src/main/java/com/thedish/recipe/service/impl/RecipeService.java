@@ -56,6 +56,6 @@ public interface RecipeService {
 	 
 	
 	  List<Recipe> getAllRecipes();
- 		
+
  	
 }

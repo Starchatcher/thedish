@@ -67,10 +67,11 @@ public class UsersController {
         return "users/loginPage";
     }
     
-    @RequestMapping("terms.do")
-    public String moveTermsPage() {
-        return "users/terms"; 
-    }
+	
+	  @RequestMapping("enrollterms.do") public String moveTermsPage() { return
+	  "users/enrollterms"; 
+	  }
+	 
 
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     public String loginMethod(Users users, HttpServletRequest request, HttpSession session, SessionStatus status, Model model) {

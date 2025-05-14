@@ -50,18 +50,19 @@
   }
 
   .buttons .confirm {
-    background-color: #e74c3c;
-    color: white;
-  }
+  background-color: #444; /* 어두운 회색 - 탈퇴 */
+  color: white;
+}
 
-  .buttons .cancel {
-    background-color: #2ecc71;
-    color: white;
-  }
+.buttons .cancel {
+  background-color: #777; /* 중간 회색 - 취소 */
+  color: white;
+}
 
-  .buttons button:hover {
-    opacity: 0.8;
-  }
+.buttons button:hover {
+  opacity: 1;
+  filter: brightness(85%); /* 살짝 어두워지는 효과 */
+}
 </style>
 </head>
 <body>

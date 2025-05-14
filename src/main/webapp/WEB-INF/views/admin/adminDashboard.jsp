@@ -6,6 +6,7 @@
 <%
     String todayKorean = new SimpleDateFormat("yyyy년 M월 d일").format(new Date());
 %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>관리자 대시보드</title>
@@ -24,7 +25,6 @@
             color: #ecf0f1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             padding: 20px 15px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -83,7 +83,6 @@
             margin-bottom: 15px;
             color: #2c3e50;
         }
-        /* ✅ 오늘의 알림 박스 개선 */
         .status-box {
             display: flex;
             flex-wrap: wrap;
@@ -111,7 +110,6 @@
             font-weight: 800;
             color: #2c3e50;
         }
-        /* ✅ 일자별 요약 테이블 개선 */
         .stats-table {
             width: 100%;
             border-radius: 12px;
@@ -140,6 +138,16 @@
         .stats-table tbody tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        
+        .chart-container {
+  width: 100%;
+  height: 320px;
+  position: relative;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
     </style>
 </head>
 <body>
@@ -148,13 +156,13 @@
     <div class="sidebar-nav">
         <h2>관리자 메뉴</h2>
         <a href="${pageContext.request.contextPath}/main.do">메인 페이지</a>
-        <a href="${ pageContext.servletContext.contextPath }/noticeList.do">공지사항 관리</a>
-        <a href="${pageContext.request.contextPath}/boardList.do">자유게시판 관리</a>
+        <a href="${pageContext.request.contextPath}/noticeList.do">공지사항 관리</a>
+        <a href="${pageContext.request.contextPath}/boardList.do">게시판 관리</a>
         <a href="${pageContext.request.contextPath}/admin/userList.do">사용자 관리</a>
         <a href="${pageContext.request.contextPath}/recipeList.do">레시피 데이터관리</a>
         <a href="${pageContext.request.contextPath}/drinkList.do">술 데이터관리</a>
         <a href="${pageContext.request.contextPath}/FAQList.do">FAQ</a>
-        <a href="${pageContext.request.contextPath}/admin/userList.do">1:1문의</a>
+        <a href="${pageContext.request.contextPath}/qnaList.do">1:1문의</a>
     </div>
     <div class="calendar-box">
         오늘은 <%= todayKorean %>입니다
@@ -167,11 +175,11 @@
             <div class="section">
                 <div class="section-title">오늘의 알림</div>
                 <div class="status-box">
-                    <div class="status-item">신규가입 <span><%= request.getAttribute("todayJoin") %></span></div>
-                    <div class="status-item">탈퇴수 <span><%= request.getAttribute("todayWithdraw") %></span></div>
-                    <div class="status-item">신고수 <span><%= request.getAttribute("todayReport") %></span></div>
-                    <div class="status-item">후기수 <span><%= request.getAttribute("todayReview") %></span></div>
-                    <div class="status-item">문의 <span><%= request.getAttribute("todayInquiry") %></span></div>
+                    <div class="status-item">신규가입 <span>${todayJoin}</span></div>
+                    <div class="status-item">탈퇴수 <span>${todayWithdraw}</span></div>
+                    <div class="status-item">신고수 <span>${todayReport}</span></div>
+                    <div class="status-item">후기수 <span>${todayReview}</span></div>
+                    <div class="status-item">문의 <span>${todayInquiry}</span></div>
                 </div>
             </div>
 
@@ -179,44 +187,61 @@
                 <div class="section-title">일자별 요약</div>
                 <table class="stats-table">
                     <thead>
-                    <tr>
-                        <th>일자</th>
-                        <th>게시글</th>
-                        <th>조회수</th>
-                        <th>방문자</th>
-                    </tr>
+                        <tr>
+                            <th>일자</th>
+                            <th>게시글</th>
+                            <th>게시판 조회수</th>
+                            <th>레시피 조회수</th>
+                            <th>드링크 조회수</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <c:set var="sumPost" value="0" />
-                    <c:set var="sumView" value="0" />
-                    <c:set var="sumVisit" value="0" />
-                    <c:forEach var="row" items="${dailySummary}">
+                        <c:set var="sumPost" value="0" />
+                        <c:set var="sumBoardView" value="0" />
+                        <c:set var="sumRecipeView" value="0" />
+                        <c:set var="sumDrinkView" value="0" />
+                        <c:forEach var="row" items="${dailySummary}">
+                            <tr>
+                                <td>${row.DAY}</td>
+                                <td>${row.POST_COUNT}건</td>
+                                <td>${row.BOARD_VIEW_COUNT}회</td>
+                                <td>${row.RECIPE_VIEW_COUNT}회</td>
+                                <td>${row.DRINK_VIEW_COUNT}회</td>
+                            </tr>
+                            <c:set var="sumPost" value="${sumPost + row.POST_COUNT}" />
+                            <c:set var="sumBoardView" value="${sumBoardView + row.BOARD_VIEW_COUNT}" />
+                            <c:set var="sumRecipeView" value="${sumRecipeView + row.RECIPE_VIEW_COUNT}" />
+                            <c:set var="sumDrinkView" value="${sumDrinkView + row.DRINK_VIEW_COUNT}" />
+                        </c:forEach>
                         <tr>
-                            <td>${row.DAY}</td>
-                            <td>${row.POST_COUNT}건</td>
-                            <td>${row.VIEW_COUNT}회</td>
-                            <td>${row.VISIT_COUNT}명</td>
+                            <td>최근 7일 합계</td>
+                            <td>${sumPost}건</td>
+                            <td>${sumBoardView}회</td>
+                            <td>${sumRecipeView}회</td>
+                            <td>${sumDrinkView}회</td>
                         </tr>
-                        <c:set var="sumPost" value="${sumPost + row.POST_COUNT}" />
-                        <c:set var="sumView" value="${sumView + row.VIEW_COUNT}" />
-                        <c:set var="sumVisit" value="${sumVisit + row.VISIT_COUNT}" />
-                    </c:forEach>
-                    <tr>
-                        <td>최근 7일 합계</td>
-                        <td>${sumPost}건</td>
-                        <td>${sumView}회</td>
-                        <td>${sumVisit}명</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <div>
-            <h3 style="margin-bottom: 10px; font-size: 18px; color: #2c3e50;">그래프 현황</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-                <canvas id="lineChart1" style="flex: 1; max-width: 60%; height: 120px;"></canvas>
-                <canvas id="lineChart2" style="flex: 1; max-width: 60%; height: 120px;"></canvas>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: space-between; margin-top: 40px;">
+            <div style="flex: 1; min-width: 400px; height: 320px; background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); padding: 20px;">
+                <div style="font-size: 16px; font-weight: bold; color: #2980b9; margin-bottom: 10px;">
+                    게시글 수 그래프
+                </div>
+                <div class="chart-container">
+                <canvas id="lineChart1"></canvas>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 400px; height: 320px; background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); padding: 20px;">
+                <div style="font-size: 16px; font-weight: bold; color: #27ae60; margin-bottom: 10px;">
+                    총 조회수 그래프
+                </div>
+                <div class="chart-container">
+                <canvas id="lineChart2"></canvas>
+                </div>
             </div>
         </div>
     </div>

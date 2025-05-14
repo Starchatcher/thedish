@@ -135,4 +135,5 @@ public class RecipeDao {
     		return sqlSessionTemplate.selectList("recipeMapper.selectAllRecipes");
     	}
     
+
 }

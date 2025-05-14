@@ -42,7 +42,7 @@
     button {
         padding: 12px;
         border: none;
-        background-color: #3498db;
+        background-color: #777;
         color: white;
         font-size: 15px;
         border-radius: 6px;
@@ -50,7 +50,7 @@
         margin-top: 10px;
     }
     button:hover {
-        background-color: #2980b9;
+        background-color: #444;
     }
     a {
         display: block;
