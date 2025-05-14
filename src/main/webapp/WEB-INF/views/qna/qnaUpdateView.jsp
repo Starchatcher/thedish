@@ -7,106 +7,105 @@
 <head>
 <meta charset="UTF-8">
 <title>문의글 수정 페이지</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard&display=swap" rel="stylesheet">
 <style>
-/* 전체 form 크기 조절 */
-form {
-	width: 70%;
-	margin: 0 auto;
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
 }
 
-/* 제목 + 게시판 선택 반반 정렬 */
-.title-row {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	gap: 20px;
-	margin: 20px 0;
+.container {
+  max-width: 780px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
-.title-row select:focus, .title-row .title-input:focus {
-	border-color: #aaa;
-	outline: none;
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
+  color: #333;
 }
 
-/* 내용 작성 textarea */
-.editor {
-	width: 100%;
-	min-height: 250px;
-	height: 400px;
-	border: 1px solid #d0d0d0;
-	border-radius: 6px;
-	background-color: #fff;
-	padding: 12px;
-	font-size: 14px;
-	line-height: 1.6;
-	box-sizing: border-box;
-	margin-bottom: 20px;
-	color: #333;
-	resize: vertical;
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
 }
 
-/* 파일 선택 버튼 영역 (왼쪽 정렬) */
-.file-upload {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	gap: 10px;
-	margin-bottom: 30px;
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #3182ce;
+  background-color: #ffffff;
+  outline: none;
 }
 
-/* 기본 파일 input */
-.file-upload input[type="file"] {
-	padding: 8px 10px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	font-size: 13px;
-	background-color: #fff;
-	color: #444;
+textarea.editor {
+  min-height: 280px;
+  resize: vertical;
 }
 
-/* 커스텀 파일 버튼 */
 .custom-file-button {
-	display: inline-block;
-	background-color: #888;
-	color: white;
-	padding: 8px 14px;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: background-color 0.2s ease;
-	font-size: 13px;
-	border: none;
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #333; 
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .custom-file-button:hover {
-	background-color: #555;
+  background-color: #444; 
 }
 
-/* 등록/취소 버튼 영역 */
 .button-row {
-	display: flex;
-	justify-content: flex-end;
-	gap: 10px;
-	margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
 }
 
-/* 등록/취소 버튼 스타일 */
 .button-row button {
-	background-color: #888;
-	border: none;
-	border-radius: 6px;
-	padding: 10px 20px;
-	font-size: 14px;
-	color: white;
-	cursor: pointer;
-	transition: background-color 0.2s ease;
+  padding: 12px 26px;
+  font-size: 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .button-row button:hover {
-	background-color: #555;
+  background-color: #444;
 }
 
+.button-row button.cancel {
+  background-color: #e2e8f0;
+  color: #333;
+}
+
+.button-row button.cancel:hover {
+  background-color: #cbd5e1;
+}
 </style>
+
 
 <script>
   function updateFileName(input) {
@@ -114,24 +113,81 @@ form {
     const fileName = input.files.length > 0 ? input.files[0].name : "선택된 파일 없음";
     fileNameDisplay.textContent = fileName;
   }
+  
+  function checkByteWithLimit(textarea, maxByte, counterId) {
+		const text = textarea.value;
+		let byteCount = 0;
+		let cutIndex = text.length;
+
+		for (let i = 0; i < text.length; i++) {
+			const char = text.charAt(i);
+			byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+
+			if (byteCount > maxByte) {
+				cutIndex = i;
+				break;
+			}
+		}
+
+		if (byteCount > maxByte) {
+			alert(maxByte + "byte를 초과할 수 없습니다.");
+			textarea.value = text.substring(0, cutIndex);
+			byteCount = 0;
+			for (let i = 0; i < cutIndex; i++) {
+				const char = textarea.value.charAt(i);
+				byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+			}
+		}
+
+		document.getElementById(counterId).innerText = byteCount;
+	}
+  
+  function limitByte(input, maxByte) {
+	  const text = input.value;
+	  let byteCount = 0;
+	  let cutIndex = text.length;
+
+	  for (let i = 0; i < text.length; i++) {
+	    const char = text.charAt(i);
+	    byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+	    if (byteCount > maxByte) {
+	      cutIndex = i;
+	      break;
+	    }
+	  }
+
+	  if (byteCount > maxByte) {
+	    alert(maxByte + "byte를 초과할 수 없습니다.");
+	    input.value = text.substring(0, cutIndex);
+	  }
+	}
+  window.addEventListener("DOMContentLoaded", function () {
+	    const contentTextarea = document.querySelector("textarea[name='content']");
+	    if (contentTextarea) {
+	      checkByteWithLimit(contentTextarea, 4000, 'qnaByteCount');
+	    }
+	  });
 </script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
-
+<div class="container">
+  <h2>문의글 수정</h2>
 	<form action="qnaUpdate.do" method="post"
 		enctype="multipart/form-data">
 
 		<input type="hidden" name="qnaId" value="${qna.qnaId}">
-		<!-- 게시판 선택 + 제목 입력 -->
+
 		<div class="title-row">
 			<input type="text" name="title" class="title-input"
-				value="${ qna.title }" placeholder="제목을 입력해 주세요." required>
+				value="${ qna.title }" placeholder="제목을 입력해 주세요."
+				oninput="limitByte(this, 200)" required>
 		</div>
 
 		<!-- 내용 입력 -->
 		<textarea name="content" class="editor" placeholder="내용을 입력해 주세요."
-			required>${ qna.content }</textarea>
+			oninput="checkByteWithLimit(this, 4000, 'qnaByteCount')" required>${ qna.content }</textarea>
+		<div><span id="qnaByteCount">0</span> / 4000 byte</div>
 
 		<!-- 파일 선택 -->
 		<div class="file-upload">
@@ -169,9 +225,8 @@ form {
 			<button type="submit">수정</button>
 			<button type="button" onclick="history.back()">취소</button>
 		</div>
-
 	</form>
-
+</div>
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
 
 </body>
