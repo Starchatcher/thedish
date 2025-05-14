@@ -34,6 +34,7 @@
     .dish-logo {
       width: 500px;  /* 너무 크지 않도록 조정 */
       height: auto;
+      
     }
 
     .error-box {

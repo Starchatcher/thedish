@@ -57,6 +57,11 @@ public class UsersController {
     public String moveLoginPage() {
         return "users/loginPage";
     }
+    
+    @RequestMapping("terms.do")
+    public String moveTermsPage() {
+        return "users/terms"; 
+    }
 
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     public String loginMethod(Users users, HttpServletRequest request, HttpSession session, SessionStatus status, Model model) {
@@ -151,7 +156,10 @@ public class UsersController {
     }
 
     @RequestMapping("enrollPage.do")
-    public String moveEnrollPage() {
+    public String moveEnrollPage(@RequestParam(value = "enrollSuccess", required = false) String enrollSuccess, Model model) {
+        if ("true".equals(enrollSuccess)) {
+            model.addAttribute("enrollSuccess", true);
+        }
         return "users/enrollPage";
     }
 
@@ -173,7 +181,11 @@ public class UsersController {
         user.setPassword(encPwd);
 
         int result = usersService.insertUser(user);
-        return result > 0 ? "redirect:loginPage.do" : "common/error";
+        if (result > 0) {
+            return "redirect:enrollPage.do?enrollSuccess=true";
+        } else {
+            return "common/error";
+        }
     }
 
     @RequestMapping("myinfo.do")
@@ -294,5 +306,4 @@ public class UsersController {
         String encodedPwd = bcryptPasswordEncoder.encode(rawPwd);
         return "암호화된 관리자 비밀번호: " + encodedPwd;
     }
-
 }

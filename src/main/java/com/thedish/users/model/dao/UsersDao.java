@@ -22,10 +22,13 @@ public class UsersDao {
     public Users selectLogin(Users users) {
         return sqlSessionTemplate.selectOne("usersMapper.selectLogin", users);
     }
-
-    // 비밀번호 수정
+    
     public int updatePassword(Users user) {
         return sqlSessionTemplate.update("usersMapper.updatePassword", user);
+    }
+    
+    public int updatePassword(Map<String, Object> param) {
+        return sqlSessionTemplate.update("usersMapper.updatePassword", param);
     }
 
     // 내 정보 조회 (by loginId)

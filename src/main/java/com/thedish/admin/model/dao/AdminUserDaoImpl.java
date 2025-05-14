@@ -44,9 +44,9 @@ public class AdminUserDaoImpl implements AdminUserDao {
     public int countWithdrawnUsers() {
         return sqlSession.selectOne("adminUserMapper.countWithdrawnUsers");
     }
-    
+
     @Override
     public List<Users> searchUsers(Map<String, String> paramMap) {
-        return sqlSession.selectList("com.thedish.admin.model.dao.AdminUserDao.searchUsers", paramMap);
+        return sqlSession.selectList("adminUserMapper.searchUsers", paramMap);
     }
 }
