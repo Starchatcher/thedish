@@ -11628,6 +11628,7 @@ CREATE TABLE report_post (
     checked_at DATE,
     CONSTRAINT fk_report_post_board FOREIGN KEY (board_id) REFERENCES board(board_id),
     CONSTRAINT fk_report_post_reporter FOREIGN KEY (reporter_id) REFERENCES users(login_id)
+    CONSTRAINT uq_report_once UNIQUE (board_id, reporter_id)
 );
 
 
