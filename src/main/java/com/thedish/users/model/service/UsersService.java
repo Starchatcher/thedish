@@ -65,4 +65,6 @@ public interface UsersService {
     
     Users selectUserByLoginId(String loginId);
 
+	int resetPassword(String loginId, String newPassword);
+
 }

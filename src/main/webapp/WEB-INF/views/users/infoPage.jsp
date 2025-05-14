@@ -128,7 +128,7 @@ input[type="name"] {
   box-sizing: border-box;
 }
 input[type="text"] {
-  width: 28%;
+  width: 30%;
   padding: 12px;
   font-size: 15px;
   border: 1px solid #ccc;

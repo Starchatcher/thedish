@@ -27,7 +27,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
         }
 
-        h2 {
+        .title-recommend {
             font-size: 28px;
             color: #2c3e50;
             margin-bottom: 30px;
@@ -91,7 +91,7 @@
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 <div class="main-container">
-    <h2>🥕 "${condition}" 건강 맞춤형 레시피 목록</h2>
+    <h2 class="title-recommend"> "${condition}" 건강 맞춤형 레시피 목록</h2>
 
     <c:if test="${empty recipes}">
         <p class="no-result">조건에 맞는 레시피가 없습니다.</p>

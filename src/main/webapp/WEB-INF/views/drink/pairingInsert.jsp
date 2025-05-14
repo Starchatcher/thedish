@@ -62,7 +62,7 @@
 
         h1 {
             text-align: center; /* 메인 제목 가운데 정렬 */
-            color: #5a67d8; /* 브랜드 색상 예시 */
+            color: #777; /* 브랜드 색상 예시 */
         }
 
         /* 폼 스타일 */
@@ -214,7 +214,7 @@
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
   <div class="container">
 
-        <h1>${drinkId}번 드링크 페어링 등록</h1>
+        <h1>페어링 등록</h1>
 
         <form id="pairingForm" action="${ pageContext.request.contextPath }/insertPairing.do" method="post">
             <input type="hidden" name="drinkId" value="${ drinkId }">

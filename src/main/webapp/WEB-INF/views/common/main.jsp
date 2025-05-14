@@ -432,6 +432,15 @@
 
       animatedEls.forEach(el => observer.observe(el));
     });
+ 
+
+    function requireLogin() {
+      alert("로그인이 필요한 기능입니다.");
+        alert("로그인 페이지로 이동합니다.");
+        location.href = "${pageContext.request.contextPath}/loginPage.do";
+      
+    }
+
   </script>
   
 </head>
@@ -448,7 +457,7 @@
 <section class="main-hero">
   <div class="hero-overlay">
     <div class="hero-text">
-      <h1>맛있는 건강의 시작<br>여기서 시작하세요</h1>
+      <h1>맛있는 건강의 시작<br>The Dish와 함께하세요</h1>
       <p>
         우리는 건강을 위한 음식 추천과 술 페어링을 제공합니다.<br>
         다양한 레시피와 정보를 통해 당신의 식탁을 더욱 풍성하게 만들어 드립니다.
@@ -524,14 +533,30 @@
           <strong>건강 맞춤형 추천</strong>
           <span>건강과 맛 동시에 챙기고 싶나요?</span>
         </div>
-        <button class="feature-btn" onclick="location.href='healthSearchForm.do'">지금 시작하기</button>
+        <!-- 건강 맞춤형 추천 -->
+<c:choose>
+  <c:when test="${not empty sessionScope.loginUser}">
+    <button class="feature-btn" onclick="location.href='healthSearchForm.do'">지금 시작하기</button>
+  </c:when>
+  <c:otherwise>
+    <button class="feature-btn" onclick="requireLogin()">지금 시작하기</button>
+  </c:otherwise>
+</c:choose>
       </div>
       <div class="feature-row">
         <div class="feature-text">
           <strong>술 페어링 추천</strong>
           <span>술에 어울리는 음식을 원하시나요?</span>
         </div>
-        <button class="feature-btn" onclick="location.href='drinkSearchForm.do'">지금 시작하기</button>
+        <!-- 술 페어링 추천 -->
+<c:choose>
+  <c:when test="${not empty sessionScope.loginUser}">
+    <button class="feature-btn" onclick="location.href='drinkSearchForm.do'">지금 시작하기</button>
+  </c:when>
+  <c:otherwise>
+    <button class="feature-btn" onclick="requireLogin()">지금 시작하기</button>
+  </c:otherwise>
+</c:choose>
       </div>
       <div class="feature-row">
         <div class="feature-text">
@@ -572,5 +597,4 @@
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
-<hr>
 </html>
