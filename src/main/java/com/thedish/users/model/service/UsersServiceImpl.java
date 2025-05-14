@@ -58,7 +58,18 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.deleteUsers(userId); // 또는 내부 로직에 맞게 수정
     }
 
- 
+
+    // 🔑 비밀번호 초기화 (인증 후)
+    @Override
+    public int resetPassword(String loginId, String newPassword) {
+        String encPwd = bcryptPasswordEncoder.encode(newPassword);
+        
+        Users user = new Users();
+        user.setLoginId(loginId);
+        user.setPassword(encPwd);  // ✅ Users 클래스에 setPassword 있어야 함
+
+        return usersDao.updatePassword(user);  // ✅ Users 타입으로 전달
+    }
 
     // 🚫 회원 탈퇴 (논리 삭제)
     @Override
