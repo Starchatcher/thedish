@@ -174,7 +174,7 @@ p {
     <div class="qna-answer">
       <div class="qna-answer-title">💬 관리자 답변</div>
       <p style="font-size: 13px; color: #888;">
-        <fmt:formatDate value="${qna.answeredAt}" pattern="yyyy-MM-dd HH:mm" />
+        <fmt:formatDate value="${qna.answeredAt}" pattern="yyyy-MM-dd HH:mm"/>
       </p>
       <div class="qna-answer-content">${qna.answer}</div>
     </div>

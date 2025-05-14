@@ -583,7 +583,8 @@ public class BoardController {
 	public ModelAndView deleteBoardCommentMethod(ModelAndView mv, HttpSession session,
 			@RequestParam("commentId") int commentId,
 			@RequestParam("boardId") int boardId,
-			@RequestParam("category") String category) {
+			@RequestParam("category") String category,
+			@RequestParam(name = "cpage", required = false) String cpageStr) {
 
 		Users loginUser = (Users) session.getAttribute("loginUser");
 		if (loginUser == null) {
@@ -597,7 +598,27 @@ public class BoardController {
 
 		int result = boardService.deleteBoardComment(param);
 		if (result > 0) {
-			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+			  // ✅ 삭제 성공 후 전체 댓글 수를 다시 계산
+	        int totalCommentCount = boardService.selectBoardCommentCount(boardId); // 이 메서드는 댓글 총 개수 리턴해야 함
+	        int commentsPerPage = 10;
+	        int maxCpage = (int) Math.ceil((double) totalCommentCount / commentsPerPage);
+	        
+	        // 전달받은 cpage 파라미터 문자열을 정수로 파싱, 없거나 잘못된 경우 기본값 1
+	        int cpage = 1;
+	        try {
+	            cpage = Integer.parseInt(cpageStr);
+	        } catch (Exception e) {
+	        }
+
+	        // ✅ 현재 페이지가 최대 페이지보다 크면 조정
+	        if (cpage > maxCpage) {
+	            cpage = maxCpage;
+	        }
+	        if (cpage < 1) {
+	            cpage = 1;
+	        }
+			
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&cpage=" + cpage);
 		} else {
 			mv.addObject("message", "댓글 삭제에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("common/error");

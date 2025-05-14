@@ -275,6 +275,7 @@ public class QnaController {
 	    }
 
 	    Qna qna = new Qna();
+	    qna.setAnsweredAt(new java.sql.Date(System.currentTimeMillis()));
 	    qna.setQnaId(qnaId);
 	    qna.setAnswer(answer);
 	    qna.setCreatedBy(loginUser.getLoginId());
