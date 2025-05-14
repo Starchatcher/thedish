@@ -111,7 +111,7 @@ form {
 
 	<form action="boardInsert.do" method="post"
 		enctype="multipart/form-data">
-
+	<input type="hidden" name="source" value="${param.source}" />
 		<!-- 게시판 선택 + 제목 입력 -->
 		<div class="title-row">
 			<input type="text" name="title" class="title-input"

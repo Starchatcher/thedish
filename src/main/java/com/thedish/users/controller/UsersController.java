@@ -1,11 +1,14 @@
 package com.thedish.users.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +32,12 @@ public class UsersController {
 
     private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
+    @Value("${kakao.clientId}")
+    private String clientId;
+    
+    @Value("${kakao.redirectUri}")
+    private String redirectUri;
+    
     @Autowired
     private UsersService usersService;
 
@@ -118,6 +127,8 @@ public class UsersController {
             return "common/error";
         }
     }
+
+
 
     @RequestMapping("myPage.do")
     public String showMyPage(HttpSession session, Model model) {

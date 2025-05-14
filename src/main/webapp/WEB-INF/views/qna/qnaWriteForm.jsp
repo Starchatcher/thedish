@@ -1,130 +1,130 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성 페이지</title>
+<title>문의글 작성</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard&display=swap" rel="stylesheet">
 
 <style>
-/* 전체 form 크기 조절 */
-form {
-  width: 70%;
-  margin: 0 auto;
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
 }
 
-/* 제목 + 게시판 선택 반반 정렬 */
-.title-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.container {
+  max-width: 780px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 24px;
+  color: #333;
+}
+
+input[type="text"],
+textarea {
   width: 100%;
-  gap: 20px;
-  margin-bottom: 20px;
-  margin-top:20px;
-}
-
-/* 게시판 선택 드롭다운과 제목 입력 공통 */
-.title-row select,
-.title-row .title-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 14px;
   font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* 내용 작성 textarea */
-.editor {
-  width: 100%;
-  min-height: 250px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
-  padding: 12px;
-  font-size: 15px;
-  line-height: 1.6;
-  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
   margin-bottom: 20px;
-  height: 400px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
 }
 
-/* 파일 선택 버튼 영역 (왼쪽 정렬) */
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #3182ce;
+  background-color: #ffffff;
+  outline: none;
+}
+
+textarea.editor {
+  min-height: 280px;
+  resize: vertical;
+}
+
 .file-upload {
-  display: flex;
-  justify-content: flex-start; /* 왼쪽 정렬 */
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
-/* 파일 선택 버튼 */
 .file-upload input[type="file"] {
-  padding: 8px;
+  display: inline-block;
+  padding: 10px;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 14px;
+  background-color: #f9f9f9;
 }
 
 .button-row {
   display: flex;
-  justify-content: center;  /* ✅ 가운데 정렬 추가 */
-  gap: 10px;
-  margin-bottom: 50px;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
 }
 
 .button-row button {
-  display: inline-block;
-  padding: 10px 24px;
+  padding: 12px 26px;
   font-size: 15px;
-  background-color: #4A5568;
+  background-color: #333; /* ✅ 진한 회색 */
   color: white;
-  text-decoration: none;
-  border-radius: 6px;
   border: none;
-  transition: background-color 0.25s ease-in-out;
-  cursor: pointer;  /* ✅ 마우스 올렸을 때 포인터 손가락으로 */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .button-row button:hover {
-  background-color: #2D3748;
+  background-color: #444; /* ✅ 약간 밝은 회색으로 hover */
+}
+
+.button-row button.cancel {
+  background-color: #e2e8f0;
+  color: #333;
+}
+
+.button-row button.cancel:hover {
+  background-color: #cbd5e1;
 }
 </style>
-
-
 </head>
 <body>
 
-	<c:import url="/WEB-INF/views/common/menubar.jsp" />
+<c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-	<form action="qnaInsert.do" method="post"
-		enctype="multipart/form-data">
+<div class="container">
+  <h2>문의글 작성</h2>
 
-		<!-- 게시판 선택 + 제목 입력 -->
-		<div class="title-row">
-			<input type="text" name="title" class="title-input"
-				placeholder="제목을 입력해 주세요." required>
+  <form action="qnaInsert.do" method="post" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="제목을 입력해 주세요." required>
 
-		</div>
+    <textarea name="content" class="editor" placeholder="내용을 입력해 주세요." required></textarea>
 
-		<!-- 내용 입력 -->
-		<textarea name="content" class="editor" placeholder="내용을 입력해 주세요."
-			required></textarea>
+    <div class="file-upload">
+      <label for="ofile">첨부 파일:</label><br>
+      <input type="file" name="ofile" id="ofile">
+    </div>
 
-		<!-- 파일 선택 -->
-		<div class="file-upload">
-			<input type="file" name="ofile">
-		</div>
+    <div class="button-row">
+      <button type="submit">등록하기</button>
+      <button type="button" class="cancel" onclick="history.back()">취소</button>
+    </div>
+  </form>
+</div>
 
-		<!-- 등록/취소 버튼 -->
-		<div class="button-row">
-			<button type="submit">등록하기</button>
-			<button type="button" onclick="history.back()">등록취소</button>
-		</div>
-
-	</form>
-
-	<c:import url="/WEB-INF/views/common/footer.jsp" />
-
+<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

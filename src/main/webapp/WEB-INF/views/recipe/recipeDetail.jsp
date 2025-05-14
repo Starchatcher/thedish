@@ -436,11 +436,6 @@ form {
     </div>
 </div>
 
-
-	
-
-
-
 	<div class="stats">
 		<span>조회수: ${recipe.viewCount}</span> <span>평균 평점:
 			${recipe.avgRating}</span>
@@ -580,7 +575,7 @@ form {
 
 
 	</div>
-	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

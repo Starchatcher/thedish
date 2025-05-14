@@ -138,6 +138,7 @@ form {
 
 		<input type="hidden" name="page" value="${ currentPage }">
 		<input type="hidden" name="boardId" value="${board.boardId}" />
+		<input type="hidden" name="source" value="${param.source}" />
 		<!-- 게시판 선택 + 제목 입력 -->
 		<div class="title-row">
 			<input type="text" name="title" class="title-input"

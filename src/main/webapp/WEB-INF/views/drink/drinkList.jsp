@@ -530,7 +530,7 @@ body {
 </div>
     <br>
 	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
-	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
     <c:import url="/WEB-INF/views/common/footer.jsp" />
         <%-- 정렬 기준 변경 및 폼 제출을 위한 JavaScript 함수 --%>
  <script type="text/javascript">

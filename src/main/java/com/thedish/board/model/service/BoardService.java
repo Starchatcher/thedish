@@ -13,6 +13,9 @@ public interface BoardService {
 
 	int selectBoardCategoryCount(String category);
 	int selectBoardListCount();
+	int selectMyBoardListCount(String loginId);
+	
+	List<Board> selectMyBoardList (Map<String, Object> param);
 	ArrayList<Board> selectBoardList(Paging paging);
 	List<Board> selectBoardCategoryList(Map<String, Object> param);
 	Board selectBoard(int boardId);

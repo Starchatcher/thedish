@@ -464,7 +464,7 @@
     }
 </script>
 
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -119,4 +119,8 @@ public class UsersDao {
         param.put("encPwd", encPwd);
         return sqlSessionTemplate.update("usersMapper.updatePassword", param);
     }
+    
+    public Users selectUserByLoginId(String loginId) {
+        return sqlSessionTemplate.selectOne("usersMapper.selectUserByLoginId", loginId);
+    }
 }

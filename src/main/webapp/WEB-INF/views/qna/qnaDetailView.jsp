@@ -57,24 +57,23 @@ p {
   text-decoration: none;
   font-weight: 500;
 }
-
 .qna-attachment a:hover {
   text-decoration: underline;
 }
 
 .qna-answer {
   margin-top: 40px;
-  background-color: #fdfdfd;
-  border-left: 4px solid #28a745;
+  background-color: #f2f2f2;     /* ✅ 밝은 회색 */
+  border-left: 4px solid #888;
   padding: 18px 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .qna-answer-title {
   font-size: 16px;
   font-weight: bold;
-  color: #28a745;
+  color: #222;
   margin-bottom: 10px;
 }
 
@@ -85,27 +84,12 @@ p {
   white-space: pre-wrap;
 }
 
-.back-btn {
-  margin-top: 30px;
-  padding: 10px 20px;
-  background-color: #666;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.back-btn:hover {
-  background-color: #444;
-}
-
 .qna-action-buttons {
   margin-top: 30px;
   display: flex;
-  justify-content: flex-begin;
-  gap: 12px;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .qna-btn {
@@ -119,30 +103,60 @@ p {
 }
 
 .qna-btn.back {
-  background-color: #f5f5f5;
-  color: #333;
+  padding: 5px 12px;
+  font-size: 13px;
+  height: 32px;
+  min-height: unset;
+  background-color: #444;
+  color: #eee;
+}
+.qna-btn.back:hover {
+  background-color: #555;
 }
 
-.qna-btn.back:hover {
-  background-color: #e0e0e0;
+.qna-btn.update {
+  background-color: #f0f0f0;
+}
+.qna-btn.update:hover {
+  background-color: #ddd;
 }
 
 .qna-btn.delete {
   background-color: #ffecec;
   color: #d32f2f;
 }
-
 .qna-btn.delete:hover {
   background-color: #ffd4d4;
+}
+
+.qna-btn.submit {
+  background-color: #444;
+  color: #fff;
+}
+.qna-btn.submit:hover {
+  background-color: #555;
 }
 </style>
 </head>
 <body>
+
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 <div class="container">
   <h2>${qna.title}</h2>
-  <p><strong>작성자:</strong> ${qna.userId}</p>
+  <p><strong>작성자:</strong>
+    <c:choose>
+      <c:when test="${sessionScope.loginUser.role eq 'ADMIN'}">
+        <c:if test="${not empty writer}">
+          ${writer.nickName}
+        </c:if>
+      </c:when>
+      <c:otherwise>
+        ${sessionScope.loginUser.nickName}
+      </c:otherwise>
+    </c:choose>
+  </p>
+
   <p><strong>작성일:</strong> <fmt:formatDate value="${qna.createdAt}" pattern="yyyy-MM-dd" /></p>
   <hr>
   <p>${qna.content}</p>
@@ -172,19 +186,31 @@ p {
     </div>
   </c:if>
 
-	<div class="qna-action-buttons">
-		<button type="button" onclick="history.back()" class="qna-btn back">🔙 목록</button>
-		<c:if test="${ qna.isAnswered eq 'N' }">
-		<form action="qnaUpdateForm.do" method="get">
-	    	<input type="hidden" name="qnaId" value="${ qna.qnaId }" />
-	    	<button type="submit" class="qna-btn update">✏️ 수정</button>
-	    </form>
-	    <form action="qnaDelete.do" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-	        <input type="hidden" name="qnaId" value="${ qna.qnaId }" />
-	        <button type="submit" class="qna-btn delete">🗑️ 삭제</button>
-	    </form>
-	    </c:if>
-	</div>
+  <div class="qna-action-buttons">
+    <button type="button" class="qna-btn back" onclick="history.back()">🔙 목록</button>
+
+    <!-- ✅ 관리자일 경우 수정/삭제 버튼 표시하지 않음 -->
+    <c:if test="${qna.isAnswered eq 'N' and sessionScope.loginUser.role ne 'ADMIN'}">
+      <form action="qnaUpdateForm.do" method="get">
+        <input type="hidden" name="qnaId" value="${ qna.qnaId }" />
+        <button type="submit" class="qna-btn update">✏️ 수정</button>
+      </form>
+      <form action="qnaDelete.do" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+        <input type="hidden" name="qnaId" value="${ qna.qnaId }" />
+        <button type="submit" class="qna-btn delete">🗑️ 삭제</button>
+      </form>
+    </c:if>
+
+    <c:if test="${empty qna.answer and sessionScope.loginUser.role eq 'ADMIN'}">
+      <form action="qnaAnswer.do" method="post" style="margin-top: 20px;">
+        <input type="hidden" name="qnaId" value="${qna.qnaId}" />
+        <label for="answer" style="font-weight: bold; display: block; margin-bottom: 6px;">답변 내용:</label>
+        <textarea name="answer" rows="5" cols="80" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;" required></textarea>
+        <br>
+        <button type="submit" class="qna-btn submit">답변 등록</button>
+      </form>
+    </c:if>
+  </div>
 </div>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
