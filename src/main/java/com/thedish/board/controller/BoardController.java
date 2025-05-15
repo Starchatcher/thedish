@@ -966,7 +966,7 @@ public class BoardController {
 	    report.setReporterId(loginUser.getLoginId());
 
 	    try {
-	        int result = reportPostService.insertBoardReport(report);
+	        int result = boardService.insertBoardReport(report);
 
 	        if (result > 0) {
 	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");

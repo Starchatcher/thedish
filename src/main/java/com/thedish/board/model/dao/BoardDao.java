@@ -173,8 +173,12 @@ public class BoardDao {
 		return sqlSessionTemplate.selectOne("reportPostMapper.selectReportedPostCount");
 	}
 	
-	public int updateReportChecked (int report_id) {
-		return sqlSessionTemplate.update("reportPostMapper.updateReportChecked", report_id);
+	public int updateReportChecked (int reportId) {
+		return sqlSessionTemplate.update("reportPostMapper.updateReportChecked", reportId);
+	}
+	
+	public int insertBoardReport(ReportPost reportPost) {
+		return sqlSessionTemplate.insert("reportPostMapper.insertBoardReport", reportPost);
 	}
 	
 }

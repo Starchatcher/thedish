@@ -280,7 +280,7 @@ public class QnaController {
 	    qna.setAnswer(answer);
 	    qna.setCreatedBy(loginUser.getLoginId());
 
-	    int result = qnaService.answerQna(qna);; // service → dao → mapper 호출
+	    int result = qnaService.answerQna(qna);; 
 
 	    if (result > 0) {
 	        mv.setViewName("redirect:qnaDetail.do?qnaId=" + qnaId);
