@@ -158,7 +158,7 @@ canvas {
         <a href="${pageContext.request.contextPath}/main.do">메인 페이지</a>
         <a href="${pageContext.request.contextPath}/noticeList.do">공지사항 관리</a>
 
-        <a href="${pageContext.request.contextPath}/boardList.do">자유게시판 관리</a>
+        <a href="${pageContext.request.contextPath}/reportedBoardList.do">신고게시판 관리</a>
         <a href="${pageContext.request.contextPath}/admin/userList.do">사용자 관리</a>
         <a href="${pageContext.request.contextPath}/recipeList.do">레시피 데이터관리</a>
         <a href="${pageContext.request.contextPath}/drinkList.do">술 데이터관리</a>

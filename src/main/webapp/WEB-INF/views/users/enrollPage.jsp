@@ -12,7 +12,6 @@ body {
   padding: 0;
   font-family: 'Arial', sans-serif;
 
-  background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
 
   min-height: 100vh;
   display: flex;
@@ -98,7 +97,7 @@ input[type="number"] {
   margin-top: 8px;
   width: 100%;
 
-  background-color: #2364aa;
+  background-color: #444;
 
   color: white;
   border: none;
@@ -134,7 +133,7 @@ input[type="number"] {
   transition: background-color 0.3s;
   text-align: center;
 
-  background-color: #2364aa;
+  background-color: #444;
 
   text-decoration: none;
 }
@@ -142,7 +141,7 @@ input[type="number"] {
 .button-group button:hover,
 .button-group a:hover {
 
-  background-color: #1e5799;
+  background-color: #777;
 
 }
 

@@ -69,7 +69,6 @@ public class UsersController {
 	  @RequestMapping("enrollterms.do") public String moveTermsPage() { return
 	  "users/enrollterms"; 
 	  }
-	 
 
 	  @RequestMapping(value = "login.do", method = RequestMethod.POST)
 	    public String loginMethod(Users users,
@@ -88,66 +87,49 @@ public class UsersController {
 	            return "common/error";
 	        }
 
+	        String dbPw = loginUser.getPassword();
+	        boolean isBcrypt = dbPw.startsWith("$2a$") || dbPw.startsWith("$2b$") || dbPw.startsWith("$2y$");
+	        boolean match = isBcrypt ? bcryptPasswordEncoder.matches(users.getPassword(), dbPw) : users.getPassword().equals(dbPw);
 
-    @RequestMapping("terms.do")
-    public String moveTermsPage() {
-        return "users/terms";
-    }
+	        if (!match) {
+	            model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+	            return "common/error";
+	        }
 
-    @RequestMapping(value = "login.do", method = RequestMethod.POST)
-    public String loginMethod(Users users, HttpServletRequest request, HttpSession session, SessionStatus status, Model model) {
-        logger.info("로그인 시도: " + users.getLoginId());
-        Users loginUser = usersService.selectLogin(users);
+	        if (!"ACTIVE".equals(loginUser.getStatus())) {
+	            model.addAttribute("msg", "탈퇴했거나 제한된 계정입니다. 관리자에게 문의하세요.");
+	            return "common/error";
+	        }
 
-        if (loginUser == null) {
-            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
-            return "common/error";
-        }
+	        String loginId = loginUser.getLoginId();
+	        String currentIp = request.getRemoteAddr();
+	        String currentSessionId = session.getId();
 
+	        LoginInfo existing = activeUsers.get(loginId);
+	        if (existing != null && (!existing.getIp().equals(currentIp) || !existing.getSessionId().equals(currentSessionId))) {
+	            model.addAttribute("msg", "이미 다른 위치 또는 브라우저에서 로그인 중입니다.");
+	            return "common/error";
+	        }
 
-        String dbPw = loginUser.getPassword();
-        boolean isBcrypt = dbPw.startsWith("$2a$") || dbPw.startsWith("$2b$") || dbPw.startsWith("$2y$");
-        boolean match = isBcrypt ? bcryptPasswordEncoder.matches(users.getPassword(), dbPw) : users.getPassword().equals(dbPw);
+	        activeUsers.put(loginId, new LoginInfo(currentIp, currentSessionId));
+	        session.setAttribute("loginUser", loginUser);
 
-        if (!match) {
-            model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-            return "common/error";
-        }
+	        // ✅ 기억하기 기능 처리
+	        if ("on".equals(remember)) {
+	            Cookie rememberCookie = new Cookie("rememberId", loginUser.getLoginId());
+	            rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7일
+	            rememberCookie.setPath(request.getContextPath());
+	            response.addCookie(rememberCookie);
+	        } else {
+	            Cookie rememberCookie = new Cookie("rememberId", null);
+	            rememberCookie.setMaxAge(0);
+	            rememberCookie.setPath(request.getContextPath());
+	            response.addCookie(rememberCookie);
+	        }
 
-        if (!"ACTIVE".equals(loginUser.getStatus())) {
-            model.addAttribute("msg", "탈퇴했거나 제한된 계정입니다. 관리자에게 문의하세요.");
-            return "common/error";
-        }
+	        return "ADMIN".equalsIgnoreCase(loginUser.getRole()) ? "redirect:/admin/dashboard.do" : "redirect:main.do";
+	    }
 
-        String loginId = loginUser.getLoginId();
-        String currentIp = request.getRemoteAddr();
-        String currentSessionId = session.getId();
-
-        LoginInfo existing = activeUsers.get(loginId);
-        if (existing != null && (!existing.getIp().equals(currentIp) || !existing.getSessionId().equals(currentSessionId))) {
-            model.addAttribute("msg", "이미 다른 위치 또는 브라우저에서 로그인 중입니다.");
-            return "common/error";
-        }
-
-        activeUsers.put(loginId, new LoginInfo(currentIp, currentSessionId));
-        session.setAttribute("loginUser", loginUser);
-        
-        // ✅ 기억하기 기능 처리
-        if ("on".equals(remember)) {
-            Cookie rememberCookie = new Cookie("rememberId", loginUser.getLoginId());
-            rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7일
-            rememberCookie.setPath(request.getContextPath());
-            response.addCookie(rememberCookie);
-        } else {
-            Cookie rememberCookie = new Cookie("rememberId", null);
-            rememberCookie.setMaxAge(0);
-            rememberCookie.setPath(request.getContextPath());
-            response.addCookie(rememberCookie);
-        }
-
-        
-        return "ADMIN".equalsIgnoreCase(loginUser.getRole()) ? "redirect:/admin/dashboard.do" : "redirect:main.do";
-    }
 
     @RequestMapping("logout.do")
     public String logoutMethod(HttpServletRequest request, Model model) {
