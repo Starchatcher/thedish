@@ -4,7 +4,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%
-    String todayKorean = new SimpleDateFormat("yyyy년 M월 d일").format(new Date());
+    String todayKorean = new SimpleDateFormat("yyyy\uB144 M\uC6D4 d\uC77C").format(new Date());
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -13,165 +13,106 @@
     <title>사용자 관리</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-        }
+
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f0f2f5; margin: 0; }
+
         .sidebar {
-            width: 240px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
+            width: 240px; height: 100vh; position: fixed; top: 0; left: 0;
             background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
-            padding: 20px 15px;
-            color: #ecf0f1;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px 15px; color: #ecf0f1; box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
         }
         .sidebar h2 { font-size: 18px; margin-bottom: 25px; text-align: center; }
         .sidebar a {
-            color: #bdc3c7;
-            text-decoration: none;
-            display: block;
-            margin: 10px 0;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: background 0.3s, color 0.3s;
+            color: #bdc3c7; text-decoration: none; display: block;
+            margin: 10px 0; padding: 10px 15px; border-radius: 8px;
+            font-size: 14px; transition: background 0.3s, color 0.3s;
         }
         .sidebar a:hover { background-color: #2980b9; color: #fff; }
         .calendar-box {
-            margin-top: 20px;
-            padding: 8px;
-            background-color: #34495e;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 13px;
+
+            margin-top: 20px; padding: 8px; background-color: #34495e;
+            border-radius: 10px; text-align: center; font-size: 13px;
         }
-        .main-content {
-            margin-left: 260px;
-            padding: 80px 40px;
-        }
-        h1 {
-            color: #2d3e50;
-            font-size: 26px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+        .main-content { margin-left: 260px; padding: 80px 40px; }
+        h1 { color: #2d3e50; font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 25px; }
+
         .user-stats {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 25px;
+            display: flex; gap: 15px; justify-content: center; margin-bottom: 25px;
         }
         .stat-box {
-            flex: 1;
-            max-width: 240px;
-            background: #ffffff;
-            color: #2364aa;
-            padding: 18px 12px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 16px;
-            font-weight: 700;
-            transition: transform 0.3s ease;
+
+            flex: 1; max-width: 240px; background: #ffffff; color: #2364aa;
+            padding: 18px 12px; border-radius: 10px; text-align: center;
+            font-size: 16px; font-weight: 700; transition: transform 0.3s ease;
+
         }
         .stat-box:hover { transform: translateY(-4px); }
         form.search-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 25px;
+            display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 25px;
         }
         .search-form input[type="text"], .search-form select {
-            padding: 10px;
-            font-size: 13px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            background: #ffffff;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+
+            padding: 10px; font-size: 13px; border: 1px solid #ccc; border-radius: 6px;
+            background: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+
         }
         .search-form button {
-            background-color: #2364aa;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 13px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            background-color: #2364aa; color: white; border: none;
+            padding: 10px 20px; font-size: 13px; border-radius: 6px;
+            cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             transition: background-color 0.3s ease;
         }
         .search-form button:hover { background-color: #3a7bc4; }
+
+        .user-table-wrapper { display: flex; justify-content: center; }
         .user-table {
-            width: 100%;
-            table-layout: fixed;
-            border-collapse: separate;
-            border-spacing: 0 8px;
+            width: 1000px; border-collapse: separate; border-spacing: 0 8px;
+
         }
         .user-table thead th {
-            background-color: #2364aa;
-            color: #ffffff;
-            padding: 12px;
-            font-size: 16px;
-            text-align: center;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
+            background-color: #2364aa; color: #ffffff; padding: 12px; font-size: 16px; text-align: center;
+            border-top-left-radius: 6px; border-top-right-radius: 6px;
         }
         .user-table tbody tr {
-            background-color: #ffffff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            border-radius: 6px;
+            background-color: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border-radius: 6px;
         }
         .user-table td {
-            text-align: center;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: 500;
-            min-height: 40px;
+
+            text-align: center; padding: 10px; font-size: 14px; font-weight: 500;
         }
         .user-table tbody tr:hover { background-color: #f7f9fb; }
-        .user-table a {
-            color: #2364aa;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .user-table a:hover { text-decoration: underline; }
-        .pagination {
-            text-align: center;
-            margin-top: 25px;
-        }
+        .pagination { text-align: center; margin-top: 25px; }
         .pagination a, .pagination strong {
-            margin: 0 5px;
-            text-decoration: none;
-            color: #2364aa;
-            font-weight: bold;
+            margin: 0 5px; text-decoration: none; color: #2364aa; font-weight: bold;
         }
         .pagination strong { color: #000; }
-        .back-button {
-            text-align: center;
-            margin-top: 25px;
-        }
+        .back-button { text-align: center; margin-top: 25px; }
         .back-button button {
-            padding: 10px 25px;
-            font-size: 13px;
-            background-color: #2364aa;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-            transition: background-color 0.3s ease;
+            padding: 10px 25px; font-size: 13px; background-color: #2364aa; color: white;
+            border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08); transition: background-color 0.3s ease;
         }
-        .back-button button:hover {
-            background-color: #4a90e2;
-            transform: translateY(-3px);
+        .back-button button:hover { background-color: #4a90e2; transform: translateY(-3px); }
+		.action-btn {
+		    display: inline-block;
+		    min-width: 60px;        /* ▶️ 버튼의 최소 가로 길이 */
+		    padding: 7px 14px;      /* ▶️ 상하 6px, 좌우 12px 패딩 (버튼 크기 핵심!) */
+		    margin: 0 4px;          /* ▶️ 버튼 간격 */
+		    font-size: 13px;
+		    font-weight: bold;
+		    border-radius: 6px;
+		    border: none;
+		    cursor: pointer;
+		    transition: background-color 0.3s ease;
+		}
+        .view-btn { background-color: #2364aa; color: white; }
+        .view-btn:hover { background-color: #1e4e8c; }
+        .deactivate-btn { background-color: #dc3545; color: white; }
+        .deactivate-btn:hover { background-color: #a71d2a; }
+        .deactivate-btn[disabled] {
+            background-color: #ccc; color: #666; cursor: not-allowed;
+
         }
     </style>
 </head>
@@ -193,6 +134,7 @@
     </div>
 </div>
 
+
 <div class="main-content">
     <h1>사용자 관리</h1>
     <div class="user-stats">
@@ -200,6 +142,7 @@
         <div class="stat-box">현재 회원 수 : ${activeUsers}</div>
         <div class="stat-box">현재 탈퇴한 수 : ${withdrawnUsers}</div>
     </div>
+
 
     <form class="search-form" method="get" action="${pageContext.request.contextPath}/admin/userList.do">
         <input type="text" name="keyword" placeholder="닉네임 또는 ID 검색" value="${param.keyword}" />
@@ -211,7 +154,9 @@
         <button type="submit">검색</button>
     </form>
 
-    <table class="user-table">
+    <div class="user-table-wrapper">
+    <table class="user-table" style="width: 1300px;">
+
         <thead>
         <tr>
     <th style="width: 18%;">회원ID</th>
@@ -231,12 +176,26 @@
                     <td>${user.email}</td>
                     <td>${user.status}</td>
                     <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="${pageContext.request.contextPath}/admin/userDetail.do?userId=${user.userId}">보기</a></td>
+
+                    <td>
+                        <form method="get" action="${pageContext.request.contextPath}/admin/userDetail.do" style="display:inline;">
+                            <input type="hidden" name="userId" value="${user.userId}" />
+                            <button type="submit" class="action-btn view-btn">보기</button>
+                        </form>
+                        <form method="post" action="${pageContext.request.contextPath}/admin/deactivateUser.do" style="display:inline;"
+                              onsubmit="return confirm('정말로 탈퇴 처리하시겠습니까?');">
+                            <input type="hidden" name="loginId" value="${user.loginId}" />
+                            <button type="submit" class="action-btn deactivate-btn" <c:if test="${user.status eq 'INACTIVE'}">disabled</c:if>>탈퇴</button>
+                        </form>
+                    </td>
+
                 </tr>
             </c:if>
         </c:forEach>
         </tbody>
     </table>
+
+    </div>
 
     <div class="pagination">
         <c:forEach begin="1" end="${totalPages}" var="pageNum">
@@ -250,6 +209,7 @@
             </c:choose>
         </c:forEach>
     </div>
+
 
     <div class="back-button">
         <button onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'">이전 페이지</button>

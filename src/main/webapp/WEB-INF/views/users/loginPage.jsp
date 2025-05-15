@@ -189,10 +189,12 @@
       </div>
     </div>
 
-    <div class="signup-link" style="display: flex; justify-content: center; gap: 10px;">
-      <button onclick="location.href='${pageContext.request.contextPath}/enrollterms.do'">회원가입</button>
-      <button onclick="location.href='${pageContext.request.contextPath}/'">홈으로</button>
-    </div>
+
+<div class="signup-link" style="display: flex; justify-content: center; gap: 10px;">
+  <button onclick="location.href='${pageContext.request.contextPath}/terms.do'">회원가입</button>
+  <button onclick="location.href='${pageContext.request.contextPath}/'">홈으로</button>
+</div>
+
 
   </div>
 

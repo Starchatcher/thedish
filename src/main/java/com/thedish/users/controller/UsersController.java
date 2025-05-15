@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,6 +87,22 @@ public class UsersController {
 	            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
 	            return "common/error";
 	        }
+
+
+    @RequestMapping("terms.do")
+    public String moveTermsPage() {
+        return "users/terms";
+    }
+
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
+    public String loginMethod(Users users, HttpServletRequest request, HttpSession session, SessionStatus status, Model model) {
+        logger.info("로그인 시도: " + users.getLoginId());
+        Users loginUser = usersService.selectLogin(users);
+
+        if (loginUser == null) {
+            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
+            return "common/error";
+        }
 
 
         String dbPw = loginUser.getPassword();
@@ -178,6 +193,8 @@ public class UsersController {
             if (result > 0) {
                 mv.addObject("msg", "비밀번호가 변경되었습니다.");
                 session.setAttribute("loginUser", loginUser);
+                mv.setViewName("users/passwordSuccess");
+                return mv;
             } else {
                 mv.addObject("msg", "비밀번호 변경 실패");
             }
@@ -204,9 +221,21 @@ public class UsersController {
             user.setLoginId(user.getUserId());
         }
 
+        // ✅ 중복 아이디 및 닉네임 체크
+        if (usersService.selectCheckId(user.getLoginId()) > 0) {
+            model.addAttribute("msg", "이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+            return "common/error";
+        }
+
+        if (usersService.selectChecknickName(user.getNickName()) > 0) {
+            model.addAttribute("msg", "이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.");
+            return "common/error";
+        }
+
+        // ✅ 비밀번호 유효성 검사
         String pw = user.getPassword();
         if (pw == null || pw.length() < 8 || !pw.matches("^(?=.*[a-zA-Z])(?=.*\\d).+$")) {
-            model.addAttribute("message", "비밀번호는 영문자+숫자 조합 8자 이상이어야 합니다.");
+            model.addAttribute("msg", "비밀번호는 영문자+숫자 조합 8자 이상이어야 합니다.");
             return "common/error";
         }
 
@@ -214,11 +243,9 @@ public class UsersController {
         user.setPassword(encPwd);
 
         int result = usersService.insertUser(user);
-        if (result > 0) {
-            return "redirect:enrollPage.do?enrollSuccess=true";
-        } else {
-            return "common/error";
-        }
+
+        return (result > 0) ? "users/enrollSuccess" : "common/error";
+
     }
 
     @RequestMapping("myinfo.do")
@@ -228,7 +255,7 @@ public class UsersController {
             model.addAttribute("users", users);
             return "users/infoPage";
         } else {
-            model.addAttribute("message", loginId + " 에 대한 회원 정보 조회 실패! 아이디를 다시 확인하세요.");
+            model.addAttribute("message", loginId + " 에 대한 회원 정보 조회 실패!");
             return "common/error";
         }
     }
@@ -237,7 +264,6 @@ public class UsersController {
     public String updateUser(Users user, Model model, HttpSession session) {
         String encPwd = bcryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encPwd);
-
         int result = usersService.updateUser(user);
         if (result > 0) {
             session.setAttribute("loginUser", usersService.selectUsers(user.getLoginId()));
@@ -263,7 +289,7 @@ public class UsersController {
             }
             return "redirect:loginPage.do";
         } else {
-            model.addAttribute("message", "회원 탈퇴에 실패했습니다. 관리자에게 문의하세요.");
+            model.addAttribute("message", "회원 탈퇴에 실패했습니다.");
             return "common/error";
         }
     }
@@ -310,7 +336,7 @@ public class UsersController {
         int result = usersService.resetPassword(loginId, newPassword);
         if (result > 0) {
             mv.addObject("msg", "비밀번호가 성공적으로 변경되었습니다.");
-            mv.setViewName("users/loginPage");
+            mv.setViewName("users/passwordSuccess");
         } else {
             mv.addObject("msg", "비밀번호 변경 실패. 다시 시도해주세요.");
             mv.setViewName("users/resetPassword");
@@ -336,7 +362,6 @@ public class UsersController {
     @RequestMapping("encodeAdminPwd.do")
     public String encodeAdminPassword() {
         String rawPwd = "admin1234";
-        String encodedPwd = bcryptPasswordEncoder.encode(rawPwd);
-        return "암호화된 관리자 비밀번호: " + encodedPwd;
+        return "암호화된 관리자 비밀번호: " + bcryptPasswordEncoder.encode(rawPwd);
     }
 }

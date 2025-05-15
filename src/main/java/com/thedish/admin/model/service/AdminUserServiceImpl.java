@@ -24,11 +24,12 @@ public class AdminUserServiceImpl implements AdminUserService {
     public int updateUser(Users user) {
         return adminUserDao.updateUser(user);
     }
-    
+
     @Override
     public List<Users> selectAllUsers() {
         return adminUserDao.selectAllUsers();
     }
+
     @Override
     public int countTotalUsers() {
         return adminUserDao.countTotalUsers();
@@ -43,9 +44,15 @@ public class AdminUserServiceImpl implements AdminUserService {
     public int countWithdrawnUsers() {
         return adminUserDao.countWithdrawnUsers();
     }
-    
+
     @Override
     public List<Users> searchUsers(Map<String, String> paramMap) {
         return adminUserDao.searchUsers(paramMap);
+    }
+
+    // ✅ 관리자에서 회원 상태를 INACTIVE로 바꾸는 메서드
+    @Override
+    public int deactivateUser(String loginId) {
+        return adminUserDao.deactivateUser(loginId);
     }
 }

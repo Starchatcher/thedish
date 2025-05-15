@@ -19,6 +19,11 @@ public class AdminUserDaoImpl implements AdminUserDao {
     public Users selectUserById(String userId) {
         return sqlSession.selectOne("adminUserMapper.selectUserById", userId);
     }
+    
+    @Override
+    public int deactivateUser(String loginId) {
+        return sqlSession.update("adminUserMapper.deactivateUser", loginId);
+    }
 
     @Override
     public int updateUser(Users user) {

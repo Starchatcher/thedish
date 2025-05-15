@@ -20,7 +20,8 @@ public class AdminController {
     // ✅ 관리자 대시보드
     @RequestMapping("dashboard.do")
     public ModelAndView adminDashboard(ModelAndView mv) {
-        // 📌 오늘의 알림 데이터 조회
+
+
         int todayJoin = adminService.countTodayJoin();
         int todayWithdraw = adminService.countTodayWithdraw();
         int todayReport = adminService.countTodayReports();
@@ -28,7 +29,8 @@ public class AdminController {
         int todayInquiry = adminService.countTodayInquiries();
         int totalUsers = adminService.countTotalUsers();
 
-        // 📌 일자별 요약 데이터 조회
+
+
         List<Map<String, Object>> dailySummary = adminService.selectDailySummary();
 
         List<String> labels = new ArrayList<>();
@@ -39,13 +41,17 @@ public class AdminController {
 
         for (Map<String, Object> row : dailySummary) {
             labels.add((String) row.get("DAY"));
+
+
+
             postData.add(row.get("POST_COUNT") != null ? ((Number) row.get("POST_COUNT")).intValue() : 0);
             boardViewData.add(row.get("BOARD_VIEW_COUNT") != null ? ((Number) row.get("BOARD_VIEW_COUNT")).intValue() : 0);
             recipeViewData.add(row.get("RECIPE_VIEW_COUNT") != null ? ((Number) row.get("RECIPE_VIEW_COUNT")).intValue() : 0);
             drinkViewData.add(row.get("DRINK_VIEW_COUNT") != null ? ((Number) row.get("DRINK_VIEW_COUNT")).intValue() : 0);
         }
 
-        // ✅ 오늘의 알림 데이터 JSP로 전달
+
+
         mv.addObject("todayJoin", todayJoin);
         mv.addObject("todayWithdraw", todayWithdraw);
         mv.addObject("todayReport", todayReport);
@@ -56,10 +62,12 @@ public class AdminController {
         // ✅ 그래프/테이블 데이터 JSP로 전달
         mv.addObject("dailySummary", dailySummary);
         mv.addObject("postViewLabels", labels);
-        mv.addObject("postData", postData);
-        mv.addObject("viewData", boardViewData);
-        mv.addObject("recipeViewData", recipeViewData);
-        mv.addObject("drinkViewData", drinkViewData);
+
+        mv.addObject("postData", postData);             // 게시글 수 (그래프 1)
+        mv.addObject("viewData", boardViewData);        // 게시판 조회수 (그래프 2)
+        mv.addObject("recipeViewData", recipeViewData); // JSP 테이블용
+        mv.addObject("drinkViewData", drinkViewData);   // JSP 테이블용
+
 
         mv.setViewName("admin/adminDashboard");
         return mv;

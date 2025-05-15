@@ -105,4 +105,11 @@ public class AdminUserController {
         adminUserService.updateUser(user);
         return "redirect:/admin/userList.do";
     }
+
+    // ✅ 사용자 상태를 'INACTIVE'로 변경 (탈퇴 처리)
+    @RequestMapping(value = "/deactivateUser.do", method = RequestMethod.POST)
+    public String deactivateUser(@RequestParam("loginId") String loginId) {
+        adminUserService.deactivateUser(loginId);
+        return "redirect:/admin/userList.do";
+    }
 }
