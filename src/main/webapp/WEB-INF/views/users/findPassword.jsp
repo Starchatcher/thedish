@@ -11,7 +11,6 @@
       margin: 0;
       padding: 0;
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #f8d5dc, #d3eaf2);
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -55,13 +54,13 @@
     }
 
     input[type="submit"] {
-      background-color: #4CAF50;
+      background-color: #444;
       border: none;
       color: white;
     }
 
     input[type="submit"]:hover {
-      background-color: #45a049;
+      background-color: #777;
     }
 
     .back-button {

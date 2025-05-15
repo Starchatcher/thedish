@@ -11,7 +11,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
+
   background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
+
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -95,7 +97,9 @@ input[type="number"] {
 #nickNameCheckBtn {
   margin-top: 8px;
   width: 100%;
+
   background-color: #2364aa;
+
   color: white;
   border: none;
   padding: 10px;
@@ -107,7 +111,7 @@ input[type="number"] {
 
 #dupCheckBtn:hover,
 #nickNameCheckBtn:hover {
-  background-color: #1e5799;
+  background-color: #777;
 }
 
 .button-group {
@@ -129,13 +133,17 @@ input[type="number"] {
   cursor: pointer;
   transition: background-color 0.3s;
   text-align: center;
+
   background-color: #2364aa;
+
   text-decoration: none;
 }
 
 .button-group button:hover,
 .button-group a:hover {
+
   background-color: #1e5799;
+
 }
 
 .success-message {

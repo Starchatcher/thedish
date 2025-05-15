@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 문의 목록</title>
+<title>문의 목록</title>
 <style>
 body {
 	font-family: 'Pretendard', sans-serif;
@@ -78,7 +78,7 @@ td a:hover {
     display: inline-block;
     padding: 10px 24px;
     font-size: 15px;
-    background-color: #4A5568; /* 모던 다크 그레이 */
+    background-color: #4A5568;
     color: white;
     text-decoration: none;
     border-radius: 6px;
@@ -87,13 +87,24 @@ td a:hover {
 }
 
 .qna-btn:hover {
-    background-color: #2D3748; /* 좀 더 어두운 그레이 */
+    background-color: #2D3748;
 }
 </style>
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-<h2>내 문의 목록</h2>
+
+<!-- ✅ 관리자와 일반 유저에 따라 제목 변경 -->
+<h2>
+    <c:choose>
+        <c:when test="${sessionScope.loginUser.role eq 'ADMIN'}">
+            모든 문의 목록
+        </c:when>
+        <c:otherwise>
+            내 문의 목록
+        </c:otherwise>
+    </c:choose>
+</h2>
 
 <table>
     <thead>
@@ -132,11 +143,16 @@ td a:hover {
         </c:if>
     </tbody>
 </table>
-<div class="btn-wrap">
-    <a href="qnaWriteForm.do" class="qna-btn">문의하기</a>
-</div>
 
+<!-- ✅ 일반 유저만 '문의하기' 버튼 표시 -->
+<c:if test="${sessionScope.loginUser.role ne 'ADMIN'}">
+    <div class="btn-wrap">
+        <a href="qnaWriteForm.do" class="qna-btn">문의하기</a>
+    </div>
+</c:if>
 
+<!-- 페이징 처리 컴포넌트 -->
+<c:import url="/WEB-INF/views/common/pagingView.jsp" />
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

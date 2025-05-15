@@ -12,6 +12,7 @@ import com.thedish.board.model.vo.Board;
 import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.reportPost.model.vo.ReportPost;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -165,7 +166,29 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectRepliesByBoardId(boardId);
 	}
 
+	@Override
+	public int selectMyBoardListCount(String loginId) {
+		return boardDao.selectMyBoardListCount(loginId);
+	}
 
+	@Override
+	public List<Board> selectMyBoardList(Map<String, Object> param) {
+		return boardDao.selectMyBoardList(param);
+	}
 
+	@Override
+	public List<ReportPost> selectListReportedPost(Map<String, Object> param) {
+		return boardDao.selectListReportedPost(param);
+	}
+
+	@Override
+	public int selectReportedPostCount() {
+		return boardDao.selectReportedPostCount();
+	}
+
+	@Override
+	public int updateReportChecked(int report_id) {
+		return boardDao.updateReportChecked(report_id);
+	}
 
 }

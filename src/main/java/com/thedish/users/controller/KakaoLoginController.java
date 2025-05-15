@@ -46,7 +46,8 @@ public class KakaoLoginController {
         String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" +
                 "client_id=" + clientId +
                 "&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8") +
-                "&response_type=code";
+                "&response_type=code" +
+                "&prompt=login";
         if (mode != null) {
             kakaoUrl += "&state=" + mode;
         }
@@ -87,6 +88,7 @@ public class KakaoLoginController {
         }
         JSONObject tokenJson = new JSONObject(result);
         accessToken = tokenJson.getString("access_token");
+        session.setAttribute("kakaoAccessToken", accessToken);
         br.close();
 
         // 2단계: 사용자 정보 요청

@@ -26,7 +26,15 @@ public class RestaurantRecommend implements java.io.Serializable {
 		 private int imageId;
 		 private byte[] imageData; 
 		 
-		 
+	       private String createdAtKst;
+
+	       public String getCreatedAtKst() {
+	           return createdAtKst;
+	       }
+
+	       public void setCreatedAtKst(String createdAtKst) {
+	           this.createdAtKst = createdAtKst;
+	       }
 		 
 		 
 		public java.sql.Timestamp getCreatedAt() {

@@ -6,10 +6,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,7 +20,9 @@ import com.thedish.common.mail.MailService;
 import com.thedish.users.model.service.UsersService;
 import com.thedish.users.model.vo.Users;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,6 +30,12 @@ public class UsersController {
 
     private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
 
+    @Value("${kakao.clientId}")
+    private String clientId;
+    
+    @Value("${kakao.redirectUri}")
+    private String redirectUri;
+    
     @Autowired
     private UsersService usersService;
 
@@ -53,6 +64,30 @@ public class UsersController {
     public String moveLoginPage() {
         return "users/loginPage";
     }
+    
+	
+	  @RequestMapping("enrollterms.do") public String moveTermsPage() { return
+	  "users/enrollterms"; 
+	  }
+	 
+
+	  @RequestMapping(value = "login.do", method = RequestMethod.POST)
+	    public String loginMethod(Users users,
+	                              HttpServletRequest request,
+	                              HttpServletResponse response,
+	                              HttpSession session,
+	                              SessionStatus status,
+	                              Model model,
+	                              @RequestParam(value = "remember", required = false) String remember) {
+
+	        logger.info("로그인 시도: " + users.getLoginId());
+	        Users loginUser = usersService.selectLogin(users);
+
+	        if (loginUser == null) {
+	            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
+	            return "common/error";
+	        }
+
 
     @RequestMapping("terms.do")
     public String moveTermsPage() {
@@ -68,6 +103,7 @@ public class UsersController {
             model.addAttribute("msg", "아이디가 존재하지 않습니다.");
             return "common/error";
         }
+
 
         String dbPw = loginUser.getPassword();
         boolean isBcrypt = dbPw.startsWith("$2a$") || dbPw.startsWith("$2b$") || dbPw.startsWith("$2y$");
@@ -95,7 +131,21 @@ public class UsersController {
 
         activeUsers.put(loginId, new LoginInfo(currentIp, currentSessionId));
         session.setAttribute("loginUser", loginUser);
+        
+        // ✅ 기억하기 기능 처리
+        if ("on".equals(remember)) {
+            Cookie rememberCookie = new Cookie("rememberId", loginUser.getLoginId());
+            rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7일
+            rememberCookie.setPath(request.getContextPath());
+            response.addCookie(rememberCookie);
+        } else {
+            Cookie rememberCookie = new Cookie("rememberId", null);
+            rememberCookie.setMaxAge(0);
+            rememberCookie.setPath(request.getContextPath());
+            response.addCookie(rememberCookie);
+        }
 
+        
         return "ADMIN".equalsIgnoreCase(loginUser.getRole()) ? "redirect:/admin/dashboard.do" : "redirect:main.do";
     }
 
@@ -114,6 +164,8 @@ public class UsersController {
             return "common/error";
         }
     }
+
+
 
     @RequestMapping("myPage.do")
     public String showMyPage(HttpSession session, Model model) {
@@ -191,7 +243,9 @@ public class UsersController {
         user.setPassword(encPwd);
 
         int result = usersService.insertUser(user);
+
         return (result > 0) ? "users/enrollSuccess" : "common/error";
+
     }
 
     @RequestMapping("myinfo.do")
@@ -245,7 +299,7 @@ public class UsersController {
         return "users/findPassword";
     }
 
-    @PostMapping("/sendCode.do")
+    @RequestMapping("/sendCode.do")
     public ModelAndView sendVerificationCode(@RequestParam("loginId") String loginId,
                                              @RequestParam("email") String email,
                                              HttpSession session,
@@ -264,7 +318,7 @@ public class UsersController {
         return mv;
     }
 
-    @PostMapping("/verifyCode.do")
+    @RequestMapping("/verifyCode.do")
     public ModelAndView verifyCode(@RequestParam("code") String code, HttpSession session, ModelAndView mv) {
         String sessionCode = (String) session.getAttribute("verifyCode");
         if (code.equals(sessionCode)) {
@@ -276,7 +330,7 @@ public class UsersController {
         return mv;
     }
 
-    @PostMapping("/resetPassword.do")
+    @RequestMapping("/resetPassword.do")
     public ModelAndView resetPassword(@RequestParam("newPassword") String newPassword, HttpSession session, ModelAndView mv) {
         String loginId = (String) session.getAttribute("loginIdForReset");
         int result = usersService.resetPassword(loginId, newPassword);

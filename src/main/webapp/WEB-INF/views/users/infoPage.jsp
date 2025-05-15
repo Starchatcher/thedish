@@ -88,12 +88,15 @@ body {
   font-weight: 600;
 }
 
+
+
 .main-content {
   flex: 1;
+  max-width: 550px; /* ✅ 너무 넓지 않게 제한 */
   background-color: #fff;
-  padding: 50px;
+  padding: 30px 40px; /* ✅ 패딩 줄임 */
   border-radius: 10px;
-  margin-left: 30px;
+  margin: 0 auto; /* ✅ 화면 가운데 정렬 */
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
@@ -104,6 +107,9 @@ body {
   font-weight: 700;
 }
 
+
+
+
 label {
   font-weight: 600;
   display: block;
@@ -113,8 +119,40 @@ label {
   font-size: 15px;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
-  width: 100%;
+input[type="name"] {
+  width: 17%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+input[type="text"] {
+  width: 30%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+ input[type="email"] {
+  width: 32%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+ input[type="password"] {
+  width: 30%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+ input[type="tel"] {
+  width: 29%;
   padding: 12px;
   font-size: 15px;
   border: 1px solid #ccc;
@@ -123,6 +161,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="tel
 }
 
 .btn-group {
+	width: 19%;
   display: flex;
   gap: 16px;
   margin-top: 40px;
@@ -137,7 +176,7 @@ input[type="reset"] {
   font-size: 15px;
   border: none;
   border-radius: 8px;
-  background-color: #3498db;
+  background-color: #555; /* ✅ 등록 버튼과 동일한 색상 */
   color: white;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
@@ -145,7 +184,7 @@ input[type="reset"] {
 
 .btn-group button:hover,
 input[type="submit"]:hover {
-  background-color: #2980b9;
+  background-color: #333; /* ✅ hover 색상도 동일하게 */
 }
 
 .danger-btn {
@@ -186,16 +225,14 @@ function checkPw() {
 
     <h3>회원정보</h3>
     <ul>
-      <li><a href="${pageContext.request.contextPath}/myPage.do">메인페이지</a></li>
       <li><a href="${pageContext.request.contextPath}/confirmDelete.do?loginId=${users.loginId}">회원 탈퇴</a></li>
     </ul>
 
     <h3>Community</h3>
     <ul>
-      <li><a href="${pageContext.request.contextPath}/inquiryList.do">1:1 문의</a></li>
+      <li><a href="${pageContext.request.contextPath}/qnaList.do">1:1 문의</a></li>
       <li><a href="${pageContext.request.contextPath}/myBoardList.do">내가 쓴 글</a></li>
-      <li><a href="${pageContext.request.contextPath}/faqList.do">FAQ</a></li>
-      <li><a href="${pageContext.request.contextPath}/qnaList.do">Q&A</a></li>
+      <li><a href="${pageContext.request.contextPath}/FAQList.do">FAQ</a></li>
     </ul>
   </div>
 
@@ -205,7 +242,7 @@ function checkPw() {
       <input type="hidden" name="loginId" value="${users.loginId}" />
 
       <label>이름</label>
-      <input type="text" name="userName" value="${users.userName}" required />
+      <input type="name" name="userName" value="${users.userName}" required />
 
       <label>비밀번호</label>
       <input type="password" name="password" id="password" required />

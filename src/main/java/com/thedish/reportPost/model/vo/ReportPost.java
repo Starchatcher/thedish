@@ -11,7 +11,7 @@ public class ReportPost implements java.io.Serializable{
 	private String reporterId;
 	private java.sql.Date reportedAt;
 	private String isChecked;
-	private java.sql.Date checked_at;
+	private java.sql.Date checkedAt;
 	
 	
 	public ReportPost() {
@@ -21,7 +21,7 @@ public class ReportPost implements java.io.Serializable{
 
 
 	public ReportPost(int reportId, int boardId, String reason, String reporterId, Date reportedAt, String isChecked,
-			Date checked_at) {
+			Date checkedAt) {
 		super();
 		this.reportId = reportId;
 		this.boardId = boardId;
@@ -29,7 +29,7 @@ public class ReportPost implements java.io.Serializable{
 		this.reporterId = reporterId;
 		this.reportedAt = reportedAt;
 		this.isChecked = isChecked;
-		this.checked_at = checked_at;
+		this.checkedAt = checkedAt;
 	}
 
 
@@ -93,13 +93,13 @@ public class ReportPost implements java.io.Serializable{
 	}
 
 
-	public java.sql.Date getChecked_at() {
-		return checked_at;
+	public java.sql.Date getCheckedAt() {
+		return checkedAt;
 	}
 
 
-	public void setChecked_at(java.sql.Date checked_at) {
-		this.checked_at = checked_at;
+	public void setCheckedAt(java.sql.Date checkedAt) {
+		this.checkedAt = checkedAt;
 	}
 
 
@@ -111,7 +111,7 @@ public class ReportPost implements java.io.Serializable{
 	@Override
 	public String toString() {
 		return "ReportPost [reportId=" + reportId + ", boardId=" + boardId + ", reason=" + reason + ", reporterId="
-				+ reporterId + ", reportedAt=" + reportedAt + ", isChecked=" + isChecked + ", checked_at=" + checked_at
+				+ reporterId + ", reportedAt=" + reportedAt + ", isChecked=" + isChecked + ", checkedAt=" + checkedAt
 				+ "]";
 	}
 	

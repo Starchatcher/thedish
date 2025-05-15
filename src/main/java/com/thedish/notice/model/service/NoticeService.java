@@ -16,6 +16,9 @@ public interface NoticeService {
 	ArrayList<Notice> selectTop10();
 	//dml -------------------------------------------
 	void updateAddReadCount (int noticeId);
+	int insertNotice(Notice notice);
+	int deleteNotice(int noticeId);
+	int updateNotice(Notice notice);
 	
 	//search
 	int selectSearchTitleCount(String keyword);

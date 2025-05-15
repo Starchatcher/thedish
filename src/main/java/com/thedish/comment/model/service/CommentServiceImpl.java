@@ -72,6 +72,29 @@ public class CommentServiceImpl implements CommentService{
 
 
 
+	@Override
+	public List<Comment> selectRestaurantComments(int targetId, int offset, int limit) {
+		
+		return commentDao.selectRestaurantComments(targetId, offset, limit);
+	}
+
+
+
+	@Override
+	public int insertRestaurantComment(Comment comment) {
+		return commentDao.insertRestaurantComment(comment);
+	}
+
+
+
+	@Override
+	public int deleteRestaurantComment(int commentId, String targetType) {
+		
+		return commentDao.deleteRestaurantComment(commentId, targetType);
+	}
+
+
+
 	
 
 	

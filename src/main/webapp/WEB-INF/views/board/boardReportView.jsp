@@ -65,10 +65,44 @@
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+function checkByte(textarea) {
+  const maxByte = 500;
+  let text = textarea.value;
+  let byteCount = 0;
+  let cutIndex = text.length;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text.charAt(i);
+    byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+
+    if (byteCount > maxByte) {
+      cutIndex = i;
+      break;
+    }
+  }
+
+  if (byteCount > maxByte) {
+    alert("최대 500byte까지만 입력 가능합니다.");
+    textarea.value = text.substring(0, cutIndex);
+    byteCount = 0;
+    for (let i = 0; i < cutIndex; i++) {
+      const char = textarea.value.charAt(i);
+      byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+    }
+  }
+
+  document.getElementById("byteCount").innerText = byteCount;
+}
+</script>
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-
+<c:if test="${not empty alertMsg}">
+  <script>
+    alert("${alertMsg}");
+  </script>
+</c:if>
 <div class="report-form">
     <h2>🚨 게시글 신고</h2>
     
@@ -79,7 +113,8 @@
         <div class="label-wrapper">
 		    <label for="reason">신고 사유</label>
 		</div>
-        <textarea name="reason" id="reason" rows="6" required placeholder="신고 사유를 작성해주세요."></textarea><br/>
+        <textarea name="reason" id="reason" oninput="checkByte(this)" required></textarea>
+		<div><span id="byteCount">0</span> / 500 byte</div>
 
         <button type="submit">신고 제출</button>
     </form>

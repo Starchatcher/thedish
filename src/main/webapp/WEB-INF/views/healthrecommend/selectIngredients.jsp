@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #fff9f0; /* 검색창과 같은 톤 */
+            background-color: #f8f9fa;
             color: #333;
         }
 
@@ -17,14 +17,14 @@
             max-width: 1000px;
             margin: 60px auto;
             padding: 40px;
-            background-color: #fffdf7;
+            background-color: #ffffff;
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
-        h2 {
+        .title-recommend {
             font-size: 26px;
-            color: #d84315;
+            color: #2c3e50;
             margin-bottom: 24px;
             text-align: center;
         }
@@ -41,8 +41,8 @@
             min-width: 300px;
             padding: 20px;
             border-radius: 12px;
-            background-color: #fffaf2;
-            box-shadow: 0 2px 6px rgba(255, 138, 101, 0.1);
+            background-color: #f9fbfd;
+            box-shadow: 0 2px 6px rgba(44, 62, 80, 0.1);
             max-height: 500px;
             display: flex;
             flex-direction: column;
@@ -52,7 +52,7 @@
         .exclude-box h3 {
             font-size: 18px;
             margin-bottom: 14px;
-            color: #ff7043;
+            color: #2c3e50;
         }
 
         .ingredient-list {
@@ -60,7 +60,7 @@
             flex-direction: column;
             gap: 10px;
             overflow-y: auto;
-            max-height: 400px; /* 추천 재료 10개 이상 시 스크롤 */
+            max-height: 400px;
             padding-right: 6px;
         }
 
@@ -73,11 +73,11 @@
             align-items: center;
             justify-content: flex-start;
             transition: all 0.3s ease;
-            border: 1px solid #ffe0b2;
+            border: 1px solid #b0bec5;
         }
 
         .ingredient-item:hover {
-            background-color: #fff3e0;
+            background-color: #e3f2fd;
         }
 
         .ingredient-item input[type="checkbox"]:checked + span {
@@ -90,14 +90,13 @@
             color: #e53935;
             font-size: 14px;
             overflow-y: auto;
-            max-height: 360px; /* 금기 재료 20개 이상 시 스크롤 */
+            max-height: 360px;
         }
 
         .bad-list li {
             margin-bottom: 6px;
         }
 
-        /* 스크롤바 커스터마이징 */
         .ingredient-list::-webkit-scrollbar,
         .bad-list::-webkit-scrollbar {
             width: 6px;
@@ -105,7 +104,7 @@
 
         .ingredient-list::-webkit-scrollbar-thumb,
         .bad-list::-webkit-scrollbar-thumb {
-            background-color: #ffab91;
+            background-color: #90a4ae;
             border-radius: 3px;
         }
 
@@ -113,7 +112,7 @@
             display: block;
             margin: 30px auto 0;
             padding: 14px 40px;
-            background-color: #ff7043;
+            background-color: #2c3e50;
             color: white;
             font-size: 16px;
             border: none;
@@ -123,17 +122,17 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #bf360c;
+            background-color: #1a2c38;
         }
     </style>
 </head>
 <body>
 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 
 <div class="main-container">
-    <h2>"${condition}"에 대한 건강 맞춤 재료 선택</h2>
+    <h2 class= "title-recommend">"${condition}"에 대한 건강 맞춤 재료 선택</h2>
 
     <form action="recommendRecipes.do" method="post">
         <input type="hidden" name="condition" value="${condition}" />
@@ -141,8 +140,7 @@
         <div class="dual-box">
             <!-- 추천 재료 (체크박스) -->
             <div class="include-box">
-                <h3>🥗 좋은 재료 <br> 
-                (싫어하는 재료는 체크해서 제외!)</h3>
+                <h3>🥗 입력하신 질병에 대한 좋은 재료 <br>(싫어하는 재료가 포함되어있다면 체크후 제외)</h3>
                 <div class="ingredient-list">
                     <c:forEach var="ingredient" items="${recommendedIngredients}">
                         <div class="ingredient-item">
@@ -157,7 +155,7 @@
 
             <!-- 금기 재료 (표시만) -->
             <div class="exclude-box">
-                <h3>🚫 금기 재료 (드시지 마세요!)</h3>
+                <h3>🚫 자동 제외된 재료</h3>
                 <ul class="bad-list">
                     <c:forEach var="bad" items="${excludedIngredients}">
                         <li>${bad}</li>

@@ -13,7 +13,9 @@
     <title>사용자 관리</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
+
         body { font-family: 'Noto Sans KR', sans-serif; background-color: #f0f2f5; margin: 0; }
+
         .sidebar {
             width: 240px; height: 100vh; position: fixed; top: 0; left: 0;
             background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
@@ -28,26 +30,32 @@
         }
         .sidebar a:hover { background-color: #2980b9; color: #fff; }
         .calendar-box {
+
             margin-top: 20px; padding: 8px; background-color: #34495e;
             border-radius: 10px; text-align: center; font-size: 13px;
         }
         .main-content { margin-left: 260px; padding: 80px 40px; }
         h1 { color: #2d3e50; font-size: 26px; font-weight: 800; text-align: center; margin-bottom: 25px; }
+
         .user-stats {
             display: flex; gap: 15px; justify-content: center; margin-bottom: 25px;
         }
         .stat-box {
+
             flex: 1; max-width: 240px; background: #ffffff; color: #2364aa;
             padding: 18px 12px; border-radius: 10px; text-align: center;
             font-size: 16px; font-weight: 700; transition: transform 0.3s ease;
+
         }
         .stat-box:hover { transform: translateY(-4px); }
         form.search-form {
             display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 25px;
         }
         .search-form input[type="text"], .search-form select {
+
             padding: 10px; font-size: 13px; border: 1px solid #ccc; border-radius: 6px;
             background: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+
         }
         .search-form button {
             background-color: #2364aa; color: white; border: none;
@@ -56,9 +64,11 @@
             transition: background-color 0.3s ease;
         }
         .search-form button:hover { background-color: #3a7bc4; }
+
         .user-table-wrapper { display: flex; justify-content: center; }
         .user-table {
             width: 1000px; border-collapse: separate; border-spacing: 0 8px;
+
         }
         .user-table thead th {
             background-color: #2364aa; color: #ffffff; padding: 12px; font-size: 16px; text-align: center;
@@ -68,6 +78,7 @@
             background-color: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.05); border-radius: 6px;
         }
         .user-table td {
+
             text-align: center; padding: 10px; font-size: 14px; font-weight: 500;
         }
         .user-table tbody tr:hover { background-color: #f7f9fb; }
@@ -101,6 +112,7 @@
         .deactivate-btn:hover { background-color: #a71d2a; }
         .deactivate-btn[disabled] {
             background-color: #ccc; color: #666; cursor: not-allowed;
+
         }
     </style>
 </head>
@@ -109,18 +121,20 @@
     <div class="sidebar-nav">
         <h2>관리자 메뉴</h2>
         <a href="${pageContext.request.contextPath}/main.do">메인 페이지</a>
-        <a href="${pageContext.request.contextPath}/ndetail.do?no=1&page=1">공지사항 관리</a>
-        <a href="${pageContext.request.contextPath}/board/boardList.do">자유게시판 관리</a>
+        <a href="${pageContext.request.contextPath}/noticeList.do">공지사항 관리</a>
+        <a href="${pageContext.request.contextPath}/boardList.do">게시판 관리</a>
         <a href="${pageContext.request.contextPath}/admin/userList.do">사용자 관리</a>
-        <a href="${pageContext.request.contextPath}/recipe/recipeList.do">레시피 데이터관리</a>
-        <a href="${pageContext.request.contextPath}/drink/drinkList.do">술 데이터관리</a>
-        <a href="${pageContext.request.contextPath}/admin/userList.do">FAQ</a>
-        <a href="${pageContext.request.contextPath}/admin/userList.do">1:1문의</a>
+        <a href="${pageContext.request.contextPath}/recipeList.do">레시피 데이터관리</a>
+        <a href="${pageContext.request.contextPath}/drinkList.do">술 데이터관리</a>
+        <a href="${pageContext.request.contextPath}/FAQList.do">FAQ</a>
+        <a href="${pageContext.request.contextPath}/qnaList.do">1:1문의</a>
     </div>
     <div class="calendar-box">
         오늘은 <%= todayKorean %>입니다
     </div>
 </div>
+
+
 <div class="main-content">
     <h1>사용자 관리</h1>
     <div class="user-stats">
@@ -128,6 +142,8 @@
         <div class="stat-box">현재 회원 수 : ${activeUsers}</div>
         <div class="stat-box">현재 탈퇴한 수 : ${withdrawnUsers}</div>
     </div>
+
+
     <form class="search-form" method="get" action="${pageContext.request.contextPath}/admin/userList.do">
         <input type="text" name="keyword" placeholder="닉네임 또는 ID 검색" value="${param.keyword}" />
         <select name="status">
@@ -137,16 +153,18 @@
         </select>
         <button type="submit">검색</button>
     </form>
+
     <div class="user-table-wrapper">
     <table class="user-table" style="width: 1300px;">
+
         <thead>
         <tr>
-            <th>회원ID</th>
-            <th>닉네임</th>
-            <th>이메일</th>
-            <th>상태</th>
-            <th>가입일</th>
-            <th>관리</th>
+    <th style="width: 18%;">회원ID</th>
+    <th style="width: 18%;">닉네임</th>
+    <th style="width: 24%;">이메일</th>
+    <th style="width: 12%;">상태</th>
+    <th style="width: 18%;">가입일</th>
+    <th style="width: 10%;">관리</th>
         </tr>
         </thead>
         <tbody>
@@ -158,6 +176,7 @@
                     <td>${user.email}</td>
                     <td>${user.status}</td>
                     <td><fmt:formatDate value="${user.createdAt}" pattern="yyyy-MM-dd"/></td>
+
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/admin/userDetail.do" style="display:inline;">
                             <input type="hidden" name="userId" value="${user.userId}" />
@@ -169,12 +188,15 @@
                             <button type="submit" class="action-btn deactivate-btn" <c:if test="${user.status eq 'INACTIVE'}">disabled</c:if>>탈퇴</button>
                         </form>
                     </td>
+
                 </tr>
             </c:if>
         </c:forEach>
         </tbody>
     </table>
+
     </div>
+
     <div class="pagination">
         <c:forEach begin="1" end="${totalPages}" var="pageNum">
             <c:choose>
@@ -187,6 +209,8 @@
             </c:choose>
         </c:forEach>
     </div>
+
+
     <div class="back-button">
         <button onclick="location.href='${pageContext.request.contextPath}/admin/dashboard.do'">이전 페이지</button>
     </div>

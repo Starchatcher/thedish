@@ -43,7 +43,8 @@ public class GoogleLoginController {
                 "client_id=" + clientId +
                 "&redirect_uri=" + URLEncoder.encode(redirectUri, "UTF-8") +
                 "&response_type=code" +
-                "&scope=email%20profile";
+                "&scope=email%20profile" + 
+                "&prompt=login";;
         if (mode != null) {
             googleUrl += "&state=" + mode; // mode를 state로 전달
         }

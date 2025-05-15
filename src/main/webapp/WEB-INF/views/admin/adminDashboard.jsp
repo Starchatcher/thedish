@@ -25,7 +25,6 @@
             color: #ecf0f1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
             padding: 20px 15px;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -139,6 +138,16 @@
         .stats-table tbody tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        
+        .chart-container {
+  width: 100%;
+  height: 320px;
+  position: relative;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
     </style>
 </head>
 <body>
@@ -148,11 +157,13 @@
         <h2>관리자 메뉴</h2>
         <a href="${pageContext.request.contextPath}/main.do">메인 페이지</a>
         <a href="${pageContext.request.contextPath}/noticeList.do">공지사항 관리</a>
+
         <a href="${pageContext.request.contextPath}/boardList.do">자유게시판 관리</a>
         <a href="${pageContext.request.contextPath}/admin/userList.do">사용자 관리</a>
         <a href="${pageContext.request.contextPath}/recipeList.do">레시피 데이터관리</a>
         <a href="${pageContext.request.contextPath}/drinkList.do">술 데이터관리</a>
         <a href="${pageContext.request.contextPath}/FAQAdminView.do">FAQ</a>
+
         <a href="${pageContext.request.contextPath}/qnaList.do">1:1문의</a>
     </div>
     <div class="calendar-box">
@@ -166,11 +177,11 @@
             <div class="section">
                 <div class="section-title">오늘의 알림</div>
                 <div class="status-box">
-                    <div class="status-item">신규가입 <span><%= request.getAttribute("todayJoin") %></span></div>
-                    <div class="status-item">탈퇴수 <span><%= request.getAttribute("todayWithdraw") %></span></div>
-                    <div class="status-item">신고수 <span><%= request.getAttribute("todayReport") %></span></div>
-                    <div class="status-item">후기수 <span><%= request.getAttribute("todayReview") %></span></div>
-                    <div class="status-item">문의 <span><%= request.getAttribute("todayInquiry") %></span></div>
+                    <div class="status-item">신규가입 <span>${todayJoin}</span></div>
+                    <div class="status-item">탈퇴수 <span>${todayWithdraw}</span></div>
+                    <div class="status-item">신고수 <span>${todayReport}</span></div>
+                    <div class="status-item">후기수 <span>${todayReview}</span></div>
+                    <div class="status-item">문의 <span>${todayInquiry}</span></div>
                 </div>
             </div>
 
@@ -216,11 +227,23 @@
             </div>
         </div>
 
-        <div>
-            <h3 style="margin-bottom: 10px; font-size: 18px; color: #2c3e50;">그래프 현황</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-                <canvas id="lineChart1" style="flex: 1; max-width: 60%; height: 120px;"></canvas>
-                <canvas id="lineChart2" style="flex: 1; max-width: 60%; height: 120px;"></canvas>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: space-between; margin-top: 40px;">
+            <div style="flex: 1; min-width: 400px; height: 320px; background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); padding: 20px;">
+                <div style="font-size: 16px; font-weight: bold; color: #2980b9; margin-bottom: 10px;">
+                    게시글 수 그래프
+                </div>
+                <div class="chart-container">
+                <canvas id="lineChart1"></canvas>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 400px; height: 320px; background: white; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); padding: 20px;">
+                <div style="font-size: 16px; font-weight: bold; color: #27ae60; margin-bottom: 10px;">
+                    총 조회수 그래프
+                </div>
+                <div class="chart-container">
+                <canvas id="lineChart2"></canvas>
+                </div>
             </div>
         </div>
     </div>

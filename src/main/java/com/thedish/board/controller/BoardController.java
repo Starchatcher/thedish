@@ -1,15 +1,16 @@
 package com.thedish.board.controller;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,6 @@ import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.annotation.PostConstruct;
 
 
 
@@ -51,10 +51,6 @@ public class BoardController {
 	private ReportPostService reportPostService;
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
 	
-	@PostConstruct
-    public void initTimeZoneCheck() {
-        System.out.println("✅ 현재 JVM 시간대(TimeZone.getDefault()): " + TimeZone.getDefault().getID());
-    }
 
 	// 게시글 작성 페이지 내보내기
 	@RequestMapping("boardWritePage.do")
@@ -94,17 +90,23 @@ public class BoardController {
 	}
 
 	// 요청 처리용 메소드 ----------------------------------------------
+	// 게시글 목록 출력
 	@RequestMapping("boardList.do")
-	public ModelAndView selectListBoard(ModelAndView mv, @RequestParam(name = "page", required = false) String page,
+	public ModelAndView selectListBoard(ModelAndView mv, 
+			@RequestParam(name = "page",  defaultValue = "1") String page,
 			@RequestParam(name = "limit", required = false) String slimit,
 			@RequestParam(name = "category", required = false) String category) {
 
+		category = (category == null || category.trim().isEmpty()) ? null : category;
+		
 		int currentPage = (page != null) ? Integer.parseInt(page) : 1;
 		int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
 
 		int listCount = (category != null) ? boardService.selectBoardCategoryCount(category)
 				: boardService.selectBoardListCount();
 
+		
+		
 		Paging paging = new Paging(listCount, limit, currentPage, "boardList.do");
 		paging.calculate();
 
@@ -136,15 +138,61 @@ public class BoardController {
 		mv.setViewName("board/boardListView");
 		return mv;
 	}
+	
+	// 내 게시글 목록 출력
+	@RequestMapping("myBoardList.do")
+	public ModelAndView selectListMyBoard(ModelAndView mv, 
+			@RequestParam(name = "page", required = false) String page,
+			@RequestParam(name = "limit", required = false) String slimit,
+			HttpSession session) {
+		
+		String loginId = ((Users) session.getAttribute("loginUser")).getLoginId();
+		
+		int currentPage = (page != null && !page.isEmpty()) ? Integer.parseInt(page) : 1;
+		int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+		
+		int listCount = boardService.selectMyBoardListCount(loginId);
+		
+		Paging paging = new Paging(listCount, limit, currentPage, "myBoardList.do");
+		paging.calculate();
+		
+		List<Board> list = null;
+		if(loginId != null) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("loginId", loginId);
+			param.put("startRow", paging.getStartRow());
+			param.put("endRow", paging.getEndRow());
+			
+			list = boardService.selectMyBoardList(param);
+		}
+		
+		for (Board board : list) {
+		    int likeCount = likeService.countLikes(board.getBoardId());
+		    board.setLikeCount(likeCount);  // Board VO에 likeCount 필드 필요
+		}
+		
+		for (Board board : list) {
+		    int commentCount = boardService.selectBoardCommentCount(board.getBoardId());
+		    board.setCommentCount(commentCount);   
+		}
+		
+		mv.addObject("list", list);
+		mv.addObject("paging", paging);
+		mv.addObject("loginId", loginId);
+		mv.setViewName("board/myBoardListView");
+		return mv;
+	}
+	
 
 	// 게시글 상세보기 (댓글 목록 포함)
 	@RequestMapping("boardDetail.do")
 	public ModelAndView boardDetailView(
 			@RequestParam("boardId") int boardId,
 			@RequestParam(name = "page", required = false) String page, 
-			@RequestParam("category") String category,
+			@RequestParam(name = "category", required = false) String category,
 			@RequestParam(name = "editCommentId", required = false) Integer editCommentId,
-			@RequestParam(name ="cpage", required = false) String cpageStr,
+			@RequestParam(name = "cpage", required = false) String cpageStr,
+			@RequestParam(name = "source", required = false) String source,
 			ModelAndView mv, HttpSession session, HttpServletRequest request) {
 
 		logger.info("boardDetail.do : " + boardId);
@@ -190,6 +238,8 @@ public class BoardController {
 			if (editCommentId != null) {
 				mv.addObject("editCommentId", editCommentId);
 			}
+			
+			mv.addObject("source", source);	// 목록 버튼 판단 기준
 			mv.addObject("commentCount", commentCount); // 댓글의 총 개수
 			mv.addObject("commentList", commentList); // 댓글 리스트
 			mv.addObject("replyList", replyList);	// 대댓글 리스트
@@ -198,11 +248,7 @@ public class BoardController {
 			mv.addObject("category", category); // 게시글 카테고리
 			mv.addObject("commentPaging", commentPaging); // 댓글 페이징 객체
 			mv.setViewName("board/boardDetailView");
-		} else {
-			mv.addObject("message", boardId + "번 게시글 상세보기 요청 실패!");
-			mv.setViewName("common/error");
 		}
-
 		return mv;
 	}
 
@@ -231,8 +277,11 @@ public class BoardController {
 
 	// 새 게시글 원글 등록 요청 처리용 (파일 업로드 기능 포함)
 	@RequestMapping(value = "boardInsert.do", method = RequestMethod.POST)
-	public String boardInsertMethod(Board board, @RequestParam(name = "ofile", required = false) MultipartFile mfile,
-			@RequestParam(name = "boardType") String category, HttpServletRequest request, HttpSession session,
+	public String boardInsertMethod(Board board, 
+			@RequestParam(name = "ofile", required = false) MultipartFile mfile,
+			@RequestParam(name = "boardType") String category,
+			@RequestParam(name = "source", required = false) String source,
+			HttpServletRequest request, HttpSession session,
 			ModelAndView mv) {
 
 		// 로그인 유저 세션에서 가져와 작성자 세팅
@@ -242,12 +291,11 @@ public class BoardController {
 			mv.addObject("message", "로그인이 필요합니다.");
 			return "common/error"; // String 반환 형식은 변경되지 않음
 		}
+		
 		board.setWriter(loginUser.getLoginId());
 		board.setBoardCategory(category);
-
 		// 현재 시간 자동 설정
 		board.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
-		board.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 		// 파일 저장 로직
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
@@ -273,19 +321,24 @@ public class BoardController {
 
 		// 게시글 등록
 		if (boardService.insertBoard(board) > 0) {
-			mv.setViewName("redirect:boardList.do");
+			if ("my".equals(source)) {
+				mv.setViewName("redirect:myBoardList.do");
+			} else {
+				mv.setViewName("redirect:boardList.do?category=" + category);
+			}
 		} else {
 			mv.setViewName("common/error");
 			mv.addObject("message", "새 게시글 등록 실패!");
 		}
 
-		return mv.getViewName(); // ModelAndView 객체의 viewName을 리턴
+		return mv.getViewName();
 	}
 
 	// 게시글 수정 메소드
 	@RequestMapping(value = "boardUpdate.do", method = RequestMethod.POST)
 	public ModelAndView boardUpdateMethod(ModelAndView mv, Board board, HttpServletRequest request,
 			@RequestParam(name = "deleteFile", required = false) String delFlag,
+			@RequestParam(name = "source", required = false) String source,
 			@RequestParam(name = "ofile", required = false) MultipartFile mfile,
 			@RequestParam(name = "page", required = false) String page) {
 
@@ -320,7 +373,6 @@ public class BoardController {
 				try {
 					mfile.transferTo(new File(savePath + "\\" + renameFileName));
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					mv.addObject("message", "첨부파일 저장에 실패하였습니다. 다시 시도해주세요.");
 					mv.setViewName("common/error");
@@ -332,11 +384,15 @@ public class BoardController {
 			board.setOriginalFileName(fileName);
 			board.setRenameFileName(renameFileName);
 		}
+		
+		board.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
 
 		if (boardService.updateBoard(board) > 0) {
+			mv.addObject("updatedAt", board.getUpdatedAt());
 			mv.addObject("boardId", board.getBoardId());
 			mv.setViewName("redirect:boardDetail.do?boardId=" + board.getBoardId() + "&page=" + currentPage
-					+ "&category=" + board.getBoardCategory());
+					+ "&category=" + board.getBoardCategory()
+					+ (source != null && source.equals("my") ? "&source=my" : ""));
 		} else {
 			mv.addObject("message", "게시글 수정에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("common/error");
@@ -347,11 +403,12 @@ public class BoardController {
 
 	// 게시글 삭제용 메소드
 	@RequestMapping("boardDelete.do")
-	public ModelAndView boardDeleteMethod(@RequestParam("boardId") int boardId,
+	public ModelAndView boardDeleteMethod(
+			@RequestParam("boardId") int boardId,
 			@RequestParam(name = "page", required = false) String page,
-			@RequestParam(name = "category", required = false) String category, HttpServletRequest request,
-			ModelAndView mv,
-			HttpSession session) {
+			@RequestParam(name = "category", required = false) String category, 
+			@RequestParam(name = "source", required = false) String source,
+			HttpServletRequest request, ModelAndView mv, HttpSession session) {
 
 		Users loginUser = (Users) session.getAttribute("loginUser");
 	    if (loginUser == null) {
@@ -368,7 +425,7 @@ public class BoardController {
 		
 		Board board = boardService.selectBoard(boardId); // 게시글 정보 조회
 
-		boardService.deleteBoardReports(board);
+		boardService.deleteBoardReports(board);	// 신고 테이블에서 먼저 삭제
 		
 		if (boardService.deleteBoard(board) > 0) {
 			// 첨부파일 삭제
@@ -378,14 +435,22 @@ public class BoardController {
 			}
 
 			// 리다이렉트 경로 설정
-			String redirectUrl = "redirect:boardList.do";
-			if (category != null && !category.trim().isEmpty()) {
-				redirectUrl += "?category=" + category;
-				if (page != null && !page.trim().isEmpty()) {
-					redirectUrl += "&page=" + page;
+			String redirectUrl;
+			if("my".equals(source)) {
+				redirectUrl = "redirect:myBoardList.do";
+				if(page != null && !page.trim().isEmpty()) {	// 내 게시글 목록일 때
+					redirectUrl += "?page=" + page;
 				}
-			} else if (page != null && !page.trim().isEmpty()) {
-				redirectUrl += "?page=" + page;
+			}else {
+				redirectUrl = "redirect:boardList.do";
+				if(category != null && !category.trim().isEmpty()) { // 카테고리가 있을 때
+					redirectUrl += "?category=" + category;
+					if(page != null && !page.trim().isEmpty()) {
+						redirectUrl += "&page=" + page;
+					}
+				} else if(page != null && !page.trim().isEmpty()) {
+					redirectUrl += "?page=" + page;
+				}
 			}
 
 			mv.setViewName(redirectUrl);
@@ -499,10 +564,12 @@ public class BoardController {
 		Comment comment = new Comment();
 		comment.setCommentId(commentId);
 		comment.setContent(content);
+		comment.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
 		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인 용도
 
 		int result = boardService.updateBoardComment(comment);
 		if (result > 0) {
+			mv.addObject("updatedAt", comment.getUpdatedAt());
 			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&page=" + page + "&cpage=" + cpage);
 		} else {
 			mv.addObject("message", "댓글 수정에 실패하였습니다. 다시 시도해주세요.");
@@ -517,7 +584,8 @@ public class BoardController {
 	public ModelAndView deleteBoardCommentMethod(ModelAndView mv, HttpSession session,
 			@RequestParam("commentId") int commentId,
 			@RequestParam("boardId") int boardId,
-			@RequestParam("category") String category) {
+			@RequestParam("category") String category,
+			@RequestParam(name = "cpage", required = false) String cpageStr) {
 
 		Users loginUser = (Users) session.getAttribute("loginUser");
 		if (loginUser == null) {
@@ -531,7 +599,27 @@ public class BoardController {
 
 		int result = boardService.deleteBoardComment(param);
 		if (result > 0) {
-			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+			  // ✅ 삭제 성공 후 전체 댓글 수를 다시 계산
+	        int totalCommentCount = boardService.selectBoardCommentCount(boardId); // 이 메서드는 댓글 총 개수 리턴해야 함
+	        int commentsPerPage = 10;
+	        int maxCpage = (int) Math.ceil((double) totalCommentCount / commentsPerPage);
+	        
+	        // 전달받은 cpage 파라미터 문자열을 정수로 파싱, 없거나 잘못된 경우 기본값 1
+	        int cpage = 1;
+	        try {
+	            cpage = Integer.parseInt(cpageStr);
+	        } catch (Exception e) {
+	        }
+
+	        // ✅ 현재 페이지가 최대 페이지보다 크면 조정
+	        if (cpage > maxCpage) {
+	            cpage = maxCpage;
+	        }
+	        if (cpage < 1) {
+	            cpage = 1;
+	        }
+			
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&cpage=" + cpage);
 		} else {
 			mv.addObject("message", "댓글 삭제에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("common/error");
@@ -829,7 +917,38 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 게시글 신고 처리용 메소드
+	// 신고된 게시글 목록 출력용 메소드
+	@RequestMapping("reportedBoardList.do")
+	public ModelAndView selectListReportedBoard(ModelAndView mv,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit) {
+
+	    int currentPage = (page != null && !page.isEmpty()) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    // 전체 신고 수 조회
+	    int listCount = boardService.selectReportedPostCount();
+
+	    // 페이징 계산
+	    Paging paging = new Paging(listCount, limit, currentPage, "reportedBoardList.do");
+	    paging.calculate();
+
+	    // 신고된 게시글 목록 조회
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("startRow", paging.getStartRow());
+	    param.put("endRow", paging.getEndRow());
+
+	    List<ReportPost> list = boardService.selectListReportedPost(param);
+
+	    // 뷰 전달
+	    mv.addObject("list", list);
+	    mv.addObject("paging", paging);
+	    mv.setViewName("admin/reportedBoardListView"); // JSP 경로에 맞게 조정
+
+	    return mv;
+	}
+	
+	// 게시글 신고 등록용 메소드
 	@RequestMapping(value = "boardReportInsert.do", method = RequestMethod.POST)
 	public ModelAndView insertBoardReport(ModelAndView mv, HttpSession session,
 	                                      @RequestParam("targetId") int boardId,
@@ -847,16 +966,43 @@ public class BoardController {
 	    report.setReason(reason);
 	    report.setReporterId(loginUser.getLoginId());
 
-	    int result = reportPostService.insertBoardReport(report);
+	    try {
+	        int result = reportPostService.insertBoardReport(report);
 
-	    if (result > 0) {
-	    	mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
-	    } else {
-	        mv.addObject("message", "신고 등록 실패! 다시 시도해주세요.");
-	        mv.setViewName("common/error");
+	        if (result > 0) {
+	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
+	        } else {
+	            mv.addObject("alertMsg", "신고 등록 실패! 다시 시도해주세요.");
+	            mv.setViewName("board/boardReportForm");  // 신고 작성 폼 JSP
+	        }
+
+	    } catch (Exception e) {
+	        mv.addObject("alertMsg", "이미 신고한 게시글이거나 알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
+	        mv.setViewName("board/boardReportView");  // 다시 신고 폼 JSP
 	    }
 
+	    // 폼에 hidden으로 필요하기 때문에 다시 전달
+	    mv.addObject("targetId", boardId);
+	    mv.addObject("category", category);
 	    return mv;
 	}
+	
+	// 신고 게시글 처리용 메소드
+	@RequestMapping("checkReport.do")
+	public ModelAndView checkReport(@RequestParam("reportId") int reportId,
+	                                @RequestParam("page") int page,
+	                                ModelAndView mv) {
+
+	    int result = boardService.updateReportChecked(reportId);
+
+	    if (result > 0) {
+	        mv.addObject("message", "신고가 처리되었습니다.");
+	    } else {
+	        mv.addObject("message", "신고 처리 실패");
+	    }
+	    mv.setViewName("redirect:reportedBoardList.do?page=" + page);
+	    return mv;
+	}
+	
 	
 }

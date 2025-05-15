@@ -1,157 +1,169 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%-- JSTL 코어 라이브러리 임포트 필요 --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>The Dish FAQ</title>
 <style>
-    /* 전체 페이지 기본 스타일 */
     body {
-        font-family: 'Arial', sans-serif;
-        margin: 0; /* 기본 마진 제거 */
+        font-family: Arial, sans-serif;
         padding: 20px;
-        background-color: #f8f8f8; /* 연한 배경색 */
+        background: #f8f8f8;
     }
 
     h1 {
+        text-align: center;
         color: #333;
+    }
+
+    #faqListContainer {
+        max-width: 800px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .faq-item {
+        border-bottom: 1px solid #eee;
+        margin-bottom: 10px;
+    }
+
+    .question {
+        font-weight: bold;
+        padding: 15px 20px;
+        cursor: pointer;
+        background: #fefefe;
+        position: relative;
+    }
+
+    .question::after {
+        content: '+';
+        position: absolute;
+        right: 20px;
+        font-size: 18px;
+    }
+
+    .faq-item.active .question::after {
+        content: '-';
+    }
+
+    .answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.8s ease, padding 0.8s ease;
+        padding: 0 20px;
+        color: #555;
+    }
+
+    .faq-item.active .answer {
+        max-height: 500px;
+        padding: 15px 20px;
+    }
+
+    .admin-btns {
+        margin-top: 10px;
+        text-align: right;
+    }
+
+    .admin-btns form {
+        display: inline;
+    }
+
+    .admin-btns button,
+    .register-btn {
+        background-color: #666;
+        color: #fff;
+        border: none;
+        padding: 7px 14px;
+        font-size: 13px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    .admin-btns button:hover,
+    .register-btn:hover {
+        background-color: #444;
+    }
+
+    .answer-text {
+        white-space: pre-line;
+    }
+
+    .register-wrapper {
         text-align: center;
         margin-bottom: 30px;
     }
-
-    /* FAQ 목록 컨테이너 스타일 */
-    #faqListContainer {
-        max-width: 800px; /* 최대 너비 설정 */
-        margin: 20px auto; /* 가운데 정렬 */
-        background-color: #fff; /* 하얀 배경 */
-        border-radius: 8px; /* 모서리 둥글게 */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
-        overflow: hidden; /* 컨테이너 넘치는 내용 숨김 */
-    }
-
-    /* 개별 FAQ 항목 스타일 */
-    .faq-item {
-        border-bottom: 1px solid #eee; /* 하단 구분선 */
-    }
-    .faq-item:last-child {
-        border-bottom: none; /* 마지막 항목 하단선 제거 */
-    }
-
-    /* 질문 부분 스타일 */
-    .question {
-        font-weight: bold;
-        color: #555;
-        padding: 15px 20px; /* 안쪽 여백 */
-        cursor: pointer; /* 클릭 가능한 모양 */
-        background-color: #fefefe; /* 질문 배경색 */
-        position: relative; /* ::after 위치 기준으로 설정 */
-        transition: background-color 0.3s ease; /* 호버 시 부드러운 전환 */
-    }
-
-    .question:hover {
-        background-color: #f0f0f0; /* 호버 시 배경색 변경 */
-    }
-
-    /* 드롭다운 화살표 (::after 가상 요소 사용) */
-    .question::after {
-        content: '+'; /* 기본 상태는 '+' */
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%); /* 세로 중앙 정렬 */
-        font-size: 1.2em;
-        transition: transform 0.3s ease; /* 회전 시 부드러운 전환 */
-        color: #888;
-    }
-
-    /* 답변이 보이는 상태일 때 질문 스타일 및 화살표 변경 */
-    .faq-item.active .question {
-        background-color: #f0f0f0; /* 활성화 상태 배경색 */
-    }
-    .faq-item.active .question::after {
-        content: '-'; /* 활성화 상태는 '-' */
-        transform: translateY(-50%) rotate(0deg); /* 회전 초기화 (또는 45deg로 X자 모양 가능) */
-        color: #333;
-    }
-
-
-    /* 답변 부분 스타일 */
-       .answer {
-        margin-top: 0;
-        padding: 0 20px; /* 기본 패딩 (닫혔을 때) */
-        color: #777;
-        background-color: #fff;
-        overflow: hidden; /* 내용이 넘칠 경우 숨김 */
-
-        max-height: 0; /* 기본 상태: 높이 0으로 숨김 */
-        transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* 부드러운 전환 효과 */
-    }
-
-    /* 답변이 보이는 상태일 때 스타일 */
-    .faq-item.active .answer {
-         max-height: 2000px; /* <-- 충분히 큰 값으로 설정 */
-         padding: 15px 20px; /* 열렸을 때 패딩 */
-    }
-    /* FAQ 없을 때 메시지 스타일 */
-    #faqListContainer p {
-        text-align: center;
-        padding: 20px;
-        color: #777;
-    }
-
 </style>
-<%-- 여기 불필요한 </style> 태그가 삭제되었어 --%>
-
 </head>
 <body>
-<c:import url="/WEB-INF/views/common/menubar.jsp"></c:import>
-  <h1>자주 묻는 질문 (FAQ)</h1>
 
-    <div id="faqListContainer">
-        <%-- 컨트롤러에서 넘겨받은 faqList 데이터 사용 --%>
-        <c:choose>
-            <c:when test="${not empty faqList}">
-                <c:forEach var="faq" items="${faqList}">
-                    <div class="faq-item">
-                        <div class="question">
-                            Q: <c:out value="${faq.question}"/>
-                        </div>
-                        <div class="answer">
-                            A: <c:out value="${faq.answer}"/>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <p>등록된 FAQ가 없습니다.</p>
-            </c:otherwise>
-        </c:choose>
+<c:import url="/WEB-INF/views/common/menubar.jsp"/>
+
+<h1>자주 묻는 질문 (FAQ)</h1>
+
+<!-- 등록 버튼 -->
+<c:if test="${sessionScope.loginUser != null && sessionScope.loginUser.role eq 'ADMIN'}">
+    <div class="register-wrapper">
+        <button class="register-btn" onclick="location.href='FAQWrite.do';">+ FAQ 등록</button>
     </div>
+</c:if>
 
-      <script>
-        document.querySelectorAll('.question').forEach(item => {
-            item.addEventListener('click', event => {
-                // 클릭된 질문의 부모인 .faq-item 요소를 찾음
-                const faqItem = item.closest('.faq-item');
+<div id="faqListContainer">
+    <c:choose>
+        <c:when test="${not empty faqList}">
+            <c:forEach var="faq" items="${faqList}">
+                <div class="faq-item" id="faq-${faq.faqId}">
+                    <div class="question" onclick="toggleFAQ(this)">Q: <span class="question-text">${faq.question}</span></div>
+                    <div class="answer">
+                        <div class="answer-text" id="answerText-${faq.faqId}">${faq.answer}</div>
 
-                // 해당 faq-item에 'active' 클래스를 토글 (추가 또는 제거)
-                faqItem.classList.toggle('active');
+                        <!-- 관리자 전용 버튼 -->
+                        <c:if test="${sessionScope.loginUser != null && sessionScope.loginUser.role eq 'ADMIN'}">
+                            <div class="admin-btns">
+                                <!-- 수정 버튼: 수정 페이지 이동 -->
+                                <form action="faqmoveup.do" method="get">
+                                    <input type="hidden" name="no" value="${faq.faqId}">
+                                    <button type="submit">수정</button>
+                                </form>
 
-                // 다른 열려있는 FAQ 항목 닫기 (선택 사항)
-                document.querySelectorAll('.faq-item.active').forEach(openItem => {
-                    if (openItem !== faqItem) { // 방금 클릭한 항목이 아니면
-                         openItem.classList.remove('active'); // active 클래스 제거
-                    }
-                });
-            });
-        });
+                                <!-- 삭제 버튼 -->
+                                 <button onclick="location.href='faqdelete.do?Id=${faq.faqId}'">삭제</button>
+                            </div>
+                        </c:if>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <p style="text-align:center; padding:20px;">FAQ가 없습니다.</p>
+        </c:otherwise>
+    </c:choose>
+</div>
 
-         // 페이지 로드 시 모든 답변을 CSS의 max-height: 0으로 숨김 (별도의 JS display: none 설정 제거)
-         // CSS에서 .answer { max-height: 0; overflow: hidden; ... } 속성으로 기본적으로 숨겨져야 함
+<c:import url="/WEB-INF/views/common/footer.jsp"/>
 
-    </script>
-<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
+<script>
+function toggleFAQ(element) {
+  const item = element.closest('.faq-item');
+  const answer = item.querySelector('.answer');
+
+  if (item.classList.contains('active')) {
+    // 접기
+    answer.style.maxHeight = '0px';
+    answer.style.padding = '0 20px';
+    item.classList.remove('active');
+  } else {
+    // 펼치기
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    answer.style.padding = '15px 20px';
+    item.classList.add('active');
+  }
+}
+</script>
+
 </body>
 </html>

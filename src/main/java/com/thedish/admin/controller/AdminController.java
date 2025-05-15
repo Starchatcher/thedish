@@ -20,12 +20,16 @@ public class AdminController {
     // ✅ 관리자 대시보드
     @RequestMapping("dashboard.do")
     public ModelAndView adminDashboard(ModelAndView mv) {
+
+
         int todayJoin = adminService.countTodayJoin();
         int todayWithdraw = adminService.countTodayWithdraw();
         int todayReport = adminService.countTodayReports();
         int todayReview = adminService.countTodayReviews();
         int todayInquiry = adminService.countTodayInquiries();
         int totalUsers = adminService.countTotalUsers();
+
+
 
         List<Map<String, Object>> dailySummary = adminService.selectDailySummary();
 
@@ -38,11 +42,15 @@ public class AdminController {
         for (Map<String, Object> row : dailySummary) {
             labels.add((String) row.get("DAY"));
 
+
+
             postData.add(row.get("POST_COUNT") != null ? ((Number) row.get("POST_COUNT")).intValue() : 0);
             boardViewData.add(row.get("BOARD_VIEW_COUNT") != null ? ((Number) row.get("BOARD_VIEW_COUNT")).intValue() : 0);
             recipeViewData.add(row.get("RECIPE_VIEW_COUNT") != null ? ((Number) row.get("RECIPE_VIEW_COUNT")).intValue() : 0);
             drinkViewData.add(row.get("DRINK_VIEW_COUNT") != null ? ((Number) row.get("DRINK_VIEW_COUNT")).intValue() : 0);
         }
+
+
 
         mv.addObject("todayJoin", todayJoin);
         mv.addObject("todayWithdraw", todayWithdraw);
@@ -51,12 +59,15 @@ public class AdminController {
         mv.addObject("todayInquiry", todayInquiry);
         mv.addObject("totalUsers", totalUsers);
 
+        // ✅ 그래프/테이블 데이터 JSP로 전달
         mv.addObject("dailySummary", dailySummary);
         mv.addObject("postViewLabels", labels);
+
         mv.addObject("postData", postData);             // 게시글 수 (그래프 1)
         mv.addObject("viewData", boardViewData);        // 게시판 조회수 (그래프 2)
         mv.addObject("recipeViewData", recipeViewData); // JSP 테이블용
         mv.addObject("drinkViewData", drinkViewData);   // JSP 테이블용
+
 
         mv.setViewName("admin/adminDashboard");
         return mv;
@@ -68,4 +79,7 @@ public class AdminController {
         mv.setViewName("admin/noticeList");
         return mv;
     }
+
+    // ❌ 사용자 목록 기능은 AdminUserController로 이동했으므로 제거함
+    // @RequestMapping("userList.do") → 삭제
 }

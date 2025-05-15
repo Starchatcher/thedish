@@ -127,6 +127,41 @@ form {
     const fileName = input.files.length > 0 ? input.files[0].name : "선택된 파일 없음";
     fileNameDisplay.textContent = fileName;
   }
+  
+  function checkByteLimit(textarea, maxByte, counterId) {
+	  let text = textarea.value;
+	  let byteCount = 0;
+	  let cutIndex = text.length;
+
+	  for (let i = 0; i < text.length; i++) {
+	    const char = text.charAt(i);
+	    byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+
+	    if (byteCount > maxByte) {
+	      cutIndex = i;
+	      break;
+	    }
+	  }
+
+	  if (byteCount > maxByte) {
+	    alert(maxByte + "byte까지만 입력할 수 있습니다.");
+	    textarea.value = text.substring(0, cutIndex);
+	    byteCount = 0;
+	    for (let i = 0; i < cutIndex; i++) {
+	      const char = textarea.value.charAt(i);
+	      byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+	    }
+	  }
+
+	  if (counterId) {
+	    document.getElementById(counterId).innerText = byteCount;
+	  }
+	}
+  
+  window.addEventListener('DOMContentLoaded', function () {
+	  const textarea = document.querySelector('textarea[name="content"]');
+	  if (textarea) checkByteLimit(textarea, 4000, 'boardByteCount');
+	});
 </script>
 </head>
 <body>
@@ -138,6 +173,7 @@ form {
 
 		<input type="hidden" name="page" value="${ currentPage }">
 		<input type="hidden" name="boardId" value="${board.boardId}" />
+		<input type="hidden" name="source" value="${param.source}" />
 		<!-- 게시판 선택 + 제목 입력 -->
 		<div class="title-row">
 			<input type="text" name="title" class="title-input"
@@ -157,7 +193,8 @@ form {
 
 		<!-- 내용 입력 -->
 		<textarea name="content" class="editor" placeholder="내용을 입력해 주세요."
-			required>${ board.content }</textarea>
+          oninput="checkByteLimit(this, 4000, 'boardByteCount')" required>${ board.content }</textarea>
+		<div><span id="boardByteCount">0</span> / 4000 byte</div>
 
 		<!-- 파일 선택 -->
 		<div class="file-upload">

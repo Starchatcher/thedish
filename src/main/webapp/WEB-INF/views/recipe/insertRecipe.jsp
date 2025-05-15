@@ -63,13 +63,26 @@ select {
     /* 필요에 따라 추가 스타일링 (예: 화살표 모양 변경) 필요 */
 }
 
-/* 파일 업로드 필드 */
+/* 숨겨진 진짜 input */
 input[type="file"] {
-    display: block; /* 블록 요소로 만들고 */
-    margin-top: 10px; /* 위쪽 여백 */
-    font-size: 14px; /* 글자 크기 */
+    display: none;
 }
 
+/* 사용자 정의 파일 업로드 버튼 */
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2f2f2f;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-label:hover {
+    background-color: #444;
+}
 
 /* 필수 입력 표시 (*) 스타일 */
 span[style="color:red"] { /* HTML에 직접 style로 지정된 색상을 타겟팅 */
@@ -86,7 +99,7 @@ span[style="color:red"] { /* HTML에 직접 style로 지정된 색상을 타겟�
     font-size: 16px;
     font-weight: bold;
     color: white; /* 글자색 */
-    background-color: #8FBC8F; /* 목록 페이지 검색 버튼 색상 */
+    background-color: #444; /* 목록 페이지 검색 버튼 색상 */
     border: none; /* 테두리 제거 */
     border-radius: 5px; /* 둥근 모서리 */
     cursor: pointer; /* 커서 모양 변경 */
@@ -94,7 +107,7 @@ span[style="color:red"] { /* HTML에 직접 style로 지정된 색상을 타겟�
 }
 
 .submit-btn:hover {
-    background-color: #7aa97a; /* 호버 시 색상 변경 */
+    background-color: #777; /* 호버 시 색상 변경 */
 }
 
 /* 필드셋 스타일 (선택 사항) */
@@ -148,9 +161,10 @@ legend {
         <label for="ingredientName">재료명 (INGREDIENT_NAME) <span style="color:red">*</span>:</label>
         <textarea id="ingredientName" name="ingredientName" maxlength="2000" rows="4" required></textarea>
 
-        <!-- 이미지 업로드 필드 -->
-        <label for="images">이미지 업로드:</label>
-        <input type="file" id="images" name="imageFile" accept="image/*"  />
+       <label for="images">이미지 업로드:</label><br>
+<label for="images" class="custom-file-label">파일 선택</label>
+<input type="file" id="images" name="imageFile" accept="image/*" />
+<span id="fileNameDisplay" style="margin-left: 10px; color: #ddd;">선택된 파일 없음</span>
 <div id="imagePreview" style="margin-top: 10px; border: 1px solid #ccc; width: 150px; height: 150px; overflow: hidden;">
     <img id="previewImage" src="#" alt="이미지 미리보기" style="max-width: 100%; max-height: 100%; display: none;" />
 </div>
@@ -185,10 +199,23 @@ legend {
     } else {
         console.error("오류: 'images' ID를 가진 input 요소를 찾을 수 없습니다.");
     }
+    
+ // 파일명 표시
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const display = document.getElementById('fileNameDisplay');
+        if (file) {
+            display.textContent = file.name;
+        } else {
+            display.textContent = '선택된 파일 없음';
+        }
+    });
 </script>
+
+
         <button type="submit" class="submit-btn">등록하기</button>
     </form>
-    <c:import url="/WEB-INF/views/common/sidebar.jsp" />
+    
     <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
