@@ -9,7 +9,6 @@
   <style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background-color: #f0f8ff;
       margin: 0;
       padding: 0;
       height: 100vh;
@@ -41,7 +40,7 @@
     .btn {
       display: inline-block;
       padding: 12px 24px;
-      background-color: #3498db;
+      background-color: #444;
       color: white;
       text-decoration: none;
       font-weight: bold;
@@ -51,7 +50,7 @@
     }
 
     .btn:hover {
-      background-color: #2980b9;
+      background-color: #777;
     }
   </style>
 </head>

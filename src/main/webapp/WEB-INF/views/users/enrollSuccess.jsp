@@ -9,7 +9,6 @@
   <style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background: linear-gradient(135deg, #f8d5dc, #d3eaf2);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -42,7 +41,7 @@
     .btn {
       display: inline-block;
       padding: 12px 24px;
-      background-color: #2364aa;
+      background-color: #444;
       color: white;
       border-radius: 6px;
       text-decoration: none;
@@ -52,7 +51,7 @@
     }
 
     .btn:hover {
-      background-color: #1e5799;
+      background-color: #777;
     }
   </style>
 </head>
