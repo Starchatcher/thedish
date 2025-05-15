@@ -94,7 +94,7 @@ td a:hover {
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-<!-- ✅ 관리자와 일반 유저에 따라 제목 변경 -->
+<!-- 관리자와 일반 유저에 따라 제목 변경 -->
 <h2>
     <c:choose>
         <c:when test="${sessionScope.loginUser.role eq 'ADMIN'}">
@@ -144,7 +144,7 @@ td a:hover {
     </tbody>
 </table>
 
-<!-- ✅ 일반 유저만 '문의하기' 버튼 표시 -->
+<!-- 일반 유저만 '문의하기' 버튼 표시 -->
 <c:if test="${sessionScope.loginUser.role ne 'ADMIN'}">
     <div class="btn-wrap">
         <a href="qnaWriteForm.do" class="qna-btn">문의하기</a>
