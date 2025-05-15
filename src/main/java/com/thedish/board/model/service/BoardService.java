@@ -52,5 +52,6 @@ public interface BoardService {
 	int deleteCommentsByBoardId(Map<String, Object> param);
 	List<ReportPost> selectListReportedPost(Map<String, Object> param);
 	int selectReportedPostCount ();
-	int updateReportChecked (int report_id);
+	int updateReportChecked (int reportId);
+	int insertBoardReport(ReportPost reportPost);
 }

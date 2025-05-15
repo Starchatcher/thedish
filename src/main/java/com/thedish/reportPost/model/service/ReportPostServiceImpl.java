@@ -12,8 +12,4 @@ public class ReportPostServiceImpl implements ReportPostService{
 	@Autowired
 	ReportPostDao reportPostDao;
 
-	@Override
-	public int insertBoardReport(ReportPost reportPost) {
-		return reportPostDao.insertBoardReport(reportPost);
-	}
 }

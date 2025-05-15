@@ -399,10 +399,10 @@ textarea:focus {
          
          <c:if test="${ loginUser.role ne 'ADMIN' and loginUser.loginId ne board.writer }">
             <form id="reportForm" action="boardReportPage.do" method="get" style="display: inline;">
-               <input type="hidden" name="targetId" value="${ board.boardId }">
-               <input type="hidden" name="category" value="${ category }">
-               <button type="submit" class="report-btn">🚨 신고</button>
-            </form>
+			   <input type="hidden" name="targetId" value="${board.boardId}">
+			   <input type="hidden" name="category" value="${param.category}">
+			   <button type="submit" class="report-btn" onclick="return checkLogin()">🚨 신고</button>
+			</form>
          </c:if>
          
          <c:if test="${loginUser.loginId eq board.writer || loginUser.role eq 'ADMIN'}">
@@ -744,6 +744,8 @@ textarea:focus {
             }
         });
     }
+    
+    
 
     document.addEventListener("DOMContentLoaded", function () {
          const replyMap = {};
@@ -806,6 +808,17 @@ textarea:focus {
          }
        }
     
+    function checkLogin() {
+        const loginId = '${sessionScope.loginUser.loginId}';
+
+        if (!loginId) {
+            alert("로그인이 필요합니다.");
+            location.href = 'loginPage.do';
+            return false; // form 제출 막기
+        }
+
+        return true; // 로그인 되어있으면 정상 제출
+    }
 
 
 </script>

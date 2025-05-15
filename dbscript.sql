@@ -11652,72 +11652,6 @@ INSERT INTO report_post (board_id, reason, reporter_id) VALUES
 
 
 
--- CREATE TABLE: report_user
-CREATE TABLE report_user (
-    report_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    reported_user_id VARCHAR2(50) NOT NULL,
-    reason VARCHAR2(500) NOT NULL,
-    reporter_id VARCHAR2(50) NOT NULL,
-    reported_at DATE DEFAULT SYSDATE,
-    is_checked CHAR(1) DEFAULT 'N' NOT NULL CHECK (is_checked IN ('Y', 'N')),
-    checked_at DATE,
-    CONSTRAINT fk_report_user_reported FOREIGN KEY (reported_user_id) REFERENCES users(login_id),
-    CONSTRAINT fk_report_user_reporter FOREIGN KEY (reporter_id) REFERENCES users(login_id)
-);
-
-COMMENT ON COLUMN report_user.report_id IS '신고 고유 ID (자동 생성)';
-COMMENT ON COLUMN report_user.reported_user_id IS '신고당한 사용자 login_id';
-COMMENT ON COLUMN report_user.reason IS '신고 사유';
-COMMENT ON COLUMN report_user.reporter_id IS '신고한 사용자 login_id';
-COMMENT ON COLUMN report_user.reported_at IS '신고 일시 (기본값 SYSDATE)';
-COMMENT ON COLUMN report_user.is_checked IS '신고 처리 여부 (Y: 처리, N: 미처리)';
-COMMENT ON COLUMN report_user.checked_at IS '신고 처리 완료 일시';
-
-INSERT INTO report_user (
-    reported_user_id,
-    reason,
-    reporter_id,
-    reported_at,
-    is_checked,
-    checked_at
-) VALUES (
-    'user01',  -- 신고당한 사용자 login_id
-    '부적절한 게시물 작성',  -- 신고 사유
-    'ADMIN',  -- 신고한 사용자 login_id
-    SYSDATE,  -- 신고 일시 (기본값 SYSDATE이므로 생략 가능)
-    'N',      -- 처리 여부 (기본값 'N'이므로 생략 가능)
-    NULL      -- 처리 완료 일시 (아직 처리 전이라 NULL)
-);
-
-
-
-
--- CREATE TABLE: search_log
-CREATE TABLE search_log (
-    log_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    login_id VARCHAR2(50) NOT NULL,
-    keyword VARCHAR2(200) NOT NULL,
-    search_type VARCHAR2(50) NOT NULL,
-    searched_at DATE DEFAULT SYSDATE,
-    CONSTRAINT fk_search_log_login_id FOREIGN KEY (login_id) REFERENCES users(login_id)
-);
-
-COMMENT ON COLUMN search_log.log_id IS '검색 로그 고유 ID (자동 생성)';
-COMMENT ON COLUMN search_log.login_id IS '사용자 로그인 ID (users 테이블 참조)';
-COMMENT ON COLUMN search_log.keyword IS '검색 키워드';
-COMMENT ON COLUMN search_log.search_type IS '검색 유형 (예: 레시피, 게시글 등)';
-COMMENT ON COLUMN search_log.searched_at IS '검색 일시 (기본값 SYSDATE)';
-
-
-INSERT INTO search_log (login_id, keyword, search_type) VALUES
-('user01', '닭가슴살 요리', 'recipe');
-
-INSERT INTO search_log (login_id, keyword, search_type, searched_at) VALUES
-('user02', '알레르기 없는 음식', 'recipe', TO_DATE('2025-04-18 10:15:00', 'YYYY-MM-DD HH24:MI:SS'));
-
-INSERT INTO search_log (login_id, keyword, search_type) VALUES
-('user03', '건강 식단', 'recipe');
-
 
 -- CREATE TABLE: user_allergy
 CREATE TABLE user_allergy (
@@ -11736,38 +11670,6 @@ INSERT INTO user_allergy (login_id, allergy_id) VALUES ('user01', 1);  -- user01
 INSERT INTO user_allergy (login_id, allergy_id) VALUES ('user02', 2);  -- user02가 우유 알레르기 보유
 INSERT INTO user_allergy (login_id, allergy_id) VALUES ('user03', 3);  -- user03이 계란 알레르기 보유
 
-
-
--- CREATE TABLE: visit_log
-CREATE TABLE visit_log (
-    log_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    login_id VARCHAR2(50) NOT NULL,
-    ip_address VARCHAR2(50) NOT NULL,
-    page_url VARCHAR2(255) NOT NULL,
-    visited_at DATE NOT NULL,
-    CONSTRAINT fk_visit_log_login_id FOREIGN KEY (login_id) REFERENCES users(login_id)
-);
-
-
-COMMENT ON COLUMN visit_log.log_id IS '방문 로그 고유 ID (자동 생성)';
-COMMENT ON COLUMN visit_log.login_id IS '사용자 로그인 ID (users 테이블 참조)';
-COMMENT ON COLUMN visit_log.ip_address IS '사용자 접속 IP 주소';
-COMMENT ON COLUMN visit_log.page_url IS '사용자가 방문한 페이지 URL';
-COMMENT ON COLUMN visit_log.visited_at IS '방문 일시';
-
-
-
-INSERT INTO visit_log (login_id, ip_address, page_url, visited_at) VALUES
-('user01', '192.168.0.1', '/home', SYSDATE);
-
-INSERT INTO visit_log (login_id, ip_address, page_url, visited_at) VALUES
-('user02', '203.0.113.15', '/recipe/123', TO_DATE('2025-04-18 14:30:00', 'YYYY-MM-DD HH24:MI:SS'));
-
-INSERT INTO visit_log (login_id, ip_address, page_url, visited_at) VALUES
-('user03', '198.51.100.22', '/profile', TO_DATE('2025-04-17 09:15:00', 'YYYY-MM-DD HH24:MI:SS'));
-
-
-
 -- CREATE TABLE: pairing
 CREATE TABLE pairing (
     pairing_id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -11783,11 +11685,6 @@ COMMENT ON COLUMN pairing.drink_id IS '술 ID (drink.drink_id 참조)';
 COMMENT ON COLUMN pairing.pairing_id IS '페어링 고유 ID';
 COMMENT ON COLUMN pairing.reason IS '추천 이유';
 COMMENT ON COLUMN pairing.recipe_id IS '레시피 ID (recipe.recipe_id 참조)';
-
-
-
-
-
 
 
 -- CREATE TABLE: image

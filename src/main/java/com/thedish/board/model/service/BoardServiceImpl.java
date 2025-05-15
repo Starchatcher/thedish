@@ -187,8 +187,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int updateReportChecked(int report_id) {
-		return boardDao.updateReportChecked(report_id);
+	public int updateReportChecked(int reportId) {
+		return boardDao.updateReportChecked(reportId);
+	}
+
+	@Override
+	public int insertBoardReport(ReportPost reportPost) {
+		return boardDao.insertBoardReport(reportPost);
 	}
 
 }
