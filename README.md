@@ -44,6 +44,7 @@
 - 🧑‍🎨 [UI 설계](./docs/ui/UI설계.pdf)
 - 🔧 [DB 스크립트](./db/ddl/dbscript.sql)
 - 📊 [클래스 설계 보고서 (UML 포함)](uml/클래스설계.pdf)
+- 🧾 [DB 설계 보고서](report/DB설계.pdf)
 
 ---
 
