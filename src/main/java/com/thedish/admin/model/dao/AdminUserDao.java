@@ -13,4 +13,5 @@ public interface AdminUserDao {
     int countTotalUsers();
     int countActiveUsers();
     int countWithdrawnUsers();
+    int deactivateUser(String loginId); // 로그인 ID 기준으로 status = 'INACTIVE' 처리
 }

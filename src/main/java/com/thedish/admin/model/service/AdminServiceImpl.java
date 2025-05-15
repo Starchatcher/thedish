@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thedish.admin.model.dao.AdminDao;
+import com.thedish.users.model.vo.Users;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -19,6 +20,16 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.countTodayJoin();
     }
     
+    @Override
+    public int countActiveUsers() {
+    	return adminDao.countActiveUsers();
+    }
+    
+    @Override
+    public int countWithdrawnUsers() {
+    	return adminDao.countWithdrawnUsers();
+    }
+
     @Override
     public int countTotalUsers() {
         return adminDao.countTotalUsers();
@@ -48,10 +59,19 @@ public class AdminServiceImpl implements AdminService {
     public List<Map<String, Object>> selectDailySummary() {
         return adminDao.selectDailySummary();
     }
-    
+
     @Override
     public List<Map<String, Object>> selectDailyPostAndView() {
         return adminDao.selectDailyPostAndView();
     }
 
+    @Override
+    public List<Users> searchUsers(Map<String, Object> param) {
+        return adminDao.searchUsers(param);
+    }
+    
+    @Override
+    public int countUsersByStatus(Map<String, Object> param) {
+    	return adminDao.countUsersByStatus(param);
+    }
 }

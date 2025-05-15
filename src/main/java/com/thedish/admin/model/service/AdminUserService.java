@@ -14,4 +14,5 @@ public interface AdminUserService {
     int countTotalUsers();
     int countActiveUsers();
     int countWithdrawnUsers();
+    int deactivateUser(String loginId);
 }
