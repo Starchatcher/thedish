@@ -16558,15 +16558,15 @@ CREATE INDEX idx_board_writer ON board(writer);
 
 -- 전화번호 컬럼 추가
 ALTER TABLE USERS
-ADD (PHONE VARCHAR2(20));
+ADD (PHONE VARCHAR2(20) NOT NULL);
 
 -- 나이 컬럼 추가
 ALTER TABLE USERS
-ADD (AGE NUMBER(3));
+ADD (AGE NUMBER(3) NOT NULL);
 
 -- 성별 컬럼 추가
 ALTER TABLE USERS
-ADD (GENDER VARCHAR2(10));
+ADD (GENDER VARCHAR2(10) NOT NULL);
 
 -- 제공된 모든 식재료 목록과 업데이트된 알레르기 ID를 기반으로 생성된 INSERT 구문 (중복 쌍 제거)
 
