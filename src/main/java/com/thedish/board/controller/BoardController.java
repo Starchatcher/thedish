@@ -1,7 +1,6 @@
 package com.thedish.board.controller;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
@@ -952,7 +952,8 @@ public class BoardController {
 	public ModelAndView insertBoardReport(ModelAndView mv, HttpSession session,
 	                                      @RequestParam("targetId") int boardId,
 	                                      @RequestParam("category") String category,
-	                                      @RequestParam("reason") String reason) {
+	                                      @RequestParam("reason") String reason,
+	                                      RedirectAttributes redirectAttributes) {
 
 	    Users loginUser = (Users) session.getAttribute("loginUser");
 	    if (loginUser == null) {
@@ -971,18 +972,15 @@ public class BoardController {
 	        if (result > 0) {
 	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
 	        } else {
-	            mv.addObject("alertMsg", "신고 등록 실패! 다시 시도해주세요.");
-	            mv.setViewName("board/boardReportForm");  // 신고 작성 폼 JSP
+	            redirectAttributes.addFlashAttribute("alertMsg", "신고 등록 실패! 다시 시도해주세요.");
+	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=false");
 	        }
 
 	    } catch (Exception e) {
-	        mv.addObject("alertMsg", "이미 신고한 게시글이거나 알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
-	        mv.setViewName("board/boardReportView");  // 다시 신고 폼 JSP
+	        redirectAttributes.addFlashAttribute("alertMsg", "이미 신고한 게시글이거나 알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
+	        mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=false");
 	    }
 
-	    // 폼에 hidden으로 필요하기 때문에 다시 전달
-	    mv.addObject("targetId", boardId);
-	    mv.addObject("category", category);
 	    return mv;
 	}
 	

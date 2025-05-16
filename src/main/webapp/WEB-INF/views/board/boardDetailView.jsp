@@ -15,6 +15,7 @@
 <script>
     const commentCount = ${commentCount};
 </script>
+
 <style>
 .container {
    max-width: 800px;
@@ -527,12 +528,9 @@ textarea:focus {
     </div>
 
     <!-- 대댓글 전체 출력 (JS로 3개만 보이게) -->
-    <c:set var="visibleReplyCount" value="0" />
    <c:forEach var="r" items="${replyList}">
      <c:if test="${r.parentId eq c.commentId}">
        <c:set var="visibleReplyCount" value="${visibleReplyCount + 1}" />
-       
-       <!-- 🔥 숨김 조건 직접 계산 -->
        <c:choose>
          <c:when test="${visibleReplyCount > 3 and (empty editCommentId or editCommentId ne r.commentId)}">
            <div class="comment-box reply hidden-reply" data-parent="${r.parentId}" data-comment-id="${r.commentId}">
@@ -653,12 +651,18 @@ textarea:focus {
 </div>
 
 <c:if test="${param.reportSuccess eq 'true'}">
-    <script>
+    <script type="text/javascript">
         alert('🚨 신고가 완료되었습니다.');
     </script>
 </c:if>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />   
+
+<c:if test="${not empty alertMsg}">
+    <script>
+        alert('${alertMsg}');
+    </script>
+</c:if>
 
 <script type="text/javascript">
     const boardId = '${board.boardId}';
