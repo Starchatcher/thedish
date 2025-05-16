@@ -248,90 +248,92 @@ public class CommentController {
 		}
 
 		 // 맛집 추천 댓글 등록 요청 처리용
-	    @RequestMapping(value = "insertRestaurantComment.do", method = RequestMethod.POST)
-	    public String insertRestaurantComment(
-	            @RequestParam("recommendId") int recommendId, // 맛집 추천 ID
-	            @RequestParam("content") String content,
-	            @RequestParam("targetType") String targetType, // 댓글 대상 타입 (예: "restaurant")
-	            @RequestParam("page") int page, // 댓글 목록 페이징용 현재 페이지 번호 (리다이렉트 시 활용)
-	            @RequestParam("redirectUrl") String redirectUrl, // 댓글 등록 후 리다이렉트할 URL (성공 시 사용)
-	            HttpSession session,
-	            Model model, // 🎉 Model 객체를 파라미터로 받도록 추가
-	            RedirectAttributes redirectAttributes) { // 성공 시 리다이렉트 메시지 전달 위해 유지
+		@RequestMapping(value = "insertRestaurantComment.do", method = RequestMethod.POST)
+		public String insertRestaurantComment(
+		        @RequestParam("recommendId") int recommendId, // 맛집 추천 ID
+		        @RequestParam("content") String content,
+		        @RequestParam("targetType") String targetType, // 댓글 대상 타입 (예: "restaurant")
+		        // 클라이언트에서 이 파라미터에 '순수한 정수'만 담아 보내야 합니다.
+		        // 예: page=1, page=2 등. "1?no=110,1"과 같은 값은 오류를 유발합니다.
+		        @RequestParam("page") int page, // 댓글 목록 페이징용 현재 페이지 번호 (리다이렉트 시 활용)
+		        // 클라이언트에서 이 파라미터에 '경로'만 담아 보내야 합니다.
+		        // 예: redirectUrl=/restaurantRecommendDetail.do. 쿼리 스트링은 포함하지 마세요.
+		        @RequestParam("redirectUrl") String redirectUrl, // 댓글 등록 후 리다이렉트할 URL (성공 시 사용)
+		        HttpSession session,
+		        Model model,
+		        RedirectAttributes redirectAttributes) {
 
-	        logger.info("맛집 추천 댓글 작성 요청: recommendId={}, content={}, targetType={}", recommendId, content, targetType);
+		    logger.info("맛집 추천 댓글 작성 요청: recommendId={}, content={}, targetType={}", recommendId, content, targetType);
 
-	        // 세션에서 로그인 사용자 정보 가져오기
-	        Object loginUserObj = session.getAttribute("loginUser");
-	        String writerId = null; // 작성자 ID를 저장할 변수
+		    // 세션에서 로그인 사용자 정보 가져오기
+		    Object loginUserObj = session.getAttribute("loginUser");
+		    String writerId = null; // 작성자 ID를 저장할 변수
 
-	        // 1. 로그인 상태 확인 및 사용자 ID 가져오기
-	        if (loginUserObj != null) {
-	             try {
-	                 // LoginUser 타입으로 캐스팅하고 실제 사용자 ID를 가져오는 메소드 호출
-	                 // *** 실제 LoginUser 클래스 타입으로 캐스팅하고 Getter 메소드 호출하세요 ***
-	                 Users loginUser = (Users) loginUserObj;
-	                 writerId = loginUser.getLoginId(); // 예: getLoginId()
-	                 logger.info("로그인된 사용자 ID 확인: {}", writerId);
+		    // 1. 로그인 상태 확인 및 사용자 ID 가져오기
+		    if (loginUserObj != null) {
+		         try {
+		             // LoginUser 타입으로 캐스팅하고 실제 사용자 ID를 가져오는 메소드 호출
+		             // *** 실제 LoginUser 클래스 타입으로 캐스팅하고 Getter 메소드 호출하세요 ***
+		             Users loginUser = (Users) loginUserObj;
+		             writerId = loginUser.getLoginId(); // 예: getLoginId()
+		             logger.info("로그인된 사용자 ID 확인: {}", writerId);
 
-	             } catch (ClassCastException e) {
-	                 logger.error("세션의 loginUser 객체 타입 캐스팅 오류 (맛집 추천 댓글)", e);
-	                 model.addAttribute("msg", "사용자 정보를 가져오는 중 시스템 오류가 발생했습니다. 다시 로그인 해주세요."); // 🎉 Model에 메시지 담기
-	                 // 알림창 확인 후 이전 페이지 (맛집 추천 상세 페이지)로 돌아가도록 alertMessage.jsp에서 처리
-	                 return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
-	             }
+		         } catch (ClassCastException e) {
+		             logger.error("세션의 loginUser 객체 타입 캐스팅 오류 (맛집 추천 댓글)", e);
+		             model.addAttribute("msg", "사용자 정보를 가져오는 중 시스템 오류가 발생했습니다. 다시 로그인 해주세요.");
+		             return "common/alertMessage";
+		         }
 
-	        } else {
-	            // 로그인되지 않은 사용자의 댓글 작성 시도
-	            logger.warn("로그인되지 않은 사용자가 맛집 추천 댓글 작성을 시도했습니다. recommendId={}", recommendId);
-	            model.addAttribute("msg", "댓글 작성은 로그인 후 이용 가능합니다."); // 🎉 Model에 메시지 담기
-	             // 알림창 확인 후 이전 페이지 (맛집 추천 상세 페이지)로 돌아가도록 alertMessage.jsp에서 처리
-	            return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
-	        }
+		    } else {
+		        // 로그인되지 않은 사용자의 댓글 작성 시도
+		        logger.warn("로그인되지 않은 사용자가 맛집 추천 댓글 작성을 시도했습니다. recommendId={}", recommendId);
+		        model.addAttribute("msg", "댓글 작성은 로그인 후 이용 가능합니다.");
+		        return "common/alertMessage";
+		    }
 
-	        // writerId가 정상적으로 확보된 경우에만 댓글 객체 생성 및 서비스 호출 진행
-	        if (writerId != null) {
-	            Comment comment = new Comment(); // Comment 클래스 사용
-	            comment.setTargetId(recommendId);
-	            comment.setTargetType(targetType); // 대상 타입을 "restaurant" 등으로 설정 (파라미터로 받은 값 사용)
-	            comment.setContent(content);
-	            comment.setLoginId(writerId); // 로그인된 사용자 ID를 작성자로 설정
+		    // writerId가 정상적으로 확보된 경우에만 댓글 객체 생성 및 서비스 호출 진행
+		    if (writerId != null) {
+		        Comment comment = new Comment(); // Comment 클래스 사용
+		        comment.setTargetId(recommendId);
+		        comment.setTargetType(targetType); // 대상 타입을 "restaurant" 등으로 설정 (파라미터로 받은 값 사용)
+		        comment.setContent(content);
+		        comment.setLoginId(writerId); // 로그인된 사용자 ID를 작성자로 설정
 
-	            int result = 0; // 서비스 호출 결과 저장 변수
-	            try {
-	                result = commentService.insertRestaurantComment(comment); // 댓글 등록 서비스 호출 (서비스 메소드명 확인 필요)
-	            } catch (Exception e) {
-	                 // 서비스 호출 중 예외 발생 시 (DB 오류 등)
-	                 logger.error("댓글 서비스 insertRestaurantComment 호출 중 오류 발생", e);
-	                 model.addAttribute("msg", "댓글 등록 중 오류가 발생했습니다. 다시 시도해주세요."); // 🎉 Model에 메시지 담기
-	                 // 알림창 확인 후 이전 페이지 (맛집 추천 상세 페이지)로 돌아가도록 alertMessage.jsp에서 처리
-	                 return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
-	            }
+		        int result = 0; // 서비스 호출 결과 저장 변수
+		        try {
+		            result = commentService.insertRestaurantComment(comment); // 댓글 등록 서비스 호출 (서비스 메소드명 확인 필요)
+		        } catch (Exception e) {
+		             // 서비스 호출 중 예외 발생 시 (DB 오류 등)
+		             logger.error("댓글 서비스 insertRestaurantComment 호출 중 오류 발생", e);
+		             model.addAttribute("msg", "댓글 등록 중 오류가 발생했습니다. 다시 시도해주세요.");
+		             return "common/alertMessage";
+		        }
 
-	             // 서비스 호출 결과 처리
-	             if (result > 0) { // 서비스 호출 성공 시 (예: 1 반환 시)
-	                 logger.info("맛집 추천 댓글 작성 성공: recommendId={}, writer={}", recommendId, writerId);
-	                 // 성공 시에는 RedirectAttributes를 사용하여 상세 페이지에서 메시지 표시 (PRG 패턴 유지)
-	                 redirectAttributes.addFlashAttribute("successMessage", "댓글이 성공적으로 등록되었습니다.");
-	                 // 성공 시에는 리다이렉트 URL로 이동 (page 파라미터 포함)
-	                 // 예: return "redirect:/restaurantRecommendDetail.do?no=" + recommendId + "&page=" + page;
-	                 // 만약 redirectUrl 파라미터를 직접 사용한다면:
-	                 return "redirect:" + redirectUrl + "?no=" + recommendId + "&page=" + page; // 🎉 성공 시 리다이렉트
-	             } else { // 서비스 호출 실패 시 (영향 받은 행이 없는 경우 등)
-	                 logger.error("맛집 추천 댓글 작성 실패 (서비스 처리 문제): recommendId={}, writer={}", recommendId, writerId);
-	                 model.addAttribute("msg", "댓글 등록에 실패했습니다. 잠시 후 다시 시도해주세요."); // 🎉 Model에 메시지 담기
-	                 // 알림창 확인 후 이전 페이지 (맛집 추천 상세 페이지)로 돌아가도록 alertMessage.jsp에서 처리
-	                 return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
-	             }
+		         // 서비스 호출 결과 처리
+		         if (result > 0) { // 서비스 호출 성공 시 (예: 1 반환 시)
+		             logger.info("맛집 추천 댓글 작성 성공: recommendId={}, writer={}", recommendId, writerId);
+		             // 성공 시에는 RedirectAttributes를 사용하여 상세 페이지에서 메시지 표시 (PRG 패턴 유지)
+		             redirectAttributes.addFlashAttribute("successMessage", "댓글이 성공적으로 등록되었습니다.");
 
-	        } else {
-	             // loginUserObj는 null이 아니었으나 writerId를 가져오지 못한 경우 (매우 드물지만 안전하게 처리)
-	             logger.error("로그인 사용자 정보에서 ID를 가져올 수 없습니다. (맛집 추천 댓글) loginUserObj: {}", loginUserObj);
-	             model.addAttribute("msg", "사용자 정보를 가져오는 중 오류가 발생했습니다."); // 🎉 Model에 메시지 담기
-	             // 알림창 확인 후 이전 페이지 (맛집 추천 상세 페이지)로 돌아가도록 alertMessage.jsp에서 처리
-	             return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
-	        }
-	    }
+		             // ** 중요: 클라이언트에서 넘겨받은 redirectUrl (경로만 있어야 함)에 no와 page 파라미터를 붙여서 리다이렉트 URL을 생성합니다. **
+		             String finalRedirectUrl = redirectUrl + "?no=" + recommendId + "&page=" + page;
+		             logger.debug("댓글 등록 후 리다이렉트 URL: {}", finalRedirectUrl); // 생성된 최종 URL 확인용 로그
+
+		             return "redirect:" + finalRedirectUrl; // 성공 시 리다이렉트
+		         } else { // 서비스 호출 실패 시 (영향 받은 행이 없는 경우 등)
+		             logger.error("맛집 추천 댓글 작성 실패 (서비스 처리 문제): recommendId={}, writer={}", recommendId, writerId);
+		             model.addAttribute("msg", "댓글 등록에 실패했습니다. 잠시 후 다시 시도해주세요.");
+		             return "common/alertMessage";
+		         }
+
+		    } else {
+		         // loginUserObj는 null이 아니었으나 writerId를 가져오지 못한 경우 (매우 드물지만 안전하게 처리)
+		         logger.error("로그인 사용자 정보에서 ID를 가져올 수 없습니다. (맛집 추천 댓글) loginUserObj: {}", loginUserObj);
+		         model.addAttribute("msg", "사용자 정보를 가져오는 중 오류가 발생했습니다.");
+		         return "common/alertMessage";
+		    }
+		}
+
 		
 		@RequestMapping(value = "/deleteRestaurantComment.do", method = RequestMethod.POST)
 		public String deleteRestaurantComment(@RequestParam("commentId") int commentId,
