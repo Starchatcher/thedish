@@ -360,7 +360,7 @@ public class RecipeController {
 		
 		// 레시피 수정 페이지로 이동 처리용
 		@RequestMapping("moveUpdateRecipePage.do")
-		public String moveBoardUpdatePage(Model model, 
+		public String moveRecipeUpdatePage(Model model, 
 				@RequestParam("recipeId") int recipeId,
 				@RequestParam("page") int currentPage) {
 

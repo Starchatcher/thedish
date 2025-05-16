@@ -86,6 +86,7 @@
     <h2>🔑 비밀번호 재설정</h2>
     <form action="resetPassword.do" method="post">
       <input type="password" name="newPassword" placeholder="새 비밀번호 입력" required>
+      <small>영문자 + 숫자 조합, 8자 이상</small>
       <input type="submit" value="비밀번호 변경">
     </form>
 

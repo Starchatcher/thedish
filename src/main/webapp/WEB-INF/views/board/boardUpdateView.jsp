@@ -162,6 +162,26 @@ form {
 	  const textarea = document.querySelector('textarea[name="content"]');
 	  if (textarea) checkByteLimit(textarea, 4000, 'boardByteCount');
 	});
+  
+  function limitByte(input, maxByte) {
+	  let text = input.value;
+	  let byteCount = 0;
+	  let cutIndex = text.length;
+
+	  for (let i = 0; i < text.length; i++) {
+	    const char = text.charAt(i);
+	    byteCount += (char.match(/[ㄱ-ㅎㅏ-ㅣ가-힣]/)) ? 3 : (encodeURIComponent(char).length > 1 ? 2 : 1);
+	    if (byteCount > maxByte) {
+	      cutIndex = i;
+	      break;
+	    }
+	  }
+
+	  if (byteCount > maxByte) {
+	    alert("제목은 최대 " + maxByte + "byte까지 입력할 수 있습니다.");
+	    input.value = text.substring(0, cutIndex);
+	  }
+	}
 </script>
 </head>
 <body>
@@ -177,7 +197,7 @@ form {
 		<!-- 게시판 선택 + 제목 입력 -->
 		<div class="title-row">
 			<input type="text" name="title" class="title-input"
-				value="${ board.title }" placeholder="제목을 입력해 주세요." required>
+				value="${ board.title }" placeholder="제목을 입력해 주세요." required   oninput="limitByte(this, 100)" >
 
 
 			<select name="boardCategory" required>
