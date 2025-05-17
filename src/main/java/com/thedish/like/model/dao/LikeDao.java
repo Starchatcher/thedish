@@ -28,4 +28,8 @@ public class LikeDao {
 	public int countLikes (int targetId) {
 		return sqlSessionTemplate.selectOne("likeMapper.countLikes", targetId);
 	}
+	
+	public int deleteLikeAll (int targetId) {
+		return sqlSessionTemplate.delete("likeMapper.deleteLikeAll", targetId);
+	}
 }
