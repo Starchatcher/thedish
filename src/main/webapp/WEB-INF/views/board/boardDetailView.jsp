@@ -431,130 +431,127 @@ textarea:focus {
     댓글 ${commentCount} &nbsp; ❤️ <span id="like-num">${board.likeCount}</span>
   </div>
 
-<c:forEach var="c" items="${commentList}">
-  <c:if test="${empty c.parentId}">
-    <!-- 부모 댓글 -->
-    <div class="comment-box">
-      <div class="comment-meta">
-        <strong>${c.nickName}</strong> |
-        <c:choose>
-          <c:when test="${not empty c.updatedAt}">
-            <fmt:formatDate value="${c.updatedAt}" pattern="MM.dd HH:mm" />
-            &nbsp;<span style="color:#aaa;">수정됨</span>
-          </c:when>
-          <c:otherwise>
-            <fmt:formatDate value="${c.createdAt}" pattern="MM.dd HH:mm" />
-          </c:otherwise>
-        </c:choose>
-      </div>
-
-      <div class="comment-content">
-        <c:choose>
-          <c:when test="${not empty editCommentId and editCommentId eq c.commentId}">
-            <form action="boardCommentUpdate.do" method="post">
-              <input type="hidden" name="commentId" value="${c.commentId}" />
-              <input type="hidden" name="boardId" value="${board.boardId}" />
-              <input type="hidden" name="category" value="${param.category}" />
-              <input type="hidden" name="page" value="${currentPage}" />
-              <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-              <textarea name="content" required style="width:100%; height:80px;">${c.content}</textarea>
-              <div class="edit-buttons" style="margin-top:8px;">
-                <button type="submit">저장</button>
-                <button type="button"
-               onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}&page=${currentPage}&cpage=${commentPaging.currentPage}'">
-               취소
-             </button>
-
-              </div>
-            </form>
-          </c:when>
-          <c:otherwise>
-            ${c.content}
-          </c:otherwise>
-        </c:choose>
-      </div>
-
-      <c:if test="${empty editCommentId or editCommentId ne c.commentId}">
-        <div class="comment-buttons">
-          <c:if test="${ !empty loginUser.loginId }">
-            <form action="boardDetail.do" method="get" style="display:inline;">
-              <input type="hidden" name="boardId" value="${board.boardId}" />
-              <input type="hidden" name="category" value="${param.category}" />
-              <input type="hidden" name="replyTargetId" value="${c.commentId}" />
-              <input type="hidden" name="page" value="${currentPage}" />
-              <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-              <button type="submit">답글달기</button>
-            </form>
-          </c:if>
-
-          <c:if test="${loginUser.loginId eq c.loginId || loginUser.role eq 'ADMIN'}">
-            <form action="boardDetail.do" method="get" style="display:inline;">
-              <input type="hidden" name="boardId" value="${board.boardId}" />
-              <input type="hidden" name="category" value="${param.category}" />
-              <input type="hidden" name="editCommentId" value="${c.commentId}" />
-              <input type="hidden" name="page" value="${currentPage}" />
-              <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-              <button type="submit">수정</button>
-            </form>
-            <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-              <input type="hidden" name="commentId" value="${c.commentId}" />
-              <input type="hidden" name="boardId" value="${board.boardId}" />
-              <input type="hidden" name="category" value="${param.category}" />
-              <input type="hidden" name="page" value="${currentPage}" />
-              <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-              <button type="submit">삭제</button>
-            </form>
-          </c:if>
+  <c:forEach var="c" items="${commentList}">
+    <c:if test="${empty c.parentId}">
+      <!-- 부모 댓글 -->
+      <div class="comment-box">
+        <div class="comment-meta">
+          <strong>${c.nickName}</strong> |
+          <c:choose>
+            <c:when test="${not empty c.updatedAt}">
+              <fmt:formatDate value="${c.updatedAt}" pattern="MM.dd HH:mm" />
+              &nbsp;<span style="color:#aaa;">수정됨</span>
+            </c:when>
+            <c:otherwise>
+              <fmt:formatDate value="${c.createdAt}" pattern="MM.dd HH:mm" />
+            </c:otherwise>
+          </c:choose>
         </div>
-      </c:if>
 
-      <!-- 대댓글 작성 폼 -->
-      <c:if test="${param.replyTargetId eq c.commentId}">
-        <form action="boardReplyInsert.do" method="post" style="margin-top: 8px;">
-          <input type="hidden" name="boardId" value="${board.boardId}" />
-          <input type="hidden" name="parentId" value="${c.commentId}" />
-          <input type="hidden" name="category" value="${param.category}" />
-          <input type="hidden" name="page" value="${currentPage}" />
-          <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-          <textarea name="content" class="editor" placeholder="내용을 입력해 주세요."
-          oninput="limitByte(this, 4000)" required></textarea>
-          <div class="edit-buttons" style="margin-top:8px;">
-            <button type="submit">등록</button>
-            <button type="button" onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}'">취소</button>
+        <div class="comment-content">
+          <c:choose>
+            <c:when test="${not empty editCommentId and editCommentId eq c.commentId}">
+              <form action="boardCommentUpdate.do" method="post">
+                <input type="hidden" name="commentId" value="${c.commentId}" />
+                <input type="hidden" name="boardId" value="${board.boardId}" />
+                <input type="hidden" name="category" value="${param.category}" />
+                <input type="hidden" name="page" value="${currentPage}" />
+                <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+                <textarea name="content" required style="width:100%; height:80px;">${c.content}</textarea>
+                <div class="edit-buttons" style="margin-top:8px;">
+                  <button type="submit">저장</button>
+                  <button type="button"
+                    onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}&page=${currentPage}&cpage=${commentPaging.currentPage}'">
+                    취소
+                  </button>
+                </div>
+              </form>
+            </c:when>
+            <c:otherwise>
+              ${c.content}
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+        <c:if test="${empty editCommentId or editCommentId ne c.commentId}">
+          <div class="comment-buttons">
+            <c:if test="${ !empty loginUser.loginId }">
+              <form action="boardDetail.do" method="get" style="display:inline;">
+                <input type="hidden" name="boardId" value="${board.boardId}" />
+                <input type="hidden" name="category" value="${param.category}" />
+                <input type="hidden" name="replyTargetId" value="${c.commentId}" />
+                <input type="hidden" name="page" value="${currentPage}" />
+                <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+                <button type="submit">답글달기</button>
+              </form>
+            </c:if>
+
+            <c:if test="${loginUser.loginId eq c.loginId || loginUser.role eq 'ADMIN'}">
+              <form action="boardDetail.do" method="get" style="display:inline;">
+                <input type="hidden" name="boardId" value="${board.boardId}" />
+                <input type="hidden" name="category" value="${param.category}" />
+                <input type="hidden" name="editCommentId" value="${c.commentId}" />
+                <input type="hidden" name="page" value="${currentPage}" />
+                <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+                <button type="submit">수정</button>
+              </form>
+              <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                <input type="hidden" name="commentId" value="${c.commentId}" />
+                <input type="hidden" name="boardId" value="${board.boardId}" />
+                <input type="hidden" name="category" value="${param.category}" />
+                <input type="hidden" name="page" value="${currentPage}" />
+                <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+                <button type="submit">삭제</button>
+              </form>
+            </c:if>
           </div>
-        </form>
-      </c:if>
-    </div>
+        </c:if>
 
-    <!-- 대댓글 전체 출력 (JS로 3개만 보이게) -->
-    <c:set var="visibleReplyCount" value="0" />
-   <c:forEach var="r" items="${replyList}">
-     <c:if test="${r.parentId eq c.commentId}">
-       <c:set var="visibleReplyCount" value="${visibleReplyCount + 1}" />
-       
-       <!-- 🔥 숨김 조건 직접 계산 -->
-       <c:choose>
-         <c:when test="${visibleReplyCount > 3 and (empty editCommentId or editCommentId ne r.commentId)}">
-           <div class="comment-box reply hidden-reply" data-parent="${r.parentId}" data-comment-id="${r.commentId}">
-         </c:when>
-         <c:otherwise>
-           <div class="comment-box reply" data-parent="${r.parentId}" data-comment-id="${r.commentId}">
-         </c:otherwise>
-       </c:choose>
-        
-       
+        <!-- 대댓글 작성 폼 -->
+        <c:if test="${param.replyTargetId eq c.commentId}">
+          <form action="boardReplyInsert.do" method="post" style="margin-top: 8px;">
+            <input type="hidden" name="boardId" value="${board.boardId}" />
+            <input type="hidden" name="parentId" value="${c.commentId}" />
+            <input type="hidden" name="category" value="${param.category}" />
+            <input type="hidden" name="page" value="${currentPage}" />
+            <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+            <textarea name="content" class="editor" placeholder="내용을 입력해 주세요." oninput="limitByte(this, 4000)" required></textarea>
+            <div class="edit-buttons" style="margin-top:8px;">
+              <button type="submit">등록</button>
+              <button type="button"
+                onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}'">취소</button>
+            </div>
+          </form>
+        </c:if>
+      </div>
+
+      <!-- 대댓글 전체 출력 (JS로 3개만 보이게) -->
+      <c:set var="visibleReplyCount" value="0" />
+      <c:forEach var="r" items="${replyList}">
+        <c:if test="${r.parentId eq c.commentId}">
+          <c:set var="visibleReplyCount" value="${visibleReplyCount + 1}" />
+
+          <c:choose>
+            <c:when test="${visibleReplyCount > 3 and (empty editCommentId or editCommentId ne r.commentId)}">
+              <div class="comment-box reply hidden-reply" data-parent="${r.parentId}" data-comment-id="${r.commentId}">
+            </c:when>
+            <c:otherwise>
+              <div class="comment-box reply" data-parent="${r.parentId}" data-comment-id="${r.commentId}">
+            </c:otherwise>
+          </c:choose>
+
           <div class="comment-meta">
-           <strong>${r.nickName}</strong> |
-           <c:choose>
-             <c:when test="${not empty r.updatedAt}">
-               <fmt:formatDate value="${r.updatedAt}" pattern="MM.dd HH:mm" />
-               &nbsp;<span style="color:#aaa;">수정됨</span>
-             </c:when>
-             <c:otherwise>
-               <fmt:formatDate value="${r.createdAt}" pattern="MM.dd HH:mm" />
-             </c:otherwise>
-           </c:choose>
-         </div>
+            <strong>${r.nickName}</strong> |
+            <c:choose>
+              <c:when test="${not empty r.updatedAt}">
+                <fmt:formatDate value="${r.updatedAt}" pattern="MM.dd HH:mm" />
+                &nbsp;<span style="color:#aaa;">수정됨</span>
+              </c:when>
+              <c:otherwise>
+                <fmt:formatDate value="${r.createdAt}" pattern="MM.dd HH:mm" />
+              </c:otherwise>
+            </c:choose>
+          </div>
 
           <div class="comment-content">
             <c:choose>
@@ -568,9 +565,10 @@ textarea:focus {
                   <textarea name="content" oninput="limitByte(this, 4000)" required style="width:100%; height:80px;">${r.content}</textarea>
                   <div class="edit-buttons" style="margin-top:8px;">
                     <button type="submit">저장</button>
-                    <a href="boardDetail.do?boardId=${board.boardId}&category=${param.category}&page=${currentPage}&cpage=${commentPaging.currentPage}">
-                 <button type="button">취소</button>
-               </a>
+                    <button type="button"
+                      onclick="location.href='boardDetail.do?boardId=${board.boardId}&category=${param.category}&page=${currentPage}&cpage=${commentPaging.currentPage}'">
+                      취소
+                    </button>
                   </div>
                 </form>
               </c:when>
@@ -579,44 +577,47 @@ textarea:focus {
               </c:otherwise>
             </c:choose>
           </div>
-      <c:if test="${empty editCommentId or editCommentId ne r.commentId}">
-          <c:if test="${loginUser.loginId eq r.loginId || loginUser.role eq 'ADMIN'}">
-            <div class="comment-buttons" style="margin-top: 8px;">
-              <form action="boardDetail.do" method="get" style="display:inline;">
-                <input type="hidden" name="boardId" value="${board.boardId}" />
-                <input type="hidden" name="category" value="${param.category}" />
-                <input type="hidden" name="editCommentId" value="${r.commentId}" />
-                <input type="hidden" name="page" value="${currentPage}" />
-                <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-                <button type="submit">수정</button>
-              </form>
-              <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                <input type="hidden" name="commentId" value="${r.commentId}" />
-                <input type="hidden" name="boardId" value="${board.boardId}" />
-                <input type="hidden" name="category" value="${param.category}" />
-                <input type="hidden" name="page" value="${currentPage}" />
-                <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
-                <button type="submit">삭제</button>
-              </form>
-            </div>
-          </c:if>
-         </c:if>
-        </div>
-      </c:if>
 
-    </c:forEach>
-    <c:set var="replyCount" value="0" />
-   <c:forEach var="r" items="${replyList}">
-     <c:if test="${r.parentId eq c.commentId}">
-       <c:set var="replyCount" value="${replyCount + 1}" />
-     </c:if>
-   </c:forEach>
-   
-   <c:if test="${visibleReplyCount > 3}">
-     <button class="more-reply-btn" data-parent-id="${c.commentId}" data-expanded="false">더보기</button>
-   </c:if>
-  </c:if>
-</c:forEach>
+          <c:if test="${empty editCommentId or editCommentId ne r.commentId}">
+            <c:if test="${loginUser.loginId eq r.loginId || loginUser.role eq 'ADMIN'}">
+              <div class="comment-buttons" style="margin-top: 8px;">
+                <form action="boardDetail.do" method="get" style="display:inline;">
+                  <input type="hidden" name="boardId" value="${board.boardId}" />
+                  <input type="hidden" name="category" value="${param.category}" />
+                  <input type="hidden" name="editCommentId" value="${r.commentId}" />
+                  <input type="hidden" name="page" value="${currentPage}" />
+                  <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+                  <button type="submit">수정</button>
+                </form>
+                <form action="boardCommentDelete.do" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                  <input type="hidden" name="commentId" value="${r.commentId}" />
+                  <input type="hidden" name="boardId" value="${board.boardId}" />
+                  <input type="hidden" name="category" value="${param.category}" />
+                  <input type="hidden" name="page" value="${currentPage}" />
+                  <input type="hidden" name="cpage" value="${commentPaging.currentPage}" />
+                  <button type="submit">삭제</button>
+                </form>
+              </div>
+            </c:if>
+          </c:if>
+        </div>
+        </c:if>
+      </c:forEach>
+
+      <c:set var="replyCount" value="0" />
+      <c:forEach var="r" items="${replyList}">
+        <c:if test="${r.parentId eq c.commentId}">
+          <c:set var="replyCount" value="${replyCount + 1}" />
+        </c:if>
+      </c:forEach>
+
+      <c:if test="${visibleReplyCount > 3}">
+        <button class="more-reply-btn" data-parent-id="${c.commentId}" data-expanded="false">더보기</button>
+      </c:if>
+    </c:if>
+  </c:forEach>
+</div>
+
 <!-- 댓글 페이징 -->
 <c:if test="${commentPaging.maxPage > 1}">
   <div class="comment-pagination">
@@ -756,7 +757,8 @@ textarea:focus {
            if (!replyMap[parentId]) replyMap[parentId] = [];
            replyMap[parentId].push(el);
          });
-
+		 
+         // 대댓글 목록 중 처음 3개만 보여줌
          Object.entries(replyMap).forEach(([parentId, replies]) => {
             replies.forEach((el, idx) => {
               const commentId = el.dataset.commentId;
@@ -767,7 +769,8 @@ textarea:focus {
               }
             });
           });
-
+		 
+         // 더보기 버튼 클릭 이벤트 처리
          document.addEventListener("click", function (e) {
            if (e.target.classList.contains("more-reply-btn")) {
              const parentId = e.target.dataset.parentId;

@@ -290,12 +290,10 @@ public class BoardController {
 			mv.addObject("message", "로그인이 필요합니다.");
 			return "common/error"; // String 반환 형식은 변경되지 않음
 		}
-		
 		board.setWriter(loginUser.getLoginId());
 		board.setBoardCategory(category);
 		// 현재 시간 자동 설정
 		board.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
-
 		// 파일 저장 로직
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
 		if (!mfile.isEmpty()) {
@@ -317,7 +315,6 @@ public class BoardController {
 				}
 			}
 		}
-
 		// 게시글 등록
 		if (boardService.insertBoard(board) > 0) {
 			if ("my".equals(source)) {
@@ -421,6 +418,9 @@ public class BoardController {
 	    param.put("targetId", boardId);
 
 	    boardService.deleteCommentsByBoardId(param);
+	    
+	    // 해당 게시글의 좋아요 기록 삭제
+	    likeService.deleteLikeAll(boardId);
 		
 		Board board = boardService.selectBoard(boardId); // 게시글 정보 조회
 
@@ -544,7 +544,7 @@ public class BoardController {
 
 	
 
-	// 댓글 수정용 메소드
+	// 댓글, 대댓글 수정용 메소드
 	@RequestMapping(value = "boardCommentUpdate.do", method = RequestMethod.POST)
 	public ModelAndView updateBoardCommentMethod(ModelAndView mv, HttpSession session,
 			@RequestParam("commentId") int commentId,
@@ -564,7 +564,7 @@ public class BoardController {
 		comment.setCommentId(commentId);
 		comment.setContent(content);
 		comment.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
-		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인 용도
+		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인
 
 		int result = boardService.updateBoardComment(comment);
 		if (result > 0) {
@@ -578,7 +578,7 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 댓글 삭제용 메소드
+	// 댓글, 대댓글 삭제용 메소드
 	@RequestMapping(value = "boardCommentDelete.do", method = RequestMethod.POST)
 	public ModelAndView deleteBoardCommentMethod(ModelAndView mv, HttpSession session,
 			@RequestParam("commentId") int commentId,
@@ -598,19 +598,18 @@ public class BoardController {
 
 		int result = boardService.deleteBoardComment(param);
 		if (result > 0) {
-			  // ✅ 삭제 성공 후 전체 댓글 수를 다시 계산
-	        int totalCommentCount = boardService.selectBoardCommentCount(boardId); // 이 메서드는 댓글 총 개수 리턴해야 함
+			// 삭제 성공 후 전체 댓글 수를 다시 계산
+	        int totalCommentCount = boardService.selectBoardCommentCount(boardId);
 	        int commentsPerPage = 10;
 	        int maxCpage = (int) Math.ceil((double) totalCommentCount / commentsPerPage);
 	        
-	        // 전달받은 cpage 파라미터 문자열을 정수로 파싱, 없거나 잘못된 경우 기본값 1
 	        int cpage = 1;
 	        try {
 	            cpage = Integer.parseInt(cpageStr);
 	        } catch (Exception e) {
 	        }
 
-	        // ✅ 현재 페이지가 최대 페이지보다 크면 조정
+	        // 현재 페이지가 최대 페이지보다 크면 조정
 	        if (cpage > maxCpage) {
 	            cpage = maxCpage;
 	        }

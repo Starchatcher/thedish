@@ -41,4 +41,9 @@ public class LikeServiceImpl implements LikeService{
 	    return checkLike(like) > 0;
 	}
 
+	@Override
+	public int deleteLikeAll(int targetId) {
+		return likeDao.deleteLikeAll(targetId);
+	}
+
 }
