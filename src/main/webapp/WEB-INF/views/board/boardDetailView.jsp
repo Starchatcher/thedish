@@ -15,6 +15,7 @@
 <script>
     const commentCount = ${commentCount};
 </script>
+
 <style>
 .container {
    max-width: 800px;
@@ -540,6 +541,8 @@ textarea:focus {
             </c:otherwise>
           </c:choose>
 
+
+
           <div class="comment-meta">
             <strong>${r.nickName}</strong> |
             <c:choose>
@@ -654,12 +657,18 @@ textarea:focus {
 </div>
 
 <c:if test="${param.reportSuccess eq 'true'}">
-    <script>
+    <script type="text/javascript">
         alert('🚨 신고가 완료되었습니다.');
     </script>
 </c:if>
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />   
+
+<c:if test="${not empty alertMsg}">
+    <script>
+        alert('${alertMsg}');
+    </script>
+</c:if>
 
 <script type="text/javascript">
     const boardId = '${board.boardId}';
