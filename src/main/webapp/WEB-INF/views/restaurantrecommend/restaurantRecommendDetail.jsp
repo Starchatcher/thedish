@@ -521,9 +521,7 @@ $(document).ready(function() {
         // 버튼의 'data-id' 속성에서 맛집 추천 게시글 ID를 가져옵니다.
         const recommendId = $(buttonElement).data('id'); // recommendId 변수 선언
 
-        // JSP EL을 사용하여 모델에 담긴 로그인 사용자 ID를 가져옵니다.
-        // 컨트롤러에서 mv.addObject("loginUser", loginUser); 로 넘겨줬다고 가정합니다.
-        // loginUser 객체에 loginId 필드가 있다고 가정합니다.
+      
         const loginId = "${loginUser.loginId}"; // loginId 변수 선언
 
         // **로그인 여부 확인:**
@@ -532,7 +530,6 @@ $(document).ready(function() {
             return;
         }
 
-        // **★ 서버로 보낼 데이터 객체 올바르게 구성 ★**
         const requestData = {
             // 선언된 recommendId 변수 사용
             "recommendId": recommendId,
@@ -547,7 +544,6 @@ $(document).ready(function() {
             url: 'toggleRestaurantLike.do', // 서버 측 URL
             method: 'post',
             contentType: 'application/json',
-            // **★ 올바르게 구성된 requestData 객체를 JSON 문자열로 변환하여 전송 ★**
             data: JSON.stringify(requestData),
             dataType: 'json', // 서버 응답을 JSON으로 기대
 
@@ -577,11 +573,10 @@ $(document).ready(function() {
                  }
             }
         });
-        // **AJAX 요청 종료**
+   
     });
-    // **버튼 클릭 이벤트 리스너 종료**
+   
 
-    // 여기에 댓글 답글 접기/펼치기 등 다른 JavaScript 코드 작성
 
 }); // $(document).ready() 종료
 </script>
