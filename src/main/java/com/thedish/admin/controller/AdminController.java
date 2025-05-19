@@ -39,10 +39,15 @@ public class AdminController {
         for (Map<String, Object> row : dailySummary) {
             labels.add((String) row.get("DAY"));
 
-            postData.add(row.get("POST_COUNT") != null ? ((Number) row.get("POST_COUNT")).intValue() : 0);
-            boardViewData.add(row.get("BOARD_VIEW_COUNT") != null ? ((Number) row.get("BOARD_VIEW_COUNT")).intValue() : 0);
-            recipeViewData.add(row.get("RECIPE_VIEW_COUNT") != null ? ((Number) row.get("RECIPE_VIEW_COUNT")).intValue() : 0);
-            drinkViewData.add(row.get("DRINK_VIEW_COUNT") != null ? ((Number) row.get("DRINK_VIEW_COUNT")).intValue() : 0);
+            
+            // POST_COUNT null 체크
+            Object postCountObj = row.get("POST_COUNT");
+            postData.add(postCountObj != null ? ((Number) postCountObj).intValue() : 0);
+            
+            // VIEW_COUNT null 체크
+            Object viewCountObj = row.get("VIEW_COUNT");
+            viewData.add(viewCountObj != null ? ((Number) viewCountObj).intValue() : 0);
+
         }
 
         mv.addObject("todayJoin", todayJoin);

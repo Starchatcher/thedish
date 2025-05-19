@@ -142,13 +142,13 @@ public class UsersController {
         }
     }
 
-    // ✅ 비밀번호 변경 화면 진입
+    // 비밀번호 변경 화면 진입
     @RequestMapping("changePassword.do")
     public String showChangePasswordPage() {
         return "users/changePassword";
     }
 
-    // ✅ 비밀번호 변경 처리 (세션에서 loginId 꺼내는 방식)
+    // 비밀번호 변경 처리 (세션에서 loginId 꺼내는 방식)
     @RequestMapping(value = "updatePassword.do", method = RequestMethod.POST)
     public String updatePassword(HttpSession session,
                                  @RequestParam("newPassword") String newPassword,
@@ -191,22 +191,44 @@ public class UsersController {
         return (count == 0) ? "ok" : "duplicated";
     }
 
-    @ResponseBody
-    @RequestMapping(value = "nickNamechk.do", method = RequestMethod.POST)
-    public String checkNickName(@RequestParam("nickName") String nickName) {
-        int count = usersService.selectChecknickName(nickName);
-        return (count == 0) ? "ok" : "duplicated";
+
+    @RequestMapping("/sendCode.do")
+    public ModelAndView sendVerificationCode(@RequestParam("loginId") String loginId,
+                                             @RequestParam("email") String email,
+                                             HttpSession session,
+                                             ModelAndView mv) {
+        Users user = usersService.findByLoginIdAndEmail(loginId, email);
+        if (user != null) {
+            String code = String.valueOf((int)(Math.random() * 900000) + 100000);
+            session.setAttribute("verifyCode", code);
+            session.setAttribute("loginIdForReset", loginId);
+            mailService.sendVerificationCode(email, code);
+            mv.setViewName("users/verifyCode");
+        } else {
+            mv.addObject("msg", "아이디와 이메일이 일치하지 않습니다.");
+            mv.setViewName("users/findPassword");
+        }
+        return mv;
     }
 
-    @RequestMapping(value = "enroll.do", method = RequestMethod.POST)
-    public String enrollUser(Users user, HttpServletRequest request, Model model) {
-        String userId = request.getParameter("userId");
-        user.setLoginId(userId);
+    @RequestMapping("/verifyCode.do")
+    public ModelAndView verifyCode(@RequestParam("code") String code, 
+    		HttpSession session, ModelAndView mv) {
+        String sessionCode = (String) session.getAttribute("verifyCode");
+        if (code.equals(sessionCode)) {
+            mv.setViewName("users/resetPassword");
+        } else {
+            mv.addObject("msg", "인증번호가 올바르지 않습니다.");
+            mv.setViewName("users/verifyCode");
+        }
+        return mv;
+    }
 
-        String encPwd = bcryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encPwd);
-
-        int result = usersService.insertUser(user);
+    @RequestMapping("/resetPassword.do")
+    public ModelAndView resetPassword(@RequestParam("newPassword") 
+    String newPassword, HttpSession session, ModelAndView mv) {
+        String loginId = (String) session.getAttribute("loginIdForReset");
+        int result = usersService.resetPassword(loginId, newPassword);
 
         if (result > 0) {
             return "redirect:enrollPage.do?enrollSuccess=true";
@@ -223,26 +245,15 @@ public class UsersController {
 
         String loginId = loginUser.getLoginId();
 
-        int freeBoardViews = usersService.getFreeBoardViewCount(loginId);
-        int freeBoardPosts = usersService.getFreeBoardPostCount(loginId);
-        int reviewCommentCount = usersService.getBoardCommentCount(loginId);
-        String reviewLastCommentDate = usersService.getBoardLastCommentDate(loginId);
-        String lastPostDate = usersService.getFreeBoardLastPostDate(loginId);
-        int reviewBoardPosts = usersService.getReviewBoardPostCount(loginId);
-        String reviewLastPostDate = usersService.getReviewBoardLastPostDate(loginId);
-        int tipBoardPosts = usersService.getTipBoardPostCount(loginId);
-        String tipLastPostDate = usersService.getTipBoardLastPostDate(loginId);
 
-        model.addAttribute("users", loginUser);
-        model.addAttribute("freeBoardViews", freeBoardViews);
-        model.addAttribute("freeBoardPosts", freeBoardPosts);
-        model.addAttribute("lastPostDate", lastPostDate);
-        model.addAttribute("reviewCommentCount", reviewCommentCount);
-        model.addAttribute("reviewLastCommentDate", reviewLastCommentDate);
-        model.addAttribute("reviewBoardPosts", reviewBoardPosts);
-        model.addAttribute("reviewLastPostDate", reviewLastPostDate);
-        model.addAttribute("tipBoardPosts", tipBoardPosts);
-        model.addAttribute("tipLastPostDate", tipLastPostDate);
+    @ResponseBody
+    @RequestMapping(value = "encodeAdminPwd.do", method = RequestMethod.POST)
+    public String encodeAdminPassword() {
+        String rawPwd = "admin";
+        String encodedPwd = bcryptPasswordEncoder.encode(rawPwd);
+        return "암호화된 관리자 비밀번호: " + encodedPwd;
+    }
+
 
         return "users/infoPage";
     }

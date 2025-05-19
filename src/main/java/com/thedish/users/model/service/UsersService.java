@@ -59,6 +59,7 @@ public interface UsersService {
 
     Users selectUserByLoginId(String loginId);
 
+
     // 🔢 마이페이지 활동 요약
     int getFreeBoardViewCount(String loginId);
     int getFreeBoardPostCount(String loginId);
@@ -71,4 +72,5 @@ public interface UsersService {
     String getBoardLastCommentDate(String loginId);
     String getReviewBoardLastPostDate(String loginId);
     String getTipBoardLastPostDate(String loginId);
+
 }
