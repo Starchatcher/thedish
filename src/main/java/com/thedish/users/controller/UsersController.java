@@ -239,7 +239,7 @@ public class UsersController {
         return "users/findPassword";
     }
 
-    @PostMapping("/sendCode.do")
+    @RequestMapping("/sendCode.do")
     public ModelAndView sendVerificationCode(@RequestParam("loginId") String loginId,
                                              @RequestParam("email") String email,
                                              HttpSession session,
@@ -258,8 +258,9 @@ public class UsersController {
         return mv;
     }
 
-    @PostMapping("/verifyCode.do")
-    public ModelAndView verifyCode(@RequestParam("code") String code, HttpSession session, ModelAndView mv) {
+    @RequestMapping("/verifyCode.do")
+    public ModelAndView verifyCode(@RequestParam("code") String code, 
+    		HttpSession session, ModelAndView mv) {
         String sessionCode = (String) session.getAttribute("verifyCode");
         if (code.equals(sessionCode)) {
             mv.setViewName("users/resetPassword");
@@ -270,8 +271,9 @@ public class UsersController {
         return mv;
     }
 
-    @PostMapping("/resetPassword.do")
-    public ModelAndView resetPassword(@RequestParam("newPassword") String newPassword, HttpSession session, ModelAndView mv) {
+    @RequestMapping("/resetPassword.do")
+    public ModelAndView resetPassword(@RequestParam("newPassword") 
+    String newPassword, HttpSession session, ModelAndView mv) {
         String loginId = (String) session.getAttribute("loginIdForReset");
         int result = usersService.resetPassword(loginId, newPassword);
         if (result > 0) {
@@ -299,9 +301,9 @@ public class UsersController {
     }
 
     @ResponseBody
-    @RequestMapping("encodeAdminPwd.do")
+    @RequestMapping(value = "encodeAdminPwd.do", method = RequestMethod.POST)
     public String encodeAdminPassword() {
-        String rawPwd = "admin1234";
+        String rawPwd = "admin";
         String encodedPwd = bcryptPasswordEncoder.encode(rawPwd);
         return "암호화된 관리자 비밀번호: " + encodedPwd;
     }

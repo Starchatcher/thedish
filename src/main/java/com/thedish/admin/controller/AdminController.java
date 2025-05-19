@@ -38,8 +38,14 @@ public class AdminController {
         List<Integer> viewData = new ArrayList<>();
         for (Map<String, Object> row : dailySummary) {
             labels.add((String) row.get("DAY"));
-            postData.add(((Number) row.get("POST_COUNT")).intValue());
-            viewData.add(((Number) row.get("VIEW_COUNT")).intValue());
+            
+            // POST_COUNT null 체크
+            Object postCountObj = row.get("POST_COUNT");
+            postData.add(postCountObj != null ? ((Number) postCountObj).intValue() : 0);
+            
+            // VIEW_COUNT null 체크
+            Object viewCountObj = row.get("VIEW_COUNT");
+            viewData.add(viewCountObj != null ? ((Number) viewCountObj).intValue() : 0);
         }
 
         // 3. 데이터 JSP로 전달
