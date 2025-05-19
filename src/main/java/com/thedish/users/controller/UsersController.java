@@ -10,11 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.thedish.common.mail.MailService;
 import com.thedish.users.model.service.UsersService;
@@ -32,10 +29,10 @@ public class UsersController {
 
     @Value("${kakao.clientId}")
     private String clientId;
-    
+
     @Value("${kakao.redirectUri}")
     private String redirectUri;
-    
+
     @Autowired
     private UsersService usersService;
 
@@ -64,72 +61,70 @@ public class UsersController {
     public String moveLoginPage() {
         return "users/loginPage";
     }
-    
-	
-	  @RequestMapping("enrollterms.do") public String moveTermsPage() { return
-	  "users/enrollterms"; 
-	  }
 
-	  @RequestMapping(value = "login.do", method = RequestMethod.POST)
-	    public String loginMethod(Users users,
-	                              HttpServletRequest request,
-	                              HttpServletResponse response,
-	                              HttpSession session,
-	                              SessionStatus status,
-	                              Model model,
-	                              @RequestParam(value = "remember", required = false) String remember) {
+    @RequestMapping("enrollterms.do")
+    public String moveTermsPage() {
+        return "users/enrollterms";
+    }
 
-	        logger.info("로그인 시도: " + users.getLoginId());
-	        Users loginUser = usersService.selectLogin(users);
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
+    public String loginMethod(Users users,
+                              HttpServletRequest request,
+                              HttpServletResponse response,
+                              HttpSession session,
+                              SessionStatus status,
+                              Model model,
+                              @RequestParam(value = "remember", required = false) String remember) {
 
-	        if (loginUser == null) {
-	            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
-	            return "common/error";
-	        }
+        logger.info("로그인 시도: " + users.getLoginId());
+        Users loginUser = usersService.selectLogin(users);
 
-	        String dbPw = loginUser.getPassword();
-	        boolean isBcrypt = dbPw.startsWith("$2a$") || dbPw.startsWith("$2b$") || dbPw.startsWith("$2y$");
-	        boolean match = isBcrypt ? bcryptPasswordEncoder.matches(users.getPassword(), dbPw) : users.getPassword().equals(dbPw);
+        if (loginUser == null) {
+            model.addAttribute("msg", "아이디가 존재하지 않습니다.");
+            return "common/error";
+        }
 
-	        if (!match) {
-	            model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
-	            return "common/error";
-	        }
+        String dbPw = loginUser.getPassword();
+        boolean isBcrypt = dbPw.startsWith("$2a$") || dbPw.startsWith("$2b$") || dbPw.startsWith("$2y$");
+        boolean match = isBcrypt ? bcryptPasswordEncoder.matches(users.getPassword(), dbPw) : users.getPassword().equals(dbPw);
 
-	        if (!"ACTIVE".equals(loginUser.getStatus())) {
-	            model.addAttribute("msg", "탈퇴했거나 제한된 계정입니다. 관리자에게 문의하세요.");
-	            return "common/error";
-	        }
+        if (!match) {
+            model.addAttribute("msg", "비밀번호가 일치하지 않습니다.");
+            return "common/error";
+        }
 
-	        String loginId = loginUser.getLoginId();
-	        String currentIp = request.getRemoteAddr();
-	        String currentSessionId = session.getId();
+        if (!"ACTIVE".equals(loginUser.getStatus())) {
+            model.addAttribute("msg", "탈퇴했거나 제한된 계정입니다. 관리자에게 문의하세요.");
+            return "common/error";
+        }
 
-	        LoginInfo existing = activeUsers.get(loginId);
-	        if (existing != null && (!existing.getIp().equals(currentIp) || !existing.getSessionId().equals(currentSessionId))) {
-	            model.addAttribute("msg", "이미 다른 위치 또는 브라우저에서 로그인 중입니다.");
-	            return "common/error";
-	        }
+        String loginId = loginUser.getLoginId();
+        String currentIp = request.getRemoteAddr();
+        String currentSessionId = session.getId();
 
-	        activeUsers.put(loginId, new LoginInfo(currentIp, currentSessionId));
-	        session.setAttribute("loginUser", loginUser);
+        LoginInfo existing = activeUsers.get(loginId);
+        if (existing != null && (!existing.getIp().equals(currentIp) || !existing.getSessionId().equals(currentSessionId))) {
+            model.addAttribute("msg", "이미 다른 위치 또는 브라우저에서 로그인 중입니다.");
+            return "common/error";
+        }
 
-	        // ✅ 기억하기 기능 처리
-	        if ("on".equals(remember)) {
-	            Cookie rememberCookie = new Cookie("rememberId", loginUser.getLoginId());
-	            rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7일
-	            rememberCookie.setPath(request.getContextPath());
-	            response.addCookie(rememberCookie);
-	        } else {
-	            Cookie rememberCookie = new Cookie("rememberId", null);
-	            rememberCookie.setMaxAge(0);
-	            rememberCookie.setPath(request.getContextPath());
-	            response.addCookie(rememberCookie);
-	        }
+        activeUsers.put(loginId, new LoginInfo(currentIp, currentSessionId));
+        session.setAttribute("loginUser", loginUser);
 
-	        return "ADMIN".equalsIgnoreCase(loginUser.getRole()) ? "redirect:/admin/dashboard.do" : "redirect:main.do";
-	    }
+        if ("on".equals(remember)) {
+            Cookie rememberCookie = new Cookie("rememberId", loginUser.getLoginId());
+            rememberCookie.setMaxAge(7 * 24 * 60 * 60);
+            rememberCookie.setPath(request.getContextPath());
+            response.addCookie(rememberCookie);
+        } else {
+            Cookie rememberCookie = new Cookie("rememberId", null);
+            rememberCookie.setMaxAge(0);
+            rememberCookie.setPath(request.getContextPath());
+            response.addCookie(rememberCookie);
+        }
 
+        return "ADMIN".equalsIgnoreCase(loginUser.getRole()) ? "redirect:/admin/dashboard.do" : "redirect:main.do";
+    }
 
     @RequestMapping("logout.do")
     public String logoutMethod(HttpServletRequest request, Model model) {
@@ -147,111 +142,33 @@ public class UsersController {
         }
     }
 
-
-
-    @RequestMapping("myPage.do")
-    public String showMyPage(HttpSession session, Model model) {
-        Users loginUser = (Users) session.getAttribute("loginUser");
-        if (loginUser == null) return "redirect:loginPage.do";
-        model.addAttribute("users", loginUser);
-        return "users/infoPage";
-    }
-
+    // ✅ 비밀번호 변경 화면 진입
     @RequestMapping("changePassword.do")
     public String showChangePasswordPage() {
         return "users/changePassword";
     }
 
+    // ✅ 비밀번호 변경 처리 (세션에서 loginId 꺼내는 방식)
     @RequestMapping(value = "updatePassword.do", method = RequestMethod.POST)
-    public ModelAndView updatePassword(@RequestParam("currentPassword") String currentPassword,
-                                       @RequestParam("newPassword") String newPassword,
-                                       HttpSession session,
-                                       ModelAndView mv) {
+    public String updatePassword(HttpSession session,
+                                 @RequestParam("newPassword") String newPassword,
+                                 Model model) {
+
         Users loginUser = (Users) session.getAttribute("loginUser");
-        if (loginUser != null && bcryptPasswordEncoder.matches(currentPassword, loginUser.getPassword())) {
-            String encNewPwd = bcryptPasswordEncoder.encode(newPassword);
-            loginUser.setPassword(encNewPwd);
-            int result = usersService.updatePassword(loginUser);
-            if (result > 0) {
-                mv.addObject("msg", "비밀번호가 변경되었습니다.");
-                session.setAttribute("loginUser", loginUser);
-                mv.setViewName("users/passwordSuccess");
-                return mv;
-            } else {
-                mv.addObject("msg", "비밀번호 변경 실패");
-            }
-        } else {
-            mv.addObject("msg", "현재 비밀번호가 일치하지 않습니다.");
-        }
-        mv.setViewName("users/changePassword");
-        return mv;
-    }
 
-    @RequestMapping("enrollPage.do")
-    public String moveEnrollPage(@RequestParam(value = "enrollSuccess", required = false) String enrollSuccess, Model model) {
-        if ("true".equals(enrollSuccess)) {
-            model.addAttribute("enrollSuccess", true);
-        }
-        return "users/enrollPage";
-    }
-
-    @RequestMapping(value = "enroll.do", method = RequestMethod.POST)
-    public String insertUser(Users user, Model model) {
-        logger.info("enroll.do : " + user);
-
-        if (user.getLoginId() == null || user.getLoginId().trim().isEmpty()) {
-            user.setLoginId(user.getUserId());
-        }
-
-        // ✅ 중복 아이디 및 닉네임 체크
-        if (usersService.selectCheckId(user.getLoginId()) > 0) {
-            model.addAttribute("msg", "이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+        if (loginUser == null) {
+            model.addAttribute("msg", "세션이 만료되었습니다. 다시 로그인 해주세요.");
             return "common/error";
         }
 
-        if (usersService.selectChecknickName(user.getNickName()) > 0) {
-            model.addAttribute("msg", "이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.");
-            return "common/error";
-        }
+        String loginId = loginUser.getLoginId();
+        String encPwd = bcryptPasswordEncoder.encode(newPassword);
+        int result = usersService.updatePassword(loginId, encPwd);
 
-        // ✅ 비밀번호 유효성 검사
-        String pw = user.getPassword();
-        if (pw == null || pw.length() < 8 || !pw.matches("^(?=.*[a-zA-Z])(?=.*\\d).+$")) {
-            model.addAttribute("msg", "비밀번호는 영문자+숫자 조합 8자 이상이어야 합니다.");
-            return "common/error";
-        }
-
-        String encPwd = bcryptPasswordEncoder.encode(pw);
-        user.setPassword(encPwd);
-
-        int result = usersService.insertUser(user);
-
-        return (result > 0) ? "users/enrollSuccess" : "common/error";
-
-    }
-
-    @RequestMapping("myinfo.do")
-    public String usersDetailMethod(@RequestParam("loginId") String loginId, Model model) {
-        Users users = usersService.selectUsers(loginId);
-        if (users != null) {
-            model.addAttribute("users", users);
-            return "users/infoPage";
-        } else {
-            model.addAttribute("message", loginId + " 에 대한 회원 정보 조회 실패!");
-            return "common/error";
-        }
-    }
-
-    @RequestMapping(value = "updateUser.do", method = RequestMethod.POST)
-    public String updateUser(Users user, Model model, HttpSession session) {
-        String encPwd = bcryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encPwd);
-        int result = usersService.updateUser(user);
         if (result > 0) {
-            session.setAttribute("loginUser", usersService.selectUsers(user.getLoginId()));
-            return "redirect:myinfo.do?loginId=" + user.getLoginId();
+            return "users/passwordSuccess";
         } else {
-            model.addAttribute("message", "회원정보 수정에 실패했습니다.");
+            model.addAttribute("msg", "비밀번호 변경에 실패했습니다. 다시 시도해주세요.");
             return "common/error";
         }
     }
@@ -262,88 +179,71 @@ public class UsersController {
         return "users/deleteConfirmationPage";
     }
 
-    @RequestMapping(value = "deleteUser.do", method = RequestMethod.POST)
-    public String deleteUser(@RequestParam("loginId") String loginId, HttpSession session, Model model) {
-        int result = usersService.deactivateUser(loginId);
-        if (result > 0) {
-            if (session != null && session.getAttribute("loginUser") != null) {
-                session.invalidate();
-            }
-            return "redirect:loginPage.do";
-        } else {
-            model.addAttribute("message", "회원 탈퇴에 실패했습니다.");
-            return "common/error";
-        }
-    }
-
-    @RequestMapping("/findPassword.do")
-    public String showFindPasswordPage() {
-        return "users/findPassword";
-    }
-
-    @RequestMapping("/sendCode.do")
-    public ModelAndView sendVerificationCode(@RequestParam("loginId") String loginId,
-                                             @RequestParam("email") String email,
-                                             HttpSession session,
-                                             ModelAndView mv) {
-        Users user = usersService.findByLoginIdAndEmail(loginId, email);
-        if (user != null) {
-            String code = String.valueOf((int)(Math.random() * 900000) + 100000);
-            session.setAttribute("verifyCode", code);
-            session.setAttribute("loginIdForReset", loginId);
-            mailService.sendVerificationCode(email, code);
-            mv.setViewName("users/verifyCode");
-        } else {
-            mv.addObject("msg", "아이디와 이메일이 일치하지 않습니다.");
-            mv.setViewName("users/findPassword");
-        }
-        return mv;
-    }
-
-    @RequestMapping("/verifyCode.do")
-    public ModelAndView verifyCode(@RequestParam("code") String code, HttpSession session, ModelAndView mv) {
-        String sessionCode = (String) session.getAttribute("verifyCode");
-        if (code.equals(sessionCode)) {
-            mv.setViewName("users/resetPassword");
-        } else {
-            mv.addObject("msg", "인증번호가 올바르지 않습니다.");
-            mv.setViewName("users/verifyCode");
-        }
-        return mv;
-    }
-
-    @RequestMapping("/resetPassword.do")
-    public ModelAndView resetPassword(@RequestParam("newPassword") String newPassword, HttpSession session, ModelAndView mv) {
-        String loginId = (String) session.getAttribute("loginIdForReset");
-        int result = usersService.resetPassword(loginId, newPassword);
-        if (result > 0) {
-            mv.addObject("msg", "비밀번호가 성공적으로 변경되었습니다.");
-            mv.setViewName("users/passwordSuccess");
-        } else {
-            mv.addObject("msg", "비밀번호 변경 실패. 다시 시도해주세요.");
-            mv.setViewName("users/resetPassword");
-        }
-        return mv;
+    @RequestMapping("enrollPage.do")
+    public String moveEnrollPage() {
+        return "users/enrollPage";
     }
 
     @ResponseBody
     @RequestMapping(value = "idchk.do", method = RequestMethod.POST)
     public String checkUserId(@RequestParam("userId") String userId) {
-        int result = usersService.selectCheckId(userId);
-        return (result == 0) ? "ok" : "dup";
+        int count = usersService.selectCheckId(userId);
+        return (count == 0) ? "ok" : "duplicated";
     }
 
     @ResponseBody
     @RequestMapping(value = "nickNamechk.do", method = RequestMethod.POST)
-    public String checknickName(@RequestParam("nickName") String nickName) {
-        int result = usersService.selectChecknickName(nickName);
-        return (result == 0) ? "ok" : "dup";
+    public String checkNickName(@RequestParam("nickName") String nickName) {
+        int count = usersService.selectChecknickName(nickName);
+        return (count == 0) ? "ok" : "duplicated";
     }
 
-    @ResponseBody
-    @RequestMapping("encodeAdminPwd.do")
-    public String encodeAdminPassword() {
-        String rawPwd = "admin1234";
-        return "암호화된 관리자 비밀번호: " + bcryptPasswordEncoder.encode(rawPwd);
+    @RequestMapping(value = "enroll.do", method = RequestMethod.POST)
+    public String enrollUser(Users user, HttpServletRequest request, Model model) {
+        String userId = request.getParameter("userId");
+        user.setLoginId(userId);
+
+        String encPwd = bcryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encPwd);
+
+        int result = usersService.insertUser(user);
+
+        if (result > 0) {
+            return "redirect:enrollPage.do?enrollSuccess=true";
+        } else {
+            model.addAttribute("msg", "회원가입에 실패했습니다. 다시 시도해주세요.");
+            return "common/error";
+        }
+    }
+
+    @RequestMapping("myPage.do")
+    public String showMyPage(HttpSession session, Model model) {
+        Users loginUser = (Users) session.getAttribute("loginUser");
+        if (loginUser == null) return "redirect:loginPage.do";
+
+        String loginId = loginUser.getLoginId();
+
+        int freeBoardViews = usersService.getFreeBoardViewCount(loginId);
+        int freeBoardPosts = usersService.getFreeBoardPostCount(loginId);
+        int reviewCommentCount = usersService.getBoardCommentCount(loginId);
+        String reviewLastCommentDate = usersService.getBoardLastCommentDate(loginId);
+        String lastPostDate = usersService.getFreeBoardLastPostDate(loginId);
+        int reviewBoardPosts = usersService.getReviewBoardPostCount(loginId);
+        String reviewLastPostDate = usersService.getReviewBoardLastPostDate(loginId);
+        int tipBoardPosts = usersService.getTipBoardPostCount(loginId);
+        String tipLastPostDate = usersService.getTipBoardLastPostDate(loginId);
+
+        model.addAttribute("users", loginUser);
+        model.addAttribute("freeBoardViews", freeBoardViews);
+        model.addAttribute("freeBoardPosts", freeBoardPosts);
+        model.addAttribute("lastPostDate", lastPostDate);
+        model.addAttribute("reviewCommentCount", reviewCommentCount);
+        model.addAttribute("reviewLastCommentDate", reviewLastCommentDate);
+        model.addAttribute("reviewBoardPosts", reviewBoardPosts);
+        model.addAttribute("reviewLastPostDate", reviewLastPostDate);
+        model.addAttribute("tipBoardPosts", tipBoardPosts);
+        model.addAttribute("tipLastPostDate", tipLastPostDate);
+
+        return "users/infoPage";
     }
 }

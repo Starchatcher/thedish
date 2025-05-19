@@ -6,19 +6,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Users implements java.io.Serializable {
     private static final long serialVersionUID = -8078395567683396465L;
 
-    private String userId;         // ← JSP의 name="userId"
-    private String password;       // ← name="userPwd"
-    private String userPwd2;       // ← 비밀번호 확인용 (DB 저장 X)
-    private String userName;       // ← name="userName"
-    private String nickName;       // ← name="nickName"
-    private String gender;         // ← name="gender"
-    private int age;               // ← name="age"
-    private String phone;          // ← name="phone"
-    private String email;          // ← name="email"
-    private String status;         // ← name="status"
-    private String provider;       // ← name="provider"
-    private String role;           // ← name="role"
-    private String loginId;        // ← name="loginId"
+    private String userId;
+    private String password;
+    private String userPwd2;
+    private String userName;
+    private String nickName;
+    private String gender;
+    private int age;
+    private String phone;
+    private String email;
+    private String status;
+    private String provider;
+    private String role;
+    private String loginId;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date createdAt;
@@ -28,6 +28,13 @@ public class Users implements java.io.Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date withdrawnAt;
+
+    // 🔹 자유게시판 최근 작성일
+    private String lastPostDate;
+    
+ // 후기 게시판 관련 통계
+    private int boardCommentCount;
+    private String boardLastCommentDate;
 
     public Users() {}
 
@@ -95,23 +102,45 @@ public class Users implements java.io.Serializable {
 
     public Date getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
-    
-    //
+
     public Date getCreatedAt() { return createdAt; }
     public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
     public Date getWithdrawnAt() { return withdrawnAt; }
     public void setWithdrawnAt(Date withdrawnAt) { this.withdrawnAt = withdrawnAt; }
 
-    //
+    // 🔹 자유게시판 최근 작성일
+    public String getLastPostDate() {
+        return lastPostDate;
+    }
+
+    public void setLastPostDate(String lastPostDate) {
+        this.lastPostDate = lastPostDate;
+    }
     
+    public int getBoardCommentCount() {
+        return boardCommentCount;
+    }
+
+    public void setBoardCommentCount(int boardCommentCount) {
+        this.boardCommentCount = boardCommentCount;
+    }
+
+    public String getBoardLastCommentDate() {
+        return boardLastCommentDate;
+    }
+
+    public void setBoardLastCommentDate(String boardLastCommentDate) {
+        this.boardLastCommentDate = boardLastCommentDate;
+    }
+
     @Override
     public String toString() {
         return "Users [userId=" + userId + ", password=" + password + ", userPwd2=" + userPwd2 +
-               ", userName=" + userName + ", nickName=" + nickName + ", gender=" + gender +
-               ", age=" + age + ", phone=" + phone + ", email=" + email +
-               ", status=" + status + ", provider=" + provider + ", role=" + role +
-               ", loginId=" + loginId + ", createdAt=" + createdAt +
-               ", updatedAt=" + updatedAt + ", withdrawnAt=" + withdrawnAt + "]";
+                ", userName=" + userName + ", nickName=" + nickName + ", gender=" + gender +
+                ", age=" + age + ", phone=" + phone + ", email=" + email + ", status=" + status +
+                ", provider=" + provider + ", role=" + role + ", loginId=" + loginId +
+                ", createdAt=" + createdAt + ", updatedAt=" + updatedAt +
+                ", withdrawnAt=" + withdrawnAt + ", lastPostDate=" + lastPostDate + "]";
     }
 }

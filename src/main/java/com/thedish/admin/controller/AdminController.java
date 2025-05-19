@@ -21,15 +21,12 @@ public class AdminController {
     @RequestMapping("dashboard.do")
     public ModelAndView adminDashboard(ModelAndView mv) {
 
-
         int todayJoin = adminService.countTodayJoin();
         int todayWithdraw = adminService.countTodayWithdraw();
         int todayReport = adminService.countTodayReports();
         int todayReview = adminService.countTodayReviews();
         int todayInquiry = adminService.countTodayInquiries();
         int totalUsers = adminService.countTotalUsers();
-
-
 
         List<Map<String, Object>> dailySummary = adminService.selectDailySummary();
 
@@ -42,15 +39,11 @@ public class AdminController {
         for (Map<String, Object> row : dailySummary) {
             labels.add((String) row.get("DAY"));
 
-
-
             postData.add(row.get("POST_COUNT") != null ? ((Number) row.get("POST_COUNT")).intValue() : 0);
             boardViewData.add(row.get("BOARD_VIEW_COUNT") != null ? ((Number) row.get("BOARD_VIEW_COUNT")).intValue() : 0);
             recipeViewData.add(row.get("RECIPE_VIEW_COUNT") != null ? ((Number) row.get("RECIPE_VIEW_COUNT")).intValue() : 0);
             drinkViewData.add(row.get("DRINK_VIEW_COUNT") != null ? ((Number) row.get("DRINK_VIEW_COUNT")).intValue() : 0);
         }
-
-
 
         mv.addObject("todayJoin", todayJoin);
         mv.addObject("todayWithdraw", todayWithdraw);
@@ -67,7 +60,6 @@ public class AdminController {
         mv.addObject("viewData", boardViewData);        // 게시판 조회수 (그래프 2)
         mv.addObject("recipeViewData", recipeViewData); // JSP 테이블용
         mv.addObject("drinkViewData", drinkViewData);   // JSP 테이블용
-
 
         mv.setViewName("admin/adminDashboard");
         return mv;
