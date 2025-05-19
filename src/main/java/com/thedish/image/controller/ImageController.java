@@ -38,7 +38,6 @@ public class ImageController {
 
         response.setContentType("image/" + imageType);
 
-        // 캐시 방지 헤더 추가
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
