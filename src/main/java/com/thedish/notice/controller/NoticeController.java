@@ -141,8 +141,11 @@ public class NoticeController {
 	        mv.addObject("keyword", keyword);
 	        mv.setViewName("notice/noticeListView"); // 공통 뷰 사용
 	    } else {
-	        mv.addObject("message", "검색 결과가 존재하지 않습니다.");
-	        mv.setViewName("common/error");
+	    	 mv.addObject("list", list);
+		        mv.addObject("paging", paging);
+		        mv.addObject("action", action);
+		        mv.addObject("keyword", keyword);
+		        mv.setViewName("notice/noticeListView");
 	    }
 
 	    return mv;
@@ -178,8 +181,11 @@ public class NoticeController {
 	        mv.addObject("keyword", keyword);
 	        mv.setViewName("notice/noticeListView"); // 공통 뷰 사용
 	    } else {
-	        mv.addObject("message", "검색 결과가 존재하지 않습니다.");
-	        mv.setViewName("common/error");
+	    	mv.addObject("list", list);
+	        mv.addObject("paging", paging);
+	        mv.addObject("action", action);
+	        mv.addObject("keyword", keyword);
+	        mv.setViewName("notice/noticeListView"); // 공통 뷰 사용
 	    }
 
 	    return mv;

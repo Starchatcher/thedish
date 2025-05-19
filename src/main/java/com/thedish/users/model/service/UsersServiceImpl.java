@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.thedish.common.Paging;
@@ -22,7 +21,6 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersDao usersDao;
 
- 
     // 🔐 로그인
     @Override
     public Users selectLogin(Users users) {
@@ -47,57 +45,52 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.updateUser(user);
     }
 
-    // 🔑 비밀번호 변경
+    // ✅ 비밀번호 변경 (loginId + 암호화된 비밀번호 전달)
     @Override
-    public int updatePassword(Users user) {
-        return usersDao.updatePassword(user);
+    public int updatePassword(String loginId, String encPwd) {
+        return usersDao.updatePassword(loginId, encPwd);
     }
-    
+
+    // 🧨 계정 삭제
     @Override
     public int deleteUsers(String userId) {
-        return usersDao.deleteUsers(userId); // 또는 내부 로직에 맞게 수정
+        return usersDao.deleteUsers(userId);
     }
 
- 
-
-    // 🚫 회원 탈퇴 (논리 삭제)
+    // 🚫 탈퇴 처리
     @Override
     public int deactivateUser(String loginId) {
         return usersDao.deactivateUser(loginId);
     }
 
-    // ✅ 아이디 중복 체크
+    // ✅ 중복 체크
     @Override
     public int selectCheckId(String userId) {
         return usersDao.selectCheckId(userId);
     }
 
-    // ✅ 닉네임 중복 체크
     @Override
     public int selectChecknickName(String nickName) {
         return usersDao.selectChecknickName(nickName);
     }
 
-    // 👨‍💼 관리자: 전체 회원 수
+    // 👨‍💼 관리자 기능
     @Override
     public int selectListCount() {
         return usersDao.selectListCount();
     }
 
-    // 👨‍💼 관리자: 전체 회원 리스트
     @Override
     public ArrayList<Users> selectList(Paging paging) {
         return usersDao.selectList(paging);
     }
 
-    // 👨‍💼 관리자: 회원 상태 변경
     @Override
     public int updateStatus(Users users) {
         return usersDao.updateLoginOk(users);
     }
 
-
-    // 🔍 검색 카운트
+    // 🔍 검색 기능
     @Override
     public int selectSearchUserIdCount(String keyword) {
         return usersDao.selectSearchUserIdCount(keyword);
@@ -113,7 +106,6 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.selectSearchStatusCount(keyword);
     }
 
-    // 🔍 검색 리스트
     @Override
     public ArrayList<Users> selectSearchUserId(Search search) {
         return usersDao.selectSearchUserId(search);
@@ -129,14 +121,61 @@ public class UsersServiceImpl implements UsersService {
         return usersDao.selectSearchStatus(search);
     }
 
-    // 🔐 이메일 기반 사용자 검색
+    // 🔐 비밀번호 찾기용 사용자 조회
     @Override
     public Users findByLoginIdAndEmail(String loginId, String email) {
         return usersDao.findByLoginIdAndEmail(loginId, email);
     }
-    
+
     @Override
     public Users selectUserByLoginId(String loginId) {
         return usersDao.selectUserByLoginId(loginId);
+    }
+
+    // 자유게시판 활동
+    @Override
+    public int getFreeBoardViewCount(String loginId) {
+        return usersDao.selectFreeBoardViewCount(loginId);
+    }
+
+    @Override
+    public int getFreeBoardPostCount(String loginId) {
+        return usersDao.selectFreeBoardPostCount(loginId);
+    }
+
+    // 🔹 자유게시판 마지막 작성일 조회
+    @Override
+    public String getFreeBoardLastPostDate(String loginId) {
+        return usersDao.selectFreeBoardLastPostDate(loginId);
+    }
+
+    @Override
+    public int getReviewBoardPostCount(String loginId) {
+        return usersDao.selectReviewBoardPostCount(loginId);
+    }
+
+    @Override
+    public String getReviewBoardLastPostDate(String loginId) {
+        return usersDao.selectReviewBoardLastPostDate(loginId);
+    }
+
+    @Override
+    public int getBoardCommentCount(String loginId) {
+        return usersDao.selectBoardCommentCount(loginId);
+    }
+
+    @Override
+    public String getBoardLastCommentDate(String loginId) {
+        return usersDao.selectBoardLastCommentDate(loginId);
+    }
+
+    @Override
+    public int getTipBoardPostCount(String loginId) {
+        return usersDao.selectTipBoardPostCount(loginId);
+    }
+
+    @Override
+    public String getTipBoardLastPostDate(String loginId) {
+        return usersDao.selectTipBoardLastPostDate(loginId);
     }
 }

@@ -350,7 +350,7 @@ public class RecipeController {
 		            e.printStackTrace();
 		            // 예외 처리 로직 추가 (예: 에러 메시지 모델에 담기, 로그 기록 등)
 		            model.addAttribute("msg", "이미지 업로드 중 오류가 발생했습니다.");
-		            return "errorPage";  // 적절한 에러 페이지로 이동
+		            return  "common/alertMessage";  // 적절한 에러 페이지로 이동
 		        }
 		    }
 
@@ -360,7 +360,7 @@ public class RecipeController {
 		
 		// 레시피 수정 페이지로 이동 처리용
 		@RequestMapping("moveUpdateRecipePage.do")
-		public String moveBoardUpdatePage(Model model, 
+		public String moveRecipeUpdatePage(Model model, 
 				@RequestParam("recipeId") int recipeId,
 				@RequestParam("page") int currentPage) {
 
@@ -372,8 +372,8 @@ public class RecipeController {
 				model.addAttribute("currentPage", currentPage);
 				return "recipe/recipeUpdate";
 			} else {
-				model.addAttribute("message", recipeId + "번 레시피 수정페이지로 이동 실패!");
-				return "common/error";
+				model.addAttribute("msg", recipeId + "번 레시피 수정페이지로 이동 실패!");
+				return  "common/alertMessage";
 			}
 		}
 		
@@ -417,12 +417,12 @@ public class RecipeController {
 
 		    } catch (IOException e) {
 		        e.printStackTrace();
-		        model.addAttribute("message", "이미지 업로드 중 오류가 발생했습니다.");
-		        return "common/error";
+		        model.addAttribute("msg", "이미지 업로드 중 오류가 발생했습니다.");
+		        return  "common/alertMessage";
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		        model.addAttribute("message", "레시피 수정 중 오류가 발생했습니다.");
-		        return "common/error";
+		        model.addAttribute("msg", "레시피 수정 중 오류가 발생했습니다.");
+		        return  "common/alertMessage";
 		}
 				 }
 		// 레시피 삭제
@@ -484,7 +484,6 @@ public class RecipeController {
 
 		 }
 		 
-		 
-		 
+
 
 }

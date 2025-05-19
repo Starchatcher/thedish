@@ -7,6 +7,8 @@
   <title>The Dish Introduce</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
   <style>
+  
+
     body {
       font-family: 'Noto Sans KR', sans-serif;
       background-color: #fdfdfd;
@@ -51,12 +53,7 @@
       transform: translateY(0);
     }
 
-    /* 하단 여백 */
-    body::after {
-      content: '';
-      display: block;
-      height: 300px;
-    }
+
 
     @media (max-width: 768px) {
       section {

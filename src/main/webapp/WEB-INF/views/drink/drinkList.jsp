@@ -468,39 +468,27 @@ body {
 <body>
     <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
-       <form action="drinkSearch.do" id="titleform" class="sform" method="get">
-    <input type="hidden" name="action" value="title">
+ <form action="drinkSearch.do" id="titleform" class="sform" method="get">
+  <input type="hidden" name="action" value="title">
+  <input type="hidden" name="sortType" id="sortType" value="${param.sortType}">
+  <input type="hidden" name="sortDirection" id="sortDirection" value="${param.sortDirection == null ? 'DESC' : param.sortDirection}">
 
-    <%-- 정렬 기준을 저장할 숨겨진 필드 --%>
-    <%-- value="${param.sortType}" 를 사용하여 현재 정렬 기준을 유지합니다. --%>
-    <input type="hidden" name="sortType" id="sortType" value="${param.sortType}">
+  <fieldset style="display: flex; align-items: center; gap: 10px; width: 100%;">
+    <input type="search" name="keyword" size="50" value="${param.keyword}">
+    <input type="submit" value="검색">
 
-    <%-- *** 추가: 정렬 방향을 저장할 숨겨진 필드 *** --%>
-    <%-- value="${param.sortDirection}" 를 사용하여 현재 정렬 방향을 유지합니다. --%>
-    <%-- 초기 로딩 시 param.sortDirection이 null이면 기본값 'DESC'로 설정할 수 있습니다. --%>
-    <input type="hidden" name="sortDirection" id="sortDirection" value="${param.sortDirection == null ? 'DESC' : param.sortDirection}">
+    <div class="sort-options">
+      <input type="button" onclick="sortRecipes(event, 'latest');" class="${param.sortType == 'latest' || param.sortType == null ? 'active' : ''}" value="최신순">
+      <input type="button" onclick="sortRecipes(event, 'viewCount');" class="${param.sortType == 'viewCount' ? 'active' : ''}" value="조회수 순">
+      <input type="button" onclick="sortRecipes(event, 'rating');" class="${param.sortType == 'rating' ? 'active' : ''}" value="평점 순">
+    </div>
 
-
-    <%-- fieldset 안에 검색 입력, 버튼, 정렬 옵션을 함께 배치합니다. --%>
-    <fieldset>
-        <%-- 검색어 입력 필드: value="${param.keyword}" 를 사용하여 검색어 유지 --%>
-        <input type="search" name="keyword" size="50" value="${param.keyword}"> &nbsp;
-        <input type="submit" value="검색">
-
-        <!-- 정렬 옵션 버튼 추가 - fieldset 안에 배치 -->
-        <div class="sort-options">
-            <%-- 정렬 옵션을 INPUT type="button" 태그로 변경 --%>
-            <%-- 버튼 텍스트는 value 속성에 지정합니다. --%>
-            <%-- onclick 이벤트로 sortRecipes 함수 호출 --%>
-            <input type="button" onclick="sortRecipes(event, 'latest');" class="${param.sortType == 'latest' || param.sortType == null ? 'active' : ''}" value="최신순">
-            <input type="button" onclick="sortRecipes(event, 'viewCount');" class="${param.sortType == 'viewCount' ? 'active' : ''}" value="조회수 순">
-            <input type="button" onclick="sortRecipes(event, 'rating');" class="${param.sortType == 'rating' ? 'active' : ''}" value="평점 순">
-        </div>
-    </fieldset>
+    <!-- ✅ 등록 버튼은 오른쪽으로 밀기 위해 margin-left: auto -->
+    <c:if test="${loginUser.role eq 'ADMIN'}">
+      <a href="moveInsertDrink.do" class="register-drink-button" style="margin-left: auto;">등록</a>
+    </c:if>
+  </fieldset>
 </form>
-<c:if test="${  loginUser.role eq 'ADMIN' }">
-    <a href="moveInsertDrink.do" class="register-drink-button">등록</a>
-</c:if>
   <div class="grid"> <!-- 그리드 레이아웃을 위한 div -->
     <c:forEach items="${ requestScope.list }" var="drink" varStatus="status">
         <c:if test="${status.index < 12}"> <!-- 12개 항목만 출력 -->
@@ -530,7 +518,7 @@ body {
 </div>
     <br>
 	<c:import url="/WEB-INF/views/common/pagingView.jsp" />
-	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
     <c:import url="/WEB-INF/views/common/footer.jsp" />
         <%-- 정렬 기준 변경 및 폼 제출을 위한 JavaScript 함수 --%>
  <script type="text/javascript">

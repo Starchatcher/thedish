@@ -14,6 +14,7 @@ import com.thedish.board.model.vo.Board;
 import com.thedish.comment.model.vo.Comment;
 import com.thedish.common.Paging;
 import com.thedish.common.Search;
+import com.thedish.reportPost.model.vo.ReportPost;
 
 @Repository("BoardDao")
 public class BoardDao {
@@ -164,8 +165,20 @@ public class BoardDao {
 		return sqlSessionTemplate.delete("commentMapper.deleteCommentsByBoardId", param);
 	}
 	
+	public List<ReportPost> selectListReportedPost(Map<String, Object> param){
+		return sqlSessionTemplate.selectList("reportPostMapper.selectListReportedPost", param);
+	}
 	
+	public int selectReportedPostCount () {
+		return sqlSessionTemplate.selectOne("reportPostMapper.selectReportedPostCount");
+	}
 	
+	public int updateReportChecked (int reportId) {
+		return sqlSessionTemplate.update("reportPostMapper.updateReportChecked", reportId);
+	}
 	
+	public int insertBoardReport(ReportPost reportPost) {
+		return sqlSessionTemplate.insert("reportPostMapper.insertBoardReport", reportPost);
+	}
 	
 }

@@ -19,6 +19,11 @@ public class AdminUserDaoImpl implements AdminUserDao {
     public Users selectUserById(String userId) {
         return sqlSession.selectOne("adminUserMapper.selectUserById", userId);
     }
+    
+    @Override
+    public int deactivateUser(String loginId) {
+        return sqlSession.update("adminUserMapper.deactivateUser", loginId);
+    }
 
     @Override
     public int updateUser(Users user) {
@@ -44,9 +49,9 @@ public class AdminUserDaoImpl implements AdminUserDao {
     public int countWithdrawnUsers() {
         return sqlSession.selectOne("adminUserMapper.countWithdrawnUsers");
     }
-    
+
     @Override
     public List<Users> searchUsers(Map<String, String> paramMap) {
-        return sqlSession.selectList("com.thedish.admin.model.dao.AdminUserDao.searchUsers", paramMap);
+        return sqlSession.selectList("adminUserMapper.searchUsers", paramMap);
     }
 }

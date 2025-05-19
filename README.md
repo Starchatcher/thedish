@@ -25,15 +25,14 @@
 | Backend | Java, Spring MVC, MyBatis |
 | Frontend | JSP, HTML/CSS/JS |
 | Database | Oracle 11g |
-| 협업 도구 | GitHub, Notion, VS Code |
-| 배포 환경 | (추후: EC2, Tomcat, etc) |
+| 협업 도구 | GitHub, Notion, Canva, 구글 spreadsheets|
+| 배포 환경 | EC2, Tomcat, etc |
 
 ---
 
 ## 🛠️ 프로젝트 구조
 
-> 전체 디렉토리 구조는 [여기서 보기](./docs/README_DIRECTORY.md)  
-(→ 또는 자동 생성 스크립트 참고)
+> 전체 디렉토리 구조는 [여기서 보기](./docs/report/전체프로젝트구조.docx)  
 
 ---
 
@@ -42,7 +41,9 @@
 - 📘 [기획서 PDF](./docs/report/기획서.pdf)
 - 🧩 [ERD 구조](./docs/erd/ERD설계.png)
 - 🧑‍🎨 [UI 설계](./docs/ui/UI설계.pdf)
-- 🔧 [DB 스크립트](./db/ddl/thedish_create_tables.sql)
+- 🔧 [DB 스크립트](./db/ddl/dbscript.sql)
+- 📊 [클래스 설계 보고서 (UML 포함)](./docs/uml/클래스설계.pdf)
+- 🧾 [DB 설계 보고서](./docs/report/DB설계.pdf)
 
 ---
 
@@ -51,19 +52,19 @@
 | 이름 | 역할 |
 |------|------|
 | 김요섭 | 팀장 / DB & 회원 기능 |
-| 정세현 | 음식/술 기능, 클래스설계 |
-| 박기범 | 화면 UI 설계 / 프론트 |
-| 김준용 | 술 정보 / 페어링 / 관리자 기능 |
-| 유다빈 | 커뮤니티 / Q&A / FAQ 관리 |
+| 정세현 | DB 작업 / SNS 관련 기능 |
+| 박기범 | 화면 UI 설계 / 건강맞춤형 추천 / FAQ / 공지사항 |
+| 김준용 | 술 정보 / 레시피 / 페어링 / 맛집추천 |
+| 유다빈 | 게시판 기능 / 1대1문의 |
 
 ---
 
 ## 🚀 실행 방법
 
-1. Oracle DB 실행 + `thedish_create_tables.sql` 실행
-2. VS Code or IntelliJ에서 프로젝트 Import
+1. Oracle DB 실행 + `dbscript.sql` 실행
+2. Spring tool suite 에서 프로젝트 Import
 3. Maven install (pom.xml 확인)
-4. `http://localhost:8080/the-dish` 로 접속
+4. `http://localhost:8080/thedish` 로 접속
 
 ---
 
@@ -71,7 +72,7 @@
 
 1. 본인 브랜치에서 작업
 2. 커밋 메시지는 기능 단위로 작성: `feat: 로그인 기능 구현`
-3. 머지는 `세현`이 메인 브랜치로 통합
+3. 머지는 작업확인 후 메인 브랜치로 통합
 
 ---
 

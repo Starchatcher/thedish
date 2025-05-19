@@ -22,5 +22,5 @@ public interface CommentService   {
 	
 	 List<Comment> selectRestaurantComments(int targetId, int offset, int limit) ;
 	 int insertRestaurantComment(Comment comment);
-    
+	 int deleteRestaurantComment(int commentId, String targetType);
 }

@@ -26,8 +26,8 @@ body {
 }
 
 h2 {
-	color: #e67e22;
-	margin-bottom: 10px;
+  color: #2c3e50; /* 주황 → 어두운 회색 계열 */
+  margin-bottom: 10px;
 }
 
 .label {
@@ -46,7 +46,7 @@ h2 {
 }
 
 .comments-section {
-	width: 850px; /* 댓글 섹션 전체 너비 */
+	width: 750px; /* 댓글 섹션 전체 너비 */
 	margin: 10px auto; /* 가운데 정렬 */
 	padding: 20px;
 	background-color: #fff;
@@ -77,7 +77,7 @@ h2 {
 .comments-section li strong {
 	display: block;
 	font-size: 16px;
-	color: #007bff;
+	color: #444;
 }
 
 .comments-section li span {
@@ -125,7 +125,7 @@ form {
 
 /* 댓글 작성 폼에만 적용되는 스타일 (.comment-form 클래스를 사용) */
 .comments-container {
-    width: 900px; /* 컨테이너의 너비를 850px로 설정 */
+    width: 800px; /* 컨테이너의 너비를 850px로 설정 */
     margin: 20px auto; /* 위쪽 여백은 20px, 좌우 여백은 자동으로 설정하여 가운데 정렬 */
     background-color: #fff; /* 배경색 */
     border-radius: 8px; /* 모서리 둥글게 */
@@ -141,35 +141,39 @@ form {
 }
 
 .textarea-button-container {
-    display: flex; /* Flexbox를 사용하여 가로로 정렬 */
-    align-items: flex-start; /* 세로 정렬을 상단으로 설정 */
-    margin-top: 10px; /* 상단 여백 추가 */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* ✅ stretch로 버튼과 높이 맞춤 */
 }
 
 .textarea-button-container textarea {
-    width: 100%; /* 부모(.textarea-button-container)의 너비에 맞게 100%로 설정 */
-    box-sizing: border-box; /* 패딩과 보더가 width에 포함되도록 설정 */
-   
-    padding: 10px; /* 내부 여백 */
-    border: 1px solid #ccc; /* 테두리 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    resize: vertical; /* 세로 크기 조정 가능 */
-    margin-right: 10px; /* 버튼과의 간격을 위해 오른쪽 여백 추가 */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  margin-right: 10px;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  min-height: 40px;
 }
 
 .textarea-button-container button {
-    padding: 10px 15px; /* 버튼 내부 여백 */
-  	
-    border: none; /* 테두리 없음 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    background-color: #007bff; /* 배경색 */
-    color: white; /* 글자색 */
-    cursor: pointer; /* 커서 모양 */
-    transition: background-color 0.3s; /* 배경색 변경 시 부드러운 전환 */
+  padding: 10px 20px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: 40px; /* ✅ textarea와 높이 일치 */
+  white-space: nowrap;
 }
-
 .textarea-button-container button:hover {
-    background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+  background-color: #222;
 }
 
 
@@ -362,22 +366,22 @@ form {
 </head>
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
-	<c:if test="${  loginUser.role eq 'ADMIN' }">
-		<div class="button-container">
-			<!-- 버튼을 감싸는 부모 요소 -->
-			<button
-				onclick="location.href='moveUpdateRecipePage.do?recipeId=${recipe.recipeId}&page=${currentPage != null ? currentPage : 1}'"
-				class="modify-button">수정</button>
+	<div class="container">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
 
-			<form action="deleteRecipe.do" method="post" style="display: inline;">
-				<input type="hidden" name="recipeId" value="${recipe.recipeId}" />
-				<input type="hidden" name="page"
-					value="${currentPage != null ? currentPage : 1}" />
-				<button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');"
-					class="delete-button">삭제</button>
-			</form>
-		</div>
-	</c:if>
+    <c:if test="${  loginUser.role eq 'ADMIN' }">
+      <div class="button-container">
+        <button onclick="location.href='moveUpdateRecipePage.do?recipeId=${recipe.recipeId}&page=${currentPage != null ? currentPage : 1}'"
+                class="modify-button">수정</button>
+        <form action="deleteRecipe.do" method="post" style="display: inline;">
+          <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
+          <input type="hidden" name="page" value="${currentPage != null ? currentPage : 1}" />
+          <button type="submit" onclick="return confirm('정말 삭제하시겠습니까?');"
+                  class="delete-button">삭제</button>
+        </form>
+      </div>
+    </c:if>
+  </div>
 
 	<%-- 줄바꿈 처리를 위한 자바 코드 블록 --%>
 	<%
@@ -554,15 +558,15 @@ form {
     </div>
 
     <!-- 댓글 작성 폼 -->
-    <form action="insertComment.do" method="post" class="comment-form">
-        <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
-        <div class="textarea-button-container">
-            <textarea name="content" rows="2" 
-                placeholder="<c:if test='${loginUser == null}'>로그인 후 댓글을 작성하세요</c:if><c:if test='${loginUser != null}'>댓글을 입력하세요</c:if>" 
-                required></textarea>
-            <button type="submit" >등록</button>
-        </div>
-    </form>  
+<form action="insertComment.do" method="post" class="comment-form">
+  <input type="hidden" name="recipeId" value="${recipe.recipeId}" />
+  <div class="textarea-button-container">
+    <textarea name="content" rows="2" 
+      placeholder="${loginUser == null ? '로그인 후 댓글을 작성하세요' : '댓글을 입력하세요'}" 
+      required></textarea>
+    <button type="submit">등록</button>
+  </div>
+</form> 
 </div>
 
 
@@ -575,7 +579,7 @@ form {
 
 
 	</div>
-	<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String rememberedId = "";
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("rememberId".equals(cookie.getName())) {
+                rememberedId = cookie.getValue();
+                break;
+            }
+        }
+    }
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +22,6 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
       height: 100vh;
       display: flex;
       align-items: center;
@@ -66,7 +77,7 @@
     }
 
     .login-button {
-      background-color: #2364aa;
+      background-color: #444;
       color: white;
       border: none;
       padding: 12px;
@@ -79,7 +90,7 @@
     }
 
     .login-button:hover {
-      background-color: #1e5799;
+      background-color: #777;
     }
 
     .signup-link {
@@ -88,7 +99,7 @@
     }
 
 .signup-link button {
-  background-color: #2364aa;
+  background-color: #444;
   color: white;
   border: none;
   padding: 7px 0;
@@ -103,7 +114,7 @@
 }
 
     .signup-link button:hover {
-      background-color: #1e5799;
+      background-color: #777;
     }
 
     .sns-section {
@@ -138,20 +149,31 @@
     <img src="${pageContext.request.contextPath}/resources/images/thedishlogo.jpg" alt="The Dish 로고" class="logo">
 
     <div class="login-title">The Dish 로그인</div>
-    
+
     <form action="login.do" method="post">
-      <input type="text" id="loginId" name="loginId" class="login-input" placeholder="아이디" required>
+      <!-- ✅ 자동 아이디 입력 -->
+      <input type="text" id="loginId" name="loginId" class="login-input" placeholder="아이디" required
+             value="<%= rememberedId %>">
+
       <input type="password" id="userPwd" name="userPwd" class="login-input" placeholder="비밀번호" required>
 
       <div class="options">
-        <label><input type="checkbox" name="remember"> 기억하기</label>
+        <!-- ✅ 기억하기 체크박스 상태 유지 -->
+        <label>
+          <input type="checkbox" name="remember" <%= rememberedId.isEmpty() ? "" : "checked" %> > 기억하기
+        </label>
         <a href="findPassword.do">Forgot Password?</a>
       </div>
+
+      <!-- ✅ 비밀번호 저장 안내 문구 -->
+      <p class="info-text">
+        비밀번호는 보안상 저장되지 않으며, 브라우저의 저장 기능을 이용하실 수 있습니다.
+      </p>
 
       <input type="submit" class="login-button" value="LOGIN">
     </form>
 
-    <!-- ✅ SNS 버튼: 크기 동일, 정렬, 축소 -->
+    <!-- ✅ SNS 로그인 섹션 -->
     <div class="sns-section">
       <p>SNS 계정으로 로그인</p>
       <div class="sns-buttons">
@@ -167,10 +189,12 @@
       </div>
     </div>
 
+
 <div class="signup-link" style="display: flex; justify-content: center; gap: 10px;">
-  <button onclick="location.href='${pageContext.request.contextPath}/enrollPage.do'">회원가입</button>
+  <button onclick="location.href='${pageContext.request.contextPath}/enrollterms.do'">회원가입</button>
   <button onclick="location.href='${pageContext.request.contextPath}/'">홈으로</button>
 </div>
+
 
   </div>
 

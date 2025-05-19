@@ -42,7 +42,7 @@
     button {
         padding: 12px;
         border: none;
-        background-color: #3498db;
+        background-color: #777;
         color: white;
         font-size: 15px;
         border-radius: 6px;
@@ -50,7 +50,7 @@
         margin-top: 10px;
     }
     button:hover {
-        background-color: #2980b9;
+        background-color: #444;
     }
     a {
         display: block;
@@ -79,19 +79,16 @@
     <h2>비밀번호 변경</h2>
     
     <form action="${pageContext.request.contextPath}/updatePassword.do" method="post" onsubmit="return checkPasswordMatch();">
+        <!-- loginId는 세션에서 읽기 때문에 hidden input 불필요 -->
         <input type="password" name="currentPassword" placeholder="현재 비밀번호" required />
         <input type="password" id="newPassword" name="newPassword" placeholder="새 비밀번호" required />
         <input type="password" id="confirmPassword" placeholder="새 비밀번호 확인" required />
         <button type="submit">비밀번호 변경</button>
     </form>
 
-    <!-- 비밀번호 변경 페이지 새로고침용 링크 (필요 시) -->
     <a href="${pageContext.request.contextPath}/changePassword.do">다시 입력하기</a>
-
-    <!-- 마이페이지 이동 -->
     <a href="${pageContext.request.contextPath}/myPage.do">이전 페이지로 돌아가기</a>
 </div>
-
 
 </body>
 </html>

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thedish.board.model.service.BoardService;
 import com.thedish.board.model.vo.Board;
@@ -31,7 +31,6 @@ import com.thedish.users.model.vo.Users;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.annotation.PostConstruct;
 
 
 
@@ -51,10 +50,6 @@ public class BoardController {
 	private ReportPostService reportPostService;
 	// 뷰 페이지 내보내기용 메소드 ---------------------------------------
 	
-	@PostConstruct
-    public void initTimeZoneCheck() {
-        System.out.println("✅ 현재 JVM 시간대(TimeZone.getDefault()): " + TimeZone.getDefault().getID());
-    }
 
 	// 게시글 작성 페이지 내보내기
 	@RequestMapping("boardWritePage.do")
@@ -295,12 +290,10 @@ public class BoardController {
 			mv.addObject("message", "로그인이 필요합니다.");
 			return "common/error"; // String 반환 형식은 변경되지 않음
 		}
-		
 		board.setWriter(loginUser.getLoginId());
 		board.setBoardCategory(category);
 		// 현재 시간 자동 설정
 		board.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
-
 		// 파일 저장 로직
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles");
 		if (!mfile.isEmpty()) {
@@ -322,7 +315,6 @@ public class BoardController {
 				}
 			}
 		}
-
 		// 게시글 등록
 		if (boardService.insertBoard(board) > 0) {
 			if ("my".equals(source)) {
@@ -426,6 +418,9 @@ public class BoardController {
 	    param.put("targetId", boardId);
 
 	    boardService.deleteCommentsByBoardId(param);
+	    
+	    // 해당 게시글의 좋아요 기록 삭제
+	    likeService.deleteLikeAll(boardId);
 		
 		Board board = boardService.selectBoard(boardId); // 게시글 정보 조회
 
@@ -549,7 +544,7 @@ public class BoardController {
 
 	
 
-	// 댓글 수정용 메소드
+	// 댓글, 대댓글 수정용 메소드
 	@RequestMapping(value = "boardCommentUpdate.do", method = RequestMethod.POST)
 	public ModelAndView updateBoardCommentMethod(ModelAndView mv, HttpSession session,
 			@RequestParam("commentId") int commentId,
@@ -569,7 +564,7 @@ public class BoardController {
 		comment.setCommentId(commentId);
 		comment.setContent(content);
 		comment.setUpdatedAt(new java.sql.Date(System.currentTimeMillis()));
-		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인 용도
+		comment.setLoginId(loginUser.getLoginId()); // 로그인 사용자 확인
 
 		int result = boardService.updateBoardComment(comment);
 		if (result > 0) {
@@ -583,12 +578,13 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 댓글 삭제용 메소드
+	// 댓글, 대댓글 삭제용 메소드
 	@RequestMapping(value = "boardCommentDelete.do", method = RequestMethod.POST)
 	public ModelAndView deleteBoardCommentMethod(ModelAndView mv, HttpSession session,
 			@RequestParam("commentId") int commentId,
 			@RequestParam("boardId") int boardId,
-			@RequestParam("category") String category) {
+			@RequestParam("category") String category,
+			@RequestParam(name = "cpage", required = false) String cpageStr) {
 
 		Users loginUser = (Users) session.getAttribute("loginUser");
 		if (loginUser == null) {
@@ -602,7 +598,26 @@ public class BoardController {
 
 		int result = boardService.deleteBoardComment(param);
 		if (result > 0) {
-			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category);
+			// 삭제 성공 후 전체 댓글 수를 다시 계산
+	        int totalCommentCount = boardService.selectBoardCommentCount(boardId);
+	        int commentsPerPage = 10;
+	        int maxCpage = (int) Math.ceil((double) totalCommentCount / commentsPerPage);
+	        
+	        int cpage = 1;
+	        try {
+	            cpage = Integer.parseInt(cpageStr);
+	        } catch (Exception e) {
+	        }
+
+	        // 현재 페이지가 최대 페이지보다 크면 조정
+	        if (cpage > maxCpage) {
+	            cpage = maxCpage;
+	        }
+	        if (cpage < 1) {
+	            cpage = 1;
+	        }
+			
+			mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&cpage=" + cpage);
 		} else {
 			mv.addObject("message", "댓글 삭제에 실패하였습니다. 다시 시도해주세요.");
 			mv.setViewName("common/error");
@@ -900,12 +915,44 @@ public class BoardController {
 		return mv;
 	}
 	
-	// 게시글 신고 처리용 메소드
+	// 신고된 게시글 목록 출력용 메소드
+	@RequestMapping("reportedBoardList.do")
+	public ModelAndView selectListReportedBoard(ModelAndView mv,
+	        @RequestParam(name = "page", required = false) String page,
+	        @RequestParam(name = "limit", required = false) String slimit) {
+
+	    int currentPage = (page != null && !page.isEmpty()) ? Integer.parseInt(page) : 1;
+	    int limit = (slimit != null) ? Integer.parseInt(slimit) : 10;
+
+	    // 전체 신고 수 조회
+	    int listCount = boardService.selectReportedPostCount();
+
+	    // 페이징 계산
+	    Paging paging = new Paging(listCount, limit, currentPage, "reportedBoardList.do");
+	    paging.calculate();
+
+	    // 신고된 게시글 목록 조회
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("startRow", paging.getStartRow());
+	    param.put("endRow", paging.getEndRow());
+
+	    List<ReportPost> list = boardService.selectListReportedPost(param);
+
+	    // 뷰 전달
+	    mv.addObject("list", list);
+	    mv.addObject("paging", paging);
+	    mv.setViewName("admin/reportedBoardListView"); // JSP 경로에 맞게 조정
+
+	    return mv;
+	}
+	
+	// 게시글 신고 등록용 메소드
 	@RequestMapping(value = "boardReportInsert.do", method = RequestMethod.POST)
 	public ModelAndView insertBoardReport(ModelAndView mv, HttpSession session,
 	                                      @RequestParam("targetId") int boardId,
 	                                      @RequestParam("category") String category,
-	                                      @RequestParam("reason") String reason) {
+	                                      @RequestParam("reason") String reason,
+	                                      RedirectAttributes redirectAttributes) {
 
 	    Users loginUser = (Users) session.getAttribute("loginUser");
 	    if (loginUser == null) {
@@ -918,16 +965,40 @@ public class BoardController {
 	    report.setReason(reason);
 	    report.setReporterId(loginUser.getLoginId());
 
-	    int result = reportPostService.insertBoardReport(report);
+	    try {
+	        int result = boardService.insertBoardReport(report);
 
-	    if (result > 0) {
-	    	mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
-	    } else {
-	        mv.addObject("message", "신고 등록 실패! 다시 시도해주세요.");
-	        mv.setViewName("common/error");
+	        if (result > 0) {
+	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=true");
+	        } else {
+	            redirectAttributes.addFlashAttribute("alertMsg", "신고 등록 실패! 다시 시도해주세요.");
+	            mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=false");
+	        }
+
+	    } catch (Exception e) {
+	        redirectAttributes.addFlashAttribute("alertMsg", "이미 신고한 게시글이거나 알 수 없는 오류가 발생했습니다. 다시 시도해주세요.");
+	        mv.setViewName("redirect:boardDetail.do?boardId=" + boardId + "&category=" + category + "&reportSuccess=false");
 	    }
 
 	    return mv;
 	}
+	
+	// 신고 게시글 처리용 메소드
+	@RequestMapping("checkReport.do")
+	public ModelAndView checkReport(@RequestParam("reportId") int reportId,
+	                                @RequestParam("page") int page,
+	                                ModelAndView mv) {
+
+	    int result = boardService.updateReportChecked(reportId);
+
+	    if (result > 0) {
+	        mv.addObject("message", "신고가 처리되었습니다.");
+	    } else {
+	        mv.addObject("message", "신고 처리 실패");
+	    }
+	    mv.setViewName("redirect:reportedBoardList.do?page=" + page);
+	    return mv;
+	}
+	
 	
 }

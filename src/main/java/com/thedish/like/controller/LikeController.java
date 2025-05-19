@@ -23,7 +23,7 @@ public class LikeController {
 	
 	//클라이언트가 보낸 json 객체를 받아서 처리하는 컨트롤러 메소드
 	//요청에 대한 응답으로 ResponseEntity 사용할 수 있음, Http 상태 코드도 함께 보낼 때 사용함
-	//메소드 메개변수로 @RequestBody 를 통해 json 이 자동으로 Notice 객체로 매핑됨
+	//메소드 메개변수로 @RequestBody 를 통해 json 이 자동으로 Like 객체로 매핑됨
 	@RequestMapping("toggleLike.do")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> toggleLike(@RequestBody Like like) {

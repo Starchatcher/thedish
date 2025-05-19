@@ -13,7 +13,5 @@ public class ReportPostDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public int insertBoardReport(ReportPost reportPost) {
-		return sqlSessionTemplate.insert("reportPostMapper.insertBoardReport", reportPost);
-	}
+	
 }

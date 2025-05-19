@@ -131,7 +131,7 @@
                                 </form>
 
                                 <!-- 삭제 버튼 -->
-                                <button onclick="deleteFAQ(${faq.faqId})">삭제</button>
+                                 <button onclick="location.href='faqdelete.do?Id=${faq.faqId}'">삭제</button>
                             </div>
                         </c:if>
                     </div>

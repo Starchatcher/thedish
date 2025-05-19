@@ -9,4 +9,5 @@ public interface LikeService {
 	int checkLike (Like like);
 	int countLikes (int targetId);
 	boolean isLiked(String loginId, int targetId);
+	int deleteLikeAll (int targetId);
 }

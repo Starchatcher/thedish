@@ -2,6 +2,7 @@ package com.thedish.drink.controller;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -257,10 +259,7 @@ public class DrinkController {
 			                     comments = new ArrayList<>();
 			                 }
 			                 logger.info("조회된 댓글 리스트 크기: " + comments.size());
-			                 // 댓글 로깅은 필요에 따라 유지 또는 제거 (상세 정보 확인용으로 남겨둠)
-			                 // for (Comment c : comments) {
-			                 //     logger.info("댓글 ID: " + c.getCommentId() + ", 내용: " + c.getContent());
-			                 // }
+			                 
 
 			                 mv.addObject("comments", comments);
 			                 mv.addObject("page", page);
@@ -347,34 +346,73 @@ public class DrinkController {
 			// 새 술 원글 등록 요청 처리용(이미지 업로드 기능 포함)	
 
 			@RequestMapping(value = "drinkInsert.do", method = RequestMethod.POST)
-			public String insertDrink(
-			        Drink drink,
+			public String insertDrink( // 반환 타입 String 유지
+			        Drink drink, // 사용자가 입력한 데이터가 담긴 drink 객체
 			        @RequestParam(name = "imageFile", required = false) MultipartFile imageFile,
 			        Model model) {
 
-			    // 1. 레시피 저장 (자동 생성된 ID를 recipe.id에 세팅)
-				drinkService.insertDrink(drink);
+			    logger.info("insertDrink.do : " + drink);
 
-			    // 2. 이미지 파일이 있을 경우 이미지 저장
-			    if (imageFile != null && !imageFile.isEmpty()) {
-			        try {
-			        	 byte[] imageBytes = imageFile.getBytes();
+			    try {
+			        // 1. 음료 저장 (자동 생성된 ID를 drink.drinkId에 세팅)
+			        // 성공적으로 insert 될 때만 ID가 세팅됩니다.
+			        drinkService.insertDrink(drink);
 
-			            Image image = new Image();
-			            image.setTargetId(drink.getDrinkId());
-			            image.setTargetType("drink");
-			            image.setImageData(imageBytes);
-			            image.setDescription("레시피 이미지");
+			        // 2. 이미지 파일이 있을 경우 이미지 저장
+			        if (imageFile != null && !imageFile.isEmpty()) {
+			            try {
+			                byte[] imageBytes = imageFile.getBytes();
 
-			            imageService.insertImage(image);
-			        } catch (IOException e) {
-			            e.printStackTrace();
-			            // 예외 처리 로직 추가 (예: 에러 메시지 모델에 담기, 로그 기록 등)
-			            model.addAttribute("msg", "이미지 업로드 중 오류가 발생했습니다.");
-			            return "errorPage";  // 적절한 에러 페이지로 이동
+			                Image image = new Image();
+			                // drink.getDrinkId()가 insertDrink 호출 후 올바르게 설정되었는지 확인 중요
+			                image.setTargetId(drink.getDrinkId());
+			                image.setTargetType("drink");
+			                image.setImageData(imageBytes);
+			                image.setDescription("음료 이미지"); // "레시피 이미지" 대신 "음료 이미지"
+
+			                imageService.insertImage(image);
+			            } catch (IOException e) {
+			                e.printStackTrace();
+			                // 이미지 업로드 중 오류 발생 시
+			                model.addAttribute("msg", "이미지 파일 처리 중 오류가 발생했습니다. 다시 시도해주세요."); // 사용자에게 보여줄 메시지
+			                model.addAttribute("drink", drink); // 사용자가 입력했던 drink 객체를 다시 모델에 담아 뷰로 전달
+			                return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
+
+			            }
 			        }
+
+			        // 성공 시 음료 목록 페이지로 리다이렉트
+			        return "redirect:drinkList.do";
+
+			    } catch (UncategorizedSQLException dbE) {
+			        dbE.printStackTrace();
+			        // 데이터베이스 관련 오류 발생 시 (ORA-12899 포함)
+			        String userMessage = "음료 등록 중 데이터베이스 오류가 발생했습니다.";
+			        if (dbE.getCause() instanceof SQLException) {
+			            SQLException sqlE = (SQLException) dbE.getCause();
+			            logger.error("SQL Error Code: " + sqlE.getErrorCode() + ", SQL State: " + sqlE.getSQLState()); // 서버 로그에 상세 에러 기록
+
+			            if (sqlE.getErrorCode() == 12899) {
+			                userMessage = "입력하신 음료 이름이 너무 깁니다. (최대 200자)"; // ORA-12899 특정 메시지
+			            } else {
+			                 // 다른 SQL 오류의 경우 일반적인 메시지 또는 더 상세한 정보 제공
+			                 userMessage = "데이터베이스 처리 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.";
+			            }
+			        }
+			        model.addAttribute("msg", userMessage); // 사용자에게 보여줄 메시지
+			        model.addAttribute("drink", drink); // 🎉 사용자가 입력했던 drink 객체를 다시 모델에 담아 뷰로 전달
+			        return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
+
+
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			        // 그 외 예상치 못한 오류 발생 시
+			        logger.error("Unexpected error during drink insert", e); // 서버 로그에 상세 에러 기록
+			        model.addAttribute("msg", "음료 등록 중 예상치 못한 오류가 발생했습니다. 시스템 관리자에게 문의해주세요."); // 사용자에게 보여줄 메시지
+			        model.addAttribute("drink", drink); // 🎉 사용자가 입력했던 drink 객체를 다시 모델에 담아 뷰로 전달
+			        return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
+
 			    }
-			    return "redirect:drinkList.do";
 			}
 			
 			// drink 수정 페이지로 이동 처리용
@@ -391,8 +429,9 @@ public class DrinkController {
 					model.addAttribute("currentPage", currentPage);
 					return "drink/drinkUpdate";
 				} else {
+					
 					model.addAttribute("message", drinkId + "번 레시피 수정페이지로 이동 실패!");
-					return "common/error";
+			        return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
 				}
 			}
 			
@@ -414,7 +453,7 @@ public class DrinkController {
 
 			        if (result <= 0) {
 			            model.addAttribute("message", "레시피 수정 실패");
-			            return "common/error";
+			            return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
 			        }
 
 			        // 2. 이미지 파일이 새로 업로드 되었으면 처리
@@ -438,11 +477,13 @@ public class DrinkController {
 			    } catch (IOException e) {
 			        e.printStackTrace();
 			        model.addAttribute("message", "이미지 업로드 중 오류가 발생했습니다.");
-			        return "common/error";
+			        return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
 			    } catch (Exception e) {
 			        e.printStackTrace();
+			        
 			        model.addAttribute("message", "레시피 수정 중 오류가 발생했습니다.");
-			        return "common/error";
+			        model.addAttribute("msg", "음료 등록 중 예상치 못한 오류가 발생했습니다. 시스템 관리자에게 문의해주세요."); // 사용자에게 보여줄 메시지
+			        return "common/alertMessage"; // 🎉 알림창 JSP 뷰 이름 반환
 			}
 					 }
 			

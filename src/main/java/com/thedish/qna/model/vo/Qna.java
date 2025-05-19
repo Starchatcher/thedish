@@ -2,6 +2,8 @@ package com.thedish.qna.model.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Qna implements java.io.Serializable{
 	private static final long serialVersionUID = -7370875045617624684L;
 
@@ -10,9 +12,11 @@ public class Qna implements java.io.Serializable{
 	private String content;
 	private String userId;
 	private String createdBy;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private java.sql.Date createdAt;
 	private String isAnswered;
 	private String answer;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private java.sql.Date answeredAt;
 	private String status;
 	private String originalFileName;

@@ -163,6 +163,7 @@ public class QnaController {
 		return mv;
 	}
 	
+	// 문의글 수정 메소드
 	@RequestMapping(value = "qnaUpdate.do", method = RequestMethod.POST)
 	public ModelAndView qnaUpdateMethod(ModelAndView mv, Qna qna, HttpServletRequest request,
 			@RequestParam(name = "deleteFile", required = false) String delFlag,
@@ -218,17 +219,17 @@ public class QnaController {
 		return mv;
 	}
 	
+	// 문의글 상세보기
 	@RequestMapping("qnaDetail.do")
 	public ModelAndView qnaDetailView(ModelAndView mv,
 	        @RequestParam("qnaId") int qnaId) {
 
 	    Qna qna = qnaService.selectQnaById(qnaId);
 	    
-	    // ✨ 작성자 정보 따로 가져오기
 	    Users writer = usersService.selectUserByLoginId(qna.getUserId());
 
 	    mv.addObject("qna", qna);
-	    mv.addObject("writer", writer); // ✅ 이거 반드시 있어야 함
+	    mv.addObject("writer", writer); 
 	    mv.setViewName("qna/qnaDetailView");
 
 	    return mv;
@@ -259,7 +260,7 @@ public class QnaController {
 		return mv;
 	}
 	
-	//관리자 기능 추가 (답변 달기) 
+	//관리자 기능 (답변 등록) 
 	@RequestMapping(value = "qnaAnswer.do", method = RequestMethod.POST)
 	public ModelAndView qnaAnswerMethod(ModelAndView mv,
 	        @RequestParam("qnaId") int qnaId,
@@ -275,11 +276,12 @@ public class QnaController {
 	    }
 
 	    Qna qna = new Qna();
+	    qna.setAnsweredAt(new java.sql.Date(System.currentTimeMillis()));
 	    qna.setQnaId(qnaId);
 	    qna.setAnswer(answer);
 	    qna.setCreatedBy(loginUser.getLoginId());
 
-	    int result = qnaService.answerQna(qna);; // service → dao → mapper 호출
+	    int result = qnaService.answerQna(qna);; 
 
 	    if (result > 0) {
 	        mv.setViewName("redirect:qnaDetail.do?qnaId=" + qnaId);

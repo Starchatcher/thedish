@@ -69,7 +69,6 @@ public class HomeController {
 		model.addAttribute("randomRecipe", randomRecipe); // 랜덤 레시피 객체
 		model.addAttribute("randomRecipeImage", randomRecipeImage); // 이미지 정보 객체
 
-
 		// 5. 뷰 이름 반환
 		return "common/main"; // → /WEB-INF/views/common/main.jsp
 
@@ -80,19 +79,16 @@ public class HomeController {
 		// 메인 페이지에 오류 메시지를 표시하도록 처리할 수 있습니다.
 		model.addAttribute("message", "메인 페이지 정보를 가져오는 중 오류가 발생했습니다.");
 		
-		
 		return "common/main"; // → /WEB-INF/views/common/main.jsp
 	}
 }
 	
-	@RequestMapping("/terms.do")
-	public String showTerms() {
-	    return "common/terms";
-	}
+  @RequestMapping("/terms.do") public String showTerms() { return
+  "common/terms"; }
+ 
 
 	@RequestMapping("/privacy.do")
 	public String showPrivacy() {
 	    return "common/privacy";
 	}
-	
 }

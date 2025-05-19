@@ -62,7 +62,7 @@
 
         h1 {
             text-align: center; /* 메인 제목 가운데 정렬 */
-            color: #5a67d8; /* 브랜드 색상 예시 */
+            color: #777; /* 브랜드 색상 예시 */
         }
 
         /* 폼 스타일 */
@@ -103,7 +103,7 @@
         button[type="submit"],
         button[type="button"] {
             display: inline-block; /* 버튼을 인라인 블록 요소로 */
-            background-color: #5a67d8; /* 배경색 */
+            background-color: #444; /* 배경색 */
             color: white; /* 글자색 */
             padding: 10px 20px;
             border: none;
@@ -115,7 +115,7 @@
 
          button[type="submit"]:hover,
         button[type="button"]:hover:not(:disabled) {
-            background-color: #434190; /* 호버 시 배경색 변경 */
+            background-color: #777; /* 호버 시 배경색 변경 */
         }
 
         button:disabled {
@@ -214,7 +214,7 @@
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
   <div class="container">
 
-        <h1>${drinkId}번 드링크 페어링 등록</h1>
+        <h1>페어링 등록</h1>
 
         <form id="pairingForm" action="${ pageContext.request.contextPath }/insertPairing.do" method="post">
             <input type="hidden" name="drinkId" value="${ drinkId }">
@@ -464,7 +464,7 @@
     }
 </script>
 
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

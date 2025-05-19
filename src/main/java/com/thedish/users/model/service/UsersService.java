@@ -20,8 +20,8 @@ public interface UsersService {
     // 🔁 회원 정보 수정
     int updateUser(Users user);
 
-    // 🔑 비밀번호 변경
-    int updatePassword(Users user);
+    // ✅ 비밀번호 변경 (loginId + 암호화된 비밀번호 전달)
+    int updatePassword(String loginId, String encPwd);
 
     // 🚫 회원 탈퇴 (논리 삭제: status = 'INACTIVE')
     int deactivateUser(String loginId);
@@ -29,15 +29,10 @@ public interface UsersService {
     // ✅ 아이디 중복 체크
     int selectCheckId(String userId);
 
-    // ✅ 닉네임 중복 체크
-
-
     // 회원 탈퇴
     int deleteUsers(String userId);
 
-
     // 닉네임 중복 체크
-
     int selectChecknickName(String nickName);
 
     // 👨‍💼 관리자: 전체 회원 수 조회
@@ -59,11 +54,23 @@ public interface UsersService {
     ArrayList<Users> selectSearchCreatedAt(Search search);
     ArrayList<Users> selectSearchStatus(Search search);
 
-
-    // 🔐 아이디 + 이메일로 사용자 찾기 (비밀번호 초기화용) 
+    // 🔐 아이디 + 이메일로 사용자 찾기 (비밀번호 초기화용)
     Users findByLoginIdAndEmail(String loginId, String email);
-    
+
     Users selectUserByLoginId(String loginId);
 
+
+    // 🔢 마이페이지 활동 요약
+    int getFreeBoardViewCount(String loginId);
+    int getFreeBoardPostCount(String loginId);
+    int getBoardCommentCount(String loginId);
+    int getReviewBoardPostCount(String loginId);
+    int getTipBoardPostCount(String loginId);
+
+    // 🔹 자유/댓글/후기 마지막 작성일
+    String getFreeBoardLastPostDate(String loginId);
+    String getBoardLastCommentDate(String loginId);
+    String getReviewBoardLastPostDate(String loginId);
+    String getTipBoardLastPostDate(String loginId);
 
 }

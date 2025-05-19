@@ -22,7 +22,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
-        h2 {
+        .title-recommend {
             font-size: 26px;
             color: #2c3e50;
             margin-bottom: 24px;
@@ -129,10 +129,10 @@
 <body>
 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-<c:import url="/WEB-INF/views/common/sidebar.jsp" />
+
 
 <div class="main-container">
-    <h2>"${condition}"에 대한 건강 맞춤 재료 선택</h2>
+    <h2 class= "title-recommend">"${condition}"에 대한 건강 맞춤 재료 선택</h2>
 
     <form action="recommendRecipes.do" method="post">
         <input type="hidden" name="condition" value="${condition}" />

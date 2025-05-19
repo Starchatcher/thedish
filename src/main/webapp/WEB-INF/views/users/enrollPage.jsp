@@ -11,8 +11,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(120deg, #f8d5dc, #d3eaf2);
-  min-height: 100vh; /* ✅ 수정됨 */
+
+
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,22 +21,34 @@ body {
 
 .signup-container {
   background-color: rgba(255, 255, 255, 0.85);
-  padding: 40px 30px;
+  padding: 30px;
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  width: 420px;
+  width: 600px;
   text-align: center;
 }
 
 h1 {
   font-size: 1.8em;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   color: #333;
 }
 
+.form-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
 .form-group {
+  flex: 0 0 48%;
   text-align: left;
-  margin-bottom: 15px;
+}
+
+.form-group-full {
+  flex: 0 0 100%;
+  text-align: left;
 }
 
 .form-group label {
@@ -67,22 +80,25 @@ input[type="number"] {
 
 .gender-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  align-items: center;
 }
 
 .gender-group label {
+  color: #555;
   display: flex;
   align-items: center;
   gap: 4px;
-  flex-direction: row-reverse;
-  color: #555;
+  font-size: 14px;
 }
 
 #dupCheckBtn,
 #nickNameCheckBtn {
   margin-top: 8px;
-  width: 30%;
-  background-color: #2364aa;
+  width: 100%;
+
+  background-color: #444;
+
   color: white;
   border: none;
   padding: 10px;
@@ -94,20 +110,19 @@ input[type="number"] {
 
 #dupCheckBtn:hover,
 #nickNameCheckBtn:hover {
-  background-color: #1e5799;
+  background-color: #777;
 }
 
 .button-group {
-  display: flex;
-  justify-content: start;
-  gap: 10px;
   margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 .button-group button,
 .button-group a {
   width: 100px;
-  text-align: center;
   padding: 12px 0;
   font-size: 15px;
   font-weight: bold;
@@ -116,32 +131,27 @@ input[type="number"] {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
-}
+  text-align: center;
 
-.submit-btn {
-  background-color: #2364aa;
-}
+  background-color: #444;
 
-.submit-btn:hover {
-  background-color: #1e5799;
-}
-
-.home-link {
-  background-color: #2364aa;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 20px;
-  font-weight: bold;
-  border-radius: 6px;
-  color: white;
-  width: 100px;
-  transition: background-color 0.3s;
 }
 
-.home-link:hover {
-  background-color: #1e5799;
+.button-group button:hover,
+.button-group a:hover {
+
+  background-color: #777;
+
+}
+
+.success-message {
+  background: #dff0d8;
+  color: #3c763d;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 </style>
 
@@ -167,9 +177,6 @@ function dupnickNameCheck() {
                 alert('이미 사용중인 닉네임입니다. 다시 입력하세요.');
                 $('#nickName').select();
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log('nickName check error : ' + jqXHR + ', ' + textStatus + ', ' + errorThrown);
         }
     });
 }
@@ -184,12 +191,9 @@ function dupIdCheck() {
                 alert('사용 가능한 아이디입니다.');
                 $('#userPwd').focus();
             } else {
-                alert('이미 사용중인 아이디입니다. 다시 입력하세요.');
+                alert('이미 사용중인 아이디입니다.');
                 $('#userId').select();
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log('error : ' + jqXHR + ', ' + textStatus + ', ' + errorThrown);
         }
     });
 }
@@ -197,88 +201,87 @@ function dupIdCheck() {
 function validate() {
     const pwd = $('#userPwd').val();
     const pwd2 = $('#userPwd2').val();
-
-    // 형식 검사: 영문자 + 숫자, 8자 이상
     const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!pwdRegex.test(pwd)) {
         alert('비밀번호는 영문자 + 숫자 조합의 8자 이상이어야 합니다.');
-        $('#userPwd').focus();
         return false;
     }
-
     if (pwd !== pwd2) {
         alert('비밀번호와 확인이 일치하지 않습니다.');
-        $('#userPwd').val('');
-        $('#userPwd2').val('');
-        $('#userPwd').focus();
         return false;
     }
-
     return true;
 }
 </script>
 </head>
 <body>
-
 <div class="signup-container">
     <h1>회원 가입</h1>
+
+    <c:if test="${param.enrollSuccess eq 'true'}">
+        <div class="success-message">
+            회원가입이 성공적으로 완료되었습니다! 환영합니다 😊
+        </div>
+    </c:if>
+
     <form action="enroll.do" method="post" onsubmit="return validate();">
-
-        <div class="form-group">
-            <label for="userId">아이디</label>
-            <input type="text" name="userId" id="userId" required>
-            <button type="button" id="dupCheckBtn" onclick="dupIdCheck();">아이디 중복검사</button>
-        </div>
-
-        <div class="form-group">
-            <label for="userPwd">비밀번호</label>
-            <input type="password" name="userPwd" id="userPwd" required>
-            <small>비밀번호는 <strong>영문자 + 숫자 조합</strong>의 8자 이상이어야 합니다.</small>
-        </div>
-
-        <div class="form-group">
-            <label for="userPwd2">비밀번호 확인</label>
-            <input type="password" name="userPwd2" id="userPwd2" required>
-        </div>
-
-        <div class="form-group">
-            <label for="userName">이름</label>
-            <input type="text" name="userName" id="userName" required>
-        </div>
-
-        <div class="form-group">
-            <label for="nickName">닉네임</label>
-            <input type="text" name="nickName" id="nickName" required>
-            <button type="button" id="nickNameCheckBtn" onclick="dupnickNameCheck();">닉네임 중복검사</button>
-        </div>
-
-        <div class="form-group">
-            <label>성별</label>
-            <div class="gender-group">
-                <label><input type="radio" name="gender" value="M" required> 남자</label>
-                <label><input type="radio" name="gender" value="F" required> 여자</label>
+        <div class="form-wrapper">
+            <div class="form-group">
+                <label for="userId">아이디</label>
+                <input type="text" name="userId" id="userId" required>
+                <button type="button" id="dupCheckBtn" onclick="dupIdCheck();">중복확인</button>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="age">나이</label>
-            <input type="number" name="age" min="19" max="100" value="20" required>
-        </div>
+            <div class="form-group">
+                <label for="nickName">닉네임</label>
+                <input type="text" name="nickName" id="nickName" required>
+                <button type="button" id="nickNameCheckBtn" onclick="dupnickNameCheck();">중복확인</button>
+            </div>
 
-        <div class="form-group">
-            <label for="phone">전화번호</label>
-            <input type="tel" name="phone" required>
-        </div>
+            <div class="form-group">
+                <label for="userPwd">비밀번호</label>
+                <input type="password" name="userPwd" id="userPwd" required>
+                <small>영문자 + 숫자 조합, 8자 이상</small>
+            </div>
 
-        <div class="form-group">
-            <label for="email">이메일</label>
-            <input type="email" name="email" required>
-        </div>
+            <div class="form-group">
+                <label for="userPwd2">비밀번호 확인</label>
+                <input type="password" name="userPwd2" id="userPwd2" required>
+            </div>
 
-        <input type="hidden" name="status" value="ACTIVE">
-        <input type="hidden" name="provider" value="local">
-        <input type="hidden" name="role" value="USER">
-        <input type="hidden" name="loginId" value="${userId}">
+            <div class="form-group">
+                <label for="userName">이름</label>
+                <input type="text" name="userName" id="userName" required>
+            </div>
+
+            <div class="form-group">
+                <label>성별</label>
+                <div class="gender-group">
+                    <label><input type="radio" name="gender" value="M" required> 남자</label>
+                    <label><input type="radio" name="gender" value="F" required> 여자</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">나이</label>
+                <input type="number" name="age" min="19" max="100" value="20" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">전화번호</label>
+                <input type="tel" name="phone" required>
+            </div>
+
+            <div class="form-group-full">
+                <label for="email">이메일</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <input type="hidden" name="status" value="ACTIVE">
+            <input type="hidden" name="provider" value="local">
+            <input type="hidden" name="role" value="USER">
+            <input type="hidden" name="loginId" value="${userId}">
+        </div>
 
         <div class="button-group">
             <button type="submit" class="submit-btn">가입하기</button>
@@ -286,6 +289,5 @@ function validate() {
         </div>
     </form>
 </div>
-
 </body>
 </html>
