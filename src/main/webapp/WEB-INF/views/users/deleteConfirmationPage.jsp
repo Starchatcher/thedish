@@ -12,7 +12,6 @@
     padding: 0;
     background-color: #f9f9f9;
   }
-
   .container {
     max-width: 600px;
     margin: 80px auto;
@@ -22,25 +21,21 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   }
-
   h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #2c3e50;
   }
-
   .message {
     margin-bottom: 30px;
     font-size: 16px;
     color: #555;
   }
-
   .buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
   }
-
   .buttons button {
     padding: 10px 20px;
     font-size: 16px;
@@ -48,17 +43,14 @@
     border-radius: 6px;
     cursor: pointer;
   }
-
   .buttons .confirm {
   background-color: #444; /* 어두운 회색 - 탈퇴 */
   color: white;
 }
-
 .buttons .cancel {
   background-color: #777; /* 중간 회색 - 취소 */
   color: white;
 }
-
 .buttons button:hover {
   opacity: 1;
   filter: brightness(85%); /* 살짝 어두워지는 효과 */
@@ -78,7 +70,7 @@
       <input type="hidden" name="loginId" value="${param.loginId}" />
       <button type="submit" class="confirm">확인</button>
     </form>
-    <a href="myinfo.do?loginId=${param.loginId}">
+    <a href="myPage.do">
       <button type="button" class="cancel">취소</button>
     </a>
   </div>

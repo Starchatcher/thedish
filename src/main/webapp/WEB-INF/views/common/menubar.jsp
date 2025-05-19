@@ -124,23 +124,23 @@
       background-color: gray;
     }
 
-.user-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 6px;
-}
+    .user-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 6px;
+    }
 
-.action-btn img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
+    .action-btn img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      transition: transform 0.2s ease;
+    }
 
-.action-btn img:hover {
-  transform: scale(1.1);
-}
+    .action-btn img:hover {
+      transform: scale(1.1);
+    }
   </style>
 
   <script>
@@ -183,7 +183,6 @@
             <div class="dropdown-column">
               <h4>맞춤형 추천</h4>
 
-              <!-- ✅ 로그인 여부에 따라 다르게 이동 -->
               <c:choose>
                 <c:when test="${empty sessionScope.loginUser}">
                   <a href="#" onclick="requireLogin(); return false;">건강 맞춤형 추천</a>
@@ -192,13 +191,14 @@
                   <a href="${ pageContext.servletContext.contextPath }/healthSearchForm.do">건강 맞춤형 추천</a>
                 </c:otherwise>
               </c:choose>
-			  <c:choose>
+
+              <c:choose>
                 <c:when test="${empty sessionScope.loginUser}">
-                 <a href="#" onclick="requireLogin(); return false;">술 페어링 추천</a>
+                  <a href="#" onclick="requireLogin(); return false;">술 페어링 추천</a>
                 </c:when>
                 <c:otherwise>
-              <a href="${ pageContext.servletContext.contextPath }/drinkSearchForm.do">술 페어링 추천</a>
-              </c:otherwise>
+                  <a href="${ pageContext.servletContext.contextPath }/drinkSearchForm.do">술 페어링 추천</a>
+                </c:otherwise>
               </c:choose>
             </div>
           </div>
@@ -232,36 +232,33 @@
 
       <!-- 로그인/로그아웃 -->
       <c:if test="${ empty sessionScope.loginUser }">
-  <button onclick="location.href='${pageContext.request.contextPath}/loginPage.do'" class="login-btn">로그인</button>
-</c:if>
-
-<c:if test="${ !empty sessionScope.loginUser }">
-  <div id="loginBox" class="lineA">
-    <div style="margin-bottom: 4px;">
-      <strong>${ sessionScope.loginUser.nickName }</strong> 님
-    </div>
-
-    <div class="user-actions">
-      <!-- 내 정보 버튼 -->
-      <a href="myinfo.do?loginId=${ sessionScope.loginUser.loginId }" class="action-btn" title="내 정보">
-        <img src="${pageContext.request.contextPath}/resources/images/user-round-search.png" alt="내 정보">
-      </a>
-
-      <!-- 관리자 페이지 버튼 (관리자만) -->
-      <c:if test="${ sessionScope.loginUser.role eq 'ADMIN' }">
-        <a href="${pageContext.request.contextPath}/admin/dashboard.do" class="action-btn" title="관리자 페이지">
-          <img src="${pageContext.request.contextPath}/resources/images/settings.png" alt="관리자">
-        </a>
+        <button onclick="location.href='${pageContext.request.contextPath}/loginPage.do'" class="login-btn">로그인</button>
       </c:if>
-      
-      <!-- 로그아웃 버튼 -->
-      <a href="logout.do" class="action-btn" title="로그아웃">
-        <img src="${pageContext.request.contextPath}/resources/images/log-out.png" alt="로그아웃">
-      </a>
-      
-    </div>
-  </div>
-</c:if>
+
+      <c:if test="${ !empty sessionScope.loginUser }">
+        <div id="loginBox" class="lineA">
+          <div style="margin-bottom: 4px;">
+            <strong>${ sessionScope.loginUser.nickName }</strong> 님
+          </div>
+
+          <div class="user-actions">
+            <!-- ✅ 수정: myPage.do로 이동 -->
+            <a href="${pageContext.request.contextPath}/myPage.do" class="action-btn" title="내 정보">
+              <img src="${pageContext.request.contextPath}/resources/images/user-round-search.png" alt="내 정보">
+            </a>
+
+            <c:if test="${ sessionScope.loginUser.role eq 'ADMIN' }">
+              <a href="${pageContext.request.contextPath}/admin/dashboard.do" class="action-btn" title="관리자 페이지">
+                <img src="${pageContext.request.contextPath}/resources/images/settings.png" alt="관리자">
+              </a>
+            </c:if>
+
+            <a href="logout.do" class="action-btn" title="로그아웃">
+              <img src="${pageContext.request.contextPath}/resources/images/log-out.png" alt="로그아웃">
+            </a>
+          </div>
+        </div>
+      </c:if>
 
     </div>
   </nav>
